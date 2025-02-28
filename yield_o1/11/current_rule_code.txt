@@ -1,0 +1,141 @@
+def rule2matrix(smiles_list):
+    # Define SMARTS patterns for functional groups and structural motifs
+    
+    # Rule 1 patterns
+    amino_acid_backbone = Chem.MolFromSmarts('[NX3][CX4H]([CX3](=O)[OX1H])[*]')
+    carboxylic_acid = Chem.MolFromSmarts('[CX3](=O)[OX1H]')
+    aromatic_nitrogen = Chem.MolFromSmarts('[n]')
+    
+    # Rule 2 patterns
+    aromatic_carboxylic_acid = Chem.MolFromSmarts('[c][CX3](=O)[OX1H]')
+    ewg_on_aromatic = [Chem.MolFromSmarts('[c][F]'), Chem.MolFromSmarts('[c][Cl]'),
+                       Chem.MolFromSmarts('[c][Br]'), Chem.MolFromSmarts('[c][I]'),
+                       Chem.MolFromSmarts('[c][NX3](=O)=O')]
+    edg_on_aromatic = [Chem.MolFromSmarts('[c][CH3]'), Chem.MolFromSmarts('[c][OX2H]'),
+                       Chem.MolFromSmarts('[c][OX2][CH3]')]
+    
+    # Rule 3 patterns
+    heterocyclic_carboxylic_acid = Chem.MolFromSmarts('[n][CX3](=O)[OX1H]')
+    
+    # Rule 5 patterns
+    thiol = Chem.MolFromSmarts('[SX2H]')
+    carboxylic_acid_adjacent_thiol = Chem.MolFromSmarts('[CX3](=O)[OX1H][CX4][SX2H]')
+    
+    # Rule 6 patterns
+    carboxylic_acid_adjacent_hydroxyl = Chem.MolFromSmarts('[CX3](=O)[OX1H][CX4][OX2H]')
+    multiple_ether_linkages = Chem.MolFromSmarts('[#6][OX2][#6][OX2][#6]')
+    
+    # Rule 7 patterns
+    aldehyde_adjacent_carboxylate = Chem.MolFromSmarts('[CX3](=O)[OX1H][CX4][CX3H](=O)')
+    ketone_near_carboxylate = Chem.MolFromSmarts('[CX3](=O)[OX1H][CX4][CX3](=O)[#6]')
+    amide_near_carboxylate = Chem.MolFromSmarts('[CX3](=O)[OX1H][CX4][NX3][CX3](=O)[#6]')
+    
+    # Rule 8 patterns
+    perfluoroalkyl_chain = Chem.MolFromSmarts('[CX4](F)(F)(F)')
+    
+    # Rule 9 patterns
+    aromatic_adjacent_carboxylate = Chem.MolFromSmarts('[CX3](=O)[OX1H][c]')
+    
+    # Define rules with their associated patterns and predictions
+    rules = [
+        {
+            'number': 1,
+            'description': 'High Yield: Modifiers that are amino acids with side chains containing additional coordinating groups such as extra carboxylate groups or nitrogen-containing heterocycles.',
+            'match_func': lambda mol: (
+                mol.HasSubstructMatch(amino_acid_backbone) and
+                (len(mol.GetSubstructMatches(carboxylic_acid)) > 1 or mol.HasSubstructMatch(aromatic_nitrogen))
+            ),
+            'prediction': 1
+        },
+        {
+            'number': 2,
+            'description': 'High Yield: Modifiers that are aromatic carboxylic acids with strong electron-withdrawing substituents attached directly to the aromatic ring.',
+            'match_func': lambda mol: (
+                mol.HasSubstructMatch(aromatic_carboxylic_acid) and
+                any(mol.HasSubstructMatch(pat) for pat in ewg_on_aromatic)
+            ),
+            'prediction': 1
+        },
+        {
+            'number': 2.1,
+            'description': 'Low Yield: Modifiers that are aromatic carboxylic acids with electron-donating substituents attached directly to the aromatic ring.',
+            'match_func': lambda mol: (
+                mol.HasSubstructMatch(aromatic_carboxylic_acid) and
+                any(mol.HasSubstructMatch(pat) for pat in edg_on_aromatic)
+            ),
+            'prediction': -1
+        },
+        {
+            'number': 3,
+            'description': 'High Yield: Modifiers containing nitrogenous heterocycles capable of coordinating with metals, such as pyridine or pyrazole carboxylic acids.',
+            'match_func': lambda mol: mol.HasSubstructMatch(heterocyclic_carboxylic_acid),
+            'prediction': 1
+        },
+        {
+            'number': 5,
+            'description': 'High Yield: Modifiers containing thiol groups near the carboxylate, such as mercapto carboxylic acids.',
+            'match_func': lambda mol: mol.HasSubstructMatch(carboxylic_acid_adjacent_thiol),
+            'prediction': 1
+        },
+        {
+            'number': 6,
+            'description': 'High Yield: Modifiers with multiple hydroxyl groups adjacent to the carboxylate. Low Yield: Modifiers with multiple ether linkages.',
+            'match_func': lambda mol: (
+                mol.HasSubstructMatch(carboxylic_acid_adjacent_hydroxyl) and
+                len(mol.GetSubstructMatches('[OX2H]')) > 2
+            ),
+            'prediction': 1
+        },
+        {
+            'number': 6.1,
+            'description': 'Low Yield: Modifiers with multiple ether linkages.',
+            'match_func': lambda mol: mol.HasSubstructMatch(multiple_ether_linkages),
+            'prediction': -1
+        },
+        {
+            'number': 7,
+            'description': 'Low Yield: Modifiers that have aldehyde or ketone groups adjacent to the carboxylate, or amide bonds near the carboxylate.',
+            'match_func': lambda mol: (
+                mol.HasSubstructMatch(aldehyde_adjacent_carboxylate) or
+                mol.HasSubstructMatch(ketone_near_carboxylate) or
+                mol.HasSubstructMatch(amide_near_carboxylate)
+            ),
+            'prediction': -1
+        },
+        {
+            'number': 8,
+            'description': 'Low Yield: Modifiers containing strong electron-withdrawing groups that excessively reduce electron density on the carboxylate, such as perfluoroalkyl chains.',
+            'match_func': lambda mol: mol.HasSubstructMatch(perfluoroalkyl_chain),
+            'prediction': -1
+        },
+        {
+            'number': 9,
+            'description': 'Low Yield: Modifiers with bulky aromatic side chains without additional coordinating groups, especially when adjacent to the carboxylate.',
+            'match_func': lambda mol: mol.HasSubstructMatch(aromatic_adjacent_carboxylate),
+            'prediction': -1
+        }
+    ]
+    
+    # Initialize results list
+    results = []
+    
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If molecule cannot be parsed, append zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                if rule['match_func'](mol):
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception:
+                row.append(0)
+        results.append(row)
+    
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule["number"]}' for rule in rules])
+    return df

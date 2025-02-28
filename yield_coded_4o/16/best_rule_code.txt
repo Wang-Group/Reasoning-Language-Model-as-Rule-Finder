@@ -1,0 +1,39 @@
+def rule2matrix(smiles_list):
+    rules = [
+        ['[NX3H2]', '[CX3](=O)[OX2H1]'],  # Rule 1: Amino and carboxylic acid group
+        ['[c][CX3](=O)[OX2H1]', '[OH]'],  # Rule 2: Phenyl and carboxylic acid with hydroxyl
+        ['[SX2H]', '[CX3](=O)[OX2H1]'],  # Rule 3: Sulfur and carboxylic acid
+        ['[n][CX3](=O)[OX2H1]'],  # Rule 4: Pyridine and carboxylic acid
+        ['[OX2H]', '[OX2H]', '[CX3](=O)[OX2H1]'],  # Rule 5: Multiple hydroxyls and carboxylic acid
+        ['[c][NX3+](=O)[O-]', '[CX3](=O)[OX2H1]'],  # Rule 6: Nitro on phenyl and carboxylic acid
+        ['[c][CX3H](=O)', '[CX3](=O)[OX2H1]'],  # Rule 7: Formyl on phenyl and carboxylic acid
+        ['[CX4](F)(F)F', '[CX3](=O)[OX2H1]'],  # Rule 8: Trifluoromethyl and carboxylic acid
+        ['[OX2][CX3](=O)[OX2H1]'],  # Rule 9: Ether linkage and carboxylic acid
+        ['[NX3](C(=O)C)', '[NX3H2]'],  # Rule 10: Acetamido and amino group
+        ['[NX3H2]', '[OX2H]', '[CX3](=O)[OX2H1]'],  # Rule 11: Amino, hydroxyl, and carboxylic acid
+        ['[c]1oc2ccccc2c1', '[CX3](=O)[OX2H1]'],  # Rule 12: Benzofuranone and carboxylic acid
+        ['[n]', '[NX3H2]', '[CX3](=O)[OX2H1]'],  # Rule 13: Pyridine and additional group
+        ['[c][CX3](=O)'],  # Rule 14: Phenyl and acyl group
+        ['[CX4][CX4][CX4][CX4][CX4][CX4][CX4]', '[CX3](=O)[OX2H1]']  # Rule 15: Long aliphatic chain and carboxylic acid
+    ]
+    results = []
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            results.append([0] * len(rules))
+            continue
+        row = []
+        for i, rule in enumerate(rules):
+            try:
+                if all(mol.HasSubstructMatch(Chem.MolFromSmarts(r)) for r in rule):
+                    if i in [0, 1, 2, 3, 4, 5, 10, 11, 12]:  # High yield rules
+                        row.append(1)
+                    else:  # Low yield rules
+                        row.append(-1)
+                else:
+                    row.append(0)
+            except:
+                row.append(0)
+        results.append(row)
+    df = pd.DataFrame(results, columns=[f'Rule {i+1}' for i in range(len(rules))])
+    return df

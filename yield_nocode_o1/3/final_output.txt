@@ -1,0 +1,1072 @@
+
+    Target Name: yield
+    GPT Model: o1-preview-2024-09-12
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+- **Rule 1**: **Aliphatic carboxylic acids with amino or hydroxyl groups within five carbons of the carboxyl group give high yield.**
+  - *Examples*: 5-aminopentanoic acid, 3-sulfanylpropanoic acid, 5-(4-hydroxyphenyl)pentanoic acid.
+  - *Rationale*: Proximal amino or hydroxyl groups can enhance coordination with the metal centers in the catalyst, promoting higher yields.
+
+- **Rule 2**: **Aliphatic carboxylic acids with amino or hydroxyl groups located more than five carbons away from the carboxyl group give low yield.**
+  - *Examples*: 7-aminoheptanoic acid, 8-aminooctanoic acid, 7-hydroxyheptanoic acid.
+  - *Rationale*: Distant functional groups may not effectively interact with the catalytic sites, resulting in lower yields.
+
+- **Rule 3**: **Aromatic carboxylic acids with amino groups at the para position give high yield.**
+  - *Examples*: 4-aminobenzoic acid.
+  - *Rationale*: Para-amino groups can enhance electron density and coordinate with metal centers, facilitating the reaction.
+
+- **Rule 4**: **Aromatic carboxylic acids with formyl (aldehyde) groups at the ortho or para position give low yield.**
+  - *Examples*: 4-formylbenzoic acid, 5-formyl-2-hydroxybenzoic acid.
+  - *Rationale*: Aldehyde groups can deactivate the aromatic ring and hinder coordination, leading to lower yields.
+
+- **Rule 5**: **Aromatic carboxylic acids with nitro groups at the para position give high yield.**
+  - *Examples*: 4-nitrobenzoic acid.
+  - *Rationale*: Nitro groups are strong electron-withdrawing groups that can facilitate catalytic activity through pi-backbonding.
+
+- **Rule 6**: **Aliphatic carboxylic acids with multiple hydroxyl groups near the carboxyl group give high yield.**
+  - *Examples*: (2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid.
+  - *Rationale*: Multiple hydroxyl groups can enhance solubility and interaction with the catalyst, promoting higher yields.
+
+- **Rule 7**: **Carboxylic acids with nitrogen-containing heterocyclic rings directly attached to the carboxyl group give high yield.**
+  - *Examples*: Pyridine-3-carboxylic acid, 1H-pyrazole-4-carboxylic acid, 2-oxo-1H-pyridine-4-carboxylic acid.
+  - *Rationale*: Nitrogen heterocycles can coordinate with metal centers, enhancing catalytic efficiency.
+
+- **Rule 8**: **Carboxylic acids with fluorinated alkyl chains give low yield.**
+  - *Examples*: 2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid, 4-[(2,2,2-trifluoroacetyl)amino]butanoic acid.
+  - *Rationale*: Fluorination increases hydrophobicity and steric bulk, which may hinder catalyst interaction.
+
+- **Rule 9**: **Aliphatic carboxylic acids with polyether chains give low yield.**
+  - *Examples*: 2-[2-(2-methoxyethoxy)ethoxy]acetic acid, 3-[2-(2-aminoethoxy)ethoxy]propanoic acid.
+  - *Rationale*: Ether chains may reduce binding affinity to the catalyst due to steric hindrance and decreased polarity.
+
+- **Rule 10**: **Aromatic carboxylic acids with sulfhydryl (thiol) groups at the para position give low yield.**
+  - *Examples*: 4-sulfanylbenzoic acid.
+  - *Rationale*: Thiol groups can form strong bonds with metals, potentially deactivating or poisoning the catalyst.
+
+- **Rule 11**: **Aliphatic carboxylic acids without additional polar functional groups give high yield.**
+  - *Examples*: Octanoic acid.
+  - *Rationale*: Simple aliphatic acids can readily interact with the catalyst without steric or electronic hindrance.
+
+- **Rule 12**: **Amino acids with indole side chains give high yield, whereas those with phenyl side chains give low yield.**
+  - *Examples*: Tryptophan (high yield), Phenylalanine (low yield).
+  - *Rationale*: Indole rings can participate in pi-stacking and coordinate with metal centers better than simple phenyl rings.
+
+- **Rule 13**: **Carboxylic acids where the carboxyl group is connected via an amide bond to an aromatic ring tend to give low yield.**
+  - *Examples*: 2-[(4-hydroxybenzoyl)amino]acetic acid.
+  - *Rationale*: Amide linkages may decrease the availability of the carboxyl group for catalyst interaction.
+
+- **Rule 14**: **Aromatic carboxylic acids with electron-donating methyl groups at the para position give low yield.**
+  - *Examples*: 4-methylbenzoic acid.
+  - *Rationale*: Electron-donating groups can reduce the effectiveness of metal coordination, leading to lower yields.
+
+**End of Rules**---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+{
+    "Rule 1: Aliphatic carboxylic acids with amino or hydroxyl groups within five carbons of the carboxyl group give high yield.": [1,1,0,1,0,0,1,1,0,1,0,0,0,1,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,1,1,1,1,0,1,0],
+    "Rule 2: Aliphatic carboxylic acids with amino or hydroxyl groups located more than five carbons away from the carboxyl group give low yield.": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1],
+    "Rule 3: Aromatic carboxylic acids with amino groups at the para position give high yield.": [0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    "Rule 4: Aromatic carboxylic acids with formyl (aldehyde) groups at the ortho or para position give low yield.": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    "Rule 5: Aromatic carboxylic acids with nitro groups at the para position give high yield.": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    "Rule 6: Aliphatic carboxylic acids with multiple hydroxyl groups near the carboxyl group give high yield.": [0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    "Rule 7: Carboxylic acids with nitrogen-containing heterocyclic rings directly attached to the carboxyl group give high yield.": [0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    "Rule 8: Carboxylic acids with fluorinated alkyl chains give low yield.": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    "Rule 9: Aliphatic carboxylic acids with polyether chains give low yield.": [0,0,0,0,0,0,0,0,0,0,0,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,0,0],
+    "Rule 10: Aromatic carboxylic acids with sulfhydryl (thiol) groups at the para position give low yield.": [0,0,0,0,0,0,0,0,0,0,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    "Rule 11: Aliphatic carboxylic acids without additional polar functional groups give high yield.": [0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    "Rule 12: Amino acids with indole side chains give high yield, whereas those with phenyl side chains give low yield.": [0,0,0,0,0,0,0,0,0,0,0,0,0,-1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    "Rule 13: Carboxylic acids where the carboxyl group is connected via an amide bond to an aromatic ring tend to give low yield.": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,0,0,0,0,0,0,0,0],
+    "Rule 14: Aromatic carboxylic acids with electron-donating methyl groups at the para position give low yield.": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,0,0,0,0,0,0,0,0,0,0,0,0,0]
+}
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.8285714285714286; Test Accuracy: 0.0
+    Train Support: 0.05054945054945055; Test Support: 0.07692307692307693
+    Train Confidence: 0.8816568047337279; Test Confidence: 0.5384615384615384
+    Train Lift: 1.7579862319681325; Test Lift: NONE
+    Train Leverage: 0.01682888540031397; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    
+    Target Name: yield
+    GPT Model: o1-preview-2024-09-12
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+- **Rule 1**: **Aliphatic carboxylic acids with amino or hydroxyl groups within five carbons of the carboxyl group give high yield.**
+  - *Examples*: 5-aminopentanoic acid, 3-sulfanylpropanoic acid, octanoic acid.
+  - *Rationale*: Proximal amino or hydroxyl groups can effectively interact with the catalytic metal centers, enhancing the reaction efficiency and leading to higher yields.
+
+- **Rule 2**: **Aliphatic carboxylic acids with amino or hydroxyl groups located more than five carbons away from the carboxyl group give low yield.**
+  - *Examples*: 7-aminoheptanoic acid, 8-aminooctanoic acid, 7-hydroxyheptanoic acid.
+  - *Rationale*: Distant functional groups have reduced influence on catalytic interactions due to steric hindrance or limited electronic effect, resulting in lower yields.
+
+- **Rule 3**: **Aromatic carboxylic acids with amino or hydroxyl groups at the para position give high yield, unless additional deactivating groups are present.**
+  - *Examples*: 4-aminobenzoic acid, 4-nitrobenzoic acid.
+  - *Counterexamples*: 4-formylbenzoic acid, 5-formyl-2-hydroxybenzoic acid.
+  - *Rationale*: Para-substituted amino or hydroxyl groups enhance electron density and facilitate coordination with metal centers. However, the presence of additional electron-withdrawing groups can negate this effect, leading to lower yields.
+
+- **Rule 4**: **Aromatic carboxylic acids with strong electron-withdrawing formyl groups at the ortho or para position give low yield.**
+  - *Examples*: 4-formylbenzoic acid, 5-formyl-2-hydroxybenzoic acid.
+  - *Rationale*: Formyl groups reduce electron density on the aromatic ring and can hinder effective coordination with the catalyst, resulting in decreased yields.
+
+- **Rule 5**: **Nitrogen-containing heteroaromatic carboxylic acids directly attached to the carboxyl group give high yield.**
+  - *Examples*: Pyridine-3-carboxylic acid, 1H-pyrazole-4-carboxylic acid, 2-oxo-1H-pyridine-4-carboxylic acid.
+  - *Counterexamples*: 4-pyridin-4-ylbenzoic acid.
+  - *Rationale*: Heteroaromatic rings with nitrogen atoms can coordinate with metal centers in the catalyst, enhancing catalytic activity and improving yield. If the heterocycle is not directly attached to the carboxyl group, this effect is diminished.
+
+- **Rule 6**: **Carboxylic acids with fluorinated alkyl chains give low yield.**
+  - *Examples*: 2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid, 4-[(2,2,2-trifluoroacetyl)amino]butanoic acid.
+  - *Rationale*: Fluorination increases hydrophobicity and steric bulk, which can hinder interaction with the catalyst's active sites, leading to lower yields.
+
+- **Rule 7**: **Aliphatic carboxylic acids with polyether chains give low yield.**
+  - *Examples*: 2-[2-(2-methoxyethoxy)ethoxy]acetic acid, 3-[2-(2-aminoethoxy)ethoxy]propanoic acid.
+  - *Rationale*: Polyether chains introduce steric hindrance and decrease the overall polarity, reducing the ability of the modifier to coordinate effectively with the catalyst.
+
+- **Rule 8**: **Amino acids with indole side chains give high yield, whereas those with phenyl side chains give low yield.**
+  - *Examples*: (2R)-2-amino-3-(1H-indol-3-yl)propanoic acid (tryptophan) - high yield; (2S)-2-amino-3-phenylpropanoic acid (phenylalanine) - low yield.
+  - *Rationale*: Indole rings can engage in stronger pi-stacking and coordinate more effectively with metal centers compared to simple phenyl rings, enhancing catalytic activity and yield.
+
+- **Rule 9**: **Carboxylic acids with sulfur-containing functional groups on an aromatic ring give low yield.**
+  - *Examples*: 4-sulfanylbenzoic acid.
+  - *Rationale*: Sulfhydryl (thiol) groups can bind strongly to metals, potentially deactivating the catalyst by forming inhibitory complexes, thus lowering the yield.
+
+- **Rule 10**: **Aliphatic carboxylic acids without additional polar functional groups give high yield.**
+  - *Examples*: Octanoic acid.
+  - *Rationale*: Simple aliphatic acids can interact freely with the catalyst without steric or electronic hindrance from additional functional groups, leading to higher yields.
+
+- **Rule 11**: **Carboxylic acids with amide bonds adjacent to the carboxyl group give low yield.**
+  - *Examples*: 2-[(4-hydroxybenzoyl)amino]acetic acid.
+  - *Rationale*: Amide linkages can reduce the availability of the carboxyl group for effective coordination with the catalyst, thereby decreasing the yield.
+
+- **Rule 12**: **Aromatic carboxylic acids with methyl groups at the para position give low yield.**
+  - *Examples*: 4-methylbenzoic acid.
+  - *Rationale*: Although methyl groups are electron-donating, they can introduce steric hindrance at the active site and may not enhance coordination with the catalyst, resulting in lower yields.
+
+- **Rule 13**: **Aliphatic dicarboxylic acids with amino groups give high yield, provided the amino group is within five carbons of both carboxyl groups.**
+  - *Examples*: (2S)-2-aminopentanedioic acid.
+  - *Rationale*: The presence of two carboxyl groups in proximity to an amino group can enhance multiple points of interaction with the catalyst, leading to higher yields.
+
+- **Rule 14**: **Carboxylic acids containing terminal aldehyde or ketone groups distant from the carboxyl group give low yield.**
+  - *Examples*: 4-oxoheptanedioic acid, 5-formyl-2-hydroxybenzoic acid.
+  - *Rationale*: Terminal carbonyl groups can engage in side reactions or hinder the primary coordination required for effective catalysis, reducing the overall yield.
+
+- **Rule 15**: **Aromatic carboxylic acids with methoxy groups on the aromatic ring and additional ketone functionalities give high yield.**
+  - *Examples*: 4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid.
+  - *Rationale*: Methoxy groups are electron-donating and can enhance electron density on the aromatic ring, while ketone groups can facilitate interactions with the catalyst, together promoting higher yields.
+
+**End of Rules**---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+{
+    "Rule 1: Aliphatic carboxylic acids with amino or hydroxyl groups within five carbons of the carboxyl group give high yield.": [1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1],
+    "Rule 2: Aliphatic carboxylic acids with amino or hydroxyl groups located more than five carbons away from the carboxyl group give low yield.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "Rule 3: Aromatic carboxylic acids with amino or hydroxyl groups at the para position give high yield, unless additional deactivating groups are present.": [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "Rule 4: Aromatic carboxylic acids with strong electron-withdrawing formyl groups at the ortho or para position give low yield.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "Rule 5: Nitrogen-containing heteroaromatic carboxylic acids directly attached to the carboxyl group give high yield.": [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "Rule 6: Carboxylic acids with fluorinated alkyl chains give low yield.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0],
+    "Rule 7: Aliphatic carboxylic acids with polyether chains give low yield.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0],
+    "Rule 8: Amino acids with indole side chains give high yield, whereas those with phenyl side chains give low yield.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "Rule 9: Carboxylic acids with sulfur-containing functional groups on an aromatic ring give low yield.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "Rule 10: Aliphatic carboxylic acids without additional polar functional groups give high yield.": [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "Rule 11: Carboxylic acids with amide bonds adjacent to the carboxyl group give low yield.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0],
+    "Rule 12: Aromatic carboxylic acids with methyl groups at the para position give low yield.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "Rule 13: Aliphatic dicarboxylic acids with amino groups give high yield, provided the amino group is within five carbons of both carboxyl groups.": [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+    "Rule 14: Carboxylic acids containing terminal aldehyde or ketone groups distant from the carboxyl group give low yield.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "Rule 15: Aromatic carboxylic acids with methoxy groups on the aromatic ring and additional ketone functionalities give high yield.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+}
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.7714285714285715; Test Accuracy: 1.0
+    Train Support: 0.04642857142857143; Test Support: 0.0
+    Train Confidence: 0.875; Test Confidence: 0.5
+    Train Lift: 1.7228349673202614; Test Lift: NONE
+    Train Leverage: 0.02122448979591837; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    
+    Target Name: yield
+    GPT Model: o1-preview-2024-09-12
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+- **Rule 1**: **Aliphatic carboxylic acids with amino or sulfhydryl groups located at the gamma (3rd) or delta (4th) carbon from the carboxyl group give high yield.**
+  - *Examples*: 5-aminopentanoic acid (high yield), 3-sulfanylpropanoic acid (high yield).
+  - *Counterexamples*: 7-aminoheptanoic acid (low yield), 8-aminooctanoic acid (low yield).
+  - *Rationale*: Proximal amino or sulfhydryl groups can effectively coordinate with the metal centers in the catalyst, enhancing catalytic activity and resulting in higher yields.
+
+- **Rule 2**: **Aromatic carboxylic acids with amino or nitro groups at the para position of the benzene ring give high yield.**
+  - *Examples*: 4-aminobenzoic acid (high yield), 4-nitrobenzoic acid (high yield).
+  - *Counterexamples*: 4-methylbenzoic acid (low yield).
+  - *Rationale*: Amino and nitro groups can enhance electron density or offer coordination sites, facilitating better interaction with the catalyst and improving yield.
+
+- **Rule 3**: **Aromatic carboxylic acids with formyl or methyl groups at the para position give low yield.**
+  - *Examples*: 4-formylbenzoic acid (low yield), 4-methylbenzoic acid (low yield).
+  - *Rationale*: Formyl and methyl groups do not contribute to effective coordination with the catalyst and may impede interaction due to steric hindrance or lack of electron-donating ability, leading to lower yields.
+
+- **Rule 4**: **Aliphatic carboxylic acids without additional polar or bulky functional groups give high yield.**
+  - *Examples*: Octanoic acid (high yield).
+  - *Counterexamples*: 7-hydroxyheptanoic acid (low yield), which contains a distal hydroxyl group.
+  - *Rationale*: Simple aliphatic acids can interact freely with the catalyst without steric hindrance or electronic interference from additional functional groups, resulting in higher yields.
+
+- **Rule 5**: **Carboxylic acids containing polyether chains give low yield.**
+  - *Examples*: 2-[2-(2-methoxyethoxy)ethoxy]acetic acid (low yield), 3-[2-(2-aminoethoxy)ethoxy]propanoic acid (low yield).
+  - *Rationale*: Polyether chains introduce steric bulk and flexibility, which can hinder effective coordination with the catalyst's active sites, decreasing the reaction yield.
+
+- **Rule 6**: **Carboxylic acids with fluorinated alkyl chains give low yield.**
+  - *Examples*: 2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid (low yield), 4-[(2,2,2-trifluoroacetyl)amino]butanoic acid (low yield).
+  - *Rationale*: The presence of fluorine atoms increases steric hindrance and decreases polarity, reducing the ability of the modifier to coordinate effectively with the catalyst and lowering the yield.
+
+- **Rule 7**: **Amino acids with heteroaromatic side chains give high yield, while those with simple aromatic side chains give low yield.**
+  - *Examples*: (2R)-2-amino-3-(1H-indol-3-yl)propanoic acid (tryptophan) gives high yield; (2S)-2-amino-3-phenylpropanoic acid (phenylalanine) gives low yield.
+  - *Rationale*: Heteroaromatic side chains like indole can form stronger interactions or coordination with the catalyst due to additional lone pairs on heteroatoms, enhancing the catalytic activity and yield.
+
+- **Rule 8**: **Carboxylic acids where the carboxyl group is directly attached to a nitrogen-containing heterocycle give high yield.**
+  - *Examples*: Pyridine-3-carboxylic acid (nicotinic acid) (high yield), 1H-pyrazole-4-carboxylic acid (high yield).
+  - *Counterexample*: 4-pyridin-4-ylbenzoic acid (low yield), where the pyridine is not directly attached.
+  - *Rationale*: Direct attachment facilitates the nitrogen atom's ability to coordinate with the metal center in the catalyst, enhancing reactivity and yield.
+
+- **Rule 9**: **Carboxylic acids with carbonyl groups adjacent to the carboxyl group give low yield.**
+  - *Examples*: 2-[(4-hydroxybenzoyl)amino]acetic acid (low yield), 4-oxoheptanedioic acid (low yield).
+  - *Rationale*: Adjacent carbonyl groups can engage in resonance or intramolecular interactions that reduce the availability of the carboxyl group for effective catalyst coordination, decreasing the yield.
+
+- **Rule 10**: **Carboxylic acids with bulky substituents near the carboxyl group give low yield.**
+  - *Examples*: (2S)-6-acetamido-2-aminohexanoic acid (low yield).
+  - *Rationale*: Bulky groups near the carboxyl group can create steric hindrance that impedes the modifier's ability to interact effectively with the catalyst's active sites, resulting in lower yields.
+
+- **Rule 11**: **Aromatic carboxylic acids with hydroxyl groups at the para position give variable yields depending on additional functional groups and chain length.**
+  - *Examples*: 5-(4-hydroxyphenyl)pentanoic acid (high yield), 3-(4-hydroxyphenyl)propanoic acid (low yield).
+  - *Rationale*: While hydroxyl groups can enhance coordination, other factors like the length of the aliphatic chain and presence of additional functional groups influence the overall effect on yield.
+
+- **Rule 12**: **Carboxylic acids with thiol groups on an aromatic ring give low yield.**
+  - *Example*: 4-sulfanylbenzoic acid (low yield).
+  - *Rationale*: Thiol groups can strongly bind to metal centers, potentially deactivating the catalyst by forming stable, non-reactive complexes, thereby reducing the reaction yield.
+
+- **Rule 13**: **Polyhydroxylated aliphatic carboxylic acids give high yield.**
+  - *Example*: (2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid (high yield).
+  - *Rationale*: Multiple hydroxyl groups increase solubility and provide multiple sites for hydrogen bonding or coordination, enhancing interaction with the catalyst and improving yield.
+
+- **Rule 14**: **Aromatic carboxylic acids with formyl groups on the ring give low yield.**
+  - *Examples*: 5-formyl-2-hydroxybenzoic acid (low yield), 4-formylbenzoic acid (low yield).
+  - *Rationale*: Formyl groups are strong electron-withdrawing substituents that decrease electron density on the aromatic ring, reducing its ability to coordinate with the catalyst and lowering the reaction yield.
+
+- **Rule 15**: **Aromatic carboxylic acids with methoxy groups on the ring and additional ketone functionalities give high yield.**
+  - *Example*: 4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid (high yield).
+  - *Rationale*: Methoxy groups are electron-donating and enhance electron density on the aromatic ring, while ketone groups can participate in coordination. Together, they facilitate stronger interactions with the catalyst, improving yield.
+
+**End of Rules**---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+{
+    "Rule 1: Aliphatic carboxylic acids with amino or sulfhydryl groups located at the gamma (3rd) or delta (4th) carbon from the carboxyl group give high yield.": [0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "Rule 2: Aromatic carboxylic acids with amino or nitro groups at the para position of the benzene ring give high yield.": [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "Rule 3: Aromatic carboxylic acids with formyl or methyl groups at the para position give low yield.": [0, 0, -1, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, -1, 0, 0, 0, 0, -1, -1, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "Rule 4: Aliphatic carboxylic acids without additional polar or bulky functional groups give high yield.": [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0],
+    "Rule 5: Carboxylic acids containing polyether chains give low yield.": [0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, -1, 0, 0, 0],
+    "Rule 6: Carboxylic acids with fluorinated alkyl chains give low yield.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0],
+    "Rule 7: Amino acids with heteroaromatic side chains give high yield, while those with simple aromatic side chains give low yield.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0],
+    "Rule 8: Carboxylic acids where the carboxyl group is directly attached to a nitrogen-containing heterocycle give high yield.": [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "Rule 9: Carboxylic acids with carbonyl groups adjacent to the carboxyl group give low yield.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, -1, -1, 0, 0, 0, 0, 0, 0, -1, -1, 0, 0, 0, 0, 0, 0, 0],
+    "Rule 10: Carboxylic acids with bulky substituents near the carboxyl group give low yield.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0],
+    "Rule 11: Aromatic carboxylic acids with hydroxyl groups at the para position give variable yields depending on additional functional groups and chain length.": [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
+    "Rule 12: Carboxylic acids with thiol groups on an aromatic ring give low yield.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "Rule 13: Polyhydroxylated aliphatic carboxylic acids give high yield.": [0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "Rule 14: Aromatic carboxylic acids with formyl groups on the ring give low yield.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "Rule 15: Aromatic carboxylic acids with methoxy groups on the ring and additional ketone functionalities give high yield.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+}
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.8571428571428571; Test Accuracy: 0.0
+    Train Support: 0.08214285714285714; Test Support: 0.0
+    Train Confidence: 0.9791666666666667; Test Confidence: 0.5
+    Train Lift: 1.9801879084967324; Test Lift: NONE
+    Train Leverage: 0.039285714285714285; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    
+    Target Name: yield
+    GPT Model: o1-preview-2024-09-12
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+- **Rule 1**: **Aliphatic carboxylic acids with amino or sulfhydryl groups located at the γ (gamma) or δ (delta) carbon (3rd or 4th carbon) from the carboxyl group give high yield; those with such groups at positions beyond δ (epsilon or further) give low yield.**
+  - *Examples*:
+    - **High Yield**: 5-aminopentanoic acid, 3-sulfanylpropanoic acid.
+    - **Low Yield**: 7-aminoheptanoic acid, 8-aminooctanoic acid.
+  - *Rationale*: Proximal amino or sulfhydryl groups can effectively coordinate with metal centers in the catalyst, enhancing catalytic activity. Distal groups are less effective due to increased flexibility and reduced interaction with the catalyst.
+
+- **Rule 2**: **Aromatic carboxylic acids with para substituents capable of coordinating with the catalyst (e.g., amino, nitro, bromomethyl groups) give high yield; those with non-coordinating or deactivating groups (e.g., methyl, formyl, thiol) at the para position give low yield.**
+  - *Examples*:
+    - **High Yield**: 4-aminobenzoic acid, 4-nitrobenzoic acid, 4-(bromomethyl)benzoic acid.
+    - **Low Yield**: 4-methylbenzoic acid, 4-formylbenzoic acid, 4-sulfanylbenzoic acid.
+  - *Rationale*: Effective coordination enhances interaction with the catalyst, improving yield. Non-coordinating or deactivating groups hinder coordination or reduce electron density, leading to lower yields.
+
+- **Rule 3**: **Carboxylic acids where the carboxyl group is directly attached to a nitrogen-containing heterocycle give high yield; if the nitrogen heterocycle is attached via a linker, the yield is low.**
+  - *Examples*:
+    - **High Yield**: Pyridine-3-carboxylic acid (nicotinic acid), 1H-pyrazole-4-carboxylic acid.
+    - **Low Yield**: 4-pyridin-4-ylbenzoic acid.
+  - *Rationale*: Direct attachment allows the heterocyclic nitrogen to coordinate effectively with the catalyst, enhancing reactivity and yield. Linkers reduce this interaction due to increased distance and flexibility.
+
+- **Rule 4**: **Carboxylic acids containing polyether chains (long chains of ethylene glycol units) give low yield.**
+  - *Examples*: 2-[2-(2-methoxyethoxy)ethoxy]acetic acid, 3-[2-(2-aminoethoxy)ethoxy]propanoic acid.
+  - *Rationale*: Polyether chains introduce steric bulk and flexibility, hindering effective coordination with the catalyst's active sites and decreasing the reaction yield.
+
+- **Rule 5**: **Carboxylic acids with fluorinated alkyl chains or trifluoroacetyl groups give low yield.**
+  - *Examples*: 2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid, 4-[(2,2,2-trifluoroacetyl)amino]butanoic acid.
+  - *Rationale*: Fluorination increases steric hindrance and decreases polarity, reducing the modifier's ability to coordinate effectively with the catalyst and lowering the yield.
+
+- **Rule 6**: **Alpha-amino acids with heteroaromatic side chains (e.g., indole ring) give high yield; those with simple aromatic side chains (e.g., phenyl ring) give low yield.**
+  - *Examples*:
+    - **High Yield**: (2R)-2-amino-3-(1H-indol-3-yl)propanoic acid (tryptophan).
+    - **Low Yield**: (2S)-2-amino-3-phenylpropanoic acid (phenylalanine).
+  - *Rationale*: Heteroaromatic side chains can coordinate better due to lone pairs on heteroatoms, enhancing interaction with the catalyst. Simple aromatic rings lack these features, resulting in lower yields.
+
+- **Rule 7**: **Polyhydroxylated aliphatic carboxylic acids give high yield.**
+  - *Examples*: (2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid.
+  - *Rationale*: Multiple hydroxyl groups increase solubility and provide multiple sites for coordination or hydrogen bonding, enhancing interaction with the catalyst and improving yield.
+
+- **Rule 8**: **Simple aliphatic carboxylic acids without additional polar or bulky functional groups give high yield.**
+  - *Examples*:
+    - **High Yield**: Octanoic acid.
+    - **Low Yield**: 7-hydroxyheptanoic acid, 7-aminoheptanoic acid.
+  - *Rationale*: Lack of interfering functional groups allows better interaction with the catalyst. Additional polar or bulky groups can introduce steric hindrance or electronic effects that reduce yield.
+
+- **Rule 9**: **Carboxylic acids with carbonyl groups adjacent to the carboxyl group give low yield.**
+  - *Examples*: 2-[(4-hydroxybenzoyl)amino]acetic acid, 4-oxoheptanedioic acid.
+  - *Rationale*: Adjacent carbonyl groups can engage in resonance or intramolecular interactions that reduce the availability of the carboxyl group for effective catalyst coordination, decreasing the yield.
+
+- **Rule 10**: **Carboxylic acids with bulky substituents near the carboxyl group give low yield.**
+  - *Example*: (2S)-6-acetamido-2-aminohexanoic acid.
+  - *Rationale*: Bulky groups near the carboxyl group create steric hindrance that impedes the modifier's ability to interact effectively with the catalyst's active sites, resulting in lower yields.
+
+- **Rule 11**: **Aliphatic carboxylic acids with omega-pyridyl groups give high yield.**
+  - *Example*: 4-pyridin-4-ylbutanoic acid.
+  - *Rationale*: The pyridine nitrogen at the terminal position can coordinate with the catalyst when appropriately spaced by an aliphatic chain, enhancing interaction and yield.
+
+- **Rule 12**: **Aromatic carboxylic acids with methoxy groups on the ring and additional ketone functionalities give high yield.**
+  - *Example*: 4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid.
+  - *Rationale*: Methoxy groups are electron-donating, increasing electron density and enhancing coordination. Ketone groups can also participate in coordination, collectively improving yield.
+
+- **Rule 13**: **Carboxylic acids with thiol groups attached to aromatic rings give low yield.**
+  - *Example*: 4-sulfanylbenzoic acid.
+  - *Rationale*: Thiol groups can strongly bind to metal centers, potentially deactivating the catalyst by forming stable, non-reactive complexes, thereby reducing the reaction yield.
+
+- **Rule 14**: **Aliphatic carboxylic acids with distal polar groups (hydroxyl, amino) located at positions beyond δ (epsilon or further) give low yield.**
+  - *Examples*: 7-hydroxyheptanoic acid, 8-aminooctanoic acid.
+  - *Rationale*: Polar groups too distant from the carboxyl group are less effective in coordination and may introduce flexibility that hinders effective interaction with the catalyst, leading to lower yields.
+
+- **Rule 15**: **Aromatic carboxylic acids with non-coordinating electron-withdrawing groups (e.g., formyl) at the para position give low yield.**
+  - *Examples*: 4-formylbenzoic acid, 5-formyl-2-hydroxybenzoic acid.
+  - *Rationale*: Electron-withdrawing groups decrease electron density on the aromatic ring, reducing its ability to coordinate with the catalyst and lowering the reaction yield.
+
+**End of Rules**---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+{
+    "Rule 1": [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, -1, 0, -1, -1],
+    "Rule 2": [0, 0, 1, 0, 1, 0, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0, 0, 0, -1, -1, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "Rule 3": [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "Rule 4": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0],
+    "Rule 5": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0],
+    "Rule 6": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "Rule 7": [0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "Rule 8": [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "Rule 9": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0],
+    "Rule 10": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, -1, 0, 0],
+    "Rule 11": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "Rule 12": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "Rule 13": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "Rule 14": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, -1, 0, -1, -1, 0],
+    "Rule 15": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+}
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.9428571428571428; Test Accuracy: 1.0
+    Train Support: 0.09523809523809523; Test Support: 0.0
+    Train Confidence: 0.963888888888889; Test Confidence: 0.5
+    Train Lift: 1.9082244008714595; Test Lift: NONE
+    Train Leverage: 0.044081632653061226; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    
+    Target Name: yield
+    GPT Model: o1-preview-2024-09-12
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+- **Rule 1**: **Modifiers that are aromatic carboxylic acids with electron-donating or coordinating substituents at the para position (e.g., amino, nitro, bromomethyl groups) give high yield; those with electron-withdrawing or non-coordinating groups (e.g., methyl, formyl, thiol) at the para position give low yield.**
+
+  - *Examples*:
+    - **High Yield**: 4-aminobenzoic acid, 4-nitrobenzoic acid, 4-(bromomethyl)benzoic acid.
+    - **Low Yield**: 4-methylbenzoic acid, 4-formylbenzoic acid, 4-sulfanylbenzoic acid.
+  - *Rationale*: Electron-donating or coordinating groups increase electron density and enhance the ability of the aromatic ring to coordinate with the metal catalyst, improving yield. Electron-withdrawing or non-coordinating groups reduce electron density or introduce steric hindrance, hindering coordination.
+
+- **Rule 2**: **Modifiers that are nitrogen-containing heterocyclic carboxylic acids with the carboxyl group directly attached to the ring give high yield; if the heterocycle is attached via a linker or lacks accessible nitrogen atoms, the yield is low.**
+
+  - *Examples*:
+    - **High Yield**: Pyridine-3-carboxylic acid (nicotinic acid), 1H-pyrazole-4-carboxylic acid.
+    - **Low Yield**: 4-pyridin-4-ylbenzoic acid.
+  - *Rationale*: Direct attachment allows the heterocyclic nitrogen to effectively coordinate with the catalyst, enhancing reactivity. Linkers increase distance and reduce coordination efficiency.
+
+- **Rule 3**: **Modifiers that are aliphatic carboxylic acids with amino or thiol (sulfhydryl) groups at the γ (gamma, 3rd carbon) or δ (delta, 4th carbon) positions relative to the carboxyl group give high yield; those with such groups at more distal positions give low yield.**
+
+  - *Examples*:
+    - **High Yield**: 5-aminopentanoic acid, 3-sulfanylpropanoic acid.
+    - **Low Yield**: 7-aminoheptanoic acid, 8-aminooctanoic acid.
+  - *Rationale*: Proximal amino or thiol groups can effectively coordinate with the catalyst's metal centers, enhancing catalytic activity. Distal groups are less effective due to increased flexibility and reduced interaction.
+
+- **Rule 4**: **Modifiers that are simple aliphatic carboxylic acids without additional bulky or interfering functional groups provide high yield; those with bulky substituents near the carboxyl group give low yield.**
+
+  - *Examples*:
+    - **High Yield**: Octanoic acid.
+    - **Low Yield**: (2S)-6-acetamido-2-aminohexanoic acid, 4-oxoheptanedioic acid.
+  - *Rationale*: Lack of steric hindrance near the carboxyl group allows better interaction with the catalyst. Bulky groups can impede coordination due to steric effects.
+
+- **Rule 5**: **Modifiers that are amino acids with heteroaromatic side chains capable of coordination (e.g., indole ring) give high yield; those with non-coordinating aromatic side chains (e.g., phenyl ring) give low yield.**
+
+  - *Examples*:
+    - **High Yield**: (2R)-2-amino-3-(1H-indol-3-yl)propanoic acid (tryptophan).
+    - **Low Yield**: (2S)-2-amino-3-phenylpropanoic acid (phenylalanine).
+  - *Rationale*: Heteroaromatic side chains contain nitrogen atoms that can coordinate with the catalyst, enhancing reactivity. Simple aromatic rings lack coordinating heteroatoms.
+
+- **Rule 6**: **Modifiers containing long polyether chains (e.g., multiple ethylene glycol units) give low yield.**
+
+  - *Examples*: 2-[2-(2-methoxyethoxy)ethoxy]acetic acid, 3-[2-(2-aminoethoxy)ethoxy]propanoic acid.
+  - *Rationale*: Polyether chains introduce steric bulk and flexibility, hindering effective coordination with the catalyst's active sites and decreasing the reaction yield.
+
+- **Rule 7**: **Modifiers that are carboxylic acids with fluorinated alkyl chains or trifluoromethyl groups give low yield.**
+
+  - *Examples*: 2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid, 4-[(2,2,2-trifluoroacetyl)amino]butanoic acid.
+  - *Rationale*: Fluorination increases steric hindrance and electron-withdrawing effects, reducing the modifier's ability to coordinate effectively with the catalyst and lowering the yield.
+
+- **Rule 8**: **Modifiers with carbonyl groups adjacent to the carboxyl group or within the molecule give low yield.**
+
+  - *Examples*: 4-oxoheptanedioic acid, 2-[(4-hydroxybenzoyl)amino]acetic acid.
+  - *Rationale*: Adjacent carbonyl groups can engage in resonance or intramolecular interactions that reduce the availability of the carboxyl group for effective catalyst coordination, decreasing the yield.
+
+- **Rule 9**: **Modifiers that are aromatic carboxylic acids with thiol groups attached to the ring give low yield.**
+
+  - *Example*: 4-sulfanylbenzoic acid.
+  - *Rationale*: Thiol groups can strongly bind to metal centers, potentially deactivating the catalyst by forming stable, non-reactive complexes, thereby reducing the reaction yield.
+
+- **Rule 10**: **Modifiers that are aromatic carboxylic acids with methoxy groups on the ring and additional ketone functionalities give high yield.**
+
+  - *Example*: 4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid.
+  - *Rationale*: Methoxy groups are electron-donating, increasing electron density and enhancing coordination. Ketone groups can also participate in coordination, collectively improving yield.
+
+**End of Rules**---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+{
+    "Rule 1": [0, 0, 1, 0, 1, 0, 0, 1, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
+    "Rule 2": [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "Rule 3": [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, -1],
+    "Rule 4": [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, -1, 0, 0, -1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 1, 0, 1, 0, -1, 1, 0],
+    "Rule 5": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "Rule 6": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "Rule 7": [0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "Rule 8": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, -1, -1, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0],
+    "Rule 9": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "Rule 10": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+}
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.8; Test Accuracy: 1.0
+    Train Support: 0.1619047619047619; Test Support: 0.0
+    Train Confidence: 0.7685185185185185; Test Confidence: 0.5
+    Train Lift: 1.5388223190510775; Test Lift: NONE
+    Train Leverage: 0.05768707482993198; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    
+    Target Name: yield
+    GPT Model: o1-preview-2024-09-12
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+- **Rule 1**: **Modifiers that are aromatic carboxylic acids with substituents capable of coordination through lone pair electrons at the para position (e.g., amino, nitro, bromomethyl) yield high reaction efficiency; those with electron-donating groups or non-coordinating substituents at the para position yield low efficiency.**
+
+  - *Examples*:
+    - **High Yield**: *4-aminobenzoic acid*, *4-nitrobenzoic acid*, *4-(bromomethyl)benzoic acid*.
+    - **Low Yield**: *4-methylbenzoic acid*, *4-formylbenzoic acid*.
+  - *Rationale*: Para substituents with lone pairs or electron-withdrawing capabilities enhance coordination with the metal center, increasing catalyst activity. Electron-donating groups reduce coordination efficiency.
+
+- **Rule 2**: **Modifiers that are nitrogen-containing heterocyclic carboxylic acids with the carboxyl group directly attached to the heterocycle or connected via a short aliphatic chain yield high reaction efficiency; those connected through an additional aromatic ring yield low efficiency.**
+
+  - *Examples*:
+    - **High Yield**: *Pyridine-3-carboxylic acid* (nicotinic acid), *1H-pyrazole-4-carboxylic acid*, *4-pyridin-4-ylbutanoic acid*.
+    - **Low Yield**: *4-pyridin-4-ylbenzoic acid*.
+  - *Rationale*: Direct attachment or connection through a short chain allows effective coordination of the heterocyclic nitrogen with the catalyst's metal center. An additional aromatic ring introduces steric hindrance and electronic effects that reduce coordination efficiency.
+
+- **Rule 3**: **Modifiers that are aliphatic carboxylic acids with terminal amino groups on short chains (five carbons or fewer) yield high efficiency; longer chains with terminal amino groups or acylated amino groups yield low efficiency.**
+
+  - *Examples*:
+    - **High Yield**: *5-aminopentanoic acid*.
+    - **Low Yield**: *7-aminoheptanoic acid*, *8-aminooctanoic acid*, *(2S)-6-acetamido-2-aminohexanoic acid*.
+  - *Rationale*: Short-chain amino acids maintain the amino group in proximity to the carboxyl group, facilitating bidentate coordination. Longer chains introduce flexibility and distance, reducing coordination efficiency. Acylation of amino groups blocks coordination sites.
+
+- **Rule 4**: **Modifiers that are aliphatic carboxylic acids with multiple hydroxyl groups adjacent to the carboxyl group yield high efficiency due to enhanced coordination capability.**
+
+  - *Example*:
+    - **High Yield**: *(2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid* (gluconic acid).
+  - *Rationale*: Multiple hydroxyl groups provide additional coordination sites, increasing binding affinity to the catalyst's metal center.
+
+- **Rule 5**: **Modifiers that are amino acids with heteroaromatic side chains capable of coordination yield high efficiency; those with non-heteroaromatic or acylated side chains yield low efficiency.**
+
+  - *Examples*:
+    - **High Yield**: *(2R)-2-amino-3-(1H-indol-3-yl)propanoic acid* (tryptophan).
+    - **Low Yield**: *(2S)-2-amino-3-phenylpropanoic acid* (phenylalanine), *2-[[(2S)-2-amino-4-methylsulfanylbutanoyl]amino]acetic acid*.
+  - *Rationale*: Heteroaromatic side chains with accessible coordination sites enhance metal binding. Non-heteroaromatic side chains lack these sites, and acylation hinders coordination.
+
+- **Rule 6**: **Modifiers that are aliphatic carboxylic acids without additional bulky or highly polar functional groups yield high efficiency; those with bulky substituents or long, flexible polar chains yield low efficiency.**
+
+  - *Examples*:
+    - **High Yield**: *Octanoic acid*.
+    - **Low Yield**: *2-[2-(2-methoxyethoxy)ethoxy]acetic acid*, *3-[2-(2-aminoethoxy)ethoxy]propanoic acid*.
+  - *Rationale*: Minimal steric hindrance and limited polarity near the coordination site allow better interaction with the catalyst. Bulky or flexible polar groups reduce effective coordination.
+
+- **Rule 7**: **Modifiers containing long polyether chains or flexible linkers yield low efficiency due to steric hindrance and decreased coordination efficiency with the metal center.**
+
+  - *Example*:
+    - **Low Yield**: *2-[2-(2-methoxyethoxy)ethoxy]acetic acid*.
+  - *Rationale*: Flexible chains introduce steric bulk and flexibility that hinder precise interaction with the catalyst's active sites.
+
+- **Rule 8**: **Modifiers with strong electron-withdrawing groups such as perfluoroalkyl or trifluoromethyl groups yield low efficiency due to decreased electron density and possible steric effects.**
+
+  - *Example*:
+    - **Low Yield**: *2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid*.
+  - *Rationale*: Electron-withdrawing groups reduce the ligand's ability to donate electrons to the metal center, weakening coordination.
+
+- **Rule 9**: **Modifiers with aldehyde (formyl) groups on the aromatic ring yield low efficiency due to decreased electron density and potential competition at coordination sites.**
+
+  - *Examples*:
+    - **Low Yield**: *4-formylbenzoic acid*, *5-formyl-2-hydroxybenzoic acid*.
+  - *Rationale*: Aldehyde groups are electron-withdrawing and may participate in side reactions or interfere with metal coordination.
+
+- **Rule 10**: **Modifiers that are aromatic carboxylic acids with thiol (sulfhydryl) groups directly attached to the aromatic ring yield low efficiency due to potential catalyst poisoning from strong metal-thiol binding.**
+
+  - *Examples*:
+    - **Low Yield**: *4-sulfanylbenzoic acid*.
+  - *Rationale*: Thiol groups can bind irreversibly to metal centers, deactivating the catalyst.
+
+- **Rule 11**: **Modifiers that are keto acids (carboxylic acids containing additional carbonyl groups near the carboxyl group) yield low efficiency due to competition for coordination and potential chelation that inhibits catalysis.**
+
+  - *Examples*:
+    - **Low Yield**: *4-oxoheptanedioic acid*, *2-[(4-hydroxybenzoyl)amino]acetic acid*.
+  - *Rationale*: Additional carbonyl groups can create competing coordination sites or form stable chelates that reduce catalyst activity.
+
+- **Rule 12**: **Modifiers that are aliphatic carboxylic acids with hydroxyl or amino groups located far from the carboxyl group yield low efficiency due to reduced ability to form effective coordination complexes.**
+
+  - *Examples*:
+    - **Low Yield**: *7-hydroxyheptanoic acid*, *7-aminoheptanoic acid*, *8-aminooctanoic acid*.
+  - *Rationale*: Functional groups distant from the carboxyl group are less likely to coordinate simultaneously, reducing binding strength.
+
+- **Rule 13**: **Modifiers that are aromatic carboxylic acids substituted with methoxy groups and additional coordinating functionalities yield high efficiency due to enhanced electron density and multiple coordination sites.**
+
+  - *Example*:
+    - **High Yield**: *4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid*.
+  - *Rationale*: Methoxy groups increase electron density on the aromatic ring, and additional functional groups provide multiple coordination points, enhancing catalyst interaction.
+
+- **Rule 14**: **Modifiers with electron-rich aromatic systems containing adjacent carbonyl and hydroxyl groups yield high efficiency due to potential for strong coordination without catalyst inhibition.**
+
+  - *Example*:
+    - **High Yield**: *1,3-dioxo-2-benzofuran-5-carboxylic acid*.
+  - *Rationale*: The arrangement of functional groups allows effective coordination with the metal center while maintaining catalyst activity.
+
+- **Rule 15**: **Modifiers that are aliphatic carboxylic acids with terminal thiol groups yield variable efficiency; small thiol-containing acids may yield high efficiency due to effective coordination, while larger ones may cause catalyst poisoning and yield low efficiency.**
+
+  - *Example*:
+    - **High Yield**: *3-sulfanylpropanoic acid*.
+  - *Rationale*: Small thiol-containing modifiers can enhance coordination without significantly deactivating the catalyst, whereas larger thiols may bind too strongly.
+
+**End of Rules**
+
+---
+
+These rules have been thoughtfully developed to accurately represent the relationship between molecular modifiers' structural features and the reaction yield. They consider the combination of functional groups and physical-chemical properties, such as electronic effects, steric hindrance, and coordination potential, providing clear predictions for high or low yields. The rules balance simplicity and complexity, aiming for broad coverage of the dataset while highlighting key structural influences on the catalyst's performance.---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+{
+  "Rule 1: **Modifiers that are aromatic carboxylic acids with substituents capable of coordination through lone pair electrons at the para position (e.g., amino, nitro, bromomethyl) yield high reaction efficiency; those with electron-donating groups or non-coordinating substituents at the para position yield low efficiency.**": [0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  "Rule 2: **Modifiers that are nitrogen-containing heterocyclic carboxylic acids with the carboxyl group directly attached to the heterocycle or connected via a short aliphatic chain yield high reaction efficiency; those connected through an additional aromatic ring yield low efficiency.**": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  "Rule 3: **Modifiers that are aliphatic carboxylic acids with terminal amino groups on short chains (five carbons or fewer) yield high efficiency; longer chains with terminal amino groups or acylated amino groups yield low efficiency.**": [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, -1, 0, -1],
+  "Rule 4: **Modifiers that are aliphatic carboxylic acids with multiple hydroxyl groups adjacent to the carboxyl group yield high efficiency due to enhanced coordination capability.**": [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  "Rule 5: **Modifiers that are amino acids with heteroaromatic side chains capable of coordination yield high efficiency; those with non-heteroaromatic or acylated side chains yield low efficiency.**": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0],
+  "Rule 6: **Modifiers that are aliphatic carboxylic acids without additional bulky or highly polar functional groups yield high efficiency; those with bulky substituents or long, flexible polar chains yield low efficiency.**": [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, 0, 0],
+  "Rule 7: **Modifiers containing long polyether chains or flexible linkers yield low efficiency due to steric hindrance and decreased coordination efficiency with the metal center.**": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, 0, 0],
+  "Rule 8: **Modifiers with strong electron-withdrawing groups such as perfluoroalkyl or trifluoromethyl groups yield low efficiency due to decreased electron density and possible steric effects.**": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  "Rule 9: **Modifiers with aldehyde (formyl) groups on the aromatic ring yield low efficiency due to decreased electron density and potential competition at coordination sites.**": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  "Rule 10: **Modifiers that are aromatic carboxylic acids with thiol (sulfhydryl) groups directly attached to the aromatic ring yield low efficiency due to potential catalyst poisoning from strong metal-thiol binding.**": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  "Rule 11: **Modifiers that are keto acids (carboxylic acids containing additional carbonyl groups near the carboxyl group) yield low efficiency due to competition for coordination and potential chelation that inhibits catalysis.**": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, -1, 0, 0, 0, 0, 0, 0, 0],
+  "Rule 12: **Modifiers that are aliphatic carboxylic acids with hydroxyl or amino groups located far from the carboxyl group yield low efficiency due to reduced ability to form effective coordination complexes.**": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, 0, 0, -1, 0],
+  "Rule 13: **Modifiers that are aromatic carboxylic acids substituted with methoxy groups and additional coordinating functionalities yield high efficiency due to enhanced electron density and multiple coordination sites.**": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  "Rule 14: **Modifiers with electron-rich aromatic systems containing adjacent carbonyl and hydroxyl groups yield high efficiency due to potential for strong coordination without catalyst inhibition.**": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  "Rule 15: **Modifiers that are aliphatic carboxylic acids with terminal thiol groups yield variable efficiency; small thiol-containing acids may yield high efficiency due to effective coordination, while larger ones may cause catalyst poisoning and yield low efficiency.**": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+}
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.9428571428571428; Test Accuracy: 1.0
+    Train Support: 0.07346938775510205; Test Support: 0.0
+    Train Confidence: 0.9761904761904762; Test Confidence: 0.5
+    Train Lift: 1.9400871459694993; Test Lift: NONE
+    Train Leverage: 0.035335276967930034; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    
+    Target Name: yield
+    GPT Model: o1-preview-2024-09-12
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+- **Rule 1**: **Modifiers that are aromatic carboxylic acids with electron-withdrawing substituents at the para position, capable of coordinating to metal centers (e.g., amino, nitro, halomethyl groups), yield high reaction efficiency; those with electron-donating substituents (e.g., methyl, methoxy) yield low efficiency.**
+
+  - *Examples*:
+    - **High Yield**: *4-aminobenzoic acid*, *4-nitrobenzoic acid*, *4-(bromomethyl)benzoic acid*.
+    - **Low Yield**: *4-methylbenzoic acid*, *4-formylbenzoic acid*.
+  - *Rationale*: Electron-withdrawing groups enhance the ability of the carboxylate to coordinate with the metal center by increasing its acidity and electron affinity. Electron-donating groups decrease coordination efficiency by reducing electron density withdrawal.
+
+- **Rule 2**: **Modifiers that are aliphatic carboxylic acids with amino groups located within five carbons of the carboxyl group yield high efficiency; longer chains with terminal amino groups yield low efficiency due to reduced coordination effectiveness.**
+
+  - *Examples*:
+    - **High Yield**: *5-aminopentanoic acid*, *(2S)-2-aminopentanedioic acid* (glutamic acid).
+    - **Low Yield**: *7-aminoheptanoic acid*, *8-aminooctanoic acid*.
+  - *Rationale*: Proximity of amino and carboxyl groups allows for effective bidentate coordination to the metal center. Extended chains decrease the probability of simultaneous coordination due to increased flexibility and distance.
+
+- **Rule 3**: **Modifiers that are nitrogen-containing heterocyclic carboxylic acids directly attached to the ring yield high efficiency; those with heterocycles connected via additional aromatic rings yield low efficiency due to steric hindrance and electronic effects.**
+
+  - *Examples*:
+    - **High Yield**: *Pyridine-3-carboxylic acid* (nicotinic acid), *1H-pyrazole-4-carboxylic acid*, *2-oxo-1H-pyridine-4-carboxylic acid*.
+    - **Low Yield**: *4-pyridin-4-ylbenzoic acid*.
+  - *Rationale*: Direct attachment ensures that the heterocyclic nitrogen is properly oriented for coordination. Additional rings can impede effective interaction with the metal center.
+
+- **Rule 4**: **Modifiers that are polyhydroxy aliphatic carboxylic acids yield high efficiency due to multiple coordination sites provided by hydroxyl groups adjacent to the carboxyl group.**
+
+  - *Example*:
+    - **High Yield**: *(2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid* (gluconic acid).
+  - *Rationale*: Multiple hydroxyl groups enhance binding affinity through chelation, stabilizing the metal complex.
+
+- **Rule 5**: **Modifiers that are aliphatic carboxylic acids with a thiol group near the carboxyl group yield high efficiency due to effective coordination; aromatic thiol-containing acids yield low efficiency due to potential catalyst poisoning.**
+
+  - *Examples*:
+    - **High Yield**: *3-sulfanylpropanoic acid*.
+    - **Low Yield**: *4-sulfanylbenzoic acid*.
+  - *Rationale*: Aliphatic thiols can coordinate without excessively strong binding. Aromatic thiols may bind too tightly to the metal center, deactivating the catalyst.
+
+- **Rule 6**: **Modifiers that are keto acids with additional carbonyl groups near the carboxyl group yield low efficiency due to the formation of stable chelate complexes that inhibit catalysis.**
+
+  - *Examples*:
+    - **Low Yield**: *4-oxoheptanedioic acid*, *2-[(4-hydroxybenzoyl)amino]acetic acid*.
+  - *Rationale*: Additional carbonyl groups create competing coordination sites, potentially sequestering the metal and reducing its availability for catalysis.
+
+- **Rule 7**: **Modifiers containing perfluoroalkyl groups yield low efficiency due to strong electron-withdrawing effects that decrease electron density on coordinating atoms, weakening metal-ligand interactions.**
+
+  - *Example*:
+    - **Low Yield**: *2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid*.
+  - *Rationale*: Electron-deficient ligands are less effective at donating electron density to the metal center, resulting in weaker coordination bonds.
+
+- **Rule 8**: **Modifiers that are amino acids with heteroaromatic side chains capable of coordination (e.g., indole ring of tryptophan) yield high efficiency; those with non-coordinating aromatic side chains yield low efficiency.**
+
+  - *Examples*:
+    - **High Yield**: *(2R)-2-amino-3-(1H-indol-3-yl)propanoic acid* (tryptophan).
+    - **Low Yield**: *(2S)-2-amino-3-phenylpropanoic acid* (phenylalanine).
+  - *Rationale*: Heteroatoms in side chains provide additional coordination sites, enhancing metal binding. Non-heteroaromatic rings lack these sites.
+
+- **Rule 9**: **Modifiers with aldehyde (formyl) groups on the aromatic ring yield low efficiency due to their electron-withdrawing nature and potential to form inactive complexes with the catalyst.**
+
+  - *Examples*:
+    - **Low Yield**: *4-formylbenzoic acid*, *5-formyl-2-hydroxybenzoic acid*.
+  - *Rationale*: Aldehyde groups decrease electron density on the ligand and may engage in side reactions, reducing coordination effectiveness.
+
+- **Rule 10**: **Modifiers with long, flexible ether chains or bulky substituents yield low efficiency due to steric hindrance that impedes effective coordination with the metal center.**
+
+  - *Example*:
+    - **Low Yield**: *2-[2-(2-methoxyethoxy)ethoxy]acetic acid*.
+  - *Rationale*: Steric bulk from flexible chains can obstruct the approach to the active site, decreasing catalyst interaction.
+
+- **Rule 11**: **Modifiers that are aromatic carboxylic acids with methoxy groups and additional coordinating functionalities yield high efficiency due to increased electron density and multiple coordination sites.**
+
+  - *Example*:
+    - **High Yield**: *4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid*.
+  - *Rationale*: Methoxy groups are electron-donating, enhancing the ligand's ability to coordinate with the metal center and stabilizing the catalyst complex.
+
+- **Rule 12**: **Modifiers with acylated amino groups yield low efficiency because acylation blocks the amino group's lone pair, preventing coordination with the metal center.**
+
+  - *Example*:
+    - **Low Yield**: *(2S)-6-acetamido-2-aminohexanoic acid*.
+  - *Rationale*: The acyl group reduces the availability of the nitrogen's lone pair for metal coordination.
+
+- **Rule 13**: **Modifiers that are simple aliphatic carboxylic acids without additional functional groups yield high efficiency due to minimal steric hindrance and effective coordination via the carboxyl group.**
+
+  - *Example*:
+    - **High Yield**: *Octanoic acid*.
+  - *Rationale*: The absence of interfering substituents allows the carboxyl group to coordinate freely with the metal center.
+
+- **Rule 14**: **Modifiers with hydroxyl or amino groups located far from the carboxyl group (beyond five carbons) yield low efficiency due to ineffective simultaneous coordination.**
+
+  - *Examples*:
+    - **Low Yield**: *7-hydroxyheptanoic acid*, *8-aminooctanoic acid*.
+  - *Rationale*: Distant functional groups are less likely to participate in bidentate or multidentate coordination, reducing binding strength.
+
+- **Rule 15**: **Modifiers that are amino acids with thioether-containing side chains yield low efficiency because thioether sulfur atoms are poor ligands compared to thiols, leading to weak coordination with the metal center.**
+
+  - *Example*:
+    - **Low Yield**: *2-[[(2S)-2-amino-4-methylsulfanylbutanoyl]amino]acetic acid* (derived from methionine).
+  - *Rationale*: Thioethers have less donating ability than thiols, resulting in less effective metal-ligand interactions.
+
+**End of Rules**
+
+---
+
+These rules provide a comprehensive understanding of how various functional groups and structural features of modifiers influence the yield of the radical-mediated remote δ-C(sp³)–H bond functionalization reaction. By combining multiple sub-structures and considering physico-chemical properties such as electronic effects, steric hindrance, and coordination potential, the rules offer clear predictions for whether a given modifier will result in a high or low yield. This balanced set of rules covers a broad range of the dataset and maintains an equilibrium between simplicity and complexity, aiding in the optimization and control of the reaction yield.---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+{
+  "Rule 1: Modifiers that are aromatic carboxylic acids with substituents at the para position capable of coordinating to metal centers yield high efficiency; those without coordinating substituents yield low efficiency.": [0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+
+  "Rule 2: Modifiers that are aliphatic carboxylic acids with amino groups located within five carbons of the carboxyl group yield high efficiency; longer chains with terminal amino groups yield low efficiency.": [1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, -1],
+
+  "Rule 3: Modifiers that are nitrogen-containing heterocyclic carboxylic acids directly attached to the ring yield high efficiency; those with heterocycles connected via additional aromatic rings yield low efficiency due to steric hindrance and electronic effects.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+
+  "Rule 4: Modifiers that are polyhydroxy aliphatic carboxylic acids yield high efficiency due to multiple coordination sites provided by hydroxyl groups adjacent to the carboxyl group.": [0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+
+  "Rule 5: Modifiers that are aliphatic carboxylic acids with a thiol group near the carboxyl group yield high efficiency; aromatic thiol-containing acids yield low efficiency due to potential catalyst poisoning.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+
+  "Rule 6: Modifiers that are keto acids with additional carbonyl groups near the carboxyl group yield low efficiency due to the formation of stable chelate complexes that inhibit catalysis.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, 0, 0, 0, 0],
+
+  "Rule 7: Modifiers containing perfluoroalkyl groups yield low efficiency due to strong electron-withdrawing effects that decrease electron density on coordinating atoms, weakening metal-ligand interactions.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+
+  "Rule 8: Modifiers that are amino acids with heteroaromatic side chains capable of coordination yield high efficiency; those with non-coordinating aromatic side chains yield low efficiency.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+
+  "Rule 9: Modifiers with aldehyde (formyl) groups on the aromatic ring yield low efficiency due to their electron-withdrawing nature and potential to form inactive complexes with the catalyst.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+
+  "Rule 10: Modifiers with long, flexible ether chains or bulky substituents yield low efficiency due to steric hindrance that impedes effective coordination with the metal center.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0],
+
+  "Rule 11: Modifiers that are aromatic carboxylic acids with methoxy groups and additional coordinating functionalities yield high efficiency due to increased electron density and multiple coordination sites.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+
+  "Rule 12: Modifiers with acylated amino groups yield low efficiency because acylation blocks the amino group's lone pair, preventing coordination with the metal center.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0],
+
+  "Rule 13: Modifiers that are simple aliphatic carboxylic acids without additional functional groups yield high efficiency due to minimal steric hindrance and effective coordination via the carboxyl group.": [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+
+  "Rule 14: Modifiers with hydroxyl or amino groups located far from the carboxyl group (beyond five carbons) yield low efficiency due to ineffective simultaneous coordination.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1],
+
+  "Rule 15: Modifiers that are amino acids with thioether-containing side chains yield low efficiency because thioether sulfur atoms are poor ligands compared to thiols, leading to weak coordination with the metal center.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+}
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.9142857142857143; Test Accuracy: 1.0
+    Train Support: 0.06; Test Support: 0.1
+    Train Confidence: 0.875; Test Confidence: 0.55
+    Train Lift: 1.767347494553377; Test Lift: NONE
+    Train Leverage: 0.0273469387755102; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    
+    Target Name: yield
+    GPT Model: o1-preview-2024-09-12
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+- **Rule 1**: **Modifiers that are **aliphatic carboxylic acids with an amino or thiol group located within three to five carbons of the carboxyl group** yield **high efficiency** due to effective bidentate coordination with the metal center; those with these groups further away yield low efficiency.**
+
+  - *Examples*:
+    - **High Yield**: *5-aminopentanoic acid*, *(2S)-2-aminopentanedioic acid* (glutamic acid), *3-sulfanylpropanoic acid*.
+    - **Low Yield**: *7-aminoheptanoic acid*, *8-aminooctanoic acid*, *7-hydroxyheptanoic acid*.
+  - *Rationale*: Close proximity of amino or thiol groups to the carboxyl group allows for simultaneous coordination to the metal center, enhancing binding strength and catalytic activity. Distant functional groups reduce chelation ability and coordination effectiveness.
+
+- **Rule 2**: **Modifiers that are **aromatic carboxylic acids with substituents capable of additional coordination (e.g., amino, nitro, bromomethyl groups) at the para position** yield **high efficiency** due to enhanced metal-ligand interactions; those with non-coordinating or electron-donating substituents yield low efficiency.**
+
+  - *Examples*:
+    - **High Yield**: *4-aminobenzoic acid*, *4-nitrobenzoic acid*, *4-(bromomethyl)benzoic acid*.
+    - **Low Yield**: *4-methylbenzoic acid*, *4-formylbenzoic acid*.
+  - *Rationale*: Substituents capable of coordination provide additional binding sites to the metal center, enhancing catalyst stability. Non-coordinating or electron-donating groups do not offer this advantage and may decrease the coordination efficiency.
+
+- **Rule 3**: **Modifiers that are **perfluorinated aliphatic carboxylic acids** yield **low efficiency** due to the strong electron-withdrawing effect of fluorine atoms, which reduces electron density on the carboxylate oxygen atoms and weakens metal coordination.**
+
+  - *Example*:
+    - **Low Yield**: *2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid*.
+  - *Rationale*: The highly electronegative fluorine atoms pull electron density away from the carboxylate group, diminishing its ability to effectively coordinate with the metal center.
+
+- **Rule 4**: **Modifiers that are **aromatic carboxylic acids with aldehyde (formyl) groups** yield **low efficiency** due to the potential of aldehyde groups to engage in side reactions or form stable, inactive complexes with the metal catalyst.**
+
+  - *Examples*:
+    - **Low Yield**: *4-formylbenzoic acid*, *5-formyl-2-hydroxybenzoic acid*.
+  - *Rationale*: Aldehyde groups can interact with the metal center in a manner that deactivates the catalyst or reduces its availability for the desired reaction.
+
+- **Rule 5**: **Modifiers that are **simple aliphatic carboxylic acids without additional functional groups** yield **high efficiency** due to minimal steric hindrance and effective coordination through the carboxylate group.**
+
+  - *Example*:
+    - **High Yield**: *Octanoic acid*.
+  - *Rationale*: The absence of interfering functional groups allows the carboxylate to freely coordinate with the metal center, optimizing catalytic activity.
+
+- **Rule 6**: **Modifiers with **long, flexible ether chains or bulky substituents near the carboxyl group** yield **low efficiency** due to steric hindrance that impedes effective coordination with the metal center.**
+
+  - *Example*:
+    - **Low Yield**: *2-[2-(2-methoxyethoxy)ethoxy]acetic acid*.
+  - *Rationale*: Bulky or flexible groups can obstruct the approach of the carboxylate oxygen to the metal, reducing binding efficiency.
+
+- **Rule 7**: **Modifiers that are **amino acids with heteroaromatic side chains capable of coordination** (e.g., indole ring of tryptophan) yield **high efficiency**; those with non-coordinating side chains yield low efficiency.**
+
+  - *Examples*:
+    - **High Yield**: *(2R)-2-amino-3-(1H-indol-3-yl)propanoic acid* (tryptophan).
+    - **Low Yield**: *(2S)-2-amino-3-phenylpropanoic acid* (phenylalanine).
+  - *Rationale*: Heteroaromatic side chains provide additional coordination sites, enhancing metal binding and catalytic performance. Non-coordinating side chains lack this benefit.
+
+- **Rule 8**: **Modifiers that are **nitrogen-containing heterocyclic carboxylic acids directly attached to the ring** yield **high efficiency** due to the ability of the heterocyclic nitrogen to coordinate with the metal; those with heterocycles connected via additional rings yield low efficiency.**
+
+  - *Examples*:
+    - **High Yield**: *Pyridine-3-carboxylic acid* (nicotinic acid), *1H-pyrazole-4-carboxylic acid*.
+    - **Low Yield**: *4-pyridin-4-ylbenzoic acid*.
+  - *Rationale*: Direct attachment ensures effective coordination through the heterocycle. Additional rings introduce steric hindrance and electronic effects that reduce coordination efficiency.
+
+- **Rule 9**: **Modifiers with **conjugated keto-carboxylate systems** yield **low efficiency** due to the formation of stable chelate complexes that sequester the metal center and inhibit catalysis.**
+
+  - *Example*:
+    - **Low Yield**: *4-oxoheptanedioic acid*.
+  - *Rationale*: The conjugation between the carbonyl and carboxylate groups leads to strong binding with the metal, forming inactive complexes that decrease available catalyst.
+
+- **Rule 10**: **Modifiers that are **polyhydroxy aliphatic carboxylic acids with hydroxyl groups adjacent to the carboxyl group** yield **high efficiency** due to multiple coordination sites enhancing metal binding.**
+
+  - *Example*:
+    - **High Yield**: *(2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid* (gluconic acid).
+  - *Rationale*: Hydroxyl groups near the carboxylate increase chelation effectiveness, stabilizing the metal complex and promoting catalytic activity.
+
+- **Rule 11**: **Modifiers with **bulky substituents near the carboxyl group** yield **low efficiency** due to steric hindrance that impairs coordination with the metal center.**
+
+  - *Example*:
+    - **Low Yield**: *3-[2-(2-aminoethoxy)ethoxy]propanoic acid*.
+  - *Rationale*: Large groups adjacent to the carboxylate obstruct metal-ligand interaction, reducing catalytic efficiency.
+
+- **Rule 12**: **Modifiers with **acylated amino or hydroxyl groups** yield **low efficiency** because acylation blocks the coordinating lone pairs on nitrogen or oxygen, preventing effective metal coordination.**
+
+  - *Example*:
+    - **Low Yield**: *(2S)-6-acetamido-2-aminohexanoic acid*.
+  - *Rationale*: Acyl groups inhibit the ability of amino or hydroxyl groups to donate electrons to the metal center, diminishing binding and catalytic performance.
+
+- **Rule 13**: **Modifiers with **hydroxy or amino groups located more than five carbons away from the carboxyl group** yield **low efficiency** due to ineffective simultaneous coordination and reduced chelation potential.**
+
+  - *Examples*:
+    - **Low Yield**: *7-hydroxyheptanoic acid*, *8-aminooctanoic acid*.
+  - *Rationale*: Distant functional groups cannot effectively participate in bidentate coordination, lessening metal binding and catalytic activity.
+
+- **Rule 14**: **Modifiers that are **aliphatic carboxylic acids with aromatic rings bearing coordinating groups** yield **high efficiency** due to additional π-π interactions and coordination sites enhancing metal-ligand binding.**
+
+  - *Example*:
+    - **High Yield**: *5-(4-hydroxyphenyl)pentanoic acid*.
+  - *Rationale*: The combination of an aromatic ring and coordinating substituents like hydroxyl groups promotes stronger interactions with the metal center.
+
+- **Rule 15**: **Modifiers that are **amino acids with thioether-containing side chains** yield **low efficiency** because thioether sulfur atoms are less effective at metal coordination compared to thiols, resulting in weaker binding.**
+
+  - *Example*:
+    - **Low Yield**: *2-[[(2S)-2-amino-4-methylsulfanylbutanoyl]amino]acetic acid* (derived from methionine).
+  - *Rationale*: Thioethers have diminished electron-donating ability, leading to less effective coordination with the metal center and reduced catalytic efficiency.
+
+**End of Rules**
+
+---
+
+These rules provide a structured understanding of how the combination of specific functional groups and structural features in molecular modifiers influence the yield of the radical-mediated remote δ-C(sp³)–H bond functionalization reaction. By focusing on the direct combinations of sub-structures, including the position and type of functional groups, and considering their physico-chemical properties like electron-donating or withdrawing abilities, steric effects, and coordination potential, the rules predict whether a modifier will result in a high or low yield.
+
+The rules cover a broad range of modifiers in the dataset, balancing simplicity and complexity to maximize coverage while maintaining specificity. They offer clear guidance for predicting reaction outcomes based on modifier structures, aiding in the selection and design of effective modifiers to optimize and control the reaction yield.---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+{
+  "Rule 1: Modifiers that are aliphatic carboxylic acids with an amino or thiol group located within three to five carbons of the carboxyl group yield high efficiency; those with these groups further away yield low efficiency.": [1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0],
+  "Rule 2: Modifiers that are aromatic carboxylic acids with substituents capable of additional coordination (e.g., amino, nitro, bromomethyl groups) at the para position yield high efficiency; those with non-coordinating or electron-donating substituents yield low efficiency.": [0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, -1, -1, 1, -1, 0, 1, 0, 1, 0, 0, 0, -1, 0, 0, 0, 0],
+  "Rule 3: Modifiers that are perfluorinated aliphatic carboxylic acids yield low efficiency due to the strong electron-withdrawing effect of fluorine atoms.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  "Rule 4: Modifiers that are aromatic carboxylic acids with aldehyde (formyl) groups yield low efficiency due to potential side reactions.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  "Rule 5: Modifiers that are simple aliphatic carboxylic acids without additional functional groups yield high efficiency due to effective coordination through the carboxylate group.": [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  "Rule 6: Modifiers with long, flexible ether chains or bulky substituents near the carboxyl group yield low efficiency due to steric hindrance.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0],
+  "Rule 7: Modifiers that are amino acids with heteroaromatic side chains capable of coordination yield high efficiency; those with non-coordinating side chains yield low efficiency.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  "Rule 8: Modifiers that are nitrogen-containing heterocyclic carboxylic acids directly attached to the ring yield high efficiency; those with heterocycles connected via additional rings yield low efficiency.": [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  "Rule 9: Modifiers with conjugated keto-carboxylate systems yield low efficiency due to stable chelate complex formation.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0],
+  "Rule 10: Modifiers that are polyhydroxy aliphatic carboxylic acids with hydroxyl groups adjacent to the carboxyl group yield high efficiency due to multiple coordination sites.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  "Rule 11: Modifiers with bulky substituents near the carboxyl group yield low efficiency due to steric hindrance.": [0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0],
+  "Rule 12: Modifiers with acylated amino or hydroxyl groups yield low efficiency because acylation blocks coordinating lone pairs.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, -1, 0, -1, 0, 0, 0, 0, -1, 0],
+  "Rule 13: Modifiers with hydroxy or amino groups located more than five carbons away from the carboxyl group yield low efficiency due to reduced chelation potential.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, -1, -1, 0, -1],
+  "Rule 14: Modifiers that are aliphatic carboxylic acids with aromatic rings bearing coordinating groups yield high efficiency due to enhanced metal-ligand binding.": [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
+  "Rule 15: Modifiers that are amino acids with thioether-containing side chains yield low efficiency because thioether sulfur atoms are less effective at metal coordination.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+}
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.7428571428571429; Test Accuracy: 1.0
+    Train Support: 0.12380952380952381; Test Support: 0.0
+    Train Confidence: 1.0; Test Confidence: 0.5
+    Train Lift: 1.9749455337690633; Test Lift: NONE
+    Train Leverage: 0.06122448979591837; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    
+    Target Name: yield
+    GPT Model: o1-preview-2024-09-12
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+- **Rule 1**: **Modifiers that are **aliphatic carboxylic acids with an amino or thiol group located within three to five carbons of the carboxyl group** yield **high efficiency** due to effective bidentate coordination with the metal center; those with these groups further away yield low efficiency.**
+
+  - *Examples*:
+    - **High Yield**: *5-aminopentanoic acid*, *(2S)-2-aminopentanedioic acid* (glutamic acid), *3-sulfanylpropanoic acid*.
+    - **Low Yield**: *7-aminoheptanoic acid*, *8-aminooctanoic acid*, *7-hydroxyheptanoic acid*.
+  - *Rationale*: Close proximity of amino or thiol groups to the carboxyl group allows for simultaneous coordination to the metal center, forming stable chelate complexes that enhance catalytic activity. Distant functional groups cannot effectively chelate, reducing coordination effectiveness.
+
+- **Rule 2**: **Modifiers that are **aromatic carboxylic acids with substituents capable of coordination (e.g., amino, nitro groups) at the para position** yield **high efficiency** due to enhanced metal-ligand interactions; those with non-coordinating or sterically hindering substituents yield low efficiency.**
+
+  - *Examples*:
+    - **High Yield**: *4-aminobenzoic acid*, *4-nitrobenzoic acid*.
+    - **Low Yield**: *4-methylbenzoic acid*, *4-formylbenzoic acid*, *4-sulfanylbenzoic acid*.
+  - *Rationale*: Coordinating substituents like amino and nitro groups provide additional binding sites to the metal center, enhancing catalyst stability and reactivity. Non-coordinating groups or those that can engage in side reactions (e.g., formyl groups) may decrease coordination efficiency or deactivate the catalyst.
+
+- **Rule 3**: **Modifiers that are **perfluorinated aliphatic carboxylic acids** yield **low efficiency** due to the strong electron-withdrawing effect of fluorine atoms, which reduces electron density on the carboxylate oxygen atoms and weakens metal coordination.**
+
+  - *Example*:
+    - **Low Yield**: *2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid*.
+  - *Rationale*: The electronegative fluorine atoms pull electron density away from the carboxylate group, diminishing its ability to coordinate effectively with the metal center.
+
+- **Rule 4**: **Modifiers that are **simple aliphatic carboxylic acids without additional functional groups** yield **high efficiency** due to minimal steric hindrance and effective coordination through the carboxylate group.**
+
+  - *Example*:
+    - **High Yield**: *Octanoic acid*.
+  - *Rationale*: The absence of interfering functional groups allows the carboxylate to freely coordinate with the metal center, optimizing catalytic activity by minimizing steric and electronic obstacles.
+
+- **Rule 5**: **Modifiers with **hydroxyl or amino groups located more than five carbons away from the carboxyl group** yield **low efficiency** due to ineffective simultaneous coordination and reduced chelation potential.**
+
+  - *Examples*:
+    - **Low Yield**: *7-hydroxyheptanoic acid*, *7-aminoheptanoic acid*, *8-aminooctanoic acid*.
+  - *Rationale*: Functional groups distant from the carboxyl group cannot participate in bidentate coordination, resulting in weaker metal binding and decreased catalytic efficiency.
+
+- **Rule 6**: **Modifiers that are **amino acids with heteroaromatic side chains capable of coordination** (e.g., indole ring of tryptophan) yield **high efficiency**; those with non-heteroaromatic side chains yield low efficiency.**
+
+  - *Examples*:
+    - **High Yield**: *(2R)-2-amino-3-(1H-indol-3-yl)propanoic acid* (tryptophan).
+    - **Low Yield**: *(2S)-2-amino-3-phenylpropanoic acid* (phenylalanine).
+  - *Rationale*: Heteroaromatic side chains provide additional coordination sites through heteroatoms, enhancing metal binding and catalytic performance. Non-heteroaromatic side chains lack this benefit.
+
+- **Rule 7**: **Modifiers with **aldehyde (formyl) groups** yield **low efficiency** due to the potential of aldehyde groups to engage in side reactions or form stable, inactive complexes with the metal catalyst.**
+
+  - *Examples*:
+    - **Low Yield**: *4-formylbenzoic acid*, *5-formyl-2-hydroxybenzoic acid*.
+  - *Rationale*: Aldehyde groups can interact with the metal center, deactivating the catalyst or reducing its availability for the desired reaction through irreversible binding or side reactions.
+
+- **Rule 8**: **Modifiers that are **polyhydroxy aliphatic carboxylic acids with hydroxyl groups adjacent to the carboxyl group** yield **high efficiency** due to multiple coordination sites enhancing metal binding.**
+
+  - *Example*:
+    - **High Yield**: *(2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid* (gluconic acid).
+  - *Rationale*: Multiple hydroxyl groups near the carboxylate increase chelation effectiveness by providing several points of attachment to the metal center, stabilizing the catalyst.
+
+- **Rule 9**: **Modifiers with **long, flexible ether chains or bulky substituents near the carboxyl group** yield **low efficiency** due to steric hindrance that impedes effective coordination with the metal center.**
+
+  - *Examples*:
+    - **Low Yield**: *2-[2-(2-methoxyethoxy)ethoxy]acetic acid*, *3-[2-(2-aminoethoxy)ethoxy]propanoic acid*.
+  - *Rationale*: Bulky or flexible groups can obstruct the approach of the carboxylate oxygen to the metal, reducing binding efficiency and inhibiting catalysis.
+
+- **Rule 10**: **Modifiers that are **arylalkanoic acids with longer aliphatic chains (more than four carbons) between the aromatic ring and the carboxyl group** yield **high efficiency**; those with shorter chains yield low efficiency.**
+
+  - *Examples*:
+    - **High Yield**: *5-(4-hydroxyphenyl)pentanoic acid*.
+    - **Low Yield**: *3-(4-hydroxyphenyl)propanoic acid*.
+  - *Rationale*: Longer aliphatic chains may reduce steric hindrance and electronic interference from the aromatic ring, allowing the carboxylate group to coordinate more effectively with the metal center.
+
+- **Rule 11**: **Modifiers containing **acylated amino groups** yield **low efficiency** because acylation blocks the coordinating lone pairs on nitrogen, preventing effective metal coordination.**
+
+  - *Example*:
+    - **Low Yield**: *(2S)-6-acetamido-2-aminohexanoic acid*.
+  - *Rationale*: Acyl groups on amino functions inhibit their ability to donate electrons to the metal center, diminishing binding and catalytic performance.
+
+- **Rule 12**: **Modifiers that are **nitrogen-containing heterocyclic carboxylic acids directly attached to the ring** yield **high efficiency** due to the ability of the heterocyclic nitrogen to coordinate with the metal; those with heterocycles connected via additional rings yield low efficiency.**
+
+  - *Examples*:
+    - **High Yield**: *Pyridine-3-carboxylic acid* (nicotinic acid), *1H-pyrazole-4-carboxylic acid*.
+    - **Low Yield**: *4-pyridin-4-ylbenzoic acid*.
+  - *Rationale*: Direct attachment ensures effective coordination through the heterocycle. Additional rings introduce steric hindrance and electronic effects that reduce coordination efficiency.
+
+- **Rule 13**: **Modifiers with **electron-withdrawing groups such as trifluoroacetyl or perfluoroalkyl chains** yield **low efficiency** due to decreased electron density on coordinating atoms, weakening metal-ligand interactions.**
+
+  - *Example*:
+    - **Low Yield**: *4-[(2,2,2-trifluoroacetyl)amino]butanoic acid*.
+  - *Rationale*: Electron-withdrawing groups reduce the ability of coordinating atoms to donate electron density to the metal center, impairing coordination.
+
+- **Rule 14**: **Modifiers with **functional groups that can form stable, inactive chelates with the metal center** yield **low efficiency** due to sequestration of the metal catalyst.**
+
+  - *Example*:
+    - **Low Yield**: *4-oxoheptanedioic acid*.
+  - *Rationale*: Chelating agents can bind the metal strongly in an inactive form, reducing the availability of the catalyst for the desired reaction.
+
+- **Rule 15**: **Modifiers that are **amino acids with unacylated primary amino groups near the carboxyl group** yield **high efficiency** due to effective coordination; modifiers with **acylated or blocked amino groups** yield low efficiency.**
+
+  - *Examples*:
+    - **High Yield**: *5-aminopentanoic acid*.
+    - **Low Yield**: *2-[[(2S)-2-amino-4-methylsulfanylbutanoyl]amino]acetic acid* (derived from methionine).
+  - *Rationale*: Free amino groups enhance metal binding through coordination. Acylation or blocking of amino groups prevents this interaction, reducing catalytic efficiency.
+
+**End of Rules**
+
+---
+
+These rules provide a structured understanding of how specific combinations of functional groups and structural features in molecular modifiers influence the yield of the radical-mediated remote δ-C(sp³)–H bond functionalization reaction. By focusing on direct combinations of sub-structures—including the position and type of functional groups—and considering their physico-chemical properties such as coordination ability, electron-donating or -withdrawing effects, steric hindrance, and chelation potential, the rules predict whether a modifier will result in a high or low yield.
+
+The rules balance simplicity and complexity, covering a broad range of modifiers in the dataset while maintaining specificity. They offer clear guidance for predicting reaction outcomes based on modifier structures, aiding in the selection and design of effective modifiers to optimize and control the reaction yield.---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+{
+    "Rule 1: Modifiers that are aliphatic carboxylic acids with an amino or thiol group located within three to five carbons of the carboxyl group yield high efficiency due to effective bidentate coordination with the metal center; those with these groups further away yield low efficiency.": [1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, -1, 0, 1, -1, -1, -1],
+    "Rule 2: Modifiers that are aromatic carboxylic acids with substituents capable of coordination (e.g., amino, nitro groups) at the para position yield high efficiency due to enhanced metal-ligand interactions; those with non-coordinating or sterically hindering substituents yield low efficiency.": [0, 0, 0, 0, 1, 0, 0, 1, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0],
+    "Rule 3: Modifiers that are perfluorinated aliphatic carboxylic acids yield low efficiency due to the strong electron-withdrawing effect of fluorine atoms, which reduces electron density on the carboxylate oxygen atoms and weakens metal coordination.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "Rule 4: Modifiers that are simple aliphatic carboxylic acids without additional functional groups yield high efficiency due to minimal steric hindrance and effective coordination through the carboxylate group.": [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "Rule 5: Modifiers with hydroxyl or amino groups located more than five carbons away from the carboxyl group yield low efficiency due to ineffective simultaneous coordination and reduced chelation potential.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, -1, 0, 0, -1],
+    "Rule 6: Modifiers that are amino acids with heteroaromatic side chains capable of coordination (e.g., indole ring of tryptophan) yield high efficiency; those with non-heteroaromatic side chains yield low efficiency.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "Rule 7: Modifiers with aldehyde (formyl) groups yield low efficiency due to the potential of aldehyde groups to engage in side reactions or form stable, inactive complexes with the metal catalyst.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "Rule 8: Modifiers that are polyhydroxy aliphatic carboxylic acids with hydroxyl groups adjacent to the carboxyl group yield high efficiency due to multiple coordination sites enhancing metal binding.": [0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "Rule 9: Modifiers with long, flexible ether chains or bulky substituents near the carboxyl group yield low efficiency due to steric hindrance that impedes effective coordination with the metal center.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, 0],
+    "Rule 10: Modifiers that are arylalkanoic acids with longer aliphatic chains (more than four carbons) between the aromatic ring and the carboxyl group yield high efficiency; those with shorter chains yield low efficiency.": [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
+    "Rule 11: Modifiers containing acylated amino groups yield low efficiency because acylation blocks the coordinating lone pairs on nitrogen, preventing effective metal coordination.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, 0],
+    "Rule 12: Modifiers that are nitrogen-containing heterocyclic carboxylic acids directly attached to the ring yield high efficiency due to the ability of the heterocyclic nitrogen to coordinate with the metal; those with heterocycles connected via additional rings yield low efficiency.": [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "Rule 13: Modifiers with electron-withdrawing groups such as trifluoroacetyl or perfluoroalkyl chains yield low efficiency due to decreased electron density on coordinating atoms, weakening metal-ligand interactions.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0],
+    "Rule 14: Modifiers with functional groups that can form stable, inactive chelates with the metal center yield low efficiency due to sequestration of the metal catalyst.": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0],
+    "Rule 15: Modifiers that are amino acids with unacylated primary amino groups near the carboxyl group yield high efficiency due to effective coordination; modifiers with acylated or blocked amino groups yield low efficiency.": [1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, 0]
+}
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.7428571428571429; Test Accuracy: 1.0
+    Train Support: 0.21428571428571427; Test Support: 0.5
+    Train Confidence: 0.9166666666666667; Test Confidence: 0.75
+    Train Lift: 1.8567538126361658; Test Lift: NONE
+    Train Leverage: 0.09428571428571428; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    

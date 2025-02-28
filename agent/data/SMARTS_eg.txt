@@ -1,0 +1,78 @@
+<Example of SMARTS>
+
+Alkyl Carbon: [CX4]
+Allenic Carbon: [$([CX2](=C)=C)]
+Vinylic Carbon: [$([CX3]=[CX3])] #Ethenyl carbon
+Acetylenic Carbon: [$([CX2]#C)]
+Arene: c
+Carbonyl group (Low specificity): [CX3]=[OX1] #Hits carboxylic acid, ester, ketone, aldehyde, carbonic acid/ester,anhydride, carbamic acid/ester, acyl halide, amide.
+Carbonyl group: [$([CX3]=[OX1]),$([CX3+]-[OX1-])] #Hits either resonance structure
+Carbonyl with Carbon: [CX3](=[OX1])C #Hits aldehyde, ketone, carboxylic acid (except formic), anhydride (except formic), acyl halides (acid halides). Won't hit carbamic acid/ester, carbonic acid/ester.
+Carbonyl with Nitrogen: [OX1]=CN #Hits amide, carbamic acid/ester, poly peptide
+Carbonyl with Oxygen: [CX3](=[OX1])O #Hits ester, carboxylic acid, carbonic acid or ester, carbamic acid or ester, anhydride Won't hit aldehyde or ketone.
+Acyl Halide: [CX3](=[OX1])[F,Cl,Br,I]
+Aldehyde: [CX3H1](=O)[#6]
+Anhydride: [CX3](=[OX1])[OX2][CX3](=[OX1])
+Amide: [NX3][CX3](=[OX1])[#6]
+Carboxylic acid: [CX3](=O)[OX2H1]
+Cyanamide: [NX3][CX2]#[NX1]
+Ketone: [#6][CX3](=O)[#6]
+Ether: [OD2]([#6])[#6]
+Not a Hydrogen Atom: [!#1]
+Alkylbromide: [BrX1;$([BrX1][CX4])]
+Primary or secondary amine, not amide: [NX3;H2,H1;!$(NC=O)] #Not ammonium ion (N must be 3-connected), not ammonia (H count can't be 3). Primary or secondary is specified by N's H-count (H2 & H1 respectively). Also note that "&" (and) is the dafault opperator and is higher precedence that "," (or), which is higher precedence than ";" (and). Will hit cyanamides and thioamide
+Generic amino acid: (low specificity): [NX3,NX4+][CX4H]([*])[CX3](=[OX1])[O,N] #For use w/ non-standard a.a. search. hits pro but not gly. Hits acids and conjugate bases. Hits single a.a.s and specific residues w/in polypeptides (internal, or terminal).
+Primary_aliph_amine: [NX3H2+0,NX4H3+;!$([N][!C])]
+Secondary_aliph_amine: [NX3H1+0,NX4H2+;!$([N][!C])]
+Tertiary_aliph_amine: [NX3H0+0,NX4H1+;!$([N][!C])]
+Unsubstituted dicarboximide: [CX3](=[OX1])[NX3H][CX3](=[OX1])
+Substituted dicarboximide: [CX3](=[OX1])[NX3H0]([#6])[CX3](=[OX1])
+Nitro group: [$([NX3](=O)=O),$([NX3+](=O)[O-])][!#8] Hits both forms
+Two Nitro groups: [$([NX3](=O)=O),$([NX3+](=O)[O-])][!#8].[$([NX3](=O)=O),$([NX3+](=O)[O-])][!#8]
+Hydroxyl: [#6][OX2H] #includes alcohol, phenol, carboxylic acid
+Hydroxyl in Alcohol: [OX2H,OX1-;$([OX2H,OX1-][CX4;!$(C([OX2H,OX1-])[O,S,#7,#15])])]
+Phenol: [OX2H][cX3]:[c]
+Hydroxyl in Carboxylic Acid: [OX2H][CX3]=[OX1]
+Enol: [OX2,OX1-][CX3;$([H1]),$(C[#6])]=[CX3]
+Thiol or Sulfide or Disulfide Sulfur: [SX2]
+Halogen: [F,Cl,Br,I]
+Any carbon attached to any halogen: [#6][F,Cl,Br,I]
+Quaternary Nitrogen: [$([NX4+]),$([NX4]=*)] #Hits non-aromatic Ns
+Tricoordinate S double bonded to N: [$([SX3]=N)]
+S double-bonded to Carbon: [$([SX1]=[#6])] #Hits terminal (1-connected S)
+Triply bonded N: [$([NX1]#*)]
+Divalent Oxygen: [$([OX2])]
+Aromatic sp2 carbon: [$([cX3](:*):*),$([cX2+](:*):*)]
+Any sp2 carbon: [$([cX3](:*):*),$([cX2+](:*):*),$([CX3]=*),$([CX2+]=*)]
+Any sp2 nitrogen: [$([nX3](:*):*),$([nX2](:*):*),$([#7X2]=*),$([NX3](=*)=*),$([#7X3+](-*)=*),$([#7X3+H]=*)]
+Unbranched_alkane groups: [R0;D2][R0;D2][R0;D2][R0;D2] #Only hits alkanes (single-bond chains). Only hits chains of at-least 4 members. All non-(implicit-hydrogen) atoms count as branches (e.g. halide substituted chains count as branched).
+Unbranched_chain groups: [R0;D2]~[R0;D2]~[R0;D2]~[R0;D2] #Hits any bond (single, double, triple). Only hits chains of at-least 4 members. All non-(implicit-hydrogen) atoms count as branches (e.g. halide substituted chains count as branched).
+Long_chain groups: [AR0]~[AR0]~[AR0]~[AR0]~[AR0]~[AR0]~[AR0]~[AR0]: Aliphatic chains at-least 8 members long.
+Atom_fragment: [!$([#6+0]);!$(C(F)(F)F);!$(c(:[!c]):[!c])!$([#6]=,#[!#6])] #(CLOGP definition) A fragment atom is a not an isolating carbon
+Carbon_isolating: [$([#6+0]);!$(C(F)(F)F);!$(c(:[!c]):[!c])!$([#6]=,#[!#6])] #This definition is based on that in CLOGP, so it is a charge-neutral carbon, which is not a CF3 or an aromatic C between two aromati c hetero atoms eg in tetrazole, it is not multiply bonded to a hetero atom.
+Rotatable bond: [!$(*#*)&!D1]-!@[!$(*#*)&!D1] # An atom which is not triply bonded and not one-connected i.e.terminal connected by a single non-ring bond to and equivalent atom. Note that logical operators can be applied to bonds ("-&!@"). Here, the overall SMARTS consists of two atoms and one bond. The bond is "site and not ring". *#* any atom triple bonded to any atom. By enclosing this SMARTS in parentheses and preceding with $, this enables us to use $(*#*) to write a recursive SMARTS using that string as an atom primitive. The purpose is to avoid bonds such as c1ccccc1-C#C which wo be considered rotatable without this specification.
+Bicyclic: [$([*R2]([*R])([*R])([*R]))].[$([*R2]([*R])([*R])([*R]))] #Bicyclic compounds have 2 bridgehead atoms with 3 arms connecting the bridgehead atoms.
+Ortho: *-!:aa-!:*
+Meta: *-!:aaa-!:*
+Para: *-!:aaaa-!:*
+Acylic-bonds: *!@*
+Single bond and not in a ring: *-!@*
+Non-ring atom: [R0] or [!R]
+Macrocycle groups: [r;!r3;!r4;!r5;!r6;!r7]
+Aromatic 5-Ring O with Lone Pair: [oX2r5]
+N in 5-sided aromatic ring: [nX2r5]
+N in 5-ring arom: [$([nX2r5]:[a-]),$([nX2r5]:[a]:[a-])]
+CIS or TRANS double bond in a ring: */,\[R]=;@[R]/,\*
+CIS or TRANS double or aromatic bond in a ring: */,\[R]=,:;@[R]/,\*
+Unfused benzene ring: [cR1]1[cR1][cR1][cR1][cR1][cR1]1 #To find a benzene ring which is not fused, we write a SMARTS of 6 aromatic carbons in a ring where each atom is only in one ring
+Multiple non-fused benzene rings: [cR1]1[cR1][cR1][cR1][cR1][cR1]1.[cR1]1[cR1][cR1][cR1][cR1][cR1]
+Fused benzene rings: c12ccccc1cccc2
+Two possible groups: [$(SMARTS_expression_A),$(SMARTS_expression_B)]
+Recursive SMARTS: [$([atom_that_gets_hit][other_atom][other_atom])] # Hits first atom within parenthesis     Example usages: [$([CX3]=[OX1])] hits Carbonyl Carbon     [$([OX1]=[CX3])] hits Carbonyl Oxygen
+Two disconnected SMARTS fragments: ([Cl!$(Cl~c)].[c!$(c~Cl)])
+Two disconnected SMARTS fragments: ([Cl]).([c])
+Two not-necessarily connected SMARTS fragments: ([Cl].[c])
+SMILES wildcard: [#0]
+High-precidence "and": [N&X4&+,N&X3&+0] or [NX4+,NX3+0] #High-precidence "and" (&) is the default logical operator. "Or" (,) is higher precidence than & and low-precidence "and" (;) is lower precidence than &.
+Any atom w/ at-least 1 H: [*!H0,#1] #In SMILES and SMARTS, Hydrogen is not considered an atom (unless it is specified as an isotope). The hydrogen count is instead consi dered a property of an atom. This SMARTS provides a way to effectively hit Hs themselves.
+Hs on Carbons: [#6!H0,#1]

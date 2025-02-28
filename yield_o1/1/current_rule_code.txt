@@ -1,0 +1,211 @@
+def rule2matrix(smiles_list):
+    rules = [
+        # Rule 1
+        {
+            'name': 'Rule 1',
+            'smarts': [
+                # Electron-withdrawing groups at para position of aromatic carboxylic acid
+                'c1ccc(cc1C(=O)O)[NX3H2]',  # para-amino benzoic acid
+                'c1ccc(cc1C(=O)O)[N+](=O)[O-]',  # para-nitro benzoic acid
+                'c1ccc(cc1C(=O)O)CBr',  # para-bromomethyl benzoic acid
+            ],
+            'prediction': 1
+        },
+        # Rule 2
+        {
+            'name': 'Rule 2',
+            'smarts': [
+                # Aliphatic carboxylic acids with chain lengths of 4–8 carbons
+                '[CH3][CH2]{2,6}[CX3](=O)[OX2H1]'
+            ],
+            'exclude': [
+                # Exclude molecules with additional polar functional groups
+                '*[OX2H][!C](=O)',  # Hydroxyl groups not part of carboxylic acid
+                '[NX3;!$(N[C](=O)O)]',  # Amino groups not as part of amino acid
+                '[SX2H;!$(S[C](=O)O)]'  # Thiol groups not part of carboxylic acid
+            ],
+            'prediction': 1
+        },
+        # Rule 3
+        {
+            'name': 'Rule 3',
+            'smarts': [
+                # Amino acids with short aliphatic side chains (≤5 carbons)
+                '[NX3H2][CHX4][CH2]{0,3}[CX3](=O)[OX2H1]'
+            ],
+            'exclude': [
+                '[c]',  # Exclude aromatic rings
+                '[NX3;!H2][CH2]',  # Exclude secondary or tertiary amines
+                '[OX2H][CH2][OX2H]',  # Exclude additional hydroxyl groups
+                '[SX2H]',  # Exclude thiol groups
+                '[CX3](=O)[OX2H1][CH2]{0,3}[OX2H]'  # Exclude polar groups in side chains
+            ],
+            'prediction': 1
+        },
+        # Rule 4
+        {
+            'name': 'Rule 4',
+            'smarts': [
+                # Carboxylic acids with adjacent multiple hydroxyl groups near the carboxyl group
+                '[CX3](=O)[OX2H1][CHX4]([OX2H])[CHX4]([OX2H])[CH2][OX2H]'
+            ],
+            'prediction': 1
+        },
+        # Rule 5a
+        {
+            'name': 'Rule 5a',
+            'smarts': [
+                # Short-chain aliphatic carboxylic acids with thiol groups
+                '[CX3](=O)[OX2H1][CH2]{1,3}[SX2H]'
+            ],
+            'prediction': 1
+        },
+        # Rule 5b
+        {
+            'name': 'Rule 5b',
+            'smarts': [
+                # Thiol group on aromatic ring
+                'c1ccc([SX2H])cc1C(=O)O'
+            ],
+            'prediction': -1
+        },
+        # Rule 6
+        {
+            'name': 'Rule 6',
+            'smarts': [
+                # Aromatic carboxylic acids with electron-donating groups at para position
+                'c1ccc(cc1C(=O)O)[OH,CH3,OCH3]'
+            ],
+            'prediction': -1
+        },
+        # Rule 7
+        {
+            'name': 'Rule 7',
+            'smarts': [
+                # Carboxylic acids with ether linkages in the aliphatic chain
+                '[CX3](=O)[OX2H1][CH2]{0,5}O[CH2]{1,5}[CX3](=O)[OX2H1]'
+            ],
+            'prediction': -1
+        },
+        # Rule 8
+        {
+            'name': 'Rule 8',
+            'smarts': [
+                # Perfluorinated carboxylic acids
+                '[CX3](=O)[OX2H1][CX4]([F])[CX2]([F])[CX2]([F])[CX3]([F])'
+            ],
+            'prediction': -1
+        },
+        # Rule 9
+        {
+            'name': 'Rule 9',
+            'smarts': [
+                # Heteroaromatic carboxylic acids
+                '[nH]1nccc1C(=O)O',  # Pyrazole-4-carboxylic acid
+                'n1cc(C(=O)O)ccc1',  # Pyridine-3-carboxylic acid
+                'c1cnc(C(=O)O)cn1'  # Pyrimidine-4-carboxylic acid
+            ],
+            'exclude': [
+                # Exclude bulky substituents causing steric hindrance
+                '*1***([#6;X4,#6;X3])(****1)[CX3](=O)[OX2H1]'
+            ],
+            'prediction': 1
+        },
+        # Rule 10a
+        {
+            'name': 'Rule 10a',
+            'smarts': [
+                # Amino acids with aromatic side chains containing nitrogen heterocycles
+                '[NX3H2][CHX4][CX3](=O)[OX2H1][CH2][c]1c[nH]c2c1cccc2'  # Tryptophan
+            ],
+            'prediction': 1
+        },
+        # Rule 10b
+        {
+            'name': 'Rule 10b',
+            'smarts': [
+                # Amino acids with aromatic hydrocarbon side chains
+                '[NX3H2][CHX4][CX3](=O)[OX2H1][CH2][c]1ccccc1'  # Phenylalanine
+            ],
+            'prediction': -1
+        },
+        # Rule 11a
+        {
+            'name': 'Rule 11a',
+            'smarts': [
+                # Dicarboxylic acids with additional coordinating groups (e.g., amino group)
+                '[NX3H2][CHX4][CH2][CX3](=O)[OX2H1]',  # Aspartic acid
+            ],
+            'prediction': 1
+        },
+        # Rule 11b
+        {
+            'name': 'Rule 11b',
+            'smarts': [
+                # Dicarboxylic acids without additional coordinating groups
+                '[CX3](=O)[OX2H1][CH2]{2,4}[CX3](=O)[OX2H1]'
+            ],
+            'exclude': [
+                '[NX3]',  # Exclude amino groups
+                '[OX2H][CH2][OX2H]',  # Exclude additional hydroxyl groups
+                '[SX2H]'  # Exclude thiol groups
+            ],
+            'prediction': -1
+        },
+        # Rule 12
+        {
+            'name': 'Rule 12',
+            'smarts': [
+                # Bulky substituents or acyl groups near coordinating sites
+                '[NX3][CX3](=O)'  # Acylated amino group
+            ],
+            'prediction': -1
+        }
+    ]
+
+    results = []
+    rule_names = [rule['name'] for rule in rules]
+
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        row = []
+        if mol is None:
+            row = [0]*len(rules)
+        else:
+            for rule in rules:
+                try:
+                    match = False
+                    for smarts in rule['smarts']:
+                        try:
+                            patt = Chem.MolFromSmarts(smarts)
+                            if patt is None:
+                                continue
+                            if mol.HasSubstructMatch(patt):
+                                match = True
+                                break
+                        except Exception as e:
+                            # Handle SMARTS parsing errors
+                            match = False
+                            break
+                    if 'exclude' in rule and match:
+                        for excl_smarts in rule['exclude']:
+                            try:
+                                excl_patt = Chem.MolFromSmarts(excl_smarts)
+                                if excl_patt is None:
+                                    continue
+                                if mol.HasSubstructMatch(excl_patt):
+                                    match = False
+                                    break
+                            except Exception as e:
+                                # Handle SMARTS parsing errors
+                                continue
+                    if match:
+                        row.append(rule['prediction'])
+                    else:
+                        row.append(0)
+                except Exception as e:
+                    row.append(0)
+        results.append(row)
+
+    df = pd.DataFrame(results, columns=rule_names)
+    return df

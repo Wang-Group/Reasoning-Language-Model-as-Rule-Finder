@@ -1,0 +1,204 @@
+def rule2matrix(smiles_list):
+    # Define SMARTS patterns for functional groups using corrected patterns from suggestions
+    
+    # Rule 1: Omega-amino aliphatic carboxylic acids (omega-amino acids)
+    # The amino group is terminal and connected via at least two CH2 units to the carboxylic acid
+    omega_amino_acid = '[NX3;H2][CH2]{2,}[CX3](=O)[OX1H0-,OX2H1]'
+    
+    # Rule 2: Aromatic carboxylic acids with para-substituted electron-withdrawing groups capable of coordinating
+    # Examples: nitro (-NO2), bromomethyl (-CH2Br), pyridyl rings
+    para_substituted_coord_ewg_nitro = 'c1cc(ccc1C(=O)[OX1H0-,OX2H1])[N+](=O)[O-]'
+    para_substituted_coord_ewg_bromomethyl = 'c1cc(ccc1C(=O)[OX1H0-,OX2H1])CBr'
+    para_substituted_coord_ewg_pyridyl = 'c1cc(ccc1C(=O)[OX1H0-,OX2H1])c2ccncc2'
+    para_substituted_coord_ewg = [para_substituted_coord_ewg_nitro, para_substituted_coord_ewg_bromomethyl, para_substituted_coord_ewg_pyridyl]
+    
+    # Rule 3: Thiol (-SH) and thioether (-S-) groups
+    thiol = '[SX2H]'
+    thioether = '[SX2;$([H0]([#6])[#6])]([#6])[#6]'
+    
+    # Rule 4: Chelating amino acids with adjacent amino and carboxyl groups (alpha-amino acids)
+    chelating_amino_acid = '[NX3;H2][CX4H][CX3](=O)[OX1H0-,OX2H1]'
+    
+    # Rule 5: Flexible polyether chains terminated with coordinating functional groups
+    polyether_chain = '[#6]-([O][#6]){2,}-[O][#6]'
+    terminal_patterns = ['[CX3](=O)[OX1H0-,OX2H1]', '[NX3;H2]']
+    
+    # Rule 6: Aromatic carboxylic acids with para-substituted electron-donating groups
+    para_substituted_edg = 'c1cc([NX3;H2,OX2H,OC,C])ccc1C(=O)[OX1H0-,OX2H1]'
+    
+    # Rule 7: Modifiers containing multiple hydroxyl groups (-OH) without additional strong coordinating groups
+    hydroxyl_group = '[OX2H]'
+    exclude_patterns_rule7 = ['[NX3]', '[SX2]', '[n]']
+    
+    # Rule 8: Fluorinated aliphatic chains or fluorinated functional groups
+    fluorinated_chain = '[CX4]([F])([F])[F]'
+    
+    # Rule 9: Modifiers containing coordinating heterocycles directly attached to carboxylic acids
+    coordinating_heterocycles = 'c1ncccc1C(=O)[OX1H0-,OX2H1]'
+    
+    # Rule 10: Simple aliphatic carboxylic acids without additional coordinating functional groups
+    carboxylic_acid = '[CX3](=O)[OX1H0-,OX2H1]'
+    exclude_patterns_rule10 = ['[NX3]', '[OX2H]', '[SX2]', '[n]', '[#7]', '[#8]', '[#16]']
+    
+    # Rule 11: Aliphatic carboxylic acids with omega-hydroxyl groups
+    omega_hydroxyl_acid = '[OX2H][CH2]{2,}[CX3](=O)[OX1H0-,OX2H1]'
+    
+    # Rule 12: Modifiers with aromatic rings linked to carboxylic acids via ketone groups
+    aromatic_ketone_acid = 'c1ccccc1C(=O)C(=O)[OX1H0-,OX2H1]'
+    
+    # Now define the rules with their associated patterns and predictions
+    rules = [
+        {
+            'number': 1,
+            'description': 'Modifiers that are omega-amino aliphatic carboxylic acids increase Fe/Hf.',
+            'patterns': [omega_amino_acid],
+            'prediction': 1
+        },
+        {
+            'number': 2,
+            'description': 'Aromatic carboxylic acids with para-substituted electron-withdrawing groups capable of coordinating increase Fe/Hf.',
+            'patterns': para_substituted_coord_ewg,
+            'prediction': 1
+        },
+        {
+            'number': 3,
+            'description': 'Modifiers containing sulfur functional groups such as thiols (-SH) or thioethers (-S-) increase Fe/Hf.',
+            'patterns': [thiol, thioether],
+            'prediction': 1
+        },
+        {
+            'number': 4,
+            'description': 'Modifiers that can form stable chelate rings through adjacent amino and carboxyl groups increase Fe/Hf.',
+            'patterns': [chelating_amino_acid],
+            'prediction': 1
+        },
+        {
+            'number': 5,
+            'description': 'Modifiers containing flexible polyether chains terminated with coordinating functional groups increase Fe/Hf.',
+            'patterns': [polyether_chain],
+            'terminal_patterns': terminal_patterns,
+            'prediction': 1
+        },
+        {
+            'number': 6,
+            'description': 'Aromatic carboxylic acids with para-substituted electron-donating groups decrease Fe/Hf.',
+            'patterns': [para_substituted_edg],
+            'prediction': -1
+        },
+        {
+            'number': 7,
+            'description': 'Modifiers containing multiple hydroxyl groups (-OH) without additional strong coordinating groups decrease Fe/Hf.',
+            'patterns': [hydroxyl_group],
+            'exclude_patterns': exclude_patterns_rule7,
+            'count_threshold': {'[OX2H]': 2},
+            'prediction': -1
+        },
+        {
+            'number': 8,
+            'description': 'Modifiers containing fluorinated aliphatic chains or fluorinated functional groups decrease Fe/Hf.',
+            'patterns': [fluorinated_chain],
+            'prediction': -1
+        },
+        {
+            'number': 9,
+            'description': 'Modifiers containing coordinating heterocycles directly attached to carboxylic acids increase Fe/Hf.',
+            'patterns': [coordinating_heterocycles],
+            'prediction': 1
+        },
+        {
+            'number': 10,
+            'description': 'Simple aliphatic carboxylic acids without additional coordinating functional groups decrease Fe/Hf.',
+            'patterns': [carboxylic_acid],
+            'exclude_patterns': exclude_patterns_rule10,
+            'prediction': -1
+        },
+        {
+            'number': 11,
+            'description': 'Aliphatic carboxylic acids with omega-hydroxyl groups increase Fe/Hf.',
+            'patterns': [omega_hydroxyl_acid],
+            'prediction': 1
+        },
+        {
+            'number': 12,
+            'description': 'Modifiers with aromatic rings linked to carboxylic acids via ketone groups increase Fe/Hf.',
+            'patterns': [aromatic_ketone_acid],
+            'prediction': 1
+        }
+    ]
+    
+    # Compile patterns
+    for rule in rules:
+        compiled_patterns = []
+        for pattern in rule.get('patterns', []):
+            compiled_patterns.append(Chem.MolFromSmarts(pattern))
+        rule['compiled_patterns'] = compiled_patterns
+        # Compile terminal patterns if any
+        if 'terminal_patterns' in rule:
+            compiled_terminal_patterns = []
+            for pattern in rule['terminal_patterns']:
+                compiled_terminal_patterns.append(Chem.MolFromSmarts(pattern))
+            rule['compiled_terminal_patterns'] = compiled_terminal_patterns
+        # Compile exclude patterns if any
+        if 'exclude_patterns' in rule:
+            compiled_exclude_patterns = []
+            for pattern in rule['exclude_patterns']:
+                compiled_exclude_patterns.append(Chem.MolFromSmarts(pattern))
+            rule['compiled_exclude_patterns'] = compiled_exclude_patterns
+        # Compile count_threshold patterns if any
+        if 'count_threshold' in rule:
+            compiled_count_threshold = {}
+            for smarts, threshold in rule['count_threshold'].items():
+                compiled_count_threshold[Chem.MolFromSmarts(smarts)] = threshold
+            rule['compiled_count_threshold'] = compiled_count_threshold
+    
+    # Initialize results list
+    results = []
+    
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = True
+                # Check exclude patterns if any
+                if 'compiled_exclude_patterns' in rule:
+                    for pat in rule['compiled_exclude_patterns']:
+                        if mol.HasSubstructMatch(pat):
+                            match = False
+                            break
+                    if not match:
+                        row.append(0)
+                        continue
+                # Check required patterns
+                for pat in rule['compiled_patterns']:
+                    if not mol.HasSubstructMatch(pat):
+                        match = False
+                        break
+                # For rules requiring terminal patterns (e.g., Rule 5)
+                if match and 'compiled_terminal_patterns' in rule:
+                    terminal_match = any(mol.HasSubstructMatch(pat) for pat in rule['compiled_terminal_patterns'])
+                    if not terminal_match:
+                        match = False
+                # For rules with count threshold
+                if match and 'compiled_count_threshold' in rule:
+                    for pat, threshold in rule['compiled_count_threshold'].items():
+                        matches = mol.GetSubstructMatches(pat)
+                        if len(matches) < threshold:
+                            match = False
+                            break
+                if match:
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule['number']}' for rule in rules])
+    return df

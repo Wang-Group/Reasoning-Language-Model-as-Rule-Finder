@@ -1,0 +1,39 @@
+def rule2matrix(smiles_list):
+    rules = [
+        ['[NX3;H2,H1;!$(NC=O)]', '[CX3](=O)[OX2H1]'],  # Rule 1: Amino and carboxylic acid groups
+        ['[c]1[c][c][c][c][c]1[NX3+](=O)[O-]'],  # Rule 2: Phenyl with nitro group
+        ['[n]1ccccc1'],  # Rule 3: Pyridine ring
+        ['O=C1OCc2ccccc2C1=O'],  # Rule 4: Benzofuranone structure
+        ['[OX2H]'],  # Rule 5: Multiple hydroxyl groups
+        ['c1c[nH]c2ccccc12'],  # Rule 6: Indole structure
+        ['[c]1[c][c][c][c][c]1[CH2Br]'],  # Rule 7: Phenyl with bromomethyl
+        ['[CX4](F)(F)F'],  # Rule 8: Trifluoromethyl group
+        ['CCCCCCC'],  # Rule 9: Aliphatic chain longer than six carbons
+        ['[c]1[c][c][c][c][c]1[CX3H]=O'],  # Rule 10: Formyl group on phenyl
+        ['[c]1[c][c][c][c][c]1[CH3]'],  # Rule 11: Phenyl with methyl
+        ['COCCO'],  # Rule 12: Methoxy in polyether chain
+        ['[c]1[c][c][c][c][c]1[OH]'],  # Rule 13: Phenyl with hydroxyl
+        ['[SX2H][CX4]'],  # Rule 14: Sulfanyl group in aliphatic chain
+        ['[c]1[c][c][c][c][c]1[CX3H]=O', '[c]1[c][c][c][c][c]1[OX2H]'],  # Rule 15: Phenyl with formyl/carboxyl and electron-donating groups
+    ]
+    results = []
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            results.append([0] * len(rules))
+            continue
+        row = []
+        for i, rule in enumerate(rules):
+            try:
+                if all(mol.HasSubstructMatch(Chem.MolFromSmarts(r)) for r in rule):
+                    if i in [0, 1, 2, 3, 4, 5, 6, 14]:  # Rules predicting high yield
+                        row.append(1)
+                    else:  # Rules predicting low yield
+                        row.append(-1)
+                else:
+                    row.append(0)
+            except:
+                row.append(0)
+        results.append(row)
+    df = pd.DataFrame(results, columns=[f'Rule {i+1}' for i in range(len(rules))])
+    return df

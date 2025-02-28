@@ -1,0 +1,275 @@
+def rule2matrix(smiles_list):
+    # Define SMARTS patterns for functional groups and structural features
+    # Carboxylic acid group (-COOH)
+    carboxylic_acid = '[CX3](=O)[OX2H1]'
+    # Primary aliphatic amine group (-NH2)
+    primary_aliph_amine = '[NX3;H2][CX4]'
+    # Aliphatic chain (non-aromatic carbons)
+    aliphatic_chain = '[CX4]'
+    # Thiol group (-SH)
+    thiol_group = '[SX2H]'
+    # Thioether group (-S-)
+    thioether_group = '[#16X2][#6]'
+    # Ether linkage (-O-)
+    ether_linkage = '[#6][OX2][#6]'
+    # Pyridine ring connected via aliphatic linker
+    pyridine_aliphatic_linker = '[#6]-[#6]-n1ccccc1'
+    # Pyridine ring directly attached
+    pyridine_direct = 'n1ccccc1'
+    # Halogen or nitro group on aromatic ring
+    electron_withdrawing_groups = ['[c][F,Cl,Br,I]', '[c][NX3](=O)[O-]']
+    # Electron-donating groups on aromatic ring
+    electron_donating_groups = ['[c][OX2H]', '[c][OX2][CH3]', '[c][NX3;H2,H1][#6]']
+    # Terminal hydroxyl group on aliphatic chain (-OH)
+    terminal_hydroxyl = '[CX4][CX4][OX2H]'
+    # Phenolic hydroxyl group (-OH on aromatic ring)
+    phenolic_oh = '[c][OX2H]'
+    # Aldehyde group (-CHO)
+    aldehyde_group = '[CX3H1](=O)[#6]'
+    # Pyrazole ring directly attached to carboxyl group
+    pyrazole_carboxylic_acid = 'n1nccc1C(=O)O'
+    # Conjugated dicarbonyl systems
+    conjugated_dicarbonyl = '[#6]=O[#6]=O'
+    # Fluorinated aliphatic chain
+    fluorinated_chain = '[CX4;H2,H1]([F,Cl,Br,I])[CX4;H2,H1]([F,Cl,Br,I])[CX4;H2,H1]([F,Cl,Br,I])'
+    # Bulky aromatic side chain (e.g., tryptophan)
+    bulky_aromatic_side_chain = '[NX3;H2][CX4H]([#6])[c]'
+    
+    # Define the rules with their associated patterns and predictions
+    rules = [
+        {
+            'number': 1,
+            'description': 'Modifiers that are omega-amino acids—aliphatic carboxylic acids with a terminal amino group (-NH2) at the opposite end of the chain—result in a high Fe/Hf value.',
+            'patterns': [
+                carboxylic_acid,
+                primary_aliph_amine,
+                aliphatic_chain
+            ],
+            'logic': 'AND',
+            'prediction': 1
+        },
+        {
+            'number': 2,
+            'description': 'Modifiers that are amino acids or amino acid derivatives with short aliphatic side chains result in a high Fe/Hf value. Those with bulky or aromatic side chains result in a low Fe/Hf value.',
+            'patterns': [
+                '[NX3;H2][CX4H]([CX4H2])[C](=O)[OX2H1]'  # Amino acid with short side chain
+            ],
+            'exclude_patterns': [
+                bulky_aromatic_side_chain
+            ],
+            'logic': 'AND',
+            'prediction': 1
+        },
+        {
+            'number': 3,
+            'description': 'Modifiers containing sulfur-containing groups such as thiol (-SH) or thioether (-S-) groups in proximity to a carboxyl group result in a high Fe/Hf value.',
+            'patterns': [
+                carboxylic_acid,
+                [thiol_group, thioether_group]  # Either thiol or thioether
+            ],
+            'logic': 'AND',
+            'prediction': 1
+        },
+        {
+            'number': 4,
+            'description': 'Modifiers that are aromatic carboxylic acids with electron-withdrawing substituents (e.g., nitro (-NO2), halomethyl (-CH2X)) on the aromatic ring result in a high Fe/Hf value. Those with electron-donating substituents result in a low Fe/Hf value.',
+            'patterns': [
+                carboxylic_acid,
+                electron_withdrawing_groups
+            ],
+            'exclude_patterns': electron_donating_groups,
+            'logic': 'AND',
+            'prediction': 1
+        },
+        {
+            'number': 5,
+            'description': 'Modifiers with a pyridine ring connected to a carboxyl group via an aliphatic linker result in a high Fe/Hf value. If the pyridine ring is directly attached to the carboxyl group, it results in a low Fe/Hf value.',
+            'patterns': [
+                carboxylic_acid,
+                pyridine_aliphatic_linker
+            ],
+            'exclude_patterns': [
+                pyridine_direct + carboxylic_acid
+            ],
+            'logic': 'AND',
+            'prediction': 1
+        },
+        {
+            'number': 6,
+            'description': 'Modifiers featuring flexible ether linkages (-O-) with terminal amino groups (-NH2) result in a high Fe/Hf value.',
+            'patterns': [
+                carboxylic_acid,
+                ether_linkage,
+                primary_aliph_amine
+            ],
+            'logic': 'AND',
+            'prediction': 1
+        },
+        {
+            'number': 7,
+            'description': 'Modifiers that are aliphatic carboxylic acids with a terminal hydroxyl group (-OH) on the aliphatic chain result in a high Fe/Hf value. If the hydroxyl group is attached to an aromatic ring (phenolic), the Fe/Hf value is low.',
+            'patterns': [
+                carboxylic_acid,
+                terminal_hydroxyl
+            ],
+            'exclude_patterns': [
+                phenolic_oh
+            ],
+            'logic': 'AND',
+            'prediction': 1
+        },
+        {
+            'number': 8,
+            'description': 'Modifiers containing multiple coordinating groups in a conjugated system, such as dicarbonyls or fused rings with carbonyl groups, result in a high Fe/Hf value.',
+            'patterns': [
+                conjugated_dicarbonyl
+            ],
+            'logic': 'AND',
+            'prediction': 1
+        },
+        {
+            'number': 9,
+            'description': 'Modifiers that are simple aliphatic carboxylic acids without additional coordinating functional groups result in a low Fe/Hf value.',
+            'patterns': [
+                carboxylic_acid
+            ],
+            'exclude_patterns': [
+                primary_aliph_amine,
+                thiol_group,
+                thioether_group,
+                ether_linkage,
+                terminal_hydroxyl
+            ],
+            'logic': 'AND',
+            'prediction': -1
+        },
+        {
+            'number': 10,
+            'description': 'Modifiers containing strong electron-withdrawing fluorine atoms on an aliphatic chain result in a low Fe/Hf value.',
+            'patterns': [
+                carboxylic_acid,
+                fluorinated_chain
+            ],
+            'logic': 'AND',
+            'prediction': -1
+        },
+        {
+            'number': 11,
+            'description': 'Modifiers that are amino acids with bulky aromatic side chains result in a low Fe/Hf value.',
+            'patterns': [
+                bulky_aromatic_side_chain
+            ],
+            'logic': 'AND',
+            'prediction': -1
+        },
+        {
+            'number': 12,
+            'description': 'Modifiers that are aromatic carboxylic acids substituted with electron-donating groups at the ortho or para positions result in a low Fe/Hf value.',
+            'patterns': [
+                carboxylic_acid,
+                electron_donating_groups
+            ],
+            'logic': 'AND',
+            'prediction': -1
+        },
+        {
+            'number': 13,
+            'description': 'Modifiers containing an aldehyde group (-CHO) in addition to a carboxyl group result in a low Fe/Hf value.',
+            'patterns': [
+                carboxylic_acid,
+                aldehyde_group
+            ],
+            'logic': 'AND',
+            'prediction': -1
+        },
+        {
+            'number': 14,
+            'description': 'Modifiers with a pyrazole ring directly attached to a carboxyl group result in a low Fe/Hf value.',
+            'patterns': [
+                pyrazole_carboxylic_acid
+            ],
+            'logic': 'AND',
+            'prediction': -1
+        },
+        {
+            'number': 15,
+            'description': 'Modifiers with bulky substituents or extensive conjugation that do not provide additional coordinating atoms result in a low Fe/Hf value.',
+            'patterns': [
+                '[c]=[c]-[c]=[c]-[c]=[c]'  # Extensive conjugation
+            ],
+            'exclude_patterns': [
+                primary_aliph_amine,
+                thiol_group,
+                thioether_group,
+                ether_linkage
+            ],
+            'logic': 'AND',
+            'prediction': -1
+        }
+    ]
+
+    # Compile SMARTS patterns
+    for rule in rules:
+        compiled_patterns = []
+        for pat in rule.get('patterns', []):
+            if isinstance(pat, list):
+                sub_patterns = [Chem.MolFromSmarts(p) for p in pat]
+                compiled_patterns.append(sub_patterns)
+            else:
+                compiled_patterns.append(Chem.MolFromSmarts(pat))
+        rule['compiled_patterns'] = compiled_patterns
+        # Compile exclude patterns if any
+        if 'exclude_patterns' in rule:
+            compiled_excludes = []
+            for pat in rule['exclude_patterns']:
+                compiled_excludes.append(Chem.MolFromSmarts(pat))
+            rule['compiled_exclude_patterns'] = compiled_excludes
+
+    # Initialize results list
+    results = []
+
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = True
+                # Check exclude patterns if any
+                if 'compiled_exclude_patterns' in rule:
+                    for ex_pat in rule['compiled_exclude_patterns']:
+                        if mol.HasSubstructMatch(ex_pat):
+                            match = False
+                            break
+                    if not match:
+                        row.append(0)
+                        continue
+                # Check required patterns
+                for pat in rule['compiled_patterns']:
+                    if isinstance(pat, list):
+                        # Group of patterns (OR logic within the group)
+                        group_match = False
+                        for sub_pat in pat:
+                            if mol.HasSubstructMatch(sub_pat):
+                                group_match = True
+                                break
+                        match = match and group_match
+                    else:
+                        if not mol.HasSubstructMatch(pat):
+                            match = False
+                            break
+                if match:
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception as e:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f"Rule {rule['number']}" for rule in rules])
+    return df

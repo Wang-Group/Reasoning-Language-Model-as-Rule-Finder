@@ -1,0 +1,254 @@
+def rule2matrix(smiles_list):
+    # Define SMARTS patterns for functional groups and substructures
+    
+    # Carboxylic acid group (-COOH)
+    carboxylic_acid = '[CX3](=O)[OX2H1]'
+    
+    # Amino group (-NH2)
+    amino_group = '[NX3H2]'
+    
+    # Alpha-amino acid backbone
+    alpha_amino_acid = '[NX3H2][CX4H]'
+    
+    # Additional carboxylic acid group in side chain
+    additional_carboxylic_acid = '[CX3](=O)[OX2H1]'
+    
+    # Aromatic ring
+    aromatic_ring = '[a]'
+    
+    # Electron-withdrawing groups on aromatic ring
+    ewg_aromatic = '[c][$([NX3](=O)=O),$([F,Cl,Br,I])]'
+    
+    # Electron-donating groups on aromatic ring
+    edg_aromatic = '[c][$([OX2H]),$([OX2][CH3]),$([CX4H3])]'
+    
+    # Thiol group (-SH)
+    thiol_group = '[SX2H]'
+    
+    # Aliphatic chain of length C3-C5 with amino or thiol groups
+    short_aliphatic_chain_with_amine_or_thiol = '[CH2][CH2][CH2][$([NX3H2]),$(S[H])]'  # For C3 chains
+    
+    # Long aliphatic chain (≥ C7) with amino or thiol groups
+    long_aliphatic_chain_with_amine_or_thiol = '[CH2][CH2][CH2][CH2][CH2][CH2][CH2][$([NX3H2]),$(S[H])]'  # For C7 chains
+    
+    # Nitrogen-containing heteroaromatic carboxylic acids (e.g., pyridine derivatives)
+    pyridine_carboxylic_acid = 'n1ccccc1C(=O)O'
+    
+    # Aldehyde group attached to aromatic ring
+    aldehyde_on_aromatic = '[c][CX3H](=O)'
+    
+    # Polyols (multiple hydroxyl groups on aliphatic chains)
+    polyol = '[CX4][$([OX2H]),$([OX2H][CX4][$([OX2H])])]'  # Simplified pattern
+    
+    # Perfluorinated alkyl chains
+    perfluoro_alkyl_chain = '[CX4]([F])([F])[F]'
+    
+    # Amino acids with aromatic side chains containing heteroatoms (e.g., indole nitrogen)
+    indole_containing_amino_acid = '[NX3H2][CX4H][CX3](=O)[OX2H1][#6][#6]c1c[cH]c2c1cccc2'  # Simplified tryptophan pattern
+    
+    # Thiol group attached to aromatic ring
+    thiol_on_aromatic = '[c][SX2H]'
+    
+    # Long aliphatic chains (≥ C7) without polar substituents
+    long_aliphatic_chain = '[CH2]' * 7  # Simplified pattern for chain of length 7
+    
+    # Flexible polyether chains (multiple ethoxy units)
+    polyether_chain = '[OX2][CX4][CX4][OX2][CX4][CX4][OX2][CX4][CX3](=O)[OX2H1]'
+    
+    # N-acylated amino acids
+    n_acylated_amino_acid = '[NX3][CX3](=O)[CX4][CX3](=O)[OX2H1]'
+    
+    # Methoxy substituted aromatic ring connected via short aliphatic chain to carboxylic acid
+    methoxy_aromatic_with_short_chain = '[c][OX2][CH3][CX4][CX3](=O)[OX2H1]'
+    
+    # Ketone group on aliphatic chain
+    ketone_on_aliphatic_chain = '[CX3](=O)[CH2][CH2][CX3](=O)[OX2H1]'
+    
+    # Define the rules with their associated patterns and predictions
+    rules = [
+        {
+            'number': 1,
+            'description': 'Modifiers that are α-amino acids with acidic side chains containing additional carboxylic acid groups tend to result in high yields.',
+            'patterns': [
+                alpha_amino_acid,  # Alpha-amino acid backbone
+            ],
+            'extra_conditions': {
+                'carboxylic_acid_count': 2  # At least two carboxylic acid groups
+            },
+            'prediction': 1
+        },
+        {
+            'number': 2,
+            'description': 'Modifiers that are aromatic carboxylic acids substituted at the para position with strong electron-withdrawing groups.',
+            'patterns': [
+                ewg_aromatic,
+                carboxylic_acid
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 3,
+            'description': 'Modifiers that are aliphatic carboxylic acids with amino (-NH2) or thiol (-SH) groups located on short (C3–C5) chains.',
+            'patterns': [
+                short_aliphatic_chain_with_amine_or_thiol,
+                carboxylic_acid
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 4,
+            'description': 'Modifiers that are nitrogen-containing heteroaromatic carboxylic acids, particularly pyridine derivatives with the nitrogen atom adjacent or ortho to the carboxyl group.',
+            'patterns': [
+                pyridine_carboxylic_acid
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 5,
+            'description': 'Modifiers that are aromatic carboxylic acids substituted at the para position with electron-donating groups.',
+            'patterns': [
+                edg_aromatic,
+                carboxylic_acid
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 6,
+            'description': 'Modifiers containing multiple hydroxyl groups (polyols) on aliphatic chains tend to result in high yields due to enhanced coordination and hydrogen bonding.',
+            'patterns': [
+                polyol,
+                carboxylic_acid
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 7,
+            'description': 'Modifiers with aldehyde (-CHO) groups attached to aromatic rings tend to result in low yields.',
+            'patterns': [
+                aldehyde_on_aromatic,
+                carboxylic_acid
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 8,
+            'description': 'Modifiers with perfluorinated alkyl chains tend to result in low yields due to strong electron-withdrawing effects and poor coordination ability.',
+            'patterns': [
+                perfluoro_alkyl_chain,
+                carboxylic_acid
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 9,
+            'description': 'Modifiers that are amino acids with aromatic side chains containing heteroatoms capable of coordination, such as indole nitrogen, tend to result in high yields.',
+            'patterns': [
+                indole_containing_amino_acid
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 10,
+            'description': 'Modifiers that are aromatic carboxylic acids with thiol (-SH) groups attached to the aromatic ring tend to result in low yields.',
+            'patterns': [
+                thiol_on_aromatic,
+                carboxylic_acid
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 11,
+            'description': 'Modifiers with long aliphatic chains (≥ C7) without polar substituents tend to result in variable yields depending on chain length and steric factors.',
+            'patterns': [
+                long_aliphatic_chain,
+                carboxylic_acid
+            ],
+            'prediction': 0  # Variable yield, assigning 0
+        },
+        {
+            'number': 12,
+            'description': 'Modifiers containing flexible polyether chains tend to result in low yields due to steric hindrance and solvation effects.',
+            'patterns': [
+                polyether_chain
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 13,
+            'description': 'Modifiers that are N-acylated amino acids tend to result in low yields due to reduced coordination ability of the amino group.',
+            'patterns': [
+                n_acylated_amino_acid
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 14,
+            'description': 'Modifiers with methoxy (-OCH3) substituted aromatic rings connected via short aliphatic chains to carboxylic acid groups tend to result in high yields.',
+            'patterns': [
+                methoxy_aromatic_with_short_chain
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 15,
+            'description': 'Modifiers with ketone (C=O) groups on aliphatic chains tend to result in low yields due to potential chelation that disrupts optimal catalyst geometry.',
+            'patterns': [
+                ketone_on_aliphatic_chain
+            ],
+            'prediction': -1
+        }
+    ]
+    
+    # Compile SMARTS patterns
+    for rule in rules:
+        compiled_patterns = []
+        for smarts in rule.get('patterns', []):
+            compiled_patterns.append(Chem.MolFromSmarts(smarts))
+        rule['compiled_patterns'] = compiled_patterns
+    
+    # Initialize results list
+    results = []
+    
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = True
+                # Check for extra conditions like counts
+                if 'extra_conditions' in rule:
+                    conditions_met = True
+                    conditions = rule['extra_conditions']
+                    for condition, value in conditions.items():
+                        if condition == 'carboxylic_acid_count':
+                            ca_pattern = Chem.MolFromSmarts(carboxylic_acid)
+                            ca_matches = mol.GetSubstructMatches(ca_pattern)
+                            if len(ca_matches) < value:
+                                conditions_met = False
+                                break
+                    if not conditions_met:
+                        match = False
+                if not match:
+                    row.append(0)
+                    continue
+                # Check required patterns
+                for pat in rule['compiled_patterns']:
+                    if not mol.HasSubstructMatch(pat):
+                        match = False
+                        break
+                if match:
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception as e:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f"Rule {rule['number']}" for rule in rules])
+    return df

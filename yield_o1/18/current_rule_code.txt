@@ -1,0 +1,234 @@
+def rule2matrix(smiles_list):
+    # Define SMARTS patterns and compile them
+    carboxyl_group = Chem.MolFromSmarts('[CX3](=O)[O-]')
+    carboxylic_acid = Chem.MolFromSmarts('[CX3](=O)[OX1H0]')
+    amino_group = Chem.MolFromSmarts('[NX3;H2]')
+    hydroxyl_group = Chem.MolFromSmarts('[OX2H]')
+    thiol_group = Chem.MolFromSmarts('[SX2H]')
+    thioether_group = Chem.MolFromSmarts('[SX2][#6]')
+    ether_linkage = Chem.MolFromSmarts('[#6][OX2][#6]')
+    aldehyde_group = Chem.MolFromSmarts('[CX3H1](=O)')
+    ketone_group = Chem.MolFromSmarts('[#6][CX3](=O)[#6]')
+    aromatic_ring = Chem.MolFromSmarts('a1aaaaa1')
+    para_substituted_aromatic = Chem.MolFromSmarts('c1ccc([*:1])cc1')
+    electron_withdrawing_groups = [
+        Chem.MolFromSmarts('[NX3+](=O)[O-]'),  # Nitro group
+        Chem.MolFromSmarts('[NX3][CX3](=O)[OX1]'),  # Amide group
+        Chem.MolFromSmarts('[CX3](=O)[OX1H0]'),  # Carboxylic acid
+        Chem.MolFromSmarts('[F,Cl,Br,I]'),  # Halogens
+    ]
+    electron_donating_groups = [
+        Chem.MolFromSmarts('[OX2H]'),  # Hydroxyl group
+        Chem.MolFromSmarts('[OX2][#6]'),  # Methoxy group
+        Chem.MolFromSmarts('[NX3;H2,H1][#6]'),  # Amino group
+        Chem.MolFromSmarts('[CX4H3]'),  # Methyl group
+    ]
+    perfluorinated_chain = Chem.MolFromSmarts('[CX4](F)(F)(F)')
+    heteroaromatic_nitrogen = Chem.MolFromSmarts('[n]')
+    additional_aromatic_ring = Chem.MolFromSmarts('c1ccc(cc1)-c2ccccc2')
+    aliphatic_chain_five_or_more = Chem.MolFromSmarts('[CH2][CH2][CH2][CH2][CH2]')
+    
+    # Initialize results list
+    results = []
+    
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*10)
+            continue
+        row = [0]*10  # Initialize the row with zeros for 10 rules
+        try:
+            # Rule 1: Amino acids or amino acid derivatives with side-chain coordinating groups within three carbons from the alpha carbon result in high yield; those with hydrophobic side chains extending beyond four carbons result in low yield.
+            rule1_high = False
+            rule1_low = False
+            # Identify alpha carbon: carbon attached to both amino group and carboxyl group
+            matches = mol.GetSubstructMatches(Chem.MolFromSmarts('[NX3;H2][CHX4][CX3](=O)[OX1H0,-1]'))
+            if matches:
+                for match in matches:
+                    alpha_c_idx = match[1]
+                    alpha_c_atom = mol.GetAtomWithIdx(alpha_c_idx)
+                    # Search for coordinating groups within 3 bonds from alpha carbon
+                    coordinating_group_found = False
+                    for neighbor in Chem.IterateNeighbors(mol, alpha_c_atom):
+                        path = Chem.GetShortestPath(mol, alpha_c_idx, neighbor.GetIdx())
+                        if len(path) > 3:
+                            continue
+                        neighbor_atom = neighbor
+                        if neighbor_atom.HasSubstructMatch(carboxyl_group) or neighbor_atom.HasSubstructMatch(amino_group) or neighbor_atom.HasSubstructMatch(hydroxyl_group):
+                            coordinating_group_found = True
+                            break
+                    if coordinating_group_found:
+                        rule1_high = True
+                        break
+                    # Check for hydrophobic side chains extending beyond four carbons
+                    for neighbor in Chem.IterateNeighbors(mol, alpha_c_atom):
+                        if neighbor.GetAtomicNum() == 6 and not neighbor.IsInRing():
+                            chain_length = 1
+                            current_idx = neighbor.GetIdx()
+                            visited = set([alpha_c_idx])
+                            stack = [(current_idx, chain_length)]
+                            while stack:
+                                curr_idx, curr_length = stack.pop()
+                                if curr_length > 4:
+                                    rule1_low = True
+                                    break
+                                visited.add(curr_idx)
+                                curr_atom = mol.GetAtomWithIdx(curr_idx)
+                                for nbr in curr_atom.GetNeighbors():
+                                    nbr_idx = nbr.GetIdx()
+                                    if nbr_idx not in visited and nbr.GetAtomicNum() == 6 and not nbr.IsInRing():
+                                        stack.append((nbr_idx, curr_length+1))
+                            if rule1_low:
+                                break
+                if rule1_high:
+                    row[0] = 1
+                elif rule1_low:
+                    row[0] = -1
+        except Exception:
+            row[0] = 0
+        try:
+            # Rule 2: Aromatic carboxylic acids with para-substituted coordinating electron-withdrawing groups result in high yield; those with electron-donating groups result in low yield.
+            rule2_high = False
+            rule2_low = False
+            # Check for para-substituted aromatic carboxylic acid
+            for match in mol.GetSubstructMatches(para_substituted_aromatic):
+                substituent_atom = mol.GetAtomWithIdx(match[1])
+                # Check for electron-withdrawing groups
+                for ewg in electron_withdrawing_groups:
+                    if substituent_atom.HasSubstructMatch(ewg):
+                        rule2_high = True
+                        break
+                # Check for electron-donating groups
+                for edg in electron_donating_groups:
+                    if substituent_atom.HasSubstructMatch(edg):
+                        rule2_low = True
+                        break
+                if rule2_high or rule2_low:
+                    break
+            if rule2_high:
+                row[1] = 1
+            elif rule2_low:
+                row[1] = -1
+        except Exception:
+            row[1] = 0
+        try:
+            # Rule 3: Aliphatic carboxylic acids with hydroxyl or thiol groups within three carbons of the carboxyl group result in high yield; if such groups are further than four carbons away, they result in low yield.
+            rule3_high = False
+            rule3_low = False
+            carboxylic_acid_atoms = mol.GetSubstructMatches(carboxylic_acid)
+            if carboxylic_acid_atoms:
+                for match in carboxylic_acid_atoms:
+                    ca_idx = match[0]
+                    ca_atom = mol.GetAtomWithIdx(ca_idx)
+                    # Search for hydroxyl or thiol groups within 3 bonds
+                    bfs = Chem.FindAtomEnvironmentOfRadiusN(mol, 3, ca_idx)
+                    amap = {}
+                    submol = Chem.PathToSubmol(mol, bfs, atomMap=amap)
+                    for atom in submol.GetAtoms():
+                        if atom.HasSubstructMatch(hydroxyl_group) or atom.HasSubstructMatch(thiol_group):
+                            rule3_high = True
+                            break
+                    # Check if hydroxyl or thiol groups are further than 4 bonds away
+                    if not rule3_high:
+                        dfs_visited = set()
+                        stack = [(ca_idx, 0)]
+                        while stack:
+                            current_idx, depth = stack.pop()
+                            if depth > 4:
+                                break
+                            dfs_visited.add(current_idx)
+                            current_atom = mol.GetAtomWithIdx(current_idx)
+                            if current_atom.HasSubstructMatch(hydroxyl_group) or current_atom.HasSubstructMatch(thiol_group):
+                                if depth <= 3:
+                                    rule3_high = True
+                                else:
+                                    rule3_low = True
+                                break
+                            for neighbor in current_atom.GetNeighbors():
+                                nbr_idx = neighbor.GetIdx()
+                                if nbr_idx not in dfs_visited:
+                                    stack.append((nbr_idx, depth+1))
+                    if rule3_high or rule3_low:
+                        break
+            if rule3_high:
+                row[2] = 1
+            elif rule3_low:
+                row[2] = -1
+        except Exception:
+            row[2] = 0
+        try:
+            # Rule 4: Modifiers containing heteroaromatic rings with nitrogen atoms capable of coordination result in high yield; those with additional aromatic rings directly attached result in low yield.
+            rule4_high = False
+            rule4_low = False
+            if mol.HasSubstructMatch(heteroaromatic_nitrogen):
+                rule4_high = True
+                if mol.HasSubstructMatch(additional_aromatic_ring):
+                    rule4_low = True
+                    rule4_high = False
+            if rule4_high:
+                row[3] = 1
+            elif rule4_low:
+                row[3] = -1
+        except Exception:
+            row[3] = 0
+        try:
+            # Rule 5: Modifiers that are aliphatic carboxylic acids with ether linkages in the chain result in low yield.
+            if mol.HasSubstructMatch(carboxylic_acid) and mol.HasSubstructMatch(ether_linkage):
+                row[4] = -1
+        except Exception:
+            row[4] = 0
+        try:
+            # Rule 6: Modifiers with aldehyde or ketone groups adjacent to the carboxyl group or aromatic ring result in low yield.
+            if mol.HasSubstructMatch(aliphatic_chain_five_or_more) and (mol.HasSubstructMatch(aldehyde_group) or mol.HasSubstructMatch(ketone_group)):
+                row[5] = -1
+        except Exception:
+            row[5] = 0
+        try:
+            # Rule 7: Aromatic carboxylic acids linked by aliphatic chains (three or more carbons) to additional aromatic rings with coordinating substituents result in high yield; those without such linkers result in low yield.
+            rule7_high = False
+            rule7_low = False
+            if mol.HasSubstructMatch(aromatic_ring) and mol.HasSubstructMatch(carboxylic_acid):
+                # Check for aliphatic chain linker of three or more carbons to another aromatic ring with coordinating substituents
+                linker = Chem.MolFromSmarts('c1aaaaa1CCCc2aaaaa2')
+                if mol.HasSubstructMatch(linker):
+                    rule7_high = True
+                else:
+                    rule7_low = True
+            if rule7_high:
+                row[6] = 1
+            elif rule7_low:
+                row[6] = -1
+        except Exception:
+            row[6] = 0
+        try:
+            # Rule 8: Modifiers that are perfluorinated carboxylic acids result in low yield.
+            if mol.HasSubstructMatch(perfluorinated_chain) and mol.HasSubstructMatch(carboxylic_acid):
+                row[7] = -1
+        except Exception:
+            row[7] = 0
+        try:
+            # Rule 9: Modifiers that are simple aliphatic carboxylic acids without additional functional groups and with chain lengths of eight carbons or less result in high yield.
+            rule9_high = False
+            aliphatic_chain = Chem.MolFromSmarts('[CX4H2][CX4H2][CX4H2][CX4H2][CX4H2][CX4H2][CX4H2][CX4H2][CX3](=O)[OX1H0]')
+            if mol.HasSubstructMatch(aliphatic_chain):
+                num_atoms = mol.GetNumAtoms()
+                if num_atoms <= 50:  # Adjust maximum number of atoms as needed
+                    rule9_high = True
+            if rule9_high:
+                row[8] = 1
+        except Exception:
+            row[8] = 0
+        try:
+            # Rule 10: Modifiers containing sulfur in coordinating functional groups (e.g., thiol) result in high yield, but those with sulfur in non-coordinating groups (e.g., thioether) result in low yield.
+            if mol.HasSubstructMatch(thiol_group):
+                row[9] = 1
+            elif mol.HasSubstructMatch(thioether_group):
+                row[9] = -1
+        except Exception:
+            row[9] = 0
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {i+1}' for i in range(10)])
+    return df

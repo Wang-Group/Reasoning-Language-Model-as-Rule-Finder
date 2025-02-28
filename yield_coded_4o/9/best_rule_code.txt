@@ -1,0 +1,34 @@
+def rule2matrix(smiles_list):
+    rules = [
+        ['[CX3](=O)[OX2H1]', '[NX3H2+0,NX4H3+;!$([N][!C])]', '[C;X4][C;X4][C;X4][C;X4][C;X4]'],  # Rule 1
+        ['[c][CX3](=O)[OX2H1]', '[c][NX3H2+0,NX4H3+;$([N][c])]', '[c][OX2H,OX1-;$([OX2H,OX1-][c])]'],  # Rule 2
+        ['[SX2H;$([SX2H][CX4;!$(C([SX2H])~[O,S,#7,#15])])]', '[SX2;$([H0]([#6])[c]),$([H0]([!#6])[c])]'],  # Rule 3
+        ['[OX2H,OX1-;$([OX2H,OX1-][CX4;!$(C([OX2H,OX1-])[O,S,#7,#15])])]', '[OX2H,OX1-;$([OX2H,OX1-][CX4;!$(C([OX2H,OX1-])[O,S,#7,#15])])]', '[C;X4][C;X4][C;X4][C;X4][C;X4]'],  # Rule 4
+        ['[n][c][CX3](=O)[OX2H1]'],  # Rule 5
+        ['[CX4](F)(F)(F)'],  # Rule 6
+        ['[c][CX3H]=[OX1]'],  # Rule 7
+        ['[OX2][C;X4][C;X4][OX2]'],  # Rule 8
+        ['[nH][c]1[cH][cH][cH][cH][cH]1'],  # Rule 9
+        ['[c][NX3+](=O)[OX-]']  # Rule 10
+    ]
+    results = []
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            results.append([0] * len(rules))
+            continue
+        row = []
+        for i, rule in enumerate(rules):
+            try:
+                if all(mol.HasSubstructMatch(Chem.MolFromSmarts(r)) for r in rule):
+                    if i in [0, 1, 2, 3, 8, 9]:  # Rules with high prediction
+                        row.append(1)
+                    else:  # Rules with low prediction
+                        row.append(-1)
+                else:
+                    row.append(0)
+            except:
+                row.append(0)
+        results.append(row)
+    df = pd.DataFrame(results, columns=[f'Rule {i+1}' for i in range(len(rules))])
+    return df

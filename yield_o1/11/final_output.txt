@@ -1,0 +1,2542 @@
+
+    Target Name: yield
+    GPT Model: o1-preview-2024-09-12
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+- **Rule 1**: Modifiers containing a **carboxylic acid group** and an **amino group at the alpha or beta position** (adjacent or one carbon away from the carboxyl group) tend to give **high yield**.
+  - *Rationale*: The proximity of the amino group to the carboxylic acid can facilitate chelation with metal centers, enhancing catalyst stability and reactivity.
+  - *Examples*: 
+    - (2S)-2-aminopentanedioic acid (Entry 0) – High Yield
+    - (2S)-2-aminobutanedioic acid (Entry 2) – High Yield
+    - 5-aminopentanoic acid (Entry 3) – High Yield
+  - *Counter-Examples*: 
+    - 7-aminoheptanoic acid (Entry 31) – Low Yield (amino group too far from carboxyl group)
+    - 8-aminooctanoic acid (Entry 34) – Low Yield
+
+- **Rule 2**: Modifiers containing a **carboxylic acid group** and an **amino group directly attached to an aromatic ring** tend to give **high yield**.
+  - *Rationale*: Aromatic amino groups can engage in π-coordination and enhance electronic interactions with the catalyst.
+  - *Examples*: 
+    - 4-aminobenzoic acid (Entry 4) – High Yield
+    - Pyridine-3-carboxylic acid (Entry 21) – High Yield
+    - 1H-pyrazole-4-carboxylic acid (Entry 15) – High Yield
+  - *Counter-Example*: 
+    - 4-pyridin-4-ylbenzoic acid (Entry 11) – Low Yield (amino group not directly attached to carboxyl-bearing ring)
+
+- **Rule 3**: Modifiers containing a **carboxylic acid group** and an **aldehyde group** tend to give **low yield**.
+  - *Rationale*: Aldehyde groups can react with amines or other nucleophiles, deactivating the modifier or interfering with the catalyst.
+  - *Examples*: 
+    - 4-formylbenzoic acid (Entry 19) – Low Yield
+    - 5-formyl-2-hydroxybenzoic acid (Entry 18) – Low Yield
+
+- **Rule 4**: Modifiers containing a **perfluoroalkyl chain** attached to a carboxylic acid group tend to give **low yield**.
+  - *Rationale*: Perfluorinated chains increase hydrophobicity and can hinder interaction with the catalyst due to steric and electronic effects.
+  - *Example*: 
+    - 2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid (Entry 13) – Low Yield
+
+- **Rule 5**: Modifiers containing **ether linkages** (polyether chains) attached to a carboxylic acid group tend to give **low yield**.
+  - *Rationale*: Ether chains can chelate metal centers differently or increase solubility in the solvent rather than interacting effectively with the catalyst.
+  - *Examples*: 
+    - 2-[2-(2-methoxyethoxy)ethoxy]acetic acid (Entry 10) – Low Yield
+    - 3-[2-(2-aminoethoxy)ethoxy]propanoic acid (Entry 32) – Low Yield
+
+- **Rule 6**: Modifiers containing a **carboxylic acid group** and **multiple hydroxyl groups** tend to give **high yield**.
+  - *Rationale*: Multiple hydroxyl groups can enhance hydrogen bonding and coordination with the catalyst, improving its performance.
+  - *Example*: 
+    - (2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid (Entry 9) – High Yield
+  - *Counter-Example*: 
+    - 7-hydroxyheptanoic acid (Entry 29) – Low Yield (only one hydroxyl group)
+
+- **Rule 7**: Modifiers containing a **carboxylic acid group** and a **thiol group** tend to give **high yield**.
+  - *Rationale*: Thiol groups can form strong bonds with metal centers, stabilizing the catalyst and enhancing reactivity.
+  - *Example*: 
+    - 3-sulfanylpropanoic acid (Entry 17) – High Yield
+
+- **Rule 8**: Modifiers containing a **nitro group attached to an aromatic ring** along with a carboxylic acid group tend to give **high yield**.
+  - *Rationale*: Nitro groups are strong electron-withdrawing groups, which can enhance coordination with metal catalysts through resonance effects.
+  - *Example*: 
+    - 4-nitrobenzoic acid (Entry 20) – High Yield
+
+- **Rule 9**: Modifiers containing an **aromatic ring with electron-donating groups** (e.g., methyl, methoxy) and a carboxylic acid group tend to give **low yield**.
+  - *Rationale*: Electron-donating groups can reduce the ability of the modifier to coordinate with the metal catalyst effectively.
+  - *Examples*: 
+    - 4-methylbenzoic acid (Entry 22) – Low Yield
+    - (2S)-2-amino-3-phenylpropanoic acid (Entry 12) – Low Yield
+  - *Counter-Example*: 
+    - 4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid (Entry 25) – High Yield (additional ketone group may offset the effect)
+
+- **Rule 10**: Modifiers containing **amide linkages or peptide bonds** tend to give **low yield**.
+  - *Rationale*: Amide groups may reduce the availability of lone pairs for coordination or interfere with catalytic sites.
+  - *Examples*: 
+    - 2-[[(2S)-2-amino-4-methylsulfanylbutanoyl]amino]acetic acid (Entry 23) – Low Yield
+    - (2S)-6-acetamido-2-aminohexanoic acid (Entry 33) – Low Yield
+
+- **Rule 11**: Modifiers containing **heterocyclic aromatic rings with nitrogen atoms** (e.g., pyridine, pyrazole) attached to a carboxylic acid group tend to give **high yield**.
+  - *Rationale*: Nitrogen heterocycles can coordinate effectively with metal centers, enhancing catalytic activity.
+  - *Examples*: 
+    - Pyridine-3-carboxylic acid (Entry 21) – High Yield
+    - 1H-pyrazole-4-carboxylic acid (Entry 15) – High Yield
+    - 2-oxo-1H-pyridine-4-carboxylic acid (Entry 8) – High Yield
+  - *Counter-Example*: 
+    - 4-pyridin-4-ylbenzoic acid (Entry 11) – Low Yield (possible steric hindrance due to the benzoic linker)
+
+**End of Rules**---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+Rule 1,Rule 2,Rule 3,Rule 4,Rule 5,Rule 6,Rule 7,Rule 8,Rule 9,Rule 10,Rule 11
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,1
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,1
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,1
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,-1,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,-1,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,-1,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,-1,0
+0,0,0,0,0,0,0,0,0,0,0
+
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.6285714285714286; Test Accuracy: 0.0
+    Train Support: 0.11428571428571428; Test Support: 0.0
+    Train Confidence: 1.0; Test Confidence: 0.5
+    Train Lift: 2.0588235294117645; Test Lift: NONE
+    Train Leverage: 0.05877551020408162; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    Current Rule Code:
+def rule2matrix(smiles_list):
+    # Define SMARTS patterns for functional groups using corrected patterns from suggestions
+    
+    # Carboxylic acid group (-COOH), including carboxylate anion
+    carboxylic_acid = ['[CX3](=O)[OX2H1]', '[CX3](=O)[O-]']
+    
+    # Amino group at alpha position (adjacent to carboxylic acid)
+    alpha_amino = '[NX3;H2,H1][CX4][CX3](=O)[OX1H0-,OX2H1]'
+    
+    # Amino group at beta position (one carbon away from alpha position)
+    beta_amino = '[NX3;H2,H1][CX4][CX4][CX3](=O)[OX1H0-,OX2H1]'
+    
+    # Aromatic amino group attached directly to aromatic ring or heteroaromatic nitrogen
+    aromatic_amino = '[c][NX3;H2,H1]'
+    heteroaromatic_nitrogen = '[nH0;r5,r6]'
+    
+    # Carboxylic acid attached to aromatic ring
+    carboxylic_acid_on_aromatic = '[c][CX3](=O)[OX1H0-,OX2H1]'
+    
+    # Aldehyde group (-CHO)
+    aldehyde_group = '[CX3H1](=O)'
+    
+    # Perfluoroalkyl chain (e.g., -CF2-CF2-)
+    perfluoroalkyl_chain = '[CX4](F)(F)[CX4](F)(F)'
+    
+    # Ether linkage (-O-)
+    ether_linkage = '[#6][OX2][#6]'
+    # Require at least two consecutive ether linkages
+    polyether_chain = '([#6][OX2][#6]){2,}'
+    
+    # Hydroxyl group (-OH)
+    hydroxyl_group = '[OX2H]'
+    hydroxyl_count = 3  # At least three hydroxyl groups
+    
+    # Thiol group (-SH)
+    thiol_group = '[SX2H]'
+    
+    # Nitro group attached to aromatic ring
+    nitro_aromatic = '[c][N+](=O)[O-]'
+    
+    # Electron-donating groups attached to aromatic ring
+    electron_donating_groups = ['[c][CH3]',       # Methyl
+                                '[c][OX2H]',      # Hydroxyl
+                                '[c][OX2][CH3]',  # Methoxy
+                                '[c][NX3H2]',     # Amino
+                                '[c][NX3H][CH3]', # N-methylamino
+                                '[c][SH]']        # Thiol
+    
+    # Amide group (-CONH-), including primary, secondary, and tertiary amides
+    amide_group = '[CX3](=O)[NX3;H0,H1,H2]'
+    
+    # Define the rules with their associated patterns and predictions
+    rules = [
+        {
+            'number': 1,
+            'description': 'Modifiers containing a carboxylic acid group and an amino group at the alpha or beta position tend to give high yield.',
+            'patterns': carboxylic_acid,
+            'or_patterns': [alpha_amino, beta_amino],
+            'prediction': 1
+        },
+        {
+            'number': 2,
+            'description': 'Modifiers containing a carboxylic acid group and an amino group directly attached to an aromatic ring or containing heteroaromatic nitrogen tend to give high yield.',
+            'patterns': [carboxylic_acid_on_aromatic],
+            'or_patterns': [aromatic_amino, heteroaromatic_nitrogen],
+            'prediction': 1
+        },
+        {
+            'number': 3,
+            'description': 'Modifiers containing a carboxylic acid group and an aldehyde group tend to give low yield.',
+            'patterns': carboxylic_acid,
+            'and_patterns': [aldehyde_group],
+            'prediction': -1
+        },
+        {
+            'number': 4,
+            'description': 'Modifiers containing a perfluoroalkyl chain attached to a carboxylic acid group tend to give low yield.',
+            'patterns': carboxylic_acid,
+            'and_patterns': [perfluoroalkyl_chain],
+            'prediction': -1
+        },
+        {
+            'number': 5,
+            'description': 'Modifiers containing polyether chains attached to a carboxylic acid group tend to give low yield.',
+            'patterns': carboxylic_acid,
+            'count_patterns': [{'pattern': ether_linkage, 'count': 2, 'is_continuous': True}],
+            'prediction': -1
+        },
+        {
+            'number': 6,
+            'description': 'Modifiers containing a carboxylic acid group and multiple (at least three) hydroxyl groups tend to give high yield.',
+            'patterns': carboxylic_acid,
+            'count_patterns': [{'pattern': hydroxyl_group, 'count': hydroxyl_count}],
+            'prediction': 1
+        },
+        {
+            'number': 7,
+            'description': 'Modifiers containing a carboxylic acid group and a thiol group tend to give high yield.',
+            'patterns': carboxylic_acid,
+            'and_patterns': [thiol_group],
+            'prediction': 1
+        },
+        {
+            'number': 8,
+            'description': 'Modifiers containing a nitro group attached to an aromatic ring along with a carboxylic acid group tend to give high yield.',
+            'patterns': carboxylic_acid,
+            'and_patterns': [nitro_aromatic],
+            'prediction': 1
+        },
+        {
+            'number': 9,
+            'description': 'Modifiers containing an aromatic ring with electron-donating groups and a carboxylic acid group tend to give low yield.',
+            'patterns': carboxylic_acid,
+            'optional_patterns': electron_donating_groups,
+            'prediction': -1
+        },
+        {
+            'number': 10,
+            'description': 'Modifiers containing amide linkages or peptide bonds tend to give low yield.',
+            'patterns': [amide_group],
+            'prediction': -1
+        },
+        {
+            'number': 11,
+            'description': 'Modifiers containing heterocyclic aromatic rings with nitrogen atoms attached to a carboxylic acid group tend to give high yield.',
+            'patterns': [heteroaromatic_nitrogen],
+            'and_patterns': [carboxylic_acid_on_aromatic],
+            'prediction': 1
+        }
+    ]
+    
+    # Compile SMARTS patterns
+    for rule in rules:
+        compiled_patterns = []
+        # Compile 'patterns'
+        patterns = rule.get('patterns', [])
+        for pat in patterns:
+            if isinstance(pat, list):
+                compiled_patterns.extend([Chem.MolFromSmarts(s) for s in pat])
+            else:
+                compiled_patterns.append(Chem.MolFromSmarts(pat))
+        rule['compiled_patterns'] = compiled_patterns
+        
+        # Compile 'or_patterns' if any
+        if 'or_patterns' in rule:
+            compiled_or_patterns = [Chem.MolFromSmarts(pat) for pat in rule['or_patterns']]
+            rule['compiled_or_patterns'] = compiled_or_patterns
+        
+        # Compile 'and_patterns' if any
+        if 'and_patterns' in rule:
+            compiled_and_patterns = [Chem.MolFromSmarts(pat) for pat in rule['and_patterns']]
+            rule['compiled_and_patterns'] = compiled_and_patterns
+        
+        # Compile 'count_patterns' if any
+        if 'count_patterns' in rule:
+            compiled_count_patterns = []
+            for item in rule['count_patterns']:
+                pat = Chem.MolFromSmarts(item['pattern'])
+                compiled_count_patterns.append({'pattern': pat, 'count': item['count'], 'is_continuous': item.get('is_continuous', False)})
+            rule['compiled_count_patterns'] = compiled_count_patterns
+        
+        # Compile 'optional_patterns' if any
+        if 'optional_patterns' in rule:
+            compiled_optional_patterns = [Chem.MolFromSmarts(pat) for pat in rule['optional_patterns']]
+            rule['compiled_optional_patterns'] = compiled_optional_patterns
+    
+    # Initialize results list
+    results = []
+    
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = True
+                # Check required patterns
+                for pat in rule.get('compiled_patterns', []):
+                    if not mol.HasSubstructMatch(pat):
+                        match = False
+                        break
+                if not match:
+                    row.append(0)
+                    continue
+                
+                # Check 'or_patterns' if any
+                if 'compiled_or_patterns' in rule:
+                    or_match = False
+                    for pat in rule['compiled_or_patterns']:
+                        if mol.HasSubstructMatch(pat):
+                            or_match = True
+                            break
+                    if not or_match:
+                        match = False
+                        row.append(0)
+                        continue
+                
+                # Check 'and_patterns' if any
+                if 'compiled_and_patterns' in rule:
+                    for pat in rule['compiled_and_patterns']:
+                        if not mol.HasSubstructMatch(pat):
+                            match = False
+                            break
+                    if not match:
+                        row.append(0)
+                        continue
+                
+                # Check 'count_patterns' if any
+                if 'compiled_count_patterns' in rule:
+                    for item in rule['compiled_count_patterns']:
+                        matches = mol.GetSubstructMatches(item['pattern'])
+                        if item.get('is_continuous', False):
+                            if len(matches) < item['count']:
+                                match = False
+                                break
+                        else:
+                            if len(matches) < item['count']:
+                                match = False
+                                break
+                    if not match:
+                        row.append(0)
+                        continue
+                
+                # Check 'optional_patterns' if any
+                if 'compiled_optional_patterns' in rule:
+                    optional_match = False
+                    for pat in rule['compiled_optional_patterns']:
+                        if mol.HasSubstructMatch(pat):
+                            optional_match = True
+                            break
+                    if not optional_match:
+                        match = False
+                        row.append(0)
+                        continue
+                
+                if match:
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception as e:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+    
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule["number"]}' for rule in rules])
+    return df
+--------------------------------------------------
+    Target Name: yield
+    GPT Model: o1-preview-2024-09-12
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+- **Rule 1**: Modifiers containing a **carboxylic acid group** and an **amino group within four carbons (α to δ positions)** of the carboxyl group tend to give a **high yield**.
+  - *Rationale*: The proximity of the amino group enhances chelation with metal centers, improving catalyst coordination and reactivity.
+  - *Examples*:
+    - **(2S)-2-aminopentanedioic acid** (Entry 0) – High Yield
+    - **(2S)-2-aminobutanedioic acid** (Entry 2) – High Yield
+    - **5-aminopentanoic acid** (Entry 3) – High Yield
+  - *Counter-Examples*:
+    - **7-aminoheptanoic acid** (Entry 31) – Low Yield (amino group too distant)
+    - **8-aminooctanoic acid** (Entry 34) – Low Yield
+
+- **Rule 2**: Modifiers containing a **carboxylic acid group** attached directly to an **aromatic ring** with an **electron-withdrawing substituent** (e.g., nitro, halogens) tend to give a **high yield**.
+  - *Rationale*: Electron-withdrawing groups increase the acidity of the carboxyl group, enhancing its ability to coordinate with metal centers.
+  - *Examples*:
+    - **4-(bromomethyl)benzoic acid** (Entry 1) – High Yield
+    - **4-nitrobenzoic acid** (Entry 20) – High Yield
+  - *Counter-Examples*:
+    - **4-methylbenzoic acid** (Entry 22) – Low Yield (electron-donating methyl group)
+    - **3-(4-hydroxyphenyl)propanoic acid** (Entry 30) – Low Yield (electron-donating hydroxy group)
+
+- **Rule 3**: Modifiers containing a **carboxylic acid group** and an **aldehyde group** tend to give a **low yield**.
+  - *Rationale*: Aldehyde groups can engage in side reactions or inhibit catalyst activity by interacting with active sites.
+  - *Examples*:
+    - **4-formylbenzoic acid** (Entry 19) – Low Yield
+    - **5-formyl-2-hydroxybenzoic acid** (Entry 18) – Low Yield
+
+- **Rule 4**: Modifiers containing **amide linkages** or **peptide bonds** tend to give a **low yield**.
+  - *Rationale*: Amide bonds have resonance-stabilized lone pairs, reducing their ability to coordinate effectively with metal centers.
+  - *Examples*:
+    - **(2S)-6-acetamido-2-aminohexanoic acid** (Entry 33) – Low Yield
+    - **2-[(4-hydroxybenzoyl)amino]acetic acid** (Entry 26) – Low Yield
+    - **2-[[(2S)-2-amino-4-methylsulfanylbutanoyl]amino]acetic acid** (Entry 23) – Low Yield
+
+- **Rule 5**: Modifiers containing **heterocyclic aromatic rings with nitrogen atoms** directly attached to a **carboxylic acid group** tend to give a **high yield**.
+  - *Rationale*: Nitrogen atoms in heterocycles can act as additional coordination sites, enhancing interaction with metal centers.
+  - *Examples*:
+    - **Pyridine-3-carboxylic acid** (Entry 21) – High Yield
+    - **1H-pyrazole-4-carboxylic acid** (Entry 15) – High Yield
+    - **2-oxo-1H-pyridine-4-carboxylic acid** (Entry 8) – High Yield
+  - *Counter-Examples*:
+    - **4-pyridin-4-ylbenzoic acid** (Entry 11) – Low Yield (possible steric hindrance due to fused aromatic systems)
+
+- **Rule 6**: Modifiers containing a **carboxylic acid group** and a **thiol group** in close proximity tend to give a **high yield**.
+  - *Rationale*: Thiol groups can form strong coordination bonds with metal centers, stabilizing the catalyst.
+  - *Example*:
+    - **3-sulfanylpropanoic acid** (Entry 17) – High Yield
+
+- **Rule 7**: Modifiers containing **perfluoroalkyl chains** attached to a **carboxylic acid group** tend to give a **low yield**.
+  - *Rationale*: Perfluoroalkyl groups are highly electronegative and can repel catalytic metal centers or hinder effective coordination.
+  - *Example*:
+    - **2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid** (Entry 13) – Low Yield
+
+- **Rule 8**: Modifiers with **long aliphatic chains** that have **terminal amino or hydroxyl groups** distant from the **carboxylic acid group** tend to give a **low yield**.
+  - *Rationale*: Functional groups far from the carboxyl group are less effective in coordinating with metal centers.
+  - *Examples*:
+    - **7-hydroxyheptanoic acid** (Entry 29) – Low Yield
+    - **7-aminoheptanoic acid** (Entry 31) – Low Yield
+    - **8-aminooctanoic acid** (Entry 34) – Low Yield
+
+- **Rule 9**: Modifiers containing **ether linkages** within their structure tend to give a **low yield**.
+  - *Rationale*: Ether oxygen atoms may not coordinate effectively due to steric factors and can increase solubility without enhancing catalyst interaction.
+  - *Examples*:
+    - **2-[2-(2-methoxyethoxy)ethoxy]acetic acid** (Entry 10) – Low Yield
+    - **3-[2-(2-aminoethoxy)ethoxy]propanoic acid** (Entry 32) – Low Yield
+
+- **Rule 10**: Modifiers containing a **ketone group adjacent to a carboxylic acid group** attached to an **aromatic ring** tend to give a **high yield**.
+  - *Rationale*: The combination of ketone and carboxyl groups adjacent to an aromatic system increases coordination sites and stabilizes interactions with the catalyst.
+  - *Examples*:
+    - **1,3-dioxo-2-benzofuran-5-carboxylic acid** (Entry 16) – High Yield
+    - **4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid** (Entry 25) – High Yield
+  - *Counter-Example*:
+    - **4-oxoheptanedioic acid** (Entry 27) – Low Yield (absence of aromatic ring reduces coordination effectiveness)
+
+- **Rule 11**: Modifiers containing an **aromatic ring with electron-donating substituents** (e.g., methyl, methoxy, hydroxy) attached to a **carboxylic acid group** tend to give a **low yield**.
+  - *Rationale*: Electron-donating groups decrease the acidity of the carboxyl group, reducing its ability to coordinate with metal centers.
+  - *Examples*:
+    - **4-methylbenzoic acid** (Entry 22) – Low Yield
+    - **3-(4-hydroxyphenyl)propanoic acid** (Entry 30) – Low Yield
+    - **2-[(4-hydroxybenzoyl)amino]acetic acid** (Entry 26) – Low Yield
+  - *Counter-Example*:
+    - **5-(4-hydroxyphenyl)pentanoic acid** (Entry 7) – High Yield (the longer aliphatic chain may mitigate the electron-donating effect)
+
+- **Rule 12**: Modifiers that are **simple aliphatic carboxylic acids** without additional functional groups tend to give a **high yield**.
+  - *Rationale*: Simplistic structures may allow for better access and coordination to the metal centers without steric hindrance.
+  - *Example*:
+    - **Octanoic acid** (Entry 5) – High Yield
+
+**End of Rules**---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+Rule 1,Rule 2,Rule 3,Rule 4,Rule 5,Rule 6,Rule 7,Rule 8,Rule 9,Rule 10,Rule 11,Rule 12
+0,0,0,0,0,1,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,-1,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,-1,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,-1,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,-1,0,0,0
+0,0,0,0,0,1,0,0,0,0,0,0
+0,0,-1,0,0,0,0,0,0,0,0,0
+0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,-1,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,-1,0,0,0
+0,0,0,-1,0,0,0,-1,0,0,0,0
+0,0,0,0,0,0,0,-1,0,0,0,0
+0,0,0,-1,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,-1,0,0,0,0
+0,0,0,0,0,0,0,-1,0,0,0,0
+0,0,0,0,0,0,0,-1,0,0,0,0
+0,0,0,0,0,0,0,-1,-1,0,0,0
+1,0,0,-1,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,-1,0,0,0,0
+
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.8571428571428571; Test Accuracy: 0.0
+    Train Support: 0.1; Test Support: 0.0
+    Train Confidence: 0.96875; Test Confidence: 0.5
+    Train Lift: 1.9944852941176467; Test Lift: NONE
+    Train Leverage: 0.04795918367346938; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    Current Rule Code:
+def rule2matrix(smiles_list):
+    # Define SMARTS patterns for functional groups
+    
+    # Carboxylic acid group (-COOH)
+    carboxylic_acid_smarts = '[CX3](=O)[OX2H1]'
+    carboxylic_acid_pat = Chem.MolFromSmarts(carboxylic_acid_smarts)
+
+    # Amino group (-NH2 or -NH-), excluding amides
+    amine_smarts = '[NX3;!$(N-C=O)]'
+    amine_pat = Chem.MolFromSmarts(amine_smarts)
+
+    # Aldehyde group (-CHO)
+    aldehyde_smarts = '[CX3H1](=O)'
+    aldehyde_pat = Chem.MolFromSmarts(aldehyde_smarts)
+    
+    # Amide linkage
+    amide_smarts = '[NX3][CX3](=O)[#6]'
+    amide_pat = Chem.MolFromSmarts(amide_smarts)
+
+    # Heterocyclic aromatic ring with nitrogen directly attached to carboxylic acid
+    hetero_aromatic_carboxylic_acid_smarts = '[n][C](=O)[O;H1]'
+    hetero_aromatic_carboxylic_acid_pat = Chem.MolFromSmarts(hetero_aromatic_carboxylic_acid_smarts)
+
+    # Thiol group (-SH)
+    thiol_smarts = '[SX2H]'
+    thiol_pat = Chem.MolFromSmarts(thiol_smarts)
+
+    # Perfluoroalkyl chain
+    perfluoroalkyl_smarts = '[CX4;R0][CX4;R0](F)(F)(F)'
+    perfluoroalkyl_pat = Chem.MolFromSmarts(perfluoroalkyl_smarts)
+
+    # Ether linkage
+    ether_smarts = '[#6][OX2;!$(O=C)][#6]'
+    ether_pat = Chem.MolFromSmarts(ether_smarts)
+
+    # Ketone adjacent to carboxylic acid attached to aromatic ring
+    ketone_adjacent_aromatic_carboxylic_acid_smarts = 'c[C](=O)[C](=O)[O;H1]'
+    ketone_adjacent_aromatic_carboxylic_acid_pat = Chem.MolFromSmarts(ketone_adjacent_aromatic_carboxylic_acid_smarts)
+
+    # Electron-withdrawing groups (EWGs) on aromatic ring
+    ewg_smarts_list = [
+        '[N+](=O)[O-]',  # Nitro group
+        '[F,Cl,Br,I]'
+    ]
+    ewg_pats = [Chem.MolFromSmarts(smarts) for smarts in ewg_smarts_list]
+
+    # Electron-donating groups (EDGs) on aromatic ring
+    edg_smarts_list = [
+        '[OX2H]',      # Hydroxy group
+        '[OX2][CH3]',  # Methoxy group
+        '[CH3]'
+    ]
+    edg_pats = [Chem.MolFromSmarts(smarts) for smarts in edg_smarts_list]
+
+    # Aromatic carboxylic acid group attached to aromatic ring
+    aromatic_carboxylic_acid_smarts = 'c[C](=O)[O;H1]'
+    aromatic_carboxylic_acid_pat = Chem.MolFromSmarts(aromatic_carboxylic_acid_smarts)
+
+    # Simple aliphatic carboxylic acid without additional functional groups
+    simple_aliphatic_carboxylic_acid_smarts = '[CX3](=O)[OX2H1]'
+    simple_aliphatic_carboxylic_acid_pat = Chem.MolFromSmarts(simple_aliphatic_carboxylic_acid_smarts)
+
+    # Other functional groups to exclude in Rule 12
+    other_functional_groups_smarts = ['[NX3;!$(N-C=O)]', '[SX2H]', '[OX2H]', '[#7]']
+    other_functional_groups_pats = [Chem.MolFromSmarts(smarts) for smarts in other_functional_groups_smarts]
+
+    # Initialize results list
+    results = []
+
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*12)
+            continue
+        row = []
+        try:
+            # Rule 1: Modifiers containing a carboxylic acid group and an amino group within four carbons of the carboxyl group tend to give a high yield.
+            rule1_match = 0
+            carboxy_matches = mol.GetSubstructMatches(carboxylic_acid_pat)
+            amine_matches = mol.GetSubstructMatches(amine_pat)
+            if carboxy_matches and amine_matches:
+                for c_match in carboxy_matches:
+                    c_idx = c_match[0]
+                    for a_match in amine_matches:
+                        a_idx = a_match[0]
+                        # Check if the amine is an amide nitrogen
+                        is_amide = False
+                        a_atom = mol.GetAtomWithIdx(a_idx)
+                        for nbr in a_atom.GetNeighbors():
+                            bond = mol.GetBondBetweenAtoms(a_idx, nbr.GetIdx())
+                            if bond.GetBondType() == Chem.rdchem.BondType.DOUBLE and nbr.GetAtomicNum() == 6:
+                                is_amide = True
+                                break
+                        if is_amide:
+                            continue
+                        # Calculate the shortest path length between c_idx and a_idx
+                        path = Chem.GetShortestPath(mol, c_idx, a_idx)
+                        # Count the number of carbon atoms in the path (excluding start and end atoms)
+                        carbon_count = sum(1 for idx in path[1:-1] if mol.GetAtomWithIdx(idx).GetAtomicNum() == 6)
+                        if 0 <= carbon_count <= 4:
+                            rule1_match = 1
+                            break
+                    if rule1_match == 1:
+                        break
+            row.append(rule1_match)
+
+            # Rule 2: Modifiers containing a carboxylic acid group attached directly to an aromatic ring with an electron-withdrawing substituent tend to give a high yield.
+            rule2_match = 0
+            aromatic_carboxy_matches = mol.GetSubstructMatches(aromatic_carboxylic_acid_pat)
+            if aromatic_carboxy_matches:
+                for ac_match in aromatic_carboxy_matches:
+                    c_idx = ac_match[0]
+                    # Get the aromatic ring that contains the carboxyl carbon
+                    ring_info = mol.GetRingInfo()
+                    rings = ring_info.AtomRings()
+                    aromatic_ring = None
+                    for ring in rings:
+                        if c_idx in ring and all(mol.GetAtomWithIdx(idx).GetIsAromatic() for idx in ring):
+                            aromatic_ring = ring
+                            break
+                    if aromatic_ring:
+                        # Check if any atom in the ring has an EWG substituent
+                        ewg_found = False
+                        for ewg_pat in ewg_pats:
+                            ewg_matches = mol.GetSubstructMatches(ewg_pat)
+                            for ewg_match in ewg_matches:
+                                ewg_idx = ewg_match[0]
+                                if ewg_idx in aromatic_ring:
+                                    ewg_found = True
+                                    break
+                            if ewg_found:
+                                break
+                        if ewg_found:
+                            rule2_match = 1
+                            break
+            row.append(rule2_match)
+            
+            # Rule 3: Modifiers containing a carboxylic acid group and an aldehyde group tend to give a low yield.
+            rule3_match = 0
+            aldehyde_matches = mol.GetSubstructMatches(aldehyde_pat)
+            if carboxy_matches and aldehyde_matches:
+                rule3_match = -1
+            row.append(rule3_match)
+
+            # Rule 4: Modifiers containing amide linkages or peptide bonds tend to give a low yield.
+            rule4_match = 0
+            amide_matches = mol.GetSubstructMatches(amide_pat)
+            if amide_matches:
+                rule4_match = -1
+            row.append(rule4_match)
+
+            # Rule 5: Modifiers containing heterocyclic aromatic rings with nitrogen atoms directly attached to a carboxylic acid group tend to give a high yield.
+            rule5_match = 0
+            hetero_aromatic_ca_matches = mol.GetSubstructMatches(hetero_aromatic_carboxylic_acid_pat)
+            if hetero_aromatic_ca_matches:
+                rule5_match = 1
+            row.append(rule5_match)
+
+            # Rule 6: Modifiers containing a carboxylic acid group and a thiol group in close proximity tend to give a high yield.
+            rule6_match = 0
+            thiol_matches = mol.GetSubstructMatches(thiol_pat)
+            if carboxy_matches and thiol_matches:
+                for c_match in carboxy_matches:
+                    c_idx = c_match[0]
+                    for s_match in thiol_matches:
+                        s_idx = s_match[0]
+                        path = Chem.GetShortestPath(mol, c_idx, s_idx)
+                        if path and len(path)-1 <= 5:
+                            rule6_match = 1
+                            break
+                    if rule6_match == 1:
+                        break
+            row.append(rule6_match)
+
+            # Rule 7: Modifiers containing perfluoroalkyl chains attached to a carboxylic acid group tend to give a low yield.
+            rule7_match = 0
+            perfluoroalkyl_matches = mol.GetSubstructMatches(perfluoroalkyl_pat)
+            if perfluoroalkyl_matches:
+                rule7_match = -1
+            row.append(rule7_match)
+
+            # Rule 8: Modifiers with long aliphatic chains that have terminal amino or hydroxyl groups distant from the carboxylic acid group tend to give a low yield.
+            hydroxyl_smarts = '[OX2H]'
+            hydroxyl_pat = Chem.MolFromSmarts(hydroxyl_smarts)
+            hydroxyl_matches = mol.GetSubstructMatches(hydroxyl_pat)
+
+            rule8_match = 0
+            if carboxy_matches:
+                terminal_groups = []
+                for a_match in amine_matches:
+                    a_idx = a_match[0]
+                    a_atom = mol.GetAtomWithIdx(a_idx)
+                    if len(a_atom.GetNeighbors()) == 1:
+                        terminal_groups.append(a_idx)
+                for h_match in hydroxyl_matches:
+                    h_idx = h_match[0]
+                    h_atom = mol.GetAtomWithIdx(h_idx)
+                    if len(h_atom.GetNeighbors()) == 1:
+                        terminal_groups.append(h_idx)
+                for c_match in carboxy_matches:
+                    c_idx = c_match[0]
+                    for tg_idx in terminal_groups:
+                        path = Chem.GetShortestPath(mol, c_idx, tg_idx)
+                        if path and len(path)-1 > 6:
+                            rule8_match = -1
+                            break
+                    if rule8_match == -1:
+                        break
+            row.append(rule8_match)
+
+            # Rule 9: Modifiers containing ether linkages within their structure tend to give a low yield.
+            rule9_match = 0
+            ether_matches = mol.GetSubstructMatches(ether_pat)
+            if ether_matches:
+                rule9_match = -1
+            row.append(rule9_match)
+
+            # Rule 10: Modifiers containing a ketone group adjacent to a carboxylic acid group attached to an aromatic ring tend to give a high yield.
+            rule10_match = 0
+            ketone_adjacent_aromatic_ca_matches = mol.GetSubstructMatches(ketone_adjacent_aromatic_carboxylic_acid_pat)
+            if ketone_adjacent_aromatic_ca_matches:
+                rule10_match = 1
+            row.append(rule10_match)
+
+            # Rule 11: Modifiers containing an aromatic ring with electron-donating substituents attached to a carboxylic acid group tend to give a low yield.
+            rule11_match = 0
+            if aromatic_carboxy_matches:
+                edg_found = False
+                for ac_match in aromatic_carboxy_matches:
+                    c_idx = ac_match[0]
+                    ring_info = mol.GetRingInfo()
+                    rings = ring_info.AtomRings()
+                    aromatic_ring = None
+                    for ring in rings:
+                        if c_idx in ring and all(mol.GetAtomWithIdx(idx).GetIsAromatic() for idx in ring):
+                            aromatic_ring = ring
+                            break
+                    if aromatic_ring:
+                        for edg_pat in edg_pats:
+                            edg_matches = mol.GetSubstructMatches(edg_pat)
+                            for edg_match in edg_matches:
+                                edg_idx = edg_match[0]
+                                if edg_idx in aromatic_ring:
+                                    edg_found = True
+                                    break
+                            if edg_found:
+                                break
+                    if edg_found:
+                        break
+                if edg_found:
+                    rule11_match = -1
+            row.append(rule11_match)
+
+            # Rule 12: Modifiers that are simple aliphatic carboxylic acids without additional functional groups tend to give a high yield.
+            rule12_match = 0
+            simple_carboxy_matches = mol.GetSubstructMatches(simple_aliphatic_carboxylic_acid_pat)
+            if simple_carboxy_matches:
+                other_fg_present = False
+                for pat in other_functional_groups_pats:
+                    if mol.HasSubstructMatch(pat):
+                        other_fg_present = True
+                        break
+                if not other_fg_present:
+                    rule12_match = 1
+            row.append(rule12_match)
+
+        except Exception:
+            # In case of any error, append zeros for all rules
+            row = [0]*12
+        results.append(row)
+
+    df = pd.DataFrame(results, columns=[f'Rule {i+1}' for i in range(12)])
+    return df
+--------------------------------------------------
+    Target Name: yield
+    GPT Model: o1-preview-2024-09-12
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+1. **Rule 1**: Modifiers that are **α-amino acids with side chains containing additional coordinating functional groups (e.g., carboxylate, hydroxyl, or heteroatom-containing rings)** tend to give a **high yield**.
+
+   - **Rationale**: Side chains with additional coordination sites enhance metal-ligand interactions, stabilizing the catalyst and improving reactivity.
+   
+   - **Examples**:
+     - **(2S)-2-aminopentanedioic acid** (Entry 0) – High Yield (Glutamic acid; extra carboxylate)
+     - **(2S)-2-aminobutanedioic acid** (Entry 2) – High Yield (Aspartic acid; extra carboxylate)
+     - **(2R)-2-amino-3-(1H-indol-3-yl)propanoic acid** (Entry 14) – High Yield (Tryptophan; indole nitrogen)
+
+   - **Counter-Example**:
+     - **(2S)-2-amino-3-phenylpropanoic acid** (Entry 12) – Low Yield (Phenylalanine; non-coordinating side chain)
+
+2. **Rule 2**: Modifiers that are **aromatic carboxylic acids with electron-withdrawing substituents (e.g., nitro, halogens, keto groups) directly attached to the ring** tend to give a **high yield**.
+
+   - **Rationale**: Electron-withdrawing groups increase the acidity of the carboxyl group and enhance coordination ability.
+   
+   - **Examples**:
+     - **4-(bromomethyl)benzoic acid** (Entry 1) – High Yield
+     - **4-nitrobenzoic acid** (Entry 20) – High Yield
+     - **1,3-dioxo-2-benzofuran-5-carboxylic acid** (Entry 16) – High Yield
+     - **2-oxo-1H-pyridine-4-carboxylic acid** (Entry 8) – High Yield
+
+   - **Counter-Example**:
+     - **4-methylbenzoic acid** (Entry 22) – Low Yield (Methyl group is electron-donating)
+
+3. **Rule 3**: Modifiers that are **aromatic carboxylic acids with electron-donating substituents (e.g., methyl, methoxy, hydroxyl) directly attached to the ring** tend to give a **low yield**.
+
+   - **Rationale**: Electron-donating groups decrease the acidity of the carboxyl group, reducing coordination ability.
+
+   - **Examples**:
+     - **4-methylbenzoic acid** (Entry 22) – Low Yield
+     - **3-(4-hydroxyphenyl)propanoic acid** (Entry 30) – Low Yield
+     - **5-formyl-2-hydroxybenzoic acid** (Entry 18) – Low Yield (Hydroxyl in ortho position)
+     - **2-[(4-hydroxybenzoyl)amino]acetic acid** (Entry 26) – Low Yield
+
+   - **Exception**:
+     - **5-(4-hydroxyphenyl)pentanoic acid** (Entry 7) – High Yield (Exception possibly due to the aliphatic linker increasing flexibility)
+
+4. **Rule 4**: Modifiers that are **aliphatic carboxylic acids with medium-length chains (C5–C8) and no additional functional groups** tend to give a **high yield**.
+
+   - **Rationale**: Optimal chain length allows effective interaction with the catalyst surface without steric hindrance.
+
+   - **Example**:
+     - **Octanoic acid** (Entry 5) – High Yield
+
+   - **Counter-Examples**:
+     - **7-hydroxyheptanoic acid** (Entry 29) – Low Yield (Hydroxyl group may interfere with coordination)
+     - **7-aminoheptanoic acid** (Entry 31) – Low Yield (Amino group may introduce steric hindrance or unfavorably interact)
+
+5. **Rule 5**: Modifiers that are **heteroaromatic carboxylic acids with nitrogen atoms adjacent to the carboxyl group in the ring** tend to give a **high yield**.
+
+   - **Rationale**: Nitrogen atoms can serve as additional coordination sites, enhancing metal binding and catalyst performance.
+
+   - **Examples**:
+     - **Pyridine-3-carboxylic acid** (Entry 21) – High Yield
+     - **1H-pyrazole-4-carboxylic acid** (Entry 15) – High Yield
+
+   - **Counter-Example**:
+     - **4-pyridin-4-ylbenzoic acid** (Entry 11) – Low Yield (Pyridyl group at para-position may not effectively coordinate due to steric factors)
+
+6. **Rule 6**: Modifiers containing **functional groups capable of strong metal coordination (e.g., thiol, thioether, multiple adjacent hydroxyls) in proximity to the carboxylate group** tend to give a **high yield**.
+
+   - **Rationale**: These groups enhance coordination to the metal center, stabilizing the catalyst.
+
+   - **Examples**:
+     - **3-sulfanylpropanoic acid** (Entry 17) – High Yield (Thiol group)
+     - **(2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid** (Entry 9) – High Yield (Multiple hydroxyl groups enabling chelation)
+
+7. **Rule 7**: Modifiers with **multiple ether linkages or flexible polar chains in the molecule** tend to give a **low yield**.
+
+   - **Rationale**: Ether oxygens are poor coordinating ligands and increase solubility in the solvent, reducing catalyst interaction.
+
+   - **Examples**:
+     - **2-[2-(2-methoxyethoxy)ethoxy]acetic acid** (Entry 10) – Low Yield
+     - **3-[2-(2-aminoethoxy)ethoxy]propanoic acid** (Entry 32) – Low Yield
+
+8. **Rule 8**: Modifiers containing **amide bonds adjacent to the carboxylic acid group** tend to give a **low yield**.
+
+   - **Rationale**: Amide groups can reduce coordination ability due to resonance stabilization and may alter binding geometry unfavorably.
+
+   - **Examples**:
+     - **(2S)-6-acetamido-2-aminohexanoic acid** (Entry 33) – Low Yield
+     - **2-[[(2S)-2-amino-4-methylsulfanylbutanoyl]amino]acetic acid** (Entry 23) – Low Yield
+
+9. **Rule 9**: Modifiers that are **carboxylic acids with strong electron-withdrawing groups (e.g., perfluorinated chains)** tend to give a **low yield**.
+
+   - **Rationale**: Strong electron-withdrawing substituents decrease electron density on the carboxylate, hindering effective metal coordination.
+
+   - **Example**:
+     - **2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid** (Entry 13) – Low Yield
+
+10. **Rule 10**: Modifiers containing **aldehyde groups on an aromatic ring in positions that can interfere with coordination** tend to give a **low yield**.
+
+    - **Rationale**: Aldehyde groups can form competing interactions or deactivate catalysts through side reactions.
+
+    - **Examples**:
+      - **4-formylbenzoic acid** (Entry 19) – Low Yield
+      - **5-formyl-2-hydroxybenzoic acid** (Entry 18) – Low Yield
+
+**End of Rules**---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+Rule 1,Rule 2,Rule 3,Rule 4,Rule 5,Rule 6,Rule 7,Rule 8,Rule 9,Rule 10
+1,0,-1,0,0,1,0,-1,-1,-1
+1,0,-1,0,0,1,0,-1,-1,0
+1,0,-1,0,0,1,0,-1,-1,-1
+1,0,-1,0,0,1,0,-1,-1,0
+1,0,-1,0,0,1,0,-1,-1,0
+1,0,-1,0,0,1,0,-1,-1,-1
+1,0,-1,0,0,1,0,-1,-1,0
+1,0,-1,0,0,1,0,-1,-1,0
+1,0,-1,0,0,1,0,-1,-1,-1
+1,0,-1,0,0,1,0,-1,-1,-1
+1,0,-1,0,0,1,0,-1,-1,0
+1,0,-1,0,0,1,-1,-1,-1,0
+1,0,-1,0,0,1,0,-1,-1,-1
+1,0,-1,0,0,1,0,-1,-1,-1
+1,0,-1,0,0,1,0,-1,-1,0
+1,0,-1,0,0,1,0,-1,-1,-1
+1,0,-1,0,0,1,0,-1,-1,-1
+1,0,-1,0,0,1,0,-1,-1,-1
+1,0,-1,0,0,1,0,-1,-1,0
+1,0,-1,0,0,1,0,-1,-1,-1
+1,0,-1,0,0,1,0,-1,-1,-1
+1,0,-1,0,0,1,0,-1,-1,-1
+1,0,-1,0,0,1,0,-1,-1,-1
+1,0,-1,0,0,1,0,-1,-1,-1
+1,0,-1,0,0,1,0,-1,-1,0
+1,0,-1,0,0,1,0,-1,-1,-1
+1,0,-1,0,0,1,-1,-1,-1,-1
+1,0,-1,0,0,1,0,-1,-1,-1
+1,0,-1,0,0,1,0,-1,-1,0
+1,0,-1,0,0,1,0,-1,-1,0
+1,0,-1,0,0,1,0,-1,-1,0
+1,0,-1,0,0,1,0,-1,-1,-1
+1,0,-1,0,0,1,0,-1,-1,0
+1,0,-1,0,0,1,-1,-1,-1,0
+1,0,-1,0,0,1,0,-1,-1,0
+1,0,-1,0,0,1,0,-1,-1,0
+
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.6; Test Accuracy: 0.0
+    Train Support: 0.2; Test Support: 1.0
+    Train Confidence: 0.3888888888888889; Test Confidence: 1.0
+    Train Lift: 0.8006535947712418; Test Lift: NONE
+    Train Leverage: -0.049795918367346925; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    Current Rule Code:
+def rule2matrix(smiles_list):
+    import pandas as pd
+    from rdkit import Chem
+    from rdkit.Chem import AllChem
+    
+    # Define SMARTS patterns for functional groups and substructures
+    carboxylic_acid = '[CX3](=O)[OX2H1]'
+    amino_group = '[NX3;H2,H1]'
+    hydroxyl_group = '[OX2H]'
+    heteroatom_aromatic_ring = '[a;!c]'
+    aromatic_ring = 'a'
+    electron_withdrawing_groups = '[F,Cl,Br,I,NX3=O]'  # Halogens and nitro group
+    electron_donating_groups = '[OX2H,OX2H0]'
+    aldehyde_group = '[CX3H1](=O)'
+    amide_group = '[NX3][CX3](=O)'
+    thiol_group = '[SX2H]'
+    thioether_group = '[#16X2][#6]'
+    ether_linkage = '[#6][OX2][#6]'
+    perfluoroalkyl_chain = 'C(F)(F)F'  # Trifluoromethyl group as an example
+    
+    # Define the rules with their associated patterns and predictions
+    rules = [
+        {
+            'number': 1,
+            'description': 'High Yield: Alpha-amino acids with side chains containing additional coordinating functional groups (carboxylate, hydroxyl, or heteroatom-containing rings).',
+            'patterns': [
+                [carboxylic_acid, amino_group],  # Amino acid backbone
+                [carboxylic_acid, hydroxyl_group, heteroatom_aromatic_ring]  # Additional coordinating groups
+            ],
+            'min_counts': [1, 2],  # At least one amino acid backbone, at least two coordinating groups (including backbone)
+            'prediction': 1
+        },
+        {
+            'number': 2,
+            'description': 'High Yield: Aromatic carboxylic acids with electron-withdrawing substituents directly attached to the ring.',
+            'patterns': [
+                [aromatic_ring, carboxylic_acid],  # Aromatic carboxylic acid
+                [electron_withdrawing_groups]  # Electron-withdrawing groups attached to ring
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 3,
+            'description': 'Low Yield: Aromatic carboxylic acids with electron-donating substituents directly attached to the ring.',
+            'patterns': [
+                [aromatic_ring, carboxylic_acid],  # Aromatic carboxylic acid
+                [electron_donating_groups]  # Electron-donating groups attached to ring
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 4,
+            'description': 'High Yield: Aliphatic carboxylic acids with medium-length chains (C5–C8) and no additional functional groups.',
+            'patterns': [
+                '[CH3][CH2]{3,6}[CX3](=O)[OX2H1]'  # Aliphatic chain of length 5-8 carbons ending with carboxylic acid
+            ],
+            'exclude_patterns': [
+                [hydroxyl_group, amino_group, thiol_group, ether_linkage]  # Exclude molecules with these groups
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 5,
+            'description': 'High Yield: Heteroaromatic carboxylic acids with nitrogen atoms adjacent to the carboxyl group in the ring.',
+            'patterns': [
+                '[n][c][c][c][c][c](=O)[OX2H1]',  # Pyridine-3-carboxylic acid as an example
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 6,
+            'description': 'High Yield: Modifiers containing functional groups capable of strong metal coordination (thiol, thioether, multiple adjacent hydroxyls) near the carboxylate group.',
+            'patterns': [
+                [carboxylic_acid],  # Carboxylic acid group
+                [thiol_group, thioether_group, hydroxyl_group]  # Strong coordinating groups
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 7,
+            'description': 'Low Yield: Modifiers with multiple ether linkages or flexible polar chains.',
+            'patterns': [
+                [ether_linkage],  # Ether linkages
+            ],
+            'min_counts': [2],  # At least two ether linkages
+            'prediction': -1
+        },
+        {
+            'number': 8,
+            'description': 'Low Yield: Modifiers containing amide bonds adjacent to the carboxylic acid group.',
+            'patterns': [
+                [amide_group, carboxylic_acid],  # Amide group adjacent to carboxylic acid
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 9,
+            'description': 'Low Yield: Carboxylic acids with strong electron-withdrawing groups like perfluorinated chains.',
+            'patterns': [
+                [perfluoroalkyl_chain, carboxylic_acid],  # Perfluoroalkyl chain attached to carboxylic acid
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 10,
+            'description': 'Low Yield: Modifiers containing aldehyde groups on an aromatic ring that can interfere with coordination.',
+            'patterns': [
+                [aldehyde_group, aromatic_ring],  # Aldehyde groups on aromatic ring
+            ],
+            'prediction': -1
+        }
+    ]
+    
+    # Compile SMARTS patterns
+    for rule in rules:
+        compiled_patterns = []
+        for group in rule.get('patterns', []):
+            compiled_group = [Chem.MolFromSmarts(pat) for pat in group]
+            compiled_patterns.append(compiled_group)
+        rule['compiled_patterns'] = compiled_patterns
+        # Compile exclude patterns if any
+        if 'exclude_patterns' in rule:
+            compiled_excludes = []
+            for group in rule['exclude_patterns']:
+                compiled_group = [Chem.MolFromSmarts(pat) for pat in group]
+                compiled_excludes.append(compiled_group)
+            rule['compiled_exclude_patterns'] = compiled_excludes
+    
+    # Initialize results list
+    results = []
+    
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = True
+                # Check exclude patterns if any
+                if 'exclude_patterns' in rule:
+                    for group in rule['compiled_exclude_patterns']:
+                        for pat in group:
+                            if mol.HasSubstructMatch(pat):
+                                match = False
+                                break
+                        if not match:
+                            break
+                    if not match:
+                        row.append(0)
+                        continue
+                # Check required patterns
+                for idx, compiled_group in enumerate(rule['compiled_patterns']):
+                    group_match = False
+                    total_matches = 0
+                    for pat in compiled_group:
+                        matches = mol.GetSubstructMatches(pat)
+                        total_matches += len(matches)
+                        if matches:
+                            group_match = True
+                    # If a minimum count is specified for this pattern group
+                    if 'min_counts' in rule:
+                        threshold = rule['min_counts'][idx]
+                        if total_matches < threshold:
+                            group_match = False
+                    if not group_match:
+                        match = False
+                        break
+                if match:
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception as e:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule['number']}' for rule in rules])
+    return df
+
+--------------------------------------------------
+    Target Name: yield
+    GPT Model: o1-preview-2024-09-12
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+1. **Rule 1**: Modifiers that are **α-amino acids with side chains containing additional carboxyl groups or nitrogen-containing heterocycles (e.g., indole rings)** tend to give a **high yield**.
+
+   - **Rationale**: Extra carboxyl groups and nitrogen heterocycles enhance metal coordination through multiple binding sites, stabilizing the catalyst and improving efficiency.
+
+   - **Examples**:
+     - **(2S)-2-aminopentanedioic acid** (Entry 0) – High Yield (Glutamic acid; additional carboxylate group)
+     - **(2S)-2-aminobutanedioic acid** (Entry 2) – High Yield (Aspartic acid; additional carboxylate group)
+     - **(2R)-2-amino-3-(1H-indol-3-yl)propanoic acid** (Entry 14) – High Yield (Tryptophan; indole nitrogen)
+
+   - **Counter-Example**:
+     - **(2S)-2-amino-3-phenylpropanoic acid** (Entry 12) – Low Yield (Phenylalanine; lacks additional coordinating groups)
+
+2. **Rule 2**: Modifiers that are **aromatic carboxylic acids with electron-withdrawing substituents (e.g., nitro, halogen, ketone groups) directly attached to the aromatic ring** tend to give a **high yield**.
+
+   - **Rationale**: Electron-withdrawing groups increase the acidity of the carboxylate, enhancing its ability to coordinate with metal centers and stabilize the catalyst.
+
+   - **Examples**:
+     - **4-(bromomethyl)benzoic acid** (Entry 1) – High Yield (Bromomethyl group)
+     - **4-nitrobenzoic acid** (Entry 20) – High Yield (Nitro group)
+     - **1,3-dioxo-2-benzofuran-5-carboxylic acid** (Entry 16) – High Yield (Ketone groups within the fused ring)
+
+   - **Counter-Example**:
+     - **4-methylbenzoic acid** (Entry 22) – Low Yield (Methyl group is electron-donating)
+
+3. **Rule 3**: Modifiers that are **aromatic carboxylic acids with electron-donating substituents (e.g., methyl, methoxy, hydroxyl groups) attached to the aromatic ring** tend to give a **low yield**.
+
+   - **Rationale**: Electron-donating groups decrease the acidity of the carboxylate, weakening metal coordination and reducing catalyst effectiveness.
+
+   - **Examples**:
+     - **4-methylbenzoic acid** (Entry 22) – Low Yield (Methyl substituent)
+     - **3-(4-hydroxyphenyl)propanoic acid** (Entry 30) – Low Yield (Hydroxyl group)
+     - **2-[(4-hydroxybenzoyl)amino]acetic acid** (Entry 26) – Low Yield (Hydroxyl group)
+
+   - **Exception**:
+     - **5-(4-hydroxyphenyl)pentanoic acid** (Entry 7) – High Yield (Hydroxyphenyl group separated by an aliphatic chain, reducing electron-donating effect on the carboxylate)
+
+4. **Rule 4**: Modifiers containing **additional coordinating functional groups such as thiols or multiple adjacent hydroxyls near the carboxylate group** tend to give a **high yield**.
+
+   - **Rationale**: These functional groups can chelate the metal center, forming more stable complexes and enhancing catalytic activity.
+
+   - **Examples**:
+     - **3-sulfanylpropanoic acid** (Entry 17) – High Yield (Thiol group enhances coordination)
+     - **(2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid** (Entry 9) – High Yield (Multiple hydroxyls for chelation)
+
+5. **Rule 5**: Modifiers that are **heteroaromatic carboxylic acids with coordinating nitrogen atoms in positions favorable for metal binding (e.g., ortho or para to the carboxyl group)** tend to give a **high yield**.
+
+   - **Rationale**: Nitrogen atoms in the ring can serve as additional coordination sites, enhancing metal-ligand interactions and catalyst performance.
+
+   - **Examples**:
+     - **Pyridine-3-carboxylic acid** (Entry 21) – High Yield (Nitrogen atom adjacent to carboxyl group)
+     - **1H-pyrazole-4-carboxylic acid** (Entry 15) – High Yield (Pyrazole ring with coordinating nitrogen)
+
+   - **Counter-Example**:
+     - **4-pyridin-4-ylbenzoic acid** (Entry 11) – Low Yield (Pyridyl group may not effectively coordinate due to steric factors or unfavorable positioning)
+
+6. **Rule 6**: Modifiers that are **medium-chain aliphatic carboxylic acids (C6–C8) without additional functional groups** tend to give a **high yield**.
+
+   - **Rationale**: The optimal chain length balances hydrophobic interactions with the catalyst surface and effective metal coordination through the carboxylate group.
+
+   - **Example**:
+     - **Octanoic acid** (Entry 5) – High Yield (Eight-carbon chain)
+
+   - **Counter-Examples**:
+     - **7-hydroxyheptanoic acid** (Entry 29) – Low Yield (Hydroxyl group may interfere with coordination)
+     - **7-aminoheptanoic acid** (Entry 31) – Low Yield (Amino group may introduce unfavorable interactions)
+
+7. **Rule 7**: Modifiers containing **flexible polar chains with ether linkages or multiple amine groups** tend to give a **low yield**.
+
+   - **Rationale**: Ether oxygens and amine groups may not coordinate effectively with metal centers and can increase solubility in the solvent, reducing interaction with the catalyst surface.
+
+   - **Examples**:
+     - **2-[2-(2-methoxyethoxy)ethoxy]acetic acid** (Entry 10) – Low Yield (Multiple ether linkages)
+     - **3-[2-(2-aminoethoxy)ethoxy]propanoic acid** (Entry 32) – Low Yield (Flexible ether-containing chain with amine group)
+
+8. **Rule 8**: Modifiers containing **amide or peptide bonds adjacent to the carboxylic acid group** tend to give a **low yield**.
+
+   - **Rationale**: Amide groups can reduce coordination ability due to resonance delocalization of the lone pair on nitrogen, altering binding geometry and weakening metal interaction.
+
+   - **Examples**:
+     - **(2S)-6-acetamido-2-aminohexanoic acid** (Entry 33) – Low Yield (Acetamido group adjacent to carboxylate)
+     - **2-[(4-hydroxybenzoyl)amino]acetic acid** (Entry 26) – Low Yield (Amide linkage affects coordination)
+
+9. **Rule 9**: Modifiers with **strongly electron-withdrawing perfluoroalkyl chains attached to the carboxyl group** tend to give a **low yield**.
+
+   - **Rationale**: Perfluoroalkyl groups significantly decrease electron density on the carboxylate oxygen, hindering effective metal coordination.
+
+   - **Example**:
+     - **2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid** (Entry 13) – Low Yield (Perfluorinated chain)
+
+10. **Rule 10**: Modifiers containing **aldehyde groups on an aromatic ring, especially when adjacent to coordinating groups like hydroxyls, or on aliphatic chains** tend to give a **low yield**.
+
+    - **Rationale**: Aldehyde groups may interfere with metal coordination or participate in side reactions, reducing catalyst effectiveness.
+
+    - **Examples**:
+      - **5-formyl-2-hydroxybenzoic acid** (Entry 18) – Low Yield (Aldehyde and hydroxyl groups may chelate unfavorably)
+      - **4-formylbenzoic acid** (Entry 19) – Low Yield (Aldehyde group adjacent to carboxylate)
+      - **4-oxoheptanedioic acid** (Entry 27) – Low Yield (Aldehyde group on aliphatic chain)
+
+11. **Rule 11**: Modifiers that are **dicarboxylic acids or polycarboxylic acids with carboxyl groups separated by a short linker** tend to give a **high yield**.
+
+    - **Rationale**: Multiple carboxylate groups can coordinate simultaneously with metal centers, enhancing catalyst stability through chelation.
+
+    - **Examples**:
+      - **(2S)-2-aminopentanedioic acid** (Entry 0) – High Yield (Dicarboxylic acid)
+      - **(2S)-2-aminobutanedioic acid** (Entry 2) – High Yield (Dicarboxylic acid)
+      - **4-oxoheptanedioic acid** (Entry 27) – Low Yield (Exception due to ketone interference)
+
+12. **Rule 12**: Modifiers that are **aromatic carboxylic acids fused with additional carbonyl groups within the ring structure** tend to give a **high yield**.
+
+    - **Rationale**: Additional carbonyl groups can participate in resonance stabilization and metal coordination, enhancing catalytic activity.
+
+    - **Example**:
+      - **1,3-dioxo-2-benzofuran-5-carboxylic acid** (Entry 16) – High Yield (Fused ketone groups)
+
+13. **Rule 13**: Modifiers with **non-coordinating bulky or hydrophobic side chains near the carboxyl group** tend to give a **low yield**.
+
+    - **Rationale**: Bulky side chains may cause steric hindrance, and hydrophobic groups may reduce effective interaction with the metal center.
+
+    - **Examples**:
+      - **(2S)-2-amino-3-phenylpropanoic acid** (Entry 12) – Low Yield (Phenyl group is bulky and non-coordinating)
+      - **4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid** (Entry 25) – High Yield (Exception due to ketone enhancing coordination)
+
+14. **Rule 14**: Modifiers that are **aliphatic carboxylic acids containing hydroxyl or amino groups distant from the carboxylate** tend to give a **low yield**.
+
+    - **Rationale**: While polar, these groups may not effectively coordinate due to distance from the carboxylate and can introduce solubility issues or interfere with catalyst binding.
+
+    - **Examples**:
+      - **7-hydroxyheptanoic acid** (Entry 29) – Low Yield (Hydroxyl group distant from carboxylate)
+      - **8-aminooctanoic acid** (Entry 34) – Low Yield (Amino group distant from carboxylate)
+
+15. **Rule 15**: Modifiers with **polyether chains or multiple flexible linkages increasing conformational freedom** tend to give a **low yield**.
+
+    - **Rationale**: Increased flexibility can reduce effective binding to the catalyst surface and decrease metal coordination efficiency.
+
+    - **Examples**:
+      - **2-[2-(2-methoxyethoxy)ethoxy]acetic acid** (Entry 10) – Low Yield (Polyether chain)
+      - **3-[2-(2-aminoethoxy)ethoxy]propanoic acid** (Entry 32) – Low Yield (Flexible ether-containing chain)
+
+**End of Rules**---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+Rule 1,Rule 2,Rule 3,Rule 4,Rule 5,Rule 6,Rule 7,Rule 8,Rule 9,Rule 10
+0,0,0,1,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,1,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,1,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,-1,0
+1,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,1,0,0,0,0,0,0
+0,0,-1,0,0,0,0,0,0,-1
+0,0,0,0,0,0,0,0,0,-1
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,1,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,-1,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,-1,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,-1,-1,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,-1,0,0
+0,0,0,0,0,0,0,0,0,0
+
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.7142857142857143; Test Accuracy: 0.0
+    Train Support: 0.05714285714285714; Test Support: 0.0
+    Train Confidence: 1.0; Test Confidence: 0.4
+    Train Lift: 2.0359477124183005; Test Lift: NONE
+    Train Leverage: 0.029224489795918362; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    Current Rule Code:
+def rule2matrix(smiles_list):
+    # Define SMARTS patterns for functional groups
+    patterns = {}
+
+    # Functional groups and substructures
+    patterns['carboxylic_acid'] = Chem.MolFromSmarts('[CX3](=O)[OX2H1]')
+    patterns['carboxylate_anion'] = Chem.MolFromSmarts('[CX3](=O)[O-]')
+    patterns['primary_amine'] = Chem.MolFromSmarts('[NX3;H2][#6]')
+    patterns['secondary_amine'] = Chem.MolFromSmarts('[NX3;H1][#6][#6]')
+    patterns['amide_group'] = Chem.MolFromSmarts('[CX3](=O)[NX3H1]')
+    patterns['hydroxyl_group'] = Chem.MolFromSmarts('[OX2H]')
+    patterns['phenol_group'] = Chem.MolFromSmarts('[c][OX2H]')
+    patterns['thiol_group'] = Chem.MolFromSmarts('[SX2H]')
+    patterns['nitro_group'] = Chem.MolFromSmarts('[NX3](=O)=O')
+    patterns['halogens'] = Chem.MolFromSmarts('[F,Cl,Br,I]')
+    patterns['trifluoromethyl_group'] = Chem.MolFromSmarts('[CX4](F)(F)F')
+    patterns['alkoxy_group'] = Chem.MolFromSmarts('[OX2][#6]')
+    patterns['pyridine_ring'] = Chem.MolFromSmarts('n1ccccc1')
+    patterns['indole_ring'] = Chem.MolFromSmarts('c1ccc2c(c1)cc[nH]2')
+    patterns['ketone_group'] = Chem.MolFromSmarts('[#6][CX3](=O)[#6]')
+    patterns['aromatic_carboxylic_acid'] = Chem.MolFromSmarts('[c][CX3](=O)[OX1H0-,OX2H1]')
+    patterns['aromatic_ring'] = Chem.MolFromSmarts('a1aaaaa1')
+    patterns['amide_adjacent_to_aromatic'] = Chem.MolFromSmarts('[c][CX3](=O)[NX3H1]')
+    patterns['electron_withdrawing_group'] = [
+        Chem.MolFromSmarts('[c][F,Cl,Br,I]'),  # Halogens on aromatic ring
+        Chem.MolFromSmarts('[c][NX3](=O)=O'),  # Nitro group on aromatic ring
+        Chem.MolFromSmarts('[c][CX3](=O)[#6]')  # Ketone group attached to aromatic ring
+    ]
+    patterns['electron_donating_group'] = [
+        Chem.MolFromSmarts('[c][OX2H]'),  # Hydroxyl group on aromatic ring
+        Chem.MolFromSmarts('[c][OX2][CH3]')  # Methoxy group on aromatic ring
+    ]
+    patterns['amide_bond'] = Chem.MolFromSmarts('[CX3](=O)[NX3]')
+    patterns['aldehyde_group'] = Chem.MolFromSmarts('[CX3H1](=O)')
+    patterns['thiol_group'] = Chem.MolFromSmarts('[SX2H]')
+    patterns['adjacent_hydroxyls'] = Chem.MolFromSmarts('[OX2H][CX4][OX2H]')
+    patterns['medium_chain_aliphatic_acid'] = Chem.MolFromSmarts('[CX3](=O)[OX1H0-,OX2H1][CH2][CH2][CH2][CH2][CH3]')  # C6 acid
+    patterns['long_chain_aliphatic_acid'] = Chem.MolFromSmarts('[CX3](=O)[OX1H0-,OX2H1][CH2]{4,}[CH3]')  # C>=6 acid
+    patterns['polyether_chain'] = Chem.MolFromSmarts('[OX2H0][CX4H2][OX2H0][CX4H2][OX2H0][CX4H2][OX2H0][CX4H2]')  # Multiple ether linkages
+
+    # Define the rules
+    rules = [
+        {
+            'number': 1,
+            'description': 'Modifiers that are α-amino acids with side chains containing additional carboxyl groups or nitrogen-containing heterocycles (e.g., indole rings) tend to give a high yield.',
+            'patterns': [
+                [Chem.MolFromSmarts('[NX3;!$(N=*);!$(N~[!#6])][CX4H][CX3](=O)[OX1H0-,OX2H1]')],  # Amino acid backbone
+            ],
+            'additional_patterns': [
+                [patterns['carboxylic_acid']],  # Additional carboxylic acid group
+                [patterns['indole_ring']],  # Nitrogen-containing heterocycle
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 2,
+            'description': 'Modifiers that are aromatic carboxylic acids with electron-withdrawing substituents (e.g., nitro, halogen, ketone groups) directly attached to the aromatic ring tend to give a high yield.',
+            'patterns': [
+                [patterns['aromatic_carboxylic_acid']],  # Aromatic carboxylic acid
+                patterns['electron_withdrawing_group'],  # Electron-withdrawing groups
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 3,
+            'description': 'Modifiers that are aromatic carboxylic acids with electron-donating substituents (e.g., methyl, methoxy, hydroxyl groups) attached to the aromatic ring tend to give a low yield.',
+            'patterns': [
+                [patterns['aromatic_carboxylic_acid']],  # Aromatic carboxylic acid
+                patterns['electron_donating_group'],  # Electron-donating groups
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 4,
+            'description': 'Modifiers containing additional coordinating functional groups such as thiols or multiple adjacent hydroxyls near the carboxylate group tend to give a high yield.',
+            'patterns': [
+                [patterns['carboxylic_acid']],  # Carboxylic acid group
+                [patterns['thiol_group'], patterns['adjacent_hydroxyls']],  # Thiol or adjacent hydroxyls
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 5,
+            'description': 'Modifiers that are heteroaromatic carboxylic acids with coordinating nitrogen atoms in positions favorable for metal binding (e.g., ortho or para to the carboxyl group) tend to give a high yield.',
+            'patterns': [
+                [patterns['aromatic_carboxylic_acid']],  # Aromatic carboxylic acid
+                [patterns['pyridine_ring']],  # Heteroaromatic ring with nitrogen
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 6,
+            'description': 'Modifiers that are medium-chain aliphatic carboxylic acids (C6–C8) without additional functional groups tend to give a high yield.',
+            'patterns': [
+                [patterns['medium_chain_aliphatic_acid']],  # C6–C8 aliphatic carboxylic acid
+            ],
+            'exclude_patterns': [
+                [patterns['primary_amine'], patterns['secondary_amine'], patterns['hydroxyl_group'], patterns['thiol_group'], patterns['amide_group'], patterns['halogens']],  # Exclude additional functional groups
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 7,
+            'description': 'Modifiers containing flexible polar chains with ether linkages or multiple amine groups tend to give a low yield.',
+            'patterns': [
+                [patterns['polyether_chain']],  # Polyether chain
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 8,
+            'description': 'Modifiers containing amide or peptide bonds adjacent to the carboxylic acid group tend to give a low yield.',
+            'patterns': [
+                [patterns['amide_bond']],  # Amide group
+                [patterns['carboxylic_acid']],  # Carboxylic acid group
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 9,
+            'description': 'Modifiers with strongly electron-withdrawing perfluoroalkyl chains attached to the carboxyl group tend to give a low yield.',
+            'patterns': [
+                [Chem.MolFromSmarts('[CX4](F)(F)(F)')],  # Trifluoromethyl group
+                [patterns['carboxylic_acid']],  # Carboxylic acid group
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 10,
+            'description': 'Modifiers containing aldehyde groups on an aromatic ring, especially when adjacent to coordinating groups like hydroxyls, or on aliphatic chains tend to give a low yield.',
+            'patterns': [
+                [patterns['aldehyde_group']],  # Aldehyde group
+            ],
+            'prediction': -1
+        },
+    ]
+
+    # Initialize results list
+    results = []
+
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = True
+                # Check exclude patterns if any
+                if 'exclude_patterns' in rule:
+                    for group in rule['exclude_patterns']:
+                        group_match = False
+                        for pat in group:
+                            if mol.HasSubstructMatch(pat):
+                                group_match = True
+                                break
+                        if group_match:
+                            match = False
+                            break
+                    if not match:
+                        row.append(0)
+                        continue
+                # Check required patterns
+                for compiled_group in rule['patterns']:
+                    group_match = False
+                    for pat in compiled_group:
+                        if isinstance(pat, Chem.Mol):
+                            matches = mol.GetSubstructMatches(pat)
+                            if matches:
+                                group_match = True
+                                break
+                        else:  # List of patterns
+                            for subpat in pat:
+                                matches = mol.GetSubstructMatches(subpat)
+                                if matches:
+                                    group_match = True
+                                    break
+                            if group_match:
+                                break
+                    if not group_match:
+                        match = False
+                        break
+                # Additional patterns with OR logic (Rule 1)
+                if 'additional_patterns' in rule and match:
+                    additional_match = False
+                    for compiled_group in rule['additional_patterns']:
+                        group_match = False
+                        for pat in compiled_group:
+                            matches = mol.GetSubstructMatches(pat)
+                            if matches:
+                                group_match = True
+                                if 'min_count' in pat.__dict__ and len(matches) >= pat.__dict__['min_count']:
+                                    group_match = True
+                                    break
+                                else:
+                                    group_match = True
+                                    break
+                        if group_match:
+                            additional_match = True
+                            break
+                    if not additional_match:
+                        match = False
+                if match:
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception as e:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule['number']}' for rule in rules])
+    return df
+
+--------------------------------------------------
+    Target Name: yield
+    GPT Model: o1-preview-2024-09-12
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+1. **Rule 1**: Modifiers that are **α-amino acids with side chains containing additional carboxyl groups or nitrogen-containing heterocycles (e.g., indole rings)** tend to give a **high yield**.
+
+   - **Rationale**: Extra carboxylate groups and nitrogen heterocycles enhance metal coordination through chelation, stabilizing the catalyst and improving efficiency.
+
+   - **Examples**:
+     - **(2S)-2-aminopentanedioic acid** (Glutamic acid; additional carboxylate group)
+     - **(2S)-2-aminobutanedioic acid** (Aspartic acid; additional carboxylate group)
+     - **(2R)-2-amino-3-(1H-indol-3-yl)propanoic acid** (Tryptophan; indole nitrogen)
+
+   - **Counter-Example**:
+     - **(2S)-2-amino-3-phenylpropanoic acid** (Phenylalanine; lacks additional coordinating groups) – Low Yield
+
+2. **Rule 2**: Modifiers that are **aromatic carboxylic acids with electron-withdrawing substituents (e.g., nitro, halogens) directly attached to the aromatic ring** tend to give a **high yield**, whereas those with **electron-donating substituents (e.g., methyl, methoxy, hydroxyl groups)** tend to give a **low yield**.
+
+   - **Rationale**: Electron-withdrawing groups increase the acidity of the carboxylate, enhancing its ability to coordinate with metal centers. Electron-donating groups decrease acidity, weakening metal coordination.
+
+   - **High Yield Examples**:
+     - **4-(bromomethyl)benzoic acid** (Bromomethyl group)
+     - **4-nitrobenzoic acid** (Nitro group)
+   - **Low Yield Examples**:
+     - **4-methylbenzoic acid** (Methyl group is electron-donating)
+     - **3-(4-hydroxyphenyl)propanoic acid** (Hydroxyl group is electron-donating)
+
+3. **Rule 3**: Modifiers that are **heteroaromatic carboxylic acids with coordinating nitrogen atoms in positions favorable for metal binding (e.g., adjacent to the carboxyl group)** tend to give a **high yield**.
+
+   - **Rationale**: Nitrogen atoms in the ring can serve as additional coordination sites, enhancing metal-ligand interactions and catalyst performance.
+
+   - **High Yield Examples**:
+     - **Pyridine-3-carboxylic acid** (Nitrogen atom adjacent to carboxyl group)
+     - **1H-pyrazole-4-carboxylic acid** (Pyrazole ring with coordinating nitrogen)
+   - **Low Yield Counter-Example**:
+     - **4-pyridin-4-ylbenzoic acid** (Pyridyl group may not effectively coordinate due to unfavorable positioning)
+
+4. **Rule 4**: Modifiers that are **aliphatic carboxylic acids with medium-chain lengths (C6–C8) and no additional polar functional groups** tend to give a **high yield**.
+
+   - **Rationale**: The optimal chain length facilitates hydrophobic interactions with the catalyst surface while the carboxylate group effectively coordinates with the metal center.
+
+   - **High Yield Example**:
+     - **Octanoic acid** (Eight-carbon chain)
+   - **Low Yield Counter-Example**:
+     - **7-aminoheptanoic acid** (Presence of amino group may interfere with coordination)
+
+5. **Rule 5**: Modifiers containing **additional coordinating functional groups such as thiols or multiple adjacent hydroxyls near the carboxylate group** tend to give a **high yield**.
+
+   - **Rationale**: These functional groups can chelate the metal center, forming more stable complexes and enhancing catalytic activity.
+
+   - **Examples**:
+     - **3-sulfanylpropanoic acid** (Thiol group enhances coordination)
+     - **(2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid** (Multiple hydroxyls for chelation)
+
+6. **Rule 6**: Modifiers that are **aromatic carboxylic acids fused with additional carbonyl groups within the ring structure** tend to give a **high yield**.
+
+   - **Rationale**: Additional carbonyl groups can participate in resonance stabilization and metal coordination, enhancing catalytic activity.
+
+   - **Example**:
+     - **1,3-dioxo-2-benzofuran-5-carboxylic acid** (Fused ketone groups)
+
+7. **Rule 7**: Modifiers containing **functional groups that hinder metal coordination, such as aldehyde groups adjacent to the carboxylate, amide bonds near the carboxylate, or strongly electron-withdrawing perfluoroalkyl groups**, tend to give a **low yield**.
+
+   - **Rationale**: Aldehydes may interfere with coordination or participate in side reactions; amide groups can reduce coordination ability due to resonance delocalization; perfluoroalkyl groups excessively decrease electron density on the carboxylate oxygen.
+
+   - **Low Yield Examples**:
+     - **4-formylbenzoic acid** (Aldehyde group adjacent to carboxylate)
+     - **(2S)-6-acetamido-2-aminohexanoic acid** (Amide group adjacent to carboxylate)
+     - **2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid** (Perfluorinated chain)
+
+8. **Rule 8**: Modifiers with **bulky, non-coordinating substituents near the carboxylate group**, such as **aromatic rings without additional coordinating groups**, tend to give a **low yield**.
+
+   - **Rationale**: Bulky groups can introduce steric hindrance, reducing the effectiveness of metal coordination and catalyst performance.
+
+   - **Low Yield Examples**:
+     - **(2S)-2-amino-3-phenylpropanoic acid** (Phenylalanine; bulky phenyl group)
+     - **3-(4-hydroxyphenyl)propanoic acid** (Bulky aromatic ring with electron-donating hydroxyl group)
+
+9. **Rule 9**: Modifiers containing **flexible polar chains with ether linkages (polyether chains) or multiple amino groups** tend to give a **low yield**.
+
+   - **Rationale**: Ether oxygens and amino groups may not coordinate effectively and can increase solubility in the solvent, reducing interaction with the catalyst surface.
+
+   - **Low Yield Examples**:
+     - **2-[2-(2-methoxyethoxy)ethoxy]acetic acid** (Multiple ether linkages)
+     - **3-[2-(2-aminoethoxy)ethoxy]propanoic acid** (Flexible ether-containing chain with amino group)
+
+10. **Rule 10**: Modifiers with **long aliphatic chains containing polar groups (e.g., hydroxyl or amino groups) distant from the carboxylate** tend to give a **low yield**.
+
+    - **Rationale**: Polar groups far from the carboxylate may not effectively participate in metal coordination and can interfere with catalyst interaction or solubility.
+
+    - **Low Yield Examples**:
+      - **7-hydroxyheptanoic acid** (Hydroxyl group distant from carboxylate)
+      - **8-aminooctanoic acid** (Amino group distant from carboxylate)
+
+11. **Rule 11**: Modifiers that are **linear dicarboxylic acids without additional interfering functional groups may give variable yields depending on chain length**, with shorter chains potentially giving a **high yield** and longer or more substituted chains giving a **low yield**.
+
+    - **Rationale**: Two carboxylate groups can enhance coordination, but longer chains or additional groups may introduce steric hindrance or alter coordination geometry.
+
+    - **High Yield Potential**:
+      - **Modifiers with short dicarboxylic chains (e.g., succinic acid)**
+    - **Low Yield Example**:
+      - **4-oxoheptanedioic acid** (Ketone group may interfere with coordination)
+
+**End of Rules**---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+Rule 1,Rule 2,Rule 3,Rule 4,Rule 5,Rule 6,Rule 7,Rule 8,Rule 9,Rule 10,Rule 11
+0,1,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,-1,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,-1,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.5714285714285714; Test Accuracy: 0.0
+    Train Support: 0.05714285714285714; Test Support: 0.0
+    Train Confidence: 1.0; Test Confidence: 0.5
+    Train Lift: 2.0588235294117645; Test Lift: NONE
+    Train Leverage: 0.02938775510204081; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    Current Rule Code:
+def rule2matrix(smiles_list):
+    from rdkit import Chem
+    import pandas as pd
+
+    # Define rule functions
+    def rule1(mol):
+        try:
+            # Alpha-amino acid pattern
+            alpha_amino_acid_pat = Chem.MolFromSmarts('[NX3H2][CX4H][CX3](=O)[OX1H]')
+            if not mol.HasSubstructMatch(alpha_amino_acid_pat):
+                return 0
+            # Additional carboxyl group
+            carboxylic_acid_pat = Chem.MolFromSmarts('[CX3](=O)[OX1H]')
+            carboxyl_matches = mol.GetSubstructMatches(carboxylic_acid_pat)
+            if len(carboxyl_matches) >= 2:
+                return 1
+            # Nitrogen-containing heterocycle
+            nitrogen_heterocycle_pat = Chem.MolFromSmarts('[n;r]')
+            if mol.HasSubstructMatch(nitrogen_heterocycle_pat):
+                return 1
+            return 0
+        except:
+            return 0
+
+    def rule2(mol):
+        try:
+            # Aromatic carboxylic acid
+            aromatic_carboxylic_acid_pat = Chem.MolFromSmarts('c1ccc(cc1)C(=O)[OH]')
+            if not mol.HasSubstructMatch(aromatic_carboxylic_acid_pat):
+                return 0
+            # Electron-withdrawing substituents on aromatic ring
+            ewgs_smarts = ['[c][F,Cl,Br,I]', '[c][N+](=O)[O-]', '[c]C(=O)[O]', '[c]C#N']
+            for smarts in ewgs_smarts:
+                pat = Chem.MolFromSmarts(smarts)
+                if mol.HasSubstructMatch(pat):
+                    return 1
+            # Electron-donating substituents on aromatic ring
+            edgs_smarts = ['[c][OH]', '[c][OCH3]', '[c][NH2]', '[c][CH3]']
+            for smarts in edgs_smarts:
+                pat = Chem.MolFromSmarts(smarts)
+                if mol.HasSubstructMatch(pat):
+                    return -1
+            return 0
+        except:
+            return 0
+
+    def rule3(mol):
+        try:
+            # Heteroaromatic carboxylic acids with coordinating nitrogen atoms adjacent to carboxyl group
+            heteroaromatic_carboxylic_acid_pat = Chem.MolFromSmarts('n1ccccc1C(=O)[OH]')
+            if mol.HasSubstructMatch(heteroaromatic_carboxylic_acid_pat):
+                return 1
+            return 0
+        except:
+            return 0
+
+    def rule4(mol):
+        try:
+            # Aliphatic carboxylic acids with chain length C6-C8 and no additional polar functional groups
+            aliphatic_carboxylic_acid_pat = Chem.MolFromSmarts('[CH3][CH2]{4,6}[CX3](=O)[OX1H]')
+            if not mol.HasSubstructMatch(aliphatic_carboxylic_acid_pat):
+                return 0
+            # Exclude polar functional groups
+            polar_groups_pats = [Chem.MolFromSmarts('[#6][OX2H]'),  # Hydroxyl group
+                                 Chem.MolFromSmarts('[#6][NX3]'),   # Amino group
+                                 Chem.MolFromSmarts('[#6][SX2]')]   # Thiol group
+            for pat in polar_groups_pats:
+                if mol.HasSubstructMatch(pat):
+                    return 0
+            return 1
+        except:
+            return 0
+
+    def rule5(mol):
+        try:
+            # Carboxylate with thiol or multiple adjacent hydroxyls nearby
+            thiol_near_carboxylate_pat = Chem.MolFromSmarts('[CX3](=O)[OX1H][CX4][SX2H]')
+            hydroxyls_near_carboxylate_pat = Chem.MolFromSmarts('[CX3](=O)[OX1H][CX4]([OX2H])[CX4]([OX2H])')
+            if mol.HasSubstructMatch(thiol_near_carboxylate_pat) or mol.HasSubstructMatch(hydroxyls_near_carboxylate_pat):
+                return 1
+            return 0
+        except:
+            return 0
+
+    def rule6(mol):
+        try:
+            # Aromatic carboxylic acids fused with additional carbonyl groups within the ring structure
+            fused_carbonyl_pat = Chem.MolFromSmarts('O=C1C=CC(=O)C=C1C(=O)[OX1H]')
+            if mol.HasSubstructMatch(fused_carbonyl_pat):
+                return 1
+            return 0
+        except:
+            return 0
+
+    def rule7(mol):
+        try:
+            # Carboxylate with coordination hindering groups
+            aldehyde_adjacent_pat = Chem.MolFromSmarts('[CX3H1](=O)[c][CX3](=O)[OX1H]')
+            amide_near_carboxylate_pat = Chem.MolFromSmarts('[CX3](=O)[NX3][CX3](=O)[OX1H]')
+            perfluoroalkyl_pat = Chem.MolFromSmarts('[CX4](F)(F)F')
+            if mol.HasSubstructMatch(aldehyde_adjacent_pat) or mol.HasSubstructMatch(amide_near_carboxylate_pat) or mol.HasSubstructMatch(perfluoroalkyl_pat):
+                return -1
+            return 0
+        except:
+            return 0
+
+    def rule8(mol):
+        try:
+            # Aromatic carboxylate with no additional coordinating groups
+            aromatic_carboxylate_pat = Chem.MolFromSmarts('[c][CX3](=O)[OX1H]')
+            if not mol.HasSubstructMatch(aromatic_carboxylate_pat):
+                return 0
+            # Exclude if nitrogen or hydroxyl present on aromatic ring
+            exclude_pats = [Chem.MolFromSmarts('[c][NX3]'), Chem.MolFromSmarts('[c][OX2H]')]
+            for pat in exclude_pats:
+                if mol.HasSubstructMatch(pat):
+                    return 0
+            return -1
+        except:
+            return 0
+
+    def rule9(mol):
+        try:
+            # Flexible polar chains with ether linkages or multiple amino groups
+            ether_chain_pat = Chem.MolFromSmarts('[#6][OX2][#6][OX2][#6](=O)[OX1H]')
+            multiple_amino_groups_pat = Chem.MolFromSmarts('[NX3][CX4][NX3][CX3](=O)[OX1H]')
+            if mol.HasSubstructMatch(ether_chain_pat) or mol.HasSubstructMatch(multiple_amino_groups_pat):
+                return -1
+            return 0
+        except:
+            return 0
+
+    def rule10(mol):
+        try:
+            # Long aliphatic chain with distant polar groups
+            distant_hydroxyl_pat = Chem.MolFromSmarts('[CX3](=O)[OX1H][CX4][CX4][CX4][CX4][CX4][OX2H]')
+            distant_amino_pat = Chem.MolFromSmarts('[CX3](=O)[OX1H][CX4][CX4][CX4][CX4][CX4][NX3]')
+            if mol.HasSubstructMatch(distant_hydroxyl_pat) or mol.HasSubstructMatch(distant_amino_pat):
+                return -1
+            return 0
+        except:
+            return 0
+
+    def rule11(mol):
+        try:
+            # Linear dicarboxylic acid
+            linear_dicarboxylic_acid_pat = Chem.MolFromSmarts('[CX3](=O)[OX1H][CX4][CX2,#6][CX3](=O)[OX1H]')
+            if mol.HasSubstructMatch(linear_dicarboxylic_acid_pat):
+                return 0  # Variable yield
+            return 0
+        except:
+            return 0
+
+    # List of rule functions
+    rule_functions = [
+        rule1, rule2, rule3, rule4, rule5,
+        rule6, rule7, rule8, rule9, rule10, rule11
+    ]
+
+    # Initialize results list
+    results = []
+
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            results.append([0]*len(rule_functions))
+            continue
+        row = []
+        for func in rule_functions:
+            prediction = func(mol)
+            row.append(prediction)
+        results.append(row)
+
+    # Create DataFrame
+    df = pd.DataFrame(results, columns=[f'Rule {i+1}' for i in range(len(rule_functions))])
+    return df
+
+--------------------------------------------------
+    Target Name: yield
+    GPT Model: o1-preview-2024-09-12
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+1. **Rule 1**: Modifiers that are **α-amino acids with side chains containing additional carboxyl groups or polar heterocycles** tend to give a **high yield**.
+
+   - **Rationale**: Additional carboxylate groups and heterocyclic rings with nitrogen enhance metal chelation and stabilize the catalyst, improving efficiency.
+
+   - **High Yield Examples**:
+     - **(2S)-2-aminopentanedioic acid** (Glutamic acid; extra carboxylate group)
+     - **(2S)-2-aminobutanedioic acid** (Aspartic acid; extra carboxylate group)
+     - **(2R)-2-amino-3-(1H-indol-3-yl)propanoic acid** (Tryptophan; indole ring with nitrogen)
+   - **Low Yield Counter-Example**:
+     - **(2S)-2-amino-3-phenylpropanoic acid** (Phenylalanine; lacks additional coordinating groups) – Low Yield
+
+2. **Rule 2**: Modifiers that are **aromatic carboxylic acids with electron-withdrawing substituents (e.g., nitro, halogens) attached directly to the aromatic ring** tend to give a **high yield**, whereas those with **electron-donating substituents (e.g., methyl, methoxy, hydroxyl groups)** tend to give a **low yield**.
+
+   - **Rationale**: Electron-withdrawing groups increase the acidity of the carboxylate, enhancing its ability to coordinate with metal centers. Electron-donating groups decrease acidity and weaken metal coordination.
+
+   - **High Yield Examples**:
+     - **4-(bromomethyl)benzoic acid** (Bromomethyl group is electron-withdrawing)
+     - **4-nitrobenzoic acid** (Nitro group is strongly electron-withdrawing)
+   - **Low Yield Examples**:
+     - **4-methylbenzoic acid** (Methyl group is electron-donating)
+     - **5-formyl-2-hydroxybenzoic acid** (Hydroxyl group is electron-donating)
+
+3. **Rule 3**: Modifiers containing **nitrogenous heterocycles capable of coordinating with metals**, such as **pyridine or pyrazole carboxylic acids**, tend to give a **high yield**.
+
+   - **Rationale**: Nitrogen atoms in heterocycles can act as additional coordination sites, enhancing metal-ligand interactions and catalyst performance.
+
+   - **High Yield Examples**:
+     - **Pyridine-3-carboxylic acid** (Nitrogen atom adjacent to the carboxyl group)
+     - **1H-pyrazole-4-carboxylic acid** (Pyrazole ring with coordinating nitrogen)
+   - **Low Yield Example**:
+     - **4-pyridin-4-ylbenzoic acid** (Possible unfavorable coordination geometry) – Low Yield
+
+4. **Rule 4**: Modifiers that have **additional functional groups capable of chelating metals (e.g., thiols, multiple hydroxyls) in proximity to the carboxylate group** tend to give a **high yield**.
+
+   - **Rationale**: Chelating ligands with multiple coordinating sites form more stable complexes with metal centers, enhancing catalytic activity.
+
+   - **High Yield Examples**:
+     - **3-sulfanylpropanoic acid** (Thiol group enhances coordination)
+     - **(2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid** (Multiple hydroxyl groups enable chelation)
+
+5. **Rule 5**: Modifiers with **aliphatic chains of optimal length (e.g., C8) without interfering functional groups** can give a **high yield**, but longer chains or additional polar groups distant from the carboxylate tend to give a **low yield**.
+
+   - **Rationale**: Optimal chain length balances hydrophobic interactions and solubility, facilitating effective interaction with the catalyst. Longer chains or distant polar groups may hinder coordination or affect solubility adversely.
+
+   - **High Yield Example**:
+     - **Octanoic acid** (Eight-carbon chain provides optimal balance)
+   - **Low Yield Examples**:
+     - **7-hydroxyheptanoic acid** (Hydroxyl group distant from the carboxylate)
+     - **8-aminooctanoic acid** (Amino group distant from the carboxylate)
+
+6. **Rule 6**: Modifiers containing **polar functional groups distant from the carboxylate group**, such as **hydroxyl or amino groups at the end of long aliphatic chains**, tend to give a **low yield**.
+
+   - **Rationale**: Remote polar groups may not effectively participate in metal coordination and can interfere with catalyst interaction or solubility.
+
+   - **Low Yield Examples**:
+     - **7-hydroxyheptanoic acid**
+     - **7-aminoheptanoic acid**
+
+7. **Rule 7**: Modifiers with **bulky substituents near the carboxylate group that are non-coordinating or electron-donating**, such as **aromatic rings without additional coordinating groups**, tend to give a **low yield**.
+
+   - **Rationale**: Bulky groups can introduce steric hindrance, reducing the effectiveness of metal coordination and catalyst performance.
+
+   - **Low Yield Examples**:
+     - **(2S)-2-amino-3-phenylpropanoic acid** (Phenylalanine; bulky phenyl group)
+     - **3-(4-hydroxyphenyl)propanoic acid** (Bulky aromatic ring with electron-donating hydroxyl group)
+
+8. **Rule 8**: Modifiers containing **polyether chains or multiple ether linkages** tend to give a **low yield**.
+
+   - **Rationale**: Ether oxygens are weakly coordinating, and flexible polyether chains can increase solubility in the solvent, reducing interaction with the catalyst surface.
+
+   - **Low Yield Examples**:
+     - **2-[2-(2-methoxyethoxy)ethoxy]acetic acid** (Multiple ether linkages)
+     - **3-[2-(2-aminoethoxy)ethoxy]propanoic acid** (Ether-containing chain with amino group)
+
+9. **Rule 9**: Modifiers containing **strong electron-withdrawing groups that excessively decrease electron density on the carboxylate oxygen**, such as **perfluoroalkyl chains**, tend to give a **low yield**.
+
+   - **Rationale**: Overly electron-deficient carboxylate groups may not coordinate effectively with metal centers.
+
+   - **Low Yield Example**:
+     - **2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid** (Perfluorinated chain)
+
+10. **Rule 10**: Modifiers that have **functional groups which may interfere with metal coordination**, such as **aldehyde groups or amide bonds adjacent to the carboxylate**, tend to give a **low yield**.
+
+    - **Rationale**: Aldehyde groups can participate in side reactions or inhibit coordination; amide groups can reduce coordination ability due to resonance delocalization.
+
+    - **Low Yield Examples**:
+      - **4-formylbenzoic acid** (Aldehyde group adjacent to carboxylate)
+      - **(2S)-6-acetamido-2-aminohexanoic acid** (Amide group near carboxylate)
+
+**End of Rules**---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+Rule 1,Rule 2,Rule 2.1,Rule 3,Rule 4,Rule 5,Rule 6,Rule 7,Rule 8,Rule 9,Rule 10
+0,0,0,0,1,0,0,0,0,0,-1
+1,0,0,0,1,0,-1,0,0,0,-1
+0,1,0,0,0,0,0,0,0,0,-1
+1,0,0,0,1,0,0,0,0,0,-1
+0,0,0,0,0,0,-1,0,0,0,-1
+0,0,-1,0,0,0,0,0,0,0,-1
+0,0,0,0,0,1,0,0,0,0,-1
+0,0,0,0,1,0,-1,0,0,0,-1
+0,0,0,0,1,0,0,0,0,0,-1
+0,0,0,1,0,0,0,0,0,0,-1
+0,0,0,0,1,0,-1,0,0,0,-1
+0,0,0,0,0,0,0,0,0,0,-1
+0,0,0,1,0,0,0,0,0,0,-1
+0,0,0,0,0,0,0,0,0,0,-1
+0,0,0,0,0,0,0,0,0,0,-1
+1,0,0,1,0,0,0,0,0,0,-1
+0,0,0,1,0,0,0,0,0,0,-1
+0,0,0,0,0,0,0,0,0,0,-1
+0,0,0,0,1,0,0,0,0,0,-1
+0,0,-1,0,1,0,0,0,0,0,-1
+0,0,0,0,0,0,0,0,0,0,-1
+0,1,0,0,0,0,0,0,0,0,-1
+0,0,0,1,0,0,0,0,0,0,-1
+0,0,-1,0,0,0,0,0,0,0,-1
+0,0,0,0,0,0,-1,0,0,0,-1
+0,0,0,1,0,0,0,0,0,0,-1
+0,0,0,0,0,0,0,0,0,0,-1
+0,0,0,0,1,0,0,0,0,0,-1
+0,0,0,0,1,0,0,0,0,0,-1
+0,0,0,0,0,0,-1,0,0,0,-1
+0,0,0,0,1,0,-1,0,0,0,-1
+0,0,0,0,1,0,0,0,0,0,-1
+0,0,0,0,0,0,-1,0,0,0,-1
+0,0,0,0,0,0,0,0,0,0,-1
+0,0,0,0,0,0,-1,0,0,0,-1
+0,0,0,0,0,0,-1,0,0,0,-1
+
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.7428571428571429; Test Accuracy: 1.0
+    Train Support: 0.07857142857142857; Test Support: 0.0
+    Train Confidence: 0.9583333333333334; Test Confidence: 0.5
+    Train Lift: 1.863425925925926; Test Lift: NONE
+    Train Leverage: 0.03448979591836735; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    Current Rule Code:
+def rule2matrix(smiles_list):
+    # Define SMARTS patterns for functional groups with corrections from suggestions
+    patterns = {
+        # Carboxylic acid group (-COOH) protonated or deprotonated
+        'carboxylic_acid': '[CX3](=O)[O;H1,-1]',
+        # Alpha amino acid (amino and carboxylate on same carbon)
+        'alpha_amino_acid': '[NX3;H2,H1][CX4H]([#6])[CX3](=O)[O;H1,-1]',
+        # Nitrogen heterocycle (aromatic or non-aromatic)
+        'nitrogen_heterocycle': '[n;R]',  # Nitrogen atom in a ring
+        # Aromatic carboxylic acid
+        'aromatic_carboxylic_acid': '[c][CX3](=O)[O;H1,-1]',
+        # Electron-withdrawing groups attached directly to aromatic ring
+        'nitro_on_aromatic': '[c][NX3+](=O)[O-]',
+        'halogen_on_aromatic': '[c][F,Cl,Br,I]',
+        'halomethyl_on_aromatic': '[c][CH2][F,Cl,Br,I]',
+        # Electron-donating groups attached directly to aromatic ring
+        'hydroxyl_on_aromatic': '[c][OX2H]',
+        'methoxy_on_aromatic': '[c][OX2][CH3]',
+        'methyl_on_aromatic': '[c][CH3]',
+        'amino_on_aromatic': '[c][NX3;H2,H1]',
+        # Thiol group
+        'thiol': '[SX2H]',
+        # Multiple hydroxyl groups
+        'hydroxyl_group': '[OX2H]',
+        # Ether linkage
+        'ether_linkage': '[#6][OX2][#6]',
+        # Polyether linkage (two or more ether linkages)
+        'polyether_linkage': '[#6]-[OX2]-[#6]-[OX2]-[#6]',
+        # Aldehyde group
+        'aldehyde': '[CX3H](=O)',
+        # Amide group
+        'amide': '[CX3](=O)[NX3H0,H1,H2]',
+        # Perfluoroalkyl chain (e.g., perfluorinated alkane)
+        'perfluoroalkyl': '[CX4](F)(F)(F)[CX4](F)(F)(F)',
+        # Bulky substituent near carboxylate
+        'bulky_substituent_near_carboxylate': '[CX3](=O)[O;H1,-1][CX4][c]',
+        # Distant polar group (e.g., hydroxyl or amino group more than 3 carbons away)
+        'distant_polar_group': '[CX4][CX4][CX4][O,N;H1,H2]',
+        # Aliphatic chains of optimal length (C7-C9) ending with carboxylic acid
+        'aliphatic_chain_C7': '[CH3][CH2][CH2][CH2][CH2][CH2][CH2][CX3](=O)[O;H1,-1]',
+        'aliphatic_chain_C8': '[CH3][CH2][CH2][CH2][CH2][CH2][CH2][CH2][CX3](=O)[O;H1,-1]',
+        'aliphatic_chain_C9': '[CH3][CH2][CH2][CH2][CH2][CH2][CH2][CH2][CH2][CX3](=O)[O;H1,-1]',
+    }
+
+    # Compile SMARTS patterns
+    compiled_patterns = {name: Chem.MolFromSmarts(sma) for name, sma in patterns.items()}
+
+    # Define the rules with their associated patterns and predictions
+    rules = [
+        {
+            'number': 1,
+            'description': 'High Yield: α-amino acids with additional carboxyl groups or polar heterocycles.',
+            'evaluation': lambda mol: (
+                mol.HasSubstructMatch(compiled_patterns['alpha_amino_acid']) and (
+                    len(mol.GetSubstructMatches(compiled_patterns['carboxylic_acid'])) > 1 or
+                    mol.HasSubstructMatch(compiled_patterns['nitrogen_heterocycle'])
+                )
+            ),
+            'prediction': 1
+        },
+        {
+            'number': 2,
+            'description': 'High Yield: Aromatic carboxylic acids with electron-withdrawing substituents attached directly to the aromatic ring.',
+            'evaluation': lambda mol: (
+                mol.HasSubstructMatch(compiled_patterns['aromatic_carboxylic_acid']) and (
+                    mol.HasSubstructMatch(compiled_patterns['nitro_on_aromatic']) or
+                    mol.HasSubstructMatch(compiled_patterns['halogen_on_aromatic']) or
+                    mol.HasSubstructMatch(compiled_patterns['halomethyl_on_aromatic'])
+                )
+            ),
+            'prediction': 1
+        },
+        {
+            'number': 2.1,
+            'description': 'Low Yield: Aromatic carboxylic acids with electron-donating substituents attached directly to the aromatic ring.',
+            'evaluation': lambda mol: (
+                mol.HasSubstructMatch(compiled_patterns['aromatic_carboxylic_acid']) and (
+                    mol.HasSubstructMatch(compiled_patterns['hydroxyl_on_aromatic']) or
+                    mol.HasSubstructMatch(compiled_patterns['methoxy_on_aromatic']) or
+                    mol.HasSubstructMatch(compiled_patterns['methyl_on_aromatic']) or
+                    mol.HasSubstructMatch(compiled_patterns['amino_on_aromatic'])
+                )
+            ),
+            'prediction': -1
+        },
+        {
+            'number': 3,
+            'description': 'High Yield: Modifiers containing nitrogenous heterocycles capable of coordinating with metals.',
+            'evaluation': lambda mol: (
+                mol.HasSubstructMatch(compiled_patterns['carboxylic_acid']) and
+                mol.HasSubstructMatch(compiled_patterns['nitrogen_heterocycle'])
+            ),
+            'prediction': 1
+        },
+        {
+            'number': 4,
+            'description': 'High Yield: Modifiers with additional functional groups capable of chelating metals (thiols, multiple hydroxyls) in proximity to the carboxylate group.',
+            'evaluation': lambda mol: (
+                mol.HasSubstructMatch(compiled_patterns['carboxylic_acid']) and (
+                    mol.HasSubstructMatch(compiled_patterns['thiol']) or
+                    len(mol.GetSubstructMatches(compiled_patterns['hydroxyl_group'])) > 1
+                )
+            ),
+            'prediction': 1
+        },
+        {
+            'number': 5,
+            'description': 'High Yield: Modifiers with aliphatic chains of optimal length (C7-C9) without interfering functional groups.',
+            'evaluation': lambda mol: (
+                mol.HasSubstructMatch(compiled_patterns['aliphatic_chain_C7']) or
+                mol.HasSubstructMatch(compiled_patterns['aliphatic_chain_C8']) or
+                mol.HasSubstructMatch(compiled_patterns['aliphatic_chain_C9'])
+            ),
+            'prediction': 1
+        },
+        {
+            'number': 6,
+            'description': 'Low Yield: Modifiers containing polar functional groups distant from the carboxylate group.',
+            'evaluation': lambda mol: (
+                mol.HasSubstructMatch(compiled_patterns['carboxylic_acid']) and
+                mol.HasSubstructMatch(compiled_patterns['distant_polar_group'])
+            ),
+            'prediction': -1
+        },
+        {
+            'number': 7,
+            'description': 'Low Yield: Modifiers with bulky substituents near the carboxylate group that are non-coordinating or electron-donating.',
+            'evaluation': lambda mol: (
+                mol.HasSubstructMatch(compiled_patterns['bulky_substituent_near_carboxylate']) and
+                not mol.HasSubstructMatch(compiled_patterns['nitrogen_heterocycle'])
+            ),
+            'prediction': -1
+        },
+        {
+            'number': 8,
+            'description': 'Low Yield: Modifiers containing polyether chains or multiple ether linkages.',
+            'evaluation': lambda mol: (
+                mol.HasSubstructMatch(compiled_patterns['polyether_linkage'])
+            ),
+            'prediction': -1
+        },
+        {
+            'number': 9,
+            'description': 'Low Yield: Modifiers containing strong electron-withdrawing groups that excessively decrease electron density on the carboxylate oxygen (e.g., perfluoroalkyl chains).',
+            'evaluation': lambda mol: (
+                mol.HasSubstructMatch(compiled_patterns['perfluoroalkyl'])
+            ),
+            'prediction': -1
+        },
+        {
+            'number': 10,
+            'description': 'Low Yield: Modifiers that have functional groups which may interfere with metal coordination (aldehyde groups or amide bonds adjacent to the carboxylate).',
+            'evaluation': lambda mol: (
+                mol.HasSubstructMatch(compiled_patterns['aldehyde']) or
+                mol.HasSubstructMatch(compiled_patterns['amide'])
+            ),
+            'prediction': -1
+        },
+    ]
+
+    # Initialize results list
+    results = []
+
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0] * len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = rule['evaluation'](mol)
+                if match:
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception as e:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f"Rule {rule['number']}" for rule in rules])
+    return df
+--------------------------------------------------
+    Target Name: yield
+    GPT Model: o1-preview-2024-09-12
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+1. **Rule 1**: Modifiers that are **amino acids with side chains containing additional coordinating groups**, such as **extra carboxylate groups or nitrogen-containing heterocycles**, tend to give a **high yield**.
+
+   - **Rationale**: Additional coordinating groups enhance chelation with metal centers, stabilizing the catalyst and improving its efficiency.
+
+   - **High Yield Examples**:
+     - **(2S)-2-aminopentanedioic acid** (Glutamic acid; extra carboxylate group)
+     - **(2S)-2-aminobutanedioic acid** (Aspartic acid; extra carboxylate group)
+     - **(2R)-2-amino-3-(1H-indol-3-yl)propanoic acid** (Tryptophan; indole ring containing nitrogen)
+
+   - **Low Yield Counter-Example**:
+     - **(2S)-2-amino-3-phenylpropanoic acid** (Phenylalanine; lacks additional coordinating groups)
+
+2. **Rule 2**: Modifiers that are **aromatic carboxylic acids with strong electron-withdrawing substituents** (e.g., **nitro, halogens**) attached directly to the aromatic ring tend to give a **high yield**, whereas those with **electron-donating substituents** (e.g., **alkyl, methoxy, hydroxyl groups**) tend to give a **low yield**.
+
+   - **Rationale**: Electron-withdrawing groups increase the acidity of the carboxylate, enhancing its ability to coordinate with metal centers. Electron-donating groups decrease acidity and weaken metal coordination.
+
+   - **High Yield Examples**:
+     - **4-(bromomethyl)benzoic acid** (Bromomethyl group is electron-withdrawing)
+     - **4-nitrobenzoic acid** (Nitro group is strongly electron-withdrawing)
+
+   - **Low Yield Examples**:
+     - **4-methylbenzoic acid** (Methyl group is electron-donating)
+     - **5-formyl-2-hydroxybenzoic acid** (Hydroxyl group is electron-donating)
+
+3. **Rule 3**: Modifiers containing **nitrogenous heterocycles capable of coordinating with metals**, such as **pyridine or pyrazole carboxylic acids**, tend to give a **high yield**.
+
+   - **Rationale**: Nitrogen atoms in heterocycles act as additional coordination sites, enhancing metal-ligand interactions and catalyst performance.
+
+   - **High Yield Examples**:
+     - **Pyridine-3-carboxylic acid** (Nicotinic acid; pyridine ring with nitrogen)
+     - **1H-pyrazole-4-carboxylic acid** (Pyrazole ring with coordinating nitrogen)
+
+   - **Low Yield Counter-Example**:
+     - **4-pyridin-4-ylbenzoic acid** (Possible steric hindrance or unfavorable coordination geometry)
+
+4. **Rule 4**: Modifiers that are **aliphatic carboxylic acids with medium chain lengths (C6–C8)** and **no additional polar functional groups** tend to give a **high yield**. Those with **polar groups distant from the carboxylate** tend to give a **low yield**.
+
+   - **Rationale**: Medium-chain aliphatic acids without interfering groups provide optimal hydrophobic interactions and solubility, facilitating effective catalyst interaction.
+
+   - **High Yield Example**:
+     - **Octanoic acid** (Eight-carbon chain with no additional functional groups)
+
+   - **Low Yield Examples**:
+     - **7-hydroxyheptanoic acid** (Hydroxyl group distant from carboxylate)
+     - **7-aminoheptanoic acid** (Amino group distant from carboxylate)
+     - **8-aminooctanoic acid**
+
+5. **Rule 5**: Modifiers containing **thiol groups near the carboxylate**, such as **mercapto carboxylic acids**, tend to give a **high yield**.
+
+   - **Rationale**: Thiol groups can form strong bonds with metal centers, enhancing coordination and catalyst stability.
+
+   - **High Yield Example**:
+     - **3-sulfanylpropanoic acid** (Thiol group adjacent to carboxylate)
+
+6. **Rule 6**: Modifiers with **multiple hydroxyl groups adjacent to the carboxylate**, such as **polyhydroxy carboxylic acids**, tend to give a **high yield**. Conversely, modifiers with **multiple ether linkages** tend to give a **low yield**.
+
+   - **Rationale**: Adjacent hydroxyl groups can participate in chelation, enhancing coordination. Ether linkages may not contribute effectively to coordination and might increase flexibility.
+
+   - **High Yield Example**:
+     - **(2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid** (Gluconic acid; multiple hydroxyl groups)
+
+   - **Low Yield Example**:
+     - **2-[2-(2-methoxyethoxy)ethoxy]acetic acid** (Contains multiple ether linkages)
+
+7. **Rule 7**: Modifiers that have **aldehyde or ketone groups adjacent to the carboxylate**, or **amide bonds near the carboxylate**, tend to give a **low yield**.
+
+   - **Rationale**: These functional groups may compete with the carboxylate for metal coordination or interfere with catalyst activity.
+
+   - **Low Yield Examples**:
+     - **4-formylbenzoic acid** (Aldehyde group adjacent to carboxylate)
+     - **4-oxoheptanedioic acid** (Ketone group near carboxylate)
+     - **(2S)-6-acetamido-2-aminohexanoic acid** (Amide group near carboxylate)
+
+8. **Rule 8**: Modifiers containing **strong electron-withdrawing groups that excessively reduce electron density on the carboxylate**, such as **perfluoroalkyl chains**, tend to give a **low yield**.
+
+   - **Rationale**: Overly electron-deficient carboxylate groups may not coordinate effectively with metal centers.
+
+   - **Low Yield Example**:
+     - **2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid** (Perfluorinated chain)
+
+9. **Rule 9**: Modifiers with **bulky aromatic side chains without additional coordinating groups**, especially when adjacent to the carboxylate, tend to give a **low yield**.
+
+   - **Rationale**: Bulky groups can introduce steric hindrance, reducing the efficiency of metal coordination.
+
+   - **Low Yield Examples**:
+     - **(2S)-2-amino-3-phenylpropanoic acid** (Phenylalanine; bulky phenyl group)
+     - **3-(4-hydroxyphenyl)propanoic acid** (Bulky aromatic ring with hydroxyl group)
+
+10. **Rule 10**: Modifiers that have **polyether chains or multiple ether linkages**, especially when distant from the carboxylate group, tend to give a **low yield**.
+
+    - **Rationale**: Ether oxygen atoms are weakly coordinating, and flexible chains may reduce effective interaction with the catalyst.
+
+    - **Low Yield Examples**:
+      - **3-[2-(2-aminoethoxy)ethoxy]propanoic acid** (Multiple ether linkages with amino group)
+      - **2-[2-(2-methoxyethoxy)ethoxy]acetic acid** (Multiple ether linkages)
+
+**End of Rules**---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+Rule 1,Rule 2,Rule 2.1,Rule 3,Rule 5,Rule 6,Rule 6.1,Rule 7,Rule 8,Rule 9
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,-1,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,-1,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.5714285714285714; Test Accuracy: 0.0
+    Train Support: 0.05714285714285714; Test Support: 0.0
+    Train Confidence: 1.0; Test Confidence: 0.5
+    Train Lift: 2.0588235294117645; Test Lift: NONE
+    Train Leverage: 0.02938775510204081; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    Current Rule Code:
+def rule2matrix(smiles_list):
+    # Define SMARTS patterns for functional groups and structural motifs
+    
+    # Rule 1 patterns
+    amino_acid_backbone = Chem.MolFromSmarts('[NX3][CX4H]([CX3](=O)[OX1H])[*]')
+    carboxylic_acid = Chem.MolFromSmarts('[CX3](=O)[OX1H]')
+    aromatic_nitrogen = Chem.MolFromSmarts('[n]')
+    
+    # Rule 2 patterns
+    aromatic_carboxylic_acid = Chem.MolFromSmarts('[c][CX3](=O)[OX1H]')
+    ewg_on_aromatic = [Chem.MolFromSmarts('[c][F]'), Chem.MolFromSmarts('[c][Cl]'),
+                       Chem.MolFromSmarts('[c][Br]'), Chem.MolFromSmarts('[c][I]'),
+                       Chem.MolFromSmarts('[c][NX3](=O)=O')]
+    edg_on_aromatic = [Chem.MolFromSmarts('[c][CH3]'), Chem.MolFromSmarts('[c][OX2H]'),
+                       Chem.MolFromSmarts('[c][OX2][CH3]')]
+    
+    # Rule 3 patterns
+    heterocyclic_carboxylic_acid = Chem.MolFromSmarts('[n][CX3](=O)[OX1H]')
+    
+    # Rule 5 patterns
+    thiol = Chem.MolFromSmarts('[SX2H]')
+    carboxylic_acid_adjacent_thiol = Chem.MolFromSmarts('[CX3](=O)[OX1H][CX4][SX2H]')
+    
+    # Rule 6 patterns
+    carboxylic_acid_adjacent_hydroxyl = Chem.MolFromSmarts('[CX3](=O)[OX1H][CX4][OX2H]')
+    multiple_ether_linkages = Chem.MolFromSmarts('[#6][OX2][#6][OX2][#6]')
+    
+    # Rule 7 patterns
+    aldehyde_adjacent_carboxylate = Chem.MolFromSmarts('[CX3](=O)[OX1H][CX4][CX3H](=O)')
+    ketone_near_carboxylate = Chem.MolFromSmarts('[CX3](=O)[OX1H][CX4][CX3](=O)[#6]')
+    amide_near_carboxylate = Chem.MolFromSmarts('[CX3](=O)[OX1H][CX4][NX3][CX3](=O)[#6]')
+    
+    # Rule 8 patterns
+    perfluoroalkyl_chain = Chem.MolFromSmarts('[CX4](F)(F)(F)')
+    
+    # Rule 9 patterns
+    aromatic_adjacent_carboxylate = Chem.MolFromSmarts('[CX3](=O)[OX1H][c]')
+    
+    # Define rules with their associated patterns and predictions
+    rules = [
+        {
+            'number': 1,
+            'description': 'High Yield: Modifiers that are amino acids with side chains containing additional coordinating groups such as extra carboxylate groups or nitrogen-containing heterocycles.',
+            'match_func': lambda mol: (
+                mol.HasSubstructMatch(amino_acid_backbone) and
+                (len(mol.GetSubstructMatches(carboxylic_acid)) > 1 or mol.HasSubstructMatch(aromatic_nitrogen))
+            ),
+            'prediction': 1
+        },
+        {
+            'number': 2,
+            'description': 'High Yield: Modifiers that are aromatic carboxylic acids with strong electron-withdrawing substituents attached directly to the aromatic ring.',
+            'match_func': lambda mol: (
+                mol.HasSubstructMatch(aromatic_carboxylic_acid) and
+                any(mol.HasSubstructMatch(pat) for pat in ewg_on_aromatic)
+            ),
+            'prediction': 1
+        },
+        {
+            'number': 2.1,
+            'description': 'Low Yield: Modifiers that are aromatic carboxylic acids with electron-donating substituents attached directly to the aromatic ring.',
+            'match_func': lambda mol: (
+                mol.HasSubstructMatch(aromatic_carboxylic_acid) and
+                any(mol.HasSubstructMatch(pat) for pat in edg_on_aromatic)
+            ),
+            'prediction': -1
+        },
+        {
+            'number': 3,
+            'description': 'High Yield: Modifiers containing nitrogenous heterocycles capable of coordinating with metals, such as pyridine or pyrazole carboxylic acids.',
+            'match_func': lambda mol: mol.HasSubstructMatch(heterocyclic_carboxylic_acid),
+            'prediction': 1
+        },
+        {
+            'number': 5,
+            'description': 'High Yield: Modifiers containing thiol groups near the carboxylate, such as mercapto carboxylic acids.',
+            'match_func': lambda mol: mol.HasSubstructMatch(carboxylic_acid_adjacent_thiol),
+            'prediction': 1
+        },
+        {
+            'number': 6,
+            'description': 'High Yield: Modifiers with multiple hydroxyl groups adjacent to the carboxylate. Low Yield: Modifiers with multiple ether linkages.',
+            'match_func': lambda mol: (
+                mol.HasSubstructMatch(carboxylic_acid_adjacent_hydroxyl) and
+                len(mol.GetSubstructMatches('[OX2H]')) > 2
+            ),
+            'prediction': 1
+        },
+        {
+            'number': 6.1,
+            'description': 'Low Yield: Modifiers with multiple ether linkages.',
+            'match_func': lambda mol: mol.HasSubstructMatch(multiple_ether_linkages),
+            'prediction': -1
+        },
+        {
+            'number': 7,
+            'description': 'Low Yield: Modifiers that have aldehyde or ketone groups adjacent to the carboxylate, or amide bonds near the carboxylate.',
+            'match_func': lambda mol: (
+                mol.HasSubstructMatch(aldehyde_adjacent_carboxylate) or
+                mol.HasSubstructMatch(ketone_near_carboxylate) or
+                mol.HasSubstructMatch(amide_near_carboxylate)
+            ),
+            'prediction': -1
+        },
+        {
+            'number': 8,
+            'description': 'Low Yield: Modifiers containing strong electron-withdrawing groups that excessively reduce electron density on the carboxylate, such as perfluoroalkyl chains.',
+            'match_func': lambda mol: mol.HasSubstructMatch(perfluoroalkyl_chain),
+            'prediction': -1
+        },
+        {
+            'number': 9,
+            'description': 'Low Yield: Modifiers with bulky aromatic side chains without additional coordinating groups, especially when adjacent to the carboxylate.',
+            'match_func': lambda mol: mol.HasSubstructMatch(aromatic_adjacent_carboxylate),
+            'prediction': -1
+        }
+    ]
+    
+    # Initialize results list
+    results = []
+    
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If molecule cannot be parsed, append zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                if rule['match_func'](mol):
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception:
+                row.append(0)
+        results.append(row)
+    
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule["number"]}' for rule in rules])
+    return df
+
+--------------------------------------------------

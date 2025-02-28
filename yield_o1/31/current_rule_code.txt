@@ -1,0 +1,200 @@
+def rule2matrix(smiles_list):
+    # Define SMARTS patterns for functional groups and substructures
+    
+    # Carboxylic acid group (-COOH)
+    carboxylic_acid = '[CX3](=O)[OX1H0-,OX2H1]'
+    
+    # Amino acid backbone (alpha amino acid)
+    alpha_amino_acid = '[NX3][CX4H]([#6])[CX3](=O)[OX1H0-,OX2H1]'
+    
+    # Additional carboxyl group (not part of the backbone)
+    additional_carboxylic_acid = '[C;!$(C=O)][CX3](=O)[OX1H0-,OX2H1]'
+    
+    # Aromatic carboxylic acid
+    aromatic_carboxylic_acid = '[c][CX3](=O)[OX1H0-,OX2H1]'
+    
+    # Para-substituted groups capable of metal coordination
+    para_amino = 'c1cc(N)c(cc1)[CX3](=O)[OX1H0-,OX2H1]'
+    para_nitro = 'c1cc([NX3](=O)=O)c(cc1)[CX3](=O)[OX1H0-,OX2H1]'
+    para_bromomethyl = 'c1cc(CBr)c(cc1)[CX3](=O)[OX1H0-,OX2H1]'
+    
+    # Heteroaromatic carboxylic acids containing nitrogen atoms
+    heteroaromatic_nitrogen = '[n][c][CX3](=O)[OX1H0-,OX2H1]'
+    
+    # Aliphatic carboxylic acids with chain lengths of eight carbons or fewer
+    aliphatic_carboxylic_acid = '[#6]-[CX3](=O)[OX1H0-,OX2H1]'
+    
+    # Coordinating groups near the carboxyl end (e.g., amino or thiol)
+    amino_group = '[NX3;H2,H1][#6]'
+    thiol_group = '[#6][SX2H]'
+    
+    # Polyhydroxylated carboxylic acids (multiple hydroxyl groups)
+    hydroxyl_group = '[OX2H]'
+    
+    # Ether linkages (-O-) within carbon chains
+    ether_linkage = '[#6][OX2][#6]'
+    
+    # Electron-withdrawing groups adjacent to the carboxylic acid
+    formyl_group = '[CX3H0](=O)[#6]'
+    fluorinated_alkyl = '[CX4]([F,Cl,Br,I])[#6]'
+    
+    # Bulky substituents or sterically hindering groups near coordination sites
+    bulky_group = '[CX4]([C])[C]'
+    
+    # Aromatic carboxylic acids with flexible aliphatic linkers and coordinating substituents
+    flexible_linker = '[c][CX3](=O)[OX1H0-,OX2H1][C][C][C][c,N]'
+    
+    # Alpha-amino acids with side chains containing heteroatoms capable of chelation (e.g., indole ring)
+    indole_side_chain = '[NX3][CX4H]([#6])[CX3](=O)[OX1H0-,OX2H1][#6][#6]c1c[nH]c2ccccc12'
+    
+    # Compile SMARTS patterns
+    pattern_dict = {
+        'carboxylic_acid': Chem.MolFromSmarts(carboxylic_acid),
+        'alpha_amino_acid': Chem.MolFromSmarts(alpha_amino_acid),
+        'additional_carboxylic_acid': Chem.MolFromSmarts(additional_carboxylic_acid),
+        'aromatic_carboxylic_acid': Chem.MolFromSmarts(aromatic_carboxylic_acid),
+        'para_amino': Chem.MolFromSmarts(para_amino),
+        'para_nitro': Chem.MolFromSmarts(para_nitro),
+        'para_bromomethyl': Chem.MolFromSmarts(para_bromomethyl),
+        'heteroaromatic_nitrogen': Chem.MolFromSmarts(heteroaromatic_nitrogen),
+        'aliphatic_carboxylic_acid': Chem.MolFromSmarts(aliphatic_carboxylic_acid),
+        'amino_group': Chem.MolFromSmarts(amino_group),
+        'thiol_group': Chem.MolFromSmarts(thiol_group),
+        'hydroxyl_group': Chem.MolFromSmarts(hydroxyl_group),
+        'ether_linkage': Chem.MolFromSmarts(ether_linkage),
+        'formyl_group': Chem.MolFromSmarts(formyl_group),
+        'fluorinated_alkyl': Chem.MolFromSmarts(fluorinated_alkyl),
+        'bulky_group': Chem.MolFromSmarts(bulky_group),
+        'flexible_linker': Chem.MolFromSmarts(flexible_linker),
+        'indole_side_chain': Chem.MolFromSmarts(indole_side_chain)
+    }
+    
+    # Define the rules with their associated patterns and predictions
+    rules = [
+        {
+            'number': 1,
+            'description': 'Modifiers that are α-amino dicarboxylic acids (α-amino acids with an additional carboxyl group in the side chain).',
+            'patterns': ['alpha_amino_acid', 'additional_carboxylic_acid'],
+            'prediction': 1
+        },
+        {
+            'number': 2,
+            'description': 'Aromatic carboxylic acids with para-substituted groups capable of metal coordination (amino, nitro, or bromomethyl).',
+            'patterns': ['para_amino', 'para_nitro', 'para_bromomethyl'],
+            'prediction': 1
+        },
+        {
+            'number': 3,
+            'description': 'Heteroaromatic carboxylic acids containing nitrogen atoms in the ring.',
+            'patterns': ['heteroaromatic_nitrogen'],
+            'prediction': 1
+        },
+        {
+            'number': 4,
+            'description': 'Aliphatic carboxylic acids with chain lengths of eight carbons or fewer with coordinating groups near the carboxyl end.',
+            'patterns': ['aliphatic_carboxylic_acid'],
+            'additional_patterns': ['amino_group', 'thiol_group'],
+            'max_chain_length': 8,
+            'prediction': 1
+        },
+        {
+            'number': 5,
+            'description': 'Modifiers that are polyhydroxylated carboxylic acids (multiple hydroxyl groups).',
+            'patterns': ['carboxylic_acid', 'hydroxyl_group'],
+            'hydroxyl_count': 2,
+            'prediction': 1
+        },
+        {
+            'number': 6,
+            'description': 'Modifiers that contain ether linkages (-O-) within their carbon chains.',
+            'patterns': ['ether_linkage'],
+            'prediction': -1
+        },
+        {
+            'number': 7,
+            'description': 'Modifiers with electron-withdrawing groups adjacent to the carboxylic acid (formyl groups or fluorinated alkyl chains).',
+            'patterns': ['formyl_group', 'fluorinated_alkyl'],
+            'prediction': -1
+        },
+        {
+            'number': 8,
+            'description': 'Modifiers with bulky substituents or sterically hindering groups near potential coordination sites.',
+            'patterns': ['bulky_group'],
+            'prediction': -1
+        },
+        {
+            'number': 9,
+            'description': 'Aromatic carboxylic acids with flexible aliphatic linkers and coordinating substituents on the aromatic ring.',
+            'patterns': ['flexible_linker'],
+            'prediction': 1
+        },
+        {
+            'number': 10,
+            'description': 'Modifiers that are α-amino acids with side chains containing heteroatoms capable of chelation (e.g., indole ring).',
+            'patterns': ['indole_side_chain'],
+            'prediction': 1
+        }
+    ]
+    
+    # Initialize results list
+    results = []
+    
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = False
+                # Check all patterns for the rule
+                for pat_name in rule['patterns']:
+                    pat = pattern_dict[pat_name]
+                    if mol.HasSubstructMatch(pat):
+                        match = True
+                        # Additional checks for specific rules
+                        if rule['number'] == 1:
+                            # Rule 1: Check for at least two carboxyl groups
+                            num_carboxyl_groups = len(mol.GetSubstructMatches(pattern_dict['carboxylic_acid']))
+                            if num_carboxyl_groups < 2:
+                                match = False
+                                break
+                        elif rule['number'] == 4:
+                            # Rule 4: Check chain length and presence of coordinating group
+                            # Get the longest carbon chain
+                            chains = Chem.GetMolFrags(mol, asMols=True, sanitizeFrags=False)
+                            max_chain = 0
+                            for chain in chains:
+                                num_carbons = len([atom for atom in chain.GetAtoms() if atom.GetAtomicNum() == 6])
+                                if num_carbons > max_chain:
+                                    max_chain = num_carbons
+                            if max_chain > rule['max_chain_length']:
+                                match = False
+                                break
+                            # Check for coordinating groups near carboxyl end
+                            amino_matches = mol.GetSubstructMatches(pattern_dict['amino_group'])
+                            thiol_matches = mol.GetSubstructMatches(pattern_dict['thiol_group'])
+                            if not amino_matches and not thiol_matches:
+                                match = False
+                                break
+                        elif rule['number'] == 5:
+                            # Rule 5: Check for multiple hydroxyl groups
+                            hydroxyl_matches = mol.GetSubstructMatches(pattern_dict['hydroxyl_group'])
+                            if len(hydroxyl_matches) < rule['hydroxyl_count']:
+                                match = False
+                                break
+                        break
+                if match:
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception as e:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule["number"]}' for rule in rules])
+    return df

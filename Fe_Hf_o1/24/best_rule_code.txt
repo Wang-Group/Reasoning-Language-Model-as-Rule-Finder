@@ -1,0 +1,216 @@
+def rule2matrix(smiles_list):
+    # Import necessary RDKit functions
+    from rdkit import Chem
+    from rdkit.Chem import AllChem
+    
+    # Define SMARTS patterns for functional groups and substructures
+    
+    # Carboxylic acid group (-COOH)
+    carboxylic_acid = '[CX3](=O)[OX2H1]'
+    
+    # Primary amine group (-NH2) attached to saturated carbon
+    primary_amine = '[NX3;H2][CX4]'
+    
+    # Aliphatic chain of five or more carbons
+    aliphatic_chain_five = '[CH2][CH2][CH2][CH2][CH2]'
+    
+    # Thiol group (-SH)
+    thiol = '[SX2H]'
+    
+    # Thioether group (-S-)
+    thioether = '[#16X2][#6]'
+    
+    # Halogen atoms attached to aromatic ring at para position
+    halogen_para_aromatic = 'c1cc(ccc1)[F,Cl,Br,I]'
+    
+    # Nitro group attached to aromatic ring at para position
+    nitro_para_aromatic = 'c1cc(ccc1)[N+](=O)[O-]'
+    
+    # Electron-donating groups attached to aromatic ring
+    hydroxyl_aromatic = 'c[OX2H]'
+    amino_aromatic = 'c[NX3;H2,H1]'  # Aromatic amine
+    methoxy_aromatic = 'c[OX2][CH3]'
+    
+    # Polyol patterns (multiple hydroxyl groups)
+    polyol = '[OX2H][CX4][OX2H]'
+    
+    # Nitrogen heterocycles directly attached to carboxylic acid
+    nitrogen_heterocycle_carboxylic_acid = '[n][CX3](=O)[OX2H1]'
+    
+    # Ether linkage (-O-)
+    ether_linkage = '[CX4][OX2][CX4]'
+    
+    # Keto group adjacent to carboxylic acid
+    keto_adjacent_carboxylic_acid = '[CX3](=O)[CX3](=O)[OX2H1]'
+    
+    # Hydroxyl and carbonyl groups in close proximity on aromatic rings
+    chelating_aromatic = 'c1ccc([C](=O)[OX2H1])c([OX2H])c1'
+    
+    # Define the rules with their associated patterns and predictions
+    rules = [
+        {
+            'number': 1,
+            'description': 'Modifiers that are aliphatic amino acids with terminal primary amino groups on carbon chains of five or more carbons tend to result in high Fe/Hf values.',
+            'patterns': [
+                carboxylic_acid,
+                primary_amine,
+                aliphatic_chain_five
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 2,
+            'description': 'Modifiers containing sulfur functional groups, such as thiol (-SH) or thioether (-S-R) groups, especially when combined with carboxylic acid groups, tend to result in high Fe/Hf values.',
+            'patterns': [
+                carboxylic_acid,
+                [thiol, thioether]
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 3,
+            'description': 'Modifiers with strong electron-withdrawing groups (EWGs) such as nitro (-NO2) or halogens attached to an aromatic ring, particularly at the para position relative to a carboxyl group, tend to result in high Fe/Hf values.',
+            'patterns': [
+                carboxylic_acid,
+                [halogen_para_aromatic, nitro_para_aromatic]
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 4,
+            'description': 'Modifiers containing aromatic rings with strong electron-donating groups (EDGs) such as amino (-NH2) or hydroxy (-OH) groups directly attached to the ring tend to result in low Fe/Hf values.',
+            'patterns': [
+                carboxylic_acid,
+                [hydroxyl_aromatic, amino_aromatic]
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 5,
+            'description': 'Modifiers that are straight-chain aliphatic carboxylic acids without additional polar functional groups tend to result in low Fe/Hf values; introducing polar groups like amino (-NH2) or hydroxy (-OH) can increase Fe/Hf values.',
+            'patterns': [
+                carboxylic_acid
+            ],
+            'exclude_patterns': [
+                primary_amine,
+                hydroxyl_aromatic,
+                amino_aromatic,
+                ether_linkage,
+                thiol,
+                thioether
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 6,
+            'description': 'Modifiers containing nitrogen heterocycles separated by a linker (an aliphatic chain or aromatic ring) from the carboxyl group tend to result in high Fe/Hf values; those where the heterocycle is directly attached may result in low Fe/Hf values.',
+            'patterns': [
+                carboxylic_acid,
+                nitrogen_heterocycle_carboxylic_acid
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 7,
+            'description': 'Modifiers with multiple hydroxyl groups (polyols) on aliphatic chains or sugar acid derivatives tend to result in low Fe/Hf values.',
+            'patterns': [
+                carboxylic_acid,
+                polyol
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 8,
+            'description': 'Modifiers that are amino acids with simple aromatic side chains tend to result in high Fe/Hf values, whereas those with bulky or heteroaromatic side chains may result in low Fe/Hf values due to steric hindrance.',
+            'patterns': [
+                carboxylic_acid,
+                primary_amine,
+                'c1ccccc1'  # Simple aromatic ring
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 9,
+            'description': 'Modifiers containing ether linkages (-O-) along with carboxylic acid and amino groups tend to result in high Fe/Hf values due to increased flexibility and multiple coordination sites.',
+            'patterns': [
+                carboxylic_acid,
+                primary_amine,
+                ether_linkage
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 10,
+            'description': 'Modifiers with electron-deficient aromatic rings containing electron-withdrawing substituents adjacent to carboxylic acid groups tend to result in low Fe/Hf values due to reduced electron density on coordinating atoms.',
+            'patterns': [
+                carboxylic_acid,
+                '[c][C](=O)'  # Carbonyl group adjacent to aromatic ring
+            ],
+            'prediction': -1
+        },
+        # Additional rules can be added here following the same structure
+    ]
+
+    # Compile SMARTS patterns
+    for rule in rules:
+        compiled_patterns = []
+        for group in rule.get('patterns', []):
+            if isinstance(group, list):
+                compiled_group = [Chem.MolFromSmarts(p) for p in group]
+            else:
+                compiled_group = [Chem.MolFromSmarts(group)]
+            compiled_patterns.append(compiled_group)
+        rule['compiled_patterns'] = compiled_patterns
+        # Compile exclude patterns if any
+        if 'exclude_patterns' in rule:
+            compiled_excludes = []
+            for p in rule['exclude_patterns']:
+                compiled_excludes.append(Chem.MolFromSmarts(p))
+            rule['compiled_exclude_patterns'] = compiled_excludes
+    
+    # Initialize results list
+    results = []
+    
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = True
+                # Check exclude patterns if any
+                if 'exclude_patterns' in rule:
+                    for pat in rule['compiled_exclude_patterns']:
+                        if mol.HasSubstructMatch(pat):
+                            match = False
+                            break
+                    if not match:
+                        row.append(0)
+                        continue
+                # Check required patterns
+                for compiled_group in rule['compiled_patterns']:
+                    group_match = False
+                    for pat in compiled_group:
+                        matches = mol.GetSubstructMatches(pat)
+                        if matches:
+                            group_match = True
+                            break
+                    if not group_match:
+                        match = False
+                        break
+                if match:
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception as e:
+                # In case of any error, append 0 and optionally log the error
+                # print(f"Error processing rule {rule['number']} for SMILES {smi}: {e}")
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f"Rule {rule['number']}" for rule in rules])
+    return df

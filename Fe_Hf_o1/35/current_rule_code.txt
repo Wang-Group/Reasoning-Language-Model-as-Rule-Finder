@@ -1,0 +1,327 @@
+def rule2matrix(smiles_list):
+    # Define the SMARTS patterns for functional groups
+    # Carboxylic acid group (-COOH)
+    carboxylic_acid = '[CX3](=O)[OX2H1]'
+    
+    # Aliphatic primary amine (-NH2)
+    primary_aliphatic_amine = '[NX3;H2][CX4]'
+    
+    # Thiol group (-SH)
+    thiol = '[SX2H]'
+    
+    # Thioether (-S-)
+    thioether = '[SX2][#6]'
+
+    # Sulfur functional groups (-SH or -S-)
+    sulfur_groups = [thiol, thioether]
+
+    # Aromatic carboxylic acid
+    aromatic_carboxylic_acid = '[c][CX3](=O)[OX2H1]'
+
+    # Electron-withdrawing groups (EWGs)
+    nitro_group = '[NX3](=O)=O'
+    halogens = '[F,Cl,Br,I]'
+    trifluoromethyl = '[CX4](F)(F)F'
+
+    # Electron-donating groups (EDGs)
+    amino_group = '[NX3;H2,H1][#6]'
+    methoxy_group = '[OX2][CH3]'
+    hydroxyl_group = '[OX2H]'
+    edg_groups = [amino_group, methoxy_group, hydroxyl_group]
+
+    # Polyether chain (simplified as two or more ether linkages)
+    ether_linkage = '[#6][OX2][#6]'
+    
+    # Aromatic ring
+    aromatic_ring = '[a]'
+
+    # Perfluorinated chains
+    perfluoro_alkane = '[CX4](F)(F)(F)'
+    perfluoro_alkene = '[CX3](F)(F)=C(F)[F]'
+
+    # Pyridine ring
+    pyridine = 'n1ccccc1'
+
+    # Phenolic hydroxyl group
+    phenolic_hydroxyl = '[c][OX2H]'
+
+    rules = [
+        {
+            'number': 1,
+            'description': 'Rule 1: Modifiers that are aliphatic carboxylic acids with a terminal primary amino group (-NH2) and without additional carboxyl groups.',
+            'patterns': [
+                carboxylic_acid,
+                primary_aliphatic_amine,
+            ],
+            'exclude_patterns': [
+                aromatic_ring,
+            ],
+            'count_patterns': {
+                carboxylic_acid: 1,
+            },
+            'prediction': 1
+        },
+        {
+            'number': 2,
+            'description': 'Rule 2: Modifiers containing sulfur functional groups (-SH or thioethers) along with a carboxylic acid group.',
+            'patterns': [
+                carboxylic_acid,
+                sulfur_groups,
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 3,
+            'description': 'Rule 3: Modifiers that are aromatic carboxylic acids with strong EWGs at the para position (e.g., nitro, bromomethyl).',
+            'patterns': [
+                aromatic_carboxylic_acid,
+                [halogens, nitro_group],
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 4,
+            'description': 'Rule 4: Modifiers with flexible polyether chains terminating with coordinating groups (e.g., carboxyl or amino groups).',
+            'patterns': [
+                ether_linkage,
+                [carboxylic_acid, amino_group],
+            ],
+            'count_threshold': {
+                ether_linkage: 2,
+            },
+            'prediction': 1
+        },
+        {
+            'number': 5,
+            'description': 'Rule 5: Modifiers that are aliphatic carboxylic acids without additional coordinating functional groups.',
+            'patterns': [
+                carboxylic_acid,
+            ],
+            'exclude_patterns': [
+                amino_group,
+                hydroxyl_group,
+                sulfur_groups,
+                ether_linkage,
+                halogens,
+                aromatic_ring,
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 6,
+            'description': 'Rule 6: Modifiers that are aromatic carboxylic acids with EDGs at the para position.',
+            'patterns': [
+                aromatic_carboxylic_acid,
+                edg_groups,
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 7,
+            'description': 'Rule 7: Modifiers that are aromatic carboxylic acids with phenolic hydroxyl groups.',
+            'patterns': [
+                aromatic_carboxylic_acid,
+                phenolic_hydroxyl,
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 8,
+            'description': 'Rule 8: Modifiers that are polyhydroxy aliphatic acids (with multiple adjacent hydroxyl groups).',
+            'patterns': [
+                carboxylic_acid,
+                hydroxyl_group,
+            ],
+            'count_threshold': {
+                hydroxyl_group: 2,
+            },
+            'exclude_patterns': [
+                aromatic_ring,
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 9,
+            'description': 'Rule 9: Modifiers that are aromatic carboxylic acids substituted with pyridyl groups.',
+            'patterns': [
+                aromatic_carboxylic_acid,
+                pyridine,
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 10,
+            'description': 'Rule 10: Modifiers that are aliphatic carboxylic acids with a terminal hydroxyl group (-OH) and no additional hydroxyl or carboxyl groups.',
+            'patterns': [
+                carboxylic_acid,
+                hydroxyl_group,
+            ],
+            'exclude_patterns': [
+                aromatic_ring,
+            ],
+            'count_patterns': {
+                carboxylic_acid: 1,
+                hydroxyl_group:1,
+            },
+            'prediction': 1
+        },
+        {
+            'number': 11,
+            'description': 'Rule 11: Modifiers that are aromatic carboxylic acids fused with oxygen-containing heterocycles.',
+            'patterns': [
+                aromatic_carboxylic_acid,
+                '[o]1cccc1',  # Furan ring
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 12,
+            'description': 'Rule 12: Modifiers that are amino acids with hydrophobic side chains (high) or polar/bulky aromatic side chains (low).',
+            'patterns': [
+                '[NX3;H2][CX4;!$(C[OX2H])][CX3](=O)[OX2H1]',
+            ],
+            'substructure_patterns': {
+                'hydrophobic': [
+                    '[CX4][CH3]',  # Methyl group (alanine)
+                    '[CX4][CX4][CH3]',  # Ethyl group (valine)
+                    '[CX4][c1ccccc1]',  # Phenyl group (phenylalanine)
+                ],
+                'polar_aromatic': [
+                    '[CX4][c1c[nH]c2c1cccc2]',  # Indole ring (tryptophan)
+                    '[CX4][c1ccncc1]',  # Pyridine ring
+                    '[CX4][CX3](=O)[NX3]',  # Amide linkage (glutamine)
+                    '[CX4][OX2H]',  # Hydroxyl side chain (serine)
+                ],
+            },
+            'prediction': None  # Prediction depends on side chain type
+        },
+        {
+            'number':13,
+            'description': 'Rule 13: Modifiers containing perfluorinated chains.',
+            'patterns': [
+                perfluoro_alkane,
+            ],
+            'prediction': -1
+        },
+    ]
+
+    # Compile SMARTS patterns
+    for rule in rules:
+        compiled_patterns = []
+        for pattern in rule.get('patterns', []):
+            # If pattern is a list of patterns, compile each
+            if isinstance(pattern, list):
+                compiled_subpatterns = [Chem.MolFromSmarts(pat) for pat in pattern]
+                compiled_patterns.append(compiled_subpatterns)
+            else:
+                compiled_patterns.append([Chem.MolFromSmarts(pattern)])
+        rule['compiled_patterns'] = compiled_patterns
+
+        # Compile exclude patterns
+        exclude_patterns = rule.get('exclude_patterns', [])
+        compiled_exclude = []
+        for pattern in exclude_patterns:
+            # If pattern is a list of patterns, compile each
+            if isinstance(pattern, list):
+                compiled_subpatterns = [Chem.MolFromSmarts(pat) for pat in pattern]
+                compiled_exclude.extend(compiled_subpatterns)
+            else:
+                compiled_exclude.append(Chem.MolFromSmarts(pattern))
+        rule['compiled_exclude_patterns'] = compiled_exclude
+
+        # Compile substructure patterns for Rule 12
+        if rule.get('substructure_patterns'):
+            compiled_substructure_patterns = {}
+            for key, patterns in rule['substructure_patterns'].items():
+                compiled_substructure_patterns[key] = [Chem.MolFromSmarts(pat) for pat in patterns]
+            rule['compiled_substructure_patterns'] = compiled_substructure_patterns
+
+    # Initialize results
+    results = []
+
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = True
+
+                # Check exclude patterns
+                for pat in rule.get('compiled_exclude_patterns', []):
+                    if mol.HasSubstructMatch(pat):
+                        match = False
+                        break
+                if not match:
+                    row.append(0)
+                    continue
+
+                # Check required patterns
+                for group in rule['compiled_patterns']:
+                    group_match = False
+                    for pat in group:
+                        matches = mol.GetSubstructMatches(pat)
+                        if matches:
+                            # If a count threshold is specified for this pattern
+                            count_thresholds = rule.get('count_threshold', {})
+                            if pat.GetSmarts() in count_thresholds:
+                                if len(matches) >= count_thresholds[pat.GetSmarts()]:
+                                    group_match = True
+                                    break
+                            else:
+                                group_match = True
+                                break
+                    if not group_match:
+                        match = False
+                        break
+
+                # Check count patterns
+                count_patterns = rule.get('count_patterns', {})
+                for smarts_pattern, count_required in count_patterns.items():
+                    pat = Chem.MolFromSmarts(smarts_pattern)
+                    matches = mol.GetSubstructMatches(pat)
+                    if len(matches) != count_required:
+                        match = False
+                        break
+                if not match:
+                    row.append(0)
+                    continue
+
+                # For Rule 12, need special handling
+                if rule['number'] ==12:
+                    is_hydrophobic = False
+                    is_polar = False
+                    # Check hydrophobic side chains
+                    for pat in rule['compiled_substructure_patterns']['hydrophobic']:
+                        if mol.HasSubstructMatch(pat):
+                            is_hydrophobic = True
+                            break
+                    # Check polar/aromatic side chains
+                    for pat in rule['compiled_substructure_patterns']['polar_aromatic']:
+                        if mol.HasSubstructMatch(pat):
+                            is_polar = True
+                            break
+                    if is_hydrophobic:
+                        row.append(1)
+                    elif is_polar:
+                        row.append(-1)
+                    else:
+                        # Side chain not identified, default to 0
+                        row.append(0)
+                else:
+                    if match:
+                        row.append(rule['prediction'])
+                    else:
+                        row.append(0)
+            except Exception as e:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule["number"]}' for rule in rules])
+    return df

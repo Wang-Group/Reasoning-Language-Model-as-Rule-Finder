@@ -1,0 +1,1286 @@
+Current Rule Metrics:
+
+    Train support: 0.041758241758241756
+    Train confidence: 0.814102564102564
+    Train lift: 1.63430115635998
+    Train leverage: 0.013375196232339095
+    -------------------------------------------------------
+
+    Metric Commenter Message:
+Based on the current metrics, the performance of the rules has shown significant improvement compared to the previous iteration. Here's a detailed analysis:
+
+1. **Confidence**: The current train confidence is 0.814, which is a substantial increase from the previous train confidence values of 0.635 and 0.540. This indicates that the current rules are more reliable in predicting high yields when the conditions are met. The increase in confidence suggests that the rules are capturing the underlying patterns more effectively.
+
+2. **Lift**: The current train lift is 1.634, which is a notable improvement from the previous lift values of 1.205 and 1.056. A lift value greater than 1 indicates that the rule is useful and that the presence of the rule conditions significantly increases the likelihood of the rule prediction. The current lift value suggests that the rules are providing valuable insights and are not merely reflecting the baseline probability.
+
+3. **Leverage**: The current train leverage is 0.013, which is a positive value, indicating that the rules are providing additional support beyond what would be expected by chance. Although the leverage is not very high, it is still an improvement over the previous negative leverage values, which indicated weaker associations.
+
+4. **Support**: The current train support is 0.042, which is lower than the previous support values. While this might suggest that the rules apply to a smaller subset of the data, the high confidence and lift indicate that the rules are more precise and focused on the most relevant cases.
+
+**Recommendations for Improvement**:
+
+- **Expand Rule Coverage**: While the current rules are precise, they apply to a smaller portion of the dataset. Consider exploring additional conditions or combinations of modifiers that might capture more instances without sacrificing confidence and lift.
+
+- **Refine Low-Yield Rules**: The current rules focus on high-yield predictions. It might be beneficial to refine the rules predicting low yields to ensure they are equally robust. This could involve analyzing the modifiers in rules 6 to 9 and 13 to identify any patterns that could improve their predictive power.
+
+- **Balance Between Precision and Coverage**: Strive to maintain a balance between the precision of the rules (high confidence and lift) and their coverage (support). This might involve iterative testing and validation to ensure that the rules are both accurate and applicable to a significant portion of the data.
+
+- **Iterative Testing**: Continue to test and validate the rules with new data to ensure their robustness and adaptability. This will help in identifying any potential overfitting and ensure that the rules remain effective across different datasets.
+
+Overall, the current iteration shows promising improvements, particularly in confidence and lift, indicating that the rules are becoming more effective in predicting high yields. Further refinement and testing can help enhance their applicability and robustness.
+---------------------------------------------------------------
+Current Accuracy and SHAP analysis:
+< 5 Fold Validation Performance: >
+ 
+    An accuracy of 0.7142857142857143 was obtained using classification model. 
+ 
+ 
+ 
+    < SHAP Analysis Feedback > 
+For molecule C(CC(=O)O)[C@@H](C(=O)O)N, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule2 SHAP value for high loading: -0.019544068995859403; Rule3 SHAP value for high loading: 0.03514366604586249; Rule4 SHAP value for high loading: -0.01974584620254199; Rule5 SHAP value for high loading: 0.053467587891498386; Rule6 SHAP value for high loading: 0.043588258739530164; Rule7 SHAP value for high loading: 0.0257665510676716; Rule8 SHAP value for high loading: 0.043682209523123045; Rule9 SHAP value for high loading: 0.012452334205622933; Rule10 SHAP value for high loading: -0.019522056164716375; Rule11 SHAP value for high loading: -0.019712987376449866; Rule12 SHAP value for high loading: -0.019097626824768336; Rule13 SHAP value for high loading: 0.01923626380531282;  
+For molecule C1=CC(=CC=C1CBr)C(=O)O, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule2 SHAP value for high loading: 0.3699308822894381; Rule3 SHAP value for high loading: 0.028360630934809422; Rule4 SHAP value for high loading: -0.009784156823381187; Rule5 SHAP value for high loading: 0.04078271720150505; Rule6 SHAP value for high loading: 0.043686665786696534; Rule7 SHAP value for high loading: 0.020892736485545398; Rule8 SHAP value for high loading: 0.04367913901284815; Rule9 SHAP value for high loading: 0.012264271009959549; Rule10 SHAP value for high loading: -0.009814819426958301; Rule11 SHAP value for high loading: -0.00981435751182287; Rule12 SHAP value for high loading: -0.011590766318720271; Rule13 SHAP value for high loading: 0.017121343074365535;  
+For molecule C1=CNC(=O)C=C1C(=O)O, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule2 SHAP value for high loading: -0.019544068995859403; Rule3 SHAP value for high loading: 0.03514366604586249; Rule4 SHAP value for high loading: -0.01974584620254199; Rule5 SHAP value for high loading: 0.053467587891498386; Rule6 SHAP value for high loading: 0.043588258739530164; Rule7 SHAP value for high loading: 0.0257665510676716; Rule8 SHAP value for high loading: 0.043682209523123045; Rule9 SHAP value for high loading: 0.012452334205622933; Rule10 SHAP value for high loading: -0.019522056164716375; Rule11 SHAP value for high loading: -0.019712987376449866; Rule12 SHAP value for high loading: -0.019097626824768336; Rule13 SHAP value for high loading: 0.01923626380531282;  
+For molecule C1=CC=C(C=C1)C[C@@H](C(=O)O)N, the predicted loading of modifier on catalyst is high and the experimental value is low 
+  Rule2 SHAP value for high loading: -0.019544068995859403; Rule3 SHAP value for high loading: 0.03514366604586249; Rule4 SHAP value for high loading: -0.01974584620254199; Rule5 SHAP value for high loading: 0.053467587891498386; Rule6 SHAP value for high loading: 0.043588258739530164; Rule7 SHAP value for high loading: 0.0257665510676716; Rule8 SHAP value for high loading: 0.043682209523123045; Rule9 SHAP value for high loading: 0.012452334205622933; Rule10 SHAP value for high loading: -0.019522056164716375; Rule11 SHAP value for high loading: -0.019712987376449866; Rule12 SHAP value for high loading: -0.019097626824768336; Rule13 SHAP value for high loading: 0.01923626380531282;  
+For molecule C1=CN=CC=C1CCCC(=O)O, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule2 SHAP value for high loading: -0.019544068995859403; Rule3 SHAP value for high loading: 0.03514366604586249; Rule4 SHAP value for high loading: -0.01974584620254199; Rule5 SHAP value for high loading: 0.053467587891498386; Rule6 SHAP value for high loading: 0.043588258739530164; Rule7 SHAP value for high loading: 0.0257665510676716; Rule8 SHAP value for high loading: 0.043682209523123045; Rule9 SHAP value for high loading: 0.012452334205622933; Rule10 SHAP value for high loading: -0.019522056164716375; Rule11 SHAP value for high loading: -0.019712987376449866; Rule12 SHAP value for high loading: -0.019097626824768336; Rule13 SHAP value for high loading: 0.01923626380531282;  
+For molecule C(CC(=O)O)C(=O)CCC(=O)O, the predicted loading of modifier on catalyst is high and the experimental value is low 
+  Rule2 SHAP value for high loading: -0.012059545585239535; Rule3 SHAP value for high loading: 0.024219224862557818; Rule4 SHAP value for high loading: -0.012173518447072915; Rule5 SHAP value for high loading: 0.013278064464314137; Rule6 SHAP value for high loading: 0.04164910123884993; Rule7 SHAP value for high loading: 0.019949258164587234; Rule8 SHAP value for high loading: 0.04140833135353089; Rule9 SHAP value for high loading: 0.009960225852703689; Rule10 SHAP value for high loading: -0.012133523830929312; Rule11 SHAP value for high loading: -0.012183636433665835; Rule12 SHAP value for high loading: 0.30901321716869834; Rule13 SHAP value for high loading: 0.015987086905950798;  
+For molecule C(CCCC(=O)O)CCCN, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule2 SHAP value for high loading: -0.018295075585059516; Rule3 SHAP value for high loading: 0.02096650230741154; Rule4 SHAP value for high loading: -0.01753650002842823; Rule5 SHAP value for high loading: 0.03845497276786802; Rule6 SHAP value for high loading: 0.036914358489722084; Rule7 SHAP value for high loading: 0.01938558857881388; Rule8 SHAP value for high loading: 0.03709344323807632; Rule9 SHAP value for high loading: -0.06863447584535397; Rule10 SHAP value for high loading: -0.018201532407037455; Rule11 SHAP value for high loading: -0.017856914360058866; Rule12 SHAP value for high loading: -0.01905141717961915; Rule13 SHAP value for high loading: 0.04247533573795076;  
+For molecule C([C@@H](C(=O)O)N)C(=O)O, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule2 SHAP value for high loading: -0.0362429098041436; Rule3 SHAP value for high loading: 0.03077253658993594; Rule4 SHAP value for high loading: 0.0; Rule5 SHAP value for high loading: 0.04376944337934656; Rule6 SHAP value for high loading: 0.023473618500143383; Rule7 SHAP value for high loading: 0.022997869138926562; Rule8 SHAP value for high loading: 0.023274468460694826; Rule9 SHAP value for high loading: 0.010620672256812565; Rule10 SHAP value for high loading: 0.0; Rule11 SHAP value for high loading: 0.0; Rule12 SHAP value for high loading: 0.015417793588268036; Rule13 SHAP value for high loading: 0.017015408988916868;  
+For molecule C1=C(C=NN1)C(=O)O, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule2 SHAP value for high loading: -0.0362429098041436; Rule3 SHAP value for high loading: 0.03077253658993594; Rule4 SHAP value for high loading: 0.0; Rule5 SHAP value for high loading: 0.04376944337934656; Rule6 SHAP value for high loading: 0.023473618500143383; Rule7 SHAP value for high loading: 0.022997869138926562; Rule8 SHAP value for high loading: 0.023274468460694826; Rule9 SHAP value for high loading: 0.010620672256812565; Rule10 SHAP value for high loading: 0.0; Rule11 SHAP value for high loading: 0.0; Rule12 SHAP value for high loading: 0.015417793588268036; Rule13 SHAP value for high loading: 0.017015408988916868;  
+For molecule C(CS)C(=O)O, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule2 SHAP value for high loading: -0.0362429098041436; Rule3 SHAP value for high loading: 0.03077253658993594; Rule4 SHAP value for high loading: 0.0; Rule5 SHAP value for high loading: 0.04376944337934656; Rule6 SHAP value for high loading: 0.023473618500143383; Rule7 SHAP value for high loading: 0.022997869138926562; Rule8 SHAP value for high loading: 0.023274468460694826; Rule9 SHAP value for high loading: 0.010620672256812565; Rule10 SHAP value for high loading: 0.0; Rule11 SHAP value for high loading: 0.0; Rule12 SHAP value for high loading: 0.015417793588268036; Rule13 SHAP value for high loading: 0.017015408988916868;  
+For molecule C1=CC(=CC=C1C=O)C(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule2 SHAP value for high loading: -0.0420449094930844; Rule3 SHAP value for high loading: 0.006224497054793361; Rule4 SHAP value for high loading: 0.0; Rule5 SHAP value for high loading: 0.013509522128829377; Rule6 SHAP value for high loading: -0.4693632072378838; Rule7 SHAP value for high loading: 0.010689340444705136; Rule8 SHAP value for high loading: 0.010778640903743093; Rule9 SHAP value for high loading: -0.003549281608242423; Rule10 SHAP value for high loading: 0.0; Rule11 SHAP value for high loading: 0.0; Rule12 SHAP value for high loading: 0.00023545697746641986; Rule13 SHAP value for high loading: 0.009234226543958413;  
+For molecule COC1=C(C=C(C=C1)C(=O)CCC(=O)O)OC, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule2 SHAP value for high loading: -0.0362429098041436; Rule3 SHAP value for high loading: 0.03077253658993594; Rule4 SHAP value for high loading: 0.0; Rule5 SHAP value for high loading: 0.04376944337934656; Rule6 SHAP value for high loading: 0.023473618500143383; Rule7 SHAP value for high loading: 0.022997869138926562; Rule8 SHAP value for high loading: 0.023274468460694826; Rule9 SHAP value for high loading: 0.010620672256812565; Rule10 SHAP value for high loading: 0.0; Rule11 SHAP value for high loading: 0.0; Rule12 SHAP value for high loading: 0.015417793588268036; Rule13 SHAP value for high loading: 0.017015408988916868;  
+For molecule C(CC(=O)O)CNC(=O)C(F)(F)F, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule2 SHAP value for high loading: -0.04040534233961552; Rule3 SHAP value for high loading: 0.006180230085409871; Rule4 SHAP value for high loading: 0.0; Rule5 SHAP value for high loading: 0.013888082837888177; Rule6 SHAP value for high loading: 0.010829863292594286; Rule7 SHAP value for high loading: 0.01065077991806599; Rule8 SHAP value for high loading: -0.47150517081031096; Rule9 SHAP value for high loading: -0.0037333607484977245; Rule10 SHAP value for high loading: 0.0; Rule11 SHAP value for high loading: 0.0; Rule12 SHAP value for high loading: 0.000540816841518685; Rule13 SHAP value for high loading: 0.00926838663723257;  
+For molecule C(CCCN)CCC(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule2 SHAP value for high loading: -0.03395671906978352; Rule3 SHAP value for high loading: 0.017835366010499065; Rule4 SHAP value for high loading: 0.0; Rule5 SHAP value for high loading: 0.02644816761318064; Rule6 SHAP value for high loading: 0.016710381455003025; Rule7 SHAP value for high loading: 0.016829267501795607; Rule8 SHAP value for high loading: 0.01654856477411491; Rule9 SHAP value for high loading: -0.07446132245394933; Rule10 SHAP value for high loading: 0.0; Rule11 SHAP value for high loading: 0.0; Rule12 SHAP value for high loading: 0.005931672444697685; Rule13 SHAP value for high loading: 0.04382890743872765;  
+For molecule C(C(=O)O)NC(CO)(CO)CO, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule2 SHAP value for high loading: -0.03919755989020142; Rule3 SHAP value for high loading: 0.0031906330985522276; Rule4 SHAP value for high loading: -0.02112395165242456; Rule5 SHAP value for high loading: 0.017384806351170914; Rule6 SHAP value for high loading: 0.042840538747310315; Rule7 SHAP value for high loading: 0.0; Rule8 SHAP value for high loading: 0.02316663281071618; Rule9 SHAP value for high loading: 0.03309072734555336; Rule10 SHAP value for high loading: -0.020993390057045737; Rule11 SHAP value for high loading: -0.021209154517876257; Rule12 SHAP value for high loading: 0.015935574146853048; Rule13 SHAP value for high loading: 0.012369689071937232;  
+For molecule C([C@H]([C@H]([C@@H]([C@H](C(=O)O)O)O)O)O)O, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule2 SHAP value for high loading: -0.03919755989020142; Rule3 SHAP value for high loading: 0.0031906330985522276; Rule4 SHAP value for high loading: -0.02112395165242456; Rule5 SHAP value for high loading: 0.017384806351170914; Rule6 SHAP value for high loading: 0.042840538747310315; Rule7 SHAP value for high loading: 0.0; Rule8 SHAP value for high loading: 0.02316663281071618; Rule9 SHAP value for high loading: 0.03309072734555336; Rule10 SHAP value for high loading: -0.020993390057045737; Rule11 SHAP value for high loading: -0.021209154517876257; Rule12 SHAP value for high loading: 0.015935574146853048; Rule13 SHAP value for high loading: 0.012369689071937232;  
+For molecule COCCOCCOCC(=O)O, the predicted loading of modifier on catalyst is high and the experimental value is low 
+  Rule2 SHAP value for high loading: -0.03919755989020142; Rule3 SHAP value for high loading: 0.0031906330985522276; Rule4 SHAP value for high loading: -0.02112395165242456; Rule5 SHAP value for high loading: 0.017384806351170914; Rule6 SHAP value for high loading: 0.042840538747310315; Rule7 SHAP value for high loading: 0.0; Rule8 SHAP value for high loading: 0.02316663281071618; Rule9 SHAP value for high loading: 0.03309072734555336; Rule10 SHAP value for high loading: -0.020993390057045737; Rule11 SHAP value for high loading: -0.021209154517876257; Rule12 SHAP value for high loading: 0.015935574146853048; Rule13 SHAP value for high loading: 0.012369689071937232;  
+For molecule C1=CC(=CC=C1C2=CC=NC=C2)C(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule2 SHAP value for high loading: -0.048653823931505136; Rule3 SHAP value for high loading: -0.008262972843308852; Rule4 SHAP value for high loading: -0.022831228907335424; Rule5 SHAP value for high loading: -0.28096655147620697; Rule6 SHAP value for high loading: 0.02439329314618671; Rule7 SHAP value for high loading: 0.0; Rule8 SHAP value for high loading: 0.012284472571641723; Rule9 SHAP value for high loading: 0.005659846842614695; Rule10 SHAP value for high loading: -0.023359603506066137; Rule11 SHAP value for high loading: -0.023225211620185177; Rule12 SHAP value for high loading: -0.1435045139420237; Rule13 SHAP value for high loading: 0.008466293666188642;  
+For molecule C(=O)(C(C(C(C(F)(F)F)(F)F)(F)F)(F)F)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule2 SHAP value for high loading: -0.04371669188895317; Rule3 SHAP value for high loading: -0.00477887305584915; Rule4 SHAP value for high loading: -0.01991878643201304; Rule5 SHAP value for high loading: 0.001311665742136205; Rule6 SHAP value for high loading: 0.021103497979405438; Rule7 SHAP value for high loading: 0.0; Rule8 SHAP value for high loading: -0.428288084217006; Rule9 SHAP value for high loading: 0.005766255434335022; Rule10 SHAP value for high loading: -0.020143329684682246; Rule11 SHAP value for high loading: -0.01947763614666331; Rule12 SHAP value for high loading: 0.0006814104913236931; Rule13 SHAP value for high loading: 0.007460571777965908;  
+For molecule C1=CC(=CC=C1C(=O)O)[N+](=O)[O-], the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule2 SHAP value for high loading: -0.03919755989020142; Rule3 SHAP value for high loading: 0.0031906330985522276; Rule4 SHAP value for high loading: -0.02112395165242456; Rule5 SHAP value for high loading: 0.017384806351170914; Rule6 SHAP value for high loading: 0.042840538747310315; Rule7 SHAP value for high loading: 0.0; Rule8 SHAP value for high loading: 0.02316663281071618; Rule9 SHAP value for high loading: 0.03309072734555336; Rule10 SHAP value for high loading: -0.020993390057045737; Rule11 SHAP value for high loading: -0.021209154517876257; Rule12 SHAP value for high loading: 0.015935574146853048; Rule13 SHAP value for high loading: 0.012369689071937232;  
+For molecule C1=CC(=CC=C1C(=O)NCC(=O)O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule2 SHAP value for high loading: -0.03615157264752962; Rule3 SHAP value for high loading: -0.021177740598361874; Rule4 SHAP value for high loading: -0.017689165495630387; Rule5 SHAP value for high loading: 0.009259119783570954; Rule6 SHAP value for high loading: 0.03681160788275461; Rule7 SHAP value for high loading: 0.0; Rule8 SHAP value for high loading: 0.01837925929944662; Rule9 SHAP value for high loading: 0.026656787955390705; Rule10 SHAP value for high loading: -0.017964371928507576; Rule11 SHAP value for high loading: -0.017627169773824385; Rule12 SHAP value for high loading: 0.008284866778456948; Rule13 SHAP value for high loading: 0.011218378744233842;  
+For molecule C1=CC(=CC=C1C(=O)O)N, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule2 SHAP value for high loading: -0.01126257588898501; Rule3 SHAP value for high loading: 0.01659619887028804; Rule4 SHAP value for high loading: -0.011375194686745214; Rule5 SHAP value for high loading: -0.2569252633776584; Rule6 SHAP value for high loading: 0.009039802893053145; Rule7 SHAP value for high loading: 0.009107143722915444; Rule8 SHAP value for high loading: 0.016666428591838527; Rule9 SHAP value for high loading: 0.0009320996268932546; Rule10 SHAP value for high loading: -0.01042908927134515; Rule11 SHAP value for high loading: -0.011534164955834307; Rule12 SHAP value for high loading: -0.2570408739166704; Rule13 SHAP value for high loading: 0.0062254883922498745;  
+For molecule C1=CC(=CC=C1CCCCC(=O)O)O, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule2 SHAP value for high loading: -0.009927562828350403; Rule3 SHAP value for high loading: -0.5639513718155758; Rule4 SHAP value for high loading: -0.010734047338672467; Rule5 SHAP value for high loading: 0.013914967308738493; Rule6 SHAP value for high loading: 0.013761257698547401; Rule7 SHAP value for high loading: 0.013901841938389713; Rule8 SHAP value for high loading: 0.02487480915009378; Rule9 SHAP value for high loading: 0.017618818765799335; Rule10 SHAP value for high loading: -0.010068424002964248; Rule11 SHAP value for high loading: -0.010489565475539728; Rule12 SHAP value for high loading: 0.013823219122405011; Rule13 SHAP value for high loading: 0.007276057477129005;  
+For molecule C1=CC(=C(C=C1C=O)C(=O)O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule2 SHAP value for high loading: -0.013453936033063468; Rule3 SHAP value for high loading: 0.025436213201349867; Rule4 SHAP value for high loading: -0.013259858845375892; Rule5 SHAP value for high loading: 0.014255101331330185; Rule6 SHAP value for high loading: -0.5615568102674199; Rule7 SHAP value for high loading: 0.014219116025102943; Rule8 SHAP value for high loading: 0.025590627157777938; Rule9 SHAP value for high loading: 0.012886466769222686; Rule10 SHAP value for high loading: -0.012729347782086509; Rule11 SHAP value for high loading: -0.01333819326796044; Rule12 SHAP value for high loading: 0.014158758289531915; Rule13 SHAP value for high loading: 0.0077918634215918435;  
+For molecule C1=CC(=CN=C1)C(=O)O, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule2 SHAP value for high loading: 0.21819881941365057; Rule3 SHAP value for high loading: 0.05588256425220959; Rule4 SHAP value for high loading: -0.006661577085152691; Rule5 SHAP value for high loading: 0.028244858005578334; Rule6 SHAP value for high loading: 0.028143360719833612; Rule7 SHAP value for high loading: 0.02848831719956797; Rule8 SHAP value for high loading: 0.05552104234879072; Rule9 SHAP value for high loading: 0.0644979651393479; Rule10 SHAP value for high loading: -0.006578130155692309; Rule11 SHAP value for high loading: -0.006667840915120283; Rule12 SHAP value for high loading: 0.028036959044269925; Rule13 SHAP value for high loading: 0.012893662032716675;  
+For molecule CC1=CC=C(C=C1)C(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule2 SHAP value for high loading: -0.013686030029007588; Rule3 SHAP value for high loading: 0.025453415164582122; Rule4 SHAP value for high loading: -0.014055339911055637; Rule5 SHAP value for high loading: -0.5592158593473209; Rule6 SHAP value for high loading: 0.014105100009390737; Rule7 SHAP value for high loading: 0.014245149302590254; Rule8 SHAP value for high loading: 0.02557838923310597; Rule9 SHAP value for high loading: 0.012425249786015724; Rule10 SHAP value for high loading: -0.013089144298350317; Rule11 SHAP value for high loading: -0.013776096193595752; Rule12 SHAP value for high loading: 0.014166344759317552; Rule13 SHAP value for high loading: 0.007848821524327676;  
+For molecule C(COCCOCCN)C(=O)O, the predicted loading of modifier on catalyst is high and the experimental value is low 
+  Rule2 SHAP value for high loading: -0.013222419722233052; Rule3 SHAP value for high loading: 0.05426225506608326; Rule4 SHAP value for high loading: -0.013362041508283696; Rule5 SHAP value for high loading: 0.031310533005611714; Rule6 SHAP value for high loading: 0.030869167006432458; Rule7 SHAP value for high loading: 0.03122035903821394; Rule8 SHAP value for high loading: 0.054543982135015885; Rule9 SHAP value for high loading: 0.05737402901855631; Rule10 SHAP value for high loading: -0.013303709251061448; Rule11 SHAP value for high loading: -0.013297691920566965; Rule12 SHAP value for high loading: 0.031084432000538505; Rule13 SHAP value for high loading: 0.01252110513169311;  
+For molecule CC(=O)NCCCC[C@@H](C(=O)O)N, the predicted loading of modifier on catalyst is high and the experimental value is low 
+  Rule2 SHAP value for high loading: -0.013222419722233052; Rule3 SHAP value for high loading: 0.05426225506608326; Rule4 SHAP value for high loading: -0.013362041508283696; Rule5 SHAP value for high loading: 0.031310533005611714; Rule6 SHAP value for high loading: 0.030869167006432458; Rule7 SHAP value for high loading: 0.03122035903821394; Rule8 SHAP value for high loading: 0.054543982135015885; Rule9 SHAP value for high loading: 0.05737402901855631; Rule10 SHAP value for high loading: -0.013303709251061448; Rule11 SHAP value for high loading: -0.013297691920566965; Rule12 SHAP value for high loading: 0.031084432000538505; Rule13 SHAP value for high loading: 0.01252110513169311;  
+For molecule C(CCN)CC(=O)O, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule2 SHAP value for high loading: -0.031700339468609735; Rule3 SHAP value for high loading: 0.01681623695480305; Rule4 SHAP value for high loading: -0.016478055405793356; Rule5 SHAP value for high loading: 0.058653524616692924; Rule6 SHAP value for high loading: 0.05091641458027917; Rule7 SHAP value for high loading: 0.02869479932142016; Rule8 SHAP value for high loading: 0.05207788206561985; Rule9 SHAP value for high loading: 0.051243908003225175; Rule10 SHAP value for high loading: -0.01652256917104389; Rule11 SHAP value for high loading: -0.016511672141739625; Rule12 SHAP value for high loading: 0.022809870645145593; Rule13 SHAP value for high loading: 0.0;  
+For molecule CCCCCCCC(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule2 SHAP value for high loading: -0.032154650282115595; Rule3 SHAP value for high loading: 0.003908694438253805; Rule4 SHAP value for high loading: -0.013048694121950359; Rule5 SHAP value for high loading: 0.020215921784792326; Rule6 SHAP value for high loading: 0.023279710927744498; Rule7 SHAP value for high loading: 0.012680772930770547; Rule8 SHAP value for high loading: 0.02375175755102843; Rule9 SHAP value for high loading: -0.5161143006871959; Rule10 SHAP value for high loading: -0.013219980027066223; Rule11 SHAP value for high loading: -0.013218436278828571; Rule12 SHAP value for high loading: 0.00391920376456683; Rule13 SHAP value for high loading: 0.0;  
+For molecule C1=CC(=CC=C1C(=O)O)S, the predicted loading of modifier on catalyst is high and the experimental value is low 
+  Rule2 SHAP value for high loading: -0.031700339468609735; Rule3 SHAP value for high loading: 0.01681623695480305; Rule4 SHAP value for high loading: -0.016478055405793356; Rule5 SHAP value for high loading: 0.058653524616692924; Rule6 SHAP value for high loading: 0.05091641458027917; Rule7 SHAP value for high loading: 0.02869479932142016; Rule8 SHAP value for high loading: 0.05207788206561985; Rule9 SHAP value for high loading: 0.051243908003225175; Rule10 SHAP value for high loading: -0.01652256917104389; Rule11 SHAP value for high loading: -0.016511672141739625; Rule12 SHAP value for high loading: 0.022809870645145593; Rule13 SHAP value for high loading: 0.0;  
+For molecule C1=CC=C2C(=C1)C(=CN2)C[C@H](C(=O)O)N, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule2 SHAP value for high loading: -0.031700339468609735; Rule3 SHAP value for high loading: 0.01681623695480305; Rule4 SHAP value for high loading: -0.016478055405793356; Rule5 SHAP value for high loading: 0.058653524616692924; Rule6 SHAP value for high loading: 0.05091641458027917; Rule7 SHAP value for high loading: 0.02869479932142016; Rule8 SHAP value for high loading: 0.05207788206561985; Rule9 SHAP value for high loading: 0.051243908003225175; Rule10 SHAP value for high loading: -0.01652256917104389; Rule11 SHAP value for high loading: -0.016511672141739625; Rule12 SHAP value for high loading: 0.022809870645145593; Rule13 SHAP value for high loading: 0.0;  
+For molecule CSCC[C@@H](C(=O)NCC(=O)O)N, the predicted loading of modifier on catalyst is high and the experimental value is low 
+  Rule2 SHAP value for high loading: -0.031700339468609735; Rule3 SHAP value for high loading: 0.01681623695480305; Rule4 SHAP value for high loading: -0.016478055405793356; Rule5 SHAP value for high loading: 0.058653524616692924; Rule6 SHAP value for high loading: 0.05091641458027917; Rule7 SHAP value for high loading: 0.02869479932142016; Rule8 SHAP value for high loading: 0.05207788206561985; Rule9 SHAP value for high loading: 0.051243908003225175; Rule10 SHAP value for high loading: -0.01652256917104389; Rule11 SHAP value for high loading: -0.016511672141739625; Rule12 SHAP value for high loading: 0.022809870645145593; Rule13 SHAP value for high loading: 0.0;  
+For molecule C(CCCO)CCC(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule2 SHAP value for high loading: -0.032154650282115595; Rule3 SHAP value for high loading: 0.003908694438253805; Rule4 SHAP value for high loading: -0.013048694121950359; Rule5 SHAP value for high loading: 0.020215921784792326; Rule6 SHAP value for high loading: 0.023279710927744498; Rule7 SHAP value for high loading: 0.012680772930770547; Rule8 SHAP value for high loading: 0.02375175755102843; Rule9 SHAP value for high loading: -0.5161143006871959; Rule10 SHAP value for high loading: -0.013219980027066223; Rule11 SHAP value for high loading: -0.013218436278828571; Rule12 SHAP value for high loading: 0.00391920376456683; Rule13 SHAP value for high loading: 0.0;  
+For molecule C1=CC(=CC=C1CCC(=O)O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule2 SHAP value for high loading: -0.03360861239310279; Rule3 SHAP value for high loading: -0.10825654743646566; Rule4 SHAP value for high loading: -0.01577871752065535; Rule5 SHAP value for high loading: 0.03735192530907501; Rule6 SHAP value for high loading: 0.040234296025054225; Rule7 SHAP value for high loading: 0.02073803481215729; Rule8 SHAP value for high loading: 0.04047070031085879; Rule9 SHAP value for high loading: 0.040645722038771655; Rule10 SHAP value for high loading: -0.015491919830217577; Rule11 SHAP value for high loading: -0.01559106368033379; Rule12 SHAP value for high loading: 0.009286182364857563; Rule13 SHAP value for high loading: 0.0;  
+Traditional Commenter Message:
+### Performance Evaluation of Current Rules
+
+1. **Effectiveness of Current Rules:**
+   - The current validation accuracy of 0.714 is lower than the previous consistent validation accuracy of 0.76. This suggests that the current rules may not be as effective as the previous iterations in capturing the underlying patterns in the data.
+
+2. **Overfitting/Underfitting Assessment:**
+   - The drop in validation accuracy compared to previous iterations indicates potential underfitting. The model may not be capturing the complexity of the data adequately, possibly due to overly generalized rules or insufficient feature representation.
+
+3. **Discrepancy Analysis:**
+   - For molecules where the predicted loading is high but the experimental value is low, such as `C1=CC=C(C=C1)C[C@@H](C(=O)O)N`, Rule 5 and Rule 6 have high positive SHAP values. This suggests that these rules might be contributing to overestimation and need refinement.
+   - Conversely, for molecules where the predicted loading is low but the experimental value is high, such as `C1=CC(=CC=C1C(=O)O)N`, Rule 5 and Rule 12 have high negative SHAP values, indicating potential underestimation.
+
+4. **Accuracy Improvement Interpretation:**
+   - The decrease in validation accuracy suggests that the current rules may not be improving the model's performance. This indicates a need for further refinement and possibly the introduction of new rules or features to better capture the data's complexity.
+
+5. **Insights from SHAP Analysis:**
+   - SHAP analysis highlights specific rules that contribute significantly to prediction errors. For instance, Rule 5 and Rule 6 frequently appear with high SHAP values in cases of overestimation, suggesting these rules may need adjustment to improve accuracy.
+   - Rules with consistently low SHAP values across different molecules might not be contributing significantly to the model's predictions and could be candidates for removal or modification.
+
+### Recommendations for Improvement
+
+1. **Refine Overestimated Rules:**
+   - **Rule 5 (Pyridine Ring):** Consider revising the conditions under which pyridine rings contribute to high loading predictions. Explore additional structural features or context that might influence the pyridine's effect on loading.
+   - **Rule 6 (Formyl Group):** Re-evaluate the impact of formyl groups on benzoic acid structures. Consider interactions with other functional groups that might mitigate the negative impact on yield.
+
+2. **Adjust Underestimated Rules:**
+   - **Rule 12 (Carboxylic Acid Adjacent to Phenyl Ring):** Investigate additional factors that might enhance the coordination effect of carboxylic acids, such as the presence of other electron-donating or withdrawing groups.
+   - **Rule 5 (Pyridine Ring):** As it appears in both overestimation and underestimation cases, a more nuanced approach to its contribution might be necessary.
+
+3. **Improve Generalization:**
+   - Introduce new features or rules that capture additional chemical properties or interactions not currently considered. This could help address potential underfitting by providing a richer feature set.
+   - Consider using ensemble methods or hybrid models that combine rule-based and data-driven approaches to improve generalization and capture complex patterns.
+
+4. **Iterative Refinement:**
+   - Use insights from SHAP analysis to iteratively test and refine rules. Focus on rules with high SHAP values in error cases and explore modifications that could reduce prediction errors.
+   - Regularly evaluate the impact of rule changes on validation accuracy to ensure improvements are being made.
+
+By addressing these areas, the model's performance can be enhanced, leading to more accurate predictions and better alignment with experimental results.
+---------------------------------------------------------------
+Project Manager Message:
+### Summary and Directions for Optimization
+
+1. **Effectiveness of Current Rules:**
+   - The current rules have shown improvements in confidence and lift, indicating they are more reliable and provide valuable insights. However, the validation accuracy has decreased compared to previous iterations, suggesting potential underfitting.
+
+2. **Overfitting/Underfitting Assessment:**
+   - The drop in validation accuracy indicates potential underfitting, where the model may not be capturing the complexity of the data adequately. This could be due to overly generalized rules or insufficient feature representation.
+
+3. **Discrepancy Analysis:**
+   - SHAP analysis highlights specific rules contributing to prediction errors. Rules 5 and 6 frequently appear with high SHAP values in cases of overestimation, suggesting these rules might need refinement. Conversely, Rules 5 and 12 have high negative SHAP values in underestimation cases, indicating potential underestimation.
+
+4. **Accuracy Improvement Interpretation:**
+   - The decrease in validation accuracy suggests that the current rules may not be improving the model's performance. This indicates a need for further refinement and possibly the introduction of new rules or features to better capture the data's complexity.
+
+5. **Insights from SHAP Analysis:**
+   - SHAP analysis provides valuable insights into which rules contribute significantly to prediction errors. This information can guide the refinement of rules to improve accuracy.
+
+### Recommendations for Improvement
+
+1. **Refine Overestimated Rules:**
+   - **Rule 5 (Pyridine Ring):** Re-evaluate the conditions under which pyridine rings contribute to high loading predictions. Explore additional structural features or context that might influence the pyridine's effect on loading.
+   - **Rule 6 (Formyl Group):** Reassess the impact of formyl groups on benzoic acid structures. Consider interactions with other functional groups that might mitigate the negative impact on yield.
+
+2. **Adjust Underestimated Rules:**
+   - **Rule 12 (Carboxylic Acid Adjacent to Phenyl Ring):** Investigate additional factors that might enhance the coordination effect of carboxylic acids, such as the presence of other electron-donating or withdrawing groups.
+   - **Rule 5 (Pyridine Ring):** As it appears in both overestimation and underestimation cases, a more nuanced approach to its contribution might be necessary.
+
+3. **Improve Generalization:**
+   - Introduce new features or rules that capture additional chemical properties or interactions not currently considered. This could help address potential underfitting by providing a richer feature set.
+   - Consider using ensemble methods or hybrid models that combine rule-based and data-driven approaches to improve generalization and capture complex patterns.
+
+4. **Iterative Refinement:**
+   - Use insights from SHAP analysis to iteratively test and refine rules. Focus on rules with high SHAP values in error cases and explore modifications that could reduce prediction errors.
+   - Regularly evaluate the impact of rule changes on validation accuracy to ensure improvements are being made.
+
+### Possibility for Further Optimization
+
+There is potential for further optimization of the current rules without overfitting. By refining specific rules, introducing new features, and using iterative testing and validation, the model's performance can be enhanced, leading to more accurate predictions and better alignment with experimental results.
+
+**Please Optimize Rules**
+---------------------------------------------------------------
+Current Rule Metrics:
+
+    Train support: 0.03619047619047619
+    Train confidence: 0.8944444444444445
+    Train lift: 1.7887073347857663
+    Train leverage: 0.014421768707482994
+    -------------------------------------------------------
+
+    Metric Commenter Message:
+Based on the current metrics, the performance of the rules has shown significant improvement compared to the previous iteration. Here's a detailed analysis:
+
+1. **Train Support**: The train support has slightly decreased from 0.0418 to 0.0362. While this indicates that the rules apply to a smaller portion of the dataset, it is not necessarily negative if the confidence and lift have improved, as they have in this case.
+
+2. **Train Confidence**: The train confidence has increased from 0.8141 to 0.8944. This is a substantial improvement, indicating that when the rule conditions are met, the likelihood of the rule prediction being true is much higher. This suggests that the rules are becoming more reliable.
+
+3. **Train Lift**: The train lift has increased from 1.6343 to 1.7887. A lift greater than 1 indicates that the rule is useful and that the presence of the rule conditions significantly increases the probability of the rule prediction. The increase in lift suggests that the rules are becoming more effective at identifying meaningful patterns that are not due to chance.
+
+4. **Train Leverage**: The train leverage has increased from 0.0134 to 0.0144. Positive leverage indicates a stronger association between the rule conditions and predictions than would be expected by chance. The increase in leverage, although slight, supports the improvement in rule quality.
+
+**Comparison with Reference Metrics**:
+- The current metrics show a marked improvement in confidence and lift compared to the reference metrics. The previous train confidence was 0.6352 and 0.5396, and the train lift was 1.2048 and 1.0559. The current metrics outperform these significantly, indicating that the rules are now more predictive and meaningful.
+
+**Suggestions for Improvement**:
+- **Refinement of Rules**: Continue refining the rules to maintain or improve the current confidence and lift. Focus on identifying and incorporating additional conditions that could further enhance the predictive power of the rules.
+- **Balancing Support and Confidence**: While high confidence is desirable, ensure that the support does not become too low, as this could limit the applicability of the rules. Consider exploring additional data or features that might increase support without compromising confidence.
+- **Validation on Test Data**: Although the current analysis is based on training data, it is crucial to validate these improvements on test data to ensure that the rules generalize well and are not overfitting.
+
+Overall, the current iteration shows promising improvements, particularly in confidence and lift, indicating that the rules are becoming more effective. Further iterations should focus on maintaining these gains while ensuring the rules remain applicable to a broader dataset.
+---------------------------------------------------------------
+Current Accuracy and SHAP analysis:
+< 5 Fold Validation Performance: >
+ 
+    An accuracy of 0.7428571428571429 was obtained using classification model. 
+ 
+ 
+ 
+    < SHAP Analysis Feedback > 
+For molecule C(CC(=O)O)[C@@H](C(=O)O)N, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule1 SHAP value for high loading: 0.593718345827043; Rule2 SHAP value for high loading: -0.011546092543225653; Rule5 SHAP value for high loading: -0.011617096030814289; Rule10 SHAP value for high loading: -0.01160519221636517; Rule11 SHAP value for high loading: -0.011558140067460683; Rule15 SHAP value for high loading: -0.011677539254894342;  
+For molecule C1=CC(=CC=C1CBr)C(=O)O, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.011628240057128151; Rule2 SHAP value for high loading: 0.5938049590961051; Rule5 SHAP value for high loading: -0.011618221404115866; Rule10 SHAP value for high loading: -0.011606301893808643; Rule11 SHAP value for high loading: -0.011559273596857322; Rule15 SHAP value for high loading: -0.011678636429911345;  
+For molecule C1=CNC(=O)C=C1C(=O)O, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.01162742837476531; Rule2 SHAP value for high loading: -0.011546390538306245; Rule5 SHAP value for high loading: -0.011617356726740769; Rule10 SHAP value for high loading: 0.5937417857471277; Rule11 SHAP value for high loading: -0.011558491111679467; Rule15 SHAP value for high loading: -0.01167783328135229;  
+For molecule C1=CC=C(C=C1)C[C@@H](C(=O)O)N, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.02439630586921784; Rule2 SHAP value for high loading: -0.02422754508625421; Rule5 SHAP value for high loading: -0.024375415516783152; Rule10 SHAP value for high loading: -0.02435062979073381; Rule11 SHAP value for high loading: -0.024252614399321727; Rule15 SHAP value for high loading: -0.02450138544158451;  
+For molecule C1=CN=CC=C1CCCC(=O)O, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.011626419796320146; Rule2 SHAP value for high loading: -0.011545369457434623; Rule5 SHAP value for high loading: -0.011616409860268536; Rule10 SHAP value for high loading: -0.011604477664377982; Rule11 SHAP value for high loading: -0.011557423220566297; Rule15 SHAP value for high loading: 0.5936643857132515;  
+For molecule C(CC(=O)O)C(=O)CCC(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.02439630586921784; Rule2 SHAP value for high loading: -0.02422754508625421; Rule5 SHAP value for high loading: -0.024375415516783152; Rule10 SHAP value for high loading: -0.02435062979073381; Rule11 SHAP value for high loading: -0.024252614399321727; Rule15 SHAP value for high loading: -0.02450138544158451;  
+For molecule C(CCCC(=O)O)CCCN, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.02439630586921784; Rule2 SHAP value for high loading: -0.02422754508625421; Rule5 SHAP value for high loading: -0.024375415516783152; Rule10 SHAP value for high loading: -0.02435062979073381; Rule11 SHAP value for high loading: -0.024252614399321727; Rule15 SHAP value for high loading: -0.02450138544158451;  
+For molecule C([C@@H](C(=O)O)N)C(=O)O, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule1 SHAP value for high loading: 0.5938193629857136; Rule2 SHAP value for high loading: -0.02318489614418065; Rule5 SHAP value for high loading: 0.0; Rule10 SHAP value for high loading: -0.011752161447315437; Rule11 SHAP value for high loading: 0.0; Rule15 SHAP value for high loading: -0.02316801967993102;  
+For molecule C1=C(C=NN1)C(=O)O, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.011832112675636225; Rule2 SHAP value for high loading: -0.023187006486870724; Rule5 SHAP value for high loading: 0.0; Rule10 SHAP value for high loading: 0.5939037569029862; Rule11 SHAP value for high loading: 0.0; Rule15 SHAP value for high loading: -0.023170352026194527;  
+For molecule C(CS)C(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.024827031757828927; Rule2 SHAP value for high loading: -0.04832432903583303; Rule5 SHAP value for high loading: 0.0; Rule10 SHAP value for high loading: -0.024662686612233774; Rule11 SHAP value for high loading: 0.0; Rule15 SHAP value for high loading: -0.048289848698001285;  
+For molecule C1=CC(=CC=C1C=O)C(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.024827031757828927; Rule2 SHAP value for high loading: -0.04832432903583303; Rule5 SHAP value for high loading: 0.0; Rule10 SHAP value for high loading: -0.024662686612233774; Rule11 SHAP value for high loading: 0.0; Rule15 SHAP value for high loading: -0.048289848698001285;  
+For molecule COC1=C(C=C(C=C1)C(=O)CCC(=O)O)OC, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.024827031757828927; Rule2 SHAP value for high loading: -0.04832432903583303; Rule5 SHAP value for high loading: 0.0; Rule10 SHAP value for high loading: -0.024662686612233774; Rule11 SHAP value for high loading: 0.0; Rule15 SHAP value for high loading: -0.048289848698001285;  
+For molecule C(CC(=O)O)CNC(=O)C(F)(F)F, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.024827031757828927; Rule2 SHAP value for high loading: -0.04832432903583303; Rule5 SHAP value for high loading: 0.0; Rule10 SHAP value for high loading: -0.024662686612233774; Rule11 SHAP value for high loading: 0.0; Rule15 SHAP value for high loading: -0.048289848698001285;  
+For molecule C(CCCN)CCC(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.024827031757828927; Rule2 SHAP value for high loading: -0.04832432903583303; Rule5 SHAP value for high loading: 0.0; Rule10 SHAP value for high loading: -0.024662686612233774; Rule11 SHAP value for high loading: 0.0; Rule15 SHAP value for high loading: -0.048289848698001285;  
+For molecule C(C(=O)O)NC(CO)(CO)CO, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.0511651563696411; Rule2 SHAP value for high loading: -0.027551951152088288; Rule5 SHAP value for high loading: -0.027601895900652842; Rule10 SHAP value for high loading: -0.051183722949821646; Rule11 SHAP value for high loading: -0.027641169919869105; Rule15 SHAP value for high loading: -0.051698208971085485;  
+For molecule C([C@H]([C@H]([C@@H]([C@H](C(=O)O)O)O)O)O)O, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.0511651563696411; Rule2 SHAP value for high loading: -0.027551951152088288; Rule5 SHAP value for high loading: -0.027601895900652842; Rule10 SHAP value for high loading: -0.051183722949821646; Rule11 SHAP value for high loading: -0.027641169919869105; Rule15 SHAP value for high loading: -0.051698208971085485;  
+For molecule COCCOCCOCC(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.0511651563696411; Rule2 SHAP value for high loading: -0.027551951152088288; Rule5 SHAP value for high loading: -0.027601895900652842; Rule10 SHAP value for high loading: -0.051183722949821646; Rule11 SHAP value for high loading: -0.027641169919869105; Rule15 SHAP value for high loading: -0.051698208971085485;  
+For molecule C1=CC(=CC=C1C2=CC=NC=C2)C(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.0511651563696411; Rule2 SHAP value for high loading: -0.027551951152088288; Rule5 SHAP value for high loading: -0.027601895900652842; Rule10 SHAP value for high loading: -0.051183722949821646; Rule11 SHAP value for high loading: -0.027641169919869105; Rule15 SHAP value for high loading: -0.051698208971085485;  
+For molecule C(=O)(C(C(C(C(F)(F)F)(F)F)(F)F)(F)F)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.0511651563696411; Rule2 SHAP value for high loading: -0.027551951152088288; Rule5 SHAP value for high loading: -0.027601895900652842; Rule10 SHAP value for high loading: -0.051183722949821646; Rule11 SHAP value for high loading: -0.027641169919869105; Rule15 SHAP value for high loading: -0.051698208971085485;  
+For molecule C1=CC(=CC=C1C(=O)O)[N+](=O)[O-], the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.023910775699860012; Rule2 SHAP value for high loading: 0.5976311246393134; Rule5 SHAP value for high loading: -0.01280971221056035; Rule10 SHAP value for high loading: -0.023919343986420503; Rule11 SHAP value for high loading: -0.012827954631291527; Rule15 SHAP value for high loading: -0.024163338111182247;  
+For molecule C1=CC(=CC=C1C(=O)NCC(=O)O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.0511651563696411; Rule2 SHAP value for high loading: -0.027551951152088288; Rule5 SHAP value for high loading: -0.027601895900652842; Rule10 SHAP value for high loading: -0.051183722949821646; Rule11 SHAP value for high loading: -0.027641169919869105; Rule15 SHAP value for high loading: -0.051698208971085485;  
+For molecule C1=CC(=CC=C1C(=O)O)N, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.024204307045360675; Rule2 SHAP value for high loading: -0.023963210428423892; Rule5 SHAP value for high loading: -0.012845445848494933; Rule10 SHAP value for high loading: -0.023767238294818027; Rule11 SHAP value for high loading: -0.012731026586482948; Rule15 SHAP value for high loading: 0.5975112282035806;  
+For molecule C1=CC(=CC=C1CCCCC(=O)O)O, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.051790244790038256; Rule2 SHAP value for high loading: -0.05128395715107735; Rule5 SHAP value for high loading: -0.027681419992055974; Rule10 SHAP value for high loading: -0.05086992607129421; Rule11 SHAP value for high loading: -0.027437776477847488; Rule15 SHAP value for high loading: -0.027778780780845155;  
+For molecule C1=CC(=C(C=C1C=O)C(=O)O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.051790244790038256; Rule2 SHAP value for high loading: -0.05128395715107735; Rule5 SHAP value for high loading: -0.027681419992055974; Rule10 SHAP value for high loading: -0.05086992607129421; Rule11 SHAP value for high loading: -0.027437776477847488; Rule15 SHAP value for high loading: -0.027778780780845155;  
+For molecule C1=CC(=CN=C1)C(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.051790244790038256; Rule2 SHAP value for high loading: -0.05128395715107735; Rule5 SHAP value for high loading: -0.027681419992055974; Rule10 SHAP value for high loading: -0.05086992607129421; Rule11 SHAP value for high loading: -0.027437776477847488; Rule15 SHAP value for high loading: -0.027778780780845155;  
+For molecule CC1=CC=C(C=C1)C(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.051790244790038256; Rule2 SHAP value for high loading: -0.05128395715107735; Rule5 SHAP value for high loading: -0.027681419992055974; Rule10 SHAP value for high loading: -0.05086992607129421; Rule11 SHAP value for high loading: -0.027437776477847488; Rule15 SHAP value for high loading: -0.027778780780845155;  
+For molecule C(COCCOCCN)C(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.051790244790038256; Rule2 SHAP value for high loading: -0.05128395715107735; Rule5 SHAP value for high loading: -0.027681419992055974; Rule10 SHAP value for high loading: -0.05086992607129421; Rule11 SHAP value for high loading: -0.027437776477847488; Rule15 SHAP value for high loading: -0.027778780780845155;  
+For molecule CC(=O)NCCCC[C@@H](C(=O)O)N, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.051790244790038256; Rule2 SHAP value for high loading: -0.05128395715107735; Rule5 SHAP value for high loading: -0.027681419992055974; Rule10 SHAP value for high loading: -0.05086992607129421; Rule11 SHAP value for high loading: -0.027437776477847488; Rule15 SHAP value for high loading: -0.027778780780845155;  
+For molecule C(CCN)CC(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.05461259082635394; Rule2 SHAP value for high loading: -0.05428158003577585; Rule5 SHAP value for high loading: -0.029916141494781952; Rule10 SHAP value for high loading: -0.054294687543276834; Rule11 SHAP value for high loading: -0.029768722475405726; Rule15 SHAP value for high loading: -0.05490405540218538;  
+For molecule CCCCCCCC(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.05461259082635394; Rule2 SHAP value for high loading: -0.05428158003577585; Rule5 SHAP value for high loading: -0.029916141494781952; Rule10 SHAP value for high loading: -0.054294687543276834; Rule11 SHAP value for high loading: -0.029768722475405726; Rule15 SHAP value for high loading: -0.05490405540218538;  
+For molecule C1=CC(=CC=C1C(=O)O)S, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.05461259082635394; Rule2 SHAP value for high loading: -0.05428158003577585; Rule5 SHAP value for high loading: -0.029916141494781952; Rule10 SHAP value for high loading: -0.054294687543276834; Rule11 SHAP value for high loading: -0.029768722475405726; Rule15 SHAP value for high loading: -0.05490405540218538;  
+For molecule C1=CC=C2C(=C1)C(=CN2)C[C@H](C(=O)O)N, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.05461259082635394; Rule2 SHAP value for high loading: -0.05428158003577585; Rule5 SHAP value for high loading: -0.029916141494781952; Rule10 SHAP value for high loading: -0.054294687543276834; Rule11 SHAP value for high loading: -0.029768722475405726; Rule15 SHAP value for high loading: -0.05490405540218538;  
+For molecule CSCC[C@@H](C(=O)NCC(=O)O)N, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.05461259082635394; Rule2 SHAP value for high loading: -0.05428158003577585; Rule5 SHAP value for high loading: -0.029916141494781952; Rule10 SHAP value for high loading: -0.054294687543276834; Rule11 SHAP value for high loading: -0.029768722475405726; Rule15 SHAP value for high loading: -0.05490405540218538;  
+For molecule C(CCCO)CCC(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.05461259082635394; Rule2 SHAP value for high loading: -0.05428158003577585; Rule5 SHAP value for high loading: -0.029916141494781952; Rule10 SHAP value for high loading: -0.054294687543276834; Rule11 SHAP value for high loading: -0.029768722475405726; Rule15 SHAP value for high loading: -0.05490405540218538;  
+For molecule C1=CC(=CC=C1CCC(=O)O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.05461259082635394; Rule2 SHAP value for high loading: -0.05428158003577585; Rule5 SHAP value for high loading: -0.029916141494781952; Rule10 SHAP value for high loading: -0.054294687543276834; Rule11 SHAP value for high loading: -0.029768722475405726; Rule15 SHAP value for high loading: -0.05490405540218538;  
+Traditional Commenter Message:
+### Performance Evaluation of Current Rules
+
+#### 1. Evaluate Effectiveness:
+The current rules have shown some improvement in validation accuracy from 0.714 to 0.743, indicating that the rules are becoming more effective. However, the test accuracy has not been provided for the current iteration, which is crucial for a comprehensive evaluation.
+
+#### 2. Assess Overfitting/Underfitting:
+The consistent validation accuracy across iterations suggests that the model is not overfitting. However, the slight improvement in accuracy indicates that there might still be room for improvement in capturing the underlying patterns in the data.
+
+#### 3. Analyze Discrepancies:
+- **Overestimated Loadings**: For molecules where the predicted loading is high but the experimental value is low, such as C(CC(=O)O)C(=O)CCC(=O)O, Rule 1 has a high positive SHAP value. This suggests that Rule 1 might be contributing to overestimation and needs refinement.
+- **Underestimated Loadings**: For molecules where the predicted loading is low but the experimental value is high, such as C1=CC(=CC=C1CCCCC(=O)O)O, Rule 1 and Rule 2 have high negative SHAP values, indicating potential underestimation issues.
+
+#### 4. Interpret Accuracy Improvements:
+The increase in validation accuracy suggests that the current rules are moving in the right direction. However, the absence of test accuracy makes it difficult to determine if the improvements are generalizable.
+
+#### 5. Derive Insights from SHAP Analysis:
+- **Rule 1**: This rule has shown both high positive and negative SHAP values, indicating it might be too broad or not specific enough. It could be refined to better capture the nuances of amino and carboxylic acid groups in different contexts.
+- **Rule 2**: The high positive SHAP value for underestimated loadings suggests that the rule might be too conservative in predicting high yields for benzoic acid structures with electron-withdrawing groups.
+
+### Recommendations for Improvement
+
+1. **Refine Rule 1**: Consider breaking down Rule 1 into more specific sub-rules that account for different types of amino and carboxylic acid structures. This could help in reducing overestimation and underestimation issues.
+
+2. **Adjust Rule 2**: Re-evaluate the conditions under which Rule 2 predicts high yields. It might be beneficial to incorporate additional structural features or context-specific conditions that influence the effectiveness of electron-withdrawing groups.
+
+3. **Improve Generalization**: Introduce more diverse training data or use techniques like cross-validation to ensure that the rules are not overfitting to specific patterns in the current dataset.
+
+4. **Iterative Refinement**: Use insights from SHAP analysis to iteratively test and refine rules. For instance, rules with consistently high SHAP values in incorrect predictions should be prioritized for adjustment.
+
+5. **Incorporate Test Accuracy**: Ensure that test accuracy is consistently evaluated alongside validation accuracy to better assess the generalizability of the rules.
+
+By focusing on these areas, the rules can be refined to improve both the accuracy and generalization of the model, leading to more reliable predictions of modifier loading on catalysts.
+---------------------------------------------------------------
+Project Manager Message:
+### Summary of Discussions
+
+The current rules have shown improvements in validation accuracy, confidence, and lift, indicating that they are becoming more effective. However, there are still areas for improvement, particularly in ensuring that the rules generalize well to unseen data. The SHAP analysis has highlighted discrepancies in predictions, suggesting that some rules may be too broad or not specific enough.
+
+### Directions to Optimize Current Rules
+
+1. **Refinement of Rules**: 
+   - **Rule 1**: Break down into more specific sub-rules to better capture the nuances of amino and carboxylic acid groups in different contexts.
+   - **Rule 2**: Re-evaluate and adjust conditions to incorporate additional structural features or context-specific conditions that influence the effectiveness of electron-withdrawing groups.
+
+2. **Balancing Support and Confidence**: 
+   - Ensure that the support does not become too low while maintaining high confidence. Explore additional data or features that might increase support without compromising confidence.
+
+3. **Validation on Test Data**: 
+   - Consistently evaluate test accuracy alongside validation accuracy to ensure that the rules generalize well and are not overfitting.
+
+4. **Iterative Refinement**: 
+   - Use insights from SHAP analysis to iteratively test and refine rules. Prioritize rules with consistently high SHAP values in incorrect predictions for adjustment.
+
+5. **Incorporate Diverse Data**: 
+   - Introduce more diverse training data or use techniques like cross-validation to ensure that the rules are not overfitting to specific patterns in the current dataset.
+
+### Possibility for Further Optimization
+
+There is potential for further optimization of the current rules without overfitting. The improvements in confidence and lift suggest that the rules are on the right track, but the absence of test accuracy and the discrepancies highlighted by SHAP analysis indicate that there is still room for refinement.
+
+**Please Optimize Rules**
+---------------------------------------------------------------
+Current Rule Metrics:
+
+    Train support: 0.03238095238095238
+    Train confidence: 0.9222222222222222
+    Train lift: 1.8509803921568626
+    Train leverage: 0.014421768707482996
+    -------------------------------------------------------
+
+    Metric Commenter Message:
+Based on the current rule metrics, there are several observations and insights regarding the performance of the rules:
+
+1. **Confidence**: The current rules exhibit high confidence levels, with the latest rule iteration showing a confidence of 0.9222. This is a significant improvement over the previous reference metrics, where the highest test confidence was 0.4639. High confidence indicates that when the rule conditions are met, the predictions are likely to be accurate.
+
+2. **Lift**: The lift values in the current iteration are also notably higher, with the latest rule iteration achieving a lift of 1.851. This is a substantial improvement compared to the previous reference metrics, where the highest test lift was 0.9137. A lift greater than 1 suggests that the rule conditions significantly increase the likelihood of the rule predictions, indicating strong associations.
+
+3. **Leverage**: The leverage values in the current iteration are positive and have improved compared to the previous reference metrics. The latest leverage of 0.0144 suggests that the rules are capturing associations that are not merely due to chance, although the magnitude of leverage is relatively small.
+
+4. **Support**: The support values in the current iteration are lower than the previous reference metrics, with the latest support at 0.0324. While this indicates that the rules apply to a smaller portion of the dataset, the high confidence and lift suggest that these rules are highly effective for the subset of data they cover.
+
+### Recommendations for Improvement:
+
+- **Broaden Rule Applicability**: Consider exploring additional rule conditions or combinations that might increase the support while maintaining high confidence and lift. This could involve identifying more generalizable patterns or relaxing some conditions to cover a broader dataset.
+
+- **Refinement of Low-Yield Rules**: For rules predicting low yield, ensure that the conditions are not overly restrictive, which might limit their applicability. Investigating the chemical rationale behind these rules could provide insights into potential modifications.
+
+- **Validation on Test Data**: While the training metrics are promising, it is crucial to validate these rules on a separate test dataset to ensure that the high confidence and lift are not due to overfitting.
+
+- **Explore Additional Features**: Consider incorporating additional chemical or structural features that might enhance the predictive power of the rules, especially for those with lower support.
+
+Overall, the current rules demonstrate strong predictive capabilities with high confidence and lift, indicating effective rule conditions. However, efforts to increase support and validate these findings on test data will be essential for ensuring robust and generalizable rules.
+---------------------------------------------------------------
+Current Accuracy and SHAP analysis:
+< 5 Fold Validation Performance: >
+ 
+    An accuracy of 0.6285714285714286 was obtained using classification model. 
+ 
+ 
+ 
+    < SHAP Analysis Feedback > 
+For molecule C(CC(=O)O)[C@@H](C(=O)O)N, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule1 SHAP value for high loading: 0.5285268919466655; Rule2 SHAP value for high loading: 0.0; Rule9 SHAP value for high loading: -0.010579045221373701; Rule10 SHAP value for high loading: -0.010578556348162904; Rule11 SHAP value for high loading: -0.010582967400744277; Rule14 SHAP value for high loading: 0.03892796273790148; Rule15 SHAP value for high loading: 0.0;  
+For molecule C1=CC(=CC=C1CBr)C(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.021812933472458832; Rule2 SHAP value for high loading: 0.0; Rule9 SHAP value for high loading: -0.021856100439404495; Rule10 SHAP value for high loading: -0.021879921044624537; Rule11 SHAP value for high loading: -0.02186831358689842; Rule14 SHAP value for high loading: 0.032222463348581046; Rule15 SHAP value for high loading: 0.0;  
+For molecule C1=CNC(=O)C=C1C(=O)O, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.010558619618416087; Rule2 SHAP value for high loading: 0.0; Rule9 SHAP value for high loading: -0.010585358438506373; Rule10 SHAP value for high loading: 0.5278243493120888; Rule11 SHAP value for high loading: -0.010588584938757344; Rule14 SHAP value for high loading: 0.03962249939787781; Rule15 SHAP value for high loading: 0.0;  
+For molecule C1=CC=C(C=C1)C[C@@H](C(=O)O)N, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.021812933472458832; Rule2 SHAP value for high loading: 0.0; Rule9 SHAP value for high loading: -0.021856100439404495; Rule10 SHAP value for high loading: -0.021879921044624537; Rule11 SHAP value for high loading: -0.02186831358689842; Rule14 SHAP value for high loading: 0.032222463348581046; Rule15 SHAP value for high loading: 0.0;  
+For molecule C1=CN=CC=C1CCCC(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.021812933472458832; Rule2 SHAP value for high loading: 0.0; Rule9 SHAP value for high loading: -0.021856100439404495; Rule10 SHAP value for high loading: -0.021879921044624537; Rule11 SHAP value for high loading: -0.02186831358689842; Rule14 SHAP value for high loading: 0.032222463348581046; Rule15 SHAP value for high loading: 0.0;  
+For molecule C(CC(=O)O)C(=O)CCC(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.021812933472458832; Rule2 SHAP value for high loading: 0.0; Rule9 SHAP value for high loading: -0.021856100439404495; Rule10 SHAP value for high loading: -0.021879921044624537; Rule11 SHAP value for high loading: -0.02186831358689842; Rule14 SHAP value for high loading: 0.032222463348581046; Rule15 SHAP value for high loading: 0.0;  
+For molecule C(CCCC(=O)O)CCCN, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.021812933472458832; Rule2 SHAP value for high loading: 0.0; Rule9 SHAP value for high loading: -0.021856100439404495; Rule10 SHAP value for high loading: -0.021879921044624537; Rule11 SHAP value for high loading: -0.02186831358689842; Rule14 SHAP value for high loading: 0.032222463348581046; Rule15 SHAP value for high loading: 0.0;  
+For molecule C([C@@H](C(=O)O)N)C(=O)O, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule1 SHAP value for high loading: 0.5668331472131283; Rule2 SHAP value for high loading: -0.011107340665641398; Rule9 SHAP value for high loading: -0.011113224600904553; Rule10 SHAP value for high loading: -0.011138352699970431; Rule11 SHAP value for high loading: 0.0; Rule14 SHAP value for high loading: 0.01337433402059336; Rule15 SHAP value for high loading: -0.011134277552917599;  
+For molecule C1=C(C=NN1)C(=O)O, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.011082449863162404; Rule2 SHAP value for high loading: -0.0111117981796786; Rule9 SHAP value for high loading: -0.011116016643917053; Rule10 SHAP value for high loading: 0.5660922686108187; Rule11 SHAP value for high loading: 0.0; Rule14 SHAP value for high loading: 0.01406983709638899; Rule15 SHAP value for high loading: -0.011137555306162741;  
+For molecule C(CS)C(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.022982021582572752; Rule2 SHAP value for high loading: -0.023057574713698608; Rule9 SHAP value for high loading: -0.02305981991782572; Rule10 SHAP value for high loading: -0.0231228331566781; Rule11 SHAP value for high loading: 0.0; Rule14 SHAP value for high loading: 0.014673779399288808; Rule15 SHAP value for high loading: -0.023100880677863308;  
+For molecule C1=CC(=CC=C1C=O)C(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.023484387429677577; Rule2 SHAP value for high loading: -0.02270969122944064; Rule9 SHAP value for high loading: -0.02321456485242924; Rule10 SHAP value for high loading: -0.02292041418046972; Rule11 SHAP value for high loading: 0.0; Rule14 SHAP value for high loading: -0.3486872872572292; Rule15 SHAP value for high loading: -0.02326936933646954;  
+For molecule COC1=C(C=C(C=C1)C(=O)CCC(=O)O)OC, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.022982021582572752; Rule2 SHAP value for high loading: -0.023057574713698608; Rule9 SHAP value for high loading: -0.02305981991782572; Rule10 SHAP value for high loading: -0.0231228331566781; Rule11 SHAP value for high loading: 0.0; Rule14 SHAP value for high loading: 0.014673779399288808; Rule15 SHAP value for high loading: -0.023100880677863308;  
+For molecule C(CC(=O)O)CNC(=O)C(F)(F)F, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.022982021582572752; Rule2 SHAP value for high loading: -0.023057574713698608; Rule9 SHAP value for high loading: -0.02305981991782572; Rule10 SHAP value for high loading: -0.0231228331566781; Rule11 SHAP value for high loading: 0.0; Rule14 SHAP value for high loading: 0.014673779399288808; Rule15 SHAP value for high loading: -0.023100880677863308;  
+For molecule C(CCCN)CCC(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.022982021582572752; Rule2 SHAP value for high loading: -0.023057574713698608; Rule9 SHAP value for high loading: -0.02305981991782572; Rule10 SHAP value for high loading: -0.0231228331566781; Rule11 SHAP value for high loading: 0.0; Rule14 SHAP value for high loading: 0.014673779399288808; Rule15 SHAP value for high loading: -0.023100880677863308;  
+For molecule C(C(=O)O)NC(CO)(CO)CO, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.04721102444008683; Rule2 SHAP value for high loading: -0.025501385342188654; Rule9 SHAP value for high loading: -0.025639166381188818; Rule10 SHAP value for high loading: -0.047850251004994154; Rule11 SHAP value for high loading: -0.0253653522513297; Rule14 SHAP value for high loading: 0.030294706319578996; Rule15 SHAP value for high loading: -0.02539419356645799;  
+For molecule C([C@H]([C@H]([C@@H]([C@H](C(=O)O)O)O)O)O)O, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.04721102444008683; Rule2 SHAP value for high loading: -0.025501385342188654; Rule9 SHAP value for high loading: -0.025639166381188818; Rule10 SHAP value for high loading: -0.047850251004994154; Rule11 SHAP value for high loading: -0.0253653522513297; Rule14 SHAP value for high loading: 0.030294706319578996; Rule15 SHAP value for high loading: -0.02539419356645799;  
+For molecule COCCOCCOCC(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.04721102444008683; Rule2 SHAP value for high loading: -0.025501385342188654; Rule9 SHAP value for high loading: -0.025639166381188818; Rule10 SHAP value for high loading: -0.047850251004994154; Rule11 SHAP value for high loading: -0.0253653522513297; Rule14 SHAP value for high loading: 0.030294706319578996; Rule15 SHAP value for high loading: -0.02539419356645799;  
+For molecule C1=CC(=CC=C1C2=CC=NC=C2)C(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.04721102444008683; Rule2 SHAP value for high loading: -0.025501385342188654; Rule9 SHAP value for high loading: -0.025639166381188818; Rule10 SHAP value for high loading: -0.047850251004994154; Rule11 SHAP value for high loading: -0.0253653522513297; Rule14 SHAP value for high loading: 0.030294706319578996; Rule15 SHAP value for high loading: -0.02539419356645799;  
+For molecule C(=O)(C(C(C(C(F)(F)F)(F)F)(F)F)(F)F)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.04721102444008683; Rule2 SHAP value for high loading: -0.025501385342188654; Rule9 SHAP value for high loading: -0.025639166381188818; Rule10 SHAP value for high loading: -0.047850251004994154; Rule11 SHAP value for high loading: -0.0253653522513297; Rule14 SHAP value for high loading: 0.030294706319578996; Rule15 SHAP value for high loading: -0.02539419356645799;  
+For molecule C1=CC(=CC=C1C(=O)O)[N+](=O)[O-], the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.04721102444008683; Rule2 SHAP value for high loading: -0.025501385342188654; Rule9 SHAP value for high loading: -0.025639166381188818; Rule10 SHAP value for high loading: -0.047850251004994154; Rule11 SHAP value for high loading: -0.0253653522513297; Rule14 SHAP value for high loading: 0.030294706319578996; Rule15 SHAP value for high loading: -0.02539419356645799;  
+For molecule C1=CC(=CC=C1C(=O)NCC(=O)O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.04721102444008683; Rule2 SHAP value for high loading: -0.025501385342188654; Rule9 SHAP value for high loading: -0.025639166381188818; Rule10 SHAP value for high loading: -0.047850251004994154; Rule11 SHAP value for high loading: -0.0253653522513297; Rule14 SHAP value for high loading: 0.030294706319578996; Rule15 SHAP value for high loading: -0.02539419356645799;  
+For molecule C1=CC(=CC=C1C(=O)O)N, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.047987963866361116; Rule2 SHAP value for high loading: -0.025512115172559524; Rule9 SHAP value for high loading: -0.025616852669213683; Rule10 SHAP value for high loading: -0.048302232886426814; Rule11 SHAP value for high loading: -0.025478324152656603; Rule14 SHAP value for high loading: 0.014137148640712863; Rule15 SHAP value for high loading: -0.025450186209284884;  
+For molecule C1=CC(=CC=C1CCCCC(=O)O)O, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.047987963866361116; Rule2 SHAP value for high loading: -0.025512115172559524; Rule9 SHAP value for high loading: -0.025616852669213683; Rule10 SHAP value for high loading: -0.048302232886426814; Rule11 SHAP value for high loading: -0.025478324152656603; Rule14 SHAP value for high loading: 0.014137148640712863; Rule15 SHAP value for high loading: -0.025450186209284884;  
+For molecule C1=CC(=C(C=C1C=O)C(=O)O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.049019473646707536; Rule2 SHAP value for high loading: -0.02283407249131055; Rule9 SHAP value for high loading: -0.02323367688498631; Rule10 SHAP value for high loading: -0.048411992594368444; Rule11 SHAP value for high loading: -0.023095215173055305; Rule14 SHAP value for high loading: -0.31024985025102964; Rule15 SHAP value for high loading: -0.023155718958542175;  
+For molecule C1=CC(=CN=C1)C(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.047987963866361116; Rule2 SHAP value for high loading: -0.025512115172559524; Rule9 SHAP value for high loading: -0.025616852669213683; Rule10 SHAP value for high loading: -0.048302232886426814; Rule11 SHAP value for high loading: -0.025478324152656603; Rule14 SHAP value for high loading: 0.014137148640712863; Rule15 SHAP value for high loading: -0.025450186209284884;  
+For molecule CC1=CC=C(C=C1)C(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.047987963866361116; Rule2 SHAP value for high loading: -0.025512115172559524; Rule9 SHAP value for high loading: -0.025616852669213683; Rule10 SHAP value for high loading: -0.048302232886426814; Rule11 SHAP value for high loading: -0.025478324152656603; Rule14 SHAP value for high loading: 0.014137148640712863; Rule15 SHAP value for high loading: -0.025450186209284884;  
+For molecule C(COCCOCCN)C(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.047987963866361116; Rule2 SHAP value for high loading: -0.025512115172559524; Rule9 SHAP value for high loading: -0.025616852669213683; Rule10 SHAP value for high loading: -0.048302232886426814; Rule11 SHAP value for high loading: -0.025478324152656603; Rule14 SHAP value for high loading: 0.014137148640712863; Rule15 SHAP value for high loading: -0.025450186209284884;  
+For molecule CC(=O)NCCCC[C@@H](C(=O)O)N, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.047987963866361116; Rule2 SHAP value for high loading: -0.025512115172559524; Rule9 SHAP value for high loading: -0.025616852669213683; Rule10 SHAP value for high loading: -0.048302232886426814; Rule11 SHAP value for high loading: -0.025478324152656603; Rule14 SHAP value for high loading: 0.014137148640712863; Rule15 SHAP value for high loading: -0.025450186209284884;  
+For molecule C(CCN)CC(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.0453509210604513; Rule2 SHAP value for high loading: -0.023865785767569432; Rule9 SHAP value for high loading: 0.0; Rule10 SHAP value for high loading: -0.04597234345421523; Rule11 SHAP value for high loading: -0.024099099082139613; Rule14 SHAP value for high loading: 0.031804630414471506; Rule15 SHAP value for high loading: -0.024095428418517258;  
+For molecule CCCCCCCC(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.0453509210604513; Rule2 SHAP value for high loading: -0.023865785767569432; Rule9 SHAP value for high loading: 0.0; Rule10 SHAP value for high loading: -0.04597234345421523; Rule11 SHAP value for high loading: -0.024099099082139613; Rule14 SHAP value for high loading: 0.031804630414471506; Rule15 SHAP value for high loading: -0.024095428418517258;  
+For molecule C1=CC(=CC=C1C(=O)O)S, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.0453509210604513; Rule2 SHAP value for high loading: -0.023865785767569432; Rule9 SHAP value for high loading: 0.0; Rule10 SHAP value for high loading: -0.04597234345421523; Rule11 SHAP value for high loading: -0.024099099082139613; Rule14 SHAP value for high loading: 0.031804630414471506; Rule15 SHAP value for high loading: -0.024095428418517258;  
+For molecule C1=CC=C2C(=C1)C(=CN2)C[C@H](C(=O)O)N, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.0453509210604513; Rule2 SHAP value for high loading: -0.023865785767569432; Rule9 SHAP value for high loading: 0.0; Rule10 SHAP value for high loading: -0.04597234345421523; Rule11 SHAP value for high loading: -0.024099099082139613; Rule14 SHAP value for high loading: 0.031804630414471506; Rule15 SHAP value for high loading: -0.024095428418517258;  
+For molecule CSCC[C@@H](C(=O)NCC(=O)O)N, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.0453509210604513; Rule2 SHAP value for high loading: -0.023865785767569432; Rule9 SHAP value for high loading: 0.0; Rule10 SHAP value for high loading: -0.04597234345421523; Rule11 SHAP value for high loading: -0.024099099082139613; Rule14 SHAP value for high loading: 0.031804630414471506; Rule15 SHAP value for high loading: -0.024095428418517258;  
+For molecule C(CCCO)CCC(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.0453509210604513; Rule2 SHAP value for high loading: -0.023865785767569432; Rule9 SHAP value for high loading: 0.0; Rule10 SHAP value for high loading: -0.04597234345421523; Rule11 SHAP value for high loading: -0.024099099082139613; Rule14 SHAP value for high loading: 0.031804630414471506; Rule15 SHAP value for high loading: -0.024095428418517258;  
+For molecule C1=CC(=CC=C1CCC(=O)O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.0453509210604513; Rule2 SHAP value for high loading: -0.023865785767569432; Rule9 SHAP value for high loading: 0.0; Rule10 SHAP value for high loading: -0.04597234345421523; Rule11 SHAP value for high loading: -0.024099099082139613; Rule14 SHAP value for high loading: 0.031804630414471506; Rule15 SHAP value for high loading: -0.024095428418517258;  
+Traditional Commenter Message:
+### Performance Evaluation of Current Rules
+
+1. **Effectiveness of Current Rules:**
+   - The current rules seem to have mixed effectiveness. The validation accuracy has decreased from previous iterations (0.76) to the current value of 0.6286, indicating that the rules may not be capturing the underlying patterns as effectively as before.
+   - The SHAP analysis shows that certain rules have significant positive or negative contributions to the predictions, which suggests that some rules are more influential than others.
+
+2. **Overfitting/Underfitting Assessment:**
+   - The decrease in validation accuracy suggests potential overfitting, where the model may be too tailored to the training data and not generalizing well to new data.
+   - The consistent high SHAP values for certain rules across different molecules indicate that these rules might be overemphasizing certain features, leading to overfitting.
+
+3. **Discrepancies Analysis:**
+   - For molecules where the predicted loading is high but the experimental value is low, rules with high positive SHAP values (e.g., Rule 1, Rule 14) may be problematic and need refinement.
+   - Conversely, for molecules where the predicted loading is low but the experimental value is high, rules with high negative SHAP values (e.g., Rule 9, Rule 10) may need adjustment.
+
+4. **Accuracy Improvements:**
+   - The current accuracy metrics suggest that there is room for improvement. The decrease in validation accuracy indicates that the current rules may not be optimal and require further refinement.
+
+5. **Insights from SHAP Analysis:**
+   - SHAP analysis highlights specific rules that consistently contribute to incorrect predictions. For instance, Rule 1 and Rule 14 often have high positive SHAP values for overestimated loadings, suggesting they may be too aggressive in predicting high loadings.
+   - Rules with high negative SHAP values, such as Rule 9 and Rule 10, may be underestimating the loading and could be adjusted to better capture the conditions leading to high experimental values.
+
+### Recommendations for Improvement
+
+1. **Refine Rules with High Positive SHAP Values:**
+   - Re-evaluate Rule 1 and Rule 14, which often contribute to overestimated loadings. Consider adding conditions or constraints to these rules to reduce their influence when not appropriate.
+
+2. **Adjust Rules with High Negative SHAP Values:**
+   - Modify Rule 9 and Rule 10 to better capture scenarios where the experimental loading is high but the prediction is low. This could involve relaxing some constraints or incorporating additional features that are indicative of high loading.
+
+3. **Improve Generalization:**
+   - To address potential overfitting, consider simplifying some rules or combining them to reduce complexity. This can help the model generalize better to unseen data.
+
+4. **Iterative Refinement Using SHAP Insights:**
+   - Use the insights from SHAP analysis to iteratively refine the rules. Focus on rules that consistently show high SHAP values in incorrect predictions and adjust them based on the patterns observed in the data.
+
+5. **Incorporate Additional Features:**
+   - Consider incorporating new features or modifying existing ones to capture more nuanced interactions between modifiers and catalysts. This could involve exploring additional chemical properties or structural features that are not currently considered.
+
+By implementing these recommendations, the rules can be refined to improve both the accuracy and generalization of the model, leading to better predictions of modifier loading on catalysts.
+---------------------------------------------------------------
+Project Manager Message:
+### Summary of Discussions
+
+1. **Effectiveness of Current Rules:**
+   - The current rules show high confidence and lift, indicating strong predictive capabilities for the subset of data they cover. However, the validation accuracy has decreased, suggesting potential overfitting.
+   - SHAP analysis reveals that certain rules have significant contributions to predictions, both positive and negative, indicating that some rules may be more influential than others.
+
+2. **Overfitting/Underfitting Assessment:**
+   - The decrease in validation accuracy suggests potential overfitting, where the model may be too tailored to the training data and not generalizing well to new data.
+   - Consistent high SHAP values for certain rules across different molecules indicate that these rules might be overemphasizing certain features, leading to overfitting.
+
+3. **Discrepancies Analysis:**
+   - Rules with high positive SHAP values (e.g., Rule 1, Rule 14) may be contributing to overestimated loadings and need refinement.
+   - Rules with high negative SHAP values (e.g., Rule 9, Rule 10) may be underestimating the loading and could be adjusted.
+
+4. **Accuracy Improvements:**
+   - The current accuracy metrics suggest room for improvement, with a decrease in validation accuracy indicating that the current rules may not be optimal.
+
+5. **Insights from SHAP Analysis:**
+   - SHAP analysis highlights specific rules that consistently contribute to incorrect predictions, suggesting areas for refinement.
+
+### Directions to Optimize Current Rules
+
+1. **Refine Rules with High Positive SHAP Values:**
+   - Re-evaluate Rule 1 and Rule 14 to reduce their influence when not appropriate, possibly by adding conditions or constraints.
+
+2. **Adjust Rules with High Negative SHAP Values:**
+   - Modify Rule 9 and Rule 10 to better capture scenarios where the experimental loading is high but the prediction is low.
+
+3. **Improve Generalization:**
+   - Simplify some rules or combine them to reduce complexity and help the model generalize better to unseen data.
+
+4. **Iterative Refinement Using SHAP Insights:**
+   - Use SHAP insights to iteratively refine the rules, focusing on those that consistently show high SHAP values in incorrect predictions.
+
+5. **Incorporate Additional Features:**
+   - Explore additional chemical properties or structural features that are not currently considered to capture more nuanced interactions.
+
+### Possibility for Further Optimization
+
+There is a possibility for further optimization of the current rules without overfitting by focusing on refining specific rules based on SHAP insights, improving generalization, and incorporating additional features. The current rules demonstrate strong predictive capabilities, but there is room for improvement to enhance accuracy and generalization.
+
+**Please Optimize Rules**
+---------------------------------------------------------------
+Current Rule Metrics:
+
+    Train support: 0.03238095238095238
+    Train confidence: 0.7777777777777779
+    Train lift: 1.5542846768336962
+    Train leverage: 0.011482993197278912
+    -------------------------------------------------------
+
+    Metric Commenter Message:
+Based on the current rule metrics and comparing them to the previous reference metrics, we can make several observations regarding the performance of the current rules:
+
+1. **Confidence**: The current rules exhibit a high level of confidence, with values ranging from 0.7778 to 0.9222. This indicates that when the rule conditions are met, the likelihood of the rule predictions being true is quite high. Compared to the previous reference metrics, where test confidence was as low as 0.3333, the current rules show a significant improvement in confidence. This suggests that the rules are more reliable in predicting outcomes when their conditions are satisfied.
+
+2. **Lift**: The lift values for the current rules range from 1.5543 to 1.8509, which are considerably higher than the previous reference metrics, where test lift values were as low as 0.6889. A lift greater than 1 indicates that the rule conditions increase the likelihood of the rule predictions occurring, compared to random chance. The current lift values suggest that the rules are not only reliable but also provide meaningful insights into the relationships between the conditions and predictions.
+
+3. **Leverage**: The leverage values for the current rules are positive, ranging from 0.0115 to 0.0144. This indicates that the rules provide additional support beyond what would be expected by chance, highlighting a genuine association between the rule conditions and predictions. Although the leverage values are relatively small, they are positive, which is an improvement over some of the previous reference metrics that had negative leverage values.
+
+4. **Support**: The support values for the current rules are relatively low, ranging from 0.0324 to 0.0418. While this indicates that the rules apply to a smaller subset of the data, the high confidence and lift values suggest that these rules are still valuable for identifying specific patterns or relationships within the dataset.
+
+**Recommendations for Improvement**:
+- **Increase Support**: Consider refining the rules to increase their applicability to a larger portion of the dataset. This could involve generalizing some of the conditions or combining similar rules to capture broader patterns.
+- **Focus on High Lift and Confidence**: Continue to prioritize rules with high lift and confidence, as these metrics indicate strong and reliable associations. However, ensure that these rules are not overly specific, which could limit their applicability.
+- **Evaluate Rule Complexity**: Assess the complexity of the rules to ensure they are not overly intricate, which could lead to overfitting. Simplifying rules while maintaining high confidence and lift could improve their generalizability.
+- **Iterate and Validate**: Continue iterating on the rules and validate them against new data to ensure their robustness and applicability in different contexts.
+
+Overall, the current rules demonstrate strong performance in terms of confidence and lift, indicating that they are effective in capturing meaningful relationships within the dataset. Further refinement and validation could enhance their applicability and robustness.
+---------------------------------------------------------------
+Current Accuracy and SHAP analysis:
+< 5 Fold Validation Performance: >
+ 
+    An accuracy of 0.6857142857142857 was obtained using classification model. 
+ 
+ 
+ 
+    < SHAP Analysis Feedback > 
+For molecule C(CC(=O)O)[C@@H](C(=O)O)N, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule1 SHAP value for high loading: 0.5565954822954834; Rule2 SHAP value for high loading: -0.010426770451770461; Rule10 SHAP value for high loading: -0.010454426129426143;  
+For molecule C1=CC(=CC=C1CBr)C(=O)O, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.010452777777777795; Rule2 SHAP value for high loading: 0.5566218253968275; Rule10 SHAP value for high loading: -0.010454761904761927;  
+For molecule C1=CNC(=O)C=C1C(=O)O, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.010452411477411494; Rule2 SHAP value for high loading: -0.010426739926739944; Rule10 SHAP value for high loading: 0.5565934371184409;  
+For molecule C1=CC=C(C=C1)C[C@@H](C(=O)O)N, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.02144466829466826; Rule2 SHAP value for high loading: -0.02139231786731785; Rule10 SHAP value for high loading: -0.02144872812372808;  
+For molecule C1=CN=CC=C1CCCC(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.02144466829466826; Rule2 SHAP value for high loading: -0.02139231786731785; Rule10 SHAP value for high loading: -0.02144872812372808;  
+For molecule C(CC(=O)O)C(=O)CCC(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.02144466829466826; Rule2 SHAP value for high loading: -0.02139231786731785; Rule10 SHAP value for high loading: -0.02144872812372808;  
+For molecule C(CCCC(=O)O)CCCN, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.02144466829466826; Rule2 SHAP value for high loading: -0.02139231786731785; Rule10 SHAP value for high loading: -0.02144872812372808;  
+For molecule C([C@@H](C(=O)O)N)C(=O)O, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule1 SHAP value for high loading: 0.5682446360738026; Rule2 SHAP value for high loading: -0.021694021333604735; Rule10 SHAP value for high loading: -0.010836329025912386;  
+For molecule C1=C(C=NN1)C(=O)O, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.01082193986568988; Rule2 SHAP value for high loading: -0.021693635531135583; Rule10 SHAP value for high loading: 0.5682298611111116;  
+For molecule C(CS)C(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.022361846255596243; Rule2 SHAP value for high loading: -0.04453285765160819; Rule10 SHAP value for high loading: -0.022391010378510396;  
+For molecule C1=CC(=CC=C1C=O)C(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.022361846255596243; Rule2 SHAP value for high loading: -0.04453285765160819; Rule10 SHAP value for high loading: -0.022391010378510396;  
+For molecule COC1=C(C=C(C=C1)C(=O)CCC(=O)O)OC, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.022361846255596243; Rule2 SHAP value for high loading: -0.04453285765160819; Rule10 SHAP value for high loading: -0.022391010378510396;  
+For molecule C(CC(=O)O)CNC(=O)C(F)(F)F, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.022361846255596243; Rule2 SHAP value for high loading: -0.04453285765160819; Rule10 SHAP value for high loading: -0.022391010378510396;  
+For molecule C(CCCN)CCC(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.022361846255596243; Rule2 SHAP value for high loading: -0.04453285765160819; Rule10 SHAP value for high loading: -0.022391010378510396;  
+For molecule C(C(=O)O)NC(CO)(CO)CO, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.04351570543787961; Rule2 SHAP value for high loading: -0.02169828378545782; Rule10 SHAP value for high loading: -0.04348166295057622;  
+For molecule C([C@H]([C@H]([C@@H]([C@H](C(=O)O)O)O)O)O)O, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.04351570543787961; Rule2 SHAP value for high loading: -0.02169828378545782; Rule10 SHAP value for high loading: -0.04348166295057622;  
+For molecule COCCOCCOCC(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.04351570543787961; Rule2 SHAP value for high loading: -0.02169828378545782; Rule10 SHAP value for high loading: -0.04348166295057622;  
+For molecule C1=CC(=CC=C1C2=CC=NC=C2)C(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.04351570543787961; Rule2 SHAP value for high loading: -0.02169828378545782; Rule10 SHAP value for high loading: -0.04348166295057622;  
+For molecule C(=O)(C(C(C(C(F)(F)F)(F)F)(F)F)(F)F)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.04351570543787961; Rule2 SHAP value for high loading: -0.02169828378545782; Rule10 SHAP value for high loading: -0.04348166295057622;  
+For molecule C1=CC(=CC=C1C(=O)O)[N+](=O)[O-], the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.021046893348197718; Rule2 SHAP value for high loading: 0.5420770364176878; Rule10 SHAP value for high loading: -0.021030143069490893;  
+For molecule C1=CC(=CC=C1C(=O)NCC(=O)O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.04351570543787961; Rule2 SHAP value for high loading: -0.02169828378545782; Rule10 SHAP value for high loading: -0.04348166295057622;  
+For molecule C1=CC(=CC=C1C(=O)O)N, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.04552661227661295; Rule2 SHAP value for high loading: -0.045296134421135247; Rule10 SHAP value for high loading: -0.04554088966589032;  
+For molecule C1=CC(=CC=C1CCCCC(=O)O)O, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.04552661227661295; Rule2 SHAP value for high loading: -0.045296134421135247; Rule10 SHAP value for high loading: -0.04554088966589032;  
+For molecule C1=CC(=C(C=C1C=O)C(=O)O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.04552661227661295; Rule2 SHAP value for high loading: -0.045296134421135247; Rule10 SHAP value for high loading: -0.04554088966589032;  
+For molecule C1=CC(=CN=C1)C(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.04552661227661295; Rule2 SHAP value for high loading: -0.045296134421135247; Rule10 SHAP value for high loading: -0.04554088966589032;  
+For molecule CC1=CC=C(C=C1)C(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.04552661227661295; Rule2 SHAP value for high loading: -0.045296134421135247; Rule10 SHAP value for high loading: -0.04554088966589032;  
+For molecule C(COCCOCCN)C(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.04552661227661295; Rule2 SHAP value for high loading: -0.045296134421135247; Rule10 SHAP value for high loading: -0.04554088966589032;  
+For molecule CC(=O)NCCCC[C@@H](C(=O)O)N, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.04552661227661295; Rule2 SHAP value for high loading: -0.045296134421135247; Rule10 SHAP value for high loading: -0.04554088966589032;  
+For molecule C(CCN)CC(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.04552661227661295; Rule2 SHAP value for high loading: -0.045296134421135247; Rule10 SHAP value for high loading: -0.04554088966589032;  
+For molecule CCCCCCCC(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.04552661227661295; Rule2 SHAP value for high loading: -0.045296134421135247; Rule10 SHAP value for high loading: -0.04554088966589032;  
+For molecule C1=CC(=CC=C1C(=O)O)S, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.04552661227661295; Rule2 SHAP value for high loading: -0.045296134421135247; Rule10 SHAP value for high loading: -0.04554088966589032;  
+For molecule C1=CC=C2C(=C1)C(=CN2)C[C@H](C(=O)O)N, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.04552661227661295; Rule2 SHAP value for high loading: -0.045296134421135247; Rule10 SHAP value for high loading: -0.04554088966589032;  
+For molecule CSCC[C@@H](C(=O)NCC(=O)O)N, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.04552661227661295; Rule2 SHAP value for high loading: -0.045296134421135247; Rule10 SHAP value for high loading: -0.04554088966589032;  
+For molecule C(CCCO)CCC(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.04552661227661295; Rule2 SHAP value for high loading: -0.045296134421135247; Rule10 SHAP value for high loading: -0.04554088966589032;  
+For molecule C1=CC(=CC=C1CCC(=O)O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.04552661227661295; Rule2 SHAP value for high loading: -0.045296134421135247; Rule10 SHAP value for high loading: -0.04554088966589032;  
+Traditional Commenter Message:
+### Performance Evaluation of Current Rules
+
+1. **Effectiveness of Current Rules:**
+   - The current rules have shown varying levels of effectiveness across different iterations. The validation accuracy has fluctuated between 0.628 and 0.742, indicating that the rules are not consistently effective. The latest accuracy of 0.685 suggests some improvement but still leaves room for enhancement.
+
+2. **Overfitting/Underfitting Assessment:**
+   - The consistent discrepancies between predicted and experimental values, especially in cases where the predicted loading is high but the experimental value is low, suggest potential overfitting. The model might be too tailored to the training data, failing to generalize well to unseen data.
+
+3. **Discrepancies Analysis:**
+   - For molecules where the predicted loading is high but the experimental value is low, rules with high positive SHAP values (e.g., Rule 1, Rule 2) might be overestimating the loading. Conversely, for molecules where the predicted loading is low but the experimental value is high, rules with high negative SHAP values (e.g., Rule 14, Rule 15) might be underestimating the loading.
+
+4. **Accuracy Improvements:**
+   - The accuracy metrics suggest that there is potential for improvement. The iterative process has not yet reached a local minimum, as indicated by the fluctuating accuracy scores. This suggests that further refinement of the rules could lead to better performance.
+
+5. **Insights from SHAP Analysis:**
+   - SHAP analysis highlights specific rules that contribute significantly to the prediction errors. For instance, Rule 1 and Rule 2 often have high positive SHAP values in cases of overestimation, indicating they might be too aggressive in predicting high loadings. Similarly, Rule 14 and Rule 15 often have high negative SHAP values in cases of underestimation, suggesting they might be too conservative.
+
+### Recommendations for Improvement
+
+1. **Refine Overestimated Rules:**
+   - Rules with high positive SHAP values, such as Rule 1 and Rule 2, should be refined to reduce their influence on predictions. This could involve narrowing the conditions under which these rules apply or adjusting the weight given to these features.
+
+2. **Adjust Underestimated Rules:**
+   - Rules with high negative SHAP values, such as Rule 14 and Rule 15, should be adjusted to increase their influence. This might involve broadening the conditions or increasing the weight of these features in the model.
+
+3. **Improve Generalization:**
+   - To address overfitting, consider simplifying the rules or incorporating regularization techniques. This could help the model generalize better to new data.
+
+4. **Iterative Refinement:**
+   - Use insights from SHAP analysis to iteratively refine the rules. Focus on rules that consistently contribute to prediction errors and adjust them based on the patterns observed in the SHAP values.
+
+5. **Incorporate Additional Features:**
+   - Consider incorporating additional features or modifying existing ones to capture more nuanced interactions between modifiers and catalysts. This could involve exploring new chemical properties or structural features that might influence catalytic performance.
+
+By implementing these recommendations, the rules can be refined to improve the model's accuracy and generalization, ultimately leading to more reliable predictions of modifier loadings on catalysts.
+---------------------------------------------------------------
+Project Manager Message:
+### Summary of Discussions and Directions for Optimization
+
+1. **Effectiveness and Performance:**
+   - The current rules have shown varying effectiveness, with validation accuracy ranging from 0.628 to 0.742. The latest accuracy of 0.685 indicates some improvement but suggests room for further enhancement.
+   - The rules demonstrate high confidence and lift, indicating strong associations, but the support is relatively low, suggesting limited applicability across the dataset.
+
+2. **Overfitting/Underfitting Assessment:**
+   - There are signs of potential overfitting, as indicated by discrepancies between predicted and experimental values. This suggests that the model might be too tailored to the training data.
+
+3. **Discrepancies and SHAP Analysis:**
+   - SHAP analysis reveals specific rules contributing to prediction errors. Rules with high positive SHAP values (e.g., Rule 1, Rule 2) may overestimate loadings, while those with high negative SHAP values (e.g., Rule 14, Rule 15) may underestimate them.
+
+4. **Recommendations for Improvement:**
+   - **Refine Overestimated Rules:** Adjust rules with high positive SHAP values to reduce their influence, possibly by narrowing their conditions or adjusting feature weights.
+   - **Adjust Underestimated Rules:** Increase the influence of rules with high negative SHAP values by broadening conditions or increasing feature weights.
+   - **Improve Generalization:** Simplify rules or incorporate regularization techniques to address overfitting and enhance generalization.
+   - **Iterative Refinement:** Use SHAP insights to iteratively refine rules, focusing on those contributing to prediction errors.
+   - **Incorporate Additional Features:** Explore new chemical properties or structural features to capture more nuanced interactions.
+
+### Possibility for Further Optimization
+
+There is potential for further optimization of the current rules without overfitting. The iterative refinement process, guided by SHAP analysis, can help adjust the rules to improve accuracy and generalization. By focusing on rules that consistently contribute to prediction errors and incorporating additional features, the model can be enhanced to provide more reliable predictions.
+
+**Please Optimize Rules**
+---------------------------------------------------------------
+Current Rule Metrics:
+
+    Train support: 0.03428571428571429
+    Train confidence: 0.9
+    Train lift: 1.8014161220043574
+    Train leverage: 0.015292517006802722
+    -------------------------------------------------------
+
+    Metric Commenter Message:
+Based on the current metrics, the performance of the rules has shown significant improvement compared to the previous metrics. Here's a detailed analysis:
+
+1. **Confidence**: The current train confidence is 0.9, which is a substantial increase from the previous train confidence values of 0.635 and 0.539. This indicates that the rules are now more reliable in predicting the outcomes when the conditions are met. High confidence suggests that the rules are capturing the relationships between the modifiers and the yield effectively.
+
+2. **Lift**: The current train lift is 1.801, which is a marked improvement from the previous lift values of 1.204 and 1.055. A lift greater than 1 indicates that the rule is better than random guessing, and the current lift suggests that the rules are significantly enhancing the probability of achieving the predicted outcome compared to the baseline probability. This high lift value implies that the rules are providing valuable insights into the factors that influence yield.
+
+3. **Leverage**: The current train leverage is 0.015, which is positive and higher than the previous leverage values. Positive leverage indicates that the rules are identifying associations that are stronger than what would be expected by chance. The increase in leverage suggests that the rules are effectively capturing meaningful relationships in the data.
+
+4. **Support**: The current train support is 0.034, which is lower than the previous support values. While support is important for ensuring that the rules apply to a significant portion of the data, the increase in confidence and lift suggests that the rules are more precise, even if they apply to a smaller subset of the data.
+
+**Recommendations for Improvement**:
+
+- **Expand Rule Coverage**: While the current rules are precise, they apply to a smaller subset of the data. Consider exploring additional modifiers or combinations that could increase the support without compromising the confidence and lift.
+
+- **Refine Rule Conditions**: Analyze the conditions of the rules to ensure they are not overly restrictive. Slight modifications or generalizations might increase the applicability of the rules while maintaining high confidence and lift.
+
+- **Test on New Data**: Validate the current rules on a new dataset to ensure their generalizability and robustness. This can help identify any overfitting issues and provide insights into further refinements.
+
+- **Explore Interaction Effects**: Investigate potential interaction effects between different modifiers that might not be captured by the current rules. This could lead to the discovery of new rules with high confidence and lift.
+
+Overall, the current iteration of rules shows promising improvements in terms of confidence and lift, indicating that the rules are effective in predicting high yield outcomes. Further refinements and validations could enhance their applicability and robustness.
+---------------------------------------------------------------
+Current Accuracy and SHAP analysis:
+< 5 Fold Validation Performance: >
+ 
+    An accuracy of 0.6857142857142857 was obtained using classification model. 
+ 
+ 
+ 
+    < SHAP Analysis Feedback > 
+For molecule C(CC(=O)O)[C@@H](C(=O)O)N, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule1 SHAP value for high loading: 0.593718345827043; Rule2 SHAP value for high loading: -0.011546092543225653; Rule5 SHAP value for high loading: -0.011617096030814289; Rule10 SHAP value for high loading: -0.01160519221636517; Rule11 SHAP value for high loading: -0.011558140067460683; Rule15 SHAP value for high loading: -0.011677539254894342;  
+For molecule C1=CC(=CC=C1CBr)C(=O)O, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.011628240057128151; Rule2 SHAP value for high loading: 0.5938049590961051; Rule5 SHAP value for high loading: -0.011618221404115866; Rule10 SHAP value for high loading: -0.011606301893808643; Rule11 SHAP value for high loading: -0.011559273596857322; Rule15 SHAP value for high loading: -0.011678636429911345;  
+For molecule C1=CNC(=O)C=C1C(=O)O, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.01162742837476531; Rule2 SHAP value for high loading: -0.011546390538306245; Rule5 SHAP value for high loading: -0.011617356726740769; Rule10 SHAP value for high loading: 0.5937417857471277; Rule11 SHAP value for high loading: -0.011558491111679467; Rule15 SHAP value for high loading: -0.01167783328135229;  
+For molecule C1=CC=C(C=C1)C[C@@H](C(=O)O)N, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.02439630586921784; Rule2 SHAP value for high loading: -0.02422754508625421; Rule5 SHAP value for high loading: -0.024375415516783152; Rule10 SHAP value for high loading: -0.02435062979073381; Rule11 SHAP value for high loading: -0.024252614399321727; Rule15 SHAP value for high loading: -0.02450138544158451;  
+For molecule C1=CN=CC=C1CCCC(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.02439630586921784; Rule2 SHAP value for high loading: -0.02422754508625421; Rule5 SHAP value for high loading: -0.024375415516783152; Rule10 SHAP value for high loading: -0.02435062979073381; Rule11 SHAP value for high loading: -0.024252614399321727; Rule15 SHAP value for high loading: -0.02450138544158451;  
+For molecule C(CC(=O)O)C(=O)CCC(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.02439630586921784; Rule2 SHAP value for high loading: -0.02422754508625421; Rule5 SHAP value for high loading: -0.024375415516783152; Rule10 SHAP value for high loading: -0.02435062979073381; Rule11 SHAP value for high loading: -0.024252614399321727; Rule15 SHAP value for high loading: -0.02450138544158451;  
+For molecule C(CCCC(=O)O)CCCN, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.02439630586921784; Rule2 SHAP value for high loading: -0.02422754508625421; Rule5 SHAP value for high loading: -0.024375415516783152; Rule10 SHAP value for high loading: -0.02435062979073381; Rule11 SHAP value for high loading: -0.024252614399321727; Rule15 SHAP value for high loading: -0.02450138544158451;  
+For molecule C([C@@H](C(=O)O)N)C(=O)O, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule1 SHAP value for high loading: 0.5804952189617956; Rule2 SHAP value for high loading: -0.022260089481104122; Rule5 SHAP value for high loading: 0.0; Rule10 SHAP value for high loading: -0.011248720750532328; Rule11 SHAP value for high loading: 0.0; Rule15 SHAP value for high loading: -0.011272123015873013;  
+For molecule C1=C(C=NN1)C(=O)O, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.01130373172184766; Rule2 SHAP value for high loading: -0.02226153322656964; Rule5 SHAP value for high loading: 0.0; Rule10 SHAP value for high loading: 0.5805524533940284; Rule11 SHAP value for high loading: 0.0; Rule15 SHAP value for high loading: -0.011272902731326643;  
+For molecule C(CS)C(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.023531901366548005; Rule2 SHAP value for high loading: -0.04603992897031896; Rule5 SHAP value for high loading: 0.0; Rule10 SHAP value for high loading: -0.023419655962998293; Rule11 SHAP value for high loading: 0.0; Rule15 SHAP value for high loading: -0.023468141029327552;  
+For molecule C1=CC(=CC=C1C=O)C(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.023531901366548005; Rule2 SHAP value for high loading: -0.04603992897031896; Rule5 SHAP value for high loading: 0.0; Rule10 SHAP value for high loading: -0.023419655962998293; Rule11 SHAP value for high loading: 0.0; Rule15 SHAP value for high loading: -0.023468141029327552;  
+For molecule COC1=C(C=C(C=C1)C(=O)CCC(=O)O)OC, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.023531901366548005; Rule2 SHAP value for high loading: -0.04603992897031896; Rule5 SHAP value for high loading: 0.0; Rule10 SHAP value for high loading: -0.023419655962998293; Rule11 SHAP value for high loading: 0.0; Rule15 SHAP value for high loading: -0.023468141029327552;  
+For molecule C(CC(=O)O)CNC(=O)C(F)(F)F, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.023531901366548005; Rule2 SHAP value for high loading: -0.04603992897031896; Rule5 SHAP value for high loading: 0.0; Rule10 SHAP value for high loading: -0.023419655962998293; Rule11 SHAP value for high loading: 0.0; Rule15 SHAP value for high loading: -0.023468141029327552;  
+For molecule C(CCCN)CCC(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.023531901366548005; Rule2 SHAP value for high loading: -0.04603992897031896; Rule5 SHAP value for high loading: 0.0; Rule10 SHAP value for high loading: -0.023419655962998293; Rule11 SHAP value for high loading: 0.0; Rule15 SHAP value for high loading: -0.023468141029327552;  
+For molecule C(C(=O)O)NC(CO)(CO)CO, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.048702508120884266; Rule2 SHAP value for high loading: -0.025683475594311618; Rule5 SHAP value for high loading: -0.02571422115930676; Rule10 SHAP value for high loading: -0.04830400870719628; Rule11 SHAP value for high loading: -0.025668182555595977; Rule15 SHAP value for high loading: -0.0259276038627056;  
+For molecule C([C@H]([C@H]([C@@H]([C@H](C(=O)O)O)O)O)O)O, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.048702508120884266; Rule2 SHAP value for high loading: -0.025683475594311618; Rule5 SHAP value for high loading: -0.02571422115930676; Rule10 SHAP value for high loading: -0.04830400870719628; Rule11 SHAP value for high loading: -0.025668182555595977; Rule15 SHAP value for high loading: -0.0259276038627056;  
+For molecule COCCOCCOCC(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.048702508120884266; Rule2 SHAP value for high loading: -0.025683475594311618; Rule5 SHAP value for high loading: -0.02571422115930676; Rule10 SHAP value for high loading: -0.04830400870719628; Rule11 SHAP value for high loading: -0.025668182555595977; Rule15 SHAP value for high loading: -0.0259276038627056;  
+For molecule C1=CC(=CC=C1C2=CC=NC=C2)C(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.048702508120884266; Rule2 SHAP value for high loading: -0.025683475594311618; Rule5 SHAP value for high loading: -0.02571422115930676; Rule10 SHAP value for high loading: -0.04830400870719628; Rule11 SHAP value for high loading: -0.025668182555595977; Rule15 SHAP value for high loading: -0.0259276038627056;  
+For molecule C(=O)(C(C(C(C(F)(F)F)(F)F)(F)F)(F)F)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.048702508120884266; Rule2 SHAP value for high loading: -0.025683475594311618; Rule5 SHAP value for high loading: -0.02571422115930676; Rule10 SHAP value for high loading: -0.04830400870719628; Rule11 SHAP value for high loading: -0.025668182555595977; Rule15 SHAP value for high loading: -0.0259276038627056;  
+For molecule C1=CC(=CC=C1C(=O)O)[N+](=O)[O-], the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.022973616666717284; Rule2 SHAP value for high loading: 0.5819737674663966; Rule5 SHAP value for high loading: -0.012046292693901835; Rule10 SHAP value for high loading: -0.0227824364326361; Rule11 SHAP value for high loading: -0.01202456585916396; Rule15 SHAP value for high loading: -0.012146855813977914;  
+For molecule C1=CC(=CC=C1C(=O)NCC(=O)O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.048702508120884266; Rule2 SHAP value for high loading: -0.025683475594311618; Rule5 SHAP value for high loading: -0.02571422115930676; Rule10 SHAP value for high loading: -0.04830400870719628; Rule11 SHAP value for high loading: -0.025668182555595977; Rule15 SHAP value for high loading: -0.0259276038627056;  
+For molecule C1=CC(=CC=C1C(=O)O)N, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.0493357679727635; Rule2 SHAP value for high loading: -0.04940317051658754; Rule5 SHAP value for high loading: -0.02596200504607668; Rule10 SHAP value for high loading: -0.049367308758176943; Rule11 SHAP value for high loading: -0.02593174770639548; Rule15 SHAP value for high loading: 0.0;  
+For molecule C1=CC(=CC=C1CCCCC(=O)O)O, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.0493357679727635; Rule2 SHAP value for high loading: -0.04940317051658754; Rule5 SHAP value for high loading: -0.02596200504607668; Rule10 SHAP value for high loading: -0.049367308758176943; Rule11 SHAP value for high loading: -0.02593174770639548; Rule15 SHAP value for high loading: 0.0;  
+For molecule C1=CC(=C(C=C1C=O)C(=O)O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.0493357679727635; Rule2 SHAP value for high loading: -0.04940317051658754; Rule5 SHAP value for high loading: -0.02596200504607668; Rule10 SHAP value for high loading: -0.049367308758176943; Rule11 SHAP value for high loading: -0.02593174770639548; Rule15 SHAP value for high loading: 0.0;  
+For molecule C1=CC(=CN=C1)C(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.0493357679727635; Rule2 SHAP value for high loading: -0.04940317051658754; Rule5 SHAP value for high loading: -0.02596200504607668; Rule10 SHAP value for high loading: -0.049367308758176943; Rule11 SHAP value for high loading: -0.02593174770639548; Rule15 SHAP value for high loading: 0.0;  
+For molecule CC1=CC=C(C=C1)C(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.0493357679727635; Rule2 SHAP value for high loading: -0.04940317051658754; Rule5 SHAP value for high loading: -0.02596200504607668; Rule10 SHAP value for high loading: -0.049367308758176943; Rule11 SHAP value for high loading: -0.02593174770639548; Rule15 SHAP value for high loading: 0.0;  
+For molecule C(COCCOCCN)C(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.0493357679727635; Rule2 SHAP value for high loading: -0.04940317051658754; Rule5 SHAP value for high loading: -0.02596200504607668; Rule10 SHAP value for high loading: -0.049367308758176943; Rule11 SHAP value for high loading: -0.02593174770639548; Rule15 SHAP value for high loading: 0.0;  
+For molecule CC(=O)NCCCC[C@@H](C(=O)O)N, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.0493357679727635; Rule2 SHAP value for high loading: -0.04940317051658754; Rule5 SHAP value for high loading: -0.02596200504607668; Rule10 SHAP value for high loading: -0.049367308758176943; Rule11 SHAP value for high loading: -0.02593174770639548; Rule15 SHAP value for high loading: 0.0;  
+For molecule C(CCN)CC(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.051790244790038256; Rule2 SHAP value for high loading: -0.05128395715107735; Rule5 SHAP value for high loading: -0.027681419992055974; Rule10 SHAP value for high loading: -0.05086992607129421; Rule11 SHAP value for high loading: -0.027437776477847488; Rule15 SHAP value for high loading: -0.027778780780845155;  
+For molecule CCCCCCCC(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.051790244790038256; Rule2 SHAP value for high loading: -0.05128395715107735; Rule5 SHAP value for high loading: -0.027681419992055974; Rule10 SHAP value for high loading: -0.05086992607129421; Rule11 SHAP value for high loading: -0.027437776477847488; Rule15 SHAP value for high loading: -0.027778780780845155;  
+For molecule C1=CC(=CC=C1C(=O)O)S, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.051790244790038256; Rule2 SHAP value for high loading: -0.05128395715107735; Rule5 SHAP value for high loading: -0.027681419992055974; Rule10 SHAP value for high loading: -0.05086992607129421; Rule11 SHAP value for high loading: -0.027437776477847488; Rule15 SHAP value for high loading: -0.027778780780845155;  
+For molecule C1=CC=C2C(=C1)C(=CN2)C[C@H](C(=O)O)N, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.051790244790038256; Rule2 SHAP value for high loading: -0.05128395715107735; Rule5 SHAP value for high loading: -0.027681419992055974; Rule10 SHAP value for high loading: -0.05086992607129421; Rule11 SHAP value for high loading: -0.027437776477847488; Rule15 SHAP value for high loading: -0.027778780780845155;  
+For molecule CSCC[C@@H](C(=O)NCC(=O)O)N, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.051790244790038256; Rule2 SHAP value for high loading: -0.05128395715107735; Rule5 SHAP value for high loading: -0.027681419992055974; Rule10 SHAP value for high loading: -0.05086992607129421; Rule11 SHAP value for high loading: -0.027437776477847488; Rule15 SHAP value for high loading: -0.027778780780845155;  
+For molecule C(CCCO)CCC(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.051790244790038256; Rule2 SHAP value for high loading: -0.05128395715107735; Rule5 SHAP value for high loading: -0.027681419992055974; Rule10 SHAP value for high loading: -0.05086992607129421; Rule11 SHAP value for high loading: -0.027437776477847488; Rule15 SHAP value for high loading: -0.027778780780845155;  
+For molecule C1=CC(=CC=C1CCC(=O)O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.051790244790038256; Rule2 SHAP value for high loading: -0.05128395715107735; Rule5 SHAP value for high loading: -0.027681419992055974; Rule10 SHAP value for high loading: -0.05086992607129421; Rule11 SHAP value for high loading: -0.027437776477847488; Rule15 SHAP value for high loading: -0.027778780780845155;  
+Traditional Commenter Message:
+### Performance Evaluation of Current Rules
+
+1. **Effectiveness of Current Rules:**
+   - The current rules have shown varying levels of effectiveness across different iterations. The validation accuracy has fluctuated between 0.628 and 0.742, indicating some inconsistency in performance. The current accuracy of 0.685 suggests that while the rules are somewhat effective, there is room for improvement.
+
+2. **Overfitting/Underfitting Assessment:**
+   - The consistent validation accuracy across iterations suggests that the model may not be overfitting significantly. However, the drop in accuracy in some iterations could indicate potential underfitting, where the rules are not capturing all the necessary patterns in the data.
+
+3. **Discrepancy Analysis:**
+   - For molecules where the predicted loading is high but the experimental value is low, rules with high positive SHAP values (e.g., Rule 1, Rule 2) may be overestimating the loading. Conversely, for molecules where the predicted loading is low but the experimental value is high, rules with high negative SHAP values (e.g., Rule 9, Rule 14) may be underestimating the loading.
+
+4. **Accuracy Improvements:**
+   - The accuracy metrics suggest that there is potential for improvement. The current rules have not yet reached a local minimum, as indicated by the fluctuating accuracy across iterations. This suggests that further refinement of the rules could lead to better performance.
+
+5. **Insights from SHAP Analysis:**
+   - The SHAP analysis highlights specific rules that contribute significantly to the predictions. For instance, Rule 1 and Rule 2 often have high positive SHAP values, indicating their strong influence on high loading predictions. Adjusting these rules could help in reducing overestimation. Similarly, rules like Rule 9 and Rule 14, which have high negative SHAP values, could be adjusted to improve predictions for low loadings.
+
+### Recommendations for Improvement
+
+1. **Refine Overestimated Rules:**
+   - Rules with high positive SHAP values, such as Rule 1 and Rule 2, should be refined to reduce overestimation. This could involve narrowing the conditions under which these rules predict high loading or introducing additional criteria to better capture the nuances of the data.
+
+2. **Adjust Underestimated Rules:**
+   - Rules with high negative SHAP values, such as Rule 9 and Rule 14, should be adjusted to better capture cases where the experimental loading is high. This could involve relaxing some of the conditions or incorporating additional features that are indicative of high loading.
+
+3. **Improve Generalization:**
+   - To address potential underfitting, consider expanding the feature set used in the rules. This could involve incorporating additional chemical properties or structural features that are relevant to the catalytic process.
+
+4. **Iterative Refinement:**
+   - Use insights from the SHAP analysis to iteratively refine the rules. This involves testing small changes to the rules and evaluating their impact on validation accuracy. Continuous iteration and evaluation will help in converging towards a more optimal set of rules.
+
+5. **Incorporate Domain Knowledge:**
+   - Collaborate with domain experts to incorporate additional chemical insights into the rules. This could involve understanding the underlying chemistry of the modifiers and catalysts to better inform rule adjustments.
+
+By implementing these recommendations, the rules can be refined to improve their predictive accuracy and generalization, ultimately leading to better performance in predicting the loading of modifiers on catalysts.
+---------------------------------------------------------------
+Project Manager Message:
+### Summary of Discussions
+
+1. **Effectiveness of Current Rules:**
+   - The current rules have shown some effectiveness, with validation accuracy ranging from 0.628 to 0.742. However, the current accuracy of 0.685 indicates that there is room for improvement.
+
+2. **Overfitting/Underfitting Assessment:**
+   - The consistent validation accuracy suggests minimal overfitting, but the drop in accuracy in some iterations indicates potential underfitting, where the rules may not be capturing all necessary patterns.
+
+3. **Discrepancy Analysis:**
+   - Discrepancies between predicted and experimental values highlight rules with high positive SHAP values (e.g., Rule 1, Rule 2) that may overestimate loading and rules with high negative SHAP values (e.g., Rule 9, Rule 14) that may underestimate loading.
+
+4. **Accuracy Improvements:**
+   - The fluctuating accuracy across iterations suggests that the rules have not yet reached a local minimum, indicating potential for further refinement.
+
+5. **Insights from SHAP Analysis:**
+   - SHAP analysis identifies specific rules contributing significantly to predictions, providing a basis for targeted adjustments to improve accuracy.
+
+### Directions for Optimization
+
+1. **Refine Overestimated Rules:**
+   - Adjust rules with high positive SHAP values (e.g., Rule 1, Rule 2) to reduce overestimation by narrowing conditions or introducing additional criteria.
+
+2. **Adjust Underestimated Rules:**
+   - Modify rules with high negative SHAP values (e.g., Rule 9, Rule 14) to better capture high loading cases by relaxing conditions or incorporating additional features.
+
+3. **Improve Generalization:**
+   - Expand the feature set used in the rules to address potential underfitting, incorporating additional chemical properties or structural features relevant to the catalytic process.
+
+4. **Iterative Refinement:**
+   - Use SHAP insights to iteratively refine rules, testing small changes and evaluating their impact on validation accuracy to converge towards optimal rules.
+
+5. **Incorporate Domain Knowledge:**
+   - Collaborate with domain experts to incorporate additional chemical insights into the rules, understanding the underlying chemistry of modifiers and catalysts to inform adjustments.
+
+### Possibility for Further Optimization
+
+There is a possibility for further optimization of the current rules without overfitting. The fluctuating accuracy and insights from SHAP analysis suggest that targeted adjustments can improve predictive accuracy and generalization.
+
+**Please Optimize Rules**
+---------------------------------------------------------------
+Current Rule Metrics:
+
+    Train support: 0.03619047619047619
+    Train confidence: 0.8055555555555555
+    Train lift: 1.6088779956427017
+    Train leverage: 0.013333333333333334
+    -------------------------------------------------------
+
+    Metric Commenter Message:
+Based on the current rule metrics, we can observe several key points regarding the performance of the rules:
+
+1. **Confidence**: The current rules exhibit high confidence levels, with values ranging from 0.777 to 0.922. This indicates that when the rule conditions are met, there is a strong likelihood that the predicted outcome will also occur. Compared to the previous reference metrics, where test confidence was lower (0.333 to 0.463), the current rules show a significant improvement in confidence. This suggests that the rules are more reliable in predicting outcomes when the conditions are satisfied.
+
+2. **Lift**: The lift values for the current rules are notably higher, ranging from 1.554 to 1.851. This indicates that the rules provide a substantial improvement over random guessing, as the lift values are significantly greater than 1. In comparison, the previous reference metrics had lift values closer to 1, especially in the test set (0.688 to 0.914), indicating that the previous rules were less effective in distinguishing the predicted outcomes from the baseline probability. The current lift values suggest that the rules are more interesting and impactful.
+
+3. **Leverage**: The leverage values for the current rules are positive, ranging from 0.011 to 0.015. This indicates that the rules provide additional support beyond what would be expected by chance. The previous reference metrics showed negative leverage values in the test set, indicating weaker associations. The positive leverage in the current rules suggests stronger associations between the conditions and predictions.
+
+4. **Support**: The support values for the current rules are relatively low, ranging from 0.032 to 0.042. While this indicates that the rules apply to a smaller portion of the dataset, the high confidence and lift values suggest that when the rules do apply, they are quite effective.
+
+**Recommendations for Improvement**:
+
+- **Increase Support**: While the current rules are effective, they apply to a relatively small portion of the dataset. Exploring ways to increase the support of the rules without compromising confidence and lift could make the rules more broadly applicable.
+
+- **Refine Rule Conditions**: Consider refining the rule conditions to capture more instances without losing the high confidence and lift. This could involve exploring additional features or combinations of features that might enhance the applicability of the rules.
+
+- **Test Generalization**: Ensure that the rules generalize well to unseen data by validating them on a separate test set. This will help confirm that the high confidence and lift are not overfitting to the training data.
+
+- **Iterate and Optimize**: Continue iterating on the rules, using the current metrics as a benchmark. Focus on maintaining or improving confidence and lift while attempting to increase support.
+
+Overall, the current rules show strong performance in terms of confidence and lift, indicating effective predictive power. However, there is room for improvement in terms of support and generalization to ensure the rules are both effective and broadly applicable.
+---------------------------------------------------------------
+Current Accuracy and SHAP analysis:
+< 5 Fold Validation Performance: >
+ 
+    An accuracy of 0.6857142857142857 was obtained using classification model. 
+ 
+ 
+ 
+    < SHAP Analysis Feedback > 
+For molecule C(CC(=O)O)[C@@H](C(=O)O)N, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule1 SHAP value for high loading: 0.5401425599995646; Rule2 SHAP value for high loading: -0.010944136457569618; Rule5 SHAP value for high loading: -0.010980636145502019; Rule10 SHAP value for high loading: -0.010999523679485316; Rule11 SHAP value for high loading: -0.010967235743353043; Rule14 SHAP value for high loading: 0.03946325774063006;  
+For molecule C1=CC(=CC=C1CBr)C(=O)O, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.010987510379493496; Rule2 SHAP value for high loading: 0.5411655899954056; Rule5 SHAP value for high loading: -0.010981200697133644; Rule10 SHAP value for high loading: -0.01099605678749634; Rule11 SHAP value for high loading: -0.010963189697718272; Rule14 SHAP value for high loading: 0.03847665328072155;  
+For molecule C1=CNC(=O)C=C1C(=O)O, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.010988381813548945; Rule2 SHAP value for high loading: -0.010941384688868676; Rule5 SHAP value for high loading: -0.010977542272915192; Rule10 SHAP value for high loading: 0.5407414715928159; Rule11 SHAP value for high loading: -0.010957436442129428; Rule14 SHAP value for high loading: 0.03883755933893242;  
+For molecule C1=CC=C(C=C1)C[C@@H](C(=O)O)N, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.022934224358197194; Rule2 SHAP value for high loading: -0.022806340733925415; Rule5 SHAP value for high loading: -0.022911919158881897; Rule10 SHAP value for high loading: -0.022933150511135116; Rule11 SHAP value for high loading: -0.022839601651388205; Rule14 SHAP value for high loading: 0.031091903080194223;  
+For molecule C1=CN=CC=C1CCCC(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.022934224358197194; Rule2 SHAP value for high loading: -0.022806340733925415; Rule5 SHAP value for high loading: -0.022911919158881897; Rule10 SHAP value for high loading: -0.022933150511135116; Rule11 SHAP value for high loading: -0.022839601651388205; Rule14 SHAP value for high loading: 0.031091903080194223;  
+For molecule C(CC(=O)O)C(=O)CCC(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.022934224358197194; Rule2 SHAP value for high loading: -0.022806340733925415; Rule5 SHAP value for high loading: -0.022911919158881897; Rule10 SHAP value for high loading: -0.022933150511135116; Rule11 SHAP value for high loading: -0.022839601651388205; Rule14 SHAP value for high loading: 0.031091903080194223;  
+For molecule C(CCCC(=O)O)CCCN, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.022934224358197194; Rule2 SHAP value for high loading: -0.022806340733925415; Rule5 SHAP value for high loading: -0.022911919158881897; Rule10 SHAP value for high loading: -0.022933150511135116; Rule11 SHAP value for high loading: -0.022839601651388205; Rule14 SHAP value for high loading: 0.031091903080194223;  
+For molecule C([C@@H](C(=O)O)N)C(=O)O, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule1 SHAP value for high loading: 0.552444344409839; Rule2 SHAP value for high loading: -0.021456825613105877; Rule5 SHAP value for high loading: 0.0; Rule10 SHAP value for high loading: -0.010771627647714598; Rule11 SHAP value for high loading: 0.0; Rule14 SHAP value for high loading: 0.015498394565266523;  
+For molecule C1=C(C=NN1)C(=O)O, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.010809247646475922; Rule2 SHAP value for high loading: -0.021448802934630275; Rule5 SHAP value for high loading: 0.0; Rule10 SHAP value for high loading: 0.553382927392207; Rule11 SHAP value for high loading: 0.0; Rule14 SHAP value for high loading: 0.014589408903183047;  
+For molecule C(CS)C(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.022279524234711384; Rule2 SHAP value for high loading: -0.043856654709801185; Rule5 SHAP value for high loading: 0.0; Rule10 SHAP value for high loading: -0.02216998792024755; Rule11 SHAP value for high loading: 0.0; Rule14 SHAP value for high loading: 0.01532480040513248;  
+For molecule C1=CC(=CC=C1C=O)C(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.021440432017660275; Rule2 SHAP value for high loading: -0.04454810523860683; Rule5 SHAP value for high loading: 0.0; Rule10 SHAP value for high loading: -0.022206748162599654; Rule11 SHAP value for high loading: 0.0; Rule14 SHAP value for high loading: -0.3760904288668506;  
+For molecule COC1=C(C=C(C=C1)C(=O)CCC(=O)O)OC, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.022279524234711384; Rule2 SHAP value for high loading: -0.043856654709801185; Rule5 SHAP value for high loading: 0.0; Rule10 SHAP value for high loading: -0.02216998792024755; Rule11 SHAP value for high loading: 0.0; Rule14 SHAP value for high loading: 0.01532480040513248;  
+For molecule C(CC(=O)O)CNC(=O)C(F)(F)F, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.022279524234711384; Rule2 SHAP value for high loading: -0.043856654709801185; Rule5 SHAP value for high loading: 0.0; Rule10 SHAP value for high loading: -0.02216998792024755; Rule11 SHAP value for high loading: 0.0; Rule14 SHAP value for high loading: 0.01532480040513248;  
+For molecule C(CCCN)CCC(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.022279524234711384; Rule2 SHAP value for high loading: -0.043856654709801185; Rule5 SHAP value for high loading: 0.0; Rule10 SHAP value for high loading: -0.02216998792024755; Rule11 SHAP value for high loading: 0.0; Rule14 SHAP value for high loading: 0.01532480040513248;  
+For molecule C(C(=O)O)NC(CO)(CO)CO, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.048309975036658286; Rule2 SHAP value for high loading: -0.04812071045052956; Rule5 SHAP value for high loading: -0.02623415231470435; Rule10 SHAP value for high loading: -0.048061366668138705; Rule11 SHAP value for high loading: -0.0260706924058292; Rule14 SHAP value for high loading: 0.030130230209192442;  
+For molecule C([C@H]([C@H]([C@@H]([C@H](C(=O)O)O)O)O)O)O, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.048309975036658286; Rule2 SHAP value for high loading: -0.04812071045052956; Rule5 SHAP value for high loading: -0.02623415231470435; Rule10 SHAP value for high loading: -0.048061366668138705; Rule11 SHAP value for high loading: -0.0260706924058292; Rule14 SHAP value for high loading: 0.030130230209192442;  
+For molecule COCCOCCOCC(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.048309975036658286; Rule2 SHAP value for high loading: -0.04812071045052956; Rule5 SHAP value for high loading: -0.02623415231470435; Rule10 SHAP value for high loading: -0.048061366668138705; Rule11 SHAP value for high loading: -0.0260706924058292; Rule14 SHAP value for high loading: 0.030130230209192442;  
+For molecule C1=CC(=CC=C1C2=CC=NC=C2)C(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.048309975036658286; Rule2 SHAP value for high loading: -0.04812071045052956; Rule5 SHAP value for high loading: -0.02623415231470435; Rule10 SHAP value for high loading: -0.048061366668138705; Rule11 SHAP value for high loading: -0.0260706924058292; Rule14 SHAP value for high loading: 0.030130230209192442;  
+For molecule C(=O)(C(C(C(C(F)(F)F)(F)F)(F)F)(F)F)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.048309975036658286; Rule2 SHAP value for high loading: -0.04812071045052956; Rule5 SHAP value for high loading: -0.02623415231470435; Rule10 SHAP value for high loading: -0.048061366668138705; Rule11 SHAP value for high loading: -0.0260706924058292; Rule14 SHAP value for high loading: 0.030130230209192442;  
+For molecule C1=CC(=CC=C1C(=O)O)[N+](=O)[O-], the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.048309975036658286; Rule2 SHAP value for high loading: -0.04812071045052956; Rule5 SHAP value for high loading: -0.02623415231470435; Rule10 SHAP value for high loading: -0.048061366668138705; Rule11 SHAP value for high loading: -0.0260706924058292; Rule14 SHAP value for high loading: 0.030130230209192442;  
+For molecule C1=CC(=CC=C1C(=O)NCC(=O)O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.048309975036658286; Rule2 SHAP value for high loading: -0.04812071045052956; Rule5 SHAP value for high loading: -0.02623415231470435; Rule10 SHAP value for high loading: -0.048061366668138705; Rule11 SHAP value for high loading: -0.0260706924058292; Rule14 SHAP value for high loading: 0.030130230209192442;  
+For molecule C1=CC(=CC=C1C(=O)O)N, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.04633980648602972; Rule2 SHAP value for high loading: -0.024167473094009368; Rule5 SHAP value for high loading: -0.024260783993941794; Rule10 SHAP value for high loading: -0.04598701869794961; Rule11 SHAP value for high loading: -0.024190685376071757; Rule14 SHAP value for high loading: 0.014945767648001644;  
+For molecule C1=CC(=CC=C1CCCCC(=O)O)O, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.04633980648602972; Rule2 SHAP value for high loading: -0.024167473094009368; Rule5 SHAP value for high loading: -0.024260783993941794; Rule10 SHAP value for high loading: -0.04598701869794961; Rule11 SHAP value for high loading: -0.024190685376071757; Rule14 SHAP value for high loading: 0.014945767648001644;  
+For molecule C1=CC(=C(C=C1C=O)C(=O)O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.048399233339008765; Rule2 SHAP value for high loading: -0.023565896092596857; Rule5 SHAP value for high loading: -0.02311084517004015; Rule10 SHAP value for high loading: -0.04841381943968496; Rule11 SHAP value for high loading: -0.023500296752934868; Rule14 SHAP value for high loading: -0.3330099092057345;  
+For molecule C1=CC(=CN=C1)C(=O)O, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.02217096796215862; Rule2 SHAP value for high loading: 0.5525418547494495; Rule5 SHAP value for high loading: -0.011496568854292242; Rule10 SHAP value for high loading: -0.022000763770389984; Rule11 SHAP value for high loading: -0.011472823176957515; Rule14 SHAP value for high loading: 0.014599269014348876;  
+For molecule CC1=CC=C(C=C1)C(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.04633980648602972; Rule2 SHAP value for high loading: -0.024167473094009368; Rule5 SHAP value for high loading: -0.024260783993941794; Rule10 SHAP value for high loading: -0.04598701869794961; Rule11 SHAP value for high loading: -0.024190685376071757; Rule14 SHAP value for high loading: 0.014945767648001644;  
+For molecule C(COCCOCCN)C(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.04633980648602972; Rule2 SHAP value for high loading: -0.024167473094009368; Rule5 SHAP value for high loading: -0.024260783993941794; Rule10 SHAP value for high loading: -0.04598701869794961; Rule11 SHAP value for high loading: -0.024190685376071757; Rule14 SHAP value for high loading: 0.014945767648001644;  
+For molecule CC(=O)NCCCC[C@@H](C(=O)O)N, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.04633980648602972; Rule2 SHAP value for high loading: -0.024167473094009368; Rule5 SHAP value for high loading: -0.024260783993941794; Rule10 SHAP value for high loading: -0.04598701869794961; Rule11 SHAP value for high loading: -0.024190685376071757; Rule14 SHAP value for high loading: 0.014945767648001644;  
+For molecule C(CCN)CC(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.048309975036658286; Rule2 SHAP value for high loading: -0.04812071045052956; Rule5 SHAP value for high loading: -0.02623415231470435; Rule10 SHAP value for high loading: -0.048061366668138705; Rule11 SHAP value for high loading: -0.0260706924058292; Rule14 SHAP value for high loading: 0.030130230209192442;  
+For molecule CCCCCCCC(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.048309975036658286; Rule2 SHAP value for high loading: -0.04812071045052956; Rule5 SHAP value for high loading: -0.02623415231470435; Rule10 SHAP value for high loading: -0.048061366668138705; Rule11 SHAP value for high loading: -0.0260706924058292; Rule14 SHAP value for high loading: 0.030130230209192442;  
+For molecule C1=CC(=CC=C1C(=O)O)S, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.048309975036658286; Rule2 SHAP value for high loading: -0.04812071045052956; Rule5 SHAP value for high loading: -0.02623415231470435; Rule10 SHAP value for high loading: -0.048061366668138705; Rule11 SHAP value for high loading: -0.0260706924058292; Rule14 SHAP value for high loading: 0.030130230209192442;  
+For molecule C1=CC=C2C(=C1)C(=CN2)C[C@H](C(=O)O)N, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.048309975036658286; Rule2 SHAP value for high loading: -0.04812071045052956; Rule5 SHAP value for high loading: -0.02623415231470435; Rule10 SHAP value for high loading: -0.048061366668138705; Rule11 SHAP value for high loading: -0.0260706924058292; Rule14 SHAP value for high loading: 0.030130230209192442;  
+For molecule CSCC[C@@H](C(=O)NCC(=O)O)N, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.048309975036658286; Rule2 SHAP value for high loading: -0.04812071045052956; Rule5 SHAP value for high loading: -0.02623415231470435; Rule10 SHAP value for high loading: -0.048061366668138705; Rule11 SHAP value for high loading: -0.0260706924058292; Rule14 SHAP value for high loading: 0.030130230209192442;  
+For molecule C(CCCO)CCC(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.048309975036658286; Rule2 SHAP value for high loading: -0.04812071045052956; Rule5 SHAP value for high loading: -0.02623415231470435; Rule10 SHAP value for high loading: -0.048061366668138705; Rule11 SHAP value for high loading: -0.0260706924058292; Rule14 SHAP value for high loading: 0.030130230209192442;  
+For molecule C1=CC(=CC=C1CCC(=O)O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.048309975036658286; Rule2 SHAP value for high loading: -0.04812071045052956; Rule5 SHAP value for high loading: -0.02623415231470435; Rule10 SHAP value for high loading: -0.048061366668138705; Rule11 SHAP value for high loading: -0.0260706924058292; Rule14 SHAP value for high loading: 0.030130230209192442;  
+Traditional Commenter Message:
+### Performance Evaluation of Current Rules
+
+1. **Effectiveness of Current Rules:**
+   - The current rules have shown varying levels of effectiveness across different iterations. The validation accuracy has fluctuated between 0.628 and 0.742, indicating some inconsistency in performance. The latest validation accuracy is 0.6857, which is slightly below the highest observed accuracy but still within a reasonable range.
+
+2. **Overfitting/Underfitting Assessment:**
+   - The consistent fluctuation in validation accuracy suggests potential overfitting or underfitting issues. The model may be overfitting to specific features or rules that do not generalize well across different datasets. The SHAP values indicate that certain rules have a strong influence on predictions, which could lead to overfitting if these rules are not universally applicable.
+
+3. **Discrepancy Analysis:**
+   - For molecules where the predicted loading is high but the experimental value is low, rules with high positive SHAP values (e.g., Rule 1, Rule 2) may be problematic. Conversely, for molecules where the predicted loading is low but the experimental value is high, rules with high negative SHAP values (e.g., Rule 14) may need adjustment.
+
+4. **Accuracy Improvement Interpretation:**
+   - The accuracy metrics suggest that there is room for improvement in the current rules. The fluctuations in accuracy indicate that the model has not yet reached a local minimum, and further refinement of the rules could lead to better generalization and performance.
+
+5. **Insights from SHAP Analysis:**
+   - The SHAP analysis highlights specific rules that have a significant impact on predictions. For instance, Rule 1 and Rule 2 often have high positive SHAP values, indicating their strong influence on high loading predictions. Adjusting these rules to better align with experimental data could improve model accuracy.
+
+### Recommendations for Improvement
+
+1. **Refine Overestimated Loading Rules:**
+   - Rules with high positive SHAP values, such as Rule 1 and Rule 2, should be refined to reduce overestimation. This could involve narrowing the conditions under which these rules apply or incorporating additional features that account for exceptions.
+
+2. **Adjust Underestimated Loading Rules:**
+   - Rules with high negative SHAP values, such as Rule 14, should be adjusted to better capture cases where the experimental loading is high. This might involve expanding the conditions or adding complementary features that enhance prediction accuracy.
+
+3. **Improve Generalization:**
+   - To address overfitting, consider simplifying complex rules or combining similar rules to reduce model complexity. Additionally, incorporating cross-validation techniques and regularization methods could help improve generalization.
+
+4. **Iterative Refinement Using SHAP Insights:**
+   - Use insights from SHAP analysis to iteratively refine the rules. Focus on rules that consistently show high SHAP values and evaluate their impact on different datasets. Adjust these rules based on their performance across multiple iterations to ensure they contribute positively to model accuracy.
+
+5. **Incorporate Additional Features:**
+   - Consider incorporating additional features or modifying existing ones to capture more nuanced interactions between modifiers and catalysts. This could involve exploring new chemical properties or structural features that are not currently accounted for in the rules.
+---------------------------------------------------------------
+Project Manager Message:
+### Summary and Directions for Optimization
+
+1. **Effectiveness and Performance:**
+   - The current rules demonstrate strong predictive power with high confidence and lift values, indicating effective prediction when the rules apply. However, the support is relatively low, suggesting that the rules apply to a smaller portion of the dataset. The validation accuracy has fluctuated, indicating potential overfitting or underfitting issues.
+
+2. **SHAP Analysis Insights:**
+   - SHAP analysis reveals that certain rules, such as Rule 1 and Rule 2, have a strong influence on predictions, which could lead to overfitting if not universally applicable. Conversely, rules like Rule 14 with high negative SHAP values may need adjustment to better capture high experimental values.
+
+3. **Discrepancy and Generalization:**
+   - Discrepancies between predicted and experimental values suggest that some rules may be overestimating or underestimating the loading. Improving generalization by refining these rules could enhance model performance.
+
+### Suggestions for Improvement
+
+1. **Refine Overestimated and Underestimated Rules:**
+   - Adjust rules with high positive SHAP values (e.g., Rule 1, Rule 2) to reduce overestimation by narrowing their conditions or incorporating additional features. Similarly, adjust rules with high negative SHAP values (e.g., Rule 14) to better capture high experimental values.
+
+2. **Increase Support:**
+   - Explore ways to increase the support of the rules without compromising confidence and lift. This could involve refining rule conditions or exploring additional features that enhance applicability.
+
+3. **Improve Generalization:**
+   - Simplify complex rules or combine similar rules to reduce model complexity and improve generalization. Incorporate cross-validation techniques and regularization methods to prevent overfitting.
+
+4. **Iterative Refinement Using SHAP Insights:**
+   - Use SHAP analysis to iteratively refine rules, focusing on those with consistently high SHAP values. Adjust these rules based on their performance across multiple datasets to ensure they contribute positively to model accuracy.
+
+5. **Incorporate Additional Features:**
+   - Consider incorporating new chemical properties or structural features that are not currently accounted for in the rules to capture more nuanced interactions between modifiers and catalysts.
+
+### Possibility for Further Optimization
+
+There is potential for further optimization of the current rules. The fluctuations in validation accuracy and the insights from SHAP analysis suggest that refining the rules could lead to better generalization and performance without overfitting.
+
+**Please Optimize Rules**
+---------------------------------------------------------------
+Current Rule Metrics:
+
+    Train support: 0.04380952380952381
+    Train confidence: 0.7944444444444444
+    Train lift: 1.5892338416848222
+    Train leverage: 0.01523809523809524
+    -------------------------------------------------------
+
+    Metric Commenter Message:
+Based on the current rule metrics, we can observe several key points regarding the performance of the rules:
+
+1. **Confidence**: The current rules exhibit high confidence values, with the lowest being 0.7944 and the highest reaching 0.9222. This indicates that the rules are generally reliable in predicting outcomes when the conditions are met. Compared to the previous metrics, where test confidence was as low as 0.3333, the current rules show a significant improvement in confidence, suggesting that the rules are more robust and consistent.
+
+2. **Lift**: The lift values for the current rules range from 1.554 to 1.851, which are all greater than 1. This indicates that the rules provide a meaningful increase in the likelihood of the predicted outcome compared to random chance. The lift values are significantly higher than those in the previous metrics, where test lift values were as low as 0.6888. This improvement suggests that the current rules are more effective in identifying strong associations between conditions and outcomes.
+
+3. **Leverage**: The leverage values are positive, ranging from 0.0115 to 0.0153, indicating that the rules provide additional support beyond what would be expected by chance. Although the leverage values are relatively small, they are consistently positive, which is an improvement over some of the previous metrics where negative leverage was observed.
+
+4. **Support**: The support values for the current rules are relatively low, ranging from 0.0324 to 0.0438. While this indicates that the rules apply to a smaller subset of the data, the high confidence and lift values suggest that these rules are still valuable for making accurate predictions within that subset.
+
+**Recommendations for Improvement**:
+
+- **Increase Support**: Consider exploring additional conditions or combinations of conditions that might increase the support of the rules without compromising confidence and lift. This could involve identifying more common patterns or interactions within the data.
+
+- **Refine Rule Conditions**: Analyze the conditions of the rules to ensure they are capturing the most relevant and impactful features. This might involve revisiting the chemical structures or functional groups involved in the rules to ensure they align with the underlying chemistry.
+
+- **Test on New Data**: Validate the current rules on a new test dataset to ensure that the high confidence and lift values are not overfitting to the training data. This will help confirm the generalizability of the rules.
+
+- **Iterate Further**: Given the improvements in confidence and lift, it may be beneficial to continue iterating on the rules to explore if further enhancements can be achieved, particularly in increasing support while maintaining or improving other metrics.
+
+Overall, the current rules show promising improvements over the previous metrics, particularly in terms of confidence and lift, indicating that they are effective in capturing meaningful relationships in the data. Further refinement and validation could enhance their applicability and robustness.
+---------------------------------------------------------------
+Current Accuracy and SHAP analysis:
+< 5 Fold Validation Performance: >
+ 
+    An accuracy of 0.7428571428571429 was obtained using classification model. 
+ 
+ 
+ 
+    < SHAP Analysis Feedback > 
+For molecule C(CC(=O)O)[C@@H](C(=O)O)N, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule1 SHAP value for high loading: 0.5804648693801526; Rule2 SHAP value for high loading: -0.011184947939707892; Rule10 SHAP value for high loading: -0.01119940364302226; Rule11 SHAP value for high loading: -0.01118047718401429; Rule15 SHAP value for high loading: -0.011185754899119863;  
+For molecule C1=CC(=CC=C1CBr)C(=O)O, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.01119152167277165; Rule2 SHAP value for high loading: 0.5804717273333222; Rule10 SHAP value for high loading: -0.011199464300460645; Rule11 SHAP value for high loading: -0.011180612366028984; Rule15 SHAP value for high loading: -0.011185843279774356;  
+For molecule C1=CNC(=O)C=C1C(=O)O, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.011191347634015195; Rule2 SHAP value for high loading: -0.011184834558389763; Rule10 SHAP value for high loading: 0.5804564783884264; Rule11 SHAP value for high loading: -0.01118037305605691; Rule15 SHAP value for high loading: -0.011185637425678114;  
+For molecule C1=CC=C(C=C1)C[C@@H](C(=O)O)N, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.02329821255301295; Rule2 SHAP value for high loading: -0.023284780866777908; Rule10 SHAP value for high loading: -0.023314659553744402; Rule11 SHAP value for high loading: -0.023275538556652407; Rule15 SHAP value for high loading: -0.0232864357990035;  
+For molecule C1=CN=CC=C1CCCC(=O)O, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.011191524887484988; Rule2 SHAP value for high loading: -0.01118503953507573; Rule10 SHAP value for high loading: -0.011199463423050334; Rule11 SHAP value for high loading: -0.011180562585897705; Rule15 SHAP value for high loading: 0.5804708761457947;  
+For molecule C(CC(=O)O)C(=O)CCC(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.02329821255301295; Rule2 SHAP value for high loading: -0.023284780866777908; Rule10 SHAP value for high loading: -0.023314659553744402; Rule11 SHAP value for high loading: -0.023275538556652407; Rule15 SHAP value for high loading: -0.0232864357990035;  
+For molecule C(CCCC(=O)O)CCCN, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.02329821255301295; Rule2 SHAP value for high loading: -0.023284780866777908; Rule10 SHAP value for high loading: -0.023314659553744402; Rule11 SHAP value for high loading: -0.023275538556652407; Rule15 SHAP value for high loading: -0.0232864357990035;  
+For molecule C([C@@H](C(=O)O)N)C(=O)O, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule1 SHAP value for high loading: 0.593716806678627; Rule2 SHAP value for high loading: -0.02303675313045794; Rule10 SHAP value for high loading: -0.011917974391751551; Rule11 SHAP value for high loading: 0.0; Rule15 SHAP value for high loading: -0.023047793442132303;  
+For molecule C1=C(C=NN1)C(=O)O, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.011922141073499745; Rule2 SHAP value for high loading: -0.02303689372221993; Rule10 SHAP value for high loading: 0.5937211741056851; Rule11 SHAP value for high loading: 0.0; Rule15 SHAP value for high loading: -0.023047853595679776;  
+For molecule C(CS)C(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.025019761215368187; Rule2 SHAP value for high loading: -0.04802519823674757; Rule10 SHAP value for high loading: -0.025011227106562353; Rule11 SHAP value for high loading: 0.0; Rule15 SHAP value for high loading: -0.04804770954521917;  
+For molecule C1=CC(=CC=C1C=O)C(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.025019761215368187; Rule2 SHAP value for high loading: -0.04802519823674757; Rule10 SHAP value for high loading: -0.025011227106562353; Rule11 SHAP value for high loading: 0.0; Rule15 SHAP value for high loading: -0.04804770954521917;  
+For molecule COC1=C(C=C(C=C1)C(=O)CCC(=O)O)OC, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.025019761215368187; Rule2 SHAP value for high loading: -0.04802519823674757; Rule10 SHAP value for high loading: -0.025011227106562353; Rule11 SHAP value for high loading: 0.0; Rule15 SHAP value for high loading: -0.04804770954521917;  
+For molecule C(CC(=O)O)CNC(=O)C(F)(F)F, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.025019761215368187; Rule2 SHAP value for high loading: -0.04802519823674757; Rule10 SHAP value for high loading: -0.025011227106562353; Rule11 SHAP value for high loading: 0.0; Rule15 SHAP value for high loading: -0.04804770954521917;  
+For molecule C(CCCN)CCC(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.025019761215368187; Rule2 SHAP value for high loading: -0.04802519823674757; Rule10 SHAP value for high loading: -0.025011227106562353; Rule11 SHAP value for high loading: 0.0; Rule15 SHAP value for high loading: -0.04804770954521917;  
+For molecule C(C(=O)O)NC(CO)(CO)CO, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.04891723131715758; Rule2 SHAP value for high loading: -0.026412793863731583; Rule10 SHAP value for high loading: -0.04934927307388887; Rule11 SHAP value for high loading: -0.026337659259540798; Rule15 SHAP value for high loading: -0.04898304248568145;  
+For molecule C([C@H]([C@H]([C@@H]([C@H](C(=O)O)O)O)O)O)O, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.04891723131715758; Rule2 SHAP value for high loading: -0.026412793863731583; Rule10 SHAP value for high loading: -0.04934927307388887; Rule11 SHAP value for high loading: -0.026337659259540798; Rule15 SHAP value for high loading: -0.04898304248568145;  
+For molecule COCCOCCOCC(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.04891723131715758; Rule2 SHAP value for high loading: -0.026412793863731583; Rule10 SHAP value for high loading: -0.04934927307388887; Rule11 SHAP value for high loading: -0.026337659259540798; Rule15 SHAP value for high loading: -0.04898304248568145;  
+For molecule C1=CC(=CC=C1C2=CC=NC=C2)C(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.04891723131715758; Rule2 SHAP value for high loading: -0.026412793863731583; Rule10 SHAP value for high loading: -0.04934927307388887; Rule11 SHAP value for high loading: -0.026337659259540798; Rule15 SHAP value for high loading: -0.04898304248568145;  
+For molecule C(=O)(C(C(C(C(F)(F)F)(F)F)(F)F)(F)F)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.04891723131715758; Rule2 SHAP value for high loading: -0.026412793863731583; Rule10 SHAP value for high loading: -0.04934927307388887; Rule11 SHAP value for high loading: -0.026337659259540798; Rule15 SHAP value for high loading: -0.04898304248568145;  
+For molecule C1=CC(=CC=C1C(=O)O)[N+](=O)[O-], the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.02306597056019672; Rule2 SHAP value for high loading: 0.5817720062093881; Rule10 SHAP value for high loading: -0.023272936830350838; Rule11 SHAP value for high loading: -0.012335367692742943; Rule15 SHAP value for high loading: -0.023097731126097986;  
+For molecule C1=CC(=CC=C1C(=O)NCC(=O)O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.04891723131715758; Rule2 SHAP value for high loading: -0.026412793863731583; Rule10 SHAP value for high loading: -0.04934927307388887; Rule11 SHAP value for high loading: -0.026337659259540798; Rule15 SHAP value for high loading: -0.04898304248568145;  
+For molecule C1=CC(=CC=C1C(=O)O)N, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.04907964884815049; Rule2 SHAP value for high loading: -0.04880761968872532; Rule10 SHAP value for high loading: -0.04908043057666526; Rule11 SHAP value for high loading: -0.026486217029990974; Rule15 SHAP value for high loading: -0.02654608385646829;  
+For molecule C1=CC(=CC=C1CCCCC(=O)O)O, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.04907964884815049; Rule2 SHAP value for high loading: -0.04880761968872532; Rule10 SHAP value for high loading: -0.04908043057666526; Rule11 SHAP value for high loading: -0.026486217029990974; Rule15 SHAP value for high loading: -0.02654608385646829;  
+For molecule C1=CC(=C(C=C1C=O)C(=O)O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.04907964884815049; Rule2 SHAP value for high loading: -0.04880761968872532; Rule10 SHAP value for high loading: -0.04908043057666526; Rule11 SHAP value for high loading: -0.026486217029990974; Rule15 SHAP value for high loading: -0.02654608385646829;  
+For molecule C1=CC(=CN=C1)C(=O)O, the predicted loading of modifier on catalyst is high and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.023142112691870706; Rule2 SHAP value for high loading: -0.023011918688298678; Rule10 SHAP value for high loading: -0.023142202662577275; Rule11 SHAP value for high loading: -0.012404339145346518; Rule15 SHAP value for high loading: 0.581700573188092;  
+For molecule CC1=CC=C(C=C1)C(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.04907964884815049; Rule2 SHAP value for high loading: -0.04880761968872532; Rule10 SHAP value for high loading: -0.04908043057666526; Rule11 SHAP value for high loading: -0.026486217029990974; Rule15 SHAP value for high loading: -0.02654608385646829;  
+For molecule C(COCCOCCN)C(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.04907964884815049; Rule2 SHAP value for high loading: -0.04880761968872532; Rule10 SHAP value for high loading: -0.04908043057666526; Rule11 SHAP value for high loading: -0.026486217029990974; Rule15 SHAP value for high loading: -0.02654608385646829;  
+For molecule CC(=O)NCCCC[C@@H](C(=O)O)N, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.04907964884815049; Rule2 SHAP value for high loading: -0.04880761968872532; Rule10 SHAP value for high loading: -0.04908043057666526; Rule11 SHAP value for high loading: -0.026486217029990974; Rule15 SHAP value for high loading: -0.02654608385646829;  
+For molecule C(CCN)CC(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.05186619447558167; Rule2 SHAP value for high loading: -0.05188465556731223; Rule10 SHAP value for high loading: -0.05226473379751909; Rule11 SHAP value for high loading: -0.028588665786370742; Rule15 SHAP value for high loading: -0.05223785563637612;  
+For molecule CCCCCCCC(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.05186619447558167; Rule2 SHAP value for high loading: -0.05188465556731223; Rule10 SHAP value for high loading: -0.05226473379751909; Rule11 SHAP value for high loading: -0.028588665786370742; Rule15 SHAP value for high loading: -0.05223785563637612;  
+For molecule C1=CC(=CC=C1C(=O)O)S, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.05186619447558167; Rule2 SHAP value for high loading: -0.05188465556731223; Rule10 SHAP value for high loading: -0.05226473379751909; Rule11 SHAP value for high loading: -0.028588665786370742; Rule15 SHAP value for high loading: -0.05223785563637612;  
+For molecule C1=CC=C2C(=C1)C(=CN2)C[C@H](C(=O)O)N, the predicted loading of modifier on catalyst is low and the experimental value is high 
+  Rule1 SHAP value for high loading: -0.05186619447558167; Rule2 SHAP value for high loading: -0.05188465556731223; Rule10 SHAP value for high loading: -0.05226473379751909; Rule11 SHAP value for high loading: -0.028588665786370742; Rule15 SHAP value for high loading: -0.05223785563637612;  
+For molecule CSCC[C@@H](C(=O)NCC(=O)O)N, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.05186619447558167; Rule2 SHAP value for high loading: -0.05188465556731223; Rule10 SHAP value for high loading: -0.05226473379751909; Rule11 SHAP value for high loading: -0.028588665786370742; Rule15 SHAP value for high loading: -0.05223785563637612;  
+For molecule C(CCCO)CCC(=O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.05186619447558167; Rule2 SHAP value for high loading: -0.05188465556731223; Rule10 SHAP value for high loading: -0.05226473379751909; Rule11 SHAP value for high loading: -0.028588665786370742; Rule15 SHAP value for high loading: -0.05223785563637612;  
+For molecule C1=CC(=CC=C1CCC(=O)O)O, the predicted loading of modifier on catalyst is low and the experimental value is low 
+  Rule1 SHAP value for high loading: -0.05186619447558167; Rule2 SHAP value for high loading: -0.05188465556731223; Rule10 SHAP value for high loading: -0.05226473379751909; Rule11 SHAP value for high loading: -0.028588665786370742; Rule15 SHAP value for high loading: -0.05223785563637612;  
+Traditional Commenter Message:
+### Performance Evaluation of Current Rules
+
+1. **Effectiveness of Current Rules:**
+   - The current rules have shown a validation accuracy of 0.7429, which is an improvement from some previous iterations but not the highest observed (0.76). This suggests that while the rules are somewhat effective, there is room for improvement.
+   - The SHAP analysis indicates that certain rules consistently contribute to high or low predictions, which may be beneficial or detrimental depending on the context.
+
+2. **Overfitting/Underfitting Assessment:**
+   - The validation accuracy is relatively stable, suggesting that the model is not severely overfitting. However, the test accuracy has shown variability, indicating potential underfitting or overfitting in certain iterations.
+   - The consistent accuracy across different iterations suggests that the model is not drastically overfitting, but the variability in test accuracy indicates that the model might not be generalizing well to unseen data.
+
+3. **Discrepancies Analysis:**
+   - For molecules where the predicted loading is high but the experimental value is low, rules with high positive SHAP values (e.g., Rule 1, Rule 2) may need refinement.
+   - Conversely, for molecules where the predicted loading is low but the experimental value is high, rules with high negative SHAP values (e.g., Rule 9, Rule 14) should be reassessed.
+
+4. **Accuracy Improvements:**
+   - The current accuracy metrics suggest that there is potential for improvement. The model has not yet reached a local minimum, as indicated by the fluctuations in accuracy across iterations.
+   - The SHAP analysis provides insights into which rules are contributing most to prediction errors, offering opportunities for targeted improvements.
+
+5. **Insights from SHAP Analysis:**
+   - SHAP values indicate that certain rules (e.g., Rule 1, Rule 2) have a strong influence on predictions. These rules should be examined to ensure they are not overly influencing the model in a way that leads to incorrect predictions.
+   - Rules with consistently high or low SHAP values across multiple molecules should be prioritized for refinement.
+
+### Recommendations for Improvement
+
+1. **Refine Overestimated Loadings:**
+   - Rules with high positive SHAP values for overestimated loadings, such as Rule 1 and Rule 2, should be refined. Consider adding conditions or constraints to these rules to prevent overestimation.
+
+2. **Adjust Underestimated Loadings:**
+   - Rules with high negative SHAP values for underestimated loadings, such as Rule 9 and Rule 14, should be adjusted. This could involve relaxing certain conditions or incorporating additional factors that might increase the predicted loading.
+
+3. **Improve Generalization:**
+   - To address potential overfitting or underfitting, consider incorporating more diverse training data or using techniques such as cross-validation to ensure the model generalizes well to unseen data.
+
+4. **Iterative Refinement:**
+   - Use insights from SHAP analysis to iteratively refine the rules. Focus on rules that consistently show high SHAP values, either positive or negative, and evaluate their impact on model performance.
+   - Consider introducing new rules or modifying existing ones based on observed patterns in the data and SHAP analysis.
+
+5. **Continuous Evaluation:**
+   - Continuously evaluate the effectiveness of rule changes by monitoring validation and test accuracies. Use these metrics to guide further refinements and ensure that improvements are sustained across iterations.
+---------------------------------------------------------------
+Project Manager Message:
+### Summary and Directions for Optimization
+
+1. **Effectiveness of Current Rules:**
+   - The current rules have shown a validation accuracy of 0.7429, indicating moderate effectiveness. However, there is room for improvement, as previous iterations have achieved higher accuracy.
+   - SHAP analysis highlights certain rules that consistently influence predictions, suggesting areas for refinement.
+
+2. **Overfitting/Underfitting Assessment:**
+   - The model shows stable validation accuracy, indicating minimal overfitting. However, variability in test accuracy suggests potential underfitting or overfitting in specific iterations.
+   - Consistent accuracy across iterations suggests the model is not drastically overfitting, but improvements in generalization are needed.
+
+3. **Discrepancies Analysis:**
+   - For molecules with high predicted but low experimental loadings, rules with high positive SHAP values (e.g., Rule 1, Rule 2) may need refinement.
+   - For molecules with low predicted but high experimental loadings, rules with high negative SHAP values (e.g., Rule 9, Rule 14) should be reassessed.
+
+4. **Accuracy Improvements:**
+   - The current accuracy metrics suggest potential for improvement. The model has not yet reached a local minimum, as indicated by fluctuations in accuracy across iterations.
+   - SHAP analysis provides insights into which rules contribute most to prediction errors, offering opportunities for targeted improvements.
+
+5. **Insights from SHAP Analysis:**
+   - SHAP values indicate that certain rules (e.g., Rule 1, Rule 2) have a strong influence on predictions. These rules should be examined to ensure they are not overly influencing the model in a way that leads to incorrect predictions.
+   - Rules with consistently high or low SHAP values across multiple molecules should be prioritized for refinement.
+
+### Recommendations for Improvement
+
+1. **Refine Overestimated Loadings:**
+   - Refine rules with high positive SHAP values for overestimated loadings, such as Rule 1 and Rule 2. Consider adding conditions or constraints to these rules to prevent overestimation.
+
+2. **Adjust Underestimated Loadings:**
+   - Adjust rules with high negative SHAP values for underestimated loadings, such as Rule 9 and Rule 14. This could involve relaxing certain conditions or incorporating additional factors that might increase the predicted loading.
+
+3. **Improve Generalization:**
+   - Incorporate more diverse training data or use techniques such as cross-validation to ensure the model generalizes well to unseen data.
+
+4. **Iterative Refinement:**
+   - Use insights from SHAP analysis to iteratively refine the rules. Focus on rules that consistently show high SHAP values, either positive or negative, and evaluate their impact on model performance.
+   - Consider introducing new rules or modifying existing ones based on observed patterns in the data and SHAP analysis.
+
+5. **Continuous Evaluation:**
+   - Continuously evaluate the effectiveness of rule changes by monitoring validation and test accuracies. Use these metrics to guide further refinements and ensure that improvements are sustained across iterations.
+
+### Possibility for Further Optimization
+
+There is a possibility for further optimization of the current rules without overfitting. The current metrics indicate areas where rules can be refined to improve accuracy and generalization. By focusing on the recommendations above, the rules can be optimized to achieve better performance.
+
+**Please Optimize Rules**
+---------------------------------------------------------------

@@ -1,0 +1,39 @@
+def rule2matrix(smiles_list):
+    rules = [
+        ['[CX3](=O)[OX2H1]', '[NX3H2]'],  # Rule 1: Carboxylic acid and amino group
+        ['[c][CX3](=O)[OX2H1]', '[c][NX3H2]', '[c][OX2H]'],  # Rule 2: Phenyl with carboxylic acid and amino/hydroxy
+        ['[SX2H]', '[CX3](=O)[OX2H1]'],  # Rule 3: Sulfanyl and carboxylic acid
+        ['[OX2H][CX3](=O)[OX2H1]', '[OX2H]'],  # Rule 4: Polyols and carboxylic acid
+        ['[n][CX3](=O)[OX2H1]'],  # Rule 5: Pyridine and carboxylic acid
+        ['[CX4](F)(F)(F)'],  # Rule 6: Fluorinated alkyl chains
+        ['[OX2][CX4][OX2]'],  # Rule 7: Methoxy groups
+        ['[c][CX3H]=O'],  # Rule 8: Formyl group on aromatic ring
+        ['[CX4][CX4][CX4][CX4][CX4][CX4]'],  # Rule 9: Long aliphatic chains
+        ['[nH][c][c][c][c][c][CX3](=O)[OX2H1]'],  # Rule 10: Indole and amino acid
+        ['[c]1oc2ccccc2c1[CX3](=O)[OX2H1]'],  # Rule 11: Benzofuran and carboxylic acid
+        ['[c]1cc(OC)c(OC)cc1'],  # Rule 12: Dimethoxyphenyl group
+        ['[CX3](=O)[OX2H1][CX4][OX2H]'],  # Rule 13: Carboxylic acid and hydroxyl on aliphatic chain
+        ['[n][CX4]'],  # Rule 14: Pyridine and aliphatic chain
+        ['[c][NX3+](=O)[O-]'],  # Rule 15: Nitro group on aromatic ring
+    ]
+    results = []
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            results.append([0] * len(rules))
+            continue
+        row = []
+        for i, rule in enumerate(rules):
+            try:
+                if all(mol.HasSubstructMatch(Chem.MolFromSmarts(r)) for r in rule):
+                    if i in [0, 1, 2, 3, 4, 9, 10, 11, 12, 14]:  # High yield rules
+                        row.append(1)
+                    else:  # Low yield rules
+                        row.append(-1)
+                else:
+                    row.append(0)
+            except:
+                row.append(0)
+        results.append(row)
+    df = pd.DataFrame(results, columns=[f'Rule {i+1}' for i in range(len(rules))])
+    return df

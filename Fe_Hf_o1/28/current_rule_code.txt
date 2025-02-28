@@ -1,0 +1,163 @@
+def rule2matrix(smiles_list):
+    # Define the SMARTS patterns for various functional groups and features
+    
+    # Common patterns
+    carboxylic_acid_pattern = '[CX3](=O)[OX2H1]'  # Carboxylic acid group
+    primary_aliphatic_amine_pattern = '[NX3H2;!$([N][!C]);!$([N][a])]'  # Primary aliphatic amine
+    secondary_aliphatic_amine_pattern = '[NX3H1;!$([N][!C]);!$([N][a])]'  # Secondary aliphatic amine
+    thiol_pattern = '[SX2H]'  # Thiol group
+    hydroxyl_pattern = '[OX2H]'  # Hydroxyl group
+    ether_oxygen_pattern = '[#6][OX2][#6]'  # Ether linkage
+    pyridine_ring_pattern = 'n1ccccc1'  # Pyridine ring
+    
+    # Electron-withdrawing groups (EWGs)
+    nitro_group_pattern = '[NX3](=O)=O'  # Nitro group
+    halogen_pattern = '[F,Cl,Br,I]'      # Halogens
+    trifluoromethyl_pattern = '[CX4](F)(F)F'  # Trifluoromethyl group
+    
+    # Electron-donating groups (EDGs)
+    amino_group_pattern = '[NX3][CX4]'  # Amino group attached to carbon
+    alkoxy_group_pattern = '[OX2][CX4]'         # Alkoxy group
+    
+    # Aromatic carboxylic acid group
+    aromatic_carboxylic_acid_pattern = '[c][CX3](=O)[OX2H1]'
+    
+    # Pre-compile the SMARTS patterns
+    carboxylic_acid = Chem.MolFromSmarts(carboxylic_acid_pattern)
+    primary_aliphatic_amine = Chem.MolFromSmarts(primary_aliphatic_amine_pattern)
+    secondary_aliphatic_amine = Chem.MolFromSmarts(secondary_aliphatic_amine_pattern)
+    thiol = Chem.MolFromSmarts(thiol_pattern)
+    hydroxyl = Chem.MolFromSmarts(hydroxyl_pattern)
+    ether_oxygen = Chem.MolFromSmarts(ether_oxygen_pattern)
+    pyridine_ring = Chem.MolFromSmarts(pyridine_ring_pattern)
+    nitro_group = Chem.MolFromSmarts(nitro_group_pattern)
+    halogen = Chem.MolFromSmarts(halogen_pattern)
+    trifluoromethyl = Chem.MolFromSmarts(trifluoromethyl_pattern)
+    amino_group = Chem.MolFromSmarts(amino_group_pattern)
+    alkoxy_group = Chem.MolFromSmarts(alkoxy_group_pattern)
+    aromatic_carboxylic_acid = Chem.MolFromSmarts(aromatic_carboxylic_acid_pattern)
+    
+    # Define the rules, their patterns, and predictions
+    rules = [
+        {
+            'number': 1,
+            'description': 'Rule 1: Modifiers containing amino groups (–NH₂) on flexible aliphatic chains terminating with carboxylic acid groups result in high Fe/Hf values.',
+            'patterns': [primary_aliphatic_amine, carboxylic_acid],
+            'prediction': 1
+        },
+        {
+            'number': 2,
+            'description': 'Rule 2: Modifiers with multiple coordinating groups (e.g., amino, thiol, hydroxyl, ether oxygens) on flexible aliphatic chains result in high Fe/Hf values.',
+            'patterns': [carboxylic_acid],
+            'additional_patterns': [primary_aliphatic_amine, secondary_aliphatic_amine, thiol, hydroxyl, ether_oxygen],
+            'prediction': 1
+        },
+        {
+            'number': 3,
+            'description': 'Rule 3: Modifiers featuring nitrogen-containing aromatic rings connected via flexible linkers to carboxylic acids result in high Fe/Hf values.',
+            'patterns': [pyridine_ring, carboxylic_acid],
+            'exclude_patterns': [Chem.MolFromSmarts('n1cc(c(=O)O)ccc1')],  # Exclude direct attachments
+            'prediction': 1
+        },
+        {
+            'number': 4,
+            'description': 'Rule 4: Aromatic carboxylic acids with EWGs result in high Fe/Hf values; those with EDGs result in low Fe/Hf values.',
+            'patterns': [aromatic_carboxylic_acid],
+            'e_w_g_patterns': [nitro_group, halogen, trifluoromethyl],
+            'e_d_g_patterns': [amino_group, hydroxyl, alkoxy_group],
+            'prediction_high': 1,
+            'prediction_low': -1
+        },
+        {
+            'number': 5,
+            'description': 'Rule 5: Modifiers lacking additional coordinating groups beyond the carboxylic acid result in low Fe/Hf values.',
+            'patterns': [carboxylic_acid],
+            'exclude_patterns': [primary_aliphatic_amine, secondary_aliphatic_amine, thiol, hydroxyl, ether_oxygen, pyridine_ring],
+            'prediction': -1
+        }
+    ]
+    
+    # Initialize results list
+    results = []
+    
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = False
+                # For each rule, check the required patterns
+                if rule['number'] == 1:
+                    # Rule 1: Both primary aliphatic amine and carboxylic acid
+                    if mol.HasSubstructMatch(primary_aliphatic_amine) and mol.HasSubstructMatch(carboxylic_acid):
+                        match = True
+                elif rule['number'] == 2:
+                    # Rule 2: Carboxylic acid and at least one additional coordinating group
+                    if mol.HasSubstructMatch(carboxylic_acid):
+                        for pat in rule['additional_patterns']:
+                            if mol.HasSubstructMatch(pat):
+                                match = True
+                                break
+                elif rule['number'] == 3:
+                    # Rule 3: Pyridine ring and carboxylic acid not directly attached
+                    if mol.HasSubstructMatch(pyridine_ring) and mol.HasSubstructMatch(carboxylic_acid):
+                        # Exclude cases where carboxylic acid is directly attached to pyridine ring
+                        exclude_match = False
+                        for exclude_pat in rule.get('exclude_patterns', []):
+                            if mol.HasSubstructMatch(exclude_pat):
+                                exclude_match = True
+                                break
+                        if not exclude_match:
+                            match = True
+                elif rule['number'] == 4:
+                    # Rule 4: Aromatic carboxylic acid with EWG (High) or EDG (Low)
+                    if mol.HasSubstructMatch(aromatic_carboxylic_acid):
+                        ewg_match = False
+                        edg_match = False
+                        for ewg_pat in rule['e_w_g_patterns']:
+                            if mol.HasSubstructMatch(ewg_pat):
+                                ewg_match = True
+                                break
+                        for edg_pat in rule['e_d_g_patterns']:
+                            if mol.HasSubstructMatch(edg_pat):
+                                edg_match = True
+                                break
+                        if ewg_match:
+                            match = True
+                            row.append(rule['prediction_high'])
+                            continue  # Skip to next rule
+                        elif edg_match:
+                            match = True
+                            row.append(rule['prediction_low'])
+                            continue  # Skip to next rule
+                        else:
+                            match = False
+                    else:
+                        match = False
+                elif rule['number'] == 5:
+                    # Rule 5: Carboxylic acid without additional coordinating groups
+                    if mol.HasSubstructMatch(carboxylic_acid):
+                        exclude_match = False
+                        for exclude_pat in rule['exclude_patterns']:
+                            if mol.HasSubstructMatch(exclude_pat):
+                                exclude_match = True
+                                break
+                        if not exclude_match:
+                            match = True
+                if match:
+                    if 'prediction' in rule:
+                        row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception as e:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule["number"]}' for rule in rules])
+    return df

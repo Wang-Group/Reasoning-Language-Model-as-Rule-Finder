@@ -1,0 +1,1596 @@
+What kind of molecular property will we call for these propeties: strong electron-withdrawing groups, strong coordinating groups,coordinating groups, electron-donating groups, donor groups, donor atoms, (extended) conjugation systems
+
+
+**Property Description:** Carboxylic acid group (–COOH) presence
+
+- **SMARTS Pattern(s):** `[CX3](=O)[OX2H1]`
+
+- **Explanation:** This pattern matches a carbon atom double-bonded to an oxygen atom and single-bonded to a hydroxyl group, representing a carboxylic acid functional group. This pattern is present in nearly all molecules in the dataset, such as molecules **1**, **2**, **4**, **5**, **6**, **8**, **10**, etc.
+
+---
+
+**Property Description:** Alpha-amino acids (amine group adjacent to carboxyl carbon)
+
+- **SMARTS Pattern(s):** `[NX3;H2][CX4H][CX3](=O)[OX2H1]`
+
+- **Explanation:** This pattern matches a primary amine nitrogen (`[NX3;H2]`) connected to an alpha carbon (`[CX4H]`), which is connected to a carboxylic acid group (`[CX3](=O)[OX2H1]`). This represents the structure of alpha-amino acids. Examples from the dataset include molecules **1**, **3**, **14**, **16**, **25**, **35**.
+
+---
+
+**Property Description:** Molecules containing aromatic rings
+
+- **SMARTS Pattern(s):** `[a]`
+
+- **Explanation:** The `[a]` pattern matches any aromatic atom, thus identifying molecules containing aromatic rings. In the dataset, molecules such as **2**, **5**, **8**, **9**, **11**, **13**, **14**, **16**, **17**, **18**, **20**, **21**, **22**, **23**, **24**, **26**, **27**, **28**, **32** contain aromatic rings.
+
+---
+
+**Property Description:** Molecules containing nitro groups (–NO₂)
+
+- **SMARTS Pattern(s):** `[$([NX3](=O)=O),$([NX3+](=O)[O-])][!#8]`
+
+- **Explanation:** This pattern matches nitrogen atoms double-bonded to two oxygen atoms, representing nitro groups in both neutral and ionic forms. The `[!#8]` ensures the nitrogen is not bonded to another oxygen atom. In the dataset, molecule **22** (4-nitrobenzoic acid) contains a nitro group.
+
+---
+
+**Property Description:** Molecules containing halogen atoms
+
+- **SMARTS Pattern(s):** `[F,Cl,Br,I]`
+
+- **Explanation:** This pattern matches any halogen atom (fluorine, chlorine, bromine, or iodine). Molecules in the dataset containing halogens include **2** (bromine), **15**, and **30** (fluorine).
+
+---
+
+**Property Description:** Molecules containing hydroxyl groups (–OH)
+
+- **SMARTS Pattern(s):** `[OX2H]`
+
+- **Explanation:** This pattern matches oxygen atoms with two connections (`X2`) and one hydrogen atom (`H`), representing hydroxyl groups. Molecules such as **7**, **8**, **10**, **20**, **28**, **31**, **32** contain hydroxyl groups.
+
+---
+
+**Property Description:** Molecules containing aldehyde groups (–CHO)
+
+- **SMARTS Pattern(s):** `[CX3H1](=O)[#6]`
+
+- **Explanation:** This pattern matches a carbonyl carbon (`[CX3]`) with one hydrogen atom (`H1`) double-bonded to an oxygen atom and single-bonded to a carbon atom, representing an aldehyde group. Molecules **20** and **21** contain aldehyde groups.
+
+---
+
+**Property Description:** Molecules containing ketone groups (–C=O)
+
+- **SMARTS Pattern(s):** `[#6][CX3](=O)[#6]`
+
+- **Explanation:** This pattern matches ketone groups where a carbonyl carbon (`[CX3](=O)`) is connected to two carbon atoms (`[#6]`). Molecules such as **27** and **29** contain ketone groups in addition to carboxylic acid groups.
+
+---
+
+**Property Description:** Molecules containing sulfur atoms
+
+- **SMARTS Pattern(s):** `[#16]`
+
+- **Explanation:** This pattern matches any sulfur atom. Molecules **11**, **19**, and **25** in the dataset contain sulfur atoms in different functional groups, such as thiol groups (`–SH`) and thioethers (`–S–`).
+
+---
+
+**Property Description:** Molecules containing ether groups (–O–)
+
+- **SMARTS Pattern(s):** `[OD2]([#6])[#6]`
+
+- **Explanation:** This pattern matches oxygen atoms with two connections (`OD2`) connected to two carbon atoms (`[#6]`), representing ether linkages. Molecules **12**, **27**, and **34** contain ether groups.
+
+---
+
+**Property Description:** Molecules containing aliphatic hydroxyl groups (alcohols)
+
+- **SMARTS Pattern(s):** `[OX2H][#6;!a]`
+
+- **Explanation:** This pattern matches hydroxyl groups (`[OX2H]`) connected to non-aromatic carbon atoms (`[#6;!a]`), identifying aliphatic alcohols. Molecules **7**, **10**, and **31** contain such groups.
+
+---
+
+**Property Description:** Molecules containing primary amines (–NH₂)
+
+- **SMARTS Pattern(s):** `[NX3;H2][#6]`
+
+- **Explanation:** This pattern matches nitrogen atoms with three connections (`NX3`), two of which are hydrogen atoms (`H2`), connected to a carbon atom (`[#6]`), representing primary amines. Molecules **4**, **33**, and **36** contain primary amine groups.
+
+---
+
+**Property Description:** Molecules containing amide groups (–CONH₂)
+
+- **SMARTS Pattern(s):** `[NX3][CX3](=O)[#6]`
+
+- **Explanation:** This pattern matches nitrogen atoms (`[NX3]`) connected to a carbonyl carbon (`[CX3](=O)`), which is in turn connected to a carbon (`[#6]`), representing amide groups. Molecules **25**, **28**, **30**, and **35** contain amide functionalities.
+
+---
+
+**Property Description:** Molecules containing pyridine rings (six-membered aromatic rings with one nitrogen atom)
+
+- **SMARTS Pattern(s):** `[n][c][c][c][c][c]`
+
+- **Explanation:** This pattern matches a six-membered aromatic ring containing one nitrogen atom (`[n]`) and five carbon atoms (`[c]`). Molecules **9**, **13**, **23**, and **26** contain pyridine rings.
+
+---
+
+**Property Description:** Molecules containing sulfhydryl groups (thiols, –SH)
+
+- **SMARTS Pattern(s):** `[SX2H]`
+
+- **Explanation:** This pattern matches sulfur atoms with two connections (`SX2`) and one hydrogen atom (`H`), representing sulfhydryl groups. Molecules **11** and **19** contain thiol groups.
+
+---
+
+**Property Description:** Molecules containing methylthio groups (–S–CH₃)
+
+- **SMARTS Pattern(s):** `[SX2][#6][H3]`
+
+- **Explanation:** This pattern matches sulfur atoms (`[SX2]`) connected to a carbon atom (`[#6]`) with three hydrogens (`[H3]`), representing methylthio groups. Molecule **25** contains a methylthio group.
+
+---
+
+**Property Description:** Molecules containing trifluoromethyl groups (–CF₃)
+
+- **SMARTS Pattern(s):** `[CX4](F)(F)F`
+
+- **Explanation:** This pattern matches a carbon atom (`[CX4]`) connected to three fluorine atoms (`(F)(F)F`), representing a trifluoromethyl group. Molecules **15** and **30** contain such groups.
+
+---
+
+**Property Description:** Molecules containing polyfluorinated chains
+
+- **SMARTS Pattern(s):** `[CX4]([F])(F)[CX4]([F])(F)[CX4]([F])(F)`
+
+- **Explanation:** This pattern matches a chain of carbon atoms (`[CX4]`) each bonded to two or more fluorine atoms (`(F)(F)`), representing polyfluorinated chains. Molecule **15** (nonafluoropentanoic acid) contains such a chain.
+
+---
+
+**Property Description:** Molecules containing methoxy groups (–OCH₃)
+
+- **SMARTS Pattern(s):** `[OX2][CH3]`
+
+- **Explanation:** This pattern matches oxygen atoms (`[OX2]`) connected to a methyl group (`[CH3]`), representing methoxy groups. Molecules **12** and **27** contain methoxy groups.
+
+---
+
+**Property Description:** Molecules containing phenol groups (aromatic hydroxyl groups)
+
+- **SMARTS Pattern(s):** `[c][OX2H]`
+
+- **Explanation:** This pattern matches an aromatic carbon (`[c]`) connected to a hydroxyl group (`[OX2H]`), representing phenol functional groups. Molecules **5**, **8**, **20**, **28**, and **32** contain phenol groups.
+
+---
+
+**Property Description:** Molecules containing aldehyde groups adjacent to aromatic rings
+
+- **SMARTS Pattern(s):** `[c][CX3H1](=O)`
+
+- **Explanation:** This pattern matches an aromatic carbon (`[c]`) connected to an aldehyde group (`[CX3H1](=O)`). Molecules **20** and **21** have aldehyde groups adjacent to aromatic rings.
+
+---
+
+**Property Description:** Molecules containing conjugated systems (extended pi systems)
+
+- **SMARTS Pattern(s):** `[c]:[c]:[c]:[c]:[c]:[c]`
+
+- **Explanation:** This pattern matches a continuous chain of six conjugated aromatic carbons, representing benzene rings and extended conjugation. Molecules with benzene rings or other aromatic systems, such as **2**, **5**, **14**, **24**, etc., exhibit extended conjugation.
+
+---
+
+**Property Description:** Molecules with an aliphatic chain of at least six carbons
+
+- **SMARTS Pattern(s):** `[CX4][CX4][CX4][CX4][CX4][CX4]`
+
+- **Explanation:** This pattern matches a straight chain of six sp³-hybridized carbon atoms, representing aliphatic chains. Molecules **6** (octanoic acid), **31**, **33**, and **36** contain such chains.
+
+---
+
+**Property Description:** Molecules containing secondary amines
+
+- **SMARTS Pattern(s):** `[NX3;H1][#6][#6]`
+
+- **Explanation:** This pattern matches nitrogen atoms with three connections (`NX3`), one of which is a hydrogen atom (`H1`), connected to two carbon atoms, representing secondary amines. Molecule **34** contains a secondary amine.
+
+---
+
+**Property Description:** Molecules containing cyclic imide groups
+
+- **SMARTS Pattern(s):** `[CX3](=O)[NX3H0][CX3](=O)`
+
+- **Explanation:** This pattern matches a nitrogen atom (`[NX3H0]`) connected to two carbonyl carbons (`[CX3](=O)`), representing imide groups. Molecule **18** contains a cyclic imide group.
+
+---
+
+**Property Description:** Molecules containing pyrazole rings
+
+- **SMARTS Pattern(s):** `[n]1[c][n][c][c]1`
+
+- **Explanation:** This pattern matches a five-membered aromatic ring containing two nitrogen atoms (`[n]`) at positions 1 and 3, representing pyrazole rings. Molecule **17** contains a pyrazole ring.
+
+---
+
+**Property Description:** Molecules containing indole rings
+
+- **SMARTS Pattern(s):** `c1cc2ccccc2[nH]1`
+
+- **Explanation:** This pattern matches the indole structure, a fused bicyclic system consisting of a benzene ring fused to a pyrrole ring (`[nH]`). Molecule **16** contains an indole ring.
+
+---
+
+**Property Description:** Molecules containing ester groups
+
+- **SMARTS Pattern(s):** `[CX3](=O)[OX2][#6]`
+
+- **Explanation:** This pattern matches a carbonyl carbon (`[CX3](=O)`) connected to an oxygen atom (`[OX2]`), which is connected to a carbon atom (`[#6]`), representing ester groups. Molecule **12** contains an ester linkage (although primarily as an ether, but the pattern may match partially).
+
+---
+
+**Property Description:** Molecules containing quaternary carbons (carbon atoms bonded to four other carbons)
+
+- **SMARTS Pattern(s):** `[CX4]([#6])([#6])([#6])[#6]`
+
+- **Explanation:** This pattern matches a tetravalent carbon atom (`[CX4]`) connected to four carbon atoms (`[#6]`), representing quaternary carbons. Molecule **15** contains a quaternary carbon due to its central carbon bonded to four other carbons (though also bonded to fluorines).
+
+---
+
+This analysis covers multiple physical-chemical properties present in the dataset, providing SMARTS patterns and explanations for each property, and highlighting molecules that match each pattern.
+####################################################################################################################################################################
+
+
+To help you improve your prompt for using an LLM to generate physical-chemical properties along with corresponding SMARTS patterns, I've provided a revised version that is clearer, more concise, and structured to guide the LLM effectively.
+
+---
+
+**Revised Prompt:**
+
+---
+
+**Task:**
+
+As an experienced chemist, analyze the provided dataset of molecules. Summarize the molecular properties you identify, focusing on physical-chemical properties that are general and match multiple molecules in the dataset. For each property, write the corresponding SMARTS pattern(s) that match the property and some of the molecules in the dataset. List as many properties and SMARTS patterns as possible, providing detailed explanations.
+
+---
+
+**Guidelines:**
+
+1. **Physical-Chemical Properties to Consider:**
+
+   - Steric factors
+   - Electronic effects (electron-donating groups/electron-withdrawing groups)
+   - Hydrogen bonding capacity
+   - Presence of heteroatoms
+   - Aromaticity
+   - Aliphatic structures
+   - Functional groups (e.g., carboxylic acids, amines, alcohols)
+   - Other relevant properties that match multiple molecules in the dataset
+
+2. **SMARTS Patterns:**
+
+   - For each property, provide one or more SMARTS patterns.
+   - Ensure the SMARTS patterns are general enough to match multiple molecules.
+   - Use standard SMARTS notation and conventions.
+   - Include explanations or examples if necessary.
+
+3. **Dataset Overview:**
+
+   - Analyze the following molecules (provide the dataset with SMILES and names).
+
+4. **Response Format:**
+
+   For each property, provide:
+
+   - **Property Description (Name):** Briefly describe the physical-chemical property.
+   - **SMARTS Pattern(s):** Provide the SMARTS pattern(s) corresponding to the property.
+   - **Explanation:** Optionally, include a brief explanation or examples of molecules from the dataset that match the pattern.
+
+---
+
+**Example:**
+
+- **Property Description:** Aromatic Rings
+
+  - **SMARTS Pattern(s):** `c1ccccc1` or simply `c`
+
+  - **Explanation:** This pattern matches any aromatic carbon atom or benzene ring. Molecules such as 4-aminobenzoic acid and 4-methylbenzoic acid in the dataset contain aromatic rings and match this pattern.
+
+---
+
+**Dataset:**
+
+Provide the list of molecules in SMILES format along with their names, for example:
+
+1. **SMILES:** `C(CC(=O)O)[C@@H](C(=O)O)N`
+   - **Name:** (2S)-2-aminopentanedioic acid
+
+2. **SMILES:** `C1=CC(=CC=C1CBr)C(=O)O`
+   - **Name:** 4-(bromomethyl)benzoic acid
+
+*(Include the rest of the molecules from your dataset.)*
+
+---
+
+By using this structured and clear prompt, you guide the LLM to focus on the task of generating physical-chemical properties and corresponding SMARTS patterns that are relevant to the dataset. The response format ensures that the output is organized and easy to interpret.
+#############################################################################################################################
+**Carboxylic Acid Group**: `[CX3](=O)[OX2H1]`  
+This SMARTS pattern matches the carboxylic acid functional group, where a carbon atom is double-bonded to an oxygen and single-bonded to a hydroxyl group. It is present in almost all molecules in the dataset.
+
+---
+
+**Primary Amine Group (Non-Amide)**: `[NX3;H2;!$(NC=O)]`  
+Matches primary amines (nitrogen with two hydrogens) not attached to a carbonyl group (non-amide). Present in molecules such as:
+- 0: (2S)-2-aminopentanedioic acid
+- 2: (2S)-2-aminobutanedioic acid
+- 3: 5-aminopentanoic acid
+- 13: (2S)-2-amino-3-phenylpropanoic acid
+- 15: (2R)-2-amino-3-(1H-indol-3-yl)propanoic acid
+- 24: 2-[[(2S)-2-amino-4-methylsulfanylbutanoyl]amino]acetic acid
+- 32: 7-aminoheptanoic acid
+- 33: 3-[2-(2-aminoethoxy)ethoxy]propanoic acid
+- 34: (2S)-6-acetamido-2-aminohexanoic acid
+- 35: 8-aminooctanoic acid
+
+---
+
+**Secondary Amine Group (Non-Amide)**: `[NX3;H1;!$(NC=O)]`  
+Matches secondary amines (nitrogen with one hydrogen) not part of an amide. Less common in the dataset but may be present in molecules with secondary amines.
+
+---
+
+**Amide Group**: `[NX3][CX3](=O)[#6]`  
+This pattern matches amide functional groups where nitrogen is single-bonded to a carbonyl carbon. Present in molecules:
+- 6: 2-[[1,3-dihydroxy-2-(hydroxymethyl)propan-2-yl]amino]acetic acid
+- 24: 2-[[(2S)-2-amino-4-methylsulfanylbutanoyl]amino]acetic acid
+- 27: 2-[(4-hydroxybenzoyl)amino]acetic acid
+- 29: 4-[(2,2,2-trifluoroacetyl)amino]butanoic acid
+- 34: (2S)-6-acetamido-2-aminohexanoic acid
+
+---
+
+**Aromatic Ring (Benzene Ring)**: `c1ccccc1`  
+Matches benzene rings present in aromatic compounds. Found in molecules with phenyl groups such as:
+- 1: 4-(bromomethyl)benzoic acid
+- 4: 4-aminobenzoic acid
+- 7: 5-(4-hydroxyphenyl)pentanoic acid
+- 12: 4-pyridin-4-ylbenzoic acid
+- 13: (2S)-2-amino-3-phenylpropanoic acid
+- 19: 5-formyl-2-hydroxybenzoic acid
+- 20: 4-formylbenzoic acid
+- 21: 4-nitrobenzoic acid
+- 23: 4-methylbenzoic acid
+- 27: 2-[(4-hydroxybenzoyl)amino]acetic acid
+- 31: 3-(4-hydroxyphenyl)propanoic acid
+
+---
+
+**Aromatic Amine (Aniline Group)**: `[NX3;H2][c]`  
+Matches primary aromatic amines where nitrogen is attached to an aromatic carbon. Present in:
+- 4: 4-aminobenzoic acid
+
+---
+
+**Nitro Group**: `[$([NX3](=O)=O),$([NX3+](=O)[O-])][!#8]`  
+Matches nitro groups in both neutral and charged forms. Present in:
+- 21: 4-nitrobenzoic acid
+
+---
+
+**Aldehyde Group**: `[CX3H1](=O)[#6]`  
+Matches aldehyde functional groups where a carbonyl carbon is bonded to a hydrogen. Found in:
+- 19: 5-formyl-2-hydroxybenzoic acid
+- 20: 4-formylbenzoic acid
+
+---
+
+**Ketone Group**: `[#6][CX3](=O)[#6]`  
+Matches ketone functional groups where a carbonyl carbon is bonded to two carbons. Present in:
+- 26: 4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid
+- 28: 4-oxoheptanedioic acid
+
+---
+
+**Alcohol (Hydroxyl Group)**: `[#6][OX2H]`  
+Matches hydroxyl groups bonded to carbon (alcohols). Found in:
+- 6: 2-[[1,3-dihydroxy-2-(hydroxymethyl)propan-2-yl]amino]acetic acid
+- 9: (2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid
+- 30: 7-hydroxyheptanoic acid
+- 33: 3-[2-(2-aminoethoxy)ethoxy]propanoic acid
+
+---
+
+**Phenol Group**: `[OX2H][cX3]:[c]`  
+Matches hydroxyl groups attached to an aromatic ring (phenols). Present in:
+- 7: 5-(4-hydroxyphenyl)pentanoic acid
+- 19: 5-formyl-2-hydroxybenzoic acid
+- 27: 2-[(4-hydroxybenzoyl)amino]acetic acid
+- 31: 3-(4-hydroxyphenyl)propanoic acid
+
+---
+
+**Thiol Group (Sulfhydryl)**: `[SX2H]`  
+Matches thiol groups where sulfur is bonded to hydrogen. Found in:
+- 18: 3-sulfanylpropanoic acid
+
+---
+
+**Thioether (Sulfide) Group**: `[SX2][#6]`  
+Matches thioether groups where sulfur is bonded to two carbons. Present in:
+- 24: 2-[[(2S)-2-amino-4-methylsulfanylbutanoyl]amino]acetic acid
+
+---
+
+**Halogen Atoms**: `[F,Cl,Br,I]`  
+Matches any halogen atoms. Specific halogens in the dataset:
+
+- **Bromine Atom**: `[Br]`  
+  Present in:
+  - 1: 4-(bromomethyl)benzoic acid
+
+- **Fluorine Atom**: `[F]`  
+  Present in:
+  - 14: 2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid
+
+---
+
+**Pyridine Ring**: `n1ccccc1`  
+Matches pyridine rings (aromatic ring containing one nitrogen). Found in:
+- 12: 4-pyridin-4-ylbenzoic acid
+- 22: pyridine-3-carboxylic acid
+- 25: 4-pyridin-4-ylbutanoic acid
+
+---
+
+**Indole Ring**: `c1cc2c(c1)cc[nH]2`  
+Matches indole rings (fused benzene and pyrrole rings). Present in:
+- 15: (2R)-2-amino-3-(1H-indol-3-yl)propanoic acid
+
+---
+
+**Pyrazole Ring**: `c1cnn[cH]1`  
+Matches pyrazole rings (five-membered aromatic ring with two adjacent nitrogen atoms). Found in:
+- 16: 1H-pyrazole-4-carboxylic acid
+
+---
+
+**Ether Group**: `[OD2]([#6])[#6]`  
+Matches ether groups where oxygen is bonded to two carbons. Present in:
+- 11: 2-[2-(2-methoxyethoxy)ethoxy]acetic acid
+- 26: 4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid
+- 33: 3-[2-(2-aminoethoxy)ethoxy]propanoic acid
+
+---
+
+**Methoxy Group (Aromatic Methoxy)**: `[c][OX2][CH3]`  
+Matches methoxy groups attached to aromatic rings. Present in:
+- 26: 4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid
+
+---
+
+**Alkyl Chain (Unbranched Alkanes)**: `[R0;D2][R0;D2][R0;D2][R0;D2]`  
+Matches unbranched alkane chains of at least four carbons. Present in:
+- 5: octanoic acid
+- 30: 7-hydroxyheptanoic acid
+- 32: 7-aminoheptanoic acid
+- 35: 8-aminooctanoic acid
+
+---
+
+**Fluorinated Alkyl Group**: `[CX4][F]`  
+Matches carbons bonded to fluorine atoms. Found in:
+- 14: 2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid
+
+---
+
+**Aldehyde or Ketone (Carbonyl Group)**: `[CX3]=[OX1]`  
+Matches carbonyl groups (general). Present in molecules with aldehydes or ketones:
+- 19: 5-formyl-2-hydroxybenzoic acid
+- 20: 4-formylbenzoic acid
+- 26: 4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid
+- 28: 4-oxoheptanedioic acid
+
+---
+
+**Amphoteric Molecules**  
+Molecules containing both acidic and basic functional groups (e.g., amino acids with amine and carboxylic acid). This includes:
+- 0: (2S)-2-aminopentanedioic acid
+- 2: (2S)-2-aminobutanedioic acid
+- 13: (2S)-2-amino-3-phenylpropanoic acid
+- 15: (2R)-2-amino-3-(1H-indol-3-yl)propanoic acid
+- 24: 2-[[(2S)-2-amino-4-methylsulfanylbutanoyl]amino]acetic acid
+- 34: (2S)-6-acetamido-2-aminohexanoic acid
+
+---
+
+**Saturated Hydroxycarboxylic Acid**  
+Carboxylic acids with hydroxyl groups on saturated carbons. Present in:
+- 9: (2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid
+- 30: 7-hydroxyheptanoic acid
+
+---
+
+**Unsaturated Carboxylic Acid**  
+Carboxylic acids containing double bonds in the carbon chain. Present in molecules with alkenes or aromatic carboxylic acids.
+
+---
+
+**Alpha-Amino Acid Structure**: `[NX3;H2][CX4H]([#6])[CX3](=O)[OX2H1]`  
+Matches alpha-amino acids where the amino group is attached to the carbon adjacent to the carboxyl group. Present in:
+- 0: (2S)-2-aminopentanedioic acid
+- 2: (2S)-2-aminobutanedioic acid
+- 13: (2S)-2-amino-3-phenylpropanoic acid
+- 15: (2R)-2-amino-3-(1H-indol-3-yl)propanoic acid
+
+---
+
+**Dicarboxylic Acid**: `[CX3](=O)[OX2H1][#6][CX3](=O)[OX2H1]`  
+Matches molecules with two carboxylic acid groups. Present in:
+- 0: (2S)-2-aminopentanedioic acid
+- 2: (2S)-2-aminobutanedioic acid
+- 28: 4-oxoheptanedioic acid
+
+---
+
+**Compound with Bromomethyl Group**: `[CX4][Br]`  
+Matches bromomethyl groups. Present in:
+- 1: 4-(bromomethyl)benzoic acid
+
+---
+
+**Long Alkyl Chain (Eight Carbons or More)**: `[AR0][AR0][AR0][AR0][AR0][AR0][AR0][AR0]`  
+Matches long unbranched aliphatic chains. Present in:
+- 5: octanoic acid
+- 35: 8-aminooctanoic acid
+
+---
+
+**Polyether Chain**: `([OD2][CX4][CX4]){2,}`  
+Matches repeating units of -OCH₂CH₂-. Present in:
+- 11: 2-[2-(2-methoxyethoxy)ethoxy]acetic acid
+- 33: 3-[2-(2-aminoethoxy)ethoxy]propanoic acid
+
+---
+
+**Sulfonamide Group**: `[SX4](=O)(=O)[NX3]`  
+Although not present in the dataset, this pattern matches sulfonamide groups for future reference.
+
+---
+
+**Terminal Alkyne**: `[CX2]#[CH]`  
+Not present in the dataset but useful for identifying terminal alkynes.
+
+---
+
+**Conjugated Diene**: `[#6]=[#6]-[#6]=[#6]`  
+Matches molecules with conjugated double bonds. Present in aromatic systems.
+
+---
+
+This comprehensive list covers various functional groups and structural motifs found in the provided dataset, using SMARTS patterns to match each property accurately.
+
+####################################################################################################################################
+**Physical-Chemical Properties and Corresponding SMARTS Patterns**
+
+Below is a comprehensive analysis of the provided dataset, focusing on physical-chemical properties that are general and match multiple molecules. Each property includes the corresponding SMARTS pattern(s) and explanations, with examples from the dataset where applicable.
+
+---
+
+### **Property Description:** Aromatic Rings (Aromaticity)
+
+- **SMARTS Pattern(s):** `c`
+
+- **Explanation:** The lowercase `c` represents an aromatic carbon atom in SMARTS notation. This pattern matches any aromatic carbon atoms in molecules, effectively identifying aromatic rings such as benzene and heteroaromatic systems.
+
+- **Examples from Dataset:**
+  - **Molecule 2:** 4-(bromomethyl)benzoic acid
+  - **Molecule 5:** 4-aminobenzoic acid
+  - **Molecule 13:** 4-pyridin-4-ylbenzoic acid
+  - **Molecule 14:** (2S)-2-amino-3-phenylpropanoic acid
+  - **Molecule 23:** pyridine-3-carboxylic acid
+  - **Molecule 26:** 4-pyridin-4-ylbutanoic acid
+
+---
+
+### **Property Description:** Carboxylic Acid Functional Group
+
+- **SMARTS Pattern(s):** `[CX3](=O)[OX1H0-,OX2H1]`
+
+- **Explanation:** This pattern matches a carbon atom (`C`) that is sp² hybridized (`X3`), double-bonded to an oxygen atom (`=O`), and single-bonded to an oxygen atom that is either deprotonated (`[OX1H0-]`) or protonated (`[OX2H1]`). It represents both carboxylate and carboxylic acid forms.
+
+- **Examples from Dataset:**
+  - **Molecule 1:** (2S)-2-aminopentanedioic acid
+  - **Molecule 6:** octanoic acid
+  - **Molecule 15:** 2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid
+  - **Most molecules** contain carboxylic acid groups.
+
+---
+
+### **Property Description:** Primary and Secondary Amino Groups (Amines)
+
+- **SMARTS Pattern(s):** `[NX3;H2,H1;!$(NC=O)]`
+
+- **Explanation:** Matches nitrogen atoms (`N`) that are trivalent (`X3`), carrying one or two hydrogens (`H2,H1`), and are not part of an amide group (`!$(NC=O)`). This represents primary and secondary amines, excluding amide nitrogens.
+
+- **Examples from Dataset:**
+  - **Molecule 1:** (2S)-2-aminopentanedioic acid (glutamic acid)
+  - **Molecule 14:** (2S)-2-amino-3-phenylpropanoic acid (phenylalanine)
+  - **Molecule 33:** 7-aminoheptanoic acid
+  - **Molecule 36:** 8-aminooctanoic acid
+
+---
+
+### **Property Description:** Hydroxyl Groups (Alcohols and Phenols)
+
+- **SMARTS Pattern(s):** `[OX2H]`
+
+- **Explanation:** Matches oxygen atoms (`O`) that are divalent (`X2`) and carry a hydrogen atom (`H`). This represents hydroxyl groups in alcohols and phenols.
+
+- **Examples from Dataset:**
+  - **Molecule 7:** 2-[[1,3-dihydroxy-2-(hydroxymethyl)propan-2-yl]amino]acetic acid
+  - **Molecule 10:** (2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid
+  - **Molecule 20:** 5-formyl-2-hydroxybenzoic acid
+  - **Molecule 31:** 7-hydroxyheptanoic acid
+  - **Molecule 32:** 3-(4-hydroxyphenyl)propanoic acid
+
+---
+
+### **Property Description:** Aldehyde Functional Group
+
+- **SMARTS Pattern(s):** `[CX3H1](=O)`
+
+- **Explanation:** Matches a carbon atom (`C`) with one hydrogen (`H1`), sp² hybridized (`X3`), and double-bonded to an oxygen atom (`=O`). This represents an aldehyde group.
+
+- **Examples from Dataset:**
+  - **Molecule 20:** 5-formyl-2-hydroxybenzoic acid
+  - **Molecule 21:** 4-formylbenzoic acid
+
+---
+
+### **Property Description:** Ketone Functional Group
+
+- **SMARTS Pattern(s):** `[CX3](=O)[#6]`
+
+- **Explanation:** Matches a carbonyl carbon (`[CX3](=O)`) bonded to any carbon atom (`[#6]`). Represents ketone groups where the carbonyl is flanked by carbon atoms.
+
+- **Examples from Dataset:**
+  - **Molecule 27:** 4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid
+  - **Molecule 29:** 4-oxoheptanedioic acid
+
+---
+
+### **Property Description:** Ether Functional Group
+
+- **SMARTS Pattern(s):** `[OD2]([#6])[#6]`
+
+- **Explanation:** Matches oxygen atoms (`O`) that are divalent (`D2`), connected to two carbon atoms. Represents ether linkages in molecules.
+
+- **Examples from Dataset:**
+  - **Molecule 7:** 2-[[1,3-dihydroxy-2-(hydroxymethyl)propan-2-yl]amino]acetic acid
+  - **Molecule 12:** 2-[2-(2-methoxyethoxy)ethoxy]acetic acid
+  - **Molecule 34:** 3-[2-(2-aminoethoxy)ethoxy]propanoic acid
+
+---
+
+### **Property Description:** Amide Functional Group
+
+- **SMARTS Pattern(s):** `[NX3][CX3](=O)[#6]`
+
+- **Explanation:** Matches a nitrogen atom (`N`) connected to a carbonyl carbon (`[CX3](=O)`), which is bonded to any carbon atom (`[#6]`). Represents amide linkages.
+
+- **Examples from Dataset:**
+  - **Molecule 25:** 2-[[(2S)-2-amino-4-methylsulfanylbutanoyl]amino]acetic acid
+  - **Molecule 28:** 2-[(4-hydroxybenzoyl)amino]acetic acid
+  - **Molecule 35:** (2S)-6-acetamido-2-aminohexanoic acid
+
+---
+
+### **Property Description:** Halogen Atoms (Presence of Halogens)
+
+- **SMARTS Pattern(s):** `[F,Cl,Br,I]`
+
+- **Explanation:** Matches any halogen atom (fluorine, chlorine, bromine, or iodine). Identifies molecules containing halogens.
+
+- **Examples from Dataset:**
+  - **Molecule 2:** 4-(bromomethyl)benzoic acid (bromine)
+  - **Molecule 15:** 2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid (fluorine)
+  - **Molecule 30:** 4-[(2,2,2-trifluoroacetyl)amino]butanoic acid (fluorine)
+
+---
+
+### **Property Description:** Nitro Group (Electron-Withdrawing Group)
+
+- **SMARTS Pattern(s):** `[$([NX3](=O)=O),$([NX3+](=O)[O-])]`
+
+- **Explanation:** Matches nitro groups in both neutral and ionic forms. Represents a nitrogen atom double-bonded to two oxygen atoms or a nitrogen atom double-bonded to one oxygen and single-bonded to a negatively charged oxygen.
+
+- **Examples from Dataset:**
+  - **Molecule 22:** 4-nitrobenzoic acid
+
+---
+
+### **Property Description:** Thiol (Sulfanyl) Group
+
+- **SMARTS Pattern(s):** `[SX2H]`
+
+- **Explanation:** Matches sulfur atoms (`S`) that are divalent (`X2`) and carry a hydrogen atom (`H`). Represents thiol groups.
+
+- **Examples from Dataset:**
+  - **Molecule 11:** 4-sulfanylbenzoic acid
+  - **Molecule 19:** 3-sulfanylpropanoic acid
+
+---
+
+### **Property Description:** Phenol Functional Group
+
+- **SMARTS Pattern(s):** `[OX2H][cX3]`
+
+- **Explanation:** Matches a hydroxyl group (`[OX2H]`) connected to an aromatic carbon (`[cX3]`). Represents phenol groups.
+
+- **Examples from Dataset:**
+  - **Molecule 5:** 4-aminobenzoic acid
+  - **Molecule 20:** 5-formyl-2-hydroxybenzoic acid
+  - **Molecule 32:** 3-(4-hydroxyphenyl)propanoic acid
+  - **Molecule 28:** 2-[(4-hydroxybenzoyl)amino]acetic acid
+
+---
+
+### **Property Description:** Aliphatic Saturated Chains (Alkanes) of at Least Four Carbons
+
+- **SMARTS Pattern(s):** `[CH2]([CH2])[CH2][CH2]`
+
+- **Explanation:** Matches four consecutive methylene groups (`[CH2]`), representing an unbranched aliphatic chain of at least four carbons.
+
+- **Examples from Dataset:**
+  - **Molecule 6:** octanoic acid
+  - **Molecule 31:** 7-hydroxyheptanoic acid
+  - **Molecule 33:** 7-aminoheptanoic acid
+  - **Molecule 36:** 8-aminooctanoic acid
+
+---
+
+### **Property Description:** Aromatic Heterocycles (Heteroaromatic Rings)
+
+- **SMARTS Pattern(s):** `[n]`
+
+- **Explanation:** The lowercase `n` represents an aromatic nitrogen atom. This pattern matches heteroaromatic rings containing nitrogen, such as pyridine and pyrazole.
+
+- **Examples from Dataset:**
+  - **Molecule 9:** 2-oxo-1H-pyridine-4-carboxylic acid
+  - **Molecule 13:** 4-pyridin-4-ylbenzoic acid
+  - **Molecule 17:** 1H-pyrazole-4-carboxylic acid
+  - **Molecule 23:** pyridine-3-carboxylic acid
+  - **Molecule 26:** 4-pyridin-4-ylbutanoic acid
+
+---
+
+### **Property Description:** Electron-Withdrawing Groups (EWGs)
+
+- **SMARTS Pattern(s):**
+  - Carboxylic Acids: `[CX3](=O)[OX1H0-,OX2H1]`
+  - Nitro Groups: `[$([NX3](=O)=O),$([NX3+](=O)[O-])]`
+  - Halogens: `[F,Cl,Br,I]`
+  - Ketones: `[CX3](=O)[#6]`
+
+- **Explanation:** Electron-withdrawing groups stabilize negative charge by delocalization. The patterns match common EWGs like carboxyl groups, nitro groups, halogens, and ketones.
+
+- **Examples from Dataset:** Many molecules contain EWGs, such as:
+  - **Molecule 22:** 4-nitrobenzoic acid (nitro group)
+  - **Molecule 2:** 4-(bromomethyl)benzoic acid (bromine)
+  - **Molecule 27:** 4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid (ketone)
+
+---
+
+### **Property Description:** Electron-Donating Groups (EDGs)
+
+- **SMARTS Pattern(s):**
+  - Amino Groups: `[NX3;H2,H1;!$(NC=O)]`
+  - Hydroxyl Groups: `[OX2H]`
+  - Thiol Groups: `[SX2H]`
+
+- **Explanation:** Electron-donating groups stabilize positive charge and enhance electron density. The patterns match common EDGs like amino, hydroxyl, and thiol groups.
+
+- **Examples from Dataset:** Many molecules contain EDGs, such as:
+  - **Molecule 5:** 4-aminobenzoic acid (amino group)
+  - **Molecule 11:** 4-sulfanylbenzoic acid (thiol group)
+  - **Molecule 32:** 3-(4-hydroxyphenyl)propanoic acid (hydroxyl group)
+
+---
+
+### **Property Description:** Methoxy Groups (–OCH₃)
+
+- **SMARTS Pattern(s):** `[OX2][CH3]`
+
+- **Explanation:** Matches oxygen atoms connected to a methyl group, representing methoxy groups often found in ethers and methoxy-substituted aromatics.
+
+- **Examples from Dataset:**
+  - **Molecule 12:** 2-[2-(2-methoxyethoxy)ethoxy]acetic acid
+  - **Molecule 27:** 4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid
+
+---
+
+### **Property Description:** Indole Ring System
+
+- **SMARTS Pattern(s):** `c1ccc2[cH][nH]c2c1`
+
+- **Explanation:** Matches the indole ring system, a fused aromatic heterocycle consisting of a benzene ring fused to a pyrrole ring.
+
+- **Examples from Dataset:**
+  - **Molecule 16:** (2R)-2-amino-3-(1H-indol-3-yl)propanoic acid (tryptophan)
+
+---
+
+### **Property Description:** Primary Alcohols (Terminal Hydroxyl Groups)
+
+- **SMARTS Pattern(s):** `[CH2][OH]`
+
+- **Explanation:** Matches methylene groups (`[CH2]`) connected to a hydroxyl group (`[OH]`), representing primary alcohols at the end of aliphatic chains.
+
+- **Examples from Dataset:**
+  - **Molecule 31:** 7-hydroxyheptanoic acid
+  - **Molecule 34:** 3-[2-(2-aminoethoxy)ethoxy]propanoic acid
+
+---
+
+### **Property Description:** Secondary Alcohols
+
+- **SMARTS Pattern(s):** `[CH]([OH])[CH3]`
+
+- **Explanation:** Matches methine carbons (`[CH]`) connected to a hydroxyl group and a methyl group. Represents secondary alcohols.
+
+- **Examples from Dataset:**
+  - **Molecule 7:** Contains secondary alcohol groups within a more complex structure.
+
+---
+
+### **Property Description:** Aliphatic Amines Attached to Aliphatic Chains (Primary Amines)
+
+- **SMARTS Pattern(s):** `[NX3;H2][C][C][C]`
+
+- **Explanation:** Matches primary amines (`[NX3;H2]`) connected to at least three carbon atoms, representing amines in aliphatic chains.
+
+- **Examples from Dataset:**
+  - **Molecule 4:** 5-aminopentanoic acid
+  - **Molecule 33:** 7-aminoheptanoic acid
+  - **Molecule 36:** 8-aminooctanoic acid
+
+---
+
+### **Property Description:** Terminal Carboxylic Acid on Aliphatic Chain
+
+- **SMARTS Pattern(s):** `[C][C][C](=O)[O]`
+
+- **Explanation:** Matches at least three carbon atoms connected in a chain with a terminal carboxylic acid group (`(=O)[O]`).
+
+- **Examples from Dataset:**
+  - **Molecule 29:** 4-oxoheptanedioic acid
+  - **Molecule 31:** 7-hydroxyheptanoic acid
+  - **Molecule 33:** 7-aminoheptanoic acid
+
+---
+
+### **Property Description:** Conjugated Ketone Groups (α,β-Unsaturated Ketones)
+
+- **SMARTS Pattern(s):** `[CX3](=O)[CX3]=[CX3]`
+
+- **Explanation:** Matches ketone groups (`[CX3](=O)`) conjugated with a double bond (`=[CX3]`), representing α,β-unsaturated ketones.
+
+- **Examples from Dataset:**
+  - **Molecule 9:** 2-oxo-1H-pyridine-4-carboxylic acid (conjugated system within a heterocycle)
+  - **Molecule 27:** Contains a conjugated ketone within the aromatic ring system.
+
+---
+
+### **Property Description:** Polyhydroxylated Aliphatic Chains (Polyols)
+
+- **SMARTS Pattern(s):** `[C](O)(O)[C](O)(O)[C](O)(O)`
+
+- **Explanation:** Matches aliphatic chains with multiple hydroxyl groups (`(O)(O)`), representing polyol structures like sugars and sugar acids.
+
+- **Examples from Dataset:**
+  - **Molecule 10:** (2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid (gluconic acid)
+
+---
+
+### **Property Description:** Presence of Pyrrole Rings
+
+- **SMARTS Pattern(s):** `[nH]1cccc1`
+
+- **Explanation:** Matches aromatic five-membered rings with a nitrogen atom bearing a hydrogen (`[nH]`), representing pyrrole rings.
+
+- **Examples from Dataset:**
+  - **Molecule 16:** Contains an indole ring, which includes a pyrrole moiety.
+
+---
+
+### **Property Description:** Aliphatic Chains with Terminal Amines (Alkyl Amines)
+
+- **SMARTS Pattern(s):** `[N][CH2][CH2][CH2][CH2][C](=O)O`
+
+- **Explanation:** Matches a nitrogen atom connected to an aliphatic chain ending with a carboxylic acid group.
+
+- **Examples from Dataset:**
+  - **Molecule 4:** 5-aminopentanoic acid
+  - **Molecule 33:** 7-aminoheptanoic acid
+  - **Molecule 36:** 8-aminooctanoic acid
+
+---
+
+### **Property Description:** Molecules Containing Methoxyethoxy Groups
+
+- **SMARTS Pattern(s):** `[OX2][CX4][CX4][OX2][CX4][CX4][OX2][CX4]`
+
+- **Explanation:** Matches sequences of ethylene glycol units terminated with a methoxy group, representing methoxyethoxy chains.
+
+- **Examples from Dataset:**
+  - **Molecule 12:** 2-[2-(2-methoxyethoxy)ethoxy]acetic acid
+  - **Molecule 34:** 3-[2-(2-aminoethoxy)ethoxy]propanoic acid
+
+---
+
+### **Property Description:** Molecules Containing Heteroatoms (N, O, S)
+
+- **SMARTS Pattern(s):** `[!#6&!#1]`
+
+- **Explanation:** Matches any atom that is not carbon (`#6`) or hydrogen (`#1`), effectively identifying heteroatoms like nitrogen, oxygen, and sulfur.
+
+- **Examples from Dataset:** Nearly all molecules, as they contain functional groups with heteroatoms:
+  - **Nitrogen:** Amino acids, amines, amides
+  - **Oxygen:** Carboxylic acids, alcohols, ketones, ethers
+  - **Sulfur:** Thiols, sulfanyl groups (e.g., Molecule 25)
+
+---
+
+**Note:** The SMARTS patterns provided are designed to match specific functional groups and structural features common in the dataset. They are general enough to match multiple molecules but may need adjustments for more specific searches depending on the context.
+
+---
+
+**Conclusion**
+
+By analyzing the dataset, we have identified various physical-chemical properties and provided corresponding SMARTS patterns. These patterns can be utilized to search for molecules with specific functional groups, structural features, or electronic characteristics within chemical databases. Understanding these patterns enhances the ability to predict reactivity, biological activity, and properties of chemical compounds.
+#################################################################################################################################################################################
+
+
+**Carboxylic Acid Group**: `[CX3](=O)[OX2H1]`  
+This SMARTS pattern matches the carboxylic acid functional group, where a carbon atom is double-bonded to an oxygen and single-bonded to a hydroxyl group. It is present in almost all molecules in the dataset.
+
+---
+
+**Primary Amine Group (Non-Amide)**: `[NX3;H2;!$(NC=O)]`  
+Matches primary amines (nitrogen with two hydrogens) not attached to a carbonyl group (non-amide). Present in molecules such as:
+- 0: (2S)-2-aminopentanedioic acid
+- 2: (2S)-2-aminobutanedioic acid
+- 3: 5-aminopentanoic acid
+- 13: (2S)-2-amino-3-phenylpropanoic acid
+- 15: (2R)-2-amino-3-(1H-indol-3-yl)propanoic acid
+- 24: 2-[[(2S)-2-amino-4-methylsulfanylbutanoyl]amino]acetic acid
+- 32: 7-aminoheptanoic acid
+- 33: 3-[2-(2-aminoethoxy)ethoxy]propanoic acid
+- 34: (2S)-6-acetamido-2-aminohexanoic acid
+- 35: 8-aminooctanoic acid
+
+---
+
+**Secondary Amine Group (Non-Amide)**: `[NX3;H1;!$(NC=O)]`  
+Matches secondary amines (nitrogen with one hydrogen) not part of an amide. Less common in the dataset but may be present in molecules with secondary amines.
+
+---
+
+**Amide Group**: `[NX3][CX3](=O)[#6]`  
+This pattern matches amide functional groups where nitrogen is single-bonded to a carbonyl carbon. Present in molecules:
+- 6: 2-[[1,3-dihydroxy-2-(hydroxymethyl)propan-2-yl]amino]acetic acid
+- 24: 2-[[(2S)-2-amino-4-methylsulfanylbutanoyl]amino]acetic acid
+- 27: 2-[(4-hydroxybenzoyl)amino]acetic acid
+- 29: 4-[(2,2,2-trifluoroacetyl)amino]butanoic acid
+- 34: (2S)-6-acetamido-2-aminohexanoic acid
+
+---
+
+**Aromatic Ring (Benzene Ring)**: `c1ccccc1`  
+Matches benzene rings present in aromatic compounds. Found in molecules with phenyl groups such as:
+- 1: 4-(bromomethyl)benzoic acid
+- 4: 4-aminobenzoic acid
+- 7: 5-(4-hydroxyphenyl)pentanoic acid
+- 12: 4-pyridin-4-ylbenzoic acid
+- 13: (2S)-2-amino-3-phenylpropanoic acid
+- 19: 5-formyl-2-hydroxybenzoic acid
+- 20: 4-formylbenzoic acid
+- 21: 4-nitrobenzoic acid
+- 23: 4-methylbenzoic acid
+- 27: 2-[(4-hydroxybenzoyl)amino]acetic acid
+- 31: 3-(4-hydroxyphenyl)propanoic acid
+
+---
+
+**Aromatic Amine (Aniline Group)**: `[NX3;H2][c]`  
+Matches primary aromatic amines where nitrogen is attached to an aromatic carbon. Present in:
+- 4: 4-aminobenzoic acid
+
+---
+
+**Nitro Group**: `[$([NX3](=O)=O),$([NX3+](=O)[O-])][!#8]`  
+Matches nitro groups in both neutral and charged forms. Present in:
+- 21: 4-nitrobenzoic acid
+
+---
+
+**Aldehyde Group**: `[CX3H1](=O)[#6]`  
+Matches aldehyde functional groups where a carbonyl carbon is bonded to a hydrogen. Found in:
+- 19: 5-formyl-2-hydroxybenzoic acid
+- 20: 4-formylbenzoic acid
+
+---
+
+**Ketone Group**: `[#6][CX3](=O)[#6]`  
+Matches ketone functional groups where a carbonyl carbon is bonded to two carbons. Present in:
+- 26: 4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid
+- 28: 4-oxoheptanedioic acid
+
+---
+
+**Alcohol (Hydroxyl Group)**: `[#6][OX2H]`  
+Matches hydroxyl groups bonded to carbon (alcohols). Found in:
+- 6: 2-[[1,3-dihydroxy-2-(hydroxymethyl)propan-2-yl]amino]acetic acid
+- 9: (2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid
+- 30: 7-hydroxyheptanoic acid
+- 33: 3-[2-(2-aminoethoxy)ethoxy]propanoic acid
+
+---
+
+**Phenol Group**: `[OX2H][cX3]:[c]`  
+Matches hydroxyl groups attached to an aromatic ring (phenols). Present in:
+- 7: 5-(4-hydroxyphenyl)pentanoic acid
+- 19: 5-formyl-2-hydroxybenzoic acid
+- 27: 2-[(4-hydroxybenzoyl)amino]acetic acid
+- 31: 3-(4-hydroxyphenyl)propanoic acid
+
+---
+
+**Thiol Group (Sulfhydryl)**: `[SX2H]`  
+Matches thiol groups where sulfur is bonded to hydrogen. Found in:
+- 18: 3-sulfanylpropanoic acid
+
+---
+
+**Thioether (Sulfide) Group**: `[SX2][#6]`  
+Matches thioether groups where sulfur is bonded to two carbons. Present in:
+- 24: 2-[[(2S)-2-amino-4-methylsulfanylbutanoyl]amino]acetic acid
+
+---
+
+**Halogen Atoms**: `[F,Cl,Br,I]`  
+Matches any halogen atoms. Specific halogens in the dataset:
+
+- **Bromine Atom**: `[Br]`  
+  Present in:
+  - 1: 4-(bromomethyl)benzoic acid
+
+- **Fluorine Atom**: `[F]`  
+  Present in:
+  - 14: 2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid
+
+---
+
+**Pyridine Ring**: `n1ccccc1`  
+Matches pyridine rings (aromatic ring containing one nitrogen). Found in:
+- 12: 4-pyridin-4-ylbenzoic acid
+- 22: pyridine-3-carboxylic acid
+- 25: 4-pyridin-4-ylbutanoic acid
+
+---
+
+**Indole Ring**: `c1cc2c(c1)cc[nH]2`  
+Matches indole rings (fused benzene and pyrrole rings). Present in:
+- 15: (2R)-2-amino-3-(1H-indol-3-yl)propanoic acid
+
+---
+
+**Pyrazole Ring**: `c1cnn[cH]1`  
+Matches pyrazole rings (five-membered aromatic ring with two adjacent nitrogen atoms). Found in:
+- 16: 1H-pyrazole-4-carboxylic acid
+
+---
+
+**Ether Group**: `[OD2]([#6])[#6]`  
+Matches ether groups where oxygen is bonded to two carbons. Present in:
+- 11: 2-[2-(2-methoxyethoxy)ethoxy]acetic acid
+- 26: 4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid
+- 33: 3-[2-(2-aminoethoxy)ethoxy]propanoic acid
+
+---
+
+**Methoxy Group (Aromatic Methoxy)**: `[c][OX2][CH3]`  
+Matches methoxy groups attached to aromatic rings. Present in:
+- 26: 4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid
+
+---
+
+**Alkyl Chain (Unbranched Alkanes)**: `[R0;D2][R0;D2][R0;D2][R0;D2]`  
+Matches unbranched alkane chains of at least four carbons. Present in:
+- 5: octanoic acid
+- 30: 7-hydroxyheptanoic acid
+- 32: 7-aminoheptanoic acid
+- 35: 8-aminooctanoic acid
+
+---
+
+**Fluorinated Alkyl Group**: `[CX4][F]`  
+Matches carbons bonded to fluorine atoms. Found in:
+- 14: 2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid
+
+---
+
+**Aldehyde or Ketone (Carbonyl Group)**: `[CX3]=[OX1]`  
+Matches carbonyl groups (general). Present in molecules with aldehydes or ketones:
+- 19: 5-formyl-2-hydroxybenzoic acid
+- 20: 4-formylbenzoic acid
+- 26: 4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid
+- 28: 4-oxoheptanedioic acid
+
+---
+
+**Amphoteric Molecules**  
+Molecules containing both acidic and basic functional groups (e.g., amino acids with amine and carboxylic acid). This includes:
+- 0: (2S)-2-aminopentanedioic acid
+- 2: (2S)-2-aminobutanedioic acid
+- 13: (2S)-2-amino-3-phenylpropanoic acid
+- 15: (2R)-2-amino-3-(1H-indol-3-yl)propanoic acid
+- 24: 2-[[(2S)-2-amino-4-methylsulfanylbutanoyl]amino]acetic acid
+- 34: (2S)-6-acetamido-2-aminohexanoic acid
+
+---
+
+**Saturated Hydroxycarboxylic Acid**  
+Carboxylic acids with hydroxyl groups on saturated carbons. Present in:
+- 9: (2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid
+- 30: 7-hydroxyheptanoic acid
+
+---
+
+**Unsaturated Carboxylic Acid**  
+Carboxylic acids containing double bonds in the carbon chain. Present in molecules with alkenes or aromatic carboxylic acids.
+
+---
+
+**Alpha-Amino Acid Structure**: `[NX3;H2][CX4H]([#6])[CX3](=O)[OX2H1]`  
+Matches alpha-amino acids where the amino group is attached to the carbon adjacent to the carboxyl group. Present in:
+- 0: (2S)-2-aminopentanedioic acid
+- 2: (2S)-2-aminobutanedioic acid
+- 13: (2S)-2-amino-3-phenylpropanoic acid
+- 15: (2R)-2-amino-3-(1H-indol-3-yl)propanoic acid
+
+---
+
+**Dicarboxylic Acid**: `[CX3](=O)[OX2H1][#6][CX3](=O)[OX2H1]`  
+Matches molecules with two carboxylic acid groups. Present in:
+- 0: (2S)-2-aminopentanedioic acid
+- 2: (2S)-2-aminobutanedioic acid
+- 28: 4-oxoheptanedioic acid
+
+---
+
+**Compound with Bromomethyl Group**: `[CX4][Br]`  
+Matches bromomethyl groups. Present in:
+- 1: 4-(bromomethyl)benzoic acid
+
+---
+
+**Long Alkyl Chain (Eight Carbons or More)**: `[AR0][AR0][AR0][AR0][AR0][AR0][AR0][AR0]`  
+Matches long unbranched aliphatic chains. Present in:
+- 5: octanoic acid
+- 35: 8-aminooctanoic acid
+
+---
+
+**Polyether Chain**: `([OD2][CX4][CX4]){2,}`  
+Matches repeating units of -OCH₂CH₂-. Present in:
+- 11: 2-[2-(2-methoxyethoxy)ethoxy]acetic acid
+- 33: 3-[2-(2-aminoethoxy)ethoxy]propanoic acid
+
+---
+
+**Sulfonamide Group**: `[SX4](=O)(=O)[NX3]`  
+Although not present in the dataset, this pattern matches sulfonamide groups for future reference.
+
+---
+
+**Terminal Alkyne**: `[CX2]#[CH]`  
+Not present in the dataset but useful for identifying terminal alkynes.
+
+---
+
+**Conjugated Diene**: `[#6]=[#6]-[#6]=[#6]`  
+Matches molecules with conjugated double bonds. Present in aromatic systems.
+
+---
+
+This comprehensive list covers various functional groups and structural motifs found in the provided dataset, using SMARTS patterns to match each property accurately.
+**Summary of Molecular Properties and Corresponding SMARTS Patterns**
+
+As an experienced chemist analyzing the given dataset, I've identified various molecular properties present in the molecules. Below are the detailed properties, their corresponding SMARTS patterns, and the molecules from the dataset that match each pattern.
+
+---
+
+### 1. **Carboxylic Acid Group (–COOH)**
+
+- **SMARTS Pattern:** `[CX3](=O)[OX2H1]`
+  - **Explanation:** A carbon atom double-bonded to an oxygen atom and single-bonded to a hydroxyl group, representing the carboxylic acid functional group.
+
+- **Matching Molecules:**
+  - **0:** (2S)-2-aminopentanedioic acid
+  - **1:** 4-(bromomethyl)benzoic acid
+  - **2:** (2S)-2-aminobutanedioic acid
+  - **3:** 5-aminopentanoic acid
+  - **4:** 4-aminobenzoic acid
+  - **5:** octanoic acid
+  - **6:** 2-[[1,3-dihydroxy-2-(hydroxymethyl)propan-2-yl]amino]acetic acid
+  - **7:** 5-(4-hydroxyphenyl)pentanoic acid
+  - **8:** 2-oxo-1H-pyridine-4-carboxylic acid
+  - **9:** (2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid
+  - **10:** 4-sulfanylbenzoic acid
+  - **12:** 4-pyridin-4-ylbenzoic acid
+  - **13:** (2S)-2-amino-3-phenylpropanoic acid
+  - **14:** 2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid
+  - **15:** (2R)-2-amino-3-(1H-indol-3-yl)propanoic acid
+  - **16:** 1H-pyrazole-4-carboxylic acid
+  - **17:** 1,3-dioxo-2-benzofuran-5-carboxylic acid
+  - **18:** 3-sulfanylpropanoic acid
+  - **19:** 5-formyl-2-hydroxybenzoic acid
+  - **20:** 4-formylbenzoic acid
+  - **21:** 4-nitrobenzoic acid
+  - **22:** pyridine-3-carboxylic acid
+  - **23:** 4-methylbenzoic acid
+  - **24:** 2-[[(2S)-2-amino-4-methylsulfanylbutanoyl]amino]acetic acid
+  - **25:** 4-pyridin-4-ylbutanoic acid
+  - **26:** 4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid
+  - **27:** 2-[(4-hydroxybenzoyl)amino]acetic acid
+  - **28:** 4-oxoheptanedioic acid
+  - **29:** 4-[(2,2,2-trifluoroacetyl)amino]butanoic acid
+  - **30:** 7-hydroxyheptanoic acid
+  - **31:** 3-(4-hydroxyphenyl)propanoic acid
+  - **32:** 7-aminoheptanoic acid
+  - **33:** 3-[2-(2-aminoethoxy)ethoxy]propanoic acid
+  - **34:** (2S)-6-acetamido-2-aminohexanoic acid
+  - **35:** 8-aminooctanoic acid
+
+---
+
+### 2. **Primary Amino Group (–NH₂)**
+
+- **SMARTS Pattern:** `[NX3;H2][!$(NC=O)]`
+  - **Explanation:** A nitrogen atom with two hydrogen atoms, not connected to a carbonyl group (excludes amides). Represents primary amines.
+
+- **Matching Molecules:**
+  - **0:** (2S)-2-aminopentanedioic acid
+  - **2:** (2S)-2-aminobutanedioic acid
+  - **3:** 5-aminopentanoic acid
+  - **4:** 4-aminobenzoic acid
+  - **13:** (2S)-2-amino-3-phenylpropanoic acid
+  - **15:** (2R)-2-amino-3-(1H-indol-3-yl)propanoic acid
+  - **24:** 2-[[(2S)-2-amino-4-methylsulfanylbutanoyl]amino]acetic acid
+  - **32:** 7-aminoheptanoic acid
+  - **33:** 3-[2-(2-aminoethoxy)ethoxy]propanoic acid
+  - **34:** (2S)-6-acetamido-2-aminohexanoic acid
+  - **35:** 8-aminooctanoic acid
+
+---
+
+### 3. **Secondary Amino Group (–NH–)**
+
+- **SMARTS Pattern:** `[NX3;H1][!$(NC=O)]`
+  - **Explanation:** A nitrogen atom with one hydrogen atom, not connected to a carbonyl group (excludes amides). Represents secondary amines.
+
+- **Matching Molecules:**
+  - **6:** 2-[[1,3-dihydroxy-2-(hydroxymethyl)propan-2-yl]amino]acetic acid
+  - **29:** 4-[(2,2,2-trifluoroacetyl)amino]butanoic acid
+  - **33:** 3-[2-(2-aminoethoxy)ethoxy]propanoic acid
+
+---
+
+### 4. **Amide Group (–CONH–)**
+
+- **SMARTS Pattern:** `[NX3][CX3](=O)[#6]`
+  - **Explanation:** A nitrogen atom connected to a carbonyl carbon, where the carbonyl carbon is also bonded to another carbon atom.
+
+- **Matching Molecules:**
+  - **24:** 2-[[(2S)-2-amino-4-methylsulfanylbutanoyl]amino]acetic acid
+  - **27:** 2-[(4-hydroxybenzoyl)amino]acetic acid
+  - **29:** 4-[(2,2,2-trifluoroacetyl)amino]butanoic acid
+  - **34:** (2S)-6-acetamido-2-aminohexanoic acid
+
+---
+
+### 5. **Aromatic Ring**
+
+- **SMARTS Pattern:** `c`
+  - **Explanation:** Represents any aromatic carbon atom, indicating the presence of an aromatic ring such as benzene, pyridine, etc.
+
+- **Matching Molecules:**
+  - **1:** 4-(bromomethyl)benzoic acid
+  - **4:** 4-aminobenzoic acid
+  - **7:** 5-(4-hydroxyphenyl)pentanoic acid
+  - **8:** 2-oxo-1H-pyridine-4-carboxylic acid
+  - **10:** 4-sulfanylbenzoic acid
+  - **12:** 4-pyridin-4-ylbenzoic acid
+  - **13:** (2S)-2-amino-3-phenylpropanoic acid
+  - **15:** (2R)-2-amino-3-(1H-indol-3-yl)propanoic acid
+  - **16:** 1H-pyrazole-4-carboxylic acid
+  - **17:** 1,3-dioxo-2-benzofuran-5-carboxylic acid
+  - **19:** 5-formyl-2-hydroxybenzoic acid
+  - **20:** 4-formylbenzoic acid
+  - **21:** 4-nitrobenzoic acid
+  - **22:** pyridine-3-carboxylic acid
+  - **23:** 4-methylbenzoic acid
+  - **26:** 4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid
+  - **27:** 2-[(4-hydroxybenzoyl)amino]acetic acid
+  - **31:** 3-(4-hydroxyphenyl)propanoic acid
+
+---
+
+### 6. **Phenol Group (Aromatic Hydroxyl –OH)**
+
+- **SMARTS Pattern:** `[c][OX2H]`
+  - **Explanation:** A hydroxyl group directly attached to an aromatic carbon atom.
+
+- **Matching Molecules:**
+  - **7:** 5-(4-hydroxyphenyl)pentanoic acid
+  - **19:** 5-formyl-2-hydroxybenzoic acid
+  - **27:** 2-[(4-hydroxybenzoyl)amino]acetic acid
+  - **31:** 3-(4-hydroxyphenyl)propanoic acid
+
+---
+
+### 7. **Aldehyde Group (–CHO)**
+
+- **SMARTS Pattern:** `[CX3H1](=O)[#6]`
+  - **Explanation:** A carbonyl group (carbon double-bonded to oxygen) with the carbon also bonded to a hydrogen atom and another carbon atom.
+
+- **Matching Molecules:**
+  - **19:** 5-formyl-2-hydroxybenzoic acid
+  - **20:** 4-formylbenzoic acid
+
+---
+
+### 8. **Ketone Group (–C(=O)–)**
+
+- **SMARTS Pattern:** `[#6][CX3](=O)[#6]`
+  - **Explanation:** A carbonyl group with the carbon atom bonded to two other carbons, representing ketones.
+
+- **Matching Molecules:**
+  - **17:** 1,3-dioxo-2-benzofuran-5-carboxylic acid
+  - **26:** 4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid
+  - **28:** 4-oxoheptanedioic acid
+
+---
+
+### 9. **Ether Linkage (–O–)**
+
+- **SMARTS Pattern:** `[OD2]([#6])[#6]`
+  - **Explanation:** An oxygen atom single-bonded to two carbon atoms, indicating an ether functional group.
+
+- **Matching Molecules:**
+  - **11:** 2-[2-(2-methoxyethoxy)ethoxy]acetic acid
+  - **26:** 4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid
+  - **33:** 3-[2-(2-aminoethoxy)ethoxy]propanoic acid
+
+---
+
+### 10. **Thiol Group (–SH)**
+
+- **SMARTS Pattern:** `[SX2H]`
+  - **Explanation:** A sulfur atom bonded to hydrogen and one other atom, representing a thiol or sulfhydryl group.
+
+- **Matching Molecules:**
+  - **10:** 4-sulfanylbenzoic acid
+  - **18:** 3-sulfanylpropanoic acid
+
+---
+
+### 11. **Halogen Substitution**
+
+- **SMARTS Pattern:** `[F,Cl,Br,I]`
+  - **Explanation:** Any halogen atom (fluorine, chlorine, bromine, or iodine).
+
+- **Matching Molecules:**
+  - **1:** 4-(bromomethyl)benzoic acid (contains bromine)
+  - **14:** 2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid (contains fluorine)
+  - **29:** 4-[(2,2,2-trifluoroacetyl)amino]butanoic acid (contains fluorine)
+
+---
+
+### 12. **Nitro Group (–NO₂)**
+
+- **SMARTS Pattern:** `[$([NX3](=O)=O),$([NX3+](=O)[O-])]`
+  - **Explanation:** A nitrogen atom bonded to two oxygens, representing the nitro functional group.
+
+- **Matching Molecules:**
+  - **21:** 4-nitrobenzoic acid
+
+---
+
+### 13. **Pyridine Ring**
+
+- **SMARTS Pattern:** `[nX2]1cccc1`
+  - **Explanation:** A six-membered aromatic ring containing one nitrogen atom.
+
+- **Matching Molecules:**
+  - **12:** 4-pyridin-4-ylbenzoic acid
+  - **22:** pyridine-3-carboxylic acid
+  - **25:** 4-pyridin-4-ylbutanoic acid
+
+---
+
+### 14. **Indole Ring System**
+
+- **SMARTS Pattern:** `c1cc2c(cc1)[nH]c2`
+  - **Explanation:** A fused bicyclic system containing a benzene ring fused to a pyrrole ring.
+
+- **Matching Molecules:**
+  - **15:** (2R)-2-amino-3-(1H-indol-3-yl)propanoic acid
+
+---
+
+### 15. **Fluorinated Aliphatic Chain**
+
+- **SMARTS Pattern:** `[CX4]([F])[F]`
+  - **Explanation:** A saturated carbon atom substituted with two fluorine atoms.
+
+- **Matching Molecules:**
+  - **14:** 2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid
+  - **29:** 4-[(2,2,2-trifluoroacetyl)amino]butanoic acid
+
+---
+
+### 16. **Aliphatic Chain (Linear Hydrocarbon Chain)**
+
+- **SMARTS Pattern:** `[CH2]([CH2])[CH2]`
+  - **Explanation:** A linear chain of methylene groups representing an aliphatic hydrocarbon chain.
+
+- **Matching Molecules:**
+  - **5:** octanoic acid
+  - **30:** 7-hydroxyheptanoic acid
+  - **32:** 7-aminoheptanoic acid
+  - **35:** 8-aminooctanoic acid
+
+---
+
+### 17. **Hydroxyl Group (Alcohol –OH)**
+
+- **SMARTS Pattern:** `[OX2H][CX4]`
+  - **Explanation:** A hydroxyl group bonded to a saturated carbon atom, representing an alcohol group.
+
+- **Matching Molecules:**
+  - **6:** 2-[[1,3-dihydroxy-2-(hydroxymethyl)propan-2-yl]amino]acetic acid
+  - **9:** (2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid
+  - **30:** 7-hydroxyheptanoic acid
+
+---
+
+### 18. **Methoxy Group (–OCH₃)**
+
+- **SMARTS Pattern:** `[OD2]([CH3])[#6]`
+  - **Explanation:** An oxygen atom bonded to a methyl group and a carbon atom, representing a methoxy group.
+
+- **Matching Molecules:**
+  - **26:** 4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid
+  - **11:** 2-[2-(2-methoxyethoxy)ethoxy]acetic acid
+
+---
+
+### 19. **Pyrazole Ring**
+
+- **SMARTS Pattern:** `n1cccn1`
+  - **Explanation:** A five-membered aromatic ring containing two adjacent nitrogen atoms.
+
+- **Matching Molecules:**
+  - **16:** 1H-pyrazole-4-carboxylic acid
+
+---
+
+### 20. **Sulfone Group (–SO₂–)**
+
+- **SMARTS Pattern:** `[SX4](=O)(=O)[#6]`
+  - **Explanation:** A sulfur atom double-bonded to two oxygen atoms and single-bonded to a carbon atom.
+
+- **Matching Molecules:**
+  - **None in the dataset.**
+
+---
+
+### 21. **Quaternary Ammonium Group**
+
+- **SMARTS Pattern:** `[NX4+]`
+  - **Explanation:** A nitrogen atom bonded to four carbon atoms and carrying a positive charge.
+
+- **Matching Molecules:**
+  - **None in the dataset.**
+
+---
+
+### 22. **Terminal Alkyne Group (–C≡CH)**
+
+- **SMARTS Pattern:** `[CX2]#CH`
+  - **Explanation:** A carbon atom triple-bonded to another carbon, which is bonded to a hydrogen atom.
+
+- **Matching Molecules:**
+  - **None in the dataset.**
+
+---
+
+### 23. **Carboxamide Group (–CONH₂)**
+
+- **SMARTS Pattern:** `[CX3](=O)[NX3H2]`
+  - **Explanation:** A carbonyl group bonded to a nitrogen atom with two hydrogens, representing a primary amide.
+
+- **Matching Molecules:**
+  - **None in the dataset directly matching this pattern.**
+
+---
+
+### 24. **Thioether Group (–S–)**
+
+- **SMARTS Pattern:** `[SX2][#6]`
+  - **Explanation:** A sulfur atom bonded to two carbon atoms.
+
+- **Matching Molecules:**
+  - **24:** 2-[[(2S)-2-amino-4-methylsulfanylbutanoyl]amino]acetic acid
+
+---
+
+### 25. **Secondary Alcohol (–CHOH–)**
+
+- **SMARTS Pattern:** `[CX4H]([OX2H])[#6]`
+  - **Explanation:** A carbon atom bonded to a hydroxyl group, one hydrogen, and two other carbons.
+
+- **Matching Molecules:**
+  - **9:** (2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid
+
+---
+
+### 26. **Di-carboxylic Acid**
+
+- **SMARTS Pattern:** `[CX3](=O)[OX2H1].[CX3](=O)[OX2H1]`
+  - **Explanation:** Presence of two carboxylic acid groups in the molecule.
+
+- **Matching Molecules:**
+  - **0:** (2S)-2-aminopentanedioic acid
+  - **2:** (2S)-2-aminobutanedioic acid
+  - **28:** 4-oxoheptanedioic acid
+
+---
+
+### 27. **Branched Aliphatic Chain**
+
+- **SMARTS Pattern:** `[CX4](C)(C)C`
+  - **Explanation:** A saturated carbon atom bonded to three other carbons, indicating branching.
+
+- **Matching Molecules:**
+  - **14:** 2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid
+  - **6:** 2-[[1,3-dihydroxy-2-(hydroxymethyl)propan-2-yl]amino]acetic acid
+
+---
+
+**Note:** The molecules without matches in specific patterns may not contain those functional groups or structural features.
+
+---
+
+**Conclusion:**
+
+The dataset comprises a diverse set of molecules exhibiting various functional groups and structural motifs. By applying SMARTS patterns, we can effectively identify and classify these features, facilitating a deeper understanding of the molecular properties.
+
+- **Common Functional Groups Identified:**
+  - Carboxylic acids
+  - Amines (primary and secondary)
+  - Amides
+  - Aromatic rings
+  - Phenols
+  - Aldehydes and ketones
+  - Ethers
+  - Thiols
+  - Halogens (fluorine and bromine)
+  - Nitro groups
+  - Heterocycles (pyridine, indole, pyrazole)
+  - Aliphatic chains (linear and branched)
+  - Fluorinated chains
+
+Understanding these properties is crucial for predicting the chemical behavior, reactivity, and biological activity of these compounds.
+
+---
+##############################################################################################################################################

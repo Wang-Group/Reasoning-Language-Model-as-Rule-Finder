@@ -1,0 +1,185 @@
+def rule2matrix(smiles_list):
+    import pandas as pd
+    from rdkit import Chem
+    from rdkit.Chem import AllChem
+    
+    # Define SMARTS patterns for functional groups and structural features
+    
+    # Rule 1: Aliphatic carboxylic acids with chain lengths of 6 to 8 carbons and lacking terminal polar functional groups such as amino or hydroxyl groups tend to give high yield.
+    rule1_pattern = Chem.MolFromSmarts("[CH3][CH2]{4,6}[CX3](=O)[OX2H1]")
+    rule1_exclude_patterns = [
+        Chem.MolFromSmarts("[NX3;H2]"),  # Primary amino group
+        Chem.MolFromSmarts("[OX2H]")      # Hydroxyl group
+    ]
+    
+    # Rule 2a: Amino acids with acidic side chains or containing multiple carboxylate groups tend to give high yield.
+    amino_acid_backbone = Chem.MolFromSmarts("[NX3;H2][CX4H][CX3](=O)[OX2H1]")
+    carboxylic_acid = Chem.MolFromSmarts("[CX3](=O)[OX2H1]")
+    
+    # Rule 2b: Amino acids with hydrophobic aromatic side chains lacking heteroatoms tend to give low yield.
+    aromatic_ring = Chem.MolFromSmarts("c1ccccc1")
+    
+    # Rule 3: Amino acids with aromatic heterocycles in the side chain (e.g., tryptophan) tend to give high yield.
+    aromatic_heterocycle = Chem.MolFromSmarts("[n,o,s]")  # Aromatic heteroatoms
+    
+    # Rule 4: N-acetylated amino acids tend to give low yield.
+    n_acetyl_group = Chem.MolFromSmarts("[NX3][CX3](=O)[#6]")
+    
+    # Rule 5a: Aromatic carboxylic acids substituted with strong electron-withdrawing groups such as nitro or bromomethyl tend to give high yield.
+    aromatic_carboxylic_acid = Chem.MolFromSmarts("c[C](=O)[O]")
+    nitro_group = Chem.MolFromSmarts("[NX3+(=O)[O-]]")
+    bromomethyl_group = Chem.MolFromSmarts("[CH2Br]")
+    
+    # Rule 5b: Aromatic carboxylic acids substituted with electron-donating groups like methyl or hydroxyl, or with reactive groups like aldehyde tend to give low yield.
+    methyl_group = Chem.MolFromSmarts("[CH3]")
+    hydroxyl_group = Chem.MolFromSmarts("[OX2H]")
+    aldehyde_group = Chem.MolFromSmarts("[CX3H](=O)")
+    
+    # Rule 6a: Modifiers containing aliphatic thiol groups (-SH) tend to give high yield.
+    aliphatic_thiol = Chem.MolFromSmarts("[CX4][SX2H]")
+    
+    # Rule 6b: Modifiers with thiol groups attached directly to aromatic rings tend to give low yield.
+    aromatic_thiol = Chem.MolFromSmarts("[c][SX2H]")
+    
+    # Rule 7: Modifiers containing multiple hydroxyl groups near the carboxylic acid tend to give high yield.
+    # For simplicity, we check for at least two hydroxyl groups in the molecule
+    
+    # Rule 8: Modifiers containing ether linkages within aliphatic chains tend to give low yield.
+    ether_linkage = Chem.MolFromSmarts("[CX4][OX2][CX4]")
+    
+    # Rule 9: Modifiers with perfluorinated alkyl chains or trifluoromethyl groups tend to give low yield.
+    trifluoromethyl_group = Chem.MolFromSmarts("[CX4](F)(F)F")
+    perfluoro_alkyl_chain = Chem.MolFromSmarts("[CX4](F)(F)(F)[CX4](F)(F)F")
+    
+    # Rule 10: Modifiers containing aldehyde groups attached directly to aromatic rings tend to give low yield.
+    aromatic_aldehyde = Chem.MolFromSmarts("[c][CX3H](=O)")
+    
+    # Rule 11: Amino acids with aliphatic side chains longer than five carbons and terminal amino groups tend to give low yield.
+    long_aliphatic_chain_with_terminal_amino = Chem.MolFromSmarts("[NX3;H2][CX4][CH2][CH2][CH2][CH2][CH2][NX3;H2]")
+    
+    # Rule 12: Modifiers containing indole groups (e.g., tryptophan) tend to give high yield.
+    indole_group = Chem.MolFromSmarts("c1cc2c(c1)[nH]c2")
+    
+    # Rule 13: Modifiers with conjugated ketone groups adjacent to carboxylic acids tend to give high yield.
+    conjugated_ketone_adjacent_to_carboxylic_acid = Chem.MolFromSmarts("[CX3](=O)[CX3]=[CX3](=O)")
+    
+    # Initialize results list
+    results = []
+    
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*13)
+            continue
+        row = []
+        try:
+            # Rule 1
+            match1 = mol.HasSubstructMatch(rule1_pattern)
+            exclude1 = any(mol.HasSubstructMatch(pat) for pat in rule1_exclude_patterns)
+            if match1 and not exclude1:
+                row.append(1)
+            else:
+                row.append(0)
+            
+            # Rule 2
+            match2a = mol.HasSubstructMatch(amino_acid_backbone) and len(mol.GetSubstructMatches(carboxylic_acid)) >= 2
+            match2b = mol.HasSubstructMatch(amino_acid_backbone) and mol.HasSubstructMatch(aromatic_ring)
+            if match2a:
+                row.append(1)
+            elif match2b:
+                row.append(-1)
+            else:
+                row.append(0)
+            
+            # Rule 3
+            match3 = mol.HasSubstructMatch(amino_acid_backbone) and mol.HasSubstructMatch(aromatic_heterocycle)
+            if match3:
+                row.append(1)
+            else:
+                row.append(0)
+            
+            # Rule 4
+            match4 = mol.HasSubstructMatch(n_acetyl_group)
+            if match4:
+                row.append(-1)
+            else:
+                row.append(0)
+            
+            # Rule 5
+            match5a = mol.HasSubstructMatch(aromatic_carboxylic_acid) and (mol.HasSubstructMatch(nitro_group) or mol.HasSubstructMatch(bromomethyl_group))
+            match5b = mol.HasSubstructMatch(aromatic_carboxylic_acid) and (mol.HasSubstructMatch(methyl_group) or mol.HasSubstructMatch(hydroxyl_group) or mol.HasSubstructMatch(aldehyde_group))
+            if match5a:
+                row.append(1)
+            elif match5b:
+                row.append(-1)
+            else:
+                row.append(0)
+            
+            # Rule 6
+            match6a = mol.HasSubstructMatch(aliphatic_thiol)
+            match6b = mol.HasSubstructMatch(aromatic_thiol)
+            if match6a:
+                row.append(1)
+            elif match6b:
+                row.append(-1)
+            else:
+                row.append(0)
+            
+            # Rule 7
+            hydroxyl_matches = mol.GetSubstructMatches(hydroxyl_group)
+            if len(hydroxyl_matches) >=2 and mol.HasSubstructMatch(carboxylic_acid):
+                row.append(1)
+            else:
+                row.append(0)
+            
+            # Rule 8
+            match8 = mol.HasSubstructMatch(ether_linkage)
+            if match8:
+                row.append(-1)
+            else:
+                row.append(0)
+            
+            # Rule 9
+            match9 = mol.HasSubstructMatch(trifluoromethyl_group) or mol.HasSubstructMatch(perfluoro_alkyl_chain)
+            if match9:
+                row.append(-1)
+            else:
+                row.append(0)
+            
+            # Rule 10
+            match10 = mol.HasSubstructMatch(aromatic_aldehyde)
+            if match10:
+                row.append(-1)
+            else:
+                row.append(0)
+            
+            # Rule 11
+            match11 = mol.HasSubstructMatch(long_aliphatic_chain_with_terminal_amino)
+            if match11:
+                row.append(-1)
+            else:
+                row.append(0)
+            
+            # Rule 12
+            match12 = mol.HasSubstructMatch(indole_group)
+            if match12:
+                row.append(1)
+            else:
+                row.append(0)
+            
+            # Rule 13
+            match13 = mol.HasSubstructMatch(conjugated_ketone_adjacent_to_carboxylic_acid)
+            if match13:
+                row.append(1)
+            else:
+                row.append(0)
+            
+        except Exception as e:
+            # In case of any error, append 0s for this molecule
+            row = [0]*13
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {i}' for i in range(1,14)])
+    return df

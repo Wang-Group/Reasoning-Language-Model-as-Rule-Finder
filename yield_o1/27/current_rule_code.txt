@@ -1,0 +1,275 @@
+def rule2matrix(smiles_list):
+    # Define the rules with their associated SMARTS patterns and predictions
+    # Incorporate corrections from the suggestions
+    rules = [
+        {
+            'number': 1,
+            'description': 'Rule 1: Unbranched aliphatic monocarboxylic acids with medium-length hydrocarbon chains (6–8 carbons) and no additional functional groups result in high yield.',
+            'prediction': 1,
+            'patterns': {
+                'must_have': ['[CX3](=O)[OX1H0]'],  # Carboxylic acid group (both protonated and deprotonated)
+                'must_not_have': ['a'],  # Must not be aromatic
+            },
+            'conditions': {
+                'chain_length': (6, 8),
+                'unbranched': True,
+                'acyclic': True,
+                'no_other_functional_groups': True,
+            },
+        },
+        {
+            'number': 2,
+            'description': 'Rule 2: Aromatic carboxylic acids with electron-withdrawing substituents at the para position typically result in high yield.',
+            'prediction': 1,
+            'patterns': {
+                'must_have': ['[cX3]1[cH][cH][cH][cH][c]1[CX3](=O)[OX1H0]'],  # Aromatic carboxylic acid
+                'ewg_para': True,
+            },
+        },
+        {
+            'number': 3,
+            'description': 'Rule 3: Heteroaromatic carboxylic acids containing accessible coordinating nitrogen atoms result in high yield.',
+            'prediction': 1,
+            'patterns': {
+                'must_have': ['[nX2]1cccc1[CX3](=O)[OX1H0]',  # Pyridine-like
+                              '[nX2]1ccccc1[CX3](=O)[OX1H0]',  # Pyridine with one N
+                              '[nX2]1cc[nX2]cc1[CX3](=O)[OX1H0]',  # Pyrazine-like
+                             ],
+            },
+        },
+        {
+            'number': 4,
+            'description': 'Rule 4: Modifiers with flexible ether chains result in low yield.',
+            'prediction': -1,
+            'patterns': {
+                'must_have': ['[OX2][CX4][CX4][OX2][CX4][CX4][OX2]'],  # Flexible ether chain
+            },
+        },
+        {
+            'number': 5,
+            'description': 'Rule 5: Amino acids with side chains capable of chelation result in high yield; those with hydrophobic side chains lacking coordinating groups result in low yield.',
+            'prediction': 1,
+            'patterns': {
+                'must_have': ['N[C@@H](C(=O)[O-])[CX4][C,N,O,S]'],  # Amino acid with chelating side chain
+            },
+        },
+        {
+            'number': 6,
+            'description': 'Rule 6: Modifiers with multiple adjacent hydroxyl groups on an aliphatic chain (polyhydroxylated acids) result in high yield.',
+            'prediction': 1,
+            'patterns': {
+                'must_have': ['[CX4H1,R0][OX2H][CX4H1,R0][OX2H][CX4H1,R0][OX2H][CX4H1,R0][OX2H][CX4H1,R0][OX2H][CX3](=O)[O-]'],  # Polyhydroxylated aliphatic chain with carboxylic acid
+            },
+        },
+        {
+            'number': 7,
+            'description': 'Rule 7: Aliphatic ω-amino acids with a chain length of five carbons result in high yield; longer chain lengths result in low yield.',
+            'prediction': 1,
+            'patterns': {
+                'must_have': ['NCCCCC(=O)[O-]'],  # 5-aminopentanoic acid
+            },
+            'conditions': {
+                'chain_length': 5,
+                'omega_amino': True,
+            },
+        },
+        {
+            'number': 8,
+            'description': 'Rule 8: Modifiers that are aromatic carboxylic acids with aldehyde groups result in low yield due to potential catalyst deactivation or side reactions.',
+            'prediction': -1,
+            'patterns': {
+                'must_have': ['[c][CX3H](=O)[CX3](=O)[O-]'],  # Aromatic aldehyde carboxylic acid
+            },
+        },
+        {
+            'number': 9,
+            'description': 'Rule 9: Modifiers containing fluorinated alkyl chains result in low yield due to decreased coordination ability.',
+            'prediction': -1,
+            'patterns': {
+                'must_have': ['[CX4](F)(F)[CX4](F)(F)C(=O)[O-]'],  # Fluorinated chain with carboxylic acid
+            },
+        },
+        {
+            'number': 10,
+            'description': 'Rule 10: Modifiers that are aromatic carboxylic acids with thiol groups result in low yield; aliphatic thiol-containing modifiers may result in high yield.',
+            'prediction': -1,  # For aromatic thiols
+            'patterns': {
+                'must_have': ['[c][SX2H][CX3](=O)[O-]'],  # Aromatic thiol carboxylic acid
+            },
+        },
+        {
+            'number': 11,
+            'description': 'Rule 11: Substituted phenylalkanoic acids with a chain length of five carbons and additional coordinating groups result in high yield; shorter chain lengths or lack of coordinating groups result in low yield.',
+            'prediction': 1,
+            'patterns': {
+                'must_have': ['c1ccccc1CCCCC(=O)[O-]'],  # Phenylpentanoic acid
+            },
+        },
+        {
+            'number': 12,
+            'description': 'Rule 12: Modifiers with acylated amino groups bearing strong electron-withdrawing substituents result in low yield.',
+            'prediction': -1,
+            'patterns': {
+                'must_have': ['[NX3][CX3](=O)[CX4](F)(F)F'],  # Acylated amino with trifluoroacetyl
+            },
+        },
+        {
+            'number': 13,
+            'description': 'Rule 13: Modifiers that are α-amino acids with carboxylate side chains result in high yield due to enhanced chelation with the catalyst.',
+            'prediction': 1,
+            'patterns': {
+                'must_have': ['N[C@@H](C(=O)[O-])CC(=O)[O-]'],  # Aspartic acid
+            },
+        },
+        {
+            'number': 14,
+            'description': 'Rule 14: Modifiers containing heteroaromatic systems capable of chelation result in high yield due to enhanced interaction with the catalyst.',
+            'prediction': 1,
+            'patterns': {
+                'must_have': ['O=C1OC(=O)c2ccccc12'],  # Example of heteroaromatic system
+            },
+        },
+        {
+            'number': 15,
+            'description': 'Rule 15: Modifiers with long aliphatic chains and additional functional groups result in low yield due to steric hindrance or unfavorable interactions.',
+            'prediction': -1,
+            'patterns': {
+                'must_have': ['C(CCCCC(=O)[O-])C(=O)[O-]'],  # Long chain with additional groups
+            },
+        },
+    ]
+
+    # Compile SMARTS patterns
+    for rule in rules:
+        compiled_patterns = {}
+        for key, patterns in rule.get('patterns', {}).items():
+            if isinstance(patterns, bool):
+                compiled_patterns[key] = patterns  # For special conditions like 'ewg_para'
+            else:
+                compiled_patterns[key] = [Chem.MolFromSmarts(pat) for pat in patterns]
+        rule['patterns'] = compiled_patterns
+
+    results = []
+
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # Molecule could not be parsed
+            results.append([0]*len(rules))
+            continue
+        Chem.Kekulize(mol, clearAromaticFlags=True)
+        row = []
+        for rule in rules:
+            try:
+                match = True
+                # Check must-have patterns
+                for key, pats in rule['patterns'].items():
+                    if key == 'ewg_para' and pats:
+                        # Special handling for electron-withdrawing groups at para position (Rule 2)
+                        ewg_patterns = ['[F,Cl,Br,I]', '[N+](=O)[O-]', '[C](=O)[O-,OH]']  # Common EWGs
+                        para_positions = ['[cH]1ccc([a])cc1[CX3](=O)[O-,OH]', '[c]1ccc([a])cc1[CX3](=O)[O-,OH]']
+                        ewg_found = False
+                        for ewg in ewg_patterns:
+                            for para_pat in para_positions:
+                                ewg_pat = Chem.MolFromSmarts(para_pat.replace('[a]', ewg))
+                                if mol.HasSubstructMatch(ewg_pat):
+                                    ewg_found = True
+                                    break
+                            if ewg_found:
+                                break
+                        if not ewg_found:
+                            match = False
+                            break
+                    elif key == 'must_have':
+                        for pat in pats:
+                            if not mol.HasSubstructMatch(pat):
+                                match = False
+                                break
+                        if not match:
+                            break
+                    elif key == 'must_not_have':
+                        for pat in pats:
+                            if mol.HasSubstructMatch(pat):
+                                match = False
+                                break
+                        if not match:
+                            break
+                if not match:
+                    row.append(0)
+                    continue
+                # Additional conditions
+                conditions = rule.get('conditions', {})
+                # Chain length condition (Rule 1 and 7)
+                if 'chain_length' in conditions:
+                    min_length = max_length = conditions['chain_length']
+                    if isinstance(conditions['chain_length'], tuple):
+                        min_length, max_length = conditions['chain_length']
+                    longest_chain = 0
+                    for atom in mol.GetAtoms():
+                        if atom.GetAtomicNum() == 6 and atom.GetDegree() <= 4:
+                            paths = Chem.FindAtomEnvironmentOfRadiusN(mol, max_length, atom.GetIdx())
+                            chain_atoms = set()
+                            for bond_idx in paths:
+                                bond = mol.GetBondWithIdx(bond_idx)
+                                chain_atoms.update([bond.GetBeginAtomIdx(), bond.GetEndAtomIdx()])
+                            chain_length = len(chain_atoms)
+                            if chain_length > longest_chain:
+                                longest_chain = chain_length
+                    if not (min_length <= longest_chain <= max_length):
+                        match = False
+                        row.append(0)
+                        continue
+                # Unbranched condition (Rule 1)
+                if conditions.get('unbranched', False):
+                    branching = False
+                    for atom in mol.GetAtoms():
+                        if atom.GetAtomicNum() == 6 and atom.GetDegree() > 2:
+                            branching = True
+                            break
+                    if branching:
+                        match = False
+                        row.append(0)
+                        continue
+                # Acyclic condition (Rule 1)
+                if conditions.get('acyclic', False):
+                    if mol.GetRingInfo().NumRings() > 0:
+                        match = False
+                        row.append(0)
+                        continue
+                # No other functional groups condition (Rule 1)
+                if conditions.get('no_other_functional_groups', False):
+                    # Define functional groups to exclude
+                    fgs = [
+                        '[!#6;!#1]',  # Heteroatoms other than C and H
+                        '[CX3](=O)[OX2H1,O-]',  # Ester or other carboxylic acid derivatives
+                        '[#6]=[O,N,S]',  # Carbonyl, imine, thiocarbonyl
+                        '[OX2H]',  # Alcohols
+                        '[NX3;!$(N-C=O)]',  # Amines not amides
+                        '[SX2H]',  # Thiols
+                    ]
+                    for fg in fgs:
+                        fg_pat = Chem.MolFromSmarts(fg)
+                        if mol.HasSubstructMatch(fg_pat):
+                            match = False
+                            break
+                    if not match:
+                        row.append(0)
+                        continue
+                # Omega amino condition (Rule 7)
+                if conditions.get('omega_amino', False):
+                    pattern = Chem.MolFromSmarts('NCCCC[CX3](=O)[O-,OH]')
+                    if not mol.HasSubstructMatch(pattern):
+                        match = False
+                        row.append(0)
+                        continue
+                # If all conditions are met
+                if match:
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+    df = pd.DataFrame(results, columns=[f"Rule {rule['number']}" for rule in rules])
+    return df

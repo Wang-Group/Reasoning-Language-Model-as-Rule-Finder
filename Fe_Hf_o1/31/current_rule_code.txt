@@ -1,0 +1,302 @@
+def rule2matrix(smiles_list):
+    from rdkit import Chem
+    import pandas as pd
+    
+    # Define SMARTS patterns
+    carboxylic_acid = Chem.MolFromSmarts('[CX3](=O)[OX1H0-,OX2H1]')  # Carboxylic acid group (-COOH)
+    primary_amine = Chem.MolFromSmarts('[NX3H2]')  # Primary amine (-NH2)
+    terminal_primary_amine = Chem.MolFromSmarts('[NX3H2][CH2]')  # Terminal primary amine
+    aliphatic_chain = Chem.MolFromSmarts('[CX4H2][CX4H2][CX4H2]')  # Aliphatic chain of at least 3 carbons
+    
+    thiol = Chem.MolFromSmarts('[SX2H]')  # Thiol group (-SH)
+    thioether = Chem.MolFromSmarts('[#16X2]([#6])[#6]')  # Thioether (-S-)
+    
+    pyridine_ring = Chem.MolFromSmarts('n1cccc1')  # Pyridine ring
+    
+    # Electron-withdrawing groups
+    nitro_group = Chem.MolFromSmarts('[NX3+(=O)[O-]]')  # Nitro group (-NO2)
+    bromomethyl_group = Chem.MolFromSmarts('[CH2Br]')  # Bromomethyl group (-CH2Br)
+    aromatic_ring = Chem.MolFromSmarts('c1ccccc1')  # Aromatic ring
+    para_substitution = Chem.MolFromSmarts('c1ccc(cc1)-[*]')  # Para-substituted aromatic ring
+    
+    # Electron-donating groups
+    hydroxyl_group = Chem.MolFromSmarts('[OX2H]')  # Hydroxyl group (-OH)
+    amino_group = Chem.MolFromSmarts('[NX3H2]')  # Amino group (-NH2)
+    
+    # Heteroatoms for chelation
+    heteroatoms = Chem.MolFromSmarts('[#7,#8,#16]')  # N, O, S
+    
+    # Multiple hydroxyl groups
+    polyol = Chem.MolFromSmarts('[#6][OX2H][#6][OX2H][#6]')  # Chain with multiple -OH groups
+    
+    # Fluorinated aliphatic chain
+    fluorinated_chain = Chem.MolFromSmarts('[CF3][CF2][CF2][CF2][CF3]')
+    
+    # Carbonyl groups adjacent to carboxylic acid
+    adjacent_carbonyl = Chem.MolFromSmarts('[CX3](=O)[CX3](=O)[OX1H0-,OX2H1]')
+    
+    # Heteroaromatic rings with nitrogen in resonance
+    pyridone = Chem.MolFromSmarts('O=c1ccncc1')
+    pyrazole = Chem.MolFromSmarts('c1c[nH]ncc1')
+    
+    # Bulky aromatic systems
+    indole = Chem.MolFromSmarts('c1ccc2c(c1)cc[nH]2')
+    
+    # Intramolecular hydrogen bonding
+    intramolecular_Hbond = Chem.MolFromSmarts('[OH].[NX3][CX3](=O)[OH]')
+    
+    # Define rules
+    rules = [
+        {
+            'number': 1,
+            'description': 'Modifiers containing a terminal primary amino group (-NH2) on an aliphatic chain that is three or more carbons away from the carboxylic acid group (-COOH) predict a high Fe/Hf value.',
+            'function': 'check_rule1',
+            'prediction': 1
+        },
+        {
+            'number': 2,
+            'description': 'Modifiers containing sulfur-containing functional groups, such as thiols (-SH) or thioethers (-S-), predict a high Fe/Hf value.',
+            'function': 'check_rule2',
+            'prediction': 1
+        },
+        {
+            'number': 3,
+            'description': 'Modifiers with a pyridine ring where the nitrogen atom is available for coordination predict a high Fe/Hf value.',
+            'function': 'check_rule3',
+            'prediction': 1
+        },
+        {
+            'number': 4,
+            'description': 'Modifiers that are aromatic carboxylic acids substituted at the para position with strong electron-withdrawing groups predict a high Fe/Hf value.',
+            'function': 'check_rule4',
+            'prediction': 1
+        },
+        {
+            'number': 5,
+            'description': 'Modifiers containing multiple coordinating functional groups with heteroatoms like N, O, or S positioned to allow chelation predict a high Fe/Hf value.',
+            'function': 'check_rule5',
+            'prediction': 1
+        },
+        {
+            'number': 6,
+            'description': 'Modifiers that are simple aliphatic carboxylic acids without additional coordinating functional groups predict a low Fe/Hf value.',
+            'function': 'check_rule6',
+            'prediction': -1
+        },
+        {
+            'number': 7,
+            'description': 'Modifiers containing aromatic rings substituted with electron-donating groups at the para position predict a low Fe/Hf value.',
+            'function': 'check_rule7',
+            'prediction': -1
+        },
+        {
+            'number': 8,
+            'description': 'Modifiers containing multiple hydroxyl groups (-OH) on an aliphatic chain or cyclic structure, without an effective chelating arrangement, predict a low Fe/Hf value.',
+            'function': 'check_rule8',
+            'prediction': -1
+        },
+        {
+            'number': 9,
+            'description': 'Modifiers with fluorinated aliphatic chains predict a low Fe/Hf value.',
+            'function': 'check_rule9',
+            'prediction': -1
+        },
+        {
+            'number': 10,
+            'description': 'Modifiers containing carbonyl groups adjacent to the carboxylic acid group predict a low Fe/Hf value.',
+            'function': 'check_rule10',
+            'prediction': -1
+        },
+        {
+            'number': 11,
+            'description': 'Modifiers containing heteroaromatic rings with nitrogen atoms involved in resonance predict a low Fe/Hf value.',
+            'function': 'check_rule11',
+            'prediction': -1
+        },
+        {
+            'number': 12,
+            'description': 'Modifiers with bulky aromatic systems or fused ring structures that may cause steric hindrance predict a low Fe/Hf value.',
+            'function': 'check_rule12',
+            'prediction': -1
+        },
+        {
+            'number': 13,
+            'description': 'Modifiers containing electron-donating groups at positions that can form intramolecular hydrogen bonds may decrease the availability of the coordinating group, predicting a low Fe/Hf value.',
+            'function': 'check_rule13',
+            'prediction': -1
+        }
+    ]
+    
+    # Initialize results list
+    results = []
+    
+    # Define rule check functions
+    def check_rule1(mol):
+        try:
+            carboxy_matches = mol.GetSubstructMatches(carboxylic_acid)
+            amine_matches = mol.GetSubstructMatches(terminal_primary_amine)
+            if not carboxy_matches or not amine_matches:
+                return 0
+            for c_match in carboxy_matches:
+                c_idx = c_match[0]
+                for a_match in amine_matches:
+                    n_idx = a_match[0]
+                    path = Chem.GetShortestPath(mol, c_idx, n_idx)
+                    # Exclude start and end atoms
+                    path_atoms = path[1:-1]
+                    # Count number of carbons in path_atoms
+                    num_carbons = sum(1 for idx in path_atoms if mol.GetAtomWithIdx(idx).GetAtomicNum() == 6)
+                    if num_carbons >= 3:
+                        return 1
+            return 0
+        except:
+            return 0
+    
+    def check_rule2(mol):
+        try:
+            if mol.HasSubstructMatch(thiol) or mol.HasSubstructMatch(thioether):
+                return 1
+            return 0
+        except:
+            return 0
+    
+    def check_rule3(mol):
+        try:
+            if mol.HasSubstructMatch(pyridine_ring):
+                return 1
+            return 0
+        except:
+            return 0
+    
+    def check_rule4(mol):
+        try:
+            if mol.HasSubstructMatch(carboxylic_acid) and mol.HasSubstructMatch(aromatic_ring):
+                para_matches = mol.GetSubstructMatches(para_substitution)
+                for match in para_matches:
+                    substituted_atom = mol.GetAtomWithIdx(match[-1])
+                    if substituted_atom.HasSubstructMatch(nitro_group) or substituted_atom.HasSubstructMatch(bromomethyl_group):
+                        return 1
+            return 0
+        except:
+            return 0
+    
+    def check_rule5(mol):
+        try:
+            heteroatom_matches = mol.GetSubstructMatches(heteroatoms)
+            if len(heteroatom_matches) >= 2:
+                # Check if heteroatoms are positioned to allow chelation (simplified assumption)
+                return 1
+            return 0
+        except:
+            return 0
+    
+    def check_rule6(mol):
+        try:
+            if mol.HasSubstructMatch(carboxylic_acid):
+                if not (mol.HasSubstructMatch(primary_amine) or mol.HasSubstructMatch(thiol) or mol.HasSubstructMatch(thioether) or mol.HasSubstructMatch(hydroxyl_group) or mol.HasSubstructMatch(aromatic_ring)):
+                    return -1
+            return 0
+        except:
+            return 0
+    
+    def check_rule7(mol):
+        try:
+            if mol.HasSubstructMatch(carboxylic_acid) and mol.HasSubstructMatch(aromatic_ring):
+                para_matches = mol.GetSubstructMatches(para_substitution)
+                for match in para_matches:
+                    substituted_atom = mol.GetAtomWithIdx(match[-1])
+                    if substituted_atom.HasSubstructMatch(hydroxyl_group) or substituted_atom.HasSubstructMatch(amino_group):
+                        return -1
+            return 0
+        except:
+            return 0
+    
+    def check_rule8(mol):
+        try:
+            if mol.HasSubstructMatch(polyol):
+                return -1
+            return 0
+        except:
+            return 0
+    
+    def check_rule9(mol):
+        try:
+            if mol.HasSubstructMatch(fluorinated_chain):
+                return -1
+            return 0
+        except:
+            return 0
+    
+    def check_rule10(mol):
+        try:
+            if mol.HasSubstructMatch(adjacent_carbonyl):
+                return -1
+            return 0
+        except:
+            return 0
+    
+    def check_rule11(mol):
+        try:
+            if mol.HasSubstructMatch(pyridone) or mol.HasSubstructMatch(pyrazole):
+                return -1
+            return 0
+        except:
+            return 0
+    
+    def check_rule12(mol):
+        try:
+            if mol.HasSubstructMatch(indole):
+                return -1
+            return 0
+        except:
+            return 0
+    
+    def check_rule13(mol):
+        try:
+            if mol.HasSubstructMatch(intramolecular_Hbond):
+                return -1
+            return 0
+        except:
+            return 0
+    
+    # Map function names to actual functions
+    rule_functions = {
+        'check_rule1': check_rule1,
+        'check_rule2': check_rule2,
+        'check_rule3': check_rule3,
+        'check_rule4': check_rule4,
+        'check_rule5': check_rule5,
+        'check_rule6': check_rule6,
+        'check_rule7': check_rule7,
+        'check_rule8': check_rule8,
+        'check_rule9': check_rule9,
+        'check_rule10': check_rule10,
+        'check_rule11': check_rule11,
+        'check_rule12': check_rule12,
+        'check_rule13': check_rule13
+    }
+    
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                func = rule_functions[rule['function']]
+                match = func(mol)
+                if match:
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception as e:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+    
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule['number']}' for rule in rules])
+    return df

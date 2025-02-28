@@ -1,0 +1,100 @@
+### **Step-by-Step Chain of Thought for Generating Precise SMARTS**
+
+#### 1. **Define the Atom Type**  
+The first step in any SMARTS string is to clearly define the atom or atoms involved. Atoms can be elements (like carbon, nitrogen, oxygen), hybridized states (sp³, sp²), or be part of functional groups. 
+   - **Example:** To target sp³ hybridized carbon, use `[CX4]`.
+   - **If targeting sp²:** `[CX3]`.
+   - **To focus on a specific atom class:** Use the symbol (e.g., `N` for nitrogen, `O` for oxygen).
+
+**Think in terms of**:  
+- Which atoms should the SMARTS target? 
+- Do these atoms have specific hybridization or bonding preferences?
+  
+#### 2. **Specify the Bond Type**  
+Next, we define how the atoms are connected. Bonds can be single (`-`), double (`=`), triple (`#`), or aromatic (`:`). If you're targeting a non-ring bond, ensure that by explicitly excluding ring bonds.
+   - **Example:** A single bond not in a ring: `-!@`.
+   - **Aromatic bonds between carbons:** `:`.
+   - **Triple bonds (e.g., in alkynes):** `#`.
+
+**Think in terms of**:  
+- Are the atoms connected by single, double, or triple bonds?  
+- Are the bonds aromatic or non-aromatic?
+
+#### 3. **Add Logical Conditions and Recursive SMARTS**  
+SMARTS patterns become more powerful when combined with logical conditions using operators. You can use:
+   - **&** for AND (higher precedence)
+   - **,** for OR (higher precedence)
+   - **;** for AND (lower precedence)
+   - **!** for NOT
+   
+Additionally, **recursive SMARTS** (`$()`) lets you define more complex, nested structures, such as functional groups:
+   - **Example:** To match a carbonyl group, you can use a recursive SMARTS for the carbonyl carbon: `[$([CX3]=[OX1])]`.
+
+**Think in terms of**:  
+- Does the structure need multiple conditions?  
+- Should it exclude specific atoms or bonds?
+
+#### 4. **Target Functional Groups**  
+For identifying functional groups, combine atoms and bonds into recognizable structures. Use logical operators to refine the functional group definitions, as many groups can exist in multiple forms (e.g., resonance forms):
+   - **Example:** To identify an amide group, you would use: `[NX3][CX3](=[OX1])[#6]`.
+   - For a ketone group, you can use: `[#6][CX3](=O)[#6]`.
+
+**Think in terms of**:  
+- What functional groups are you looking for?  
+- Should the SMARTS match specific resonance structures or multiple forms?
+
+#### 5. **Handle Stereochemistry and Conformations**  
+If stereochemistry is important (such as in cis/trans configurations), explicitly include geometric relations. For example:
+   - **Example:** Use `*/,\[R]=;@[R]/,\*` to represent cis/trans double bonds in a ring.
+
+**Think in terms of**:  
+- Is there any geometric relationship or stereochemistry that matters?  
+- Should the SMARTS distinguish between different spatial arrangements?
+
+#### 6. **Account for Rings and Chain Structures**  
+To specify ring systems or long chains, include ring-specific symbols. For instance:
+   - **Example:** To identify a 6-membered benzene ring, use `[cR1]1[cR1][cR1][cR1][cR1][cR1]1`.
+   - To match an unbranched alkane chain of at least 4 members, use: `[R0;D2][R0;D2][R0;D2][R0;D2]`.
+
+**Think in terms of**:  
+- Is the structure part of a ring?  
+- Are you looking for long chains or specific cyclic structures?
+
+#### 7. **Introduce Multiple Fragments and Disconnected Structures**  
+For structures composed of multiple fragments (e.g., molecules with distinct parts), use the dot `.` to separate different SMARTS fragments:
+   - **Example:** To find a chlorine atom disconnected from an aromatic ring, use `([Cl].[c])`.
+
+**Think in terms of**:  
+- Are there multiple parts of the molecule that should be identified separately?  
+- Should the fragments be connected or disconnected?
+
+#### 8. **Use Substructure Exclusion to Increase Specificity**  
+SMARTS allows for excluding certain patterns by adding **negation**. For instance, you can exclude aromatic rings or specific substituents:
+   - **Example:** To target a carbon attached to a halogen but exclude fluorinated compounds like CF3, use `[#6][F,Cl,Br,I;!$(C(F)(F)F)]`.
+
+**Think in terms of**:  
+- Should any specific substructures or atoms be excluded?
+  
+#### 9. **Utilize Recursive Logic for Complex Patterns**  
+SMARTS can capture complex patterns using recursion. By recursively applying SMARTS, you can match specific atoms and bonds in various contexts:
+   - **Example:** To find a carbonyl oxygen, use `[$([OX1]=[CX3])]`.
+
+**Think in terms of**:  
+- Does the pattern require complex nesting or recursive logic?
+
+#### 10. **Finalize by Checking Specificity and Generality**  
+Before finalizing a SMARTS pattern, ensure the level of specificity matches your needs. For example, if you're targeting only aldehydes (and not ketones), use `[CX3H1](=O)[#6]`. If you want both, include a more general condition. Test whether it hits only the intended targets.
+
+---
+
+### **Example Chain of Thought for a Specific SMARTS: Identifying an Amide Group**
+
+1. **Start with the atom type:** The central atom in an amide is a nitrogen connected to a carbonyl group. Use `[NX3]` for nitrogen.
+   
+2. **Define the bond:** The nitrogen is single-bonded to a carbonyl carbon, which is connected to an oxygen. Use `-C(=O)` for the carbonyl structure.
+
+3. **Add logical conditions:** Ensure the carbonyl carbon is bonded to nitrogen. Use: `[NX3][CX3](=O)`.
+
+4. **Specify the rest of the structure:** You want to ensure the carbonyl group is part of a larger structure, so add `[#6]` to represent that the carbonyl carbon is attached to another carbon. The full expression becomes `[NX3][CX3](=[OX1])[#6]`.
+
+---

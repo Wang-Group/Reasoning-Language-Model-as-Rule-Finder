@@ -1,0 +1,281 @@
+def rule2matrix(smiles_list):
+    # Define SMARTS patterns for functional groups
+    # Primary aliphatic amine group (-NH2)
+    primary_aliphatic_amine = '[NX3H2][CX4]'
+    
+    # Carboxylic acid group (-COOH)
+    carboxylic_acid = '[CX3](=O)[OX2H1]'
+    
+    # Aromatic carboxylic acid group
+    aromatic_carboxylic_acid = '[c][CX3](=O)[OX1H]'
+    
+    # Electron-withdrawing groups (EWGs)
+    nitro_group = '[NX3](=O)=O'
+    halogen = '[F,Cl,Br,I]'
+    bromomethyl = '[CH2Br]'
+    pyridyl = 'n'
+    
+    # Sulfur-containing groups
+    thiol = '[SX2H]'
+    thioether = '[#16X2][#6]'
+    
+    # Ether linkage (-O-)
+    ether_linkage = '[#6][OX2][#6]'
+    
+    # Long aliphatic chain (6 or more carbons)
+    long_aliphatic_chain = '[CH2][CH2][CH2][CH2][CH2][CH2,CH1]'
+    
+    # Hydroxyl group (-OH)
+    hydroxyl_group = '[OX2H]'
+    
+    # Electron-donating groups (EDGs) on aromatic ring
+    aromatic_hydroxyl = '[c][OX2H]'
+    aromatic_amino = '[c][NX3H2]'
+    aromatic_methyl = '[c][CH3]'
+    
+    # Multiple hydroxyl groups (polyols)
+    polyol = '[OX2H]'
+    
+    # Perfluorinated carboxylic acid
+    perfluorinated_chain = '[CF2][CF2][CF2]'
+    
+    # Heterocyclic aromatic carboxylic acids with delocalized lone pair
+    pyridine_carboxylic_acid = '[n][c][c][c][c][c](=O)[OX1H]'
+    pyrazole_carboxylic_acid = '[n]1[n][c][c][c]1(=O)[OX1H]'
+    indole_carboxylic_acid = 'c1c(N)ccc2c1cc(=O)[nH]2'
+    
+    # Carbonyl groups adjacent to carboxyl groups
+    aldehyde_adjacent_carboxylic_acid = '[CX3H1](=O)[CX3](=O)[OX1H]'
+    ketone_adjacent_carboxylic_acid = '[CX3](=O)[CX3](=O)[OX1H]'
+    
+    # Acylated amino groups
+    acetamido_group = '[NX3][CX3](=O)[#6]'
+    
+    # Trifluoroacetyl group
+    trifluoroacetyl = '[CX3](=O)[CF3]'
+    
+    # Benzofuranone moiety
+    benzofuranone = 'O=C1Oc2ccccc2C1=O'
+    
+    # Define the rules with their associated patterns and predictions
+    rules = [
+        {
+            'number': 1,
+            'description': 'Aliphatic amino acids with a straight-chain aliphatic backbone containing a primary amino group (–NH₂) and a carboxyl group (–COOH) at opposite ends tend to have a high Fe/Hf value (True).',
+            'patterns': [
+                [primary_aliphatic_amine],
+                [carboxylic_acid]
+            ],
+            'exclude_patterns': [
+                ['[a]']  # Exclude aromatic rings
+            ],
+            'include_conditions': [
+                'is_acyclic'
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 2,
+            'description': 'Aromatic carboxylic acids with electron-withdrawing groups (EWGs) at the para position tend to have a high Fe/Hf value (True).',
+            'patterns': [
+                [aromatic_carboxylic_acid],
+                [nitro_group, halogen, bromomethyl, pyridyl]
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 3,
+            'description': 'Modifiers containing sulfur functional groups, such as thiol (–SH) or thioether (–S–) groups, in combination with amino or carboxyl groups, tend to have a high Fe/Hf value (True).',
+            'patterns': [
+                [thiol, thioether],
+                [carboxylic_acid, primary_aliphatic_amine]
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 4,
+            'description': 'Modifiers with long aliphatic chains (6 carbons or more) terminating with a carboxyl group (–COOH) and containing additional terminal hydroxyl (–OH) or amino (–NH₂) groups tend to have a high Fe/Hf value (True).',
+            'patterns': [
+                [long_aliphatic_chain],
+                [carboxylic_acid],
+                [hydroxyl_group, primary_aliphatic_amine]
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 5,
+            'description': 'Polyether carboxylic acids with multiple ether linkages (–O–) in the backbone terminating with a carboxyl group (–COOH) tend to have a high Fe/Hf value (True).',
+            'patterns': [
+                [ether_linkage],
+                [carboxylic_acid]
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 6,
+            'description': 'Aromatic carboxylic acids with electron-donating groups (EDGs) at the para position, such as amino (–NH₂), hydroxy (–OH), or methyl (–CH₃) groups, tend to have a low Fe/Hf value (False).',
+            'patterns': [
+                [aromatic_carboxylic_acid],
+                [aromatic_amino, aromatic_hydroxyl, aromatic_methyl]
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 7,
+            'description': 'Modifiers with multiple hydroxyl groups (polyols), especially on aliphatic chains, tend to have a low Fe/Hf value (False).',
+            'patterns': [
+                [polyol],
+                [carboxylic_acid]
+            ],
+            'count_threshold': {polyol: 2},
+            'prediction': -1
+        },
+        {
+            'number': 8,
+            'description': 'Perfluorinated carboxylic acids with multiple fluorine atoms tend to have a low Fe/Hf value (False).',
+            'patterns': [
+                [perfluorinated_chain],
+                [carboxylic_acid]
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 9,
+            'description': "Heterocyclic aromatic carboxylic acids where the heteroatom's lone pair is delocalized into the aromatic system tend to have a low Fe/Hf value (False).",
+            'patterns': [
+                [pyridine_carboxylic_acid, pyrazole_carboxylic_acid, indole_carboxylic_acid]
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 10,
+            'description': 'Modifiers with carbonyl groups adjacent to carboxyl groups tend to have a low Fe/Hf value (False).',
+            'patterns': [
+                [aldehyde_adjacent_carboxylic_acid, ketone_adjacent_carboxylic_acid]
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 11,
+            'description': 'Modifiers that are amino acids with aromatic side chains tend to have a low Fe/Hf value (False).',
+            'patterns': [
+                [aromatic_amino_acid := '[NX3][CX4][CX3](=O)[OX1H][c]']
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 12,
+            'description': 'Modifiers containing a combination of ether linkages and terminal amino groups tend to have a high Fe/Hf value (True).',
+            'patterns': [
+                [ether_linkage],
+                [primary_aliphatic_amine]
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 13,
+            'description': 'Compounds with benzofuranone moieties containing multiple carbonyl groups tend to have a high Fe/Hf value (True).',
+            'patterns': [
+                [benzofuranone]
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 14,
+            'description': 'Modifiers with acylated amino groups, such as acetamido groups, in addition to free amino groups, tend to have a high Fe/Hf value (True).',
+            'patterns': [
+                [acetamido_group],
+                [primary_aliphatic_amine]
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 15,
+            'description': 'Modifiers with electron-withdrawing groups on aliphatic chains, such as trifluoroacetyl (–COCF₃) groups, tend to have a low Fe/Hf value (False).',
+            'patterns': [
+                [trifluoroacetyl]
+            ],
+            'prediction': -1
+        }
+    ]
+    
+    # Compile SMARTS patterns
+    for rule in rules:
+        compiled_patterns = []
+        for group in rule.get('patterns', []):
+            compiled_group = [Chem.MolFromSmarts(p) for p in group]
+            compiled_patterns.append(compiled_group)
+        rule['compiled_patterns'] = compiled_patterns
+        # Compile exclude patterns if any
+        if 'exclude_patterns' in rule:
+            compiled_excludes = []
+            for group in rule['exclude_patterns']:
+                compiled_group = [Chem.MolFromSmarts(p) for p in group]
+                compiled_excludes.append(compiled_group)
+            rule['compiled_exclude_patterns'] = compiled_excludes
+    
+    # Initialize results list
+    results = []
+    
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = True
+                # Check exclude patterns if any
+                if 'exclude_patterns' in rule:
+                    for group in rule['compiled_exclude_patterns']:
+                        for pat in group:
+                            if mol.HasSubstructMatch(pat):
+                                match = False
+                                break
+                        if not match:
+                            break
+                    if not match:
+                        row.append(0)
+                        continue
+                # Check include conditions if any
+                if 'include_conditions' in rule:
+                    for condition in rule['include_conditions']:
+                        if condition == 'is_acyclic' and mol.GetRingInfo().NumRings() != 0:
+                            match = False
+                            break
+                    if not match:
+                        row.append(0)
+                        continue
+                # Check required patterns
+                for compiled_group in rule['compiled_patterns']:
+                    group_match = False
+                    for pat in compiled_group:
+                        matches = mol.GetSubstructMatches(pat)
+                        if matches:
+                            # If a count threshold is specified for this pattern
+                            if 'count_threshold' in rule and pat in rule['count_threshold']:
+                                threshold = rule['count_threshold'][pat]
+                                if len(matches) >= threshold:
+                                    group_match = True
+                                    break
+                            else:
+                                group_match = True
+                                break
+                    if not group_match:
+                        match = False
+                        break
+                if match:
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception as e:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+    
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule["number"]}' for rule in rules])
+    return df

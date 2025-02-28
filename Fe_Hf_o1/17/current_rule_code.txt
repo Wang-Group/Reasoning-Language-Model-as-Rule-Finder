@@ -1,0 +1,232 @@
+def rule2matrix(smiles_list):
+    # Define SMARTS patterns for functional groups and features based on the rules
+    
+    # Rule 1: Modifiers containing a primary amino group (-NH2) connected by an aliphatic chain of at least three carbons to the carboxyl group
+    # High Fe/Hf value (+1)
+    primary_amine = '[NX3;H2]'  # Primary amine (-NH2)
+    aliphatic_chain = '[C;!R][C;!R][C;!R]'  # Aliphatic chain of at least three carbons
+    carboxylic_acid = '[CX3](=O)[OX1H0-,OX2H1]'  # Carboxyl group (-COOH or -COO-)
+    
+    # Rule 2: Modifiers containing thiol (-SH) groups
+    # High Fe/Hf value (+1)
+    thiol_group = '[#16X2H]'  # Thiol group (-SH)
+    
+    # Rule 3: Aromatic carboxylic acids with electron-withdrawing groups at the para position
+    # High Fe/Hf value (+1)
+    aromatic_ring = 'c1ccccc1'
+    para_nitro = 'c1ccc([NX3+](=O)[O-])cc1'  # Nitro group at para position
+    para_halomethyl = 'c1ccc(C[Cl,Br,I,F])cc1'  # Halomethyl group at para position
+    # Exclude electron-donating groups at para position
+    para_methyl = 'c1ccc(C)cc1'
+    para_amino = 'c1ccc(N)cc1'
+    
+    # Rule 4: Modifiers containing a pyridine ring
+    # High Fe/Hf value (+1)
+    pyridine_ring = 'n1ccccc1'
+    
+    # Rule 5: Modifiers with flexible ether linkages and terminal coordinating groups
+    # High Fe/Hf value (+1)
+    ether_linkage = '[#6][OX2][#6]'  # Ether linkage (-O-)
+    terminal_amino = '[NX3;H2,H1;!$(N=*),!$(N-C=[O,N,S])]'  # Amino group (-NH2 or -NH-)
+    terminal_carboxyl = carboxylic_acid
+    
+    # Rule 6: Amino acids with aromatic side chains lacking bulky substituents
+    # High Fe/Hf value (+1)
+    amino_acid = '[NX3;H2,H1][CX4H,CX4H2][CX3](=O)[OX1H0-,OX2H1]'
+    aromatic_side_chain = 'c1ccccc1'
+    # Exclude bulky groups (e.g., indole)
+    indole = 'c1cc2ccccc2[nH]1'
+    
+    # Rule 7: Modifiers with multiple carboxyl groups capable of chelation
+    # High Fe/Hf value (+1)
+    dicarboxylic_acid = '[CX3](=O)[OX1H0-,OX2H1][CX4][CX3](=O)[OX1H0-,OX2H1]'  # Two carboxyl groups separated by one carbon
+    amino_acid_dicarboxylic = '[NX3;H2,H1][CX4][CX3](=O)[OX1H0-,OX2H1][CX4][CX3](=O)[OX1H0-,OX2H1]'  # Amino acid with carboxylate side chain
+    
+    # Rule 8: Modifiers with electron-donating groups at the para position of aromatic carboxylic acids
+    # Low Fe/Hf value (-1)
+    para_amino = 'c1ccc(N)cc1'  # Amino group at para position
+    para_hydroxy = 'c1ccc(O)cc1'  # Hydroxy group at para position
+    
+    # Rule 9: Simple aliphatic carboxylic acids without additional strong coordinating functional groups
+    # Low Fe/Hf value (-1)
+    simple_aliphatic_acid = '[CX3](=O)[OX1H0-,OX2H1][C;!R]'  # Carboxylic acid attached to an aliphatic chain
+    
+    # Rule 10: Modifiers with bulky or sterically hindered groups near coordinating sites
+    # Low Fe/Hf value (-1)
+    bulky_group = 'c1cc2ccccc2[nH]1'  # Indole ring (bulky group)
+    acetamido_group = '[NX3][CX3](=O)[#6]'  # Acetamido group
+    
+    # Rule 11: Modifiers with multiple adjacent hydroxyl (-OH) groups near the carboxyl group (polyhydroxy carboxylic acids)
+    # Low Fe/Hf value (-1)
+    polyhydroxy = '[OX2H][CX4]([OX2H])[CX4]([OX2H])[CX4]([OX2H])[CX3](=O)[OX1H0-,OX2H1]'  # Multiple adjacent hydroxyl groups
+    
+    # Rule 12: Modifiers with perfluorinated alkyl chains attached to the carboxyl group
+    # Low Fe/Hf value (-1)
+    perfluoro_alkyl_chain = '[CX4]([F,Cl,Br,I])([F,Cl,Br,I])[CX4]([F,Cl,Br,I])([F,Cl,Br,I])[CX3](=O)[OX1H0-,OX2H1]'
+    
+    # Rule 13: Modifiers containing conjugated carbonyl groups adjacent to the carboxyl group without additional strong coordinating groups
+    # Low Fe/Hf value (-1)
+    conjugated_carbonyl = '[CX3](=O)[CX3](=O)[#6]'
+    
+    # Rule 14: Modifiers with unique chelating structures, such as fused aromatic systems containing carbonyl groups
+    # High Fe/Hf value (+1)
+    fused_aromatic_carbonyl = 'O=C2Oc1ccccc1C2=O'  # 1,3-dioxo-2-benzofuran
+    
+    # Rule 15: Modifiers with flexible aliphatic chains terminating with coordinating functional groups on both ends
+    # High Fe/Hf value (+1)
+    terminal_primary_amine = '[NX3;H2][CX4]'  # Terminal primary amine
+    flexible_chain = '[C;!R]'  # Flexible aliphatic chain
+    
+    # Compile SMARTS patterns for each rule
+    rule_smarts = [
+        {
+            'number': 1,
+            'description': 'Modifiers containing a primary amino group (-NH2) connected by an aliphatic chain of at least three carbons to the carboxyl group',
+            'patterns': [primary_amine, aliphatic_chain + carboxylic_acid],
+            'prediction': 1
+        },
+        {
+            'number': 2,
+            'description': 'Modifiers containing thiol (-SH) groups',
+            'patterns': [thiol_group],
+            'prediction': 1
+        },
+        {
+            'number': 3,
+            'description': 'Aromatic carboxylic acids with electron-withdrawing groups at the para position',
+            'patterns': [aromatic_ring, para_nitro + para_halomethyl],
+            'exclude_patterns': [para_methyl, para_amino],
+            'prediction': 1
+        },
+        {
+            'number': 4,
+            'description': 'Modifiers containing a pyridine ring',
+            'patterns': [pyridine_ring],
+            'prediction': 1
+        },
+        {
+            'number': 5,
+            'description': 'Modifiers with flexible ether linkages and terminal coordinating groups',
+            'patterns': [ether_linkage, terminal_amino + terminal_carboxyl],
+            'prediction': 1
+        },
+        {
+            'number': 6,
+            'description': 'Amino acids with aromatic side chains lacking bulky substituents',
+            'patterns': [amino_acid, aromatic_side_chain],
+            'exclude_patterns': [indole],
+            'prediction': 1
+        },
+        {
+            'number': 7,
+            'description': 'Modifiers with multiple carboxyl groups capable of chelation',
+            'patterns': [dicarboxylic_acid + amino_acid_dicarboxylic],
+            'prediction': 1
+        },
+        {
+            'number': 8,
+            'description': 'Modifiers with electron-donating groups at the para position of aromatic carboxylic acids',
+            'patterns': [para_amino + para_hydroxy],
+            'prediction': -1
+        },
+        {
+            'number': 9,
+            'description': 'Simple aliphatic carboxylic acids without additional strong coordinating functional groups',
+            'patterns': [simple_aliphatic_acid],
+            'exclude_patterns': [primary_amine, thiol_group, ether_linkage],
+            'prediction': -1
+        },
+        {
+            'number': 10,
+            'description': 'Modifiers with bulky or sterically hindered groups near coordinating sites',
+            'patterns': [bulky_group + acetamido_group],
+            'prediction': -1
+        },
+        {
+            'number': 11,
+            'description': 'Modifiers with multiple adjacent hydroxyl (-OH) groups near the carboxyl group',
+            'patterns': [polyhydroxy],
+            'prediction': -1
+        },
+        {
+            'number': 12,
+            'description': 'Modifiers with perfluorinated alkyl chains attached to the carboxyl group',
+            'patterns': [perfluoro_alkyl_chain],
+            'prediction': -1
+        },
+        {
+            'number': 13,
+            'description': 'Modifiers containing conjugated carbonyl groups adjacent to the carboxyl group',
+            'patterns': [conjugated_carbonyl],
+            'prediction': -1
+        },
+        {
+            'number': 14,
+            'description': 'Modifiers with unique chelating structures, such as fused aromatic systems containing carbonyl groups',
+            'patterns': [fused_aromatic_carbonyl],
+            'prediction': 1
+        },
+        {
+            'number': 15,
+            'description': 'Modifiers with flexible aliphatic chains terminating with coordinating functional groups on both ends',
+            'patterns': [terminal_primary_amine + flexible_chain + terminal_carboxyl],
+            'prediction': 1
+        }
+    ]
+    
+    # Compile patterns
+    for rule in rule_smarts:
+        compiled_patterns = []
+        for patt in rule['patterns']:
+            mol = Chem.MolFromSmarts(patt)
+            if mol is not None:
+                compiled_patterns.append(mol)
+        rule['compiled_patterns'] = compiled_patterns
+        # Compile exclude patterns if any
+        if 'exclude_patterns' in rule:
+            compiled_exclude = []
+            for patt in rule['exclude_patterns']:
+                mol = Chem.MolFromSmarts(patt)
+                if mol is not None:
+                    compiled_exclude.append(mol)
+            rule['compiled_exclude_patterns'] = compiled_exclude
+    
+    # Initialize results list
+    results = []
+    
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rule_smarts))
+            continue
+        row = []
+        for rule in rule_smarts:
+            try:
+                match = True
+                # Check exclude patterns if any
+                if 'exclude_patterns' in rule:
+                    for patt in rule['compiled_exclude_patterns']:
+                        if mol.HasSubstructMatch(patt):
+                            match = False
+                            break
+                    if not match:
+                        row.append(0)
+                        continue
+                # Check required patterns
+                for patt in rule['compiled_patterns']:
+                    if not mol.HasSubstructMatch(patt):
+                        match = False
+                        break
+                if match:
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception as e:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule['number']}' for rule in rule_smarts])
+    return df

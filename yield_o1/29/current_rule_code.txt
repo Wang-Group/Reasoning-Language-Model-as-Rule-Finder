@@ -1,0 +1,428 @@
+def rule2matrix(smiles_list):
+    # Define SMARTS patterns for functional groups
+    carboxylic_acid_pat = Chem.MolFromSmarts('[CX3](=O)[OX2H1]')
+    amino_group_pat = Chem.MolFromSmarts('[NX3;H2,H1;!$(N=*)]')  # Excludes imines and other sp2 nitrogens
+    hydroxyl_group_pat = Chem.MolFromSmarts('[OX2H]')
+    thiol_group_pat = Chem.MolFromSmarts('[SX2H]')
+    aliphatic_C_pat = Chem.MolFromSmarts('[C;!R]')  # Aliphatic carbon
+    aromatic_C_pat = Chem.MolFromSmarts('[c]')
+    nitro_group_pat = Chem.MolFromSmarts('[NX3](=O)=O')
+    bromo_pat = Chem.MolFromSmarts('[Br]')
+    methyl_group_pat = Chem.MolFromSmarts('[CX4H3]')
+    indole_pat = Chem.MolFromSmarts('c1c[cH]c2[cH]c[cH][nH]c12')
+    methoxy_group_pat = Chem.MolFromSmarts('[OX2][CH3]')
+    formyl_group_pat = Chem.MolFromSmarts('[CX3H1](=O)')
+    fluorinated_alkyl_pat = Chem.MolFromSmarts('[CX4][F]')
+    ether_linkage_pat = Chem.MolFromSmarts('[#6][OX2][#6]')
+    amino_acid_pat = Chem.MolFromSmarts('[NX3;H2,H1][CX4][CX3](=O)[OX2H1]')
+    aromatic_ring_pat = Chem.MolFromSmarts('a1aaaaa1')
+    heterocycle_N_pat = Chem.MolFromSmarts('[$([nH1]),$([nH0])]1aaaa1')
+    # Define the rules with their associated patterns and predictions
+    rules = [
+        {
+            'number': 1,
+            'description': 'High Yield: Aliphatic carboxylic acids with amino (-NH2), hydroxyl (-OH), or thiol (-SH) groups within three carbons of the carboxyl group.',
+            'function': 'apply_rule_1',
+            'prediction': 1
+        },
+        {
+            'number': 2,
+            'description': 'High Yield: Aromatic carboxylic acids with electron-withdrawing groups (nitro, bromo, amino) in the para position.',
+            'function': 'apply_rule_2',
+            'prediction': 1
+        },
+        {
+            'number': 3,
+            'description': 'Low Yield: Aromatic carboxylic acids with electron-donating groups (methyl) in the para position.',
+            'function': 'apply_rule_3',
+            'prediction': -1
+        },
+        {
+            'number': 4,
+            'description': 'High Yield: Heterocyclic carboxylic acids containing nitrogen atoms within the ring.',
+            'function': 'apply_rule_4',
+            'prediction': 1
+        },
+        {
+            'number': 5,
+            'description': 'High Yield: Aliphatic carboxylic acids with multiple adjacent hydroxyl (-OH) groups.',
+            'function': 'apply_rule_5',
+            'prediction': 1
+        },
+        {
+            'number': 6,
+            'description': 'Low Yield: Aliphatic carboxylic acids with amino (-NH2) or hydroxyl (-OH) groups located more than three carbons away from the carboxyl group.',
+            'function': 'apply_rule_6',
+            'prediction': -1
+        },
+        {
+            'number': 7,
+            'description': 'Low Yield: Modifiers containing fluorinated alkyl chains near the carboxyl group.',
+            'function': 'apply_rule_7',
+            'prediction': -1
+        },
+        {
+            'number': 8,
+            'description': 'Low Yield: Aromatic carboxylic acids with ortho-substituted hydroxyl (-OH) or formyl (-CHO) groups.',
+            'function': 'apply_rule_8',
+            'prediction': -1
+        },
+        {
+            'number': 9,
+            'description': 'High Yield: Amino acids with indole side chains (tryptophan).',
+            'function': 'apply_rule_9',
+            'prediction': 1
+        },
+        {
+            'number': 10,
+            'description': 'High Yield: Aliphatic carboxylic acids without additional functional groups.',
+            'function': 'apply_rule_10',
+            'prediction': 1
+        },
+        {
+            'number': 11,
+            'description': 'Low Yield: Modifiers with polyether chains or flexible linkers bearing amino (-NH2) or methoxy (-OCH3) groups distant from the carboxyl group.',
+            'function': 'apply_rule_11',
+            'prediction': -1
+        },
+        {
+            'number': 12,
+            'description': 'Low Yield: Modifiers with bulky substituents adjacent to the carboxyl group (e.g., aromatic rings).',
+            'function': 'apply_rule_12',
+            'prediction': -1
+        },
+        {
+            'number': 13,
+            'description': 'Low Yield: Aromatic carboxylic acids containing formyl (-CHO) groups.',
+            'function': 'apply_rule_13',
+            'prediction': -1
+        },
+        {
+            'number': 14,
+            'description': 'High Yield: Aliphatic carboxylic acids containing sulfur groups (-SH) within three carbons of the carboxyl group.',
+            'function': 'apply_rule_14',
+            'prediction': 1
+        },
+        {
+            'number': 15,
+            'description': 'High Yield: Aromatic carboxylic acids with methoxy (-OCH3) groups in the meta or para position.',
+            'function': 'apply_rule_15',
+            'prediction': 1
+        }
+    ]
+    # Initialize results list
+    results = []
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        # Apply each rule function
+        for rule in rules:
+            func_name = rule['function']
+            prediction = rule['prediction']
+            try:
+                match = globals()[func_name](mol)
+                if match:
+                    row.append(prediction)
+                else:
+                    row.append(0)
+            except Exception as e:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule['number']}' for rule in rules])
+    return df
+
+    # Function definitions for rules
+    def apply_rule_1(mol):
+        # Rule 1 implementation
+        try:
+            # Find carboxylic acid carbons
+            carboxyl_carbons = [match[0] for match in mol.GetSubstructMatches(carboxylic_acid_pat)]
+            # Find amino/hydroxyl/thiol groups
+            amino_atoms = [match[0] for match in mol.GetSubstructMatches(amino_group_pat)]
+            hydroxyl_atoms = [match[0] for match in mol.GetSubstructMatches(hydroxyl_group_pat)]
+            thiol_atoms = [match[0] for match in mol.GetSubstructMatches(thiol_group_pat)]
+            functional_atoms = amino_atoms + hydroxyl_atoms + thiol_atoms
+            # For each carboxyl carbon, check if any functional group is within 3 bonds
+            for c_idx in carboxyl_carbons:
+                for f_idx in functional_atoms:
+                    path = Chem.GetShortestPath(mol, c_idx, f_idx)
+                    if len(path) - 1 <= 3:
+                        return True
+            return False
+        except:
+            return False
+
+    def apply_rule_2(mol):
+        # Rule 2 implementation
+        try:
+            # Find aromatic carboxylic acids
+            aromatic_carboxylic_acid_pat = Chem.MolFromSmarts('[c][CX3](=O)[OX2H1]')
+            matches = mol.GetSubstructMatches(aromatic_carboxylic_acid_pat)
+            if not matches:
+                return False
+            # For each match, check for EWG in para position
+            for match in matches:
+                aromatic_c_idx = match[0]  # Aromatic carbon attached to carboxyl group
+                # Get the ring that contains the aromatic carbon
+                ring_info = mol.GetRingInfo()
+                rings = ring_info.AtomRings()
+                for ring in rings:
+                    if aromatic_c_idx in ring and len(ring) == 6:
+                        # Find the index of the aromatic carbon in the ring
+                        idx_in_ring = ring.index(aromatic_c_idx)
+                        # Para position is three atoms away in the ring (opposite side)
+                        para_idx = ring[(idx_in_ring + 3) % 6]
+                        para_atom = mol.GetAtomWithIdx(para_idx)
+                        # Check for substituents at para position
+                        for neighbor in para_atom.GetNeighbors():
+                            if neighbor.GetIdx() != para_idx and neighbor.GetIdx() not in ring:
+                                sub_mol = Chem.PathToSubmol(mol, [neighbor.GetIdx()])
+                                if sub_mol.HasSubstructMatch(nitro_group_pat) or sub_mol.HasSubstructMatch(bromo_pat) or sub_mol.HasSubstructMatch(amino_group_pat):
+                                    return True
+            return False
+        except:
+            return False
+
+    def apply_rule_3(mol):
+        # Rule 3 implementation
+        try:
+            # Find aromatic carboxylic acids
+            aromatic_carboxylic_acid_pat = Chem.MolFromSmarts('[c][CX3](=O)[OX2H1]')
+            matches = mol.GetSubstructMatches(aromatic_carboxylic_acid_pat)
+            if not matches:
+                return False
+            # For each match, check for methyl group in para position
+            for match in matches:
+                aromatic_c_idx = match[0]
+                ring_info = mol.GetRingInfo()
+                rings = ring_info.AtomRings()
+                for ring in rings:
+                    if aromatic_c_idx in ring and len(ring) == 6:
+                        idx_in_ring = ring.index(aromatic_c_idx)
+                        para_idx = ring[(idx_in_ring + 3) % 6]
+                        para_atom = mol.GetAtomWithIdx(para_idx)
+                        for neighbor in para_atom.GetNeighbors():
+                            if neighbor.GetIdx() != para_idx and neighbor.GetIdx() not in ring:
+                                sub_mol = Chem.PathToSubmol(mol, [neighbor.GetIdx()])
+                                if sub_mol.HasSubstructMatch(methyl_group_pat):
+                                    return True
+            return False
+        except:
+            return False
+
+    def apply_rule_4(mol):
+        # Rule 4 implementation
+        try:
+            matches = mol.GetSubstructMatches(heterocycle_N_pat)
+            for match in matches:
+                atom = mol.GetAtomWithIdx(match[0])
+                # Check if the heterocycle has a carboxylic acid group
+                for neighbor in atom.GetNeighbors():
+                    if neighbor.HasSubstructMatch(carboxylic_acid_pat):
+                        return True
+            return False
+        except:
+            return False
+
+    def apply_rule_5(mol):
+        # Rule 5 implementation
+        try:
+            hydroxyl_matches = mol.GetSubstructMatches(hydroxyl_group_pat)
+            hydroxyl_atoms = [match[0] for match in hydroxyl_matches]
+            # Check for adjacent hydroxyl groups
+            for i in range(len(hydroxyl_atoms)):
+                atom_i = mol.GetAtomWithIdx(hydroxyl_atoms[i])
+                for j in range(i+1, len(hydroxyl_atoms)):
+                    atom_j = mol.GetAtomWithIdx(hydroxyl_atoms[j])
+                    path = Chem.GetShortestPath(mol, atom_i.GetIdx(), atom_j.GetIdx())
+                    if len(path) == 2:  # Adjacent hydroxyl groups
+                        # Check for carboxylic acid in the molecule
+                        if mol.HasSubstructMatch(carboxylic_acid_pat):
+                            return True
+            return False
+        except:
+            return False
+
+    def apply_rule_6(mol):
+        # Rule 6 implementation
+        try:
+            # Similar to Rule 1 but for groups more than 3 bonds away
+            carboxyl_carbons = [match[0] for match in mol.GetSubstructMatches(carboxylic_acid_pat)]
+            amino_atoms = [match[0] for match in mol.GetSubstructMatches(amino_group_pat)]
+            hydroxyl_atoms = [match[0] for match in mol.GetSubstructMatches(hydroxyl_group_pat)]
+            functional_atoms = amino_atoms + hydroxyl_atoms
+            found_far = False
+            found_close = False
+            for c_idx in carboxyl_carbons:
+                for f_idx in functional_atoms:
+                    path = Chem.GetShortestPath(mol, c_idx, f_idx)
+                    if len(path) - 1 > 3:
+                        found_far = True
+                    elif len(path) - 1 <= 3:
+                        found_close = True
+            if found_far and not found_close:
+                return True
+            return False
+        except:
+            return False
+
+    def apply_rule_7(mol):
+        # Rule 7 implementation
+        try:
+            # Check for fluorinated alkyl chains near carboxyl group
+            carboxyl_carbons = [match[0] for match in mol.GetSubstructMatches(carboxylic_acid_pat)]
+            fluorinated_carbons = [match[0] for match in mol.GetSubstructMatches(fluorinated_alkyl_pat)]
+            for c_idx in carboxyl_carbons:
+                for f_idx in fluorinated_carbons:
+                    path = Chem.GetShortestPath(mol, c_idx, f_idx)
+                    if len(path) - 1 <= 3:
+                        return True
+            return False
+        except:
+            return False
+
+    def apply_rule_8(mol):
+        # Rule 8 implementation
+        try:
+            # Find aromatic carboxylic acids
+            aromatic_carboxylic_acid_pat = Chem.MolFromSmarts('[c][CX3](=O)[OX2H1]')
+            matches = mol.GetSubstructMatches(aromatic_carboxylic_acid_pat)
+            if not matches:
+                return False
+            # Check for ortho-substituted hydroxyl or formyl groups
+            for match in matches:
+                aromatic_c_idx = match[0]
+                ring_info = mol.GetRingInfo()
+                rings = ring_info.AtomRings()
+                for ring in rings:
+                    if aromatic_c_idx in ring and len(ring) == 6:
+                        idx_in_ring = ring.index(aromatic_c_idx)
+                        ortho_indices = [ring[(idx_in_ring + 1) % 6], ring[(idx_in_ring - 1) % 6]]
+                        for ortho_idx in ortho_indices:
+                            ortho_atom = mol.GetAtomWithIdx(ortho_idx)
+                            for neighbor in ortho_atom.GetNeighbors():
+                                if neighbor.GetIdx() not in ring:
+                                    sub_mol = Chem.PathToSubmol(mol, [neighbor.GetIdx()])
+                                    if sub_mol.HasSubstructMatch(hydroxyl_group_pat) or sub_mol.HasSubstructMatch(formyl_group_pat):
+                                        return True
+            return False
+        except:
+            return False
+
+    def apply_rule_9(mol):
+        # Rule 9 implementation
+        try:
+            # Check for amino acid with indole side chain
+            if mol.HasSubstructMatch(indole_pat) and mol.HasSubstructMatch(amino_acid_pat):
+                return True
+            return False
+        except:
+            return False
+
+    def apply_rule_10(mol):
+        # Rule 10 implementation
+        try:
+            # Aliphatic carboxylic acids without additional functional groups
+            if mol.HasSubstructMatch(carboxylic_acid_pat):
+                # Exclude molecules with other functional groups
+                if not (mol.HasSubstructMatch(amino_group_pat) or mol.HasSubstructMatch(hydroxyl_group_pat) or mol.HasSubstructMatch(thiol_group_pat) or mol.HasSubstructMatch(aromatic_C_pat)):
+                    return True
+            return False
+        except:
+            return False
+
+    def apply_rule_11(mol):
+        # Rule 11 implementation
+        try:
+            # Check for polyether chains or flexible linkers with amino or methoxy groups distant from carboxyl
+            if mol.HasSubstructMatch(ether_linkage_pat) and (mol.HasSubstructMatch(amino_group_pat) or mol.HasSubstructMatch(methoxy_group_pat)):
+                # Check the distance from carboxyl group
+                carboxyl_carbons = [match[0] for match in mol.GetSubstructMatches(carboxylic_acid_pat)]
+                functional_atoms = [match[0] for match in mol.GetSubstructMatches(amino_group_pat)] + [match[0] for match in mol.GetSubstructMatches(methoxy_group_pat)]
+                for c_idx in carboxyl_carbons:
+                    for f_idx in functional_atoms:
+                        path = Chem.GetShortestPath(mol, c_idx, f_idx)
+                        if len(path) - 1 > 3:
+                            return True
+            return False
+        except:
+            return False
+
+    def apply_rule_12(mol):
+        # Rule 12 implementation
+        try:
+            # Check for bulky substituents adjacent to carboxyl group
+            carboxyl_carbons = [match[0] for match in mol.GetSubstructMatches(carboxylic_acid_pat)]
+            for c_idx in carboxyl_carbons:
+                carboxyl_carbon = mol.GetAtomWithIdx(c_idx)
+                for neighbor in carboxyl_carbon.GetNeighbors():
+                    if neighbor.GetAtomicNum() == 6 and neighbor.IsInRing():
+                        return True
+            return False
+        except:
+            return False
+
+    def apply_rule_13(mol):
+        # Rule 13 implementation
+        try:
+            # Aromatic carboxylic acids with formyl groups
+            aromatic_carboxylic_acid_pat = Chem.MolFromSmarts('[c][CX3](=O)[OX2H1]')
+            formyl_group_pat = Chem.MolFromSmarts('[CX3H1](=O)[#6]')
+            if mol.HasSubstructMatch(aromatic_carboxylic_acid_pat) and mol.HasSubstructMatch(formyl_group_pat):
+                return True
+            return False
+        except:
+            return False
+
+    def apply_rule_14(mol):
+        # Rule 14 implementation
+        try:
+            # Similar to Rule 1 but for sulfur groups
+            carboxyl_carbons = [match[0] for match in mol.GetSubstructMatches(carboxylic_acid_pat)]
+            thiol_atoms = [match[0] for match in mol.GetSubstructMatches(thiol_group_pat)]
+            for c_idx in carboxyl_carbons:
+                for f_idx in thiol_atoms:
+                    path = Chem.GetShortestPath(mol, c_idx, f_idx)
+                    if len(path) - 1 <= 3:
+                        return True
+            return False
+        except:
+            return False
+
+    def apply_rule_15(mol):
+        # Rule 15 implementation
+        try:
+            # Check for methoxy groups in meta or para position
+            aromatic_carboxylic_acid_pat = Chem.MolFromSmarts('[c][CX3](=O)[OX2H1]')
+            matches = mol.GetSubstructMatches(aromatic_carboxylic_acid_pat)
+            if not matches:
+                return False
+            for match in matches:
+                aromatic_c_idx = match[0]
+                ring_info = mol.GetRingInfo()
+                rings = ring_info.AtomRings()
+                for ring in rings:
+                    if aromatic_c_idx in ring and len(ring) == 6:
+                        idx_in_ring = ring.index(aromatic_c_idx)
+                        # Meta positions
+                        meta_indices = [ring[(idx_in_ring + 2) % 6], ring[(idx_in_ring - 2) % 6]]
+                        # Para position
+                        para_idx = ring[(idx_in_ring + 3) % 6]
+                        positions = meta_indices + [para_idx]
+                        for pos_idx in positions:
+                            pos_atom = mol.GetAtomWithIdx(pos_idx)
+                            for neighbor in pos_atom.GetNeighbors():
+                                if neighbor.GetIdx() not in ring:
+                                    sub_mol = Chem.PathToSubmol(mol, [neighbor.GetIdx()])
+                                    if sub_mol.HasSubstructMatch(methoxy_group_pat):
+                                        return True
+            return False
+        except:
+            return False

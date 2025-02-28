@@ -1,0 +1,204 @@
+def rule2matrix(smiles_list):
+    # Define SMARTS patterns for functional groups
+    # Carboxylic acid group (-COOH)
+    carboxylic_acid = '[CX3](=O)[OX2H1]'
+    # Amino group (-NH2)
+    primary_amino = '[NX3H2]'
+    # Secondary amino group (-NH-)
+    secondary_amino = '[NX3H1]'
+    # Alpha-amino acid backbone: amino group attached to alpha carbon, which is attached to carboxylic acid
+    alpha_amino_acid = '[NX3H2][CX4H][CX3](=O)[OX2H1]'
+    # Additional carboxylic acid group in side chain
+    side_chain_carboxylic_acid = '[CX3](=O)[OX2H1]'
+    # Aromatic ring
+    aromatic_ring = '[a]'
+    # Para-substituted electron-donating groups on aromatic ring
+    para_amino_on_aromatic = 'c1ccc(N)cc1C(=O)O'
+    para_hydroxyl_on_aromatic = 'c1ccc(O)cc1C(=O)O'
+    # Aliphatic chain with functional group within three carbons of carboxyl group
+    aliphatic_chain_amino = '[CX3](=O)[OX2H1][C;X4][C;X4][C;X4][NX3;H2,H1]'
+    aliphatic_chain_hydroxyl = '[CX3](=O)[OX2H1][C;X4][C;X4][C;X4][OX2H]'
+    aliphatic_chain_thiol = '[CX3](=O)[OX2H1][C;X4][C;X4][C;X4][SX2H]'
+    # Nitrogenous heterocycles directly attached to carboxyl group
+    pyridine_carboxylic_acid = '[n][c][c][c][c][c][CX3](=O)[OX2H1]'
+    pyrazole_carboxylic_acid = '[n][n][c][c][c][CX3](=O)[OX2H1]'
+    # Electron-withdrawing groups on aromatic ring
+    aromatic_with_ewg = '[c]1[c][c][c]([CX3H]=O)[c][c]1C(=O)O'
+    aromatic_with_cf3 = '[c]1[c][c][c](C(F)(F)F)[c][c]1C(=O)O'
+    # Amide bond adjacent to carboxyl group
+    amide_adjacent_to_carboxyl = '[CX3](=O)[NX3][CX3](=O)[OX2H1]'
+    # Ether linkage near carboxyl group
+    ether_near_carboxyl = '[CX3](=O)[OX2H1][CX4][OX2][CX4]'
+    # Multiple hydroxyl groups near carboxyl group
+    multiple_hydroxyls = '[CX3](=O)[OX2H1][CX4][OX2H]'
+    # Ketone group near carboxyl group
+    ketone_near_carboxyl = '[CX3](=O)[CX3](=O)[CX4][CX3](=O)[OX2H1]'
+    # Biaryl structures without additional coordinating groups
+    biaryl_structure = 'c1ccc(cc1)-c2ccc(cc2)C(=O)O'
+    # Patterns for Rule 1
+    rule1_patterns = [alpha_amino_acid, side_chain_carboxylic_acid]
+    # Patterns for Rule 2
+    rule2_patterns = [aromatic_ring, carboxylic_acid, [para_amino_on_aromatic, para_hydroxyl_on_aromatic]]
+    # Patterns for Rule 3
+    rule3_patterns = [carboxylic_acid, [aliphatic_chain_amino, aliphatic_chain_hydroxyl, aliphatic_chain_thiol]]
+    # Patterns for Rule 4
+    rule4_patterns = [carboxylic_acid, [pyridine_carboxylic_acid, pyrazole_carboxylic_acid]]
+    # Patterns for Rule 5
+    rule5_patterns = [aromatic_ring, carboxylic_acid, [aromatic_with_ewg, aromatic_with_cf3]]
+    # Patterns for Rule 6
+    rule6_patterns = [amide_adjacent_to_carboxyl]
+    # Patterns for Rule 7
+    rule7_patterns = [carboxylic_acid, ether_near_carboxyl]
+    # Patterns for Rule 8
+    rule8_patterns = [carboxylic_acid, multiple_hydroxyls]
+    # Patterns for Rule 9
+    rule9_patterns = [carboxylic_acid, '[SX2H]']
+    # Patterns for Rule 10
+    rule10_patterns = [alpha_amino_acid, '[!$([NX3][a])]', '[c]']
+    # Patterns for Rule 11
+    rule11_patterns = [carboxylic_acid, ketone_near_carboxyl]
+    # Patterns for Rule 12
+    rule12_patterns = [carboxylic_acid, '[NX3;H2,H1]', '[OX2H]', '[SX2H]']
+    # Patterns for Rule 13
+    rule13_patterns = ['[CX3](=O)[OX2H1][CC][CC][CC][C;!$(C[OX2H])]']
+    # Patterns for Rule 14
+    rule14_patterns = [biaryl_structure]
+    # Patterns for Rule 15
+    rule15_patterns = [carboxylic_acid, '[c][c](OC)[c]']
+    # Define the rules
+    rules = [
+        {
+            'number': 1,
+            'description': 'Alpha-amino dicarboxylic acids result in a high yield.',
+            'patterns': rule1_patterns,
+            'prediction': 1
+        },
+        {
+            'number': 2,
+            'description': 'Aromatic carboxylic acids with electron-donating groups in the para position result in a high yield.',
+            'patterns': rule2_patterns,
+            'prediction': 1
+        },
+        {
+            'number': 3,
+            'description': 'Aliphatic carboxylic acids with functional groups within three carbons result in a high yield.',
+            'patterns': rule3_patterns,
+            'prediction': 1
+        },
+        {
+            'number': 4,
+            'description': 'Carboxylic acids containing nitrogenous heterocycles directly attached result in a high yield.',
+            'patterns': rule4_patterns,
+            'prediction': 1
+        },
+        {
+            'number': 5,
+            'description': 'Aromatic carboxylic acids with electron-withdrawing groups attached result in a low yield.',
+            'patterns': rule5_patterns,
+            'prediction': -1
+        },
+        {
+            'number': 6,
+            'description': 'Modifiers with amide bonds adjacent to the carboxyl group result in a low yield.',
+            'patterns': rule6_patterns,
+            'prediction': -1
+        },
+        {
+            'number': 7,
+            'description': 'Modifiers with ether linkages near the carboxyl group result in a low yield.',
+            'patterns': rule7_patterns,
+            'prediction': -1
+        },
+        {
+            'number': 8,
+            'description': 'Modifiers with multiple hydroxyl groups near the carboxyl group result in a high yield.',
+            'patterns': rule8_patterns,
+            'prediction': 1
+        },
+        {
+            'number': 9,
+            'description': 'Modifiers with thiol groups near the carboxyl group result in a high yield.',
+            'patterns': rule9_patterns,
+            'prediction': 1
+        },
+        {
+            'number': 10,
+            'description': 'Alpha-amino acids with bulky hydrophobic side chains and no additional coordinating groups result in a low yield.',
+            'patterns': rule10_patterns,
+            'prediction': -1
+        },
+        {
+            'number': 11,
+            'description': 'Modifiers with ketone groups near the carboxyl group result in a low yield.',
+            'patterns': rule11_patterns,
+            'prediction': -1
+        },
+        {
+            'number': 12,
+            'description': 'Modifiers with multiple coordinating groups near the carboxyl group result in a high yield.',
+            'patterns': rule12_patterns,
+            'prediction': 1
+        },
+        {
+            'number': 13,
+            'description': 'Aliphatic carboxylic acids with medium-length chains and no polar groups result in a high yield.',
+            'patterns': rule13_patterns,
+            'prediction': 1
+        },
+        {
+            'number': 14,
+            'description': 'Modifiers containing biaryl structures without additional coordinating groups result in a low yield.',
+            'patterns': rule14_patterns,
+            'prediction': -1
+        },
+        {
+            'number': 15,
+            'description': 'Modifiers with methoxy groups on the aromatic ring result in a high yield.',
+            'patterns': rule15_patterns,
+            'prediction': 1
+        }
+    ]
+    # Compile SMARTS patterns
+    for rule in rules:
+        compiled_patterns = []
+        for group in rule['patterns']:
+            if isinstance(group, list):
+                compiled_group = [Chem.MolFromSmarts(pat) for pat in group]
+                compiled_patterns.append(compiled_group)
+            else:
+                compiled_patterns.append([Chem.MolFromSmarts(group)])
+        rule['compiled_patterns'] = compiled_patterns
+    # Initialize results list
+    results = []
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = True
+                # Check required patterns
+                for compiled_group in rule['compiled_patterns']:
+                    group_match = False
+                    for pat in compiled_group:
+                        if mol.HasSubstructMatch(pat):
+                            group_match = True
+                            break
+                    if not group_match:
+                        match = False
+                        break
+                if match:
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception as e:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule['number']}' for rule in rules])
+    return df

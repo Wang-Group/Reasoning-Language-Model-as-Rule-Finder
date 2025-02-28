@@ -1,0 +1,265 @@
+def rule2matrix(smiles_list):
+    """
+    Converts a list of SMILES strings into a feature matrix based on defined chemical rules.
+    Each rule is represented as a column in the output DataFrame, and each row corresponds
+    to a SMILES string from the input list.
+    """
+
+    # Define SMARTS patterns for functional groups, updated per the suggestions.
+
+    # Carboxylic acid group (-COOH)
+    carboxylic_acid = '[CX3](=O)[OX1H0-,OX2H1]'
+
+    # Thiol group (-SH)
+    thiol = '[SX2H]'
+
+    # Thioether group (-S-)
+    thioether = '[#16X2][#6]'
+
+    # Long aliphatic chain (three or more carbons between amino group and carboxylic acid) with terminal amino group (-NH2)
+    long_chain_primary_amine = '[NX3H2][CH2]{3,}[CX3](=O)[OX1H0-,OX2H1]'
+
+    # Electron-withdrawing groups on aromatic ring at para position (halogens and nitro group)
+    para_ewgs = [
+        '[cH]1ccc([F,Cl,Br,I])cc1C(=O)[OX2H1,OX1-]',    # Halogen at para position
+        '[cH]1ccc([N+](=O)[O-])cc1C(=O)[OX2H1,OX1-]'      # Nitro group at para position
+    ]
+
+    # Electron-donating groups on aromatic ring at para position (amino and hydroxyl groups)
+    para_edgs = [
+        '[cH]1ccc([NX3H2,NX3H1])cc1C(=O)[OX2H1,OX1-]',    # Amino group at para position
+        '[cH]1ccc([OX2H])cc1C(=O)[OX2H1,OX1-]'            # Hydroxyl group at para position
+    ]
+
+    # Pyridine ring with nitrogen available for coordination
+    pyridine_ring = 'n1ccccc1'
+
+    # Fluorinated alkyl chain (e.g., trifluoromethyl group)
+    fluorinated_alkyl_chain = '[CX4](F)(F)(F)'
+
+    # Cyclic structures containing multiple oxygen atoms (simplified pattern for lactones)
+    cyclic_with_multiple_oxygens = '[O]1CCOC[C]1=O'
+
+    # Define the rules
+    rules = [
+        {
+            'number': 1,
+            'description': 'Modifiers containing both a carboxylic acid group and a sulfur-containing functional group (thiol –SH or thioether –S–R) result in a High Fe/Hf value.',
+            'patterns': {
+                'must_match': [carboxylic_acid],
+                'must_match_one_of': [thiol, thioether]
+            },
+            'prediction': 1
+        },
+        {
+            'number': 2,
+            'description': 'Modifiers with long aliphatic chains (five or more carbons) containing a terminal amino group (–NH₂) result in a High Fe/Hf value.',
+            'patterns': {
+                'must_match': [long_chain_primary_amine]
+            },
+            'prediction': 1
+        },
+        {
+            'number': 3,
+            'description': 'Modifiers with aromatic carboxylic acids bearing strong electron-withdrawing groups (e.g., nitro, halogens) at the para position result in a High Fe/Hf value.',
+            'patterns': {
+                'must_match_one_of': para_ewgs
+            },
+            'prediction': 1
+        },
+        {
+            'number': 4,
+            'description': 'Modifiers containing a pyridine ring with the nitrogen atom unimpeded for coordination result in a High Fe/Hf value.',
+            'patterns': {
+                'must_match': [pyridine_ring]
+            },
+            'prediction': 1
+        },
+        {
+            'number': 5,
+            'description': 'Modifiers with flexible aliphatic chains containing ether linkages (–O–) and terminal coordinating groups result in a High Fe/Hf value.',
+            'custom_function': 'rule5_check',
+            'prediction': 1
+        },
+        {
+            'number': 6,
+            'description': 'Modifiers with multiple hydroxyl groups (three or more) on short aliphatic chains (six carbons or fewer) result in a Low Fe/Hf value.',
+            'custom_function': 'rule6_check',
+            'prediction': -1
+        },
+        {
+            'number': 7,
+            'description': 'Aromatic carboxylic acids with electron-donating groups (e.g., amino, hydroxyl) directly attached to the ring result in a Low Fe/Hf value.',
+            'patterns': {
+                'must_match_one_of': para_edgs
+            },
+            'prediction': -1
+        },
+        {
+            'number': 8,
+            'description': 'Modifiers with fluorinated alkyl chains result in a Low Fe/Hf value.',
+            'patterns': {
+                'must_match': [fluorinated_alkyl_chain]
+            },
+            'prediction': -1
+        },
+        {
+            'number': 9,
+            'description': 'Simple aliphatic carboxylic acids without additional coordinating groups result in a Low Fe/Hf value.',
+            'patterns': {
+                'must_match': [carboxylic_acid],
+                'must_not_match': ['[!#6;R]', '[!#1][N,O,S]', '[$([#6][!#6;!#1])]', '[a]']
+            },
+            'prediction': -1
+        },
+        {
+            'number': 10,
+            'description': 'Modifiers with a single hydroxyl group on a long aliphatic chain (seven carbons or more) result in a High Fe/Hf value.',
+            'custom_function': 'rule10_check',
+            'prediction': 1
+        },
+        {
+            'number': 11,
+            'description': 'Modifiers with cyclic structures containing multiple oxygen atoms positioned to chelate Fe ions result in a High Fe/Hf value.',
+            'patterns': {
+                'must_match': [cyclic_with_multiple_oxygens]
+            },
+            'prediction': 1
+        }
+    ]
+
+    # Compile the SMARTS patterns
+    for rule in rules:
+        if 'patterns' in rule:
+            for key in ['must_match', 'must_not_match', 'must_match_one_of']:
+                if key in rule['patterns']:
+                    compiled_patterns = []
+                    for pattern in rule['patterns'][key]:
+                        compiled_patterns.append(Chem.MolFromSmarts(pattern))
+                    rule['patterns'][f'compiled_{key}'] = compiled_patterns
+
+    # Initialize results list
+    results = []
+
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = True
+                # If the rule has a custom function
+                if 'custom_function' in rule:
+                    func_name = rule['custom_function']
+                    function = globals()[func_name]
+                    if function(mol):
+                        row.append(rule['prediction'])
+                    else:
+                        row.append(0)
+                    continue
+                # Check must_not_match patterns
+                if 'patterns' in rule and 'compiled_must_not_match' in rule['patterns']:
+                    for pat in rule['patterns']['compiled_must_not_match']:
+                        if mol.HasSubstructMatch(pat):
+                            match = False
+                            break
+                    if not match:
+                        row.append(0)
+                        continue
+                # Check must_match patterns
+                if 'patterns' in rule and 'compiled_must_match' in rule['patterns']:
+                    for pat in rule['patterns']['compiled_must_match']:
+                        if not mol.HasSubstructMatch(pat):
+                            match = False
+                            break
+                    if not match:
+                        row.append(0)
+                        continue
+                # Check must_match_one_of patterns
+                if 'patterns' in rule and 'compiled_must_match_one_of' in rule['patterns']:
+                    group_match = False
+                    for pat in rule['patterns']['compiled_must_match_one_of']:
+                        if mol.HasSubstructMatch(pat):
+                            group_match = True
+                            break
+                    if not group_match:
+                        match = False
+                        row.append(0)
+                        continue
+                if match:
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception as e:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule["number"]}' for rule in rules])
+    return df
+
+# Custom functions for rules requiring special checks
+
+def rule5_check(mol):
+    """
+    Rule 5: Modifiers with flexible aliphatic chains containing ether linkages (-O-) and terminal coordinating groups.
+    """
+    try:
+        # Patterns for ether linkages and terminal carboxylic acid or amino group
+        pattern1 = Chem.MolFromSmarts('[OX2]([CH2])[CH2][OX2][CH2][CH2][CX3](=O)[OX1H0-,OX2H1]')  # Ether chain ending with carboxylic acid
+        pattern2 = Chem.MolFromSmarts('[OX2]([CH2])[CH2][OX2][CH2][CH2][NX3H2]')  # Ether chain ending with amino group
+        if mol.HasSubstructMatch(pattern1) or mol.HasSubstructMatch(pattern2):
+            return True
+        else:
+            return False
+    except Exception as e:
+        return False
+
+def rule6_check(mol):
+    """
+    Rule 6: Modifiers with multiple hydroxyl groups (three or more) on short aliphatic chains (six carbons or fewer).
+    """
+    try:
+        # Check for three or more hydroxyl groups
+        hydroxyl_pattern = Chem.MolFromSmarts('[OX2H]')
+        hydroxyl_matches = mol.GetSubstructMatches(hydroxyl_pattern)
+        if len(hydroxyl_matches) >= 3:
+            # Check if the aliphatic chain is six carbons or fewer
+            chains = Chem.rdmolops.GetMolFrags(mol, asMols=True)
+            for chain in chains:
+                carbons = [atom for atom in chain.GetAtoms() if atom.GetAtomicNum() == 6 and not atom.IsInRing() and not atom.GetIsAromatic()]
+                if len(carbons) <= 6:
+                    return True
+        return False
+    except Exception as e:
+        return False
+
+def rule10_check(mol):
+    """
+    Rule 10: Modifiers with a single hydroxyl group on a long aliphatic chain (seven carbons or more).
+    """
+    try:
+        # Check for exactly one hydroxyl group
+        hydroxyl_pattern = Chem.MolFromSmarts('[OX2H]')
+        hydroxyl_matches = mol.GetSubstructMatches(hydroxyl_pattern)
+        if len(hydroxyl_matches) != 1:
+            return False
+        else:
+            # Find the longest carbon chain
+            chains = Chem.GetSymmSSSR(mol)
+            max_chain_length = 0
+            for bond in mol.GetBonds():
+                if bond.GetBeginAtom().GetAtomicNum() == 6 and bond.GetEndAtom().GetAtomicNum() == 6:
+                    length = len(Chem.rdmolops.GetShortestPath(mol, bond.GetBeginAtomIdx(), bond.GetEndAtomIdx()))
+                    if length > max_chain_length:
+                        max_chain_length = length
+            if max_chain_length >= 7:
+                return True
+            else:
+                return False
+    except Exception as e:
+        return False

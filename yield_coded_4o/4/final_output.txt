@@ -1,0 +1,896 @@
+
+    Target Name: yield
+    GPT Model: gpt-4o-2024-08-06
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+- **Rule 1**: Modifiers containing a carboxylic acid group (COOH) and an amino group (NH2) tend to result in a high yield. This rule covers compounds like (2S)-2-aminopentanedioic acid and (2S)-2-aminobutanedioic acid.
+
+- **Rule 2**: Modifiers with a phenyl group (C6H5) and a hydroxyl group (OH) tend to result in a high yield. This rule includes compounds such as 5-(4-hydroxyphenyl)pentanoic acid.
+
+- **Rule 3**: Modifiers containing a sulfanyl group (SH) and a carboxylic acid group (COOH) tend to result in a high yield. This rule covers compounds like 3-sulfanylpropanoic acid.
+
+- **Rule 4**: Modifiers with a pyridine ring tend to result in a high yield. This rule includes compounds such as pyridine-3-carboxylic acid and 4-pyridin-4-ylbutanoic acid.
+
+- **Rule 5**: Modifiers containing a formyl group (CHO) tend to result in a low yield. This rule covers compounds like 5-formyl-2-hydroxybenzoic acid and 4-formylbenzoic acid.
+
+- **Rule 6**: Modifiers with multiple ether linkages (e.g., -O-CH2-CH2-O-) tend to result in a low yield. This rule includes compounds such as 2-[2-(2-methoxyethoxy)ethoxy]acetic acid.
+
+- **Rule 7**: Modifiers containing a nitro group (NO2) tend to result in a high yield. This rule includes compounds like 4-nitrobenzoic acid.
+
+- **Rule 8**: Modifiers with a fluorinated alkyl chain tend to result in a low yield. This rule covers compounds like 2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid.
+
+- **Rule 9**: Modifiers with a benzofuranone structure tend to result in a high yield. This rule includes compounds like 1,3-dioxo-2-benzofuran-5-carboxylic acid.
+
+- **Rule 10**: Modifiers with an indole structure tend to result in a high yield. This rule includes compounds like (2R)-2-amino-3-(1H-indol-3-yl)propanoic acid.
+
+**End of Rules**---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+Rule 1,Rule 2,Rule 3,Rule 4,Rule 5,Rule 6,Rule 7,Rule 8,Rule 9,Rule 10
+1,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0
+0,0,0,1,0,0,0,0,0,0
+0,0,0,0,0,-1,0,0,0,0
+0,0,1,0,0,0,0,0,0,0
+0,0,0,0,0,-1,0,0,0,0
+0,0,0,1,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,-1,0,0
+1,0,0,0,0,0,0,0,0,1
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0
+0,1,0,0,-1,0,0,0,0,0
+0,0,0,0,-1,0,0,0,0,0
+0,0,0,0,0,0,1,0,0,0
+0,0,0,1,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0
+0,0,0,1,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,-1,0,0
+0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,-1,0,0,0,0
+1,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0
+
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.7142857142857143; Test Accuracy: 0.0
+    Train Support: 0.05714285714285714; Test Support: 0.125
+    Train Confidence: 0.7583333333333333; Test Confidence: 0.5625
+    Train Lift: 1.5231481481481484; Test Lift: NONE
+    Train Leverage: 0.009591836734693878; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    Current Rule Code:
+def rule2matrix(smiles_list):
+    rules = [
+        ['[CX3](=O)[OX2H1]', '[NX3;H2]'],  # Rule 1: Carboxylic acid and amino group
+        ['c1ccccc1[OX2H]'],  # Rule 2: Phenyl group and hydroxyl group directly attached
+        ['[SX2H]', '[CX3](=O)[OX2H1]'],  # Rule 3: Sulfanyl group and carboxylic acid
+        ['n1ccccc1'],  # Rule 4: Pyridine ring
+        ['[CX3H1]=O'],  # Rule 5: Formyl group
+        ['[OX2][CX4][CX4][OX2]'],  # Rule 6: Multiple ether linkages
+        ['[NX3](=O)[OX1-]'],  # Rule 7: Nitro group
+        ['[CX4](F)(F)(F)'],  # Rule 8: Fluorinated alkyl chain
+        ['O=C1OC2=CC=CC=C2C1=O'],  # Rule 9: Benzofuranone structure
+        ['c1c[nH]c2c1cccc2']  # Rule 10: Indole structure
+    ]
+    results = []
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            results.append([0] * len(rules))
+            continue
+        row = []
+        for i, rule in enumerate(rules):
+            try:
+                if all(mol.HasSubstructMatch(Chem.MolFromSmarts(r)) for r in rule):
+                    if i in [0, 1, 2, 3, 6, 8, 9]:  # Rules predicting high yield
+                        row.append(1)
+                    else:  # Rules predicting low yield
+                        row.append(-1)
+                else:
+                    row.append(0)
+            except:
+                row.append(0)
+        results.append(row)
+    df = pd.DataFrame(results, columns=[f'Rule {i+1}' for i in range(len(rules))])
+    return df
+--------------------------------------------------
+    Target Name: yield
+    GPT Model: gpt-4o-2024-08-06
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+- **Rule 1**: Modifiers containing a carboxylic acid group (COOH) and an amino group (NH2) in close proximity, with minimal steric hindrance, tend to result in a high yield. This rule covers compounds like (2S)-2-aminopentanedioic acid and (2S)-2-aminobutanedioic acid.
+
+- **Rule 2**: Modifiers with a phenyl group (C6H5) and a hydroxyl group (OH) para to each other tend to result in a high yield. This rule includes compounds such as 5-(4-hydroxyphenyl)pentanoic acid.
+
+- **Rule 3**: Modifiers containing a sulfanyl group (SH) and a carboxylic acid group (COOH) tend to result in a high yield. This rule covers compounds like 3-sulfanylpropanoic acid.
+
+- **Rule 4**: Modifiers with a pyridine ring and an adjacent carboxylic acid group tend to result in a high yield. This rule includes compounds such as pyridine-3-carboxylic acid.
+
+- **Rule 5**: Modifiers containing a formyl group (CHO) tend to result in a low yield. This rule covers compounds like 5-formyl-2-hydroxybenzoic acid and 4-formylbenzoic acid.
+
+- **Rule 6**: Modifiers with multiple ether linkages (e.g., -O-CH2-CH2-O-) and a total chain length of more than three ether units tend to result in a low yield. This rule includes compounds such as 2-[2-(2-methoxyethoxy)ethoxy]acetic acid.
+
+- **Rule 7**: Modifiers containing a nitro group (NO2) tend to result in a high yield. This rule includes compounds like 4-nitrobenzoic acid.
+
+- **Rule 8**: Modifiers with a highly fluorinated alkyl chain (more than four fluorine atoms) tend to result in a low yield. This rule covers compounds like 2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid.
+
+- **Rule 9**: Modifiers with a benzofuranone structure tend to result in a high yield. This rule includes compounds like 1,3-dioxo-2-benzofuran-5-carboxylic acid.
+
+- **Rule 10**: Modifiers with an indole structure tend to result in a high yield. This rule includes compounds like (2R)-2-amino-3-(1H-indol-3-yl)propanoic acid.
+
+- **Rule 11**: Modifiers containing both amino (NH2) and hydroxyl (OH) groups in a linear chain tend to result in a low yield. This rule covers compounds like 3-[2-(2-aminoethoxy)ethoxy]propanoic acid.
+
+- **Rule 12**: Modifiers with a combination of carboxylic acid (COOH) and sulfanyl (SH) groups in a linear chain tend to result in a high yield. This rule covers compounds like 3-sulfanylpropanoic acid.
+
+- **Rule 13**: Modifiers with a benzoic acid structure and additional electron-withdrawing groups (e.g., bromine or nitro) tend to result in a high yield. This rule includes compounds like 4-(bromomethyl)benzoic acid.
+
+- **Rule 14**: Modifiers with a linear aliphatic chain and an amino group at the terminal position tend to result in a low yield. This rule covers compounds like 7-aminoheptanoic acid.
+
+- **Rule 15**: Modifiers with a pyridine ring and a phenyl group attached tend to result in a low yield. This rule includes compounds like 4-pyridin-4-ylbenzoic acid.
+
+**End of Rules**---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+Rule 1,Rule 2,Rule 3,Rule 4,Rule 5,Rule 6,Rule 7,Rule 8,Rule 9,Rule 10,Rule 11,Rule 12,Rule 13,Rule 14,Rule 15
+1,0,0,0,0,0,0,0,0,0,0,0,0,-1,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,-1,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,-1,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,-1,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,1,0,0,0,-1,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,-1,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,-1,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,-1,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,-1,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,-1,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,-1,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,-1,0
+
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.6571428571428571; Test Accuracy: 0.0
+    Train Support: 0.08571428571428572; Test Support: 0.0
+    Train Confidence: 0.8888888888888888; Test Confidence: 0.3333333333333333
+    Train Lift: 1.7665214233841684; Test Lift: NONE
+    Train Leverage: 0.02721088435374151; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    Current Rule Code:
+def rule2matrix(smiles_list):
+    rules = [
+        ['[CX3](=O)[OX2H1]', '[NX3H2]'],  # Rule 1: Carboxylic acid and amino group
+        ['c1cc(O)ccc1'],  # Rule 2: Phenyl group and hydroxyl group para
+        ['[SX2H]', '[CX3](=O)[OX2H1]'],  # Rule 3: Sulfanyl and carboxylic acid
+        ['c1cncc(C(=O)O)c1'],  # Rule 4: Pyridine and carboxylic acid
+        ['[CX3H]=O'],  # Rule 5: Formyl group
+        ['[OX2]C[OX2]C[OX2]'],  # Rule 6: Multiple ether linkages
+        ['[NX3](=O)[OX1-]'],  # Rule 7: Nitro group
+        ['[CX4](F)(F)(F)(F)'],  # Rule 8: Highly fluorinated alkyl chain
+        ['O=C1OCc2ccccc2C1=O'],  # Rule 9: Benzofuranone structure
+        ['c1c[nH]c2c1cccc2'],  # Rule 10: Indole structure
+        ['[NX3H2][OX2H]'],  # Rule 11: Amino and hydroxyl in a linear chain
+        ['[SX2H][CX3](=O)[OX2H1]'],  # Rule 12: Carboxylic acid and sulfanyl
+        ['c1ccc(C(=O)O)c(c1)[Br,NX3](=O)'],  # Rule 13: Benzoic acid with electron-withdrawing groups
+        ['[NX3H2][CX4]'],  # Rule 14: Linear aliphatic chain with terminal amino group
+        ['c1ccncc1c2ccccc2']  # Rule 15: Pyridine and phenyl group
+    ]
+    results = []
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            results.append([0] * len(rules))
+            continue
+        row = []
+        for i, rule in enumerate(rules):
+            try:
+                if all(mol.HasSubstructMatch(Chem.MolFromSmarts(r)) for r in rule):
+                    if i in [0, 1, 2, 3, 6, 8, 9, 12]:  # High yield rules
+                        row.append(1)
+                    else:  # Low yield rules
+                        row.append(-1)
+                else:
+                    row.append(0)
+            except:
+                row.append(0)
+        results.append(row)
+    df = pd.DataFrame(results, columns=[f'Rule {i+1}' for i in range(len(rules))])
+    return df
+--------------------------------------------------
+    Target Name: yield
+    GPT Model: gpt-4o-2024-08-06
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+- **Rule 1**: Modifiers containing a carboxylic acid group (COOH) and an amino group (NH2) in close proximity, with minimal steric hindrance, tend to result in a high yield. This rule covers compounds like (2S)-2-aminopentanedioic acid and (2S)-2-aminobutanedioic acid.
+
+- **Rule 2**: Modifiers with a phenyl group (C6H5) and a hydroxyl group (OH) para to each other tend to result in a high yield. This rule includes compounds such as 5-(4-hydroxyphenyl)pentanoic acid.
+
+- **Rule 3**: Modifiers containing a sulfanyl group (SH) and a carboxylic acid group (COOH) tend to result in a high yield. This rule covers compounds like 3-sulfanylpropanoic acid.
+
+- **Rule 4**: Modifiers with a pyridine ring and an adjacent carboxylic acid group tend to result in a high yield. This rule includes compounds such as pyridine-3-carboxylic acid.
+
+- **Rule 5**: Modifiers containing a formyl group (CHO) and an electron-withdrawing group (e.g., nitro, halogen) in ortho or para positions tend to result in a low yield. This refined rule accounts for compounds like 5-formyl-2-hydroxybenzoic acid and 4-formylbenzoic acid.
+
+- **Rule 6**: Modifiers with multiple ether linkages (e.g., -O-CH2-CH2-O-) and a total chain length of more than three ether units tend to result in a low yield. This rule includes compounds such as 2-[2-(2-methoxyethoxy)ethoxy]acetic acid.
+
+- **Rule 7**: Modifiers containing a nitro group (NO2) tend to result in a high yield. This rule includes compounds like 4-nitrobenzoic acid.
+
+- **Rule 8**: Modifiers with a highly fluorinated alkyl chain (more than four fluorine atoms) tend to result in a low yield. This rule covers compounds like 2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid.
+
+- **Rule 9**: Modifiers with a benzofuranone structure tend to result in a high yield. This rule includes compounds like 1,3-dioxo-2-benzofuran-5-carboxylic acid.
+
+- **Rule 10**: Modifiers with an indole structure, particularly with electron-donating groups on the indole ring, tend to result in a high yield. This rule includes compounds like (2R)-2-amino-3-(1H-indol-3-yl)propanoic acid.
+
+- **Rule 11**: Modifiers containing both amino (NH2) and hydroxyl (OH) groups in a linear chain tend to result in a low yield. This rule covers compounds like 3-[2-(2-aminoethoxy)ethoxy]propanoic acid.
+
+- **Rule 12**: Modifiers with a benzoic acid structure and additional electron-withdrawing groups (e.g., bromine or nitro) tend to result in a high yield. This rule includes compounds like 4-(bromomethyl)benzoic acid.
+
+- **Rule 13**: Modifiers with a linear aliphatic chain longer than six carbons and an amino group at the terminal position tend to result in a low yield. This rule covers compounds like 7-aminoheptanoic acid.
+
+- **Rule 14**: Modifiers with a pyridine ring and a phenyl group attached in a non-conjugated manner tend to result in a low yield. This rule includes compounds like 4-pyridin-4-ylbenzoic acid.
+
+- **Rule 15**: Modifiers with a combination of carboxylic acid (COOH) and sulfanyl (SH) groups in a linear chain tend to result in a high yield. This rule covers compounds like 3-sulfanylpropanoic acid.
+
+**End of Rules**---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+Rule 1,Rule 2,Rule 3,Rule 4,Rule 5,Rule 6,Rule 7,Rule 8,Rule 9,Rule 10,Rule 11,Rule 12,Rule 13,Rule 14,Rule 15
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0,0,0,0,0,1
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0,0,0,0,0,1
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,-1,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,-1,0,0
+
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.6285714285714286; Test Accuracy: 0.0
+    Train Support: 0.047619047619047616; Test Support: 0.16666666666666666
+    Train Confidence: 0.775; Test Confidence: 0.5833333333333334
+    Train Lift: 1.576525054466231; Test Lift: NONE
+    Train Leverage: 0.0034013605442176856; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    Current Rule Code:
+def rule2matrix(smiles_list):
+    rules = [
+        ['[CX3](=O)[OX2H1]', '[NX3H2]'],  # Rule 1: Carboxylic acid and amino group
+        ['c1cc([OH])ccc1'],  # Rule 2: Phenyl group with para hydroxyl
+        ['[SX2H]', '[CX3](=O)[OX2H1]'],  # Rule 3: Sulfanyl and carboxylic acid
+        ['c1cncc(C(=O)O)c1'],  # Rule 4: Pyridine with carboxylic acid
+        ['[CX3H]=O', '[!#6][NX3+](=O)[O-]'],  # Rule 5: Formyl and electron-withdrawing group
+        ['[OX2]C([OX2])C([OX2])C([OX2])'],  # Rule 6: Multiple ether linkages
+        ['[NX3+](=O)[O-]'],  # Rule 7: Nitro group
+        ['[CX4](F)(F)(F)(F)'],  # Rule 8: Highly fluorinated alkyl chain
+        ['c1oc2ccccc2c(=O)c1'],  # Rule 9: Benzofuranone structure
+        ['c1c[nH]c2c1cccc2'],  # Rule 10: Indole structure
+        ['[NX3H2][OX2H]'],  # Rule 11: Amino and hydroxyl in a linear chain
+        ['c1cc(C(=O)O)c([Br,NX3+](=O)[O-])cc1'],  # Rule 12: Benzoic acid with electron-withdrawing groups
+        ['[NX3H2][C;X4][C;X4][C;X4][C;X4][C;X4][C;X4]'],  # Rule 13: Long aliphatic chain with terminal amino
+        ['c1ccncc1c2ccccc2'],  # Rule 14: Pyridine with non-conjugated phenyl
+        ['[SX2H]', '[CX3](=O)[OX2H1]']  # Rule 15: Carboxylic acid and sulfanyl in a linear chain
+    ]
+    results = []
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            results.append([0] * len(rules))
+            continue
+        row = []
+        for i, rule in enumerate(rules):
+            try:
+                if all(mol.HasSubstructMatch(Chem.MolFromSmarts(r)) for r in rule):
+                    if i in [0, 1, 2, 3, 6, 8, 9, 14]:  # Rules predicting high yield
+                        row.append(1)
+                    else:  # Rules predicting low yield
+                        row.append(-1)
+                else:
+                    row.append(0)
+            except:
+                row.append(0)
+        results.append(row)
+    df = pd.DataFrame(results, columns=[f'Rule {i+1}' for i in range(len(rules))])
+    return df
+--------------------------------------------------
+    Target Name: yield
+    GPT Model: gpt-4o-2024-08-06
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+- **Rule 1**: Modifiers containing both a carboxylic acid group (COOH) and an amino group (NH2) in close proximity, without significant steric hindrance, tend to result in a high yield. This rule covers compounds like (2S)-2-aminopentanedioic acid and (2S)-2-aminobutanedioic acid.
+
+- **Rule 2**: Modifiers with a phenyl group (C6H5) and a hydroxyl group (OH) para to each other tend to result in a high yield. This rule includes compounds such as 5-(4-hydroxyphenyl)pentanoic acid.
+
+- **Rule 3**: Modifiers containing a sulfanyl group (SH) and a carboxylic acid group (COOH) tend to result in a high yield. This rule covers compounds like 3-sulfanylpropanoic acid.
+
+- **Rule 4**: Modifiers with a pyridine ring and an adjacent carboxylic acid group tend to result in a high yield. This rule includes compounds such as pyridine-3-carboxylic acid.
+
+- **Rule 5**: Modifiers with an indole structure, particularly with electron-donating groups on the indole ring, tend to result in a high yield. This rule includes compounds like (2R)-2-amino-3-(1H-indol-3-yl)propanoic acid.
+
+- **Rule 6**: Modifiers containing a nitro group (NO2) tend to result in a high yield. This rule includes compounds like 4-nitrobenzoic acid.
+
+- **Rule 7**: Modifiers with a benzoic acid structure and additional electron-withdrawing groups (e.g., bromine or nitro) tend to result in a high yield. This rule includes compounds like 4-(bromomethyl)benzoic acid.
+
+- **Rule 8**: Modifiers with a highly fluorinated alkyl chain (more than four fluorine atoms) tend to result in a low yield. This rule covers compounds like 2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid.
+
+- **Rule 9**: Modifiers with multiple ether linkages (e.g., -O-CH2-CH2-O-) and a total chain length of more than three ether units tend to result in a low yield. This rule includes compounds such as 2-[2-(2-methoxyethoxy)ethoxy]acetic acid.
+
+- **Rule 10**: Modifiers containing both amino (NH2) and hydroxyl (OH) groups in a linear chain tend to result in a low yield. This rule covers compounds like 3-[2-(2-aminoethoxy)ethoxy]propanoic acid.
+
+- **Rule 11**: Modifiers with a linear aliphatic chain longer than six carbons and an amino group at the terminal position tend to result in a low yield. This rule covers compounds like 7-aminoheptanoic acid.
+
+- **Rule 12**: Modifiers containing a formyl group (CHO) and an electron-withdrawing group (e.g., nitro, halogen) in ortho or para positions tend to result in a low yield. This refined rule accounts for compounds like 5-formyl-2-hydroxybenzoic acid and 4-formylbenzoic acid.
+
+- **Rule 13**: Modifiers with a benzofuranone structure tend to result in a high yield. This rule includes compounds like 1,3-dioxo-2-benzofuran-5-carboxylic acid.
+
+- **Rule 14**: Modifiers with a pyridine ring and a phenyl group attached in a non-conjugated manner tend to result in a low yield. This rule includes compounds like 4-pyridin-4-ylbenzoic acid.
+
+- **Rule 15**: Modifiers with a carboxylic acid group (COOH) and a formyl group (CHO) on a benzene ring, particularly in the para position, tend to result in a low yield. This rule includes compounds like 4-formylbenzoic acid.
+
+**End of Rules**---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+Rule 1,Rule 2,Rule 3,Rule 4,Rule 5,Rule 6,Rule 7,Rule 8,Rule 9,Rule 10,Rule 11,Rule 12,Rule 13,Rule 14,Rule 15
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1
+0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,-1,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,-1,0,0,0,0
+
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.5714285714285714; Test Accuracy: 0.0
+    Train Support: 0.02857142857142857; Test Support: 0.0
+    Train Confidence: 0.6666666666666666; Test Confidence: 0.5
+    Train Lift: 1.3344226579520697; Test Lift: NONE
+    Train Leverage: 0.009251700680272111; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    Current Rule Code:
+def rule2matrix(smiles_list):
+    rules = [
+        ['[CX3](=O)[OX2H1]', '[NX3H2]'],  # Rule 1: Carboxylic acid and amino group
+        ['c1ccc(O)cc1'],  # Rule 2: Phenyl group with para hydroxyl
+        ['[SX2H]', '[CX3](=O)[OX2H1]'],  # Rule 3: Sulfanyl and carboxylic acid
+        ['c1cncc(C(=O)O)c1'],  # Rule 4: Pyridine with carboxylic acid
+        ['c1c[nH]c2c1cccc2'],  # Rule 5: Indole structure
+        ['[NX3+](=O)[O-]'],  # Rule 6: Nitro group
+        ['c1ccc(C(=O)O)c(c1)[Br,NX3+](=O)[O-]'],  # Rule 7: Benzoic acid with electron-withdrawing group
+        ['C(F)(F)(F)(F)'],  # Rule 8: Highly fluorinated alkyl chain
+        ['[OX2]C[OX2]C[OX2]'],  # Rule 9: Multiple ether linkages
+        ['[NX3H2][OX2H]'],  # Rule 10: Amino and hydroxyl in a linear chain
+        ['CCCCCCC[NX3H2]'],  # Rule 11: Long aliphatic chain with terminal amino
+        ['[CX3H]=O', '[NX3+](=O)[O-]'],  # Rule 12: Formyl with electron-withdrawing group
+        ['c1oc2ccccc2c(=O)c1'],  # Rule 13: Benzofuranone structure
+        ['c1ccncc1c2ccccc2'],  # Rule 14: Pyridine with non-conjugated phenyl
+        ['c1ccc(C(=O)O)c(c1)C=O'],  # Rule 15: Carboxylic acid and formyl on benzene
+    ]
+    results = []
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            results.append([0] * len(rules))
+            continue
+        row = []
+        for i, rule in enumerate(rules):
+            try:
+                if all(mol.HasSubstructMatch(Chem.MolFromSmarts(r)) for r in rule):
+                    if i in [0, 1, 2, 3, 4, 5, 6, 12]:  # Rules predicting high yield
+                        row.append(1)
+                    else:  # Rules predicting low yield
+                        row.append(-1)
+                else:
+                    row.append(0)
+            except:
+                row.append(0)
+        results.append(row)
+    df = pd.DataFrame(results, columns=[f'Rule {i+1}' for i in range(len(rules))])
+    return df
+--------------------------------------------------
+    Target Name: yield
+    GPT Model: gpt-4o-2024-08-06
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+- **Rule 1**: Modifiers containing both a carboxylic acid group (COOH) and an amino group (NH2) in close proximity, without significant steric hindrance, tend to result in a high yield. This rule covers compounds like (2S)-2-aminopentanedioic acid and (2S)-2-aminobutanedioic acid.
+
+- **Rule 2**: Modifiers with a phenyl group (C6H5) and a hydroxyl group (OH) para to each other tend to result in a high yield. This rule includes compounds such as 5-(4-hydroxyphenyl)pentanoic acid.
+
+- **Rule 3**: Modifiers containing a sulfanyl group (SH) and a carboxylic acid group (COOH) tend to result in a high yield. This rule covers compounds like 3-sulfanylpropanoic acid.
+
+- **Rule 4**: Modifiers with a pyridine ring and an adjacent carboxylic acid group tend to result in a high yield. This rule includes compounds such as pyridine-3-carboxylic acid.
+
+- **Rule 5**: Modifiers with an indole structure, particularly with electron-donating groups on the indole ring, tend to result in a high yield. This rule includes compounds like (2R)-2-amino-3-(1H-indol-3-yl)propanoic acid.
+
+- **Rule 6**: Modifiers containing a nitro group (NO2) tend to result in a high yield. This rule includes compounds like 4-nitrobenzoic acid.
+
+- **Rule 7**: Modifiers with a benzoic acid structure and additional electron-withdrawing groups (e.g., bromine or nitro) tend to result in a high yield. This rule includes compounds like 4-(bromomethyl)benzoic acid.
+
+- **Rule 8**: Modifiers with a highly fluorinated alkyl chain (more than four fluorine atoms) tend to result in a low yield. This rule covers compounds like 2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid.
+
+- **Rule 9**: Modifiers with multiple ether linkages (e.g., -O-CH2-CH2-O-) and a total chain length of more than three ether units tend to result in a low yield. This rule includes compounds such as 2-[2-(2-methoxyethoxy)ethoxy]acetic acid.
+
+- **Rule 10**: Modifiers containing both amino (NH2) and hydroxyl (OH) groups in a linear chain tend to result in a low yield. This rule covers compounds like 3-[2-(2-aminoethoxy)ethoxy]propanoic acid.
+
+- **Rule 11**: Modifiers with a linear aliphatic chain longer than six carbons and an amino group at the terminal position tend to result in a low yield. This rule covers compounds like 7-aminoheptanoic acid.
+
+- **Rule 12**: Modifiers containing a formyl group (CHO) and an electron-withdrawing group (e.g., nitro, halogen) in ortho or para positions tend to result in a low yield. This refined rule accounts for compounds like 5-formyl-2-hydroxybenzoic acid and 4-formylbenzoic acid.
+
+- **Rule 13**: Modifiers with a benzofuranone structure tend to result in a high yield. This rule includes compounds like 1,3-dioxo-2-benzofuran-5-carboxylic acid.
+
+- **Rule 14**: Modifiers with a pyridine ring and a phenyl group attached in a non-conjugated manner tend to result in a low yield. This rule includes compounds like 4-pyridin-4-ylbenzoic acid.
+
+- **Rule 15**: Modifiers with a carboxylic acid group (COOH) and a formyl group (CHO) on a benzene ring, particularly in the para position, tend to result in a low yield. This rule includes compounds like 4-formylbenzoic acid.
+
+**End of Rules**---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+Rule 1,Rule 2,Rule 3,Rule 4,Rule 5,Rule 6,Rule 7,Rule 8,Rule 9,Rule 10,Rule 11,Rule 12,Rule 13,Rule 14,Rule 15
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1
+0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,-1
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,-1,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,-1,0,0,0,0
+
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.5714285714285714; Test Accuracy: 0.0
+    Train Support: 0.0380952380952381; Test Support: 0.0
+    Train Confidence: 1.0; Test Confidence: 0.5
+    Train Lift: 2.0206971677559915; Test Lift: NONE
+    Train Leverage: 0.01904761904761905; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    Current Rule Code:
+def rule2matrix(smiles_list):
+    rules = [
+        ['[CX3](=O)[OX2H1]', '[NX3H2]'],  # Rule 1: Carboxylic acid and amino group
+        ['c1cc(O)ccc1'],  # Rule 2: Phenyl group with para hydroxyl
+        ['[SX2H]', '[CX3](=O)[OX2H1]'],  # Rule 3: Sulfanyl and carboxylic acid
+        ['c1cncc(C(=O)O)c1'],  # Rule 4: Pyridine with carboxylic acid
+        ['c1c[nH]c2c1cccc2'],  # Rule 5: Indole structure
+        ['[NX3+](=O)[O-]'],  # Rule 6: Nitro group
+        ['c1ccc(C(=O)O)c(c1)[Br,Cl,I,F]'],  # Rule 7: Benzoic acid with electron-withdrawing group
+        ['C(F)(F)(F)(F)'],  # Rule 8: Highly fluorinated alkyl chain
+        ['[OX2]C[OX2]C[OX2]'],  # Rule 9: Multiple ether linkages
+        ['[NX3H2][OX2H]'],  # Rule 10: Amino and hydroxyl in a linear chain
+        ['CCCCCCC[NX3H2]'],  # Rule 11: Long aliphatic chain with terminal amino
+        ['[CX3H]=O', '[#6][NX3+](=O)[O-]'],  # Rule 12: Formyl with electron-withdrawing group
+        ['c1oc2ccccc2c(=O)c1'],  # Rule 13: Benzofuranone structure
+        ['c1ccncc1c2ccccc2'],  # Rule 14: Pyridine with non-conjugated phenyl
+        ['c1ccc(C(=O)O)cc1C=O'],  # Rule 15: Carboxylic acid and formyl on benzene
+    ]
+    results = []
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            results.append([0] * len(rules))
+            continue
+        row = []
+        for i, rule in enumerate(rules):
+            try:
+                if all(mol.HasSubstructMatch(Chem.MolFromSmarts(r)) for r in rule):
+                    if i in [0, 1, 2, 3, 4, 5, 6, 12]:  # Rules predicting high yield
+                        row.append(1)
+                    else:  # Rules predicting low yield
+                        row.append(-1)
+                else:
+                    row.append(0)
+            except:
+                row.append(0)
+        results.append(row)
+    df = pd.DataFrame(results, columns=[f'Rule {i+1}' for i in range(len(rules))])
+    return df
+--------------------------------------------------
+    Target Name: yield
+    GPT Model: gpt-4o-2024-08-06
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+- **Rule 1**: Modifiers containing both a carboxylic acid group (COOH) and an amino group (NH2) in close proximity, without significant steric hindrance, tend to result in a high yield. This rule covers compounds like (2S)-2-aminopentanedioic acid and (2S)-2-aminobutanedioic acid.
+
+- **Rule 2**: Modifiers with a phenyl group (C6H5) and a hydroxyl group (OH) para to each other tend to result in a high yield. This rule includes compounds such as 5-(4-hydroxyphenyl)pentanoic acid.
+
+- **Rule 3**: Modifiers containing a sulfanyl group (SH) and a carboxylic acid group (COOH) tend to result in a high yield. This rule covers compounds like 3-sulfanylpropanoic acid.
+
+- **Rule 4**: Modifiers with a pyridine ring and an adjacent carboxylic acid group tend to result in a high yield. This rule includes compounds such as pyridine-3-carboxylic acid.
+
+- **Rule 5**: Modifiers with an indole structure, particularly with electron-donating groups such as methoxy (OCH3) or amino (NH2) on the indole ring, tend to result in a high yield. This rule includes compounds like (2R)-2-amino-3-(1H-indol-3-yl)propanoic acid.
+
+- **Rule 6**: Modifiers containing a nitro group (NO2) tend to result in a high yield. This rule includes compounds like 4-nitrobenzoic acid.
+
+- **Rule 7**: Modifiers with a benzoic acid structure and additional electron-withdrawing groups (e.g., bromine or nitro) tend to result in a high yield. This rule includes compounds like 4-(bromomethyl)benzoic acid.
+
+- **Rule 8**: Modifiers with a highly fluorinated alkyl chain (more than four fluorine atoms) tend to result in a low yield. This rule covers compounds like 2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid.
+
+- **Rule 9**: Modifiers with multiple ether linkages (e.g., -O-CH2-CH2-O-) and a total chain length of more than three ether units tend to result in a low yield. This rule includes compounds such as 2-[2-(2-methoxyethoxy)ethoxy]acetic acid.
+
+- **Rule 10**: Modifiers containing both amino (NH2) and hydroxyl (OH) groups in a linear chain tend to result in a low yield. This rule covers compounds like 3-[2-(2-aminoethoxy)ethoxy]propanoic acid.
+
+- **Rule 11**: Modifiers with a linear aliphatic chain longer than six carbons and an amino group at the terminal position tend to result in a low yield. This rule covers compounds like 7-aminoheptanoic acid.
+
+- **Rule 12**: Modifiers containing a formyl group (CHO) and an electron-withdrawing group (e.g., nitro, halogen) in ortho or para positions tend to result in a low yield. This refined rule accounts for compounds like 5-formyl-2-hydroxybenzoic acid and 4-formylbenzoic acid.
+
+- **Rule 13**: Modifiers with a benzofuranone structure tend to result in a high yield. This rule includes compounds like 1,3-dioxo-2-benzofuran-5-carboxylic acid.
+
+- **Rule 14**: Modifiers with a pyridine ring and a phenyl group attached in a non-conjugated manner tend to result in a low yield. This rule includes compounds like 4-pyridin-4-ylbenzoic acid.
+
+- **Rule 15**: Modifiers with a carboxylic acid group (COOH) and a formyl group (CHO) on a benzene ring, particularly in the para position, tend to result in a low yield. This rule includes compounds like 4-formylbenzoic acid.
+
+**End of Rules**---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+Rule 1,Rule 2,Rule 3,Rule 4,Rule 5,Rule 6,Rule 7,Rule 8,Rule 9,Rule 10,Rule 11,Rule 12,Rule 13,Rule 14,Rule 15
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,-1,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,-1,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,-1,0,0,0,0
+
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.5714285714285714; Test Accuracy: 0.0
+    Train Support: 0.02857142857142857; Test Support: 0.0
+    Train Confidence: 0.6666666666666666; Test Confidence: 0.5
+    Train Lift: 1.3344226579520697; Test Lift: NONE
+    Train Leverage: 0.009251700680272111; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    Current Rule Code:
+def rule2matrix(smiles_list):
+    rules = [
+        ['[CX3](=O)[OX2H1]', '[NX3H2]'],  # Rule 1: Carboxylic acid and amino group
+        ['c1cc(O)ccc1'],  # Rule 2: Phenyl group with para hydroxyl
+        ['[SX2H][CX3](=O)[OX2H1]'],  # Rule 3: Sulfanyl and carboxylic acid
+        ['c1cncc(C(=O)O)c1'],  # Rule 4: Pyridine with carboxylic acid
+        ['c1c[nH]c2c1cccc2'],  # Rule 5: Indole structure
+        ['[NX3+](=O)[O-]'],  # Rule 6: Nitro group
+        ['c1ccc(C(=O)O)c(c1)[Br,Cl,I,F]'],  # Rule 7: Benzoic acid with electron-withdrawing group
+        ['C(F)(F)(F)(F)'],  # Rule 8: Highly fluorinated alkyl chain
+        ['[OX2]CCOCCOCCO'],  # Rule 9: Multiple ether linkages
+        ['[NX3H2][OX2H]'],  # Rule 10: Amino and hydroxyl in a linear chain
+        ['CCCCCCC[NX3H2]'],  # Rule 11: Long aliphatic chain with terminal amino
+        ['[CX3H]=O', '[NX3+](=O)[O-]'],  # Rule 12: Formyl and electron-withdrawing group
+        ['c1oc2ccccc2c(=O)c1'],  # Rule 13: Benzofuranone structure
+        ['c1ccncc1c2ccccc2'],  # Rule 14: Pyridine with non-conjugated phenyl
+        ['c1ccc(C(=O)O)c(c1)C=O'],  # Rule 15: Carboxylic acid and formyl on benzene
+    ]
+    results = []
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            results.append([0] * len(rules))
+            continue
+        row = []
+        for i, rule in enumerate(rules):
+            try:
+                if all(mol.HasSubstructMatch(Chem.MolFromSmarts(r)) for r in rule):
+                    if i in [0, 1, 2, 3, 4, 5, 6, 12]:  # Rules predicting high yield
+                        row.append(1)
+                    else:  # Rules predicting low yield
+                        row.append(-1)
+                else:
+                    row.append(0)
+            except:
+                row.append(0)
+        results.append(row)
+    df = pd.DataFrame(results, columns=[f'Rule {i+1}' for i in range(len(rules))])
+    return df
+--------------------------------------------------
+    Target Name: yield
+    GPT Model: gpt-4o-2024-08-06
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+- **Rule 1**: Modifiers containing both a carboxylic acid group (COOH) and an amino group (NH2) in close proximity, without significant steric hindrance, tend to result in a high yield. This rule covers compounds like (2S)-2-aminopentanedioic acid and (2S)-2-aminobutanedioic acid.
+
+- **Rule 2**: Modifiers with a phenyl group (C6H5) and a hydroxyl group (OH) para to each other tend to result in a high yield. This rule includes compounds such as 5-(4-hydroxyphenyl)pentanoic acid.
+
+- **Rule 3**: Modifiers containing a sulfanyl group (SH) and a carboxylic acid group (COOH) tend to result in a high yield. This rule covers compounds like 3-sulfanylpropanoic acid.
+
+- **Rule 4**: Modifiers with a pyridine ring and an adjacent carboxylic acid group tend to result in a high yield. This rule includes compounds such as pyridine-3-carboxylic acid.
+
+- **Rule 5**: Modifiers with an indole structure, particularly with electron-donating groups such as methoxy (OCH3) or amino (NH2) on the indole ring, specifically at the 3-position, tend to result in a high yield. This rule includes compounds like (2R)-2-amino-3-(1H-indol-3-yl)propanoic acid.
+
+- **Rule 6**: Modifiers containing a nitro group (NO2) in combination with electron-donating groups (e.g., methoxy, amino) in ortho or para positions tend to result in a high yield. This rule includes compounds like 4-nitrobenzoic acid.
+
+- **Rule 7**: Modifiers with a benzoic acid structure and additional electron-withdrawing groups (e.g., bromine or nitro) tend to result in a high yield. This rule includes compounds like 4-(bromomethyl)benzoic acid.
+
+- **Rule 8**: Modifiers with a highly fluorinated alkyl chain (more than four fluorine atoms) tend to result in a low yield. This rule covers compounds like 2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid.
+
+- **Rule 9**: Modifiers with multiple ether linkages (e.g., -O-CH2-CH2-O-) and a total chain length of more than three ether units tend to result in a low yield. This rule includes compounds such as 2-[2-(2-methoxyethoxy)ethoxy]acetic acid.
+
+- **Rule 10**: Modifiers containing both amino (NH2) and hydroxyl (OH) groups in a linear chain tend to result in a low yield. This rule covers compounds like 3-[2-(2-aminoethoxy)ethoxy]propanoic acid.
+
+- **Rule 11**: Modifiers with a linear aliphatic chain longer than six carbons and an amino group at the terminal position, without branching, tend to result in a low yield. This rule covers compounds like 7-aminoheptanoic acid.
+
+- **Rule 12**: Modifiers containing a formyl group (CHO) and an electron-withdrawing group (e.g., nitro, halogen) in ortho or para positions tend to result in a low yield. This refined rule accounts for compounds like 5-formyl-2-hydroxybenzoic acid and 4-formylbenzoic acid.
+
+- **Rule 13**: Modifiers with a benzofuranone structure tend to result in a high yield. This rule includes compounds like 1,3-dioxo-2-benzofuran-5-carboxylic acid.
+
+- **Rule 14**: Modifiers with a pyridine ring and a phenyl group attached in a non-conjugated manner tend to result in a low yield. This rule includes compounds like 4-pyridin-4-ylbenzoic acid.
+
+- **Rule 15**: Modifiers with a carboxylic acid group (COOH) and a formyl group (CHO) on a benzene ring, particularly in the para position, with no additional electron-donating groups, tend to result in a low yield. This rule includes compounds like 4-formylbenzoic acid.
+
+**End of Rules**---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+Rule 1,Rule 2,Rule 3,Rule 4,Rule 5,Rule 6,Rule 7,Rule 8,Rule 9,Rule 10,Rule 11,Rule 12,Rule 13,Rule 14,Rule 15
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,-1,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,-1
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,-1,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,-1,0,0,0,0
+
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.6; Test Accuracy: 1.0
+    Train Support: 0.05714285714285714; Test Support: 0.0
+    Train Confidence: 1.0; Test Confidence: 0.5
+    Train Lift: 1.9444444444444446; Test Lift: NONE
+    Train Leverage: 0.02775510204081633; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    Current Rule Code:
+def rule2matrix(smiles_list):
+    rules = [
+        ['[CX3](=O)[OX2H1]', '[NX3H2]'],  # Rule 1: Carboxylic acid and amino group
+        ['c1cc(O)ccc1'],  # Rule 2: Phenyl group with para hydroxyl
+        ['[SX2H]', '[CX3](=O)[OX2H1]'],  # Rule 3: Sulfanyl and carboxylic acid
+        ['c1cncc(C(=O)O)c1'],  # Rule 4: Pyridine with carboxylic acid
+        ['c1c[nH]c2c1cccc2', '[NX3H2]', '[OX2H1]'],  # Rule 5: Indole with electron-donating groups
+        ['[NX3+](=O)[O-]', '[c][OX2H1]'],  # Rule 6: Nitro with electron-donating groups
+        ['c1ccc(C(=O)O)cc1', '[Br,Cl,I,NX3+](=O)'],  # Rule 7: Benzoic acid with electron-withdrawing groups
+        ['[CX4](F)(F)(F)(F)'],  # Rule 8: Highly fluorinated alkyl chain
+        ['[OX2][CX4][OX2][CX4][OX2]'],  # Rule 9: Multiple ether linkages
+        ['[NX3H2][CX4][OX2H1]'],  # Rule 10: Amino and hydroxyl in a linear chain
+        ['[NX3H2][CX4][CX4][CX4][CX4][CX4][CX4]'],  # Rule 11: Long aliphatic chain with terminal amino
+        ['[CX3H]=O', '[NX3+](=O)'],  # Rule 12: Formyl with electron-withdrawing group
+        ['c1cc2c(c1)C(=O)OC2=O'],  # Rule 13: Benzofuranone structure
+        ['c1ccncc1', 'c1ccccc1'],  # Rule 14: Pyridine with non-conjugated phenyl
+        ['c1ccc(C(=O)O)cc1', '[CX3H]=O'],  # Rule 15: Carboxylic acid and formyl on benzene
+    ]
+    results = []
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            results.append([0] * len(rules))
+            continue
+        row = []
+        for i, rule in enumerate(rules):
+            try:
+                if all(mol.HasSubstructMatch(Chem.MolFromSmarts(r)) for r in rule):
+                    if i in [0, 1, 2, 3, 4, 5, 6, 12]:  # Rules predicting high yield
+                        row.append(1)
+                    else:  # Rules predicting low yield
+                        row.append(-1)
+                else:
+                    row.append(0)
+            except:
+                row.append(0)
+        results.append(row)
+    df = pd.DataFrame(results, columns=[f'Rule {i+1}' for i in range(len(rules))])
+    return df
+--------------------------------------------------

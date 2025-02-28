@@ -1,0 +1,129 @@
+def rule2matrix(smiles_list):
+    # Define SMARTS patterns for functional groups
+    # Carboxylic acid group attached to aromatic ring
+    aromatic_carboxylic_acid = '[c][CX3](=O)[OX2H1]'
+    
+    # Electron-withdrawing groups on aromatic ring
+    EWG_on_aromatic = ['[c][N+](=O)[O-]', '[c][F,Cl,Br,I]', '[c]CBr']
+    
+    # Sulfur-containing groups
+    thiol = '[SX2H]'
+    thioether = '[#6][SX2][#6]'
+    
+    # Primary amino group
+    primary_amino_group = '[NX3H2]'
+    
+    # Electron-donating groups on aromatic ring
+    EDG_on_aromatic = ['[c][NX3H2]', '[c][OX2H]']
+    
+    # Hydroxyl group
+    hydroxyl_group = '[OX2H]'
+    
+    # Exclude aromatic rings
+    exclude_aromatic = '[a]'
+    
+    # Define the rules
+    rules = [
+        {
+            'number': 1,
+            'description': 'Modifiers that are benzoic acid derivatives substituted at the para (4-) position with strongly electron-withdrawing groups such as nitro or bromomethyl, or functional groups with strong metal-coordinating ability such as pyridyl rings linked via the para position, will lead to high Fe/Hf values.',
+            'patterns': [
+                [aromatic_carboxylic_acid],
+                EWG_on_aromatic
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 2,
+            'description': 'Modifiers containing sulfur atoms capable of acting as ligands, such as thiol (-SH) groups or thioether (-S-) groups, will lead to high Fe/Hf values.',
+            'patterns': [
+                [thiol, thioether]
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 3,
+            'description': 'Modifiers that are aliphatic carboxylic acids with free primary amino groups at terminal positions (ω-amino acids) lead to high Fe/Hf values.',
+            'patterns': [
+                [primary_amino_group],
+                ['[CX3](=O)[OX2H1]']  # Carboxylic acid group
+            ],
+            'exclude_patterns': [
+                [exclude_aromatic]
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 4,
+            'description': 'Modifiers that are aromatic carboxylic acids substituted on the aromatic ring with electron-donating groups such as amino (-NH2) or hydroxy (-OH) lead to low Fe/Hf values.',
+            'patterns': [
+                [aromatic_carboxylic_acid],
+                EDG_on_aromatic
+            ],
+            'prediction': -1
+        }
+        # Add remaining rules as needed
+    ]
+    
+    # Compile SMARTS patterns
+    for rule in rules:
+        compiled_patterns = []
+        for group in rule.get('patterns', []):
+            compiled_group = [Chem.MolFromSmarts(pat) for pat in group]
+            compiled_patterns.append(compiled_group)
+        rule['compiled_patterns'] = compiled_patterns
+        # Compile exclude patterns if any
+        if 'exclude_patterns' in rule:
+            compiled_exclude_patterns = []
+            for group in rule['exclude_patterns']:
+                compiled_group = [Chem.MolFromSmarts(pat) for pat in group]
+                compiled_exclude_patterns.append(compiled_group)
+            rule['compiled_exclude_patterns'] = compiled_exclude_patterns
+    
+    # Initialize results list
+    results = []
+    
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = True
+                # Check exclude patterns if any
+                if 'compiled_exclude_patterns' in rule:
+                    for group in rule['compiled_exclude_patterns']:
+                        for pat in group:
+                            if mol.HasSubstructMatch(pat):
+                                match = False
+                                break
+                        if not match:
+                            break
+                    if not match:
+                        row.append(0)
+                        continue
+                # Check required patterns
+                for compiled_group in rule['compiled_patterns']:
+                    group_match = False
+                    for pat in compiled_group:
+                        if mol.HasSubstructMatch(pat):
+                            group_match = True
+                            break
+                    if not group_match:
+                        match = False
+                        break
+                if match:
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception as e:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule['number']}' for rule in rules])
+    return df

@@ -1,0 +1,271 @@
+---
+
+**Start of Rules**
+
+---
+
+- **Rule 1**: Modifiers that are **aliphatic monocarboxylic acids** with a **terminal primary amino group (-NH₂)** at the end opposite the **carboxyl group** result in a **high** Fe/Hf value.
+
+  - **Structural Features**:
+    - Linear aliphatic chain.
+    - Single carboxyl group at one end.
+    - Terminal primary amino group (-NH₂) at the other end.
+    - No additional carboxyl or coordinating groups in the chain.
+
+  - **Examples**:
+    - **5-aminopentanoic acid**
+    - **7-aminoheptanoic acid**
+    - **8-aminooctanoic acid**
+    - **7-aminoheptanoic acid**
+    - **(2S)-6-acetamido-2-aminohexanoic acid**
+
+  - **Prediction**: High Fe/Hf value (**True**)
+
+---
+
+- **Rule 2**: Modifiers that are **aromatic carboxylic acids** with a **strong electron-withdrawing group** at the **para-position** result in a **high** Fe/Hf value.
+
+  - **Structural Features**:
+    - Benzene ring with a carboxyl group.
+    - Strong electron-withdrawing substituent at the para-position (e.g., nitro, bromomethyl, sulfanyl).
+
+  - **Examples**:
+    - **4-nitrobenzoic acid**
+    - **4-(bromomethyl)benzoic acid**
+    - **4-sulfanylbenzoic acid**
+
+  - **Prediction**: High Fe/Hf value (**True**)
+
+---
+
+- **Rule 3**: Modifiers containing **sulfur-containing functional groups** such as **thiol (-SH)** or **thioether (-S-)** result in a **high** Fe/Hf value.
+
+  - **Structural Features**:
+    - Presence of sulfur atoms capable of coordinating with Fe ions.
+    - Functional groups like thiol (-SH) or thioether (-S-).
+
+  - **Examples**:
+    - **3-sulfanylpropanoic acid**
+    - **4-sulfanylbenzoic acid**
+    - **2-[[(2S)-2-amino-4-methylsulfanylbutanoyl]amino]acetic acid**
+
+  - **Prediction**: High Fe/Hf value (**True**)
+
+---
+
+- **Rule 4**: Modifiers that are **aromatic carboxylic acids** with an attached **pyridine ring** result in a **high** Fe/Hf value.
+
+  - **Structural Features**:
+    - Aromatic carboxylic acid.
+    - Attached pyridine ring (nitrogen-containing aromatic heterocycle).
+
+  - **Examples**:
+    - **4-pyridin-4-ylbenzoic acid**
+    - **4-pyridin-4-ylbutanoic acid**
+
+  - **Prediction**: High Fe/Hf value (**True**)
+
+---
+
+- **Rule 5**: Modifiers that are **aliphatic carboxylic acids** with **ether linkages (-O-)** in the chain and a **terminal amino (-NH₂)** or **hydroxyl (-OH)** group result in a **high** Fe/Hf value.
+
+  - **Structural Features**:
+    - Aliphatic chain containing ether linkages.
+    - Terminal functional group capable of coordinating with Fe ions (e.g., amino or hydroxyl group).
+
+  - **Examples**:
+    - **3-[2-(2-aminoethoxy)ethoxy]propanoic acid**
+    - **2-[2-(2-methoxyethoxy)ethoxy]acetic acid**
+    - **7-hydroxyheptanoic acid**
+
+  - **Prediction**: High Fe/Hf value (**True**)
+
+---
+
+- **Rule 6**: Modifiers that are **aliphatic carboxylic acids** without additional coordinating groups result in a **low** Fe/Hf value.
+
+  - **Structural Features**:
+    - Straight-chain aliphatic carboxylic acids.
+    - No other functional groups capable of coordination (e.g., no amino, hydroxyl, or sulfur-containing groups).
+
+  - **Examples**:
+    - **Octanoic acid**
+    - **4-oxoheptanedioic acid**
+
+  - **Prediction**: Low Fe/Hf value (**False**)
+
+---
+
+- **Rule 7**: Modifiers that are **aromatic carboxylic acids** with **electron-donating groups** at the **para-position** result in a **low** Fe/Hf value.
+
+  - **Structural Features**:
+    - Aromatic ring with a carboxyl group.
+    - Electron-donating substituent at the para-position (e.g., hydroxyl, amino, methyl).
+
+  - **Examples**:
+    - **4-aminobenzoic acid**
+    - **4-methylbenzoic acid**
+    - **3-(4-hydroxyphenyl)propanoic acid**
+    - **5-(4-hydroxyphenyl)pentanoic acid**
+
+  - **Prediction**: Low Fe/Hf value (**False**)
+
+---
+
+- **Rule 8**: Modifiers that are **polyhydroxy carboxylic acids** with **multiple hydroxyl groups** result in a **low** Fe/Hf value.
+
+  - **Structural Features**:
+    - Carboxyl group attached to an aliphatic chain.
+    - Multiple hydroxyl groups on the aliphatic chain.
+
+  - **Examples**:
+    - **(2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid** (Gluconic acid)
+    - **2-[[1,3-dihydroxy-2-(hydroxymethyl)propan-2-yl]oxy]acetic acid**
+
+  - **Prediction**: Low Fe/Hf value (**False**)
+
+---
+
+- **Rule 9**: Modifiers that are **perfluorinated carboxylic acids** result in a **low** Fe/Hf value.
+
+  - **Structural Features**:
+    - Carboxyl group.
+    - Carbon chain fully substituted with fluorine atoms.
+
+  - **Example**:
+    - **2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid**
+
+  - **Prediction**: Low Fe/Hf value (**False**)
+
+---
+
+- **Rule 10**: Modifiers that are **aromatic carboxylic acids** with additional **carbonyl-containing substituents** (e.g., aldehyde or ketone groups) attached directly to the ring result in a **low** Fe/Hf value.
+
+  - **Structural Features**:
+    - Aromatic ring with a carboxyl group.
+    - Additional carbonyl group (e.g., formyl, keto) attached directly to the ring.
+
+  - **Examples**:
+    - **4-formylbenzoic acid**
+    - **5-formyl-2-hydroxybenzoic acid**
+    - **1H-pyrazole-4-carboxylic acid**
+
+  - **Prediction**: Low Fe/Hf value (**False**)
+
+---
+
+- **Rule 11**: Modifiers that are **amino acids with an α-carboxyl group and a side-chain carboxyl group** result in a **variable** Fe/Hf value but tend to be **low**.
+
+  - **Structural Features**:
+    - Amino acid backbone with an additional carboxyl group in the side chain.
+    - Presence of both amino and multiple carboxylate groups.
+
+  - **Examples**:
+    - **(2S)-2-aminopentanedioic acid** (Glutamic acid) – **Low** Fe/Hf (**False**)
+    - **(2S)-2-aminobutanedioic acid** (Aspartic acid) – **High** Fe/Hf (**True**)
+
+  - **Prediction**: Variable Fe/Hf value
+
+---
+
+- **Rule 12**: Modifiers that are **aromatic carboxylic acids** fused directly to **electron-rich heterocycles** result in a **low** Fe/Hf value.
+
+  - **Structural Features**:
+    - Fused aromatic heterocyclic system containing electron-rich heteroatoms (e.g., nitrogen, oxygen).
+    - Carboxyl group attached to the heterocyclic ring.
+
+  - **Examples**:
+    - **1H-pyrazole-4-carboxylic acid**
+    - **2-oxo-1H-pyridine-4-carboxylic acid**
+
+  - **Prediction**: Low Fe/Hf value (**False**)
+
+---
+
+**End of Rules**
+
+---
+
+**Notes and Justifications:**
+
+- **Coordination Ability**:
+  - Functional groups with lone pairs (e.g., amino, hydroxyl, thiol, pyridine nitrogen) enhance the ability of modifiers to coordinate with Fe ions.
+  - Presence of multiple coordination sites increases the likelihood of Fe incorporation into the catalyst.
+
+- **Electronic Effects**:
+  - **Electron-Withdrawing Groups**:
+    - Increase the acidity of the carboxyl group.
+    - Enhance the ability of the carboxylate to coordinate with Fe ions (Rules 2, 3).
+  - **Electron-Donating Groups**:
+    - Decrease the acidity of the carboxyl group.
+    - Reduce Fe coordination ability (Rule 7).
+
+- **Sulfur-Containing Groups**:
+  - Sulfur has a high affinity for transition metals like Fe.
+  - Thiol and thioether groups contribute significantly to Fe coordination (Rule 3).
+
+- **Steric Factors**:
+  - Bulky substituents can hinder coordination due to steric hindrance.
+  - Modifiers with less steric hindrance around coordinating sites are more effective (considered in Rule 1).
+
+- **Ether Linkages**:
+  - Oxygen atoms in ether linkages can act as coordination sites.
+  - When combined with terminal amino or hydroxyl groups, coordination ability is enhanced (Rule 5).
+
+- **Hydroxyl Groups**:
+  - Multiple hydroxyl groups may engage in intramolecular hydrogen bonding.
+  - This can reduce their availability for coordination with Fe ions (Rule 8).
+
+- **Dataset Coverage**:
+  - The rules collectively cover a broad range of modifiers in the dataset.
+  - They prioritize combinations of functional groups, as recommended.
+  - Balance is maintained between simple, high-coverage rules and more specific, lower-coverage rules.
+
+---
+
+**Conclusion:**
+
+These rules establish a clear relationship between the structural features of molecular modifiers and the Fe/Hf ratio in the catalyst Hf-TPY-MOL(Fe). By considering combinations of functional groups and underlying physicochemical properties, the rules predict whether a modifier will result in a high or low Fe/Hf value. This understanding aids in selecting and designing modifiers to optimize the catalyst's performance in the radical-mediated remote δ-C(sp³)–H bond functionalization reaction.
+
+---
+
+**Recommendations for Modifier Design:**
+
+- **To Achieve High Fe/Hf Value**:
+  - **Incorporate Coordinating Groups**: Use modifiers with functional groups that can coordinate with Fe ions, such as amino groups, thiol groups, and pyridine rings.
+  - **Electron-Withdrawing Substituents**: Incorporate strong electron-withdrawing groups (e.g., nitro, halogens) to enhance the coordinating ability of the carboxylate group.
+  - **Combine Functionalities**: Modifiers that combine multiple coordinating features (e.g., ether linkages with terminal amino groups) are particularly effective.
+
+- **To Achieve Low Fe/Hf Value**:
+  - **Avoid Coordinating Groups**: Use modifiers lacking additional coordinating functional groups besides the carboxylate.
+  - **Electron-Donating Substituents**: Incorporate electron-donating groups (e.g., methyl, methoxy, hydroxyl) which decrease the coordinating ability.
+  - **Steric Hindrance**: Introduce bulky substituents near potential coordination sites to hinder Fe binding.
+  - **Multiple Hydroxyl Groups**: Utilize polyhydroxy acids that may reduce coordination due to intramolecular hydrogen bonding.
+
+---
+
+**Application of Rules to Dataset:**
+
+- The rules correctly predict the Fe/Hf values for most modifiers in the dataset.
+- **High Fe/Hf Value Modifiers (True)**:
+  - **5-aminopentanoic acid** (Rule 1)
+  - **7-aminoheptanoic acid** (Rule 1)
+  - **4-nitrobenzoic acid** (Rule 2)
+  - **4-sulfanylbenzoic acid** (Rules 2 & 3)
+  - **4-pyridin-4-ylbenzoic acid** (Rule 4)
+  - **3-sulfanylpropanoic acid** (Rule 3)
+  - **2-[2-(2-methoxyethoxy)ethoxy]acetic acid** (Rule 5)
+
+- **Low Fe/Hf Value Modifiers (False)**:
+  - **Octanoic acid** (Rule 6)
+  - **4-methylbenzoic acid** (Rule 7)
+  - **(2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid** (Rule 8)
+  - **2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid** (Rule 9)
+  - **4-formylbenzoic acid** (Rule 10)
+  - **1H-pyrazole-4-carboxylic acid** (Rule 12)
+
+---
+
+By applying these rules, researchers can better predict and manipulate the Fe/Hf ratio in the catalyst by selecting appropriate molecular modifiers, ultimately optimizing the yield of the desired remote δ-C(sp³)–H bond functionalization reaction.
+
+------------------------------------------------------------------

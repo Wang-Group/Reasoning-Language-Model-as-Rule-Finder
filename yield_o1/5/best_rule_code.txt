@@ -1,0 +1,196 @@
+def rule2matrix(smiles_list):
+    # Define SMARTS patterns for electron-withdrawing groups (EWGs)
+    ewgs = [
+        '[CX3](=O)[OX2H1]',        # Carboxylic acid
+        '[CX3]=[OX1]',              # Carbonyl group (ketone/aldehyde)
+        '[NX3](=O)=O',              # Nitro group
+        '[F,Cl,Br,I]',              # Halogens
+        '[CX4][F][F][F]'            # Trifluoromethyl group
+    ]
+    
+    # Define SMARTS patterns for electron-donating groups (EDGs)
+    edgs = [
+        '[OX2H]',                  # Hydroxyl group
+        '[OX2][#6]',               # Alkoxy group (methoxy/ethers)
+        '[NX3;H2,H1][#6]'          # Amino group
+    ]
+    
+    # Define SMARTS patterns for other functional groups and features
+    aromatic_ring = '[a]'                                  # Any aromatic atom
+    para_substituted_benzene = 'c1cc([*])ccc1[*]'          # Para-substituted benzene ring
+    
+    amino_acid_pattern = '[NX3][CX4H]([*])[CX3](=O)[OX2H1]'   # Alpha-amino acid
+    aspartic_acid_side_chain = 'C[CX3](=O)[OX2H1]'             # Side chain carboxylic acid
+    glutamic_acid_side_chain = 'CC[CX3](=O)[OX2H1]'            # Side chain carboxylic acid
+    
+    phenylalanine_side_chain = 'CC[C@H](N)C1=CC=CC=C1'        # Simplified phenylalanine
+    tryptophan_side_chain = 'CC[C@H](N)C1=CC=C2C=CC=CN12'      # Simplified tryptophan
+    
+    aldehyde_group = '[CX3H1](=O)'                            # Aldehyde group
+    
+    thiol_on_aliphatic = '[CX4][SX2H]'                        # Thiol group on aliphatic chain
+    thiol_on_aromatic = '[c][SX2H]'                            # Thiol group on aromatic ring
+    
+    heteroaromatic_with_cooh = '[n,o,s][c,C]*[CX3](=O)[OX2H1]' # Heteroaromatic ring with carboxylic acid
+    
+    long_aliphatic_chain = '[CX4][CX4][CX4][CX4][CX4][CX4]'   # Aliphatic chain of five or more carbons
+    terminal_cooh = '[CX4][CX3](=O)[OX2H1]'                    # Terminal carboxylic acid
+    
+    ketone_adjacent_cooh = '[CX3](=O)[CX3](=O)[OX2H1]'        # Ketone adjacent to carboxylic acid
+    
+    amide_bond = '[NX3][CX3](=O)[#6]'                         # Amide linkage or peptide bond
+    
+    sugar_acid = '[CX3](=O)[OX2H1][CX4][OX2H]'               # Sugar acid with multiple hydroxyl groups
+    
+    terminal_oh = '[CX4][OX2H]'                               # Aliphatic chain with terminal hydroxyl group
+    
+    perfluorinated_chain = '[CX4]([F])([F])[F]'               # Trifluoromethyl group
+    
+    biaryl_system = 'c1ccc(cc1)-c2ccccc2'                     # Biaryl system
+    
+    ether_linkage_aliphatic = '[CX4][OX2][CX4]'               # Ether linkage in aliphatic chain
+    
+    # Compile SMARTS patterns for rules
+    patterns = {
+        'Rule 1': {
+            'patterns': [
+                Chem.MolFromSmarts(para_substituted_benzene),
+                [Chem.MolFromSmarts(e) for e in ewgs]
+            ],
+            'prediction': 1
+        },
+        'Rule 2': {
+            'patterns': [
+                Chem.MolFromSmarts(para_substituted_benzene),
+                [Chem.MolFromSmarts(e) for e in edgs]
+            ],
+            'prediction': -1
+        },
+        'Rule 3': {
+            'patterns': [
+                Chem.MolFromSmarts(amino_acid_pattern),
+                Chem.MolFromSmarts(aspartic_acid_side_chain + '|' + glutamic_acid_side_chain)
+            ],
+            'prediction': 1
+        },
+        'Rule 4': {
+            'patterns': [
+                Chem.MolFromSmarts(amino_acid_pattern),
+                Chem.MolFromSmarts(phenylalanine_side_chain + '|' + tryptophan_side_chain)
+            ],
+            'prediction': -1
+        },
+        'Rule 5': {
+            'patterns': [
+                Chem.MolFromSmarts(aldehyde_group)
+            ],
+            'prediction': -1
+        },
+        'Rule 6': {
+            'patterns': [
+                Chem.MolFromSmarts(thiol_on_aliphatic)
+            ],
+            'prediction': 1
+        },
+        'Rule 6 Exception': {
+            'patterns': [
+                Chem.MolFromSmarts(thiol_on_aromatic)
+            ],
+            'prediction': -1
+        },
+        'Rule 7': {
+            'patterns': [
+                Chem.MolFromSmarts(heteroaromatic_with_cooh)
+            ],
+            'prediction': 1
+        },
+        'Rule 8': {
+            'patterns': [
+                Chem.MolFromSmarts(long_aliphatic_chain),
+                Chem.MolFromSmarts(terminal_cooh)
+            ],
+            'prediction': 1
+        },
+        'Rule 9': {
+            'patterns': [
+                Chem.MolFromSmarts(ketone_adjacent_cooh)
+            ],
+            'prediction': -1
+        },
+        'Rule 10': {
+            'patterns': [
+                Chem.MolFromSmarts(amide_bond)
+            ],
+            'prediction': -1
+        },
+        'Rule 11': {
+            'patterns': [
+                Chem.MolFromSmarts(sugar_acid)
+            ],
+            'prediction': 1
+        },
+        'Rule 12': {
+            'patterns': [
+                Chem.MolFromSmarts(terminal_oh)
+            ],
+            'prediction': -1
+        },
+        'Rule 13': {
+            'patterns': [
+                Chem.MolFromSmarts(perfluorinated_chain)
+            ],
+            'prediction': -1
+        },
+        'Rule 14': {
+            'patterns': [
+                Chem.MolFromSmarts(biaryl_system)
+            ],
+            'prediction': -1
+        },
+        'Rule 15': {
+            'patterns': [
+                Chem.MolFromSmarts(ether_linkage_aliphatic)
+            ],
+            'prediction': -1
+        }
+    }
+    
+    # Initialize results list
+    results = []
+    
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(patterns))
+            continue
+        row = []
+        for rule_name, rule in patterns.items():
+            try:
+                match = True
+                for pat in rule['patterns']:
+                    if isinstance(pat, list):
+                        group_match = False
+                        for subpat in pat:
+                            if mol.HasSubstructMatch(subpat):
+                                group_match = True
+                                break
+                        if not group_match:
+                            match = False
+                            break
+                    else:
+                        if not mol.HasSubstructMatch(pat):
+                            match = False
+                            break
+                if match:
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception as e:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=patterns.keys())
+    return df

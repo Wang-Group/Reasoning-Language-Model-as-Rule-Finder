@@ -1,0 +1,259 @@
+
+def rule2matrix(smiles_list):
+    # Define SMARTS patterns for functional groups
+    carboxylic_acid = '[CX3](=O)[OX2H1]'
+    carboxylate_anion = '[CX3](=O)[O-]'
+    primary_amine = '[NX3H2]'
+    thiol = '[SX2H]'
+    pyridine_ring = '[n]1ccccc1'
+    aromatic_ring = 'c1ccccc1'
+    halogens = '[F,Cl,Br,I]'
+    nitro_group = '[N+](=O)[O-]'
+    aldehyde = '[CX3H1](=O)'
+    hydroxyl_group = '[OX2H]'
+    ether_linkage = '[#6][OX2][#6]'
+    amino_acid_pattern = '[NX3][CX4H]([*])[CX3](=O)[OX2H1]'
+    aliphatic_chain_five = '[C;X4H2][C;X4H2][C;X4H2][C;X4H2][C;X4H2]'
+    aliphatic_chain_seven = '[C;X4H2][C;X4H2][C;X4H2][C;X4H2][C;X4H2][C;X4H2][C;X4H2]'
+    indole_ring = 'c1cc2c(c1)ccc2'
+    multiple_oh = '[OX2H]'
+
+    # Define the rules with their associated patterns and predictions
+    rules = [
+        {
+            'number': 1,
+            'description': 'Modifiers containing a terminal amino group (-NH2) on an aliphatic chain of at least five carbons, with a carboxylic acid group (-COOH) at the other end.',
+            'patterns': [
+                [primary_amine],  # Terminal amino group
+                [carboxylic_acid, carboxylate_anion],  # Carboxylic acid group
+            ],
+            'chain_length': 5,
+            'prediction': 1
+        },
+        {
+            'number': 2,
+            'description': 'Modifiers that are aromatic carboxylic acids substituted with strong electron-withdrawing groups (EWGs) such as nitro (-NO2) or halogens at the para position.',
+            'patterns': [
+                [aromatic_ring],
+                [carboxylic_acid, carboxylate_anion],  # Carboxylic acid group attached to aromatic ring
+                [halogens, nitro_group],  # EWG at para position
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 3,
+            'description': 'Modifiers containing a thiol group (-SH) attached to an aromatic ring or an aliphatic chain, along with a carboxylic acid group (-COOH).',
+            'patterns': [
+                [thiol],  # Thiol group
+                [carboxylic_acid, carboxylate_anion],  # Carboxylic acid group
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 4,
+            'description': 'Modifiers featuring a pyridine ring connected via a conjugated system to a carboxylic acid group (-COOH).',
+            'patterns': [
+                [pyridine_ring],  # Pyridine ring
+                [carboxylic_acid, carboxylate_anion],  # Carboxylic acid group
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 5,
+            'description': 'Modifiers that are amino acids with hydrophobic side chains containing sulfur atoms.',
+            'patterns': [
+                [amino_acid_pattern],  # Amino acid pattern
+                [thiol],  # Sulfur atom in side chain (thiol)
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 6,
+            'description': 'Modifiers containing multiple ether linkages (-O-) within an aliphatic chain, and possessing a terminal donor group such as amino (-NH2) or methoxy (-OCH3), along with a carboxylic acid group (-COOH).',
+            'patterns': [
+                [ether_linkage],  # Ether linkage
+                [primary_amine, '[OX2][CH3]'],  # Terminal donor group
+                [carboxylic_acid, carboxylate_anion],  # Carboxylic acid group
+            ],
+            'count_threshold': {'[OX2][CX4]': 2},  # At least 2 ether linkages
+            'prediction': 1
+        },
+        {
+            'number': 7,
+            'description': 'Modifiers that are aliphatic carboxylic acids with no additional functional groups beyond the carboxylic acid (-COOH).',
+            'patterns': [
+                [carboxylic_acid, carboxylate_anion],  # Carboxylic acid group
+            ],
+            'exclude_patterns': [
+                [primary_amine, thiol, ether_linkage, halogens, aromatic_ring, pyridine_ring, hydroxyl_group],
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 8,
+            'description': 'Modifiers that are aromatic carboxylic acids substituted with electron-donating groups (EDGs) such as hydroxyl (-OH) or amino (-NH2) groups.',
+            'patterns': [
+                [aromatic_ring],
+                [carboxylic_acid, carboxylate_anion],  # Carboxylic acid group attached to aromatic ring
+                [hydroxyl_group, primary_amine],  # EDG on aromatic ring
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 9,
+            'description': 'Modifiers with an aromatic ring connected to an aliphatic chain bearing a hydroxyl group (-OH), along with a carboxylic acid group (-COOH).',
+            'patterns': [
+                [aromatic_ring],
+                [hydroxyl_group],
+                [carboxylic_acid, carboxylate_anion],
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 10,
+            'description': 'Modifiers that are amino acids with bulky side chains containing electron-rich heterocycles, such as indole rings.',
+            'patterns': [
+                [amino_acid_pattern],
+                [indole_ring],
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 11,
+            'description': 'Modifiers containing multiple hydroxyl groups (-OH) on an aliphatic chain, without other strong coordinating groups.',
+            'patterns': [
+                [multiple_oh],
+                [carboxylic_acid, carboxylate_anion],
+            ],
+            'count_threshold': {'[OX2H]': 2},  # At least 2 hydroxyl groups
+            'prediction': -1
+        },
+        {
+            'number': 12,
+            'description': 'Modifiers that are aromatic carboxylic acids with an aldehyde group (-CHO) at the para or ortho position.',
+            'patterns': [
+                [aromatic_ring],
+                [carboxylic_acid, carboxylate_anion],
+                [aldehyde],
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 13,
+            'description': 'Modifiers with electron-deficient aromatic heterocycles where the carboxylic acid group (-COOH) is directly attached to the ring.',
+            'patterns': [
+                [pyridine_ring, 'n1cccnc1', 'c1cnc[nH]1'],  # Electron-deficient heterocycles
+                [carboxylic_acid, carboxylate_anion],
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 14,
+            'description': 'Modifiers containing a terminal hydroxyl group (-OH) on an aliphatic chain of seven or more carbons, with a carboxylic acid group (-COOH) at the other end.',
+            'patterns': [
+                [hydroxyl_group],
+                [carboxylic_acid, carboxylate_anion],
+            ],
+            'chain_length': 7,
+            'prediction': 1
+        },
+        {
+            'number': 15,
+            'description': 'Modifiers that are cyclic anhydrides or lactones derived from aromatic carboxylic acids, possessing additional carbonyl groups.',
+            'patterns': [
+                ['O=C1OC(=O)c2ccccc12'],  # General pattern for cyclic anhydrides/lactones
+            ],
+            'prediction': 1
+        },
+    ]
+
+    # Compile SMARTS patterns
+    for rule in rules:
+        compiled_patterns = []
+        for group in rule.get('patterns', []):
+            compiled_group = [Chem.MolFromSmarts(p) for p in group]
+            compiled_patterns.append(compiled_group)
+        rule['compiled_patterns'] = compiled_patterns
+        # Compile exclude patterns if any
+        if 'exclude_patterns' in rule:
+            compiled_excludes = []
+            for group in rule['exclude_patterns']:
+                compiled_group = [Chem.MolFromSmarts(p) for p in group]
+                compiled_excludes.append(compiled_group)
+            rule['compiled_exclude_patterns'] = compiled_excludes
+
+    # Initialize results list
+    results = []
+
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = True
+                # Check exclude patterns if any
+                if 'exclude_patterns' in rule:
+                    for group in rule['compiled_exclude_patterns']:
+                        for pat in group:
+                            if mol.HasSubstructMatch(pat):
+                                match = False
+                                break
+                        if not match:
+                            break
+                    if not match:
+                        row.append(0)
+                        continue
+                # Check required patterns
+                for compiled_group in rule['compiled_patterns']:
+                    group_match = False
+                    for pat in compiled_group:
+                        matches = mol.GetSubstructMatches(pat)
+                        if matches:
+                            # If a count threshold is specified for this pattern
+                            if 'count_threshold' in rule and pat.GetSmarts() in rule['count_threshold']:
+                                threshold = rule['count_threshold'][pat.GetSmarts()]
+                                if len(matches) >= threshold:
+                                    group_match = True
+                                    break
+                            else:
+                                group_match = True
+                                break
+                    if not group_match:
+                        match = False
+                        break
+                # Additional checks for chain length if specified
+                if match and 'chain_length' in rule:
+                    chain_length = rule['chain_length']
+                    # Find indices of functional groups
+                    fg1_pattern = Chem.MolFromSmarts(rule['compiled_patterns'][0][0].GetSmarts())
+                    fg2_pattern = Chem.MolFromSmarts(rule['compiled_patterns'][1][0].GetSmarts())
+                    fg1_matches = mol.GetSubstructMatches(fg1_pattern)
+                    fg2_matches = mol.GetSubstructMatches(fg2_pattern)
+                    path_match = False
+                    for fg1 in fg1_matches:
+                        for fg2 in fg2_matches:
+                            path = Chem.rdmolops.GetShortestPath(mol, fg1[0], fg2[0])
+                            num_carbons = sum(1 for idx in path if mol.GetAtomWithIdx(idx).GetAtomicNum() == 6)
+                            if num_carbons >= chain_length:
+                                path_match = True
+                                break
+                        if path_match:
+                            break
+                    if not path_match:
+                        match = False
+                if match:
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception as e:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule['number']}' for rule in rules])
+    return df

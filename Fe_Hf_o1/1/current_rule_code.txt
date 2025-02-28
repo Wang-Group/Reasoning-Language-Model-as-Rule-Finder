@@ -1,0 +1,242 @@
+def rule2matrix(smiles_list):
+    # Define SMARTS patterns for functional groups
+    # Carboxylic acid group (-COOH)
+    carboxylic_acid = ['[CX3](=O)[OX2H1]', '[CX3](=O)[O-]']
+    
+    # Primary aliphatic amine group (-NH2)
+    primary_aliph_amine = ['[NX3H2][CX4H2]', '[NX3H2][CH2]']
+    
+    # Thiol group (-SH)
+    thiol = ['[SX2H]']
+    
+    # Ether linkage (-O-)
+    ether_linkage = ['[OD2]([#6])[#6]']
+    
+    # Pyridine ring connected via flexible linker
+    pyridine_linker = ['[#6]-[#6]-[#6]-[#6]-c1ccncc1', '[#6]-[#6]-c1ccncc1']
+    
+    # Aromatic carboxylic acid
+    aromatic_carboxylic_acid = ['c1ccccc1C(=O)[OX2H1]', 'c1ccccc1C(=O)[O-]']
+    
+    # Electron-withdrawing groups on aromatic ring (para position)
+    ewg_para = ['c1ccc([NX3+](=O)[O-])cc1C(=O)[OX2H1]', 'c1ccc(Br)cc1C(=O)[OX2H1]']
+    
+    # Electron-donating groups on aromatic ring (para position)
+    edg_para = ['c1ccc([NX3H2])cc1C(=O)[OX2H1]', 'c1ccc(C)cc1C(=O)[OX2H1]', 'c1ccc(O)cc1C(=O)[OX2H1]']
+    
+    # Multiple hydroxyl groups on aliphatic chain
+    multiple_hydroxyl = ['[OX2H][CX4H]([OX2H])[CX4H]([OX2H])[CX4H]']
+    
+    # Single terminal hydroxyl group on aliphatic chain
+    terminal_hydroxyl = ['[CX4H2][OX2H]']
+    
+    # Amino acids with aromatic side chains
+    aromatic_amino_acid = ['[NX3H2][CX4H]([CX3](=O)[OX2H1])[c]']
+    
+    # Amino acids with electron-rich aromatic side chains (e.g., indole)
+    electron_rich_aromatic_amino_acid = ['[NX3H2][CX4H]([CX3](=O)[OX2H1])[c]n']
+    
+    # Heterocyclic nitrogen connected via flexible linker
+    heterocyclic_nitrogen_linker = ['[#6]-[#6]-[#6]-[#6]-c1ccncc1C(=O)[OX2H1]', '[#6]-[#6]-c1ccncc1C(=O)[OX2H1]']
+    
+    # Heterocyclic nitrogen directly attached
+    heterocyclic_nitrogen_direct = ['c1ccncc1C(=O)[OX2H1]', 'c1c[nH]ccc1C(=O)[OX2H1]', 'c1cnc[nH]c1C(=O)[OX2H1]']
+    
+    # Fluorinated alkyl chains or trifluoromethyl groups
+    fluorinated_alkyl = ['[CX4](F)(F)F', '[CX4][CX4](F)(F)F']
+    
+    # Aldehyde groups adjacent to aromatic rings
+    aromatic_aldehyde = ['c1ccccc1C=O']
+    
+    # Conjugated ketone groups linked to aromatic rings via flexible linkers
+    conjugated_ketone_linker = ['c1ccccc1-[#6]-[#6]-C(=O)-[#6]']
+    
+    # Non-conjugated ketone groups
+    non_conjugated_ketone = ['[CX3](=O)[CX4]']
+    
+    # Modifiers with multiple electron-donating groups on aromatic rings
+    multiple_edg_aromatic = ['c1cc([OX2H])cc([OX2H])c1', 'c1cc([OX2H])ccc1[OX2H]', 'c1cc([OX2][CH3])cc([OX2][CH3])c1']
+    
+    # Ether linkages with terminal hydroxyl groups
+    ether_terminal_hydroxyl = ['[OD2]([#6])[#6][OD2]([#6])[#6][OD2H]']
+    
+    # Acetamido groups with additional amino groups
+    acetamido_with_amino = ['[NX3][CX3](=O)[NX3H2]']
+    
+    # Indole functional groups
+    indole_group = ['c1cc2ccccc2[nH]1']
+    
+    # Compile SMARTS patterns
+    smarts_patterns = {
+        'carboxylic_acid': carboxylic_acid,
+        'primary_aliph_amine': primary_aliph_amine,
+        'thiol': thiol,
+        'ether_linkage': ether_linkage,
+        'pyridine_linker': pyridine_linker,
+        'aromatic_carboxylic_acid': aromatic_carboxylic_acid,
+        'ewg_para': ewg_para,
+        'edg_para': edg_para,
+        'multiple_hydroxyl': multiple_hydroxyl,
+        'terminal_hydroxyl': terminal_hydroxyl,
+        'aromatic_amino_acid': aromatic_amino_acid,
+        'electron_rich_aromatic_amino_acid': electron_rich_aromatic_amino_acid,
+        'heterocyclic_nitrogen_linker': heterocyclic_nitrogen_linker,
+        'heterocyclic_nitrogen_direct': heterocyclic_nitrogen_direct,
+        'fluorinated_alkyl': fluorinated_alkyl,
+        'aromatic_aldehyde': aromatic_aldehyde,
+        'conjugated_ketone_linker': conjugated_ketone_linker,
+        'non_conjugated_ketone': non_conjugated_ketone,
+        'multiple_edg_aromatic': multiple_edg_aromatic,
+        'ether_terminal_hydroxyl': ether_terminal_hydroxyl,
+        'acetamido_with_amino': acetamido_with_amino,
+        'indole_group': indole_group,
+    }
+    
+    compiled_patterns = {key: [Chem.MolFromSmarts(pat) for pat in patterns] for key, patterns in smarts_patterns.items()}
+    
+    # Define the rules with their associated patterns and predictions
+    rules = [
+        {
+            'number': 1,
+            'description': 'Aliphatic Carboxylic Acids with Terminal Primary Amino Groups Lead to High Fe/Hf Values (True)',
+            'patterns': [compiled_patterns['primary_aliph_amine'], compiled_patterns['carboxylic_acid']],
+            'exclude_patterns': [compiled_patterns['aromatic_aldehyde'], compiled_patterns['indole_group']],
+            'prediction': 1
+        },
+        {
+            'number': 2,
+            'description': 'Aromatic Carboxylic Acids with Electron-Withdrawing Para Substituents Lead to High Fe/Hf Values (True)',
+            'patterns': [compiled_patterns['aromatic_carboxylic_acid'], compiled_patterns['ewg_para']],
+            'prediction': 1
+        },
+        {
+            'number': 3,
+            'description': 'Modifiers Containing Thiol Groups (-SH) Along with Carboxylic Acid Groups Lead to High Fe/Hf Values (True)',
+            'patterns': [compiled_patterns['thiol'], compiled_patterns['carboxylic_acid']],
+            'prediction': 1
+        },
+        {
+            'number': 4,
+            'description': 'Simple Aliphatic Carboxylic Acids Without Additional Coordinating Functional Groups Lead to Low Fe/Hf Values (False)',
+            'patterns': [compiled_patterns['carboxylic_acid']],
+            'exclude_patterns': [compiled_patterns['primary_aliph_amine'], compiled_patterns['thiol'], compiled_patterns['ether_linkage'], compiled_patterns['aromatic_carboxylic_acid']],
+            'prediction': -1
+        },
+        {
+            'number': 5,
+            'description': 'Modifiers with Multiple Hydroxyl Groups on an Aliphatic Chain Lead to Low Fe/Hf Values (False); Modifiers with a Single Terminal Hydroxyl Group May Lead to High Fe/Hf Values (True)',
+            'patterns': [compiled_patterns['multiple_hydroxyl'], compiled_patterns['carboxylic_acid']],
+            'prediction': -1
+        },
+        {
+            'number': 6,
+            'description': 'Modifiers with Ether Linkages and Terminal Amino Groups Lead to High Fe/Hf Values (True)',
+            'patterns': [compiled_patterns['ether_linkage'], compiled_patterns['primary_aliph_amine']],
+            'prediction': 1
+        },
+        {
+            'number': 7,
+            'description': 'Amino Acids with Aromatic Side Chains Lead to High Fe/Hf Values (True); Those with Highly Electron-Rich Aromatic Side Chains Lead to Low Fe/Hf Values (False)',
+            'patterns': [compiled_patterns['aromatic_amino_acid']],
+            'exclude_patterns': [compiled_patterns['electron_rich_aromatic_amino_acid']],
+            'prediction': 1
+        },
+        {
+            'number': 8,
+            'description': 'Modifiers with Heterocyclic Nitrogen Atoms Connected via Flexible Linkers Lead to High Fe/Hf Values (True); Those Directly Attached Without Flexibility Lead to Low Fe/Hf Values (False)',
+            'patterns': [compiled_patterns['heterocyclic_nitrogen_linker'], compiled_patterns['carboxylic_acid']],
+            'exclude_patterns': [compiled_patterns['heterocyclic_nitrogen_direct']],
+            'prediction': 1
+        },
+        {
+            'number': 9,
+            'description': 'Modifiers with Fluorinated Alkyl Chains or Trifluoromethyl Groups Lead to Low Fe/Hf Values (False)',
+            'patterns': [compiled_patterns['fluorinated_alkyl']],
+            'prediction': -1
+        },
+        {
+            'number': 10,
+            'description': 'Modifiers with Aldehyde Groups Adjacent to Aromatic Rings Lead to Low Fe/Hf Values (False)',
+            'patterns': [compiled_patterns['aromatic_aldehyde'], compiled_patterns['carboxylic_acid']],
+            'prediction': -1
+        },
+        {
+            'number': 11,
+            'description': 'Modifiers with Conjugated Ketone Groups Linked to Aromatic Rings via Flexible Linkers Lead to High Fe/Hf Values (True)',
+            'patterns': [compiled_patterns['conjugated_ketone_linker'], compiled_patterns['carboxylic_acid']],
+            'exclude_patterns': [compiled_patterns['non_conjugated_ketone']],
+            'prediction': 1
+        },
+        {
+            'number': 12,
+            'description': 'Modifiers with Multiple Electron-Donating Groups on Aromatic Rings Lead to Low Fe/Hf Values (False)',
+            'patterns': [compiled_patterns['multiple_edg_aromatic'], compiled_patterns['carboxylic_acid']],
+            'prediction': -1
+        },
+        {
+            'number': 13,
+            'description': 'Modifiers with Ether Linkages and Terminal Hydroxyl Groups Lead to High Fe/Hf Values (True)',
+            'patterns': [compiled_patterns['ether_terminal_hydroxyl'], compiled_patterns['carboxylic_acid']],
+            'prediction': 1
+        },
+        {
+            'number': 14,
+            'description': 'Modifiers with Aliphatic Chains Containing Acetamido Groups and Additional Amino Groups Lead to High Fe/Hf Values (True)',
+            'patterns': [compiled_patterns['acetamido_with_amino'], compiled_patterns['carboxylic_acid']],
+            'prediction': 1
+        },
+        {
+            'number': 15,
+            'description': 'Modifiers with Indole Functional Groups Lead to Low Fe/Hf Values (False)',
+            'patterns': [compiled_patterns['indole_group']],
+            'prediction': -1
+        }
+    ]
+    
+    # Initialize results list
+    results = []
+    
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = True
+                # Check exclude patterns if any
+                if 'exclude_patterns' in rule:
+                    for pat_list in rule['exclude_patterns']:
+                        for pat in pat_list:
+                            if mol.HasSubstructMatch(pat):
+                                match = False
+                                break
+                        if not match:
+                            break
+                    if not match:
+                        row.append(0)
+                        continue
+                # Check required patterns
+                for pat_list in rule['patterns']:
+                    group_match = False
+                    for pat in pat_list:
+                        if mol.HasSubstructMatch(pat):
+                            group_match = True
+                            break
+                    if not group_match:
+                        match = False
+                        break
+                if match:
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule['number']}' for rule in rules])
+    return df

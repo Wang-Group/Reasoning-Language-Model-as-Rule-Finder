@@ -1,0 +1,4090 @@
+
+    Target Name: Fe/Hf
+    GPT Model: o1-preview-2024-09-12
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+- **Rule 1**: **Modifiers containing terminal amino groups (-NH₂) on aliphatic chains of five or more carbons predict high Fe/Hf values.**
+  - *Explanation*: Terminal amino groups on longer aliphatic chains provide effective coordination sites for Fe ions, enhancing their incorporation into the catalyst.
+  - *Supporting Data*:
+    - **High Fe/Hf**: 5-aminopentanoic acid (Entry 2), 7-aminoheptanoic acid (Entry 31), 8-aminooctanoic acid (Entry 34), (2S)-6-acetamido-2-aminohexanoic acid (Entry 33)
+    - **Low Fe/Hf**: None with this specific feature.
+
+- **Rule 2**: **Modifiers that are aliphatic carboxylic acids without additional coordinating groups predict low Fe/Hf values.**
+  - *Explanation*: Lack of functional groups like amino, hydroxy, or thiol reduces the ability of the modifier to coordinate with Fe ions.
+  - *Supporting Data*:
+    - **Low Fe/Hf**: Octanoic acid (Entry 4), 4-oxoheptanedioic acid (Entry 27)
+    - **High Fe/Hf**: None without coordinating groups.
+
+- **Rule 3**: **Modifiers containing thiol groups (-SH) predict high Fe/Hf values.**
+  - *Explanation*: Thiol groups have a strong affinity for metal ions like Fe, promoting their incorporation into the catalyst.
+  - *Supporting Data*:
+    - **High Fe/Hf**: 4-sulfanylbenzoic acid (Entry 9), 3-sulfanylpropanoic acid (Entry 17), 2-[[(2S)-2-amino-4-methylsulfanylbutanoyl]amino]acetic acid (Entry 23)
+    - **Low Fe/Hf**: None with thiol groups.
+
+- **Rule 4**: **Modifiers with nitro groups (-NO₂) on aromatic rings predict high Fe/Hf values.**
+  - *Explanation*: Nitro groups enhance the ability of the aromatic ring to coordinate with Fe ions due to increased electron deficiency.
+  - *Supporting Data*:
+    - **High Fe/Hf**: 4-nitrobenzoic acid (Entry 20)
+    - **Low Fe/Hf**: None with nitro groups.
+
+- **Rule 5**: **Modifiers containing perfluoroalkyl groups predict low Fe/Hf values.**
+  - *Explanation*: Perfluoroalkyl chains are highly hydrophobic and electron-withdrawing, which may hinder effective coordination with Fe ions.
+  - *Supporting Data*:
+    - **Low Fe/Hf**: 2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid (Entry 13), 4-[(2,2,2-trifluoroacetyl)amino]butanoic acid (Entry 28)
+    - **High Fe/Hf**: None with perfluoroalkyl groups.
+
+- **Rule 6**: **Modifiers with pyridine rings connected via linkers to carboxylic acids predict high Fe/Hf values.**
+  - *Explanation*: The nitrogen atom in the pyridine ring can coordinate with Fe ions, and the linker reduces steric hindrance.
+  - *Supporting Data*:
+    - **High Fe/Hf**: 4-pyridin-4-ylbenzoic acid (Entry 11), 4-pyridin-4-ylbutanoic acid (Entry 24)
+    - **Low Fe/Hf**: Pyridine-3-carboxylic acid (Entry 21), where the carboxylic acid is directly attached to the pyridine ring.
+
+- **Rule 7**: **Modifiers with multiple hydroxyl (-OH) groups predict low Fe/Hf values.**
+  - *Explanation*: Multiple hydroxyl groups increase hydrophilicity and can create steric hindrance, reducing coordination with Fe ions.
+  - *Supporting Data*:
+    - **Low Fe/Hf**: 2-[[1,3-dihydroxy-2-(hydroxymethyl)propan-2-yl]oxy]acetic acid (Entry 5), (2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid (Entry 8)
+    - **High Fe/Hf**: None with multiple hydroxyl groups.
+
+- **Rule 8**: **Modifiers with a single hydroxy (-OH) group on a long aliphatic chain predict high Fe/Hf values.**
+  - *Explanation*: A single hydroxy group can coordinate with Fe ions without causing significant steric hindrance.
+  - *Supporting Data*:
+    - **High Fe/Hf**: 7-hydroxyheptanoic acid (Entry 29)
+    - **Low Fe/Hf**: None fitting this specific feature.
+
+- **Rule 9**: **Modifiers containing aldehyde groups (-CHO) on aromatic rings predict low Fe/Hf values.**
+  - *Explanation*: Aldehyde groups may form strong complexes with Fe ions, preventing proper incorporation into the catalyst framework.
+  - *Supporting Data*:
+    - **Low Fe/Hf**: 5-formyl-2-hydroxybenzoic acid (Entry 18), 4-formylbenzoic acid (Entry 19)
+    - **High Fe/Hf**: None with aldehyde groups.
+
+- **Rule 10**: **Modifiers that are amino acids with smaller aromatic side chains (e.g., phenylalanine) predict high Fe/Hf values, whereas those with bulkier side chains (e.g., tryptophan) predict low Fe/Hf values.**
+  - *Explanation*: Bulkier side chains may hinder coordination with Fe ions due to steric hindrance, while smaller aromatics facilitate coordination.
+  - *Supporting Data*:
+    - **High Fe/Hf**: (2S)-2-amino-3-phenylpropanoic acid (Entry 12)
+    - **Low Fe/Hf**: (2R)-2-amino-3-(1H-indol-3-yl)propanoic acid (Entry 14)
+
+- **Rule 11**: **Modifiers containing ether linkages and amino groups predict high Fe/Hf values.**
+  - *Explanation*: Ether linkages provide flexibility, and amino groups offer coordination sites for Fe ions.
+  - *Supporting Data*:
+    - **High Fe/Hf**: 3-[2-(2-aminoethoxy)ethoxy]propanoic acid (Entry 32)
+    - **Low Fe/Hf**: None with this combination.
+
+- **Rule 12**: **Modifiers with ketone groups (-C=O) adjacent to carboxylic acids predict low Fe/Hf values.**
+  - *Explanation*: Ketone groups near carboxylic acids may chelate Fe ions strongly, hindering their incorporation into the catalyst.
+  - *Supporting Data*:
+    - **Low Fe/Hf**: 4-oxoheptanedioic acid (Entry 27), 2-oxo-1H-pyridine-4-carboxylic acid (Entry 7)
+    - **High Fe/Hf**: None with adjacent ketone groups.
+
+- **Rule 13**: **Modifiers that are amino acids with longer aliphatic side chains (e.g., glutamic acid) predict high Fe/Hf values, while those with shorter chains (e.g., aspartic acid) predict low Fe/Hf values.**
+  - *Explanation*: Longer side chains enhance flexibility and offer better coordination with Fe ions.
+  - *Supporting Data*:
+    - **High Fe/Hf**: (2S)-2-aminobutanedioic acid (Glutamic acid, Entry 1)
+    - **Low Fe/Hf**: (2S)-2-aminopentanedioic acid (Aspartic acid, Entry 0)
+
+- **Rule 14**: **Modifiers containing sulfur in amino acid derivatives predict high Fe/Hf values.**
+  - *Explanation*: Sulfur atoms strongly coordinate with Fe ions, enhancing their incorporation.
+  - *Supporting Data*:
+    - **High Fe/Hf**: 2-[[(2S)-2-amino-4-methylsulfanylbutanoyl]amino]acetic acid (Entry 23)
+    - **Low Fe/Hf**: None with sulfur-containing amino acids.
+
+- **Rule 15**: **Modifiers with methoxy (-OCH₃) groups on aromatic rings predict high Fe/Hf values.**
+  - *Explanation*: Methoxy groups are electron-donating, increasing the electron density of the aromatic ring and facilitating coordination with Fe ions.
+  - *Supporting Data*:
+    - **High Fe/Hf**: 4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid (Entry 25)
+    - **Low Fe/Hf**: None with methoxy-substituted aromatics predicting low Fe/Hf.
+
+**End of Rules**---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+Rule 1,Rule 2,Rule 3,Rule 4,Rule 5,Rule 6,Rule 7,Rule 8,Rule 9,Rule 10,Rule 10.1,Rule 11,Rule 12,Rule 13,Rule 13.1,Rule 14,Rule 15
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,-1,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,-1,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,-1,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,-1,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.8; Test Accuracy: 0.0
+    Train Support: 0.04285714285714286; Test Support: 0.0
+    Train Confidence: 0.8333333333333334; Test Confidence: 0.5
+    Train Lift: 1.715686274509804; Test Lift: NONE
+    Train Leverage: 0.019591836734693877; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    Current Rule Code:
+def rule2matrix(smiles_list):
+    # Define SMARTS patterns for functional groups
+    # Rule 1: Terminal amino groups (-NH2) on aliphatic chains of five or more carbons
+    rule1_pattern = '[C;!R][C;!R][C;!R][C;!R][C;!R][NX3H2]'
+    
+    # Rule 2: Aliphatic carboxylic acids without additional coordinating groups (amine, hydroxyl, thiol)
+    carboxylic_acid = '[CX3](=O)[OX2H1]'
+    amino_group = '[NX3]'
+    hydroxyl_group = '[OX2H]'
+    thiol_group = '[SX2H]'
+    
+    # Rule 3: Thiol groups (-SH)
+    thiol_pattern = '[SX2H]'
+    
+    # Rule 4: Nitro groups (-NO2) on aromatic rings
+    nitro_on_aromatic = '[c][NX3](=O)=O'
+    
+    # Rule 5: Perfluoroalkyl groups
+    perfluoroalkyl_pattern = '[CX4](F)(F)(F)'
+    
+    # Rule 6: Pyridine rings connected via linkers to carboxylic acids
+    pyridine_ring = 'n1ccccc1'
+    pyridine_carboxylic_acid = '[n][CX3](=O)[OX2H1]'  # Exclude pattern
+    
+    # Rule 7: Multiple hydroxyl (-OH) groups
+    hydroxyl_group = '[OX2H]'
+    
+    # Rule 8: Single hydroxy (-OH) group on a long aliphatic chain
+    long_aliphatic_chain = '[C;!R][C;!R][C;!R][C;!R][C;!R]'
+    # Note: We need to ensure that there is only one hydroxyl group
+    
+    # Rule 9: Aldehyde groups (-CHO) on aromatic rings
+    aldehyde_on_aromatic = '[c][CX3H](=O)'
+    
+    # Rule 10: Amino acids with smaller aromatic side chains (e.g., phenylalanine) predict high Fe/Hf values
+    phenylalanine_smiles = 'N[C@@H](CCc1ccccc1)C(=O)O'  # SMILES of phenylalanine
+    tryptophan_smiles = 'N[C@@H](CCc1c[cH][nH]c1)C(=O)O'  # SMILES of tryptophan
+    
+    # Rule 11: Ether linkages and amino groups
+    ether_linkage = '[#6][OX2][#6]'
+    
+    # Rule 12: Ketone groups (-C=O) adjacent to carboxylic acids
+    ketone_adjacent_carboxylic_acid = '[CX3](=O)[#6][CX3](=O)[OX2H1]'
+    
+    # Rule 13: Amino acids with longer aliphatic side chains (e.g., glutamic acid) predict high Fe/Hf values
+    glutamic_acid_smiles = 'N[C@@H](CCC(=O)O)C(=O)O'  # SMILES of glutamic acid
+    aspartic_acid_smiles = 'N[C@@H](CC(=O)O)C(=O)O'  # SMILES of aspartic acid
+    
+    # Rule 14: Sulfur in amino acid derivatives
+    sulfur_atom = '[S]'
+    
+    # Rule 15: Methoxy (-OCH3) groups on aromatic rings
+    methoxy_on_aromatic = '[c][OX2][CH3]'
+    
+    # Compile SMARTS patterns
+    rules = [
+        {
+            'number': 1,
+            'description': 'Modifiers containing terminal amino groups (-NH2) on aliphatic chains of five or more carbons predict high Fe/Hf values.',
+            'patterns': [[rule1_pattern]],
+            'prediction': 1
+        },
+        {
+            'number': 2,
+            'description': 'Modifiers that are aliphatic carboxylic acids without additional coordinating groups predict low Fe/Hf values.',
+            'patterns': [[carboxylic_acid]],
+            'exclude_patterns': [[amino_group], [hydroxyl_group], [thiol_group]],
+            'prediction': -1
+        },
+        {
+            'number': 3,
+            'description': 'Modifiers containing thiol groups (-SH) predict high Fe/Hf values.',
+            'patterns': [[thiol_pattern]],
+            'prediction': 1
+        },
+        {
+            'number': 4,
+            'description': 'Modifiers with nitro groups (-NO2) on aromatic rings predict high Fe/Hf values.',
+            'patterns': [[nitro_on_aromatic]],
+            'prediction': 1
+        },
+        {
+            'number': 5,
+            'description': 'Modifiers containing perfluoroalkyl groups predict low Fe/Hf values.',
+            'patterns': [[perfluoroalkyl_pattern]],
+            'prediction': -1
+        },
+        {
+            'number': 6,
+            'description': 'Modifiers with pyridine rings connected via linkers to carboxylic acids predict high Fe/Hf values.',
+            'patterns': [[pyridine_ring], [carboxylic_acid]],
+            'exclude_patterns': [[pyridine_carboxylic_acid]],
+            'prediction': 1
+        },
+        {
+            'number': 7,
+            'description': 'Modifiers with multiple hydroxyl (-OH) groups predict low Fe/Hf values.',
+            'patterns': [[hydroxyl_group]],
+            'count_threshold': {hydroxyl_group: 2},
+            'prediction': -1
+        },
+        {
+            'number': 8,
+            'description': 'Modifiers with a single hydroxy (-OH) group on a long aliphatic chain predict high Fe/Hf values.',
+            'patterns': [[long_aliphatic_chain], [hydroxyl_group]],
+            'count_threshold': {hydroxyl_group: 1},
+            'max_count': {hydroxyl_group: 1},
+            'prediction': 1
+        },
+        {
+            'number':9,
+            'description': 'Modifiers containing aldehyde groups (-CHO) on aromatic rings predict low Fe/Hf values.',
+            'patterns': [[aldehyde_on_aromatic]],
+            'prediction': -1
+        },
+        {
+            'number': 10,
+            'description': 'Modifiers that are amino acids with smaller aromatic side chains (e.g., phenylalanine) predict high Fe/Hf values.',
+            'smiles_patterns': [[phenylalanine_smiles]],
+            'prediction': 1
+        },
+        {
+            'number': 10.1,
+            'description': 'Modifiers that are amino acids with bulkier side chains (e.g., tryptophan) predict low Fe/Hf values.',
+            'smiles_patterns': [[tryptophan_smiles]],
+            'prediction': -1
+        },
+        {
+            'number': 11,
+            'description': 'Modifiers containing ether linkages and amino groups predict high Fe/Hf values.',
+            'patterns': [[ether_linkage], [amino_group]],
+            'prediction': 1
+        },
+        {
+            'number': 12,
+            'description': 'Modifiers with ketone groups (-C=O) adjacent to carboxylic acids predict low Fe/Hf values.',
+            'patterns': [[ketone_adjacent_carboxylic_acid]],
+            'prediction': -1
+        },
+        {
+            'number':13,
+            'description': 'Modifiers that are amino acids with longer aliphatic side chains (e.g., glutamic acid) predict high Fe/Hf values.',
+            'smiles_patterns': [[glutamic_acid_smiles]],
+            'prediction': 1
+        },
+        {
+            'number':13.1,
+            'description': 'Modifiers that are amino acids with shorter chains (e.g., aspartic acid) predict low Fe/Hf values.',
+            'smiles_patterns': [[aspartic_acid_smiles]],
+            'prediction': -1
+        },
+        {
+            'number':14,
+            'description': 'Modifiers containing sulfur in amino acid derivatives predict high Fe/Hf values.',
+            'patterns': [[amino_group], [sulfur_atom]],
+            'prediction': 1
+        },
+        {
+            'number':15,
+            'description': 'Modifiers with methoxy (-OCH3) groups on aromatic rings predict high Fe/Hf values.',
+            'patterns': [[methoxy_on_aromatic]],
+            'prediction': 1
+        }
+    ]
+
+    # Compile patterns
+    for rule in rules:
+        compiled_patterns = []
+        for group in rule.get('patterns', []):
+            compiled_group = [Chem.MolFromSmarts(p) for p in group]
+            compiled_patterns.append(compiled_group)
+        for group in rule.get('smiles_patterns', []):
+            compiled_group = [Chem.MolFromSmiles(p) for p in group]
+            compiled_patterns.append(compiled_group)
+        rule['compiled_patterns'] = compiled_patterns
+        # Compile exclude patterns if any
+        if 'exclude_patterns' in rule:
+            compiled_excludes = []
+            for group in rule['exclude_patterns']:
+                compiled_group = [Chem.MolFromSmarts(p) for p in group]
+                compiled_excludes.append(compiled_group)
+            rule['compiled_exclude_patterns'] = compiled_excludes
+
+    # Initialize results list
+    results = []
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = True
+                # Check exclude patterns if any
+                if 'exclude_patterns' in rule:
+                    for group in rule['compiled_exclude_patterns']:
+                        for pat in group:
+                            if mol.HasSubstructMatch(pat):
+                                match = False
+                                break
+                        if not match:
+                            break
+                    if not match:
+                        row.append(0)
+                        continue
+                # Check required patterns
+                for compiled_group in rule['compiled_patterns']:
+                    group_match = False
+                    for pat in compiled_group:
+                        matches = mol.GetSubstructMatches(pat)
+                        if matches:
+                            # If a count threshold is specified for this pattern
+                            if 'count_threshold' in rule and pat.GetSmarts() in rule['count_threshold']:
+                                threshold = rule['count_threshold'][pat.GetSmarts()]
+                                if len(matches) >= threshold:
+                                    group_match = True
+                                    break
+                                else:
+                                    continue
+                            elif 'max_count' in rule and pat.GetSmarts() in rule['max_count']:
+                                max_threshold = rule['max_count'][pat.GetSmarts()]
+                                if len(matches) <= max_threshold:
+                                    group_match = True
+                                    break
+                                else:
+                                    continue
+                            else:
+                                group_match = True
+                                break
+                    if not group_match:
+                        match = False
+                        break
+                if match:
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception as e:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule["number"]}' for rule in rules])
+    return df
+
+--------------------------------------------------
+    Target Name: Fe/Hf
+    GPT Model: o1-preview-2024-09-12
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+- **Rule 1**: **Modifiers containing both a primary amino group (-NH₂) and a carboxylic acid group (-COOH) on an aliphatic chain of five or more carbons predict high Fe/Hf values.**
+
+  - *Explanation*: The presence of both amino and carboxyl groups on a longer aliphatic chain provides multiple coordination sites and sufficient flexibility for Fe ions to interact effectively, enhancing their incorporation into the catalyst.
+
+  - *Supporting Data*:
+    - **High Fe/Hf**:
+      - 5-aminopentanoic acid (Entry 2)
+      - 7-aminoheptanoic acid (Entry 31)
+      - 8-aminooctanoic acid (Entry 34)
+      - (2S)-6-acetamido-2-aminohexanoic acid (Entry 33)
+    - **Low Fe/Hf**: None with this specific combination.
+
+- **Rule 2**: **Modifiers containing both thiol groups (-SH) and aromatic rings predict high Fe/Hf values.**
+
+  - *Explanation*: Thiol groups have a strong affinity for Fe ions, and when attached to an aromatic ring, they can enhance coordination due to the conjugated system facilitating electron delocalization.
+
+  - *Supporting Data*:
+    - **High Fe/Hf**:
+      - 4-sulfanylbenzoic acid (Entry 9)
+    - **Low Fe/Hf**: None with this specific combination.
+
+- **Rule 3**: **Modifiers with perfluoroalkyl groups and additional electron-withdrawing functionalities predict low Fe/Hf values.**
+
+  - *Explanation*: Perfluoroalkyl chains combined with electron-withdrawing groups significantly reduce the electron density on coordinating atoms, diminishing their ability to interact with Fe ions.
+
+  - *Supporting Data*:
+    - **Low Fe/Hf**:
+      - 2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid (Entry 13)
+      - 4-[(2,2,2-trifluoroacetyl)amino]butanoic acid (Entry 28)
+    - **High Fe/Hf**: None with this combination.
+
+- **Rule 4**: **Modifiers containing multiple hydroxyl (-OH) groups and a carboxylic acid group on a small carbon framework predict low Fe/Hf values.**
+
+  - *Explanation*: Multiple hydroxyl groups increase hydrophilicity and can form intramolecular hydrogen bonds, reducing the availability of coordination sites for Fe ions and causing steric hindrance.
+
+  - *Supporting Data*:
+    - **Low Fe/Hf**:
+      - (2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid (Entry 8)
+      - 2-[[1,3-dihydroxy-2-(hydroxymethyl)propan-2-yl]oxy]acetic acid (Entry 5)
+    - **High Fe/Hf**: None with this combination.
+
+- **Rule 5**: **Modifiers with aromatic rings substituted with electron-withdrawing groups (e.g., nitro (-NO₂)) and additional coordinating groups predict high Fe/Hf values.**
+
+  - *Explanation*: Electron-withdrawing groups increase the Lewis acidity of the aromatic ring, enhancing its ability to accept electrons from Fe ions, while coordinating groups facilitate direct interaction.
+
+  - *Supporting Data*:
+    - **High Fe/Hf**:
+      - 4-nitrobenzoic acid (Entry 20)
+      - 1,3-dioxo-2-benzofuran-5-carboxylic acid (Entry 16)
+    - **Low Fe/Hf**: None with this combination.
+
+- **Rule 6**: **Modifiers that are amino acids with bulky aromatic side chains lacking additional coordinating groups predict low Fe/Hf values due to steric hindrance.**
+
+  - *Explanation*: Bulky side chains like the indole group in tryptophan hinder effective coordination with Fe ions, reducing Fe incorporation into the catalyst.
+
+  - *Supporting Data*:
+    - **Low Fe/Hf**:
+      - (2R)-2-amino-3-(1H-indol-3-yl)propanoic acid (Entry 14)
+    - **High Fe/Hf**:
+      - (2S)-2-amino-3-phenylpropanoic acid (Entry 12), which has a less bulky phenyl side chain and predicts high Fe/Hf values.
+
+- **Rule 7**: **Modifiers containing ether linkages, terminal amino groups, and carboxylic acid groups predict high Fe/Hf values.**
+
+  - *Explanation*: Ether linkages provide molecular flexibility, while amino and carboxylic acid groups offer multiple coordination sites, enhancing Fe ion interaction and incorporation.
+
+  - *Supporting Data*:
+    - **High Fe/Hf**:
+      - 3-[2-(2-aminoethoxy)ethoxy]propanoic acid (Entry 32)
+      - 2-[2-(2-methoxyethoxy)ethoxy]acetic acid (Entry 10), with a methoxy end instead of amino, still predicts high Fe/Hf.
+    - **Low Fe/Hf**: None with this combination.
+
+- **Rule 8**: **Modifiers with ketone groups (-C=O) adjacent to aromatic rings and carboxylic acids predict low Fe/Hf values.**
+
+  - *Explanation*: Ketone groups near aromatic rings can participate in strong resonance structures, reducing the availability of lone pairs for coordination with Fe ions.
+
+  - *Supporting Data*:
+    - **Low Fe/Hf**:
+      - 2-oxo-1H-pyridine-4-carboxylic acid (Entry 7)
+      - 4-oxoheptanedioic acid (Entry 27)
+    - **High Fe/Hf**: None with this combination.
+
+- **Rule 9**: **Modifiers containing methoxy (-OCH₃) groups on aromatic rings combined with ketone functionalities predict high Fe/Hf values.**
+
+  - *Explanation*: Methoxy groups are electron-donating, increasing electron density on the aromatic ring and enhancing coordination, while ketone groups can serve as additional coordination sites.
+
+  - *Supporting Data*:
+    - **High Fe/Hf**:
+      - 4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid (Entry 25)
+    - **Low Fe/Hf**: None with this combination.
+
+- **Rule 10**: **Modifiers that are amino acids with both amino (-NH₂) and amide (-CONH-) groups on aliphatic chains of six or more carbons predict high Fe/Hf values.**
+
+  - *Explanation*: Multiple nitrogen-containing groups on longer chains provide abundant coordination sites and flexibility for effective Fe ion incorporation.
+
+  - *Supporting Data*:
+    - **High Fe/Hf**:
+      - (2S)-6-acetamido-2-aminohexanoic acid (Entry 33)
+    - **Low Fe/Hf**: None with this specific combination.
+
+**End of Rules**---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+Rule 1,Rule 2,Rule 3,Rule 4,Rule 5,Rule 6,Rule 7,Rule 8,Rule 9,Rule 10
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,1,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.5428571428571428; Test Accuracy: 0.0
+    Train Support: 0.02857142857142857; Test Support: 0.0
+    Train Confidence: 1.0; Test Confidence: 0.5
+    Train Lift: 2.058823529411765; Test Lift: NONE
+    Train Leverage: 0.014693877551020407; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    Current Rule Code:
+def rule2matrix(smiles_list):
+    import pandas as pd
+    from rdkit import Chem
+    
+    # Define the rules with their associated patterns and predictions
+    rules = [
+        {
+            'number': 1,
+            'description': 'Modifiers containing both a primary amino group (-NH2) and a carboxylic acid group (-COOH) on an aliphatic chain of five or more carbons predict high Fe/Hf values.',
+            'patterns': [
+                {'pattern': '[NX3H2]', 'required': True},  # Primary amino group
+                {'pattern': '[CX3](=O)[OX1H1,O-]', 'required': True},  # Carboxylic acid group
+                {'pattern': '[CH2][CH2][CH2][CH2][CH2]', 'required': True},  # Aliphatic chain of 5 carbons
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 2,
+            'description': 'Modifiers containing both thiol groups (-SH) and aromatic rings predict high Fe/Hf values.',
+            'patterns': [
+                {'pattern': '[SX2H]', 'required': True},  # Thiol group
+                {'pattern': 'a', 'required': True},  # Aromatic ring (any aromatic atom)
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 3,
+            'description': 'Modifiers with perfluoroalkyl groups and additional electron-withdrawing functionalities predict low Fe/Hf values.',
+            'patterns': [
+                {'pattern': '[CX4]([F])([F])([F])', 'required': True},  # Trifluoromethyl group
+                {'pattern': '[F,Cl,Br,I]', 'required': True},  # Halogens
+                {'pattern': '[CX3](=O)[OX1H0]', 'required': True},  # Carbonyl group (ketone/aldehyde)
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 4,
+            'description': 'Modifiers containing multiple hydroxyl (-OH) groups and a carboxylic acid group on a small carbon framework predict low Fe/Hf values.',
+            'patterns': [
+                {'pattern': '[OX2H]', 'required': True},  # Hydroxyl group
+                {'pattern': '[CX3](=O)[OX1H1,O-]', 'required': True},  # Carboxylic acid group
+            ],
+            'count_threshold': {'[OX2H]': 2},  # At least 2 hydroxyl groups
+            'prediction': -1
+        },
+        {
+            'number': 5,
+            'description': 'Modifiers with aromatic rings substituted with electron-withdrawing groups (e.g., nitro (-NO2)) and additional coordinating groups predict high Fe/Hf values.',
+            'patterns': [
+                {'pattern': '[c][NX3+](=O)[O-]', 'required': True},  # Nitro group on aromatic ring
+                {'pattern': '[CX3](=O)[OX1H1,O-]', 'required': True},  # Carboxylic acid group
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 6,
+            'description': 'Modifiers that are amino acids with bulky aromatic side chains lacking additional coordinating groups predict low Fe/Hf values due to steric hindrance.',
+            'patterns': [
+                {'pattern': '[NX3H2]', 'required': True},  # Primary amino group
+                {'pattern': '[c]', 'required': True},  # Aromatic ring
+                {'pattern': '[CX3](=O)[OX1H1,O-]', 'required': True},  # Carboxylic acid group
+            ],
+            'exclude_patterns': [
+                {'pattern': '[#7,#8,#16]', 'required': False},  # Exclude additional coordinating groups
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 7,
+            'description': 'Modifiers containing ether linkages, terminal amino groups, and carboxylic acid groups predict high Fe/Hf values.',
+            'patterns': [
+                {'pattern': '[OX2]', 'required': True},  # Ether linkage
+                {'pattern': '[NX3H2]', 'required': True},  # Terminal amino group
+                {'pattern': '[CX3](=O)[OX1H1,O-]', 'required': True},  # Carboxylic acid group
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 8,
+            'description': 'Modifiers with ketone groups (-C=O) adjacent to aromatic rings and carboxylic acids predict low Fe/Hf values.',
+            'patterns': [
+                {'pattern': '[c][CX3](=O)[#6]', 'required': True},  # Ketone adjacent to aromatic ring
+                {'pattern': '[CX3](=O)[OX1H1,O-]', 'required': True},  # Carboxylic acid group
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 9,
+            'description': 'Modifiers containing methoxy (-OCH3) groups on aromatic rings combined with ketone functionalities predict high Fe/Hf values.',
+            'patterns': [
+                {'pattern': '[c][OX2][CH3]', 'required': True},  # Methoxy group on aromatic ring
+                {'pattern': '[CX3](=O)[#6]', 'required': True},  # Ketone group
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 10,
+            'description': 'Modifiers that are amino acids with both amino (-NH2) and amide (-CONH-) groups on aliphatic chains of six or more carbons predict high Fe/Hf values.',
+            'patterns': [
+                {'pattern': '[NX3H2]', 'required': True},  # Amino group
+                {'pattern': '[CX3](=O)[NX3H1]', 'required': True},  # Amide group
+                {'pattern': '[CH2][CH2][CH2][CH2][CH2][CH2]', 'required': True},  # Aliphatic chain of 6 carbons
+            ],
+            'prediction': 1
+        },
+    ]
+
+    # Compile SMARTS patterns
+    for rule in rules:
+        for pat_dict in rule.get('patterns', []):
+            pat_dict['compiled'] = Chem.MolFromSmarts(pat_dict['pattern'])
+        # Compile exclude patterns if any
+        if 'exclude_patterns' in rule:
+            for pat_dict in rule['exclude_patterns']:
+                pat_dict['compiled'] = Chem.MolFromSmarts(pat_dict['pattern'])
+
+    # Initialize results list
+    results = []
+
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = True
+                # Check required patterns
+                for pat_dict in rule.get('patterns', []):
+                    pat = pat_dict['compiled']
+                    required = pat_dict['required']
+                    matches = mol.GetSubstructMatches(pat)
+                    if required:
+                        if not matches:
+                            match = False
+                            break
+                        # If a count threshold is specified for this pattern
+                        if 'count_threshold' in rule and pat.GetSmarts() in rule['count_threshold']:
+                            threshold = rule['count_threshold'][pat.GetSmarts()]
+                            if len(matches) < threshold:
+                                match = False
+                                break
+                    else:
+                        if matches:
+                            match = False
+                            break
+                if not match:
+                    row.append(0)
+                    continue
+                # Check exclude patterns if any
+                if 'exclude_patterns' in rule:
+                    for pat_dict in rule['exclude_patterns']:
+                        pat = pat_dict['compiled']
+                        matches = mol.GetSubstructMatches(pat)
+                        if matches:
+                            match = False
+                            break
+                    if not match:
+                        row.append(0)
+                        continue
+                # All patterns matched
+                row.append(rule['prediction'])
+            except Exception as e:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule["number"]}' for rule in rules])
+    return df
+
+--------------------------------------------------
+    Target Name: Fe/Hf
+    GPT Model: o1-preview-2024-09-12
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+- **Rule 1**: **Modifiers containing a primary amino group (-NH₂) and a single carboxylic acid group (-COOH) on an aliphatic chain of four or more carbons predict high Fe/Hf values, excluding molecules with additional carboxylic acid groups.**
+
+  - *Explanation*: The presence of both amino and carboxyl groups on a longer aliphatic chain provides multiple coordination sites and sufficient flexibility for Fe ions to interact effectively, enhancing their incorporation into the catalyst. Molecules with additional carboxylic acid groups may create unfavorable charge distributions, reducing Fe coordination.
+
+  - *Supporting Data*:
+    - **High Fe/Hf**:
+      - 5-aminopentanoic acid (Entry 2)
+      - 7-aminoheptanoic acid (Entry 31)
+      - 8-aminooctanoic acid (Entry 34)
+    - **Low Fe/Hf**:
+      - (2S)-2-aminopentanedioic acid (Entry 0), which has an extra carboxylic acid group.
+
+- **Rule 2**: **Modifiers containing thiol groups (-SH) predict high Fe/Hf values.**
+
+  - *Explanation*: Thiol groups have a strong affinity for Fe ions due to the soft acid-soft base interaction, enhancing Fe ion coordination and incorporation into the catalyst.
+
+  - *Supporting Data*:
+    - **High Fe/Hf**:
+      - 3-sulfanylpropanoic acid (Entry 17)
+      - 4-sulfanylbenzoic acid (Entry 9)
+      - 2-[[(2S)-2-amino-4-methylsulfanylbutanoyl]amino]acetate (Entry 23)
+    - **Low Fe/Hf**:
+      - None with thiol groups.
+
+- **Rule 3**: **Modifiers containing aromatic rings substituted with strong electron-withdrawing groups (e.g., nitro (-NO₂), pyridyl rings) predict high Fe/Hf values.**
+
+  - *Explanation*: Electron-withdrawing groups increase the positive character of the coordinating atoms on the aromatic ring, enhancing their ability to accept electron density from Fe ions and form stable complexes.
+
+  - *Supporting Data*:
+    - **High Fe/Hf**:
+      - 4-nitrobenzoic acid (Entry 20)
+      - 4-pyridin-4-ylbenzoic acid (Entry 11)
+      - 4-pyridin-4-ylbutanoic acid (Entry 24)
+    - **Low Fe/Hf**:
+      - None with this combination.
+
+- **Rule 4**: **Modifiers containing aromatic rings substituted with electron-donating groups (e.g., amino (-NH₂), hydroxyl (-OH), methyl (-CH₃)) predict low Fe/Hf values.**
+
+  - *Explanation*: Electron-donating groups increase electron density on the aromatic ring, reducing its ability to coordinate with Fe ions due to decreased Lewis acidity.
+
+  - *Supporting Data*:
+    - **Low Fe/Hf**:
+      - 4-aminobenzoic acid (Entry 3)
+      - 4-methylbenzoic acid (Entry 22)
+      - 5-(4-hydroxyphenyl)pentanoic acid (Entry 6)
+      - 3-(4-hydroxyphenyl)propanoic acid (Entry 30)
+    - **High Fe/Hf**:
+      - None with this combination.
+
+- **Rule 5**: **Modifiers containing perfluoroalkyl groups predict low Fe/Hf values.**
+
+  - *Explanation*: Perfluoroalkyl groups are highly electron-withdrawing, pulling electron density away from coordinating atoms (like oxygen in carboxyl groups), which diminishes their ability to donate electron density to Fe ions, thus reducing coordination.
+
+  - *Supporting Data*:
+    - **Low Fe/Hf**:
+      - 2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid (Entry 13)
+      - 4-[(2,2,2-trifluoroacetyl)amino]butanoic acid (Entry 28)
+    - **High Fe/Hf**:
+      - None with this combination.
+
+- **Rule 6**: **Modifiers containing multiple hydroxyl (-OH) groups predict low Fe/Hf values.**
+
+  - *Explanation*: Multiple hydroxyl groups increase hydrophilicity and can form intramolecular hydrogen bonds, leading to steric hindrance and reducing the availability of lone pairs for coordination with Fe ions.
+
+  - *Supporting Data*:
+    - **Low Fe/Hf**:
+      - (2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid (Entry 8)
+      - 2-[[1,3-dihydroxy-2-(hydroxymethyl)propan-2-yl]oxy]acetic acid (Entry 5)
+    - **High Fe/Hf**:
+      - None with multiple hydroxyl groups.
+
+- **Rule 7**: **Modifiers containing ether linkages and terminal amino groups predict high Fe/Hf values.**
+
+  - *Explanation*: Ether linkages confer molecular flexibility, allowing better spatial orientation of coordinating groups, while terminal amino groups offer strong coordination sites for Fe ions.
+
+  - *Supporting Data*:
+    - **High Fe/Hf**:
+      - 3-[2-(2-aminoethoxy)ethoxy]propanoic acid (Entry 32)
+    - **Low Fe/Hf**:
+      - None with this combination.
+
+- **Rule 8**: **Modifiers that are amino acids with bulky aromatic side chains lacking additional coordinating groups predict low Fe/Hf values due to steric hindrance.**
+
+  - *Explanation*: Bulky aromatic side chains, such as indole groups, can hinder effective coordination with Fe ions by creating spatial constraints, reducing Fe incorporation.
+
+  - *Supporting Data*:
+    - **Low Fe/Hf**:
+      - (2R)-2-amino-3-(1H-indol-3-yl)propanoic acid (Entry 14)
+    - **High Fe/Hf**:
+      - (2S)-2-amino-3-phenylpropanoic acid (Entry 12) has a less bulky phenyl side chain and predicts high Fe/Hf.
+
+- **Rule 9**: **Modifiers containing long aliphatic chains (six or more carbons) with a terminal hydroxyl (-OH) group and a carboxylic acid group predict high Fe/Hf values.**
+
+  - *Explanation*: Longer aliphatic chains provide flexibility, and the presence of both hydroxyl and carboxyl groups offers multiple sites for Fe ion coordination, enhancing incorporation into the catalyst.
+
+  - *Supporting Data*:
+    - **High Fe/Hf**:
+      - 7-hydroxyheptanoic acid (Entry 29)
+    - **Low Fe/Hf**:
+      - Octanoic acid (Entry 4), which lacks the hydroxyl group.
+
+- **Rule 10**: **Modifiers containing ketone groups (-C=O) adjacent to electron-donating groups predict low Fe/Hf values due to reduced coordination capability.**
+
+  - *Explanation*: Electron-donating groups increase electron density on adjacent ketone oxygens, diminishing their ability to coordinate with Fe ions because of decreased electrophilicity.
+
+  - *Supporting Data*:
+    - **Low Fe/Hf**:
+      - 4-oxoheptanedioic acid (Entry 27)
+      - 2-[(4-hydroxybenzoyl)amino]acetic acid (Entry 26)
+    - **High Fe/Hf**:
+      - 4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid (Entry 25), where methoxy groups may alter the effect.
+
+**End of Rules**---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+Rule 1,Rule 2,Rule 3,Rule 4,Rule 5,Rule 6,Rule 7,Rule 8,Rule 9,Rule 10
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,-1
+0,0,0,0,0,0,0,0,0,-1
+0,0,0,0,0,0,0,0,0,0
+0,0,0,-1,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,-1,0,0,0,0
+0,0,0,-1,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0
+0,0,0,0,0,-1,0,0,0,-1
+0,1,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,-1
+0,0,0,0,-1,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,-1
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0
+0,0,0,-1,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0
+0,0,0,-1,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,-1
+0,0,1,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,-1,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,-1,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,-1,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,-1
+0,0,0,0,0,0,0,0,0,0
+
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.7714285714285715; Test Accuracy: 1.0
+    Train Support: 0.09523809523809523; Test Support: 0.0
+    Train Confidence: 1.0; Test Confidence: 0.5
+    Train Lift: 1.9444444444444446; Test Lift: NONE
+    Train Leverage: 0.046258503401360555; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    Current Rule Code:
+def rule2matrix(smiles_list):
+    # Define SMARTS patterns for each rule
+
+    # Rule 1: Primary amino group and single carboxylic acid group on an aliphatic chain of four or more carbons, excluding molecules with additional carboxylic acid groups.
+    rule1_pattern = '[NX3H2]-[C;!$(C=O)]{4,}-[CX3](=O)[OX1H1]'
+    carboxylic_acid_pattern = '[CX3](=O)[OX1H1]'
+    carboxylic_acid_compiled = Chem.MolFromSmarts(carboxylic_acid_pattern)
+    rule1_compiled = Chem.MolFromSmarts(rule1_pattern)
+
+    # Rule 2: Thiol group (-SH)
+    thiol_pattern = '[SX2H]'
+    thiol_compiled = Chem.MolFromSmarts(thiol_pattern)
+
+    # Rule 3: Aromatic ring with strong electron-withdrawing groups (nitro, cyano, sulfonyl) or pyridine ring
+    nitro_on_aromatic_pattern = '[c][NX3+](=O)[O-]'
+    cyano_on_aromatic_pattern = '[c]-[#6]#[N]'
+    sulfonyl_on_aromatic_pattern = '[c][SX4](=O)(=O)[#6]'
+    pyridine_pattern = 'n1ccccc1'
+
+    nitro_on_aromatic_compiled = Chem.MolFromSmarts(nitro_on_aromatic_pattern)
+    cyano_on_aromatic_compiled = Chem.MolFromSmarts(cyano_on_aromatic_pattern)
+    sulfonyl_on_aromatic_compiled = Chem.MolFromSmarts(sulfonyl_on_aromatic_pattern)
+    pyridine_compiled = Chem.MolFromSmarts(pyridine_pattern)
+
+    # Rule 4: Aromatic ring with electron-donating groups (amino, hydroxyl, methyl)
+    amino_on_aromatic_pattern = '[c][NX3H2]'
+    hydroxyl_on_aromatic_pattern = '[c][OX2H]'
+    methyl_on_aromatic_pattern = '[c][CH3]'
+
+    amino_on_aromatic_compiled = Chem.MolFromSmarts(amino_on_aromatic_pattern)
+    hydroxyl_on_aromatic_compiled = Chem.MolFromSmarts(hydroxyl_on_aromatic_pattern)
+    methyl_on_aromatic_compiled = Chem.MolFromSmarts(methyl_on_aromatic_pattern)
+
+    # Rule 5: Perfluoroalkyl groups
+    perfluoroalkyl_pattern = '[CX4](F)(F)(F)'  # Trifluoromethyl group
+    perfluoroalkyl_compiled = Chem.MolFromSmarts(perfluoroalkyl_pattern)
+
+    # Rule 6: Multiple hydroxyl groups (-OH) attached to sp3 carbons
+    hydroxyl_group_pattern = '[CX4][OX2H]'
+    hydroxyl_group_compiled = Chem.MolFromSmarts(hydroxyl_group_pattern)
+
+    # Rule 7: Ether linkage connected to terminal amino group
+    ether_amino_pattern = '[NX3H2]-[C;!$(C=O)]-[OX2]-[C;!$(C=O)]'
+    ether_amino_compiled = Chem.MolFromSmarts(ether_amino_pattern)
+
+    # Rule 8: Amino acids with bulky aromatic side chains lacking additional coordinating groups
+    amino_acid_pattern = '[NX3H2]-[CX4]-[CX3](=O)[OX1H1]'
+    indole_pattern = 'c1ccc2c(c1)cc[nH]2'  # Indole ring
+    naphthalene_pattern = 'c1cc2cccc2cc1'  # Naphthalene ring
+    biphenyl_pattern = 'c1cc(ccc1)c2ccccc2'  # Biphenyl ring
+
+    amino_acid_compiled = Chem.MolFromSmarts(amino_acid_pattern)
+    indole_compiled = Chem.MolFromSmarts(indole_pattern)
+    naphthalene_compiled = Chem.MolFromSmarts(naphthalene_pattern)
+    biphenyl_compiled = Chem.MolFromSmarts(biphenyl_pattern)
+    bulky_aromatic_patterns = [indole_compiled, naphthalene_compiled, biphenyl_compiled]
+
+    # Rule 9: Long aliphatic chain with terminal hydroxyl and carboxylic acid group
+    rule9_pattern = '[CX3](=O)[OX1H1]-[C;!$(C=O)]{6,}-[OX2H]'
+    rule9_compiled = Chem.MolFromSmarts(rule9_pattern)
+
+    # Rule 10: Ketone groups adjacent to electron-donating groups
+    ketone_pattern = '[CX3](=O)[#6]'
+    ketone_compiled = Chem.MolFromSmarts(ketone_pattern)
+    edg_patterns = ['[CX4][OX2H]', '[CX4][NX3H2]', '[CX4H][CX4][OX2H]', '[CX4H][CX4][NX3H2]']
+    edg_compiled_patterns = [Chem.MolFromSmarts(pat) for pat in edg_patterns]
+
+    # Compile rules into a list
+    rules = []
+
+    # Rule 1
+    rules.append({
+        'number': 1,
+        'patterns': [rule1_compiled],
+        'exclude_patterns': [],
+        'additional_checks': True,  # To check for exactly one carboxylic acid group
+        'carboxylic_acid_compiled': carboxylic_acid_compiled,
+        'prediction': 1
+    })
+
+    # Rule 2
+    rules.append({
+        'number': 2,
+        'patterns': [thiol_compiled],
+        'prediction': 1
+    })
+
+    # Rule 3
+    rules.append({
+        'number': 3,
+        'patterns': [nitro_on_aromatic_compiled, cyano_on_aromatic_compiled, sulfonyl_on_aromatic_compiled, pyridine_compiled],
+        'prediction': 1
+    })
+
+    # Rule 4
+    rules.append({
+        'number': 4,
+        'patterns': [amino_on_aromatic_compiled, hydroxyl_on_aromatic_compiled, methyl_on_aromatic_compiled],
+        'prediction': -1
+    })
+
+    # Rule 5
+    rules.append({
+        'number': 5,
+        'patterns': [perfluoroalkyl_compiled],
+        'prediction': -1
+    })
+
+    # Rule 6
+    rules.append({
+        'number': 6,
+        'patterns': [hydroxyl_group_compiled],
+        'count_threshold': 2,
+        'prediction': -1
+    })
+
+    # Rule 7
+    rules.append({
+        'number': 7,
+        'patterns': [ether_amino_compiled],
+        'prediction': 1
+    })
+
+    # Rule 8
+    rules.append({
+        'number': 8,
+        'patterns': [amino_acid_compiled],
+        'bulky_aromatic_patterns': bulky_aromatic_patterns,
+        'prediction': -1
+    })
+
+    # Rule 9
+    rules.append({
+        'number': 9,
+        'patterns': [rule9_compiled],
+        'prediction': 1
+    })
+
+    # Rule 10
+    rules.append({
+        'number': 10,
+        'patterns': [ketone_compiled],
+        'adjacent_patterns': edg_compiled_patterns,
+        'prediction': -1
+    })
+
+    # Initialize results
+    results = []
+
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = False
+                if rule['number'] == 1:
+                    # Check for primary amino group connected via aliphatic chain to carboxylic acid
+                    if mol.HasSubstructMatch(rule['patterns'][0]):
+                        # Check for exactly one carboxylic acid group
+                        carboxylic_acid_matches = mol.GetSubstructMatches(rule['carboxylic_acid_compiled'])
+                        if len(carboxylic_acid_matches) == 1:
+                            match = True
+                elif rule['number'] == 6:
+                    # Check for multiple hydroxyl groups attached to sp3 carbons
+                    matches = mol.GetSubstructMatches(rule['patterns'][0])
+                    if len(matches) >= rule['count_threshold']:
+                        match = True
+                elif rule['number'] == 8:
+                    # Must match amino acid pattern and have bulky aromatic side chain
+                    if mol.HasSubstructMatch(rule['patterns'][0]):
+                        for bulky_pat in rule['bulky_aromatic_patterns']:
+                            if mol.HasSubstructMatch(bulky_pat):
+                                match = True
+                                break
+                elif rule['number'] == 10:
+                    # Check for ketone adjacent to electron-donating groups
+                    ketone_matches = mol.GetSubstructMatches(rule['patterns'][0])
+                    if ketone_matches:
+                        for ketone_match in ketone_matches:
+                            ketone_atom_idx = ketone_match[0]  # Ketone carbon atom
+                            for edg_pat in rule['adjacent_patterns']:
+                                edg_matches = mol.GetSubstructMatches(edg_pat)
+                                for edg_match in edg_matches:
+                                    edg_atom_idx = edg_match[0]
+                                    # Check if ketone carbon and EDG atom are adjacent
+                                    bond = mol.GetBondBetweenAtoms(ketone_atom_idx, edg_atom_idx)
+                                    if bond:
+                                        match = True
+                                        break
+                                if match:
+                                    break
+                            if match:
+                                break
+                else:
+                    # General pattern matching
+                    for pat in rule['patterns']:
+                        if mol.HasSubstructMatch(pat):
+                            match = True
+                            break
+                if match:
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule["number"]}' for rule in rules])
+    return df
+
+--------------------------------------------------
+    Target Name: Fe/Hf
+    GPT Model: o1-preview-2024-09-12
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+---
+
+- **Rule 1**: **Modifiers containing a primary amino group (-NH₂) attached to an aliphatic chain without additional carboxylic acid groups predict high Fe/Hf values.**
+
+  - *Explanation*: Primary amino groups on aliphatic chains can effectively coordinate with Fe ions, enhancing Fe incorporation into the catalyst. The absence of additional carboxylic acid groups prevents potential competition or steric hindrance that could reduce coordination efficiency.
+
+  - *Supporting Data*:
+    - **High Fe/Hf**:
+      - **(2S)-2-aminobutanedioic acid** (Entry 1)
+      - **5-aminopentanoic acid** (Entry 2)
+      - **7-aminoheptanoic acid** (Entry 31)
+      - **8-aminooctanoic acid** (Entry 34)
+      - **(2S)-6-acetamido-2-aminohexanoic acid** (Entry 33)
+    - **Low Fe/Hf**:
+      - **(2S)-2-aminopentanedioic acid** (Entry 0) - contains additional carboxylic acid group.
+      - **4-aminobenzoic acid** (Entry 3) - amino group attached to aromatic ring, which is less effective.
+
+---
+
+- **Rule 2**: **Modifiers containing both a thiol group (-SH) and a carboxylic acid group (-COOH) predict high Fe/Hf values.**
+
+  - *Explanation*: Thiol groups are strong ligands for Fe ions due to their soft Lewis base character. The presence of both -SH and -COOH groups provides multiple coordination sites, enhancing Fe incorporation.
+
+  - *Supporting Data*:
+    - **High Fe/Hf**:
+      - **3-sulfanylpropanoic acid** (Entry 17)
+      - **4-sulfanylbenzoic acid** (Entry 9)
+    - **Low Fe/Hf**:
+      - **5-(4-hydroxyphenyl)pentanoic acid** (Entry 6) - lacks thiol group.
+
+---
+
+- **Rule 3**: **Modifiers containing a pyridine ring with an accessible nitrogen atom predict high Fe/Hf values.**
+
+  - *Explanation*: The nitrogen in the pyridine ring can coordinate with Fe ions, facilitating Fe incorporation. Accessibility of the nitrogen (i.e., not hindered by adjacent groups) enhances coordination efficiency.
+
+  - *Supporting Data*:
+    - **High Fe/Hf**:
+      - **4-pyridin-4-ylbenzoic acid** (Entry 11)
+      - **4-pyridin-4-ylbutanoic acid** (Entry 24)
+    - **Low Fe/Hf**:
+      - **Pyridine-3-carboxylic acid** (Entry 21) - carboxylic acid directly attached to pyridine may hinder coordination.
+      - **2-oxo-1H-pyridine-4-carboxylic acid** (Entry 7) - additional keto group may interfere.
+
+---
+
+- **Rule 4**: **Modifiers with electron-withdrawing groups (e.g., nitro group -NO₂) on an aromatic ring predict high Fe/Hf values.**
+
+  - *Explanation*: Electron-withdrawing groups increase the positive character of the aromatic ring, enhancing its interaction with Fe ions through coordination bonds.
+
+  - *Supporting Data*:
+    - **High Fe/Hf**:
+      - **4-nitrobenzoic acid** (Entry 20)
+    - **Low Fe/Hf**:
+      - **4-methylbenzoic acid** (Entry 22) - contains electron-donating methyl group.
+      - **4-formylbenzoic acid** (Entry 19) - aldehyde may not enhance coordination similarly.
+
+---
+
+- **Rule 5**: **Modifiers containing multiple ether linkages (-O-) in the aliphatic chain and a terminal carboxylic acid group predict high Fe/Hf values.**
+
+  - *Explanation*: Ether oxygen atoms can donate lone pairs to Fe ions, and the flexibility of ether linkages facilitates effective coordination.
+
+  - *Supporting Data*:
+    - **High Fe/Hf**:
+      - **2-[2-(2-methoxyethoxy)ethoxy]acetic acid** (Entry 10)
+      - **3-[2-(2-aminoethoxy)ethoxy]propanoic acid** (Entry 32)
+    - **Low Fe/Hf**:
+      - **2-[[1,3-dihydroxy-2-(hydroxymethyl)propan-2-yl]oxy]acetic acid** (Entry 5) - hydroxyl groups may hinder coordination.
+
+---
+
+- **Rule 6**: **Modifiers containing multiple hydroxyl groups (-OH) on aliphatic chains or aromatic rings predict low Fe/Hf values.**
+
+  - *Explanation*: Multiple hydroxyl groups increase hydrogen bonding and rigidity, which can reduce the flexibility and availability of coordination sites for Fe ions.
+
+  - *Supporting Data*:
+    - **Low Fe/Hf**:
+      - **(2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid** (Entry 8)
+      - **5-formyl-2-hydroxybenzoic acid** (Entry 18)
+    - **High Fe/Hf**:
+      - **7-hydroxyheptanoic acid** (Entry 29) - single hydroxyl group distant from carboxyl may allow coordination.
+
+---
+
+- **Rule 7**: **Modifiers containing perfluoroalkyl groups or trifluoromethyl groups attached to a carboxylic acid predict low Fe/Hf values.**
+
+  - *Explanation*: Perfluoroalkyl groups are highly electronegative and hydrophobic, which can reduce solubility and coordination ability with Fe ions.
+
+  - *Supporting Data*:
+    - **Low Fe/Hf**:
+      - **2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid** (Entry 13)
+      - **4-[(2,2,2-trifluoroacetyl)amino]butanoic acid** (Entry 28)
+    - **High Fe/Hf**:
+      - None with perfluoroalkyl groups.
+
+---
+
+- **Rule 8**: **Modifiers that are aromatic carboxylic acids with electron-donating groups (e.g., hydroxyl or methoxy groups) predict low Fe/Hf values.**
+
+  - *Explanation*: Electron-donating groups increase electron density on the aromatic ring, reducing its ability to coordinate with Fe ions.
+
+  - *Supporting Data*:
+    - **Low Fe/Hf**:
+      - **5-(4-hydroxyphenyl)pentanoic acid** (Entry 6)
+      - **3-(4-hydroxyphenyl)propanoic acid** (Entry 30)
+      - **2-[(4-hydroxybenzoyl)amino]acetic acid** (Entry 26)
+    - **High Fe/Hf**:
+      - **4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid** (Entry 25) - exception due to additional coordinating features like ketone groups.
+
+---
+
+- **Rule 9**: **Modifiers that are diacids (compounds with two carboxylic acid groups) predict low Fe/Hf values unless they have other strong coordinating groups that facilitate chelation.**
+
+  - *Explanation*: Multiple carboxylic acid groups can lead to complex formation that doesn't favor Fe incorporation, especially if not properly positioned for chelation.
+
+  - *Supporting Data*:
+    - **Low Fe/Hf**:
+      - **(2S)-2-aminopentanedioic acid** (Entry 0)
+      - **4-oxoheptanedioic acid** (Entry 27)
+    - **High Fe/Hf**:
+      - **(2S)-2-aminobutanedioic acid** (Entry 1) - exception possibly due to effective chelation despite being a diacid.
+
+---
+
+- **Rule 10**: **Modifiers with bulky aromatic side chains, such as indole groups, predict low Fe/Hf values due to steric hindrance affecting coordination.**
+
+  - *Explanation*: Bulky groups can hinder the accessibility of coordinating sites, reducing Fe incorporation.
+
+  - *Supporting Data*:
+    - **Low Fe/Hf**:
+      - **(2R)-2-amino-3-(1H-indol-3-yl)propanoic acid** (Entry 14)
+    - **High Fe/Hf**:
+      - **(2S)-2-amino-3-phenylpropanoic acid** (Entry 12) - smaller phenyl group allows effective coordination.
+
+---
+
+- **Rule 11**: **Modifiers that are simple aliphatic carboxylic acids without additional coordinating functional groups predict low Fe/Hf values.**
+
+  - *Explanation*: Lack of additional functional groups means fewer sites for effective coordination with Fe ions.
+
+  - *Supporting Data*:
+    - **Low Fe/Hf**:
+      - **Octanoic acid** (Entry 4)
+    - **High Fe/Hf**:
+      - **7-hydroxyheptanoic acid** (Entry 29) - presence of hydroxyl group may enhance coordination.
+
+---
+
+**End of Rules**
+
+---
+
+These rules have been developed by thoroughly analyzing the dataset to identify patterns based on combinations of functional groups and structural features. The focus has been on:
+
+- **Combining Multiple Substructures**: Emphasizing how different functional groups within the same molecule interact to influence Fe coordination.
+- **Underlying Physical-Chemical Properties**: Considering electron-donating and electron-withdrawing effects, Lewis acidity/basicity, steric factors, and molecular flexibility.
+- **Predictive Clarity**: Each rule explicitly states whether modifiers fitting its description are expected to result in high or low Fe/Hf values.
+- **Coverage**: Prioritizing rules that cover a broader range of the dataset while maintaining a balance between simplicity and complexity.
+
+By applying these rules, chemists can predict the Fe/Hf outcome for new modifiers based on their structural features. This aids in the rational design of modifiers to optimize catalyst performance in the targeted radical-mediated remote δ-C(sp³)–H bond functionalization reaction. The rules serve as guidelines for selecting or synthesizing modifiers that enhance Fe incorporation into the catalyst, thereby improving the reaction yield.
+
+------------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+Rule 1,Rule 2,Rule 3,Rule 4,Rule 5,Rule 6,Rule 7,Rule 8,Rule 9,Rule 10,Rule 11
+0,0,0,0,0,0,0,0,0,0,-1
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,-1
+0,0,0,0,0,0,0,0,0,0,-1
+0,0,0,0,0,0,0,0,0,0,-1
+0,0,0,0,0,0,0,-1,0,0,-1
+0,0,0,0,0,0,0,0,0,0,-1
+0,0,0,0,0,0,0,0,0,0,-1
+0,1,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,-1
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,-1
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,-1
+0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,-1,0,0,-1
+0,0,0,0,0,0,0,0,0,0,-1
+0,0,0,0,0,0,0,0,0,0,-1
+0,0,0,0,0,0,0,0,0,0,-1
+0,0,0,0,0,0,0,0,0,0,-1
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,-1
+0,0,0,0,0,0,0,-1,0,0,0
+0,0,0,0,0,0,0,-1,0,0,-1
+0,0,0,0,0,0,0,0,0,0,-1
+0,0,0,0,0,0,0,0,0,0,-1
+0,0,0,0,0,0,0,0,0,0,-1
+0,0,0,0,0,0,0,-1,0,0,-1
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.8285714285714286; Test Accuracy: 0.0
+    Train Support: 0.45714285714285713; Test Support: 0.0
+    Train Confidence: 0.8; Test Confidence: 0.0
+    Train Lift: 1.5555555555555558; Test Lift: NONE
+    Train Leverage: 0.163265306122449; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    Current Rule Code:
+def rule2matrix(smiles_list):
+    # Define SMARTS patterns for functional groups and structural features
+
+    # Carboxylic acid group (-COOH)
+    carboxylic_acid = ['[CX3](=O)[OX2H1]', '[CX3](=O)[O-]']
+
+    # Primary amino group (-NH2) attached to an aliphatic carbon
+    primary_aliphatic_amine = '[NX3H2][CX4]'
+    
+    # Additional carboxylic acid groups (excluding the one attached to the amine chain)
+    additional_carboxylic_acid = '[CX3](=O)[OX1-,OX2H1]'
+
+    # Thiol group (-SH)
+    thiol = '[SX2H]'
+    
+    # Pyridine ring with accessible nitrogen
+    pyridine_ring = '[nX2]1cccc1'
+
+    # Electron-withdrawing groups on aromatic ring (e.g., nitro group)
+    nitro_group_on_aromatic = '[c][NX3](=O)=O'
+    
+    # Ether linkage in aliphatic chain (-O-)
+    ether_linkage = '[#6][OX2][#6]'
+    
+    # Multiple hydroxyl groups (-OH)
+    hydroxyl_group = '[OX2H]'
+    
+    # Perfluoroalkyl or trifluoromethyl groups
+    perfluoroalkyl = '[CX4]([F,Cl,Br,I])[F,Cl,Br,I][F,Cl,Br,I]'
+    
+    # Electron-donating groups on aromatic ring (e.g., hydroxyl or methoxy group)
+    hydroxyl_or_methoxy_on_aromatic = ['[c][OX2H]', '[c][OX2][CH3]']
+    
+    # Diacid (two carboxylic acid groups)
+    diacid = '[CX3](=O)[OX1-,OX2H1][#6][#6][#6][CX3](=O)[OX1-,OX2H1]'
+    
+    # Bulky aromatic side chains (e.g., indole group)
+    indole_group = 'c1cc2c(c1)cc[nH]2'
+    
+    # Simple aliphatic carboxylic acids without additional coordinating functional groups
+    simple_aliphatic_acid = '[#6][CX3](=O)[OX1-,OX2H1]'
+    
+    # Aromatic amine attached directly to aromatic ring (aniline)
+    aromatic_amine = '[c][NX3H2]'
+    
+    # Define the rules with their associated patterns and predictions
+    rules = [
+        {
+            'number': 1,
+            'description': 'Modifiers containing a primary amino group (-NH₂) attached to an aliphatic chain without additional carboxylic acid groups predict high Fe/Hf values.',
+            'patterns': [
+                [primary_aliphatic_amine]  # Primary aliphatic amine
+            ],
+            'exclude_patterns': [
+                additional_carboxylic_acid  # Exclude additional carboxylic acid groups
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 2,
+            'description': 'Modifiers containing both a thiol group (-SH) and a carboxylic acid group (-COOH) predict high Fe/Hf values.',
+            'patterns': [
+                [thiol],  # Thiol group
+                carboxylic_acid  # Carboxylic acid
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 3,
+            'description': 'Modifiers containing a pyridine ring with an accessible nitrogen atom predict high Fe/Hf values.',
+            'patterns': [
+                [pyridine_ring]  # Pyridine ring
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 4,
+            'description': 'Modifiers with electron-withdrawing groups (e.g., nitro group -NO₂) on an aromatic ring predict high Fe/Hf values.',
+            'patterns': [
+                [nitro_group_on_aromatic],  # Nitro group on aromatic ring
+                carboxylic_acid  # Carboxylic acid
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 5,
+            'description': 'Modifiers containing multiple ether linkages (-O-) in the aliphatic chain and a terminal carboxylic acid group predict high Fe/Hf values.',
+            'patterns': [
+                [ether_linkage],  # Ether linkage
+                carboxylic_acid  # Carboxylic acid
+            ],
+            'count_threshold': {'[OX2]': 2},  # At least two ether linkages
+            'prediction': 1
+        },
+        {
+            'number': 6,
+            'description': 'Modifiers containing multiple hydroxyl groups (-OH) on aliphatic chains or aromatic rings predict low Fe/Hf values.',
+            'patterns': [
+                [hydroxyl_group]  # Hydroxyl group
+            ],
+            'count_threshold': {'[OX2H]': 2},  # At least two hydroxyl groups
+            'prediction': -1
+        },
+        {
+            'number': 7,
+            'description': 'Modifiers containing perfluoroalkyl groups or trifluoromethyl groups attached to a carboxylic acid predict low Fe/Hf values.',
+            'patterns': [
+                [perfluoroalkyl],  # Perfluoroalkyl or trifluoromethyl group
+                carboxylic_acid  # Carboxylic acid
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 8,
+            'description': 'Modifiers that are aromatic carboxylic acids with electron-donating groups (e.g., hydroxyl or methoxy groups) predict low Fe/Hf values.',
+            'patterns': [
+                hydroxyl_or_methoxy_on_aromatic,  # Hydroxyl or methoxy on aromatic ring
+                carboxylic_acid  # Carboxylic acid
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 9,
+            'description': 'Modifiers that are diacids predict low Fe/Hf values unless they have other strong coordinating groups that facilitate chelation.',
+            'patterns': [
+                [diacid]  # Diacid pattern
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 10,
+            'description': 'Modifiers with bulky aromatic side chains, such as indole groups, predict low Fe/Hf values due to steric hindrance affecting coordination.',
+            'patterns': [
+                [indole_group]  # Indole group
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 11,
+            'description': 'Modifiers that are simple aliphatic carboxylic acids without additional coordinating functional groups predict low Fe/Hf values.',
+            'patterns': [
+                [simple_aliphatic_acid]  # Simple aliphatic carboxylic acid
+            ],
+            'exclude_patterns': [
+                [primary_aliphatic_amine, thiol, ether_linkage, pyridine_ring]  # Exclude molecules with these groups
+            ],
+            'prediction': -1
+        }
+    ]
+
+    # Compile SMARTS patterns
+    for rule in rules:
+        compiled_patterns = []
+        for group in rule.get('patterns', []):
+            compiled_group = [Chem.MolFromSmarts(p) for p in group]
+            compiled_patterns.append(compiled_group)
+        rule['compiled_patterns'] = compiled_patterns
+        # Compile exclude patterns if any
+        if 'exclude_patterns' in rule:
+            compiled_excludes = []
+            for group in rule['exclude_patterns']:
+                if isinstance(group, list):
+                    compiled_group = [Chem.MolFromSmarts(p) for p in group]
+                else:
+                    compiled_group = [Chem.MolFromSmarts(group)]
+                compiled_excludes.append(compiled_group)
+            rule['compiled_exclude_patterns'] = compiled_excludes
+    
+    # Initialize results list
+    results = []
+    
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = True
+                # Check exclude patterns if any
+                if 'exclude_patterns' in rule:
+                    for group in rule['compiled_exclude_patterns']:
+                        for pat in group:
+                            if mol.HasSubstructMatch(pat):
+                                match = False
+                                break
+                        if not match:
+                            break
+                    if not match:
+                        row.append(0)
+                        continue
+                # Check required patterns
+                for compiled_group in rule['compiled_patterns']:
+                    group_match = False
+                    for pat in compiled_group:
+                        matches = mol.GetSubstructMatches(pat)
+                        if matches:
+                            # Check for count threshold if specified
+                            if 'count_threshold' in rule and pat.GetSmarts() in rule['count_threshold']:
+                                threshold = rule['count_threshold'][pat.GetSmarts()]
+                                if len(matches) >= threshold:
+                                    group_match = True
+                                    break
+                            else:
+                                group_match = True
+                                break
+                    if not group_match:
+                        match = False
+                        break
+                if match:
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception as e:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule['number']}' for rule in rules])
+    return df
+--------------------------------------------------
+    Target Name: Fe/Hf
+    GPT Model: o1-preview-2024-09-12
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+---
+
+**Rule 1**: **Modifiers containing an *amino group (-NH₂)* and a *carboxylic acid group (-COOH)* separated by a carbon chain of four or five carbons predict a **high Fe/Hf** value.**
+
+- **Explanation**: The amino and carboxylic acid groups can act as bidentate ligands, coordinating with Fe ions. A chain length of four or five carbons provides optimal flexibility for chelation without excessive steric hindrance.
+
+- **Supporting Data**:
+  - **High Fe/Hf**:
+    - **5-aminopentanoic acid** (Entry 2)
+    - **7-aminoheptanoic acid** (Entry 31)
+    - **8-aminooctanoic acid** (Entry 34)
+  - **Low Fe/Hf**:
+    - **(2S)-2-aminopentanedioic acid** (Entry 0) – Additional carboxylic acid group may interfere with coordination.
+    - **(2S)-2-aminobutanedioic acid** (Entry 1) – Shorter chain length may limit flexibility.
+
+---
+
+**Rule 2**: **Modifiers with a *thiol group (-SH)* and a *carboxylic acid group (-COOH)* predict a **high Fe/Hf** value.**
+
+- **Explanation**: Thiol groups are strong ligands for Fe ions due to their soft nucleophilic character. The presence of a carboxylic acid group aids in chelation through additional coordination sites.
+
+- **Supporting Data**:
+  - **High Fe/Hf**:
+    - **3-sulfanylpropanoic acid** (Entry 17)
+    - **4-sulfanylbenzoic acid** (Entry 9)
+  - **Low Fe/Hf**:
+    - No entries with this combination reported as low Fe/Hf.
+
+---
+
+**Rule 3**: **Modifiers featuring a *pyridine ring* directly connected to a *carboxylic acid group (-COOH)* predict a **high Fe/Hf** value.**
+
+- **Explanation**: The nitrogen in the pyridine ring provides a strong coordination site for Fe ions. The carboxylic acid group can further stabilize the metal complex.
+
+- **Supporting Data**:
+  - **High Fe/Hf**:
+    - **4-pyridin-4-ylbenzoic acid** (Entry 11)
+    - **4-pyridin-4-ylbutanoic acid** (Entry 24)
+  - **Low Fe/Hf**:
+    - **Pyridine-3-carboxylic acid** (Entry 21) – The position of the carboxyl group may not favor simultaneous coordination.
+
+---
+
+**Rule 4**: **Modifiers containing multiple *ether linkages (-O-)* within an aliphatic chain ending with a *carboxylic acid group (-COOH)* predict a **high Fe/Hf** value.**
+
+- **Explanation**: Ether oxygen atoms can coordinate with Fe ions, and the flexibility of the ether linkages facilitates optimal metal-ligand interactions.
+
+- **Supporting Data**:
+  - **High Fe/Hf**:
+    - **2-[2-(2-methoxyethoxy)ethoxy]acetic acid** (Entry 10)
+    - **3-[2-(2-aminoethoxy)ethoxy]propanoic acid** (Entry 32)
+  - **Low Fe/Hf**:
+    - No entries with this combination reported as low Fe/Hf.
+
+---
+
+**Rule 5**: **Modifiers that are simple *aliphatic carboxylic acids* without additional coordinating functional groups predict a **low Fe/Hf** value.**
+
+- **Explanation**: Without strong coordinating groups, these modifiers have limited ability to chelate Fe ions, resulting in lower incorporation.
+
+- **Supporting Data**:
+  - **Low Fe/Hf**:
+    - **Octanoic acid** (Entry 4)
+    - **4-oxoheptanedioic acid** (Entry 27)
+  - **High Fe/Hf**:
+    - **7-hydroxyheptanoic acid** (Entry 29) – Exception due to the hydroxyl group providing additional coordination.
+
+---
+
+**Rule 6**: **Modifiers with an *electron-withdrawing group* (e.g., nitro group -NO₂) on an aromatic ring bearing a *carboxylic acid group (-COOH)* predict a **high Fe/Hf** value.**
+
+- **Explanation**: Electron-withdrawing groups enhance the ability of the ligand to accept electron density from the Fe ion, stabilizing the complex.
+
+- **Supporting Data**:
+  - **High Fe/Hf**:
+    - **4-nitrobenzoic acid** (Entry 20)
+  - **Low Fe/Hf**:
+    - **4-methylbenzoic acid** (Entry 22) – Electron-donating methyl group reduces coordination efficiency.
+
+---
+
+**Rule 7**: **Modifiers containing adjacent *hydroxyl groups (-OH)* and a *carboxylic acid group (-COOH)* predict a **low Fe/Hf** value due to possible intramolecular hydrogen bonding limiting coordination sites.**
+
+- **Explanation**: Intramolecular hydrogen bonding between hydroxyl groups can reduce the availability of oxygen atoms for coordination with Fe ions.
+
+- **Supporting Data**:
+  - **Low Fe/Hf**:
+    - **(2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid** (Entry 8)
+    - **2-[[1,3-dihydroxy-2-(hydroxymethyl)propan-2-yl]oxy]acetic acid** (Entry 5)
+  - **High Fe/Hf**:
+    - **7-hydroxyheptanoic acid** (Entry 29) – Single hydroxyl group contributes to coordination.
+
+---
+
+**Rule 8**: **Modifiers with *fluorinated alkyl chains* attached to a *carboxylic acid group (-COOH)* predict a **low Fe/Hf** value.**
+
+- **Explanation**: Fluorine's high electronegativity withdraws electron density, decreasing the ligand's ability to donate electrons for effective coordination.
+
+- **Supporting Data**:
+  - **Low Fe/Hf**:
+    - **2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid** (Entry 13)
+    - **4-[(2,2,2-trifluoroacetyl)amino]butanoic acid** (Entry 28)
+  - **High Fe/Hf**:
+    - No entries with fluorinated groups reported as high Fe/Hf.
+
+---
+
+**Rule 9**: **Modifiers featuring *electron-donating groups* (e.g., hydroxyl -OH or methoxy -OCH₃) on an aromatic ring with a *carboxylic acid group (-COOH)* predict a **low Fe/Hf** value.**
+
+- **Explanation**: Electron-donating groups increase electron density on the aromatic ring, potentially hindering coordination with Fe ions.
+
+- **Supporting Data**:
+  - **Low Fe/Hf**:
+    - **5-(4-hydroxyphenyl)pentanoic acid** (Entry 6)
+    - **3-(4-hydroxyphenyl)propanoic acid** (Entry 30)
+    - **2-[(4-hydroxybenzoyl)amino]acetic acid** (Entry 26)
+  - **High Fe/Hf**:
+    - **4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid** (Entry 25) – Exception due to additional ketone group.
+
+---
+
+**Rule 10**: **Modifiers with *bulky aromatic substituents* near coordination sites predict a **low Fe/Hf** value due to steric hindrance.**
+
+- **Explanation**: Large aromatic groups can obstruct Fe ions from accessing coordination sites.
+
+- **Supporting Data**:
+  - **Low Fe/Hf**:
+    - **(2R)-2-amino-3-(1H-indol-3-yl)propanoic acid** (Entry 14)
+  - **High Fe/Hf**:
+    - **(2S)-2-amino-3-phenylpropanoic acid** (Entry 12) – Smaller phenyl group allows coordination.
+
+---
+
+**Rule 11**: **Modifiers containing both an *acetamido group (-NHCOCH₃)* and an *amino group (-NH₂)* on an aliphatic chain with a *carboxylic acid group (-COOH)* predict a **high Fe/Hf** value.**
+
+- **Explanation**: Multiple nitrogen donors enhance chelation with Fe ions.
+
+- **Supporting Data**:
+  - **High Fe/Hf**:
+    - **(2S)-6-acetamido-2-aminohexanoic acid** (Entry 33)
+  - **Low Fe/Hf**:
+    - No entries with this combination reported as low Fe/Hf.
+
+---
+
+**Rule 12**: **Modifiers incorporating a *ketone group (C=O)* adjacent to an aromatic ring and a *carboxylic acid group (-COOH)* predict a **high Fe/Hf** value.**
+
+- **Explanation**: The ketone's carbonyl oxygen provides an additional coordination site, enhancing metal binding.
+
+- **Supporting Data**:
+  - **High Fe/Hf**:
+    - **1,3-dioxo-2-benzofuran-5-carboxylic acid** (Entry 16)
+    - **4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid** (Entry 25)
+  - **Low Fe/Hf**:
+    - **4-formylbenzoic acid** (Entry 19) – Aldehyde may not coordinate effectively.
+
+---
+
+**Rule 13**: **Modifiers with a *formyl group (-CHO)* on an aromatic ring and a *carboxylic acid group (-COOH)* predict a **low Fe/Hf** value.**
+
+- **Explanation**: Formyl groups may engage in competing reactions or reduce ligand efficiency.
+
+- **Supporting Data**:
+  - **Low Fe/Hf**:
+    - **5-formyl-2-hydroxybenzoic acid** (Entry 18)
+    - **4-formylbenzoic acid** (Entry 19)
+  - **High Fe/Hf**:
+    - No entries with this combination reported as high Fe/Hf.
+
+---
+
+**Rule 14**: **Modifiers containing both *ether linkages (-O-)* and *amino groups (-NH₂)* within the same aliphatic chain ending with a *carboxylic acid group (-COOH)* predict a **high Fe/Hf** value.**
+
+- **Explanation**: Multiple donors in the chain improve coordination with Fe ions.
+
+- **Supporting Data**:
+  - **High Fe/Hf**:
+    - **3-[2-(2-aminoethoxy)ethoxy]propanoic acid** (Entry 32)
+  - **Low Fe/Hf**:
+    - No entries with this combination reported as low Fe/Hf.
+
+---
+
+**Rule 15**: **Modifiers with *heterocyclic rings* containing multiple heteroatoms adjacent to a *carboxylic acid group (-COOH)* predict a **low Fe/Hf** value if steric or electronic factors hinder coordination.**
+
+- **Explanation**: Certain heterocycles may not position their heteroatoms favorably for coordination.
+
+- **Supporting Data**:
+  - **Low Fe/Hf**:
+    - **1H-pyrazole-4-carboxylic acid** (Entry 15)
+  - **High Fe/Hf**:
+    - **4-pyridin-4-ylbenzoic acid** (Entry 11) – Pyridine nitrogen coordinates effectively.
+
+---
+
+**End of Rules**
+
+---
+
+These rules establish correlations between the structural features of molecular modifiers and their impact on the Fe/Hf ratio in the catalyst. By focusing on combinations of functional groups and considering their chemical properties, the rules aim to predict whether a modifier will result in a high or low Fe/Hf value.
+
+**Key considerations in these rules include**:
+
+- **Functional Groups and Coordination Ability**: Identifying how specific functional groups (e.g., amino, thiol, pyridine rings) act as ligands for Fe ions.
+- **Electronic Effects**: Considering how electron-withdrawing or electron-donating groups influence the ligand's ability to coordinate with Fe.
+- **Steric Factors**: Recognizing that bulky substituents near coordination sites can hinder metal binding.
+- **Intramolecular Interactions**: Understanding that intramolecular hydrogen bonding can reduce the availability of donor atoms for coordination.
+- **Chain Length and Flexibility**: Noting that appropriate chain lengths facilitate effective chelation without causing steric hindrance.
+
+By applying these rules, researchers can predict the likely Fe/Hf outcome based on the modifier's structure, aiding in the selection and design of modifiers to optimize catalyst performance in the reaction.
+
+**Note**: While these rules are based on the provided dataset and chemical principles, experimental validation is necessary. Additional factors not captured here may influence the Fe/Hf ratio in practical applications.---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+Rule 1,Rule 2,Rule 3,Rule 4,Rule 5,Rule 6,Rule 7,Rule 8,Rule 9,Rule 10
+0,0,0,0,0,0,0,0,0,-1
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,-1,-1
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,-1,0
+0,0,0,0,0,0,0,0,0,-1
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,-1,-1
+0,0,0,0,0,0,0,0,0,-1
+0,0,0,0,0,0,0,0,0,-1
+0,0,1,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,-1
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,-1,0
+0,0,0,0,0,0,0,0,-1,-1
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,-1,-1
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.6571428571428571; Test Accuracy: 0.0
+    Train Support: 0.09523809523809523; Test Support: 0.0
+    Train Confidence: 0.47222222222222215; Test Confidence: 0.3333333333333333
+    Train Lift: 0.91820987654321; Test Lift: NONE
+    Train Leverage: 0.017414965986394568; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    Current Rule Code:
+def rule2matrix(smiles_list):
+    # Define SMARTS patterns for functional groups
+    carboxylic_acid = '[CX3](=O)[OX2H1]'
+    amino_group = '[NX3H2]'
+    thiol_group = '[SX2H]'
+    pyridine_ring = 'n1ccccc1'
+    ether_linkage = '[#6][OX2][#6]'
+    hydroxyl_group = '[OX2H]'
+    halogen = '[F,Cl,Br,I]'
+    nitro_group = '[NX3](=O)=O'
+    electron_donating_aromatic = '[c][OX2H]'
+    methoxy_group = '[OX2][CH3]'
+    formyl_group = '[CX3H1](=O)[#6]'
+    ketone_adjacent_aromatic = '[#6][CX3](=O)[#6]'
+    aromatic_ring = 'c1ccccc1'
+    fluorinated_alkyl = '[CX4][F][F][F]'
+    # Define the rules with their associated patterns and predictions
+    rules = [
+        {
+            'number': 1,
+            'description': 'High Fe/Hf: Modifiers containing an amino group (-NH2) and a carboxylic acid group (-COOH) separated by a carbon chain of four or five carbons.',
+            'patterns': [
+                ['[NX3H2][CH2][CH2][CH2][CH2][CX3](=O)[OX2H1]'],  # Chain of 4 carbons
+                ['[NX3H2][CH2][CH2][CH2][CH2][CH2][CX3](=O)[OX2H1]']  # Chain of 5 carbons
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 2,
+            'description': 'High Fe/Hf: Modifiers with a thiol group (-SH) and a carboxylic acid group (-COOH).',
+            'patterns': [
+                [thiol_group],
+                [carboxylic_acid]
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 3,
+            'description': 'High Fe/Hf: Modifiers featuring a pyridine ring directly connected to a carboxylic acid group (-COOH).',
+            'patterns': [
+                ['[n][c]([CX3](=O)[OX2H1])[c]', '[n][c][c]([CX3](=O)[OX2H1])', '[n]1cccc([CX3](=O)[OX2H1])1']
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 4,
+            'description': 'High Fe/Hf: Modifiers containing multiple ether linkages (-O-) within an aliphatic chain ending with a carboxylic acid group (-COOH).',
+            'patterns': [
+                [ether_linkage],
+                [carboxylic_acid]
+            ],
+            'count_threshold': {'[!#6][OX2][!#6]': 2},  # At least two ether linkages
+            'prediction': 1
+        },
+        {
+            'number': 5,
+            'description': 'Low Fe/Hf: Modifiers that are simple aliphatic carboxylic acids without additional coordinating functional groups.',
+            'patterns': [
+                [carboxylic_acid],
+            ],
+            'exclude_patterns': [
+                [amino_group],
+                [thiol_group],
+                [ether_linkage],
+                [hydroxyl_group],
+                [pyridine_ring],
+                '[N]', '[S]',
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 6,
+            'description': 'High Fe/Hf: Modifiers with an electron-withdrawing group (e.g., nitro group -NO2) on an aromatic ring bearing a carboxylic acid group (-COOH).',
+            'patterns': [
+                [nitro_group],
+                [aromatic_ring],
+                [carboxylic_acid]
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 7,
+            'description': 'Low Fe/Hf: Modifiers containing adjacent hydroxyl groups (-OH) and a carboxylic acid group (-COOH).',
+            'patterns': [
+                [hydroxyl_group],
+                [carboxylic_acid]
+            ],
+            'count_threshold': {'[OX2H]': 2},  # At least 2 hydroxyl groups
+            'prediction': -1
+        },
+        {
+            'number': 8,
+            'description': 'Low Fe/Hf: Modifiers with fluorinated alkyl chains attached to a carboxylic acid group (-COOH).',
+            'patterns': [
+                [fluorinated_alkyl],
+                [carboxylic_acid]
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 9,
+            'description': 'Low Fe/Hf: Modifiers featuring electron-donating groups (e.g., hydroxyl -OH or methoxy -OCH3) on an aromatic ring with a carboxylic acid group (-COOH).',
+            'patterns': [
+                [electron_donating_aromatic, methoxy_group],
+                [carboxylic_acid]
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 10,
+            'description': 'Low Fe/Hf: Modifiers with bulky aromatic substituents near coordination sites causing steric hindrance.',
+            'patterns': [
+                [aromatic_ring],
+                [carboxylic_acid]
+            ],
+            'exclude_patterns': [
+                [amino_group],
+                [thiol_group],
+                [ether_linkage]
+            ],
+            'prediction': -1
+        },
+        # Additional rules (11 to 15) can be added here following the same structure...
+    ]
+    # Compile SMARTS patterns
+    for rule in rules:
+        compiled_patterns = []
+        for group in rule.get('patterns', []):
+            compiled_group = [Chem.MolFromSmarts(p) for p in group]
+            compiled_patterns.append(compiled_group)
+        rule['compiled_patterns'] = compiled_patterns
+        # Compile exclude patterns if any
+        if 'exclude_patterns' in rule:
+            compiled_excludes = []
+            for group in rule['exclude_patterns']:
+                # Exclude patterns can be a list or a string
+                if isinstance(group, list):
+                    compiled_group = [Chem.MolFromSmarts(p) for p in group]
+                else:
+                    compiled_group = [Chem.MolFromSmarts(group)]
+                compiled_excludes.append(compiled_group)
+            rule['compiled_exclude_patterns'] = compiled_excludes
+    # Initialize results list
+    results = []
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = True
+                # Check exclude patterns if any
+                if 'exclude_patterns' in rule:
+                    for group in rule['compiled_exclude_patterns']:
+                        for pat in group:
+                            if mol.HasSubstructMatch(pat):
+                                match = False
+                                break
+                        if not match:
+                            break
+                    if not match:
+                        row.append(0)
+                        continue
+                # Check required patterns
+                for compiled_group in rule['compiled_patterns']:
+                    group_match = False
+                    for pat in compiled_group:
+                        matches = mol.GetSubstructMatches(pat)
+                        if matches:
+                            # If a count threshold is specified for this pattern
+                            if 'count_threshold' in rule and pat.GetSmarts() in rule['count_threshold']:
+                                threshold = rule['count_threshold'][pat.GetSmarts()]
+                                if len(matches) >= threshold:
+                                    group_match = True
+                                    break
+                            else:
+                                group_match = True
+                                break
+                    if not group_match:
+                        match = False
+                        break
+                if match:
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception as e:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule['number']}' for rule in rules])
+    return df
+
+--------------------------------------------------
+    Target Name: Fe/Hf
+    GPT Model: o1-preview-2024-09-12
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+---
+
+**Rule 1**: **Modifiers containing both an *amino group (-NH₂)* and a *carboxylic acid group (-COOH)* separated by an aliphatic chain of at least three carbons predict a **high Fe/Hf** value.**
+
+- **Explanation**: These modifiers can act as bidentate ligands, with the optimal chain length allowing effective chelation of Fe ions without excessive steric hindrance.
+
+- **Examples**:
+  - **High Fe/Hf**:
+    - **5-aminopentanoic acid** (Entry 2)
+    - **7-aminoheptanoic acid** (Entry 31)
+    - **8-aminooctanoic acid** (Entry 34)
+    - **(2S)-2-aminobutanedioic acid** (Entry 1)
+  - **Low Fe/Hf**:
+    - **(2S)-2-aminopentanedioic acid** (Entry 0) – An additional carboxyl group may interfere with coordination.
+
+---
+
+**Rule 2**: **Modifiers featuring a *pyridine ring* connected to a *carboxylic acid group (-COOH)* in the para position predict a **high Fe/Hf** value.**
+
+- **Explanation**: The nitrogen atom in the pyridine ring provides a strong coordination site for Fe ions. When the carboxylic acid group is in the para position relative to the nitrogen, it facilitates simultaneous coordination.
+
+- **Examples**:
+  - **High Fe/Hf**:
+    - **4-pyridin-4-ylbenzoic acid** (Entry 11)
+    - **4-pyridin-4-ylbutanoic acid** (Entry 24)
+  - **Low Fe/Hf**:
+    - **Pyridine-3-carboxylic acid** (Entry 21) – The meta position may not favor effective coordination.
+
+---
+
+**Rule 3**: **Modifiers with a *thiol group (-SH)* and a *carboxylic acid group (-COOH)* predict a **high Fe/Hf** value.**
+
+- **Explanation**: Thiol groups are strong ligands for Fe ions due to their ability to donate electron density, enhancing Fe binding.
+
+- **Examples**:
+  - **High Fe/Hf**:
+    - **3-sulfanylpropanoic acid** (Entry 17)
+    - **4-sulfanylbenzoic acid** (Entry 9)
+
+---
+
+**Rule 4**: **Modifiers that are simple *aliphatic carboxylic acids* without additional coordinating functional groups predict a **low Fe/Hf** value.**
+
+- **Explanation**: Lack of additional coordinating groups reduces the ligand's ability to chelate Fe ions effectively.
+
+- **Examples**:
+  - **Low Fe/Hf**:
+    - **Octanoic acid** (Entry 4)
+    - **4-oxoheptanedioic acid** (Entry 27)
+
+---
+
+**Rule 5**: **Modifiers with multiple *hydroxyl groups (-OH)* adjacent to each other (*polyols*) along with a *carboxylic acid group (-COOH)* predict a **low Fe/Hf** value.**
+
+- **Explanation**: Intramolecular hydrogen bonding between hydroxyl groups can reduce the availability of oxygen atoms for coordination with Fe ions.
+
+- **Examples**:
+  - **Low Fe/Hf**:
+    - **(2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid** (Entry 8)
+    - **2-[[1,3-dihydroxy-2-(hydroxymethyl)propan-2-yl]oxy]acetic acid** (Entry 5)
+
+---
+
+**Rule 6**: **Modifiers containing *ether linkages (-O-)* within an aliphatic chain ending with a *carboxylic acid group (-COOH)* predict a **high Fe/Hf** value.**
+
+- **Explanation**: Ether oxygen atoms can coordinate with Fe ions, and the flexibility of ether linkages facilitates optimal metal-ligand interactions.
+
+- **Examples**:
+  - **High Fe/Hf**:
+    - **2-[2-(2-methoxyethoxy)ethoxy]acetic acid** (Entry 10)
+    - **3-[2-(2-aminoethoxy)ethoxy]propanoic acid** (Entry 32)
+
+---
+
+**Rule 7**: **Modifiers with *electron-withdrawing groups* (e.g., nitro group -NO₂) on an aromatic ring bearing a *carboxylic acid group (-COOH)* predict a **high Fe/Hf** value.**
+
+- **Explanation**: Electron-withdrawing groups enhance the ligand's ability to accept electron density from Fe ions, stabilizing the metal-ligand complex.
+
+- **Example**:
+  - **High Fe/Hf**:
+    - **4-nitrobenzoic acid** (Entry 20)
+
+---
+
+**Rule 8**: **Modifiers featuring *electron-donating groups* (e.g., hydroxyl -OH or methoxy -OCH₃) on an aromatic ring with a *carboxylic acid group (-COOH)* predict a **low Fe/Hf** value.**
+
+- **Explanation**: Electron-donating groups increase electron density on the aromatic ring, potentially hindering effective coordination with Fe ions.
+
+- **Examples**:
+  - **Low Fe/Hf**:
+    - **5-(4-hydroxyphenyl)pentanoic acid** (Entry 6)
+    - **3-(4-hydroxyphenyl)propanoic acid** (Entry 30)
+    - **2-[(4-hydroxybenzoyl)amino]acetic acid** (Entry 26)
+
+---
+
+**Rule 9**: **Modifiers with *bulky aromatic substituents* near coordination sites predict a **low Fe/Hf** value due to steric hindrance.**
+
+- **Explanation**: Large aromatic groups can obstruct Fe ions from accessing coordination sites on the ligand.
+
+- **Example**:
+  - **Low Fe/Hf**:
+    - **(2R)-2-amino-3-(1H-indol-3-yl)propanoic acid** (Entry 14)
+
+---
+
+**Rule 10**: **Modifiers incorporating a *ketone group (C=O)* adjacent to an aromatic ring and a *carboxylic acid group (-COOH)* predict a **high Fe/Hf** value.**
+
+- **Explanation**: The ketone's carbonyl oxygen provides an additional coordination site, enhancing metal binding.
+
+- **Examples**:
+  - **High Fe/Hf**:
+    - **1,3-dioxo-2-benzofuran-5-carboxylic acid** (Entry 16)
+    - **4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid** (Entry 25)
+
+---
+
+**Rule 11**: **Modifiers containing *fluorinated alkyl chains* attached to a *carboxylic acid group (-COOH)* predict a **low Fe/Hf** value.**
+
+- **Explanation**: Fluorine's high electronegativity withdraws electron density, decreasing the ligand's ability to donate electrons for effective coordination with Fe ions.
+
+- **Examples**:
+  - **Low Fe/Hf**:
+    - **2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid** (Entry 13)
+    - **4-[(2,2,2-trifluoroacetyl)amino]butanoic acid** (Entry 28)
+
+---
+
+**Rule 12**: **Modifiers containing both *ether linkages (-O-)* and *amino groups (-NH₂)* within the same aliphatic chain ending with a *carboxylic acid group (-COOH)* predict a **high Fe/Hf** value.**
+
+- **Explanation**: Multiple donor atoms (oxygen and nitrogen) within the chain enhance coordination with Fe ions.
+
+- **Example**:
+  - **High Fe/Hf**:
+    - **3-[2-(2-aminoethoxy)ethoxy]propanoic acid** (Entry 32)
+
+---
+
+**Rule 13**: **Modifiers with *heterocyclic rings* containing multiple heteroatoms adjacent to a *carboxylic acid group (-COOH)* predict a **low Fe/Hf** value if steric or electronic factors hinder coordination.**
+
+- **Explanation**: Certain heterocycles may not position their heteroatoms favorably for coordination due to steric hindrance or electronic repulsion.
+
+- **Example**:
+  - **Low Fe/Hf**:
+    - **1H-pyrazole-4-carboxylic acid** (Entry 15)
+
+---
+
+**Rule 14**: **Modifiers with a *formyl group (-CHO)* on an aromatic ring and a *carboxylic acid group (-COOH)* predict a **low Fe/Hf** value.**
+
+- **Explanation**: Formyl groups may engage in competing interactions or reduce ligand efficiency, hindering effective Fe coordination.
+
+- **Examples**:
+  - **Low Fe/Hf**:
+    - **4-formylbenzoic acid** (Entry 19)
+    - **5-formyl-2-hydroxybenzoic acid** (Entry 18)
+
+---
+
+**Rule 15**: **Modifiers containing both an *acetamido group (-NHCOCH₃)* and an *amino group (-NH₂)* on an aliphatic chain ending with a *carboxylic acid group (-COOH)* predict a **high Fe/Hf** value.**
+
+- **Explanation**: Multiple nitrogen donors enhance chelation with Fe ions by providing additional coordination sites.
+
+- **Example**:
+  - **High Fe/Hf**:
+    - **(2S)-6-acetamido-2-aminohexanoic acid** (Entry 33)
+
+---
+
+**End of Rules**
+
+---
+
+These rules establish correlations between the structural features of molecular modifiers and their impact on the Fe/Hf ratio in the catalyst. By focusing on combinations of functional groups and considering their chemical properties, the rules aim to predict whether a modifier will result in a high or low Fe/Hf value.
+
+**Key considerations in these rules include**:
+
+- **Functional Groups and Coordination Ability**: Identifying how specific functional groups (e.g., amino, thiol, pyridine rings) act as ligands for Fe ions.
+- **Electronic Effects**: Considering how electron-withdrawing or electron-donating groups influence the ligand's ability to coordinate with Fe.
+- **Steric Factors**: Recognizing that bulky substituents near coordination sites can hinder metal binding.
+- **Intramolecular Interactions**: Understanding that intramolecular hydrogen bonding can reduce the availability of donor atoms for coordination.
+- **Chain Length and Flexibility**: Noting that appropriate chain lengths facilitate effective chelation without causing steric hindrance.
+
+By applying these rules, researchers can predict the likely Fe/Hf outcome based on the modifier's structure, aiding in the selection and design of modifiers to optimize catalyst performance in the reaction.---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+Rule 1,Rule 2,Rule 3,Rule 4,Rule 5
+0,0,0,0,0
+1,0,0,0,0
+0,0,0,0,0
+1,0,0,0,0
+0,0,0,0,0
+0,0,0,-1,0
+0,0,0,-1,0
+0,0,0,0,0
+0,1,0,0,0
+0,0,0,-1,0
+0,0,1,0,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,0,-1,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,1,0,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,0,-1,0
+0,0,0,-1,0
+0,0,0,-1,0
+0,0,0,0,0
+1,0,0,0,0
+0,0,0,0,0
+0,0,0,0,0
+1,0,0,0,0
+
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.6285714285714286; Test Accuracy: 1.0
+    Train Support: 0.17142857142857143; Test Support: 0.0
+    Train Confidence: 0.8571428571428571; Test Confidence: 0.5
+    Train Lift: 1.6666666666666667; Test Lift: NONE
+    Train Leverage: 0.06857142857142857; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    Current Rule Code:
+def rule2matrix(smiles_list):
+    import logging
+    import pandas as pd
+    from rdkit import Chem
+    from rdkit.Chem import AllChem
+
+    # Set up logging
+    logging.basicConfig(level=logging.ERROR)
+
+    # Define SMARTS patterns for functional groups, incorporating corrections from suggestions
+
+    # Carboxylic acid group (-COOH), including protonated and deprotonated forms
+    carboxylic_acid = '[CX3](=O)[O-,OX1H0-,OX2H1]'
+
+    # Primary aliphatic amine (-NH2), exclude aromatic amines
+    primary_aliphatic_amine = '[NX3H2][CX4;!$([C][a])]'  # N attached to sp3 carbon not attached to aromatic carbons
+
+    # Thiol group (-SH)
+    thiol_group = '[SX2H]'
+
+    # Ether linkage in aliphatic chain
+    ether_linkage = '[CX4][OX2][CX4]'
+
+    # Pyridine ring connected to carboxylic acid in para position
+    # Advanced logic will be used to check for para substitution, so we can define pyridine ring pattern
+    pyridine_ring = '[n]1ccccc1'
+
+    # Electron-withdrawing nitro group (-NO2) on an aromatic ring
+    nitro_group_on_aromatic = '[c][N+](=O)[O-]'
+
+    # Electron-donating groups on aromatic ring
+    hydroxyl_on_aromatic = '[c][OX2H]'
+    methoxy_on_aromatic = '[c][OX2][CH3]'
+    amino_on_aromatic = '[c][NX3H2]'
+    extended_edgs = [hydroxyl_on_aromatic, methoxy_on_aromatic, amino_on_aromatic]
+
+    # Bulky aromatic substituents
+    indole_substituent = 'c1c[cH]c2c1cccc2'  # Indole structure
+
+    # Ketone group (C=O) adjacent to aromatic ring
+    aromatic_ketone = '[c][CX3](=O)[#6]'
+
+    # Fluorinated alkyl chains attached to -COOH
+    fluorinated_alkyl_chain = '[CX4]([CX4][F])[F]'
+
+    # Multiple hydroxyl groups (polyols)
+    polyol = '[OX2H][CX4][OX2H][CX4][OX2H]'
+
+    # Acetamido group (-NHCOCH3)
+    acetamido_group = '[NX3][CX3](=O)[CH3]'
+
+    # Heterocyclic rings with multiple heteroatoms
+    heterocycle_multiple_heteroatoms = '[n,o,s]1[n,o,s][n,o,s][n,o,s][n,o,s]1'
+
+    # Formyl group (-CHO) on aromatic ring
+    formyl_on_aromatic = '[c][CX3H](=O)'
+
+    # Define the rules with their associated patterns and predictions
+    rules = [
+        {
+            'number': 1,
+            'description': 'Modifiers containing both an amino group (-NH2) and a carboxylic acid group (-COOH) separated by an aliphatic chain of at least three carbons predict a high Fe/Hf value.',
+            'patterns': [primary_aliphatic_amine, carboxylic_acid],
+            'logic': 'amine_and_acid_with_aliphatic_chain',
+            'prediction': 1
+        },
+        {
+            'number': 2,
+            'description': 'Modifiers featuring a pyridine ring connected to a carboxylic acid group (-COOH) in the para position predict a high Fe/Hf value.',
+            'patterns': [pyridine_ring, carboxylic_acid],
+            'logic': 'pyridine_para_carboxylic_acid',
+            'prediction': 1
+        },
+        {
+            'number': 3,
+            'description': 'Modifiers with a thiol group (-SH) and a carboxylic acid group (-COOH) predict a high Fe/Hf value.',
+            'patterns': [thiol_group, carboxylic_acid],
+            'prediction': 1
+        },
+        {
+            'number': 4,
+            'description': 'Modifiers that are simple aliphatic carboxylic acids without additional coordinating functional groups predict a low Fe/Hf value.',
+            'patterns': [carboxylic_acid],
+            'exclude_patterns': [primary_aliphatic_amine, thiol_group, ether_linkage, '[a]'],
+            'prediction': -1
+        },
+        {
+            'number': 5,
+            'description': 'Modifiers with multiple hydroxyl groups (-OH) adjacent to each other (polyols) along with a carboxylic acid group (-COOH) predict a low Fe/Hf value.',
+            'patterns': [polyol, carboxylic_acid],
+            'prediction': -1
+        },
+        # Additional rules can be added here following the same structure
+    ]
+
+    # Compile SMARTS patterns
+    for rule in rules:
+        compiled_patterns = []
+        for smarts in rule.get('patterns', []):
+            if isinstance(smarts, list):
+                compiled_group = [Chem.MolFromSmarts(pat) for pat in smarts]
+            else:
+                compiled_group = [Chem.MolFromSmarts(smarts)]
+            compiled_patterns.append(compiled_group)
+        rule['compiled_patterns'] = compiled_patterns
+        # Compile exclude patterns if any
+        if 'exclude_patterns' in rule:
+            compiled_excludes = []
+            for smarts in rule['exclude_patterns']:
+                if isinstance(smarts, list):
+                    compiled_group = [Chem.MolFromSmarts(pat) for pat in smarts]
+                else:
+                    compiled_group = [Chem.MolFromSmarts(smarts)]
+                compiled_excludes.append(compiled_group)
+            rule['compiled_exclude_patterns'] = compiled_excludes
+
+    # Initialize results list
+    results = []
+
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = True
+                # Check exclude patterns if any
+                if 'exclude_patterns' in rule:
+                    for compiled_group in rule['compiled_exclude_patterns']:
+                        for pat in compiled_group:
+                            if mol.HasSubstructMatch(pat):
+                                match = False
+                                break
+                        if not match:
+                            break
+                    if not match:
+                        row.append(0)
+                        continue
+                # Custom logic for certain rules
+                if rule.get('logic') == 'amine_and_acid_with_aliphatic_chain':
+                    # Rule 1: Check for amine and acid separated by aliphatic chain of at least three carbons
+                    amine_matches = []
+                    for group in rule['compiled_patterns'][0]:
+                        amine_matches.extend(mol.GetSubstructMatches(group))
+                    acid_matches = []
+                    for group in rule['compiled_patterns'][1]:
+                        acid_matches.extend(mol.GetSubstructMatches(group))
+                    found = False
+                    for amine_match in amine_matches:
+                        amine_atom_idx = amine_match[0]
+                        for acid_match in acid_matches:
+                            acid_atom_idx = acid_match[0]
+                            path = Chem.GetShortestPath(mol, amine_atom_idx, acid_atom_idx)
+                            if path is None or len(path) < 5:
+                                continue
+                            # Exclude the amine N and acid C atoms
+                            path_atoms = [mol.GetAtomWithIdx(idx) for idx in path[1:-1]]
+                            if len(path_atoms) < 3:
+                                continue
+                            # Check if all atoms are aliphatic carbons (non-aromatic sp3 carbons)
+                            is_aliphatic_chain = all(
+                                atom.GetAtomicNum() == 6 and not atom.GetIsAromatic() and atom.GetHybridization() == Chem.HybridizationType.SP3
+                                for atom in path_atoms
+                            )
+                            if is_aliphatic_chain:
+                                found = True
+                                break
+                        if found:
+                            break
+                    if found:
+                        row.append(rule['prediction'])
+                    else:
+                        row.append(0)
+                elif rule.get('logic') == 'pyridine_para_carboxylic_acid':
+                    # Rule 2: Check for pyridine ring with carboxylic acid at para position
+                    # Match pyridine rings
+                    pyridine_pattern = rule['compiled_patterns'][0][0]
+                    pyridine_matches = mol.GetSubstructMatches(pyridine_pattern)
+                    if pyridine_matches:
+                        found = False
+                        for match_pyridine in pyridine_matches:
+                            # Identify nitrogen atom in pyridine ring
+                            nitrogen_idx = None
+                            for idx in match_pyridine:
+                                atom = mol.GetAtomWithIdx(idx)
+                                if atom.GetAtomicNum() == 7:
+                                    nitrogen_idx = idx
+                                    break
+                            if nitrogen_idx is None:
+                                continue
+                            # Find atom at para position to nitrogen in ring
+                            ring = match_pyridine
+                            idx_in_ring = ring.index(nitrogen_idx)
+                            para_atom_idx = ring[(idx_in_ring + 3) % len(ring)]
+                            # Check if para_atom_idx is connected to a carboxylic acid group
+                            connected = False
+                            para_atom = mol.GetAtomWithIdx(para_atom_idx)
+                            for neighbor in para_atom.GetNeighbors():
+                                neighbor_idx = neighbor.GetIdx()
+                                for group in rule['compiled_patterns'][1]:
+                                    for match_acid in mol.GetSubstructMatches(group):
+                                        if neighbor_idx in match_acid:
+                                            connected = True
+                                            break
+                                    if connected:
+                                        break
+                                if connected:
+                                    break
+                            if connected:
+                                found = True
+                                break
+                        if found:
+                            row.append(rule['prediction'])
+                        else:
+                            row.append(0)
+                    else:
+                        row.append(0)
+                else:
+                    # Check required patterns
+                    for compiled_group in rule['compiled_patterns']:
+                        group_match = False
+                        for pat in compiled_group:
+                            if mol.HasSubstructMatch(pat):
+                                group_match = True
+                                break
+                        if not group_match:
+                            match = False
+                            break
+                    if match:
+                        row.append(rule['prediction'])
+                    else:
+                        row.append(0)
+            except Exception as e:
+                # In case of any error, append 0
+                logging.error(f"Error processing rule {rule['number']} for SMILES {smi}: {e}")
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule["number"]}' for rule in rules])
+    return df
+--------------------------------------------------
+    Target Name: Fe/Hf
+    GPT Model: o1-preview-2024-09-12
+    ML Model: ETC
+    Current_Rules:
+    **Analysis of Dataset and Generation of Rules**
+
+Based on the analysis of the provided dataset and considering the underlying physical and chemical properties of the molecular modifiers, the following rules have been generated to describe the relationship between the structural features of the modifiers and the Fe/Hf ratio. Each rule combines specific sub-structures (functional groups) and predicts whether the Fe/Hf value will be high or low for any SMILES structure fitting the description.
+
+---
+
+**Start of Rules**
+
+---
+
+**Rule 1**: **Modifiers containing both an *amino group (-NH₂)* and a *carboxylic acid group (-COOH)* separated by an aliphatic chain of at least three carbons predict a **high Fe/Hf** value.**
+
+- **Explanation**: The presence of both amino and carboxylic acid groups separated by an appropriate chain length allows for effective chelation with Fe ions, enhancing Fe incorporation relative to Hf.
+
+- **Examples**:
+  - **High Fe/Hf**:
+    - **5-aminopentanoic acid** (Entry 2)
+    - **7-aminoheptanoic acid** (Entry 31)
+    - **8-aminooctanoic acid** (Entry 34)
+  - **Low Fe/Hf**:
+    - **(2S)-2-aminopentanedioic acid** (Entry 0) – The additional carboxyl group may interfere with optimal coordination.
+
+---
+
+**Rule 2**: **Modifiers featuring a *pyridine ring* connected directly or via a short linker to a *carboxylic acid group (-COOH)* predict a **high Fe/Hf** value.**
+
+- **Explanation**: The nitrogen atom in the pyridine ring acts as a strong ligand for Fe ions. Coupled with a carboxylic acid group, the modifier can effectively coordinate Fe through bidentate interactions.
+
+- **Examples**:
+  - **High Fe/Hf**:
+    - **4-pyridin-4-ylbenzoic acid** (Entry 11)
+    - **4-pyridin-4-ylbutanoic acid** (Entry 24)
+  - **Low Fe/Hf**:
+    - **Pyridine-3-carboxylic acid** (Entry 21) – The positioning of the carboxylic acid in the meta position may not favor simultaneous coordination with the pyridine nitrogen.
+
+---
+
+**Rule 3**: **Modifiers containing a *thiol group (-SH)* and a *carboxylic acid group (-COOH)* predict a **high Fe/Hf** value.**
+
+- **Explanation**: Thiol groups are strong soft bases that coordinate effectively with Fe ions, enhancing Fe incorporation.
+
+- **Examples**:
+  - **High Fe/Hf**:
+    - **3-sulfanylpropanoic acid** (Entry 17)
+    - **4-sulfanylbenzoic acid** (Entry 9)
+
+---
+
+**Rule 4**: **Modifiers that are simple *aliphatic carboxylic acids* without additional coordinating groups predict a **low Fe/Hf** value.**
+
+- **Explanation**: Lack of additional donor atoms reduces the ability to chelate Fe ions effectively, resulting in lower Fe incorporation.
+
+- **Examples**:
+  - **Low Fe/Hf**:
+    - **Octanoic acid** (Entry 4)
+    - **4-oxoheptanedioic acid** (Entry 27)
+
+---
+
+**Rule 5**: **Modifiers with *electron-withdrawing groups* (e.g., nitro, fluorine) on an aromatic ring bearing a *carboxylic acid group (-COOH)* predict a **high Fe/Hf** value.**
+
+- **Explanation**: Electron-withdrawing groups increase the electrophilic character of the aromatic ring, enhancing coordination with Fe ions by stabilizing the negative charge developed upon coordination.
+
+- **Examples**:
+  - **High Fe/Hf**:
+    - **4-nitrobenzoic acid** (Entry 20)
+  - **Low Fe/Hf**:
+    - **4-methylbenzoic acid** (Entry 22) – The methyl group is electron-donating, which does not enhance coordination.
+
+---
+
+**Rule 6**: **Modifiers that are *amino acids* with aromatic side chains capable of coordination predict a **high Fe/Hf** value.**
+
+- **Explanation**: Amino acids like phenylalanine can coordinate through the amino and carboxylic acid groups, and the aromatic ring may engage in π interactions with Fe ions.
+
+- **Examples**:
+  - **High Fe/Hf**:
+    - **(2S)-2-amino-3-phenylpropanoic acid** (Entry 12)
+  - **Low Fe/Hf**:
+    - **(2R)-2-amino-3-(1H-indol-3-yl)propanoic acid** (Entry 14) – The bulky indole ring may cause steric hindrance, reducing Fe coordination.
+
+---
+
+**Rule 7**: **Modifiers featuring *polyether chains* (repeating -CH₂CH₂O- units) ending with a *carboxylic acid group (-COOH)* predict a **high Fe/Hf** value.**
+
+- **Explanation**: Ether oxygens can coordinate with Fe ions, and flexible polyether chains allow for multidentate coordination, enhancing Fe binding.
+
+- **Examples**:
+  - **High Fe/Hf**:
+    - **2-[2-(2-methoxyethoxy)ethoxy]acetic acid** (Entry 10)
+    - **3-[2-(2-aminoethoxy)ethoxy]propanoic acid** (Entry 32)
+
+---
+
+**Rule 8**: **Modifiers with multiple *hydroxyl groups (-OH)* adjacent to each other (*polyols*), along with a *carboxylic acid group (-COOH)*, predict a **low Fe/Hf** value.**
+
+- **Explanation**: Intramolecular hydrogen bonding among hydroxyl groups can reduce the availability of oxygen atoms for coordination with Fe ions.
+
+- **Examples**:
+  - **Low Fe/Hf**:
+    - **(2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid** (Entry 8)
+    - **2-[[1,3-dihydroxy-2-(hydroxymethyl)propan-2-yl]oxy]acetic acid** (Entry 5)
+
+---
+
+**Rule 9**: **Modifiers containing *ketone groups (C=O)* adjacent to an aromatic ring and a *carboxylic acid group (-COOH)* predict a **high Fe/Hf** value.**
+
+- **Explanation**: The carbonyl oxygen can act as an additional coordination site, and conjugation with the aromatic ring can stabilize the metal complex.
+
+- **Examples**:
+  - **High Fe/Hf**:
+    - **1,3-dioxo-2-benzofuran-5-carboxylic acid** (Entry 16)
+    - **4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid** (Entry 25)
+
+---
+
+**Rule 10**: **Modifiers with *electron-donating groups* (e.g., hydroxyl -OH, methoxy -OCH₃) on an aromatic ring bearing a *carboxylic acid group (-COOH)* predict a **low Fe/Hf** value.**
+
+- **Explanation**: Electron-donating groups increase electron density on the aromatic ring, which can reduce the effectiveness of coordination with Fe ions due to decreased ability to stabilize the positive charge on Fe.
+
+- **Examples**:
+  - **Low Fe/Hf**:
+    - **5-(4-hydroxyphenyl)pentanoic acid** (Entry 6)
+    - **3-(4-hydroxyphenyl)propanoic acid** (Entry 30)
+    - **2-[(4-hydroxybenzoyl)amino]acetic acid** (Entry 26)
+
+---
+
+**Rule 11**: **Modifiers with a *formyl group (-CHO)* on an aromatic ring and a *carboxylic acid group (-COOH)* predict a **low Fe/Hf** value.**
+
+- **Explanation**: The formyl group may engage in competing interactions or reduce electron density available for coordination with Fe ions.
+
+- **Examples**:
+  - **Low Fe/Hf**:
+    - **4-formylbenzoic acid** (Entry 19)
+    - **5-formyl-2-hydroxybenzoic acid** (Entry 18)
+
+---
+
+**Rule 12**: **Modifiers containing both an *acetamido group (-NHCOCH₃)* and an *amino group (-NH₂)* on an aliphatic chain ending with a *carboxylic acid group (-COOH)* predict a **high Fe/Hf** value.**
+
+- **Explanation**: Multiple nitrogen donor atoms can enhance chelation with Fe ions, increasing Fe incorporation.
+
+- **Example**:
+  - **High Fe/Hf**:
+    - **(2S)-6-acetamido-2-aminohexanoic acid** (Entry 33)
+
+---
+
+**Rule 13**: **Modifiers with *fluorinated alkyl chains* attached to a *carboxylic acid group (-COOH)* predict a **low Fe/Hf** value.**
+
+- **Explanation**: Highly electronegative fluorine atoms withdraw electron density, reducing the ability of the ligand to donate electrons for effective coordination with Fe ions.
+
+- **Examples**:
+  - **Low Fe/Hf**:
+    - **2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid** (Entry 13)
+    - **4-[(2,2,2-trifluoroacetyl)amino]butanoic acid** (Entry 28)
+
+---
+
+**Rule 14**: **Modifiers with a *long aliphatic chain* bearing a *hydroxyl group (-OH)* and ending with a *carboxylic acid group (-COOH)* predict a **high Fe/Hf** value.**
+
+- **Explanation**: The hydroxyl group can act as an additional coordination site, and the chain flexibility allows for effective chelation with Fe ions.
+
+- **Example**:
+  - **High Fe/Hf**:
+    - **7-hydroxyheptanoic acid** (Entry 29)
+
+---
+
+**Rule 15**: **Modifiers containing *heteroaromatic rings* such as *pyrazole* adjacent to a *carboxylic acid group (-COOH)* predict a **low Fe/Hf** value.**
+
+- **Explanation**: The steric arrangement or electronic properties of certain heterocycles may not favor effective coordination with Fe ions.
+
+- **Example**:
+  - **Low Fe/Hf**:
+    - **1H-pyrazole-4-carboxylic acid** (Entry 15)
+
+---
+
+**End of Rules**
+
+---
+
+These rules capture the relationship between specific combinations of functional groups in the molecular modifiers and the Fe/Hf ratio observed. By focusing on combinations of sub-structures, the rules aim to predict the Fe/Hf outcome for any modifier fitting the descriptions.
+
+**Key Considerations in These Rules**:
+
+- **Coordination Chemistry Principles**: Understanding how different functional groups can act as ligands and coordinate with Fe ions, enhancing or reducing Fe incorporation.
+
+- **Electronic Effects**: Considering how electron-withdrawing or electron-donating substituents affect the ligand's ability to stabilize the metal-ligand complex.
+
+- **Steric Factors**: Recognizing that steric hindrance from bulky groups can impede effective coordination.
+
+- **Multidentate Coordination**: Identifying modifiers that offer multiple coordination sites (e.g., amino acids with additional functional groups), enhancing chelation.
+
+- **Hydrogen Bonding Effects**: Noting that intramolecular hydrogen bonding can reduce the availability of donor atoms for metal coordination.
+
+By applying these rules, researchers can predict whether a given molecular modifier will result in a high or low Fe/Hf value, aiding in the rational design of modifiers to optimize catalyst performance in the reaction.
+
+------------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+Rule 1,Rule 2,Rule 3,Rule 4,Rule 5,Rule 6,Rule 7,Rule 8,Rule 9,Rule 10,Rule 11,Rule 12,Rule 13,Rule 14,Rule 15
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,-1,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,-1,0,0
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,-1,-1,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,-1,0,0,0,0
+0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,1,-1,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,-1,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+0,0,0,0,0,0,0,0,0,-1,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,1,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.7428571428571429; Test Accuracy: 0.0
+    Train Support: 0.050793650793650794; Test Support: 0.0
+    Train Confidence: 0.9500000000000001; Test Confidence: 0.5
+    Train Lift: 1.9202977487291213; Test Lift: NONE
+    Train Leverage: 0.02231292517006803; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    Current Rule Code:
+
+def rule2matrix(smiles_list):
+    # Define SMARTS patterns for functional groups and substructures
+    
+    # Carboxylic acid group (-COOH)
+    carboxylic_acid = '[CX3](=O)[OX2H1]'
+    
+    # Amino group (-NH2)
+    amino_group = '[NX3H2]'
+    
+    # Aliphatic carbon (saturated carbon atoms)
+    aliphatic_carbon = '[#6X4]'
+
+    # Thiol group (-SH)
+    thiol_group = '[SX2H]'
+    
+    # Pyridine ring
+    pyridine_ring = 'n1ccccc1'
+
+    # Electron-withdrawing groups on aromatic rings
+    halogen_on_aromatic = '[c][F,Cl,Br,I]'
+    nitro_group_on_aromatic = '[c][NX3+](=O)[O-]'
+    
+    # Aromatic amino acid side chain (aromatic ring connected via two carbons to amino group)
+    aromatic_amino_acid = '[NX3H2][CX4][CX4][c]'
+    
+    # Polyether chain (repeating -CH2CH2O- units)
+    polyether_unit = '[#6][OX2][#6]'
+    
+    # Multiple adjacent hydroxyl groups (-OH)
+    hydroxyl_group = '[OX2H]'
+    
+    # Ketone adjacent to aromatic ring
+    ketone_adjacent_to_aromatic = '[c][C](=O)[#6]'
+    
+    # Electron-donating groups on aromatic rings
+    hydroxyl_on_aromatic = '[c][OX2H]'
+    methoxy_on_aromatic = '[c][OX2][CH3]'
+    
+    # Formyl group (-CHO) on aromatic ring
+    formyl_group_on_aromatic = '[c][CX3H](=O)'
+    
+    # Acetamido group (-NHCOCH3)
+    acetamido_group = '[NX3][CX3](=O)[CX4H3]'
+    
+    # Fluorinated alkyl chain
+    fluorinated_alkyl_chain = '[CX4]([F,Cl,Br,I])([F,Cl,Br,I])[CX3](=O)[OX2H1]'
+    
+    # Long aliphatic chain with hydroxyl group (-OH)
+    long_aliphatic_chain_with_oh = '[#6]-[CH2]-[CH2]-[CH2]-[CH2]-[CH2]-[CH2]-[OX2H]'
+    
+    # Heteroaromatic ring with carboxylic acid
+    heteroaromatic_ring_with_cooh = '[n,o,s]1cccc1C(=O)[OX2H1]'
+    
+    # Define the rules with their associated patterns and predictions
+    rules = [
+        {
+            'number': 'Rule 1',
+            'description': 'Modifiers containing both an amino group (-NH2) and a carboxylic acid group (-COOH) separated by an aliphatic chain of at least three carbons predict a high Fe/Hf value.',
+            'patterns': [
+                amino_group,  # Amino group
+                carboxylic_acid  # Carboxylic acid
+            ],
+            'connectivity': {
+                'from': amino_group,
+                'to': carboxylic_acid,
+                'min_path_length': 5,  # Minimum path length including functional groups
+                'through': aliphatic_carbon
+            },
+            'prediction': 1
+        },
+        {
+            'number': 'Rule 2',
+            'description': 'Modifiers featuring a pyridine ring connected directly or via a short linker to a carboxylic acid group (-COOH) predict a high Fe/Hf value.',
+            'patterns': [
+                pyridine_ring,
+                carboxylic_acid
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 'Rule 3',
+            'description': 'Modifiers containing a thiol group (-SH) and a carboxylic acid group (-COOH) predict a high Fe/Hf value.',
+            'patterns': [
+                thiol_group,
+                carboxylic_acid
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 'Rule 4',
+            'description': 'Modifiers that are simple aliphatic carboxylic acids without additional coordinating groups predict a low Fe/Hf value.',
+            'patterns': [
+                '[CX3](=O)[OX2H1]'  # Carboxylic acid group
+            ],
+            'exclude_patterns': [
+                amino_group,  # Exclude amino groups
+                thiol_group,  # Exclude thiol groups
+                hydroxyl_group,  # Exclude hydroxyl groups
+                '[!#6;!#1]'  # Exclude non-carbon atoms (heteroatoms)
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 'Rule 5',
+            'description': 'Modifiers with electron-withdrawing groups (e.g., nitro, fluorine) on an aromatic ring bearing a carboxylic acid group (-COOH) predict a high Fe/Hf value.',
+            'patterns': [
+                carboxylic_acid,
+                halogen_on_aromatic + ' or ' + nitro_group_on_aromatic
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 'Rule 6',
+            'description': 'Modifiers that are amino acids with aromatic side chains capable of coordination predict a high Fe/Hf value.',
+            'patterns': [
+                aromatic_amino_acid,
+                carboxylic_acid
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 'Rule 7',
+            'description': 'Modifiers featuring polyether chains (repeating -CH2CH2O- units) ending with a carboxylic acid group (-COOH) predict a high Fe/Hf value.',
+            'patterns': [
+                polyether_unit + '{2,}' + '[CX3](=O)[OX2H1]'  # At least two polyether units ending with carboxylic acid
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 'Rule 8',
+            'description': 'Modifiers with multiple hydroxyl groups (-OH) adjacent to each other (polyols), along with a carboxylic acid group (-COOH), predict a low Fe/Hf value.',
+            'patterns': [
+                hydroxyl_group + '{2,}',  # At least two hydroxyl groups
+                carboxylic_acid
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 'Rule 9',
+            'description': 'Modifiers containing ketone groups (C=O) adjacent to an aromatic ring and a carboxylic acid group (-COOH) predict a high Fe/Hf value.',
+            'patterns': [
+                ketone_adjacent_to_aromatic,
+                carboxylic_acid
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 'Rule 10',
+            'description': 'Modifiers with electron-donating groups (e.g., hydroxyl -OH, methoxy -OCH3) on an aromatic ring bearing a carboxylic acid group (-COOH) predict a low Fe/Hf value.',
+            'patterns': [
+                hydroxyl_on_aromatic + ' or ' + methoxy_on_aromatic,
+                carboxylic_acid
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 'Rule 11',
+            'description': 'Modifiers with a formyl group (-CHO) on an aromatic ring and a carboxylic acid group (-COOH) predict a low Fe/Hf value.',
+            'patterns': [
+                formyl_group_on_aromatic,
+                carboxylic_acid
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 'Rule 12',
+            'description': 'Modifiers containing both an acetamido group (-NHCOCH3) and an amino group (-NH2) on an aliphatic chain ending with a carboxylic acid group (-COOH) predict a high Fe/Hf value.',
+            'patterns': [
+                acetamido_group,
+                amino_group,
+                carboxylic_acid
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 'Rule 13',
+            'description': 'Modifiers with fluorinated alkyl chains attached to a carboxylic acid group (-COOH) predict a low Fe/Hf value.',
+            'patterns': [
+                fluorinated_alkyl_chain
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 'Rule 14',
+            'description': 'Modifiers with a long aliphatic chain bearing a hydroxyl group (-OH) and ending with a carboxylic acid group (-COOH) predict a high Fe/Hf value.',
+            'patterns': [
+                long_aliphatic_chain_with_oh,
+                carboxylic_acid
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 'Rule 15',
+            'description': 'Modifiers containing heteroaromatic rings such as pyrazole adjacent to a carboxylic acid group (-COOH) predict a low Fe/Hf value.',
+            'patterns': [
+                heteroaromatic_ring_with_cooh
+            ],
+            'prediction': -1
+        }
+    ]
+
+    # Compile the SMARTS patterns
+    for rule in rules:
+        compiled_patterns = []
+        for pattern in rule.get('patterns', []):
+            if ' or ' in pattern:
+                # Handle 'or' in patterns
+                subpatterns = pattern.split(' or ')
+                compiled_subpatterns = [Chem.MolFromSmarts(pat) for pat in subpatterns]
+                compiled_patterns.append(compiled_subpatterns)
+            else:
+                compiled_patterns.append([Chem.MolFromSmarts(pattern)])
+        rule['compiled_patterns'] = compiled_patterns
+        # Compile exclude patterns if any
+        if 'exclude_patterns' in rule:
+            compiled_excludes = []
+            for pattern in rule['exclude_patterns']:
+                compiled_excludes.append(Chem.MolFromSmarts(pattern))
+            rule['compiled_exclude_patterns'] = compiled_excludes
+
+    # Initialize the results list
+    results = []
+
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = True
+                # Check exclude patterns if any
+                if 'exclude_patterns' in rule:
+                    for pat in rule['compiled_exclude_patterns']:
+                        if mol.HasSubstructMatch(pat):
+                            match = False
+                            break
+                    if not match:
+                        row.append(0)
+                        continue
+                # Check required patterns
+                for compiled_group in rule['compiled_patterns']:
+                    group_match = False
+                    for pat in compiled_group:
+                        if mol.HasSubstructMatch(pat):
+                            group_match = True
+                            break
+                    if not group_match:
+                        match = False
+                        break
+                if match:
+                    # Additional connectivity check for Rule 1
+                    if 'connectivity' in rule:
+                        from_pat = Chem.MolFromSmarts(rule['connectivity']['from'])
+                        to_pat = Chem.MolFromSmarts(rule['connectivity']['to'])
+                        from_atoms = mol.GetSubstructMatches(from_pat)
+                        to_atoms = mol.GetSubstructMatches(to_pat)
+                        path_found = False
+                        for from_atom in from_atoms:
+                            for to_atom in to_atoms:
+                                try:
+                                    path = Chem.GetShortestPath(mol, from_atom[0], to_atom[0])
+                                    # Check path length
+                                    if len(path) >= rule['connectivity']['min_path_length']:
+                                        # Check that the path goes through aliphatic carbons
+                                        atoms_in_path = [mol.GetAtomWithIdx(idx) for idx in path[1:-1]]
+                                        aliphatic_chain = True
+                                        for atom in atoms_in_path:
+                                            if not (atom.GetSymbol() == 'C' and not atom.GetIsAromatic()):
+                                                aliphatic_chain = False
+                                                break
+                                        if aliphatic_chain:
+                                            path_found = True
+                                            break
+                                except:
+                                    continue
+                            if path_found:
+                                break
+                        if not path_found:
+                            match = False
+                            row.append(0)
+                            continue
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception:
+                row.append(0)
+        results.append(row)
+
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[rule['number'] for rule in rules])
+    return df
+
+--------------------------------------------------
+    Target Name: Fe/Hf
+    GPT Model: o1-preview-2024-09-12
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+---
+
+**Rule 1**: **Modifiers containing both an *amino group (-NH₂)* and a *carboxylic acid group (-COOH)* separated by an aliphatic chain of at least three carbon atoms predict a **high Fe/Hf** value.**
+
+- **Explanation**: Such modifiers can act as bidentate ligands, effectively coordinating with Fe ions via both amino and carboxylate groups, enhancing Fe incorporation.
+
+- **Examples**:
+  - **High Fe/Hf**:
+    - **5-aminopentanoic acid** (Entry 2)
+    - **7-aminoheptanoic acid** (Entry 31)
+    - **8-aminooctanoic acid** (Entry 34)
+  - **Low Fe/Hf**:
+    - **(2S)-2-aminopentanedioic acid** (Entry 0) – Additional carboxylate groups may interfere with optimal coordination.
+
+---
+
+**Rule 2**: **Modifiers featuring a *pyridine ring* directly connected or linked via a short aliphatic chain to a *carboxylic acid group (-COOH)* predict a **high Fe/Hf** value.**
+
+- **Explanation**: The nitrogen atom in the pyridine ring can coordinate with Fe ions, and the carboxylate group enhances chelation.
+
+- **Examples**:
+  - **High Fe/Hf**:
+    - **4-pyridin-4-ylbenzoic acid** (Entry 11)
+    - **4-pyridin-4-ylbutanoic acid** (Entry 24)
+  - **Low Fe/Hf**:
+    - **Pyridine-3-carboxylic acid** (Entry 21) – The carboxylate group position may not favor effective coordination.
+
+---
+
+**Rule 3**: **Modifiers containing both a *thiol group (-SH)* and a *carboxylic acid group (-COOH)* predict a **high Fe/Hf** value.**
+
+- **Explanation**: Thiol groups are strong binding sites for Fe ions. Combined with carboxylate groups, they enhance chelation and Fe incorporation.
+
+- **Examples**:
+  - **High Fe/Hf**:
+    - **3-sulfanylpropanoic acid** (Entry 17)
+    - **4-sulfanylbenzoic acid** (Entry 9)
+
+---
+
+**Rule 4**: **Modifiers that are simple *aliphatic carboxylic acids* without additional coordinating groups predict a **low Fe/Hf** value.**
+
+- **Explanation**: Lack of additional donor groups reduces the ability to coordinate with Fe ions, leading to lower Fe incorporation.
+
+- **Examples**:
+  - **Low Fe/Hf**:
+    - **Octanoic acid** (Entry 4)
+    - **4-oxoheptanedioic acid** (Entry 27)
+
+---
+
+**Rule 5**: **Modifiers that are *aromatic carboxylic acids* with *electron-donating groups* (e.g., hydroxyl -OH, methoxy -OCH₃) on the ring predict a **low Fe/Hf** value.**
+
+- **Explanation**: Electron-donating groups increase electron density, potentially reducing the acidity of the carboxylate group and its ability to coordinate with Fe ions.
+
+- **Examples**:
+  - **Low Fe/Hf**:
+    - **5-(4-hydroxyphenyl)pentanoic acid** (Entry 6)
+    - **3-(4-hydroxyphenyl)propanoic acid** (Entry 30)
+    - **2-[(4-hydroxybenzoyl)amino]acetic acid** (Entry 26)
+
+---
+
+**Rule 6**: **Modifiers that are *aromatic carboxylic acids* with *electron-withdrawing groups* (e.g., nitro -NO₂) on the ring predict a **high Fe/Hf** value.**
+
+- **Explanation**: Electron-withdrawing groups increase the acidity of the carboxylate group, enhancing its coordination ability with Fe ions.
+
+- **Examples**:
+  - **High Fe/Hf**:
+    - **4-nitrobenzoic acid** (Entry 20)
+  - **Low Fe/Hf**:
+    - **4-methylbenzoic acid** (Entry 22) – The methyl group is electron-donating and does not enhance coordination.
+
+---
+
+**Rule 7**: **Modifiers containing *polyether chains* (repeating -CH₂CH₂O- units) ending with a *carboxylic acid group (-COOH)* predict a **high Fe/Hf** value.**
+
+- **Explanation**: Ether oxygen atoms can coordinate with Fe ions. The flexibility of polyether chains allows for multidentate coordination, enhancing Fe incorporation.
+
+- **Examples**:
+  - **High Fe/Hf**:
+    - **2-[2-(2-methoxyethoxy)ethoxy]acetic acid** (Entry 10)
+    - **3-[2-(2-aminoethoxy)ethoxy]propanoic acid** (Entry 32)
+
+---
+
+**Rule 8**: **Modifiers with multiple *adjacent hydroxyl groups (-OH)* (*polyols*) along with a *carboxylic acid group (-COOH)* predict a **low Fe/Hf** value.**
+
+- **Explanation**: Extensive hydrogen bonding among hydroxyl groups may limit the availability of oxygen atoms for coordination with Fe ions.
+
+- **Examples**:
+  - **Low Fe/Hf**:
+    - **(2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid** (Entry 8)
+    - **2-[[1,3-dihydroxy-2-(hydroxymethyl)propan-2-yl]oxy]acetic acid** (Entry 5)
+
+---
+
+**Rule 9**: **Modifiers that are *amino acids* with small or aromatic side chains predict a **high Fe/Hf** value if the side chains do not hinder coordination.**
+
+- **Explanation**: Amino acids can coordinate through both amino and carboxylate groups. Aromatic side chains may further stabilize the Fe complex through additional interactions.
+
+- **Examples**:
+  - **High Fe/Hf**:
+    - **(2S)-2-aminobutanedioic acid** (Entry 1)
+    - **(2S)-2-amino-3-phenylpropanoic acid** (Entry 12)
+  - **Low Fe/Hf**:
+    - **(2R)-2-amino-3-(1H-indol-3-yl)propanoic acid** (Entry 14) – The bulky indole ring may cause steric hindrance.
+
+---
+
+**Rule 10**: **Modifiers containing both an *amino group (-NH₂)* and a *secondary amide group (-CONH-)* along with a *carboxylic acid group (-COOH)* predict a **high Fe/Hf** value.**
+
+- **Explanation**: Multiple nitrogen-containing functional groups enhance coordination possibilities with Fe ions, increasing Fe incorporation.
+
+- **Examples**:
+  - **High Fe/Hf**:
+    - **(2S)-6-acetamido-2-aminohexanoic acid** (Entry 33)
+    - **2-[[(2S)-2-amino-4-methylsulfanylbutanoyl]amino]acetic acid** (Entry 23)
+
+---
+
+**Rule 11**: **Modifiers featuring *fluorinated alkyl chains* attached to a *carboxylic acid group (-COOH)* predict a **low Fe/Hf** value.**
+
+- **Explanation**: The strong electron-withdrawing effect of fluorine atoms decreases the basicity of the ligand, reducing its coordination ability with Fe ions.
+
+- **Examples**:
+  - **Low Fe/Hf**:
+    - **2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid** (Entry 13)
+    - **4-[(2,2,2-trifluoroacetyl)amino]butanoic acid** (Entry 28)
+
+---
+
+**Rule 12**: **Modifiers with *ketone groups (C=O)* adjacent to an aromatic system and a *carboxylic acid group (-COOH)* predict a **high Fe/Hf** value.**
+
+- **Explanation**: The carbonyl oxygen acts as an additional coordination site, and conjugation with the aromatic ring may stabilize the Fe complex.
+
+- **Examples**:
+  - **High Fe/Hf**:
+    - **1,3-dioxo-2-benzofuran-5-carboxylic acid** (Entry 16)
+    - **4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid** (Entry 25)
+
+---
+
+**Rule 13**: **Modifiers containing *heterocyclic rings* (other than pyridine) attached to a *carboxylic acid group (-COOH)* predict a **low Fe/Hf** value unless the heterocycle can effectively coordinate with Fe.**
+
+- **Explanation**: Not all heterocycles have suitable lone pairs or steric configurations for effective coordination with Fe ions.
+
+- **Examples**:
+  - **Low Fe/Hf**:
+    - **1H-pyrazole-4-carboxylic acid** (Entry 15)
+
+---
+
+**Rule 14**: **Modifiers with *formyl groups (-CHO)* on an aromatic ring along with a *carboxylic acid group (-COOH)* predict a **low Fe/Hf** value.**
+
+- **Explanation**: Formyl groups may engage in competing interactions or reduce electron density necessary for effective coordination with Fe ions.
+
+- **Examples**:
+  - **Low Fe/Hf**:
+    - **4-formylbenzoic acid** (Entry 19)
+    - **5-formyl-2-hydroxybenzoic acid** (Entry 18)
+
+---
+
+**Rule 15**: **Modifiers that are *aromatic carboxylic acids* without additional coordinating groups predict a **low Fe/Hf** value.**
+
+- **Explanation**: Absence of strong coordinating functionalities limits Fe incorporation of Fe ions into the catalyst structure.
+
+- **Examples**:
+  - **Low Fe/Hf**:
+    - **4-methylbenzoic acid** (Entry 22)
+
+---
+
+**End of Rules**
+
+---
+
+These rules illustrate the relationship between combinations of functional groups in molecular modifiers and the observed high or low Fe/Hf values. By considering underlying physicochemical properties such as coordination ability, electron-donating or -withdrawing effects, and steric factors, these rules help predict the impact of modifiers on Fe incorporation. This predictive capability aids in the design of effective modifiers to optimize catalyst performance and enhance the yield of the target reaction.---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+Rule 1,Rule 2,Rule 3,Rule 4,Rule 5,Rule 6,Rule 7,Rule 8,Rule 9,Rule 10,Rule 11,Rule 12,Rule 13,Rule 14,Rule 15
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,-1,1,0,0,0,0,0,0
+0,0,0,0,0,0,0,-1,1,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,-1,1,0,0,0,0,0,0
+0,0,0,0,0,0,0,-1,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,-1,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,1,0,0,0,-1,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,-1,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,-1,0,0,0,0,0,-1,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,-1,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,1,0,0,0
+0,0,0,0,0,0,0,-1,1,0,0,0,0,0,0
+0,0,0,0,0,0,0,-1,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,-1,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,-1,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.7142857142857143; Test Accuracy: 1.0
+    Train Support: 0.1; Test Support: 0.0
+    Train Confidence: 0.95; Test Confidence: 0.5
+    Train Lift: 1.9044117647058827; Test Lift: NONE
+    Train Leverage: 0.04204081632653061; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    Current Rule Code:
+def rule2matrix(smiles_list):
+    # Define SMARTS patterns for functional groups and substructures
+    # Patterns for the rules
+    # Rule 1: Modifiers containing both an amino group (-NH2) and a carboxylic acid group (-COOH) separated by an aliphatic chain of at least three carbon atoms
+    rule1_pattern = '[NX3H2][CH2]{3,}[CX3](=O)[OX2H1]'
+    
+    # Rule 2: Modifiers with pyridine ring connected or linked via a short aliphatic chain to a carboxylic acid group (-COOH)
+    rule2_pattern = '[n]1aaaaa1[CH2]{0,3}[CX3](=O)[OX2H1]'
+    
+    # Rule 3: Modifiers containing both a thiol group (-SH) and a carboxylic acid group (-COOH)
+    # Thiol group: [SX2H]
+    # Carboxylic acid group: [CX3](=O)[OX2H1]
+    rule3_patterns = ['[SX2H]', '[CX3](=O)[OX2H1]']
+    
+    # Rule 4: Simple aliphatic carboxylic acids without additional coordinating groups
+    # Must have carboxylic acid group
+    # Exclude molecules containing N, S, P, F, Cl, Br, I, aromatic rings (a)
+    rule4_pattern = '[CX3](=O)[OX2H1]'
+    rule4_exclude = '[!#6;!#1]'
+    
+    # Rule 5: Aromatic carboxylic acids with electron-donating groups on the ring (e.g., -OH, -OCH3)
+    # Aromatic carboxylic acid: [c][CX3](=O)[OX2H1]
+    # Electron-donating groups on aromatic ring: [c][OX2H], [c][OX2][CH3]
+    rule5_patterns = ['[c][CX3](=O)[OX2H1]', '[c][OX2H]', '[c][OX2][CH3]']
+    
+    # Rule 6: Aromatic carboxylic acids with electron-withdrawing groups on the ring (e.g., -NO2)
+    # Aromatic carboxylic acid: [c][CX3](=O)[OX2H1]
+    # Electron-withdrawing groups: [c][NX3+](=O)[O-], [c][NX3](=O)=O
+    rule6_patterns = ['[c][CX3](=O)[OX2H1]', '[c][NX3+](=O)[O-]', '[c][NX3](=O)=O']
+    
+    # Rule 7: Modifiers containing polyether chains ending with a carboxylic acid group (-COOH)
+    # Ether linkage: [O][CH2][CH2][O][CH2][CH2] (at least two repeats)
+    # Carboxylic acid group: [CX3](=O)[OX2H1]
+    rule7_patterns = ['[O][CH2][CH2][O][CH2][CH2]', '[CX3](=O)[OX2H1]']
+    
+    # Rule 8: Modifiers with multiple adjacent hydroxyl groups (-OH) and a carboxylic acid group
+    # Hydroxyl group: [OX2H]
+    # Carboxylic acid group: [CX3](=O)[OX2H1]
+    rule8_patterns = ['[CX3](=O)[OX2H1]']
+    rule8_hydroxyl = '[OX2H]'
+    
+    # Rule 9: Modifiers that are amino acids with small or aromatic side chains
+    # Amino acid pattern: [NX3][CX4][CX3](=O)[OX2H1]
+    rule9_pattern = '[NX3][CX4][CX3](=O)[OX2H1]'
+    
+    # Rule 10: Modifiers containing both an amino group (-NH2) and a secondary amide group (-CONH-) along with a carboxylic acid group (-COOH)
+    # Amino group: [NX3H2]
+    # Secondary amide: [CX3](=O)[NX3H1][#6]
+    # Carboxylic acid group: [CX3](=O)[OX2H1]
+    rule10_patterns = ['[NX3H2]', '[CX3](=O)[NX3H1][#6]', '[CX3](=O)[OX2H1]']
+    
+    # Rule 11: Modifiers featuring fluorinated alkyl chains attached to a carboxylic acid group
+    # Fluorinated alkyl chain: [CX4]([F])[F][F]
+    # Carboxylic acid group: [CX3](=O)[OX2H1]
+    rule11_patterns = ['[CX4]([F])[F][F]', '[CX3](=O)[OX2H1]']
+    
+    # Rule 12: Modifiers with ketone groups (C=O) adjacent to an aromatic system and a carboxylic acid group
+    # Ketone adjacent to aromatic ring: [c][CX3](=O)[#6]
+    # Carboxylic acid group: [CX3](=O)[OX2H1]
+    rule12_patterns = ['[c][CX3](=O)[#6]', '[CX3](=O)[OX2H1]']
+    
+    # Rule 13: Modifiers containing heterocyclic rings (other than pyridine) attached to a carboxylic acid group (-COOH)
+    # Heterocyclic rings excluding pyridine: [!n]1[a][a][a][a]1
+    # Carboxylic acid group: [CX3](=O)[OX2H1]
+    rule13_patterns = ['[!n]1[a][a][a][a]1', '[CX3](=O)[OX2H1]']
+    
+    # Rule 14: Modifiers with formyl groups (-CHO) on an aromatic ring along with a carboxylic acid group (-COOH)
+    # Formyl group on aromatic ring: [c][CX3H](=O)
+    # Carboxylic acid group: [CX3](=O)[OX2H1]
+    rule14_patterns = ['[c][CX3H](=O)', '[CX3](=O)[OX2H1]']
+    
+    # Rule 15: Aromatic carboxylic acids without additional coordinating groups
+    # Aromatic carboxylic acid: [c][CX3](=O)[OX2H1]
+    # Exclude other coordinating groups: [NX3,NX4,OX2H,SX2H]
+    rule15_pattern = '[c][CX3](=O)[OX2H1]'
+    rule15_exclude = '[NX3,NX4,OX2H,SX2H]'
+    
+    # Compile SMARTS patterns
+    compiled_rules = []
+    
+    # Rule 1
+    compiled_rules.append({
+        'number': 1,
+        'description': 'Rule 1',
+        'patterns': [Chem.MolFromSmarts(rule1_pattern)],
+        'prediction': 1
+    })
+    
+    # Rule 2
+    compiled_rules.append({
+        'number': 2,
+        'description': 'Rule 2',
+        'patterns': [Chem.MolFromSmarts(rule2_pattern)],
+        'prediction': 1
+    })
+    
+    # Rule 3
+    compiled_rules.append({
+        'number': 3,
+        'description': 'Rule 3',
+        'patterns': [Chem.MolFromSmarts(p) for p in rule3_patterns],
+        'prediction': 1
+    })
+    
+    # Rule 4
+    compiled_rules.append({
+        'number': 4,
+        'description': 'Rule 4',
+        'patterns': [Chem.MolFromSmarts(rule4_pattern)],
+        'exclude_patterns': [Chem.MolFromSmarts(rule4_exclude)],
+        'prediction': -1
+    })
+    
+    # Rule 5
+    compiled_rules.append({
+        'number': 5,
+        'description': 'Rule 5',
+        'patterns': [Chem.MolFromSmarts(p) for p in rule5_patterns],
+        'prediction': -1
+    })
+    
+    # Rule 6
+    compiled_rules.append({
+        'number': 6,
+        'description': 'Rule 6',
+        'patterns': [Chem.MolFromSmarts(p) for p in rule6_patterns],
+        'prediction': 1
+    })
+    
+    # Rule 7
+    compiled_rules.append({
+        'number': 7,
+        'description': 'Rule 7',
+        'patterns': [Chem.MolFromSmarts(p) for p in rule7_patterns],
+        'prediction': 1
+    })
+    
+    # Rule 8
+    compiled_rules.append({
+        'number': 8,
+        'description': 'Rule 8',
+        'patterns': [Chem.MolFromSmarts(p) for p in rule8_patterns],
+        'hydroxyl_pattern': Chem.MolFromSmarts(rule8_hydroxyl),
+        'prediction': -1
+    })
+    
+    # Rule 9
+    compiled_rules.append({
+        'number': 9,
+        'description': 'Rule 9',
+        'patterns': [Chem.MolFromSmarts(rule9_pattern)],
+        'prediction': 1
+    })
+    
+    # Rule 10
+    compiled_rules.append({
+        'number': 10,
+        'description': 'Rule 10',
+        'patterns': [Chem.MolFromSmarts(p) for p in rule10_patterns],
+        'prediction': 1
+    })
+    
+    # Rule 11
+    compiled_rules.append({
+        'number': 11,
+        'description': 'Rule 11',
+        'patterns': [Chem.MolFromSmarts(p) for p in rule11_patterns],
+        'prediction': -1
+    })
+    
+    # Rule 12
+    compiled_rules.append({
+        'number': 12,
+        'description': 'Rule 12',
+        'patterns': [Chem.MolFromSmarts(p) for p in rule12_patterns],
+        'prediction': 1
+    })
+    
+    # Rule 13
+    compiled_rules.append({
+        'number': 13,
+        'description': 'Rule 13',
+        'patterns': [Chem.MolFromSmarts(p) for p in rule13_patterns],
+        'prediction': -1
+    })
+    
+    # Rule 14
+    compiled_rules.append({
+        'number': 14,
+        'description': 'Rule 14',
+        'patterns': [Chem.MolFromSmarts(p) for p in rule14_patterns],
+        'prediction': -1
+    })
+    
+    # Rule 15
+    compiled_rules.append({
+        'number': 15,
+        'description': 'Rule 15',
+        'patterns': [Chem.MolFromSmarts(rule15_pattern)],
+        'exclude_patterns': [Chem.MolFromSmarts(rule15_exclude)],
+        'prediction': -1
+    })
+    
+    # Initialize results list
+    results = []
+    
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(compiled_rules))
+            continue
+        row = []
+        for rule in compiled_rules:
+            try:
+                match = True
+                # Check exclude patterns if any
+                if 'exclude_patterns' in rule:
+                    for pat in rule['exclude_patterns']:
+                        if mol.HasSubstructMatch(pat):
+                            match = False
+                            break
+                    if not match:
+                        row.append(0)
+                        continue
+                # For Rule 8, special handling for hydroxyl count
+                if rule['number'] == 8:
+                    # Check the required patterns
+                    has_carboxylic_acid = mol.HasSubstructMatch(rule['patterns'][0])
+                    hydroxyl_matches = mol.GetSubstructMatches(rule['hydroxyl_pattern'])
+                    if has_carboxylic_acid and len(hydroxyl_matches) >= 2:
+                        row.append(rule['prediction'])
+                    else:
+                        row.append(0)
+                    continue
+                # For other rules, check if all required patterns are present
+                for pat in rule['patterns']:
+                    if not mol.HasSubstructMatch(pat):
+                        match = False
+                        break
+                if match:
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception as e:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule["number"]}' for rule in compiled_rules])
+    return df
+--------------------------------------------------
+    Target Name: Fe/Hf
+    GPT Model: o1-preview-2024-09-12
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+---
+
+**Rule 1**: **Modifiers containing both an *amino group (-NH₂)* and a *carboxylic acid group (-COOH)* separated by an aliphatic chain of at least four carbon atoms predict a **high Fe/Hf** value.**
+
+- **Explanation**: The amino and carboxylate groups can act as bidentate ligands, effectively chelating Fe ions. The longer aliphatic chain provides flexibility for optimal coordination geometry, enhancing Fe incorporation into the catalyst.
+
+- **Examples**:
+  - **High Fe/Hf**:
+    - **5-aminopentanoic acid** (Entry 2)
+    - **7-aminoheptanoic acid** (Entry 31)
+    - **8-aminooctanoic acid** (Entry 34)
+  - **Low Fe/Hf**:
+    - **(2S)-2-aminopentanedioic acid** (Entry 0) – Additional carboxylate groups may hinder effective chelation due to over-coordination or steric hindrance.
+    - **4-aminobenzoic acid** (Entry 3) – Amino and carboxylate groups attached directly to the aromatic ring may not have optimal geometry for chelation.
+
+---
+
+**Rule 2**: **Modifiers featuring a *pyridine ring* where the nitrogen atom can coordinate with Fe, and a *carboxylic acid group (-COOH)* attached directly or via a short aliphatic chain predict a **high Fe/Hf** value.**
+
+- **Explanation**: The lone pair on the pyridine nitrogen and the carboxylate oxygen can coordinate simultaneously with Fe ions, forming stable complexes. The positioning of these groups allows for effective chelation.
+
+- **Examples**:
+  - **High Fe/Hf**:
+    - **4-pyridin-4-ylbenzoic acid** (Entry 11)
+    - **4-pyridin-4-ylbutanoic acid** (Entry 24)
+  - **Low Fe/Hf**:
+    - **Pyridine-3-carboxylic acid** (Entry 21) – The nitrogen and carboxylate groups are positioned such that simultaneous coordination is less favorable due to geometrical constraints.
+
+---
+
+**Rule 3**: **Modifiers containing both a *thiol group (-SH)* and a *carboxylic acid group (-COOH)* predict a **high Fe/Hf** value if the thiol and carboxylate are appropriately spaced to allow chelation.**
+
+- **Explanation**: Thiol groups are strong ligands for Fe ions. Combined with a carboxylate group, they can chelate Fe effectively. The spatial arrangement must allow both groups to coordinate simultaneously.
+
+- **Examples**:
+  - **High Fe/Hf**:
+    - **3-sulfanylpropanoic acid** (Entry 17)
+    - **4-sulfanylbenzoic acid** (Entry 9)
+
+---
+
+**Rule 4**: **Modifiers that are carboxylic acids (aromatic or aliphatic) without additional strong coordinating groups predict a **low Fe/Hf** value.**
+
+- **Explanation**: Without extra coordinating functionalities, these modifiers have limited ability to chelate Fe ions, resulting in lower Fe incorporation into the catalyst.
+
+- **Examples**:
+  - **Low Fe/Hf**:
+    - **Octanoic acid** (Entry 4)
+    - **4-methylbenzoic acid** (Entry 22)
+    - **4-oxoheptanedioic acid** (Entry 27)
+    - **Pyridine-3-carboxylic acid** (Entry 21)
+
+---
+
+**Rule 5**: **Modifiers that are *aromatic carboxylic acids* with *electron-withdrawing groups* (e.g., nitro -NO₂) on the ring predict a **high Fe/Hf** value.**
+
+- **Explanation**: Electron-withdrawing groups increase the acidity of the carboxylic acid, enhancing the carboxylate's ability to donate electron density to Fe ions. This facilitates stronger coordination and higher Fe incorporation.
+
+- **Examples**:
+  - **High Fe/Hf**:
+    - **4-nitrobenzoic acid** (Entry 20)
+  - **Low Fe/Hf**:
+    - **4-formylbenzoic acid** (Entry 19) – Despite having an electron-withdrawing group (aldehyde), steric factors or resonance effects may reduce coordination effectiveness.
+
+---
+
+**Rule 6**: **Modifiers featuring *polyether chains* (repeating -O-CH₂CH₂- units) ending with a *carboxylic acid group (-COOH)* predict a **high Fe/Hf** value.**
+
+- **Explanation**: The oxygen atoms in the polyether chain can coordinate with Fe ions. The flexible chain allows for multiple coordination points, enhancing Fe binding and incorporation.
+
+- **Examples**:
+  - **High Fe/Hf**:
+    - **2-[2-(2-methoxyethoxy)ethoxy]acetic acid** (Entry 10)
+    - **3-[2-(2-aminoethoxy)ethoxy]propanoic acid** (Entry 32)
+  - **Low Fe/Hf**:
+    - **2-[[1,3-dihydroxy-2-(hydroxymethyl)propan-2-yl]oxy]acetic acid** (Entry 5) – Multiple hydroxyl groups may form hydrogen bonds, reducing their availability for metal coordination.
+
+---
+
+**Rule 7**: **Modifiers that are *amino acids* with *aromatic side chains* capable of participating in coordination predict a **high Fe/Hf** value.**
+
+- **Explanation**: The amino and carboxylate groups provide primary coordination sites, while aromatic side chains can offer additional stabilization through π-interactions or direct coordination if they contain suitable substituents.
+
+- **Examples**:
+  - **High Fe/Hf**:
+    - **(2S)-2-amino-3-phenylpropanoic acid** (Entry 12)
+  - **Low Fe/Hf**:
+    - **(2R)-2-amino-3-(1H-indol-3-yl)propanoic acid** (Entry 14) – The bulky indole group may cause steric hindrance, reducing coordination efficiency.
+
+---
+
+**Rule 8**: **Modifiers with multiple adjacent *hydroxyl groups (-OH)* (polyols) along with a *carboxylic acid group (-COOH)* predict a **low Fe/Hf** value.**
+
+- **Explanation**: Extensive hydrogen bonding among hydroxyl groups can decrease their availability for metal coordination. The formation of intramolecular hydrogen bonds may also alter the structure, making coordination less favorable.
+
+- **Examples**:
+  - **Low Fe/Hf**:
+    - **(2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid** (Entry 8)
+    - **2-[[1,3-dihydroxy-2-(hydroxymethyl)propan-2-yl]oxy]acetic acid** (Entry 5)
+
+---
+
+**Rule 9**: **Modifiers featuring a combination of *amide bonds (-CONH-)* and additional coordination sites such as an *amino group (-NH₂)* or *thioether (-S-)* predict a **high Fe/Hf** value.**
+
+- **Explanation**: Amide groups can participate in coordination through the carbonyl oxygen and/or nitrogen lone pairs. Additional coordinating groups like amino or thioether enhance the overall binding capacity to Fe ions.
+
+- **Examples**:
+  - **High Fe/Hf**:
+    - **(2S)-6-acetamido-2-aminohexanoic acid** (Entry 33)
+    - **2-[[(2S)-2-amino-4-methylsulfanylbutanoyl]amino]acetic acid** (Entry 23)
+
+---
+
+**Rule 10**: **Modifiers containing *nonaromatic heterocycles* with nitrogen atoms that are less accessible for coordination predict a **low Fe/Hf** value.**
+
+- **Explanation**: Nonaromatic heterocycles may have nitrogen lone pairs involved in internal resonance or hydrogen bonding, making them less available for effective metal coordination.
+
+- **Examples**:
+  - **Low Fe/Hf**:
+    - **1H-pyrazole-4-carboxylic acid** (Entry 15)
+    - **2-oxo-1H-pyridine-4-carboxylic acid** (Entry 7)
+
+---
+
+**Rule 11**: **Modifiers that are *aromatic carboxylic acids* with *electron-donating groups* (e.g., hydroxyl -OH, methoxy -OCH₃) on the ring predict a **low Fe/Hf** value unless additional coordinating groups are present.**
+
+- **Explanation**: Electron-donating groups decrease the acidity of the carboxylic acid, reducing its ability to coordinate with Fe ions. Without other strong coordinating sites, Fe incorporation remains low.
+
+- **Examples**:
+  - **Low Fe/Hf**:
+    - **5-(4-hydroxyphenyl)pentanoic acid** (Entry 6)
+    - **3-(4-hydroxyphenyl)propanoic acid** (Entry 30)
+    - **2-[(4-hydroxybenzoyl)amino]acetic acid** (Entry 26)
+
+---
+
+**Rule 12**: **Modifiers with long-chain *aliphatic hydroxyl groups (-OH)* and a *carboxylic acid group (-COOH)* predict a **high Fe/Hf** value.**
+
+- **Explanation**: The hydroxyl group can coordinate with Fe ions, and the flexible aliphatic chain allows the hydroxyl and carboxylate groups to adopt conformations favorable for chelation.
+
+- **Examples**:
+  - **High Fe/Hf**:
+    - **7-hydroxyheptanoic acid** (Entry 29)
+
+---
+
+**Rule 13**: **Modifiers containing multiple *electron-withdrawing groups* (e.g., fluorine atoms) in the aliphatic chain predict a **low Fe/Hf** value.**
+
+- **Explanation**: Strong electron-withdrawing groups reduce the basicity of potential coordinating atoms (like oxygen), making them less effective at donating electron density to Fe ions for coordination.
+
+- **Examples**:
+  - **Low Fe/Hf**:
+    - **2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid** (Entry 13)
+    - **4-[(2,2,2-trifluoroacetyl)amino]butanoic acid** (Entry 28)
+
+---
+
+**Rule 14**: **Modifiers containing *ketone groups (C=O)* adjacent to an aromatic ring and a *carboxylic acid group (-COOH)* predict a **high Fe/Hf** value when the ketone can participate in coordination.**
+
+- **Explanation**: The ketone oxygen provides an additional coordination site. Conjugation with the aromatic ring can stabilize the Fe complex through delocalization of electron density.
+
+- **Examples**:
+  - **High Fe/Hf**:
+    - **1,3-dioxo-2-benzofuran-5-carboxylic acid** (Entry 16)
+    - **4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid** (Entry 25)
+
+---
+
+**Rule 15**: **Modifiers containing both *thioether groups (-S-)* and *amide bonds (-CONH-)* along with a *carboxylic acid group (-COOH)* predict a **high Fe/Hf** value.**
+
+- **Explanation**: Thioethers and amides contribute additional coordination sites through sulfur and nitrogen atoms. This multiplicity of coordinating groups enhances Fe binding and incorporation.
+
+- **Examples**:
+  - **High Fe/Hf**:
+    - **2-[[(2S)-2-amino-4-methylsulfanylbutanoyl]amino]acetic acid** (Entry 23)
+
+---
+
+**End of Rules**
+
+---
+
+These rules illustrate how combinations of specific sub-structures (functional groups) in molecular modifiers influence the Fe/Hf ratio. By considering underlying physicochemical properties—such as coordination ability, electronic effects, and steric factors—these rules can predict whether a modifier will lead to a high or low Fe/Hf value. This predictive framework assists in designing effective modifiers to optimize catalyst performance and enhance the yield of the target δ-C(sp³)–H bond functionalization reaction.---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+Rule 1,Rule 2,Rule 3,Rule 4,Rule 5,Rule 6,Rule 7,Rule 8,Rule 9,Rule 10,Rule 11,Rule 12,Rule 13,Rule 14,Rule 15
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,1,0,0,0
+0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,-1,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,-1,0,0
+0,0,0,0,0,0,0,0,0,0,0,1,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.7142857142857143; Test Accuracy: 0.0
+    Train Support: 0.06857142857142857; Test Support: 0.0
+    Train Confidence: 0.9428571428571428; Test Confidence: 0.5
+    Train Lift: 1.9183006535947715; Test Lift: NONE
+    Train Leverage: 0.029387755102040815; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    Current Rule Code:
+def rule2matrix(smiles_list):
+    # Define SMARTS patterns for functional groups and structural features
+    
+    # Carboxylic acid group (-COOH)
+    carboxylic_acid = '[CX3](=O)[OX2H1]'
+    
+    # Primary amino group (-NH2)
+    primary_amine = '[NX3H2]'
+    
+    # Thiol group (-SH)
+    thiol = '[SX2H]'
+    
+    # Thioether group (-S-)
+    thioether = '[#16X2]([#6])[#6]'
+    
+    # Pyridine ring
+    pyridine_ring = 'n1cccc1'
+    
+    # Aromatic carboxylic acid
+    aromatic_carboxylic_acid = '[c][CX3](=O)[OX2H1]'
+    
+    # Electron-withdrawing groups on aromatic ring (e.g., nitro, halogens)
+    nitro_group = '[NX3](=O)=O'
+    halogen = '[c][F,Cl,Br,I]'
+    
+    # Polyether chain (-O-CH2CH2-)
+    polyether_chain = '([#6][OX2][#6][#6][OX2][#6])'
+    
+    # Aromatic amino acid (amino group attached to aliphatic chain with aromatic side chain)
+    aromatic_side_chain = '[CX3H1]([#6])[c]'
+    
+    # Multiple adjacent hydroxyl groups (polyols)
+    polyol = '[OX2H][CX4][OX2H]'
+    
+    # Amide group (-CONH-)
+    amide = '[NX3][CX3](=O)[#6]'
+    
+    # Nonaromatic heterocycles with nitrogen
+    nonaromatic_heterocycle_nitrogen = '[NR3r5,NR3r6]'
+    
+    # Electron-donating groups on aromatic ring (e.g., hydroxyl, methoxy)
+    edg_on_aromatic = '[c][OX2H,OX1-,OX2][#1,#6]'
+    
+    # Aliphatic hydroxyl group (-OH) in long chain
+    aliphatic_hydroxyl = '[CX4][OX2H]'
+    
+    # Multiple electron-withdrawing groups (e.g., fluorine atoms in aliphatic chain)
+    multiple_fluorines = '[CX4]([F])([F])[F]'
+    
+    # Ketone group adjacent to aromatic ring
+    aromatic_ketone = '[c][CX3](=O)[#6]'
+    
+    # Thioether and amide together
+    thioether_and_amide = '[NX3][CX3](=O)[#6][SX2][#6]'
+    
+    # Define the rules with their associated patterns and predictions
+    rules = [
+        {
+            'number': 1,
+            'description': 'Modifiers containing both an amino group (-NH2) and a carboxylic acid group (-COOH) separated by an aliphatic chain of at least four carbon atoms predict a high Fe/Hf value.',
+            'patterns': [[primary_amine], [carboxylic_acid]],
+            'chain_length': 4,
+            'prediction': 1
+        },
+        {
+            'number': 2,
+            'description': 'Modifiers featuring a pyridine ring and a carboxylic acid group (-COOH) attached directly or via a short aliphatic chain predict a high Fe/Hf value.',
+            'patterns': [[pyridine_ring], [carboxylic_acid]],
+            'max_chain_length': 3,
+            'prediction': 1
+        },
+        {
+            'number': 3,
+            'description': 'Modifiers containing both a thiol group (-SH) and a carboxylic acid group (-COOH) predict a high Fe/Hf value if they are appropriately spaced to allow chelation.',
+            'patterns': [[thiol], [carboxylic_acid]],
+            'max_chain_length': 4,
+            'prediction': 1
+        },
+        {
+            'number': 4,
+            'description': 'Modifiers that are carboxylic acids (aromatic or aliphatic) without additional strong coordinating groups predict a low Fe/Hf value.',
+            'patterns': [[carboxylic_acid]],
+            'exclude_patterns': [[primary_amine], [thiol], [thioether], [pyridine_ring], [polyether_chain]],
+            'prediction': -1
+        },
+        {
+            'number': 5,
+            'description': 'Modifiers that are aromatic carboxylic acids with electron-withdrawing groups (e.g., nitro -NO2) on the ring predict a high Fe/Hf value.',
+            'patterns': [[aromatic_carboxylic_acid], [nitro_group]],
+            'prediction': 1
+        },
+        {
+            'number': 6,
+            'description': 'Modifiers featuring polyether chains ending with a carboxylic acid group (-COOH) predict a high Fe/Hf value.',
+            'patterns': [[polyether_chain], [carboxylic_acid]],
+            'prediction': 1
+        },
+        {
+            'number': 7,
+            'description': 'Modifiers that are amino acids with aromatic side chains capable of participating in coordination predict a high Fe/Hf value.',
+            'patterns': [[aromatic_side_chain], [primary_amine], [carboxylic_acid]],
+            'prediction': 1
+        },
+        {
+            'number': 8,
+            'description': 'Modifiers containing multiple adjacent hydroxyl groups (-OH) (polyols) along with a carboxylic acid group (-COOH) predict a low Fe/Hf value.',
+            'patterns': [[polyol], [carboxylic_acid]],
+            'prediction': -1
+        },
+        {
+            'number': 9,
+            'description': 'Modifiers featuring a combination of amide bonds (-CONH-) and additional coordination sites such as an amino group (-NH2) or thioether (-S-) predict a high Fe/Hf value.',
+            'patterns': [[amide], [primary_amine, thioether]],
+            'prediction': 1
+        },
+        {
+            'number': 10,
+            'description': 'Modifiers containing nonaromatic heterocycles with nitrogen atoms that are less accessible for coordination predict a low Fe/Hf value.',
+            'patterns': [[nonaromatic_heterocycle_nitrogen]],
+            'prediction': -1
+        },
+        {
+            'number': 11,
+            'description': 'Modifiers that are aromatic carboxylic acids with electron-donating groups (e.g., hydroxyl -OH, methoxy -OCH3) on the ring predict a low Fe/Hf value unless additional coordinating groups are present.',
+            'patterns': [[aromatic_carboxylic_acid], [edg_on_aromatic]],
+            'exclude_patterns': [[primary_amine], [thiol], [thioether], [pyridine_ring]],
+            'prediction': -1
+        },
+        {
+            'number': 12,
+            'description': 'Modifiers with long-chain aliphatic hydroxyl groups (-OH) and a carboxylic acid group (-COOH) predict a high Fe/Hf value.',
+            'patterns': [[aliphatic_hydroxyl], [carboxylic_acid]],
+            'chain_length': 6,
+            'prediction': 1
+        },
+        {
+            'number': 13,
+            'description': 'Modifiers containing multiple electron-withdrawing groups (e.g., fluorine atoms) in the aliphatic chain predict a low Fe/Hf value.',
+            'patterns': [[multiple_fluorines], [carboxylic_acid]],
+            'prediction': -1
+        },
+        {
+            'number': 14,
+            'description': 'Modifiers containing ketone groups (C=O) adjacent to an aromatic ring and a carboxylic acid group (-COOH) predict a high Fe/Hf value when the ketone can participate in coordination.',
+            'patterns': [[aromatic_ketone], [carboxylic_acid]],
+            'prediction': 1
+        },
+        {
+            'number': 15,
+            'description': 'Modifiers containing both thioether groups (-S-) and amide bonds (-CONH-) along with a carboxylic acid group (-COOH) predict a high Fe/Hf value.',
+            'patterns': [[thioether_and_amide], [carboxylic_acid]],
+            'prediction': 1
+        }
+    ]
+    
+    # Compile SMARTS patterns
+    for rule in rules:
+        compiled_patterns = []
+        for group in rule.get('patterns', []):
+            compiled_group = [Chem.MolFromSmarts(p) for p in group]
+            compiled_patterns.append(compiled_group)
+        rule['compiled_patterns'] = compiled_patterns
+        # Compile exclude patterns if any
+        if 'exclude_patterns' in rule:
+            compiled_excludes = []
+            for group in rule['exclude_patterns']:
+                compiled_group = [Chem.MolFromSmarts(p) for p in group]
+                compiled_excludes.append(compiled_group)
+            rule['compiled_exclude_patterns'] = compiled_excludes
+    
+    # Initialize results list
+    results = []
+    
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = True
+                # Check exclude patterns if any
+                if 'exclude_patterns' in rule:
+                    for group in rule['compiled_exclude_patterns']:
+                        for pat in group:
+                            if mol.HasSubstructMatch(pat):
+                                match = False
+                                break
+                        if not match:
+                            break
+                    if not match:
+                        row.append(0)
+                        continue
+                # Check required patterns
+                for compiled_group in rule['compiled_patterns']:
+                    group_match = False
+                    for pat in compiled_group:
+                        if mol.HasSubstructMatch(pat):
+                            group_match = True
+                            break
+                    if not group_match:
+                        match = False
+                        break
+                # Additional checks for chain length if specified
+                if match and 'chain_length' in rule:
+                    # Find all paths between the atoms of interest
+                    atom_pairs = []
+                    # For rule 1, between amino nitrogen and carboxylic acid carbon
+                    if rule['number'] == 1:
+                        amine_nitrogens = mol.GetSubstructMatches(Chem.MolFromSmarts(primary_amine))
+                        carboxyl_carbons = mol.GetSubstructMatches(Chem.MolFromSmarts(carboxylic_acid))
+                        for n in amine_nitrogens:
+                            for c in carboxyl_carbons:
+                                atom_pairs.append((n[0], c[0]))
+                    # For rule 12, between hydroxyl group and carboxylic acid
+                    elif rule['number'] == 12:
+                        hydroxyl_oxygens = mol.GetSubstructMatches(Chem.MolFromSmarts(aliphatic_hydroxyl))
+                        carboxyl_carbons = mol.GetSubstructMatches(Chem.MolFromSmarts(carboxylic_acid))
+                        for o in hydroxyl_oxygens:
+                            for c in carboxyl_carbons:
+                                atom_pairs.append((o[0], c[0]))
+                    else:
+                        atom_pairs = []
+                    path_found = False
+                    for pair in atom_pairs:
+                        path = Chem.GetShortestPath(mol, pair[0], pair[1])
+                        # Count the number of carbons in the path
+                        carbon_count = sum(1 for idx in path if mol.GetAtomWithIdx(idx).GetAtomicNum() == 6)
+                        if carbon_count >= rule['chain_length']:
+                            path_found = True
+                            break
+                    if not path_found:
+                        match = False
+                # Additional checks for max chain length if specified
+                if match and 'max_chain_length' in rule:
+                    # For rule 2 and 3
+                    atom_pairs = []
+                    if rule['number'] == 2:
+                        pyridine_nitrogens = mol.GetSubstructMatches(Chem.MolFromSmarts(pyridine_ring))
+                        carboxyl_carbons = mol.GetSubstructMatches(Chem.MolFromSmarts(carboxylic_acid))
+                        for n in pyridine_nitrogens:
+                            for c in carboxyl_carbons:
+                                atom_pairs.append((n[0], c[0]))
+                    elif rule['number'] == 3:
+                        thiol_sulfurs = mol.GetSubstructMatches(Chem.MolFromSmarts(thiol))
+                        carboxyl_carbons = mol.GetSubstructMatches(Chem.MolFromSmarts(carboxylic_acid))
+                        for s in thiol_sulfurs:
+                            for c in carboxyl_carbons:
+                                atom_pairs.append((s[0], c[0]))
+                    else:
+                        atom_pairs = []
+                    path_found = False
+                    for pair in atom_pairs:
+                        path = Chem.GetShortestPath(mol, pair[0], pair[1])
+                        # Count the number of atoms in the path excluding the endpoints
+                        path_length = len(path) - 2
+                        if path_length <= rule['max_chain_length']:
+                            path_found = True
+                            break
+                    if not path_found:
+                        match = False
+                if match:
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception as e:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule['number']}' for rule in rules])
+    return df
+--------------------------------------------------

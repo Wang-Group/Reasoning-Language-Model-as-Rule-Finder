@@ -1,0 +1,277 @@
+def rule2matrix(smiles_list):
+    # Import necessary RDKit modules
+    from rdkit import Chem
+    from rdkit.Chem import AllChem
+    
+    # Define SMARTS patterns for functional groups and structural features
+    # Carboxylic acid group (-COOH)
+    carboxylic_acid = '[CX3](=O)[OX1H0-,OX2H1]'
+    
+    # Primary aliphatic amine group (-NH2)
+    primary_aliphatic_amine = '[NX3;H2][C]'
+    
+    # Thiol group (-SH)
+    thiol = '[SX2H]'
+    
+    # Ether linkage (-O-)
+    ether_linkage = '[CX4][OX2][CX4]'
+    
+    # Aromatic ring
+    aromatic_ring = 'a'
+    
+    # Electron-withdrawing groups (EWGs) at para position
+    nitro_group_para = '[$([c][c]([NX3+](=O)[O-])c)]'
+    halogen_para = '[$([c][c]([F,Cl,Br,I])c)]'
+    pyridyl_para = '[$([c][c](n)c)]'
+    
+    # Electron-donating groups (EDGs) at para position
+    amino_group_para = '[$([c][c]([NX3;H2,H1][#6])c)]'
+    methyl_group_para = '[$([c][c]([CH3])c)]'
+    hydroxyl_group_para = '[$([c][c]([OX2H])c)]'
+    
+    # Aldehyde group adjacent to aromatic ring
+    aldehyde_adjacent = '[#6][CX3H1](=O)'
+    
+    # Bulky aromatic side chains (e.g., indole ring)
+    indole_side_chain = '[#6][CH2][c]1[cH][nH][cH][cH][cH]1'
+    
+    # Conjugated carbonyl systems
+    conjugated_carbonyl = '[CX3](=O)[:$([#6]=[#6])]'  # Carbonyl conjugated with double bond
+    
+    # Fluorinated aliphatic chains
+    fluorinated_chain = '[CX4]([F,Cl,Br,I])[CX4]([F,Cl,Br,I])'  # Heavily halogenated chain
+    
+    # Sulfur-containing amino acids
+    sulfur_amino_acid = '[NX3;H2][CX4][CX4][SX2][CX4][CX3](=O)[OX1H0-,OX2H1]'  # Pattern for methionine-like structures
+    
+    # Multiple hydroxyl groups near carboxyl group
+    multiple_hydroxyls = '[OX2H][CX4][CX4][CX3](=O)[OX1H0-,OX2H1]'
+    
+    # Dicarboxylic acids with short chains
+    dicarboxylic_acid_short = '[OX1H0-,OX2H1][CX3](=O)[CX4][CX3](=O)[OX1H0-,OX2H1]'
+    
+    # Nitrogen heterocycles adjacent to carboxyl group
+    pyridine_carboxylic_acid = '[n][c][c][c][c][CX3](=O)[OX1H0-,OX2H1]'
+    
+    # Initialize rules with patterns and predictions
+    rules = [
+        {
+            'number': 1,
+            'description': 'Modifiers that are aliphatic amino acids with carbon chains ranging from 4 to 8 carbons, containing both amino (-NH2) and carboxyl (-COOH) groups.',
+            'patterns': [carboxylic_acid, primary_aliphatic_amine],
+            'exclude_patterns': [aromatic_ring],
+            'chain_length': (4, 8),  # Carbon chain length between amino and carboxyl groups
+            'prediction': 1
+        },
+        {
+            'number': 2,
+            'description': 'Aromatic carboxylic acids with strong electron-withdrawing groups at the para position.',
+            'patterns': [carboxylic_acid, aromatic_ring],
+            'para_substituents': [nitro_group_para, halogen_para, pyridyl_para],
+            'prediction': 1
+        },
+        {
+            'number': 3,
+            'description': 'Modifiers containing both carboxyl and thiol groups.',
+            'patterns': [carboxylic_acid, thiol],
+            'prediction': 1
+        },
+        {
+            'number': 4,
+            'description': 'Modifiers with multiple hydroxyl groups near the carboxyl group.',
+            'patterns': [carboxylic_acid],
+            'hydroxyl_count': 2,
+            'prediction': -1
+        },
+        {
+            'number': 5,
+            'description': 'Modifiers with ether linkages and terminal carboxyl groups.',
+            'patterns': [carboxylic_acid, ether_linkage],
+            'prediction': 1
+        },
+        {
+            'number': 6,
+            'description': 'Simple aliphatic carboxylic acids without additional functional groups.',
+            'patterns': [carboxylic_acid],
+            'exclude_patterns': [primary_aliphatic_amine, thiol, ether_linkage, aromatic_ring],
+            'prediction': -1
+        },
+        {
+            'number': 7,
+            'description': 'Aromatic carboxylic acids with electron-donating groups at the para position.',
+            'patterns': [carboxylic_acid, aromatic_ring],
+            'para_substituents': [amino_group_para, methyl_group_para, hydroxyl_group_para],
+            'prediction': -1
+        },
+        {
+            'number': 8,
+            'description': 'Modifiers with aldehyde groups adjacent to carboxyl groups.',
+            'patterns': [carboxylic_acid, aldehyde_adjacent],
+            'prediction': -1
+        },
+        {
+            'number': 9,
+            'description': 'Amino acids with bulky aromatic side chains.',
+            'patterns': [carboxylic_acid, primary_aliphatic_amine, indole_side_chain],
+            'prediction': -1
+        },
+        {
+            'number': 10,
+            'description': 'Modifiers with conjugated carbonyl systems adjacent to carboxyl groups.',
+            'patterns': [carboxylic_acid, conjugated_carbonyl],
+            'prediction': 1
+        },
+        {
+            'number': 11,
+            'description': 'Modifiers with heavily fluorinated aliphatic chains near the carboxyl group.',
+            'patterns': [carboxylic_acid, fluorinated_chain],
+            'prediction': -1
+        },
+        {
+            'number': 12,
+            'description': 'Sulfur-containing amino acids.',
+            'patterns': [carboxylic_acid, primary_aliphatic_amine, '[SX2][CX4]'],
+            'prediction': 1
+        },
+        {
+            'number': 13,
+            'description': 'Modifiers with terminal hydroxyl and carboxyl groups on medium-length aliphatic chains.',
+            'patterns': [carboxylic_acid, hydroxyl_group_para],
+            'chain_length': (5, 7),
+            'prediction': 1
+        },
+        {
+            'number': 14,
+            'description': 'Modifiers with multiple carboxyl groups on short chains.',
+            'patterns': [dicarboxylic_acid_short],
+            'prediction': -1
+        },
+        {
+            'number': 15,
+            'description': 'Modifiers with nitrogen heterocycles adjacent to the carboxyl group.',
+            'patterns': [pyridine_carboxylic_acid],
+            'prediction': -1
+        }
+    ]
+    
+    # Compile SMARTS patterns
+    for rule in rules:
+        compiled_patterns = []
+        for smarts in rule.get('patterns', []):
+            try:
+                compiled_patterns.append(Chem.MolFromSmarts(smarts))
+            except:
+                compiled_patterns.append(None)
+        rule['compiled_patterns'] = compiled_patterns
+        
+        # Compile exclude patterns if any
+        if 'exclude_patterns' in rule:
+            compiled_excludes = []
+            for smarts in rule['exclude_patterns']:
+                try:
+                    compiled_excludes.append(Chem.MolFromSmarts(smarts))
+                except:
+                    compiled_excludes.append(None)
+            rule['compiled_exclude_patterns'] = compiled_excludes
+        
+        # Compile para substituents if any
+        if 'para_substituents' in rule:
+            compiled_para = []
+            for smarts in rule['para_substituents']:
+                try:
+                    compiled_para.append(Chem.MolFromSmarts(smarts))
+                except:
+                    compiled_para.append(None)
+            rule['compiled_para_substituents'] = compiled_para
+    
+    # Initialize results list
+    results = []
+    
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = True
+                # Check exclude patterns if any
+                if 'compiled_exclude_patterns' in rule:
+                    for pat in rule['compiled_exclude_patterns']:
+                        if pat is not None and mol.HasSubstructMatch(pat):
+                            match = False
+                            break
+                    if not match:
+                        row.append(0)
+                        continue
+                # Check required patterns
+                for pat in rule['compiled_patterns']:
+                    if pat is not None and not mol.HasSubstructMatch(pat):
+                        match = False
+                        break
+                if not match:
+                    row.append(0)
+                    continue
+                # Additional checks for specific rules
+                # Rule 1: Check chain length between amino and carboxyl groups
+                if rule['number'] == 1:
+                    # Find amino and carboxyl groups
+                    amine_atoms = mol.GetSubstructMatches(rule['compiled_patterns'][1])
+                    carboxyl_atoms = mol.GetSubstructMatches(rule['compiled_patterns'][0])
+                    chain_match = False
+                    for amine in amine_atoms:
+                        for carboxyl in carboxyl_atoms:
+                            path_length = Chem.GetShortestPath(mol, amine[0], carboxyl[0])
+                            num_carbons = sum(1 for idx in path_length if mol.GetAtomWithIdx(idx).GetAtomicNum() == 6)
+                            if rule['chain_length'][0] <= num_carbons <= rule['chain_length'][1]:
+                                chain_match = True
+                                break
+                        if chain_match:
+                            break
+                    if not chain_match:
+                        match = False
+                # Rule 2 and 7: Check for para substituents
+                if 'compiled_para_substituents' in rule:
+                    para_match = False
+                    for para_pat in rule['compiled_para_substituents']:
+                        if para_pat is not None and mol.HasSubstructMatch(para_pat):
+                            para_match = True
+                            break
+                    if not para_match:
+                        match = False
+                # Rule 4: Check for multiple hydroxyl groups
+                if rule['number'] == 4:
+                    hydroxyl_count = len(mol.GetSubstructMatches(Chem.MolFromSmarts('[OX2H]')))
+                    if hydroxyl_count < rule['hydroxyl_count']:
+                        match = False
+                # Rule 13: Check chain length
+                if rule['number'] == 13:
+                    # Find hydroxyl and carboxyl groups
+                    hydroxyl_atoms = mol.GetSubstructMatches(Chem.MolFromSmarts('[OX2H]'))
+                    carboxyl_atoms = mol.GetSubstructMatches(rule['compiled_patterns'][0])
+                    chain_match = False
+                    for hydroxyl in hydroxyl_atoms:
+                        for carboxyl in carboxyl_atoms:
+                            path = Chem.GetShortestPath(mol, hydroxyl[0], carboxyl[0])
+                            num_carbons = sum(1 for idx in path if mol.GetAtomWithIdx(idx).GetAtomicNum() == 6)
+                            if rule['chain_length'][0] <= num_carbons <= rule['chain_length'][1]:
+                                chain_match = True
+                                break
+                        if chain_match:
+                            break
+                    if not chain_match:
+                        match = False
+                if match:
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception as e:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule["number"]}' for rule in rules])
+    return df

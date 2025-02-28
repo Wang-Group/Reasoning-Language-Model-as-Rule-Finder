@@ -1,0 +1,39 @@
+def rule2matrix(smiles_list):
+    rules = [
+        ['[c][CX3](=O)[OX2H1]', '[NX3+](=O)-[OX-]'],  # Rule 1: Carboxylic acid on aromatic ring with nitro group
+        ['[NX3H2+0][C][C][C][C][C][C]', '[c]'],  # Rule 2: Amino acid with aromatic group
+        ['[SX2H]', '[CX3](=O)[OX2H1]'],  # Rule 3: Thiol with carboxylic acid
+        ['[OX2H][C][C][C][C][C][OX2H]'],  # Rule 4: Sugar-like structure with multiple hydroxyls
+        ['[n][CX3](=O)[OX2H1]'],  # Rule 5: Pyridine with carboxylic acid
+        ['[CX4](F)(F)F'],  # Rule 6: Trifluoromethyl group
+        ['[c][CX3H]=O'],  # Rule 7: Aldehyde on aromatic ring
+        ['[c][OX2][CH3]'],  # Rule 8: Methoxy on aromatic ring
+        ['[C][C][C][C][C][C][C]'],  # Rule 9: Linear aliphatic chain > 6 carbons
+        ['[NX3H2][CX3](=O)[CX3H2]'],  # Rule 10: Acetamido with amino group
+        ['[CX3](=O)[OX2][C][C][OX2]'],  # Rule 11: Carboxylic acid with ether linkage
+        ['[c][CX3](=O)[OX2H1][OX2H1]'],  # Rule 12: Benzoic acid with hydroxyl
+        ['[n][SX2H]'],  # Rule 13: Pyridine with thiol
+        ['[c][NX3+](=O)-[OX-]'],  # Rule 14: Nitro on aromatic ring
+        ['[c][SX2H]']  # Rule 15: Sulfanyl on aromatic ring
+    ]
+    results = []
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            results.append([0] * len(rules))
+            continue
+        row = []
+        for i, rule in enumerate(rules):
+            try:
+                if all(mol.HasSubstructMatch(Chem.MolFromSmarts(r)) for r in rule):
+                    if i in [0, 1, 2, 3, 4, 13, 14]:  # Rules with high prediction
+                        row.append(1)
+                    else:
+                        row.append(-1)
+                else:
+                    row.append(0)
+            except:
+                row.append(0)
+        results.append(row)
+    df = pd.DataFrame(results, columns=[f'Rule {i+1}' for i in range(len(rules))])
+    return df
