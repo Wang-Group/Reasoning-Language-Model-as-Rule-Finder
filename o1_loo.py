@@ -4,11 +4,11 @@ import os
 from langgraph.graph import END, StateGraph, START
 
 from agent.state import AgentState,BaseMessage
-from agent.edges import good_rules_advisor,good_rules_commenter,matrix_generate_error,judge_matrix_checker,judge_manager_loo,split_1_out,tradition_calc_exception
+from agent.edges import good_rules_advisor,good_rules_commenter,matrix_generate_error,judge_matrix_checker,judge_manager_loo,split_1_out,ML_calc_exception
 from agent.rule_LLM import Rule_Generator_o1,Rule_Commenter_o1,Rule_Advisor_o1
 from agent.rule2matrix import Coded_Matrix_Generator_o1,Coded_Matrix_Checker_o1
 from agent.rule_metric import Metric_Calculator,Metric_Commenter_o1
-from agent.trad_metric import Tradition_Calculator,Tradition_Commenter_o1
+from agent.ML_metric import ML_Calculator,ML_Commenter_o1
 from agent.manager import Manager_loo_o1
 
 
@@ -36,8 +36,8 @@ for _ in range(1,37):
     graph_builder.add_node("matrix checker", Coded_Matrix_Checker_o1)
     graph_builder.add_node("metric calculator", Metric_Calculator)
     graph_builder.add_node("metric commenter", Metric_Commenter_o1)
-    graph_builder.add_node("traditional calculator", Tradition_Calculator)
-    graph_builder.add_node("traditional commenter", Tradition_Commenter_o1)
+    graph_builder.add_node("ML calculator", ML_Calculator)
+    graph_builder.add_node("ML commenter", ML_Commenter_o1)
     graph_builder.add_node("project manager", Manager_loo_o1)
     graph_builder.add_node("one output",split_1_out)
 
@@ -48,9 +48,9 @@ for _ in range(1,37):
     graph_builder.add_conditional_edges("matrix generator",matrix_generate_error,{'matrix checker':'matrix checker','rule advisor':'rule advisor'},)
     graph_builder.add_conditional_edges("matrix checker",judge_matrix_checker,{'matrix generator':'matrix generator','metric calculator':'metric calculator'},)
     graph_builder.add_edge("metric calculator", "metric commenter")
-    graph_builder.add_edge("metric commenter", "traditional calculator")
-    graph_builder.add_conditional_edges("traditional calculator",tradition_calc_exception,{'rule advisor':'rule advisor',"traditional commenter":"traditional commenter"},)
-    graph_builder.add_edge("traditional commenter", "project manager")
+    graph_builder.add_edge("metric commenter", "ML calculator")
+    graph_builder.add_conditional_edges("ML calculator",ML_calc_exception,{'rule advisor':'rule advisor',"ML commenter":"ML commenter"},)
+    graph_builder.add_edge("ML commenter", "project manager")
     graph_builder.add_conditional_edges("project manager",judge_manager_loo,{"one output":"one output",'rule advisor':'rule advisor'},)
     graph_builder.add_edge("one output",END)
     graph = graph_builder.compile()

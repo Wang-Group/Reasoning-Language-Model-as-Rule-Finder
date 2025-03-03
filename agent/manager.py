@@ -107,13 +107,13 @@ def Manager_loo_o1(state:AgentState):
         current_rule_metric = f.read()
     with open(f'{state.output_dir}/rule_metric_log.txt','r') as f1:
         rule_metric_log = f1.read()
-    with open(f'{state.output_dir}/current_trad_metric.txt','r') as f1:
-        current_trad_metric = f1.read()
-    with open(f'{state.output_dir}/trad_metric_log.txt','r') as f1:
-        trad_metric_log = f1.read()
+    with open(f'{state.output_dir}/current_ML_metric.txt','r') as f1:
+        current_ML_metric = f1.read()
+    with open(f'{state.output_dir}/ML_metric_log.txt','r') as f1:
+        ML_metric_log = f1.read()
 
     rule_discussions = ''
-    discussion_role = ['Matrix Checker','Metric Commenter','Traditional Commenter']
+    discussion_role = ['Matrix Checker','Metric Commenter','ML Commenter']
     for message in state.messages[-6:]: 
         if message.sender in discussion_role:
             rule_discussions = rule_discussions + '\n' + message.content
@@ -132,7 +132,7 @@ def Manager_loo_o1(state:AgentState):
     ----------------------------------------------------------------------
     
     !! Accuracy and SHAP Log !!
-    {trad_metric_log}
+    {ML_metric_log}
     ----------------------------------------------------------------------
     
     !! Training  Set !!
@@ -148,7 +148,7 @@ def Manager_loo_o1(state:AgentState):
     ---------------------------------------------------------------------
     
     !! Current Accuracy and SHAP !!
-    {current_trad_metric}
+    {current_ML_metric}
     ----------------------------------------------------------------------
     
     !! Rule Discussions !!

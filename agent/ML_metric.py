@@ -21,7 +21,7 @@ def high_low(high_or_low):
     else:
         return 'low'
 def rules_feedback(data, predictions, val_performances, shap_expressions,tar_column_name):
-    """ Placeholder function to apply rules and calculate errors """
+    """Check samples one by one for whether the prediction and SHAP value is consistent with the true label."""
     # This should apply the rules to your data and return prediction and actual yields
     differences = [f"For molecule {data['SMILES'].values[i]}, the predicted {tar_column_name} is {high_low(predictions[i])} and the experimental value is {high_low(data[tar_column_name].values[i])} \n  {shap_expressions[i]} \n"  for i in range(len(predictions))]
     feedback = f'''< 5 Fold Validation Performance: >\n 
@@ -109,7 +109,7 @@ def ML_Calculator(state:AgentState):
             f.write(f'Validation Accuracy: {all_val_performances}; Train Accuracy: {all_train_performances}\n---------------------------------------------------\n')
         feedback = rules_feedback(train_set.iloc[valid_indexes], valid_cla_predictions, all_val_performances, shap_expressions_lst,tar_column_name)
     
-        with open(f'{state.output_dir}/current_trad_metric.txt','w') as f1:
+        with open(f'{state.output_dir}/current_ML_metric.txt','w') as f1:
             f1.write(feedback)
         with open(f'{state.output_dir}/post_matrix_discussion.txt','a') as f:
             f.write(f'Current Accuracy and SHAP analysis:\n{feedback}')
@@ -131,10 +131,10 @@ def ML_Commenter_o1(state:AgentState):
     # GPT_temperature = state.GPT_temperature
     with open(f'{state.output_dir}/current_rules.txt','r') as f:
         current_rules = f.read()
-    with open(f'{state.output_dir}/trad_metric_log.txt','r') as f1:
+    with open(f'{state.output_dir}/ML_metric_log.txt','r') as f1:
         reference_ML_metrics = f1.read()
     current_ML_metric = state.messages[-1].content
-    with open(f'{state.output_dir}/trad_metric_log.txt','a') as f1:
+    with open(f'{state.output_dir}/ML_metric_log.txt','a') as f1:
         f1.write(current_ML_metric)
     
     system_prompt = '''

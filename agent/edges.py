@@ -19,7 +19,7 @@ def good_rules_advisor(state:AgentState):
         return 'rule generator'
     else:
         current_gen_count = state.current_gen_count
-        if current_gen_count < 2:# change to two for cost
+        if current_gen_count < 3:# change to two for cost
             if "**TRUE**" in state.messages[-1].content:
                 return 'matrix generator'
             else:
@@ -35,7 +35,7 @@ def if_comment(state:AgentState):
         Or the next node is Matrix Generator
     '''
     current_gen_count = state.current_gen_count
-    if current_gen_count < 2:# change to two for cost
+    if current_gen_count < 3:# change to two for cost
         return 'rule commenter'
     else:
         return 'matrix generator'
@@ -74,7 +74,7 @@ def judge_matrix_checker(state:AgentState):
         If Matrix Checker is unsatisfied with current feature matrix, or the number of matrix generation is smaller than 2, the next node is Matrix Generator.
         Or the next node is Metric Calculator.
     '''
-    if state.current_mtx_gen < 2:# change to two times for cost
+    if state.current_mtx_gen < 3:# change to two times for cost
         if "**TRUE**" in state.messages[-1].content:
             return 'metric calculator'
         else:

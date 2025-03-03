@@ -32,7 +32,7 @@ class AgentState(BaseModel):
     selected_train_matrix: str = Field(default='selected_train_mtx.csv') # Selected features by RFECV for the train set.
     selected_test_matrix: str = Field(default='selected_test_mtx.csv') # Selected features by RFECV for the test set.
     current_matrix: str = Field(default='current_matrix.txt') # The matrix for train and test set for the current iteration.
-    Tran_model: str = Literal['ETC', 'RFC'] # ExtraTreesClassifier or randomForestClassifier. The classification model used in the Traditional Calculator.
+    Tran_model: str = Literal['ETC', 'RFC'] # ExtraTreesClassifier or randomForestClassifier. The classification model used in the ML Calculator.
     # Arguments for LLM client
     GPT_model: str = Literal['gpt-4o-2024-08-06', 'gpt-4o-mini-2024-07-18', 'o1-preview-2024-09-12', 'deepseek-r1']
     GPT_temperature: float = Field(default=1.0)

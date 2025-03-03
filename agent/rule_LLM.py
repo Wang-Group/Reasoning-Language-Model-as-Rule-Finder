@@ -266,7 +266,7 @@ def Rule_Advisor_o1(state:AgentState):
     elif state.messages[-1].sender == 'Matrix Generator':
         input_discussion = '''It's difficult to generate numeric feature matrix from current rules.\n''' + state.messages[-1].content
         # input_discussion = state.messages[-1].content
-    elif state.messages[-1].sender == 'Tradition Calculator':
+    elif state.messages[-1].sender == 'ML Calculator':
         # Model training error because of almost all 0 matrix. This error will not be encountered by o1, for its effective code for rules
         input_discussion = state.messages[-1].content
     system_prompt='''
