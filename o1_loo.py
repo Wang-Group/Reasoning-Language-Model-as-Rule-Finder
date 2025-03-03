@@ -21,15 +21,13 @@ os.environ["LANGCHAIN_API_KEY"] = os.getenv('LANGCHAIN_API_KEY')
 os.environ["LANGCHAIN_TRACING_V2"] = "true"
 os.environ["LANGCHAIN_PROJECT"] = "GPT Agent O1"
 
-# target_name = 'modifier/SBU'
-target_name = "Fe/Hf" 
+# target_name = 'yield'
+target_name = "Fe/Hf"
 GPT_model = 'o1-preview-2024-09-12'
 output_folder = 'Fe_Hf_o1_1110'
-# output_folder = 'modi_SBU_o1_1110'
-# _ = 2
-# _ = '1_MACCS'
+# output_folder = 'yield_o1'
 
-for _ in range(28,37):
+for _ in range(1,37):
     graph_builder = StateGraph(AgentState)
     graph_builder.add_node("rule generator", Rule_Generator_o1)
     graph_builder.add_node("rule commenter", Rule_Commenter_o1)
@@ -59,9 +57,10 @@ for _ in range(28,37):
 
     print(f'ITERATION: {_}\n')
 
-    # output_dir = os.path.join(output_folder,str(_)+'_iter')
+ 
     output_dir = os.path.join(output_folder,str(_))
-    #!!！Check parameters!!!
+   
+    #Parameters are defined in the agent/state.py
     messages = AgentState(messages=[BaseMessage(content=f'Data Load Successfully for {target_name}, iteration {_}',sender='load_data')],Tran_model='ETC',GPT_model=GPT_model,target_name=target_name,output_dir=output_dir,generate_count=0)
     for chunk in graph.stream(messages,{"recursion_limit": 500}):
         # Print out all events aside from the final end chunk
