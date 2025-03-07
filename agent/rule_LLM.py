@@ -24,7 +24,7 @@ def read_last_lines_as_string(file_path, n=80):
         return '\n'.join(last_lines)
             
 def Rule_Generator_o1(state:AgentState):
-    '''Given the dataset with name, SMILES, and yield, together with the reaction background and other existing advice, the Rule Generator try to propose rules describing the relationship between the structures of the modifiers and the reaction yield (high/low).'''
+    '''Given the dataset with name, SMILES, and yield, together with background information on the catalytic reaction, key chemistry, and other existing advice, the Rule Generator try to propose rules describing the relationship between the structures of the modifiers and the reaction yield (high/low).'''
     now = datetime.datetime.now()
     with open(f'{state.output_dir}/whole_log.txt','a') as f:
         f.write(f'\n---------------------------------------------------------------\nSTART Time: {str(now)}\n---------------------------------------------------------------\n')

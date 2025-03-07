@@ -21,7 +21,15 @@ def high_low(high_or_low):
     else:
         return 'low'
 def rules_feedback(data, predictions, val_performances, shap_expressions,tar_column_name):
-    """Check samples one by one for whether the prediction and SHAP value is consistent with the true label."""
+    """Check samples one by one for whether the prediction and SHAP value is consistent with the true label.
+    Args:
+        data: list, the train set ranged in corresponding to the validation samples.
+        predictions: list, model predictions on the validation set.
+        val_performances: list, the accuracy on the validation set.
+        shap_expressions: list, the analysis of every SHAP value of rules and corresponding label of the sample.
+        tar_column_name: list, the column name of the target column.
+    """
+    
     # This should apply the rules to your data and return prediction and actual yields
     differences = [f"For molecule {data['SMILES'].values[i]}, the predicted {tar_column_name} is {high_low(predictions[i])} and the experimental value is {high_low(data[tar_column_name].values[i])} \n  {shap_expressions[i]} \n"  for i in range(len(predictions))]
     feedback = f'''< 5 Fold Validation Performance: >\n 
@@ -35,6 +43,9 @@ def rules_feedback(data, predictions, val_performances, shap_expressions,tar_col
 
 
 def ML_Calculator(state:AgentState):
+    '''
+    Calculate  5-fold cross-validation accuracy and SHAP values and generate comparison between SHAP values and predictions rule by rule, sample by sample.
+    '''
     try:
         #Calculate accuracy and SHAP on validation set for feedback
         tar_column_name = f'{state.target_name}_high_or_low_value'
@@ -125,6 +136,9 @@ def ML_Calculator(state:AgentState):
             
             
 def ML_Commenter_o1(state:AgentState):
+    '''
+    Comparing to the reference accuracies and SHAP values and going through the accuracies and SHAP analysis, ML commenter gives comments and advice for further iteration of rules.
+    '''
     #Give comment on accuracy and SHAP values
     GPT_model = state.GPT_model
     GPT_seed = state.GPT_seed

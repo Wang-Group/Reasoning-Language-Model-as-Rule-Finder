@@ -162,6 +162,7 @@ def mean_leverage(matrix,labels):
     return np.mean(leverage)
     
 def Metric_Calculator(state:AgentState):
+    '''Calculate support, confidence, lift and leverage for the inputted feature matrix.'''
     #Calculate the rule matrix
     train_features = np.array(pd.read_csv(os.path.join(state.output_dir,state.train_matrix)))
     train_set = pd.read_csv(os.path.join(state.output_dir,state.train_file))
@@ -185,6 +186,7 @@ def Metric_Calculator(state:AgentState):
                  
             
 def Metric_Commenter_o1(state:AgentState):
+    '''Comparing to the metrics across the iteraction, give commments and advice for further rule iteration.'''
     GPT_model = state.GPT_model
     GPT_seed = state.GPT_seed
     # GPT_temperature = state.GPT_temperature

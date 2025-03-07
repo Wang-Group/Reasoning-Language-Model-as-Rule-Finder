@@ -33,8 +33,7 @@ def parse_llm_json(output_message):
             
             
 def Coded_Matrix_Generator_o1(state:AgentState):
-    '''Adjust GPT-invocation for gpt-o1'''
-
+    '''Generate code to translate linguistic rules into feature matrix.'''
     GPT_model = state.GPT_model
     GPT_seed = state.GPT_seed
     current_mtx_gen = state.current_mtx_gen
@@ -182,7 +181,7 @@ def Coded_Matrix_Generator_o1(state:AgentState):
 
 
 def Coded_Matrix_Checker_o1(state:AgentState):
-    '''Adjust GPT-invocation for gpt-o1'''
+    '''Check if the feature matrix represents the linguistic rules well. If not, give advice to improve the code'''
     GPT_model = state.GPT_model
     GPT_seed = state.GPT_seed
     # GPT_temperature = state.GPT_temperature    

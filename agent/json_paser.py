@@ -52,10 +52,10 @@ def parse_LLM_json(string:str)-> str:
     Pre-processed the string into a JSON-formatted string.
     
     Args:
-        string: the string containing json type data of a matrix-generating code.
+        string: str, the string containing json type data of a matrix-generating code.
         
     Returns:
-        json_str: a well formatted string can be recognized by json package. 
+        json_str: str, a well formatted string can be recognized by json package. 
     '''
     _json_markdown_re = re.compile(r"```(json)?(.*)", re.DOTALL)
     _json_strip_chars = " \n\r\t`"
