@@ -1,0 +1,151 @@
+def rule2matrix(smiles_list):
+    # Define SMARTS patterns for functional groups
+    # Carboxylic acid group (-COOH)
+    carboxylic_acid = '[CX3](=O)[OX1H0-,OX2H1]'
+    # Amino group (-NH2) attached to alpha carbon
+    alpha_amino_group = '[C;!R][CH](N)[C](=O)[O]'
+    # Dicarboxylic acid (two carboxylic acid groups)
+    dicarboxylic_acid = '[C;!R][CH](N)([C](=O)[O])[C](=O)[O]'
+    
+    # Nitrogen-containing heterocycles directly attached to carboxylic acids
+    nitrogen_heterocycle_carboxylic_acid = '[#1]c1ncccc1C(=O)O'
+    
+    # Para-substituted benzoic acids with EWG or coordinating groups
+    para_substituted_benzoic_acid = 'c1ccc(cc1)[CX3](=O)[OX1H0-,OX2H1]'
+    # Electron-withdrawing groups (EWGs) or coordinating groups at para position
+    ewgs_or_coordinating_groups = ['[NX3+](=O)[O-]', '[NX3](=O)=O', '[F,Cl,Br,I]', '[NX3;H2,H1][CX4H]']
+    
+    # Straight-chain aliphatic carboxylic acids without terminal polar groups
+    straight_chain_aliphatic_carboxylic_acid = '[CX3](=O)[OX1H0-,OX2H1][CH2]n[CH3]'
+    terminal_polar_groups = ['[NX3;H2,H1,H0]','[OX2H]','[SX2H]']
+    
+    # Thiol groups on aliphatic chains
+    thiol_on_aliphatic_chain = '[CX4][CH2][SX2H]'
+    # Thiol groups on aromatic rings
+    thiol_on_aromatic_ring = 'c[SX2H]'
+    
+    # Multiple hydroxyl groups on aliphatic chains
+    aliphatic_chain_with_multiple_hydroxyls = '[CX3](=O)[OX1H0-,OX2H1][CH2][CH](O)[CH](O)[CH2][OH]'
+    
+    # Functional groups that interfere with coordination
+    interfering_groups = ['[CX3](=O)[CH](=O)', '[C,F,Cl,Br,I][C](F)(F)F', '[OX2][CX2][CX2][OX2]', '[CX3](=O)[NX3][CX3](=O)[CX4]']
+    
+    # α-Amino monocarboxylic acids with hydrophobic side chains
+    alpha_amino_mono_carboxylic_acid_hydrophobic = '[C;!R][CH](N)[C](=O)[O][C][C][C]'
+    # Exception for indole rings
+    indole_ring = 'c1ccc2c(c1)cc[nH]2'
+    
+    # Aromatic rings connected via medium-length aliphatic chains
+    aromatic_ring_with_aliphatic_chain = '[CX3](=O)[OX1H0-,OX2H1][CH2][CH2][CH2][c]'
+    
+    # Fused aromatic rings with electron-withdrawing groups
+    fused_aromatic_with_ewg = 'c1ccc2c(c1)c(=O)oc2C(=O)O'
+    
+    # Compile SMARTS patterns
+    patterns = {
+        'Rule 1': {
+            'patterns': [dicarboxylic_acid],
+            'prediction': 1
+        },
+        'Rule 2': {
+            'patterns': [nitrogen_heterocycle_carboxylic_acid],
+            'prediction': 1
+        },
+        'Rule 3': {
+            'patterns': [para_substituted_benzoic_acid],
+            'sub_patterns': ewgs_or_coordinating_groups,
+            'prediction': 1
+        },
+        'Rule 4': {
+            'patterns': [straight_chain_aliphatic_carboxylic_acid],
+            'exclude_patterns': terminal_polar_groups,
+            'prediction': 1
+        },
+        'Rule 5 High': {
+            'patterns': [thiol_on_aliphatic_chain],
+            'prediction': 1
+        },
+        'Rule 5 Low': {
+            'patterns': [thiol_on_aromatic_ring],
+            'prediction': -1
+        },
+        'Rule 6': {
+            'patterns': [aliphatic_chain_with_multiple_hydroxyls],
+            'prediction': 1
+        },
+        'Rule 7': {
+            'patterns': interfering_groups,
+            'prediction': -1
+        },
+        'Rule 8 Low': {
+            'patterns': [alpha_amino_mono_carboxylic_acid_hydrophobic],
+            'exclude_patterns': [indole_ring],
+            'prediction': -1
+        },
+        'Rule 8 High': {
+            'patterns': [indole_ring],
+            'prediction': 1
+        },
+        'Rule 9': {
+            'patterns': [aromatic_ring_with_aliphatic_chain],
+            'prediction': 1
+        },
+        'Rule 10': {
+            'patterns': [fused_aromatic_with_ewg],
+            'prediction': 1
+        }
+    }
+    
+    # Initialize results list
+    results = []
+    
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(patterns))
+            continue
+        row = []
+        for rule_name, rule in patterns.items():
+            try:
+                match = False
+                # Check exclude patterns if any
+                if 'exclude_patterns' in rule:
+                    exclude = False
+                    for exclude_smarts in rule['exclude_patterns']:
+                        exclude_pattern = Chem.MolFromSmarts(exclude_smarts)
+                        if mol.HasSubstructMatch(exclude_pattern):
+                            exclude = True
+                            break
+                    if exclude:
+                        row.append(0)
+                        continue
+                # Check main patterns
+                for smarts in rule['patterns']:
+                    pattern = Chem.MolFromSmarts(smarts)
+                    if mol.HasSubstructMatch(pattern):
+                        # For Rule 3, check sub-patterns
+                        if 'sub_patterns' in rule:
+                            sub_match = False
+                            for sub_smarts in rule['sub_patterns']:
+                                sub_pattern = Chem.MolFromSmarts(sub_smarts)
+                                if mol.HasSubstructMatch(sub_pattern):
+                                    sub_match = True
+                                    break
+                            if sub_match:
+                                match = True
+                                break
+                        else:
+                            match = True
+                            break
+                if match:
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception:
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=patterns.keys())
+    return df

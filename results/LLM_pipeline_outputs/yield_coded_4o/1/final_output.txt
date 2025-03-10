@@ -1,0 +1,1008 @@
+
+    Target Name: yield
+    GPT Model: gpt-4o-2024-08-06
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+- **Rule 1**: Modifiers containing a carboxylic acid group (-COOH) and an aromatic ring tend to result in a high yield. This is likely due to the ability of the carboxylic acid to coordinate with the metal center, enhancing the stability and reactivity of the catalyst. Examples include 4-(bromomethyl)benzoic acid and 4-aminobenzoic acid.
+
+- **Rule 2**: Modifiers with an amino group (-NH2) and a linear aliphatic chain of 4 to 6 carbons tend to result in a high yield. The amino group can enhance coordination with the metal center, while the aliphatic chain may provide steric effects that favor the reaction. Examples include 5-aminopentanoic acid.
+
+- **Rule 3**: Modifiers containing a hydroxyl group (-OH) and an aromatic ring tend to result in a high yield. The hydroxyl group can participate in hydrogen bonding, potentially stabilizing the catalyst structure. Examples include 5-(4-hydroxyphenyl)pentanoic acid.
+
+- **Rule 4**: Modifiers with multiple ether linkages (-O-) tend to result in a low yield. The presence of ether linkages may lead to increased flexibility and decreased rigidity in the catalyst structure, which can negatively impact the reaction. Examples include 2-[2-(2-methoxyethoxy)ethoxy]acetic acid.
+
+- **Rule 5**: Modifiers containing a sulfanyl group (-SH) tend to result in a high yield. The sulfanyl group can provide strong coordination with the metal center, enhancing the catalytic activity. Examples include 3-sulfanylpropanoic acid.
+
+- **Rule 6**: Modifiers with a nitro group (-NO2) on an aromatic ring tend to result in a high yield. The electron-withdrawing nature of the nitro group can stabilize the metal center, enhancing the reaction. An example is 4-nitrobenzoic acid.
+
+- **Rule 7**: Modifiers with a trifluoromethyl group (-CF3) tend to result in a low yield. The electron-withdrawing nature of the trifluoromethyl group may destabilize the metal center, reducing catalytic activity. An example is 4-[(2,2,2-trifluoroacetyl)amino]butanoic acid.
+
+- **Rule 8**: Modifiers containing an indole group tend to result in a high yield. The indole group can provide π-π interactions and additional coordination sites, enhancing the stability and reactivity of the catalyst. An example is (2R)-2-amino-3-(1H-indol-3-yl)propanoic acid.
+
+- **Rule 9**: Modifiers with a pyridine ring tend to result in a high yield. The nitrogen in the pyridine ring can coordinate with the metal center, enhancing the catalytic activity. Examples include pyridine-3-carboxylic acid.
+
+- **Rule 10**: Modifiers containing a formyl group (-CHO) on an aromatic ring tend to result in a low yield. The formyl group may introduce steric hindrance or electronic effects that destabilize the metal center. Examples include 4-formylbenzoic acid.
+
+**End of Rules**---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+Rule 1,Rule 2,Rule 3,Rule 4,Rule 5,Rule 6,Rule 7,Rule 8,Rule 9,Rule 10
+0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,1,0
+0,0,0,0,0,0,0,0,0,0
+1,0,0,0,1,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,1,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,-1,0,0,0
+0,0,0,0,0,0,0,-1,0,0
+1,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0
+0,0,0,0,1,0,0,0,0,0
+1,0,1,0,0,0,0,0,0,-1
+1,0,0,0,0,0,0,0,0,-1
+1,0,0,0,0,1,0,0,0,0
+1,0,0,0,0,0,0,0,1,0
+1,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,1,0
+0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,-1,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.6857142857142857; Test Accuracy: 0.0
+    Train Support: 0.08571428571428572; Test Support: 0.0
+    Train Confidence: 0.7708333333333334; Test Confidence: 0.5
+    Train Lift: 1.5298202614379086; Test Lift: NONE
+    Train Leverage: 0.022448979591836737; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    Current Rule Code:
+def rule2matrix(smiles_list):
+    rules = [
+        ['[c][CX3](=O)[OX2H1]'],  # Rule 1: Carboxylic acid directly attached to aromatic ring
+        ['[NX3H2]', '[C;X4][C;X4][C;X4][C;X4][C;X4]?[C;X4]?'],  # Rule 2: Amino group and aliphatic chain of 4 to 6 carbons
+        ['[c][OX2H]'],  # Rule 3: Hydroxyl group directly attached to aromatic ring
+        ['[OX2][CX4][OX2]'],  # Rule 4: Multiple ether linkages
+        ['[SX2H]'],  # Rule 5: Sulfanyl group
+        ['[c][NX3+](=O)[O-]'],  # Rule 6: Nitro group directly attached to aromatic ring
+        ['[CX4](F)(F)F'],  # Rule 7: Trifluoromethyl group
+        ['c1c[nH]c2c1cccc2'],  # Rule 8: Indole group
+        ['c1ccncc1'],  # Rule 9: Pyridine ring
+        ['[c][CX3H]=O']  # Rule 10: Formyl group directly attached to aromatic ring
+    ]
+    results = []
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            results.append([0] * len(rules))
+            continue
+        row = []
+        for i, rule in enumerate(rules):
+            try:
+                if all(mol.HasSubstructMatch(Chem.MolFromSmarts(r)) for r in rule):
+                    if i in [0, 1, 2, 4, 5, 8]:  # Rules with high prediction
+                        row.append(1)
+                    else:  # Rules with low prediction
+                        row.append(-1)
+                else:
+                    row.append(0)
+            except:
+                row.append(0)
+        results.append(row)
+    df = pd.DataFrame(results, columns=[f'Rule {i+1}' for i in range(len(rules))])
+    return df
+--------------------------------------------------
+    Target Name: yield
+    GPT Model: gpt-4o-2024-08-06
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+- **Rule 1**: Modifiers containing a carboxylic acid group (-COOH) and an aromatic ring with electron-donating substituents (e.g., -OH, -NH2) tend to result in a high yield. The electron-donating groups enhance coordination with the metal center, stabilizing the catalyst. Examples include 4-aminobenzoic acid and 5-(4-hydroxyphenyl)pentanoic acid.
+
+- **Rule 2**: Modifiers with an amino group (-NH2) and a linear aliphatic chain of 4 to 6 carbons, without additional electron-withdrawing groups, tend to result in a high yield. The amino group enhances coordination, while the aliphatic chain provides steric effects that favor the reaction. Examples include 5-aminopentanoic acid.
+
+- **Rule 3**: Modifiers containing a hydroxyl group (-OH) and an aromatic ring with additional electron-donating groups tend to result in a high yield. The hydroxyl group participates in hydrogen bonding, stabilizing the catalyst structure. Examples include 5-(4-hydroxyphenyl)pentanoic acid.
+
+- **Rule 4**: Modifiers with multiple ether linkages (-O-) and no additional functional groups tend to result in a low yield. The flexibility and decreased rigidity of the catalyst structure negatively impact the reaction. Examples include 2-[2-(2-methoxyethoxy)ethoxy]acetic acid.
+
+- **Rule 5**: Modifiers containing a sulfanyl group (-SH) with a short aliphatic chain (up to 3 carbons) tend to result in a high yield. The sulfanyl group provides strong coordination with the metal center, enhancing catalytic activity. Examples include 3-sulfanylpropanoic acid.
+
+- **Rule 6**: Modifiers with a nitro group (-NO2) on an aromatic ring tend to result in a high yield. The electron-withdrawing nature of the nitro group stabilizes the metal center, enhancing the reaction. An example is 4-nitrobenzoic acid.
+
+- **Rule 7**: Modifiers with a trifluoromethyl group (-CF3) tend to result in a low yield. The electron-withdrawing nature of the trifluoromethyl group destabilizes the metal center, reducing catalytic activity. An example is 4-[(2,2,2-trifluoroacetyl)amino]butanoic acid.
+
+- **Rule 8**: Modifiers containing an indole group tend to result in a high yield. The indole group provides π-π interactions and additional coordination sites, enhancing the stability and reactivity of the catalyst. An example is (2R)-2-amino-3-(1H-indol-3-yl)propanoic acid.
+
+- **Rule 9**: Modifiers with a pyridine ring tend to result in a high yield. The nitrogen in the pyridine ring coordinates with the metal center, enhancing catalytic activity. Examples include pyridine-3-carboxylic acid.
+
+- **Rule 10**: Modifiers containing a formyl group (-CHO) on an aromatic ring tend to result in a low yield. The formyl group introduces steric hindrance or electronic effects that destabilize the metal center. Examples include 4-formylbenzoic acid.
+
+- **Rule 11**: Modifiers with an aromatic ring and electron-withdrawing groups such as sulfonyl (-SO2-) or carbonyl (-C=O) groups tend to result in a low yield. These groups may destabilize the metal center. Examples include 4-sulfanylbenzoic acid.
+
+**End of Rules**---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+Rule 1,Rule 2,Rule 3,Rule 4,Rule 5,Rule 6,Rule 7,Rule 8,Rule 9,Rule 10,Rule 11
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,1,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,1,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,-1,0,0,0,0
+0,0,0,0,0,0,0,-1,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,-1,0
+0,0,0,0,0,0,0,0,0,-1,0
+0,0,0,0,0,1,0,0,0,0,0
+0,0,0,0,0,0,0,0,1,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,1,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,-1,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0
+
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.6857142857142857; Test Accuracy: 1.0
+    Train Support: 0.04081632653061224; Test Support: 0.0
+    Train Confidence: 0.6071428571428571; Test Confidence: 0.5
+    Train Lift: 1.2173202614379086; Test Lift: NONE
+    Train Leverage: 0.0045481049562682225; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    Current Rule Code:
+def rule2matrix(smiles_list):
+    rules = [
+        ['[CX3](=O)[OX2H1]', '[c][OX2H]', '[c][NX3H2]'],  # Rule 1: Carboxylic acid and aromatic ring with electron-donating groups
+        ['[NX3H2]', '[C;X4][C;X4][C;X4][C;X4]'],  # Rule 2: Amino group and linear aliphatic chain
+        ['[OX2H]', '[c][OX2H]'],  # Rule 3: Hydroxyl group and aromatic ring with electron-donating groups
+        ['[OX2][C][OX2]'],  # Rule 4: Multiple ether linkages
+        ['[SX2H]', '[C;X4][C;X4][C;X4]'],  # Rule 5: Sulfanyl group with short aliphatic chain
+        ['[NX3+](=O)[O-]', '[c]'],  # Rule 6: Nitro group on an aromatic ring
+        ['[CX4](F)(F)F'],  # Rule 7: Trifluoromethyl group
+        ['c1c[nH]c2c1cccc2'],  # Rule 8: Indole group
+        ['c1ccncc1'],  # Rule 9: Pyridine ring
+        ['[CX3H]=O', '[c]'],  # Rule 10: Formyl group on an aromatic ring
+        ['[c][SX4](=O)(=O)', '[c][CX3](=O)']  # Rule 11: Aromatic ring with sulfonyl or carbonyl groups
+    ]
+    results = []
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            results.append([0] * len(rules))
+            continue
+        row = []
+        for i, rule in enumerate(rules):
+            try:
+                if all(mol.HasSubstructMatch(Chem.MolFromSmarts(r)) for r in rule):
+                    if i in [0, 1, 2, 5, 8]:  # Rules with high prediction
+                        row.append(1)
+                    else:
+                        row.append(-1)
+                else:
+                    row.append(0)
+            except:
+                row.append(0)
+        results.append(row)
+    df = pd.DataFrame(results, columns=[f'Rule {i+1}' for i in range(len(rules))])
+    return df
+--------------------------------------------------
+    Target Name: yield
+    GPT Model: gpt-4o-2024-08-06
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+- **Rule 1**: Modifiers containing a carboxylic acid group (-COOH) and an aromatic ring with electron-donating substituents (e.g., -OH, -NH2) tend to result in a high yield. The electron-donating groups enhance coordination with the metal center, stabilizing the catalyst. Examples include 4-aminobenzoic acid and 5-(4-hydroxyphenyl)pentanoic acid.
+
+- **Rule 2**: Modifiers with an amino group (-NH2) and a linear aliphatic chain of 4 to 6 carbons, without additional electron-withdrawing groups, tend to result in a high yield. The amino group enhances coordination, while the aliphatic chain provides steric effects that favor the reaction. Examples include 5-aminopentanoic acid.
+
+- **Rule 3**: Modifiers containing a hydroxyl group (-OH) and an aromatic ring with additional electron-donating groups tend to result in a high yield. The hydroxyl group participates in hydrogen bonding, stabilizing the catalyst structure. Examples include 5-(4-hydroxyphenyl)pentanoic acid.
+
+- **Rule 4**: Modifiers with multiple ether linkages (-O-) and no additional functional groups tend to result in a low yield. The flexibility and decreased rigidity of the catalyst structure negatively impact the reaction. Examples include 2-[2-(2-methoxyethoxy)ethoxy]acetic acid.
+
+- **Rule 5**: Modifiers containing a sulfanyl group (-SH) with a short aliphatic chain (up to 3 carbons) tend to result in a high yield. The sulfanyl group provides strong coordination with the metal center, enhancing catalytic activity. Examples include 3-sulfanylpropanoic acid.
+
+- **Rule 6**: Modifiers with a nitro group (-NO2) on an aromatic ring tend to result in a high yield. The electron-withdrawing nature of the nitro group stabilizes the metal center, enhancing the reaction. An example is 4-nitrobenzoic acid.
+
+- **Rule 7**: Modifiers with a trifluoromethyl group (-CF3) tend to result in a low yield. The electron-withdrawing nature of the trifluoromethyl group destabilizes the metal center, reducing catalytic activity. An example is 4-[(2,2,2-trifluoroacetyl)amino]butanoic acid.
+
+- **Rule 8**: Modifiers containing an indole group tend to result in a high yield. The indole group provides π-π interactions and additional coordination sites, enhancing the stability and reactivity of the catalyst. An example is (2R)-2-amino-3-(1H-indol-3-yl)propanoic acid.
+
+- **Rule 9**: Modifiers with a pyridine ring tend to result in a high yield. The nitrogen in the pyridine ring coordinates with the metal center, enhancing catalytic activity. Examples include pyridine-3-carboxylic acid.
+
+- **Rule 10**: Modifiers containing a formyl group (-CHO) on an aromatic ring tend to result in a low yield. The formyl group introduces steric hindrance or electronic effects that destabilize the metal center. Examples include 4-formylbenzoic acid.
+
+- **Rule 11**: Modifiers with an aromatic ring and electron-withdrawing groups such as sulfonyl (-SO2-) or carbonyl (-C=O) groups tend to result in a low yield. These groups may destabilize the metal center. Examples include 4-sulfanylbenzoic acid.
+
+- **Rule 12**: Modifiers with an aromatic ring and electron-donating groups such as methoxy (-OCH3) or ethoxy (-OC2H5) tend to result in a high yield. These groups enhance the electron density on the aromatic ring, stabilizing the metal center. An example is 4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid.
+
+- **Rule 13**: Modifiers with a branched aliphatic chain containing an amino group (-NH2) tend to result in a low yield. The branching may introduce steric hindrance that affects coordination with the metal center. An example is (2S)-6-acetamido-2-aminohexanoic acid.
+
+- **Rule 14**: Modifiers containing a pyridine ring with electron-withdrawing substituents tend to result in a low yield. The electron-withdrawing nature reduces the electron density on the nitrogen, affecting coordination. An example is 4-pyridin-4-ylbenzoic acid.
+
+- **Rule 15**: Modifiers with a long aliphatic chain (more than 6 carbons) and no additional functional groups tend to result in a low yield. The long chain may introduce steric hindrance and reduce effective coordination. An example is octanoic acid.
+
+**End of Rules**---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+Rule 1,Rule 2,Rule 3,Rule 4,Rule 5,Rule 6,Rule 7,Rule 8,Rule 9,Rule 10,Rule 11,Rule 12,Rule 13,Rule 14,Rule 15
+0,0,0,0,0,0,0,0,0,0,0,0,-1,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,-1,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,-1,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,-1,0,0
+0,0,0,0,0,0,-1,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,-1,0,0,0,0,-1,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,-1,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,-1,0,0,0,0,0
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,-1,0,0
+0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,1,0,0,0
+0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,-1,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,-1,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,-1,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,-1,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,-1,0,-1
+
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.7428571428571429; Test Accuracy: 0.0
+    Train Support: 0.05142857142857143; Test Support: 0.0
+    Train Confidence: 0.6416666666666667; Test Confidence: 0.45
+    Train Lift: 1.2848583877995643; Test Lift: NONE
+    Train Leverage: 0.00848979591836735; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    Current Rule Code:
+def rule2matrix(smiles_list):
+    rules = [
+        ['[CX3](=O)[OX2H1]', '[c][OX2H]', '[c][NX3;H2,H1][c]'],  # Rule 1
+        ['[NX3;H2]', '[C;X4][C;X4][C;X4][C;X4]'],  # Rule 2
+        ['[OX2H]', '[c][OX2H]'],  # Rule 3
+        ['[OX2][C;!R][OX2]'],  # Rule 4
+        ['[SX2H]', '[C;X4][C;X4][C;X4]'],  # Rule 5
+        ['[c][NX3+](=O)[O-]'],  # Rule 6
+        ['[CX4](F)(F)F'],  # Rule 7
+        ['[c]1[nH]c2c(c1)cccc2'],  # Rule 8
+        ['[n]1ccccc1'],  # Rule 9
+        ['[c][CX3H]=O'],  # Rule 10
+        ['[c][SX4](=O)(=O)[#6]'],  # Rule 11
+        ['[c][OX2][C;!R]'],  # Rule 12
+        ['[NX3;H2][C;X4][C;X4]'],  # Rule 13
+        ['[n]1ccccc1[CX3](=O)[OX2H1]'],  # Rule 14
+        ['[C;X4][C;X4][C;X4][C;X4][C;X4][C;X4][C;X4]'],  # Rule 15
+    ]
+    results = []
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            results.append([0] * len(rules))
+            continue
+        row = []
+        for i, rule in enumerate(rules):
+            try:
+                if all(mol.HasSubstructMatch(Chem.MolFromSmarts(r)) for r in rule):
+                    if i in [0, 1, 2, 5, 8, 11]:  # Rules with high prediction
+                        row.append(1)
+                    else:
+                        row.append(-1)
+                else:
+                    row.append(0)
+            except:
+                row.append(0)
+        results.append(row)
+    df = pd.DataFrame(results, columns=[f'Rule {i+1}' for i in range(len(rules))])
+    return df
+--------------------------------------------------
+    Target Name: yield
+    GPT Model: gpt-4o-2024-08-06
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+- **Rule 1**: Modifiers containing a carboxylic acid group (-COOH) and an aromatic ring with electron-donating substituents (e.g., -OH, -NH2) tend to result in a high yield. These groups enhance coordination with the metal center, stabilizing the catalyst. Examples include 4-aminobenzoic acid and 5-(4-hydroxyphenyl)pentanoic acid.
+
+- **Rule 2**: Modifiers with an amino group (-NH2) and a linear aliphatic chain of 4 to 6 carbons, without additional electron-withdrawing groups, tend to result in a high yield. The amino group enhances coordination, while the aliphatic chain provides steric effects that favor the reaction. Examples include 5-aminopentanoic acid.
+
+- **Rule 3**: Modifiers containing a hydroxyl group (-OH) and an aromatic ring with additional electron-donating groups tend to result in a high yield. The hydroxyl group participates in hydrogen bonding, stabilizing the catalyst structure. Examples include 5-(4-hydroxyphenyl)pentanoic acid.
+
+- **Rule 4**: Modifiers with multiple ether linkages (-O-) and no additional functional groups tend to result in a low yield. The flexibility and decreased rigidity of the catalyst structure negatively impact the reaction. Examples include 2-[2-(2-methoxyethoxy)ethoxy]acetic acid.
+
+- **Rule 5**: Modifiers containing a sulfanyl group (-SH) with a short aliphatic chain (up to 3 carbons) tend to result in a high yield. The sulfanyl group provides strong coordination with the metal center, enhancing catalytic activity. Examples include 3-sulfanylpropanoic acid.
+
+- **Rule 6**: Modifiers with a nitro group (-NO2) on an aromatic ring tend to result in a high yield. The electron-withdrawing nature of the nitro group stabilizes the metal center, enhancing the reaction. An example is 4-nitrobenzoic acid.
+
+- **Rule 7**: Modifiers with a trifluoromethyl group (-CF3) tend to result in a low yield. The electron-withdrawing nature of the trifluoromethyl group destabilizes the metal center, reducing catalytic activity. An example is 4-[(2,2,2-trifluoroacetyl)amino]butanoic acid.
+
+- **Rule 8**: Modifiers containing an indole group tend to result in a high yield. The indole group provides π-π interactions and additional coordination sites, enhancing the stability and reactivity of the catalyst. An example is (2R)-2-amino-3-(1H-indol-3-yl)propanoic acid.
+
+- **Rule 9**: Modifiers with a pyridine ring tend to result in a high yield. The nitrogen in the pyridine ring coordinates with the metal center, enhancing catalytic activity. Examples include pyridine-3-carboxylic acid.
+
+- **Rule 10**: Modifiers containing a formyl group (-CHO) on an aromatic ring tend to result in a low yield. The formyl group introduces steric hindrance or electronic effects that destabilize the metal center. Examples include 4-formylbenzoic acid.
+
+- **Rule 11**: Modifiers with an aromatic ring and electron-withdrawing groups such as sulfonyl (-SO2-) or carbonyl (-C=O) groups tend to result in a low yield. These groups may destabilize the metal center. Examples include 4-sulfanylbenzoic acid.
+
+- **Rule 12**: Modifiers with an aromatic ring and electron-donating groups such as methoxy (-OCH3) or ethoxy (-OC2H5) tend to result in a high yield. These groups enhance the electron density on the aromatic ring, stabilizing the metal center. An example is 4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid.
+
+- **Rule 13**: Modifiers with a branched aliphatic chain containing an amino group (-NH2) tend to result in a low yield. The branching may introduce steric hindrance that affects coordination with the metal center. An example is (2S)-6-acetamido-2-aminohexanoic acid.
+
+- **Rule 14**: Modifiers containing a pyridine ring with electron-withdrawing substituents tend to result in a low yield. The electron-withdrawing nature reduces the electron density on the nitrogen, affecting coordination. An example is 4-pyridin-4-ylbenzoic acid.
+
+- **Rule 15**: Modifiers with a long aliphatic chain (more than 6 carbons) and no additional functional groups tend to result in a low yield. The long chain may introduce steric hindrance and reduce effective coordination. An example is octanoic acid.
+
+**End of Rules**---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+Rule 1,Rule 2,Rule 3,Rule 4,Rule 5,Rule 6,Rule 7,Rule 8,Rule 9,Rule 10,Rule 11,Rule 12,Rule 13,Rule 14,Rule 15
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,-1,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,1,0,0,0,0,-1,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,1,0,0,0,0,-1,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,-1,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,-1,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,-1,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,-1,0,0,0,0,0
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,1,0,0,0,0,-1,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,-1,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,-1,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,-1,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,-1,0,0
+
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.6857142857142857; Test Accuracy: 1.0
+    Train Support: 0.0380952380952381; Test Support: 0.0
+    Train Confidence: 0.6666666666666666; Test Confidence: 0.5
+    Train Lift: 1.2962962962962965; Test Lift: NONE
+    Train Leverage: 0.004625850340136056; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    Current Rule Code:
+def rule2matrix(smiles_list):
+    rules = [
+        ['[CX3](=O)[OX2H1]', '[c][OH]', '[c][NH2]'],  # Rule 1: Carboxylic acid and aromatic ring with electron-donating groups
+        ['[NX3H2]', '[C;X4][C;X4][C;X4][C;X4][C;X4]'],  # Rule 2: Amino group and linear aliphatic chain
+        ['[OX2H]', '[c][OH]', '[c][NH2]'],  # Rule 3: Hydroxyl group and aromatic ring with electron-donating groups
+        ['[OX2][C;X4][OX2]', '[OX2][C;X4][OX2]'],  # Rule 4: Multiple ether linkages
+        ['[SX2H]', '[C;X4][C;X4][C;X4]'],  # Rule 5: Sulfanyl group with short aliphatic chain
+        ['[c][NX3+](=O)[O-]'],  # Rule 6: Nitro group on an aromatic ring
+        ['[CX4](F)(F)F'],  # Rule 7: Trifluoromethyl group
+        ['[c]1[nH]c2c(c1)cccc2'],  # Rule 8: Indole group
+        ['[n]1ccccc1'],  # Rule 9: Pyridine ring
+        ['[c][CX3H]=O'],  # Rule 10: Formyl group on an aromatic ring
+        ['[c][SX4](=O)(=O)', '[c][CX3](=O)'],  # Rule 11: Aromatic ring with sulfonyl or carbonyl groups
+        ['[c][OX2][CH3]', '[c][OX2][CH2][CH3]'],  # Rule 12: Aromatic ring with methoxy or ethoxy groups
+        ['[NX3H2]', '[C;X4]([C;X4])[C;X4][C;X4]'],  # Rule 13: Branched aliphatic chain with amino group
+        ['[n]1ccccc1', '[c][CX3](=O)'],  # Rule 14: Pyridine ring with electron-withdrawing substituents
+        ['[C;X4][C;X4][C;X4][C;X4][C;X4][C;X4][C;X4][C;X4]']  # Rule 15: Long aliphatic chain
+    ]
+    results = []
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            results.append([0] * len(rules))
+            continue
+        row = []
+        for i, rule in enumerate(rules):
+            try:
+                if all(mol.HasSubstructMatch(Chem.MolFromSmarts(r)) for r in rule):
+                    if i in [0, 1, 2, 5, 8, 11]:  # Rules with high prediction
+                        row.append(1)
+                    else:
+                        row.append(-1)
+                else:
+                    row.append(0)
+            except:
+                row.append(0)
+        results.append(row)
+    df = pd.DataFrame(results, columns=[f'Rule {i+1}' for i in range(len(rules))])
+    return df
+--------------------------------------------------
+    Target Name: yield
+    GPT Model: gpt-4o-2024-08-06
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+- **Rule 1**: Modifiers containing a carboxylic acid group (-COOH) and an aromatic ring with electron-donating substituents (e.g., -OH, -NH2) tend to result in a high yield. These groups enhance coordination with the metal center, stabilizing the catalyst. Examples include 4-aminobenzoic acid and 5-(4-hydroxyphenyl)pentanoic acid.
+
+- **Rule 2**: Modifiers with an amino group (-NH2) and a linear aliphatic chain of 4 to 6 carbons, without additional electron-withdrawing groups, tend to result in a high yield. The amino group enhances coordination, while the aliphatic chain provides steric effects that favor the reaction. Examples include 5-aminopentanoic acid.
+
+- **Rule 3**: Modifiers containing a hydroxyl group (-OH) and an aromatic ring with additional electron-donating groups tend to result in a high yield. The hydroxyl group participates in hydrogen bonding, stabilizing the catalyst structure. Examples include 5-(4-hydroxyphenyl)pentanoic acid.
+
+- **Rule 4**: Modifiers with multiple ether linkages (-O-) and no additional functional groups tend to result in a low yield. The flexibility and decreased rigidity of the catalyst structure negatively impact the reaction. Examples include 2-[2-(2-methoxyethoxy)ethoxy]acetic acid.
+
+- **Rule 5**: Modifiers containing a sulfanyl group (-SH) with a short aliphatic chain (up to 3 carbons) tend to result in a high yield. The sulfanyl group provides strong coordination with the metal center, enhancing catalytic activity. Examples include 3-sulfanylpropanoic acid.
+
+- **Rule 6**: Modifiers with a nitro group (-NO2) on an aromatic ring tend to result in a high yield. The electron-withdrawing nature of the nitro group stabilizes the metal center, enhancing the reaction. An example is 4-nitrobenzoic acid.
+
+- **Rule 7**: Modifiers with a trifluoromethyl group (-CF3) tend to result in a low yield. The electron-withdrawing nature of the trifluoromethyl group destabilizes the metal center, reducing catalytic activity. An example is 4-[(2,2,2-trifluoroacetyl)amino]butanoic acid.
+
+- **Rule 8**: Modifiers containing an indole group tend to result in a high yield. The indole group provides π-π interactions and additional coordination sites, enhancing the stability and reactivity of the catalyst. An example is (2R)-2-amino-3-(1H-indol-3-yl)propanoic acid.
+
+- **Rule 9**: Modifiers with a pyridine ring tend to result in a high yield. The nitrogen in the pyridine ring coordinates with the metal center, enhancing catalytic activity. Examples include pyridine-3-carboxylic acid.
+
+- **Rule 10**: Modifiers containing a formyl group (-CHO) on an aromatic ring tend to result in a low yield. The formyl group introduces steric hindrance or electronic effects that destabilize the metal center. Examples include 4-formylbenzoic acid.
+
+- **Rule 11**: Modifiers with an aromatic ring and electron-withdrawing groups such as sulfonyl (-SO2-) or carbonyl (-C=O) groups tend to result in a low yield. These groups may destabilize the metal center. Examples include 4-sulfanylbenzoic acid.
+
+- **Rule 12**: Modifiers with an aromatic ring and electron-donating groups such as methoxy (-OCH3) or ethoxy (-OC2H5) tend to result in a high yield. These groups enhance the electron density on the aromatic ring, stabilizing the metal center. An example is 4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid.
+
+- **Rule 13**: Modifiers with a branched aliphatic chain containing an amino group (-NH2) tend to result in a low yield. The branching may introduce steric hindrance that affects coordination with the metal center. An example is (2S)-6-acetamido-2-aminohexanoic acid.
+
+- **Rule 14**: Modifiers containing a pyridine ring with electron-withdrawing substituents tend to result in a low yield. The electron-withdrawing nature reduces the electron density on the nitrogen, affecting coordination. An example is 4-pyridin-4-ylbenzoic acid.
+
+- **Rule 15**: Modifiers with a long aliphatic chain (more than 6 carbons) and no additional functional groups tend to result in a low yield. The long chain may introduce steric hindrance and reduce effective coordination. An example is octanoic acid.
+
+**End of Rules**---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+Rule 1,Rule 2,Rule 3,Rule 4,Rule 5,Rule 6,Rule 7,Rule 8,Rule 9,Rule 10,Rule 11,Rule 12,Rule 13,Rule 14,Rule 15
+0,0,0,0,0,0,0,0,0,0,0,0,-1,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,-1,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,-1,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,-1,0,0
+0,0,0,0,0,0,-1,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,-1,0,0,0,0,-1,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,-1,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,-1,0,0,0,0,0
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,1,0,0,0,0,-1,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,-1,0,0
+0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,-1,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,-1,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,-1,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,-1,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,-1,0,-1
+
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.7142857142857143; Test Accuracy: 0.0
+    Train Support: 0.07142857142857142; Test Support: 0.0
+    Train Confidence: 0.6666666666666666; Test Confidence: 0.375
+    Train Lift: 1.2962962962962963; Test Lift: NONE
+    Train Leverage: 0.02000000000000001; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    Current Rule Code:
+def rule2matrix(smiles_list):
+    rules = [
+        ['[CX3](=O)[OX2H1]', '[c][OX2H]', '[c][NX3H2]'],  # Rule 1
+        ['[NX3H2]', '[C;X4][C;X4][C;X4][C;X4]'],  # Rule 2
+        ['[OX2H]', '[c][OX2H]'],  # Rule 3
+        ['[OX2][C;X4][OX2]'],  # Rule 4
+        ['[SX2H]', '[C;X4][C;X4][C;X4]'],  # Rule 5
+        ['[c][NX3+](=O)[O-]'],  # Rule 6
+        ['[CX4](F)(F)F'],  # Rule 7
+        ['c1c[nH]c2c1cccc2'],  # Rule 8
+        ['c1ccncc1'],  # Rule 9
+        ['[c][CX3H]=O'],  # Rule 10
+        ['[c][SX4](=O)(=O)'],  # Rule 11
+        ['[c][OX2][C;X4][OX2]'],  # Rule 12
+        ['[NX3H2][C;X4][C;X4]'],  # Rule 13
+        ['c1ccncc1[CX3](=O)'],  # Rule 14
+        ['[C;X4][C;X4][C;X4][C;X4][C;X4][C;X4][C;X4]'],  # Rule 15
+    ]
+    results = []
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            results.append([0] * len(rules))
+            continue
+        row = []
+        for i, rule in enumerate(rules):
+            try:
+                if all(mol.HasSubstructMatch(Chem.MolFromSmarts(r)) for r in rule):
+                    if i in [0, 1, 2, 5, 8, 11]:  # Rules with high prediction
+                        row.append(1)
+                    else:
+                        row.append(-1)
+                else:
+                    row.append(0)
+            except:
+                row.append(0)
+        results.append(row)
+    df = pd.DataFrame(results, columns=[f'Rule {i+1}' for i in range(len(rules))])
+    return df
+--------------------------------------------------
+    Target Name: yield
+    GPT Model: gpt-4o-2024-08-06
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+- **Rule 1**: Modifiers containing a carboxylic acid group (-COOH) and an aromatic ring with electron-donating substituents (e.g., -OH, -NH2) tend to result in a high yield. These groups enhance coordination with the metal center, stabilizing the catalyst. Examples include 4-aminobenzoic acid and 5-(4-hydroxyphenyl)pentanoic acid.
+
+- **Rule 2**: Modifiers with an amino group (-NH2) and a linear aliphatic chain of 4 to 6 carbons, without additional electron-withdrawing groups, tend to result in a high yield. The amino group enhances coordination, while the aliphatic chain provides steric effects that favor the reaction. Examples include 5-aminopentanoic acid.
+
+- **Rule 3**: Modifiers containing a hydroxyl group (-OH) and an aromatic ring with additional electron-donating groups tend to result in a high yield. The hydroxyl group participates in hydrogen bonding, stabilizing the catalyst structure. Examples include 5-(4-hydroxyphenyl)pentanoic acid.
+
+- **Rule 4**: Modifiers with multiple ether linkages (-O-) and no additional functional groups tend to result in a low yield. The flexibility and decreased rigidity of the catalyst structure negatively impact the reaction. Examples include 2-[2-(2-methoxyethoxy)ethoxy]acetic acid.
+
+- **Rule 5**: Modifiers containing a sulfanyl group (-SH) with a short aliphatic chain (up to 3 carbons) tend to result in a high yield. The sulfanyl group provides strong coordination with the metal center, enhancing catalytic activity. Examples include 3-sulfanylpropanoic acid.
+
+- **Rule 6**: Modifiers with a nitro group (-NO2) on an aromatic ring tend to result in a high yield. The electron-withdrawing nature of the nitro group stabilizes the metal center, enhancing the reaction. An example is 4-nitrobenzoic acid.
+
+- **Rule 7**: Modifiers with a trifluoromethyl group (-CF3) tend to result in a low yield. The electron-withdrawing nature of the trifluoromethyl group destabilizes the metal center, reducing catalytic activity. An example is 4-[(2,2,2-trifluoroacetyl)amino]butanoic acid.
+
+- **Rule 8**: Modifiers containing an indole group tend to result in a high yield. The indole group provides π-π interactions and additional coordination sites, enhancing the stability and reactivity of the catalyst. An example is (2R)-2-amino-3-(1H-indol-3-yl)propanoic acid.
+
+- **Rule 9**: Modifiers with a pyridine ring tend to result in a high yield. The nitrogen in the pyridine ring coordinates with the metal center, enhancing catalytic activity. Examples include pyridine-3-carboxylic acid.
+
+- **Rule 10**: Modifiers containing a formyl group (-CHO) on an aromatic ring tend to result in a low yield. The formyl group introduces steric hindrance or electronic effects that destabilize the metal center. Examples include 4-formylbenzoic acid.
+
+- **Rule 11**: Modifiers with an aromatic ring and electron-withdrawing groups such as sulfonyl (-SO2-) or carbonyl (-C=O) groups tend to result in a low yield. These groups may destabilize the metal center. Examples include 4-sulfanylbenzoic acid.
+
+- **Rule 12**: Modifiers with an aromatic ring and electron-donating groups such as methoxy (-OCH3) or ethoxy (-OC2H5) tend to result in a high yield. These groups enhance the electron density on the aromatic ring, stabilizing the metal center. An example is 4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid.
+
+- **Rule 13**: Modifiers with a branched aliphatic chain containing an amino group (-NH2) tend to result in a low yield. The branching may introduce steric hindrance that affects coordination with the metal center. An example is (2S)-6-acetamido-2-aminohexanoic acid.
+
+- **Rule 14**: Modifiers containing a pyridine ring with electron-withdrawing substituents tend to result in a low yield. The electron-withdrawing nature reduces the electron density on the nitrogen, affecting coordination. An example is 4-pyridin-4-ylbenzoic acid.
+
+- **Rule 15**: Modifiers with a long aliphatic chain (more than 6 carbons) and no additional functional groups tend to result in a low yield. The long chain may introduce steric hindrance and reduce effective coordination. An example is octanoic acid.
+
+**End of Rules**---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+Rule 1,Rule 2,Rule 3,Rule 4,Rule 5,Rule 6,Rule 7,Rule 8,Rule 9,Rule 10,Rule 11,Rule 12,Rule 13,Rule 14,Rule 15
+0,0,0,0,0,0,0,0,0,0,0,0,-1,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,-1,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,1,0,0,0,0,-1,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,1,0,0,0,0,-1,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,-1,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,-1,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,-1,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,-1,0,0,0,0,0
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,1,0,0,0,0,-1,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,-1,0,0
+0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,-1,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,-1,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,-1,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,-1,0,-1
+
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.6857142857142857; Test Accuracy: 0.0
+    Train Support: 0.0761904761904762; Test Support: 0.0
+    Train Confidence: 0.9333333333333332; Test Confidence: 0.3333333333333333
+    Train Lift: 1.8148148148148149; Test Lift: NONE
+    Train Leverage: 0.03210884353741497; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    Current Rule Code:
+def rule2matrix(smiles_list):
+    rules = [
+        ['[CX3](=O)[OX2H1]', '[c][OX2H]', '[c][NX3H2]'],  # Rule 1
+        ['[NX3H2]', '[C;X4][C;X4][C;X4][C;X4]'],  # Rule 2
+        ['[OX2H]', '[c][OX2H]'],  # Rule 3
+        ['[OX2][C;X4][OX2]'],  # Rule 4
+        ['[SX2H]', '[C;X4][C;X4][C;X4]'],  # Rule 5
+        ['[c][NX3+](=O)[O-]'],  # Rule 6
+        ['[CX4](F)(F)F'],  # Rule 7
+        ['c1c[nH]c2c1cccc2'],  # Rule 8
+        ['c1ccncc1'],  # Rule 9
+        ['[c][CX3H]=O'],  # Rule 10
+        ['[c][SX4](=O)(=O)'],  # Rule 11
+        ['[c][OX2][C;X4][OX2]'],  # Rule 12
+        ['[NX3H2]', '[C;X4][C;X4][C;X4]'],  # Rule 13
+        ['c1ccncc1', '[c][CX3](=O)[OX2H1]'],  # Rule 14
+        ['[C;X4][C;X4][C;X4][C;X4][C;X4][C;X4][C;X4]']  # Rule 15
+    ]
+    results = []
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            results.append([0] * len(rules))
+            continue
+        row = []
+        for i, rule in enumerate(rules):
+            try:
+                if all(mol.HasSubstructMatch(Chem.MolFromSmarts(r)) for r in rule):
+                    if i in [0, 1, 2, 5, 8, 11]:  # Rules with high prediction
+                        row.append(1)
+                    else:
+                        row.append(-1)
+                else:
+                    row.append(0)
+            except:
+                row.append(0)
+        results.append(row)
+    df = pd.DataFrame(results, columns=[f'Rule {i+1}' for i in range(len(rules))])
+    return df
+--------------------------------------------------
+    Target Name: yield
+    GPT Model: gpt-4o-2024-08-06
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+- **Rule 1**: Modifiers containing a carboxylic acid group (-COOH) and an aromatic ring with electron-donating substituents (e.g., -OH, -NH2) tend to result in a high yield. These groups enhance coordination with the metal center, stabilizing the catalyst. Examples include 4-aminobenzoic acid and 5-(4-hydroxyphenyl)pentanoic acid.
+
+- **Rule 2**: Modifiers with an amino group (-NH2) and a linear aliphatic chain of 4 to 6 carbons, without additional electron-withdrawing groups, tend to result in a high yield. The amino group enhances coordination, while the aliphatic chain provides steric effects that favor the reaction. Examples include 5-aminopentanoic acid.
+
+- **Rule 3**: Modifiers containing a hydroxyl group (-OH) and an aromatic ring with additional electron-donating groups tend to result in a high yield. The hydroxyl group participates in hydrogen bonding, stabilizing the catalyst structure. Examples include 5-(4-hydroxyphenyl)pentanoic acid.
+
+- **Rule 4**: Modifiers with multiple ether linkages (-O-) and no additional functional groups tend to result in a low yield. The flexibility and decreased rigidity of the catalyst structure negatively impact the reaction. Examples include 2-[2-(2-methoxyethoxy)ethoxy]acetic acid.
+
+- **Rule 5**: Modifiers containing a sulfanyl group (-SH) with a short aliphatic chain (up to 3 carbons) tend to result in a high yield. The sulfanyl group provides strong coordination with the metal center, enhancing catalytic activity. Examples include 3-sulfanylpropanoic acid.
+
+- **Rule 6**: Modifiers with a nitro group (-NO2) on an aromatic ring tend to result in a high yield. The electron-withdrawing nature of the nitro group stabilizes the metal center, enhancing the reaction. An example is 4-nitrobenzoic acid.
+
+- **Rule 7**: Modifiers with a trifluoromethyl group (-CF3) and additional electron-donating groups on the aromatic ring can result in a high yield. The electron-donating groups may counteract the destabilizing effect of the trifluoromethyl group. An example is 4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid.
+
+- **Rule 8**: Modifiers containing an indole group tend to result in a high yield. The indole group provides π-π interactions and additional coordination sites, enhancing the stability and reactivity of the catalyst. An example is (2R)-2-amino-3-(1H-indol-3-yl)propanoic acid.
+
+- **Rule 9**: Modifiers with a pyridine ring tend to result in a high yield. The nitrogen in the pyridine ring coordinates with the metal center, enhancing catalytic activity. Examples include pyridine-3-carboxylic acid.
+
+- **Rule 10**: Modifiers containing a formyl group (-CHO) on an aromatic ring with additional electron-donating groups may result in a high yield. The electron-donating groups can mitigate the negative impact of the formyl group. An example is 4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid.
+
+- **Rule 11**: Modifiers with an aromatic ring and electron-withdrawing groups such as sulfonyl (-SO2-) or carbonyl (-C=O) groups tend to result in a low yield. These groups may destabilize the metal center. Examples include 4-sulfanylbenzoic acid.
+
+- **Rule 12**: Modifiers with a branched aliphatic chain containing an amino group (-NH2) and additional electron-donating groups may result in a high yield. The electron-donating groups can enhance coordination despite the branching. An example is (2S)-2-amino-3-phenylpropanoic acid.
+
+- **Rule 13**: Modifiers with a long aliphatic chain (more than 6 carbons) and additional electron-donating groups can result in a high yield. The electron-donating groups may enhance coordination and reduce steric hindrance. An example is 7-hydroxyheptanoic acid.
+
+- **Rule 14**: Modifiers containing a pyridine ring with electron-withdrawing substituents tend to result in a low yield. The electron-withdrawing nature reduces the electron density on the nitrogen, affecting coordination. An example is 4-pyridin-4-ylbenzoic acid.
+
+- **Rule 15**: Modifiers with an aromatic ring and electron-donating groups such as methoxy (-OCH3) or ethoxy (-OC2H5) tend to result in a high yield. These groups enhance the electron density on the aromatic ring, stabilizing the metal center. An example is 4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid.
+
+**End of Rules**---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+Rule 1,Rule 2,Rule 3,Rule 4,Rule 5,Rule 6,Rule 7,Rule 8,Rule 9,Rule 10,Rule 11,Rule 12,Rule 13,Rule 14,Rule 15
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,1,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0,0,0,0,0,1
+0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,1,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,1,0,0,0,0,1
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0,0,0,0,0,1
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0,0,0,0,0,1
+0,1,0,0,0,0,0,0,0,0,0,-1,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,-1,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,-1,1,0,0
+
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.6857142857142857; Test Accuracy: 0.0
+    Train Support: 0.039285714285714285; Test Support: 0.0
+    Train Confidence: 0.59375; Test Confidence: 0.5
+    Train Lift: 1.2081290849673203; Test Lift: NONE
+    Train Leverage: 0.004285714285714287; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    Current Rule Code:
+def rule2matrix(smiles_list):
+    rules = [
+        ['[CX3](=O)[OX2H1]', '[c][OX2H]', '[c][NX3H2]'],  # Rule 1
+        ['[NX3H2]', '[C;X4][C;X4][C;X4][C;X4]'],  # Rule 2
+        ['[OX2H]', '[c][OX2H]'],  # Rule 3
+        ['[OX2][C;X4][OX2]'],  # Rule 4
+        ['[SX2H]', '[C;X4][C;X4][C;X4]'],  # Rule 5
+        ['[c][NX3+](=O)[O-]'],  # Rule 6
+        ['[CX4](F)(F)F', '[c][OX2H]'],  # Rule 7
+        ['c1c[nH]c2c1cccc2'],  # Rule 8
+        ['c1ccncc1'],  # Rule 9
+        ['[CX3H]=O', '[c][OX2H]'],  # Rule 10
+        ['[c][SX4](=O)(=O)'],  # Rule 11
+        ['[NX3H2]', '[C;X4][C;X4][C;X4][C;X4][C;X4]'],  # Rule 12
+        ['[C;X4][C;X4][C;X4][C;X4][C;X4][C;X4][C;X4]', '[OX2H]'],  # Rule 13
+        ['c1ccncc1', '[c][SX4](=O)(=O)'],  # Rule 14
+        ['[c][OX2H]', '[c][OX2H]']  # Rule 15
+    ]
+    results = []
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            results.append([0] * len(rules))
+            continue
+        row = []
+        for i, rule in enumerate(rules):
+            try:
+                if all(mol.HasSubstructMatch(Chem.MolFromSmarts(r)) for r in rule):
+                    if i in [0, 1, 2, 5, 6, 7, 8, 9, 12, 13, 14]:  # Rules with high prediction
+                        row.append(1)
+                    else:
+                        row.append(-1)
+                else:
+                    row.append(0)
+            except:
+                row.append(0)
+        results.append(row)
+    df = pd.DataFrame(results, columns=[f'Rule {i+1}' for i in range(len(rules))])
+    return df
+--------------------------------------------------
+    Target Name: yield
+    GPT Model: gpt-4o-2024-08-06
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+- **Rule 1**: Modifiers containing a carboxylic acid group (-COOH) and an aromatic ring with electron-donating substituents (e.g., -OH, -NH2) tend to result in a high yield. These groups enhance coordination with the metal center, stabilizing the catalyst. Examples include 4-aminobenzoic acid and 5-(4-hydroxyphenyl)pentanoic acid.
+
+- **Rule 2**: Modifiers with an amino group (-NH2) and a linear aliphatic chain of 4 to 6 carbons, without additional electron-withdrawing groups, tend to result in a high yield. The amino group enhances coordination, while the aliphatic chain provides steric effects that favor the reaction. Examples include 5-aminopentanoic acid.
+
+- **Rule 3**: Modifiers containing a hydroxyl group (-OH) and an aromatic ring with additional electron-donating groups tend to result in a high yield. The hydroxyl group participates in hydrogen bonding, stabilizing the catalyst structure. Examples include 5-(4-hydroxyphenyl)pentanoic acid.
+
+- **Rule 4**: Modifiers with multiple ether linkages (-O-) and no additional functional groups tend to result in a low yield. The flexibility and decreased rigidity of the catalyst structure negatively impact the reaction. Examples include 2-[2-(2-methoxyethoxy)ethoxy]acetic acid.
+
+- **Rule 5**: Modifiers containing a sulfanyl group (-SH) with a short aliphatic chain (up to 3 carbons) tend to result in a high yield. The sulfanyl group provides strong coordination with the metal center, enhancing catalytic activity. Examples include 3-sulfanylpropanoic acid.
+
+- **Rule 6**: Modifiers with a nitro group (-NO2) on an aromatic ring tend to result in a high yield. The electron-withdrawing nature of the nitro group stabilizes the metal center, enhancing the reaction. An example is 4-nitrobenzoic acid.
+
+- **Rule 7**: Modifiers containing an indole group tend to result in a high yield. The indole group provides π-π interactions and additional coordination sites, enhancing the stability and reactivity of the catalyst. An example is (2R)-2-amino-3-(1H-indol-3-yl)propanoic acid.
+
+- **Rule 8**: Modifiers with a pyridine ring tend to result in a high yield. The nitrogen in the pyridine ring coordinates with the metal center, enhancing catalytic activity. Examples include pyridine-3-carboxylic acid.
+
+- **Rule 9**: Modifiers with an aromatic ring and electron-withdrawing groups such as sulfonyl (-SO2-) or carbonyl (-C=O) groups tend to result in a low yield. These groups may destabilize the metal center. Examples include 4-sulfanylbenzoic acid.
+
+- **Rule 10**: Modifiers with a long aliphatic chain (more than 6 carbons) without additional functional groups tend to result in a low yield. The lack of functional groups may reduce coordination with the metal center. An example is octanoic acid.
+
+- **Rule 11**: Modifiers containing a pyridine ring with electron-withdrawing substituents tend to result in a low yield. The electron-withdrawing nature reduces the electron density on the nitrogen, affecting coordination. An example is 4-pyridin-4-ylbenzoic acid.
+
+- **Rule 12**: Modifiers with an aromatic ring and electron-donating groups such as methoxy (-OCH3) or ethoxy (-OC2H5) tend to result in a high yield. These groups enhance the electron density on the aromatic ring, stabilizing the metal center. An example is 4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid.
+
+- **Rule 13**: Modifiers with a formyl group (-CHO) on an aromatic ring without additional electron-donating groups tend to result in a low yield. The electron-withdrawing nature of the formyl group destabilizes the metal center. An example is 4-formylbenzoic acid.
+
+**End of Rules**---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+Rule 1,Rule 2,Rule 3,Rule 4,Rule 5,Rule 6,Rule 7,Rule 8,Rule 9,Rule 10,Rule 11,Rule 12,Rule 13
+0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,-1,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,1,0,0,-1,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,1,0,0,-1,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,1,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0,0,0,1
+0,0,0,0,0,0,0,0,0,0,0,0,1
+0,0,0,0,0,1,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,1,0,0,-1,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,1,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,-1,0,0,0
+
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.6571428571428571; Test Accuracy: 0.0
+    Train Support: 0.0326530612244898; Test Support: 0.0
+    Train Confidence: 0.5357142857142857; Test Confidence: 0.5
+    Train Lift: 1.0947712418300655; Test Lift: NONE
+    Train Leverage: -0.0032653061224489784; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    Current Rule Code:
+def rule2matrix(smiles_list):
+    rules = [
+        ['[CX3](=O)[OX2H1]', '[c][OX2H]', '[c][NX3H2]'],  # Rule 1: Carboxylic acid and aromatic ring with electron-donating groups
+        ['[NX3H2]', '[C;X4][C;X4][C;X4][C;X4]'],  # Rule 2: Amino group and linear aliphatic chain
+        ['[OX2H]', '[c][OX2H]'],  # Rule 3: Hydroxyl group and aromatic ring with electron-donating groups
+        ['[OX2][C;X4][OX2]'],  # Rule 4: Multiple ether linkages
+        ['[SX2H]', '[C;X4][C;X4][C;X4]'],  # Rule 5: Sulfanyl group with short aliphatic chain
+        ['[NX3+](=O)[O-]', '[c]'],  # Rule 6: Nitro group on an aromatic ring
+        ['c1c[nH]c2c1cccc2'],  # Rule 7: Indole group
+        ['c1ccncc1'],  # Rule 8: Pyridine ring
+        ['[c][SX4](=O)(=O)', '[c][CX3](=O)'],  # Rule 9: Aromatic ring with sulfonyl or carbonyl groups
+        ['[C;X4][C;X4][C;X4][C;X4][C;X4][C;X4][C;X4]'],  # Rule 10: Long aliphatic chain
+        ['c1ccncc1', '[c][CX3](=O)'],  # Rule 11: Pyridine ring with electron-withdrawing groups
+        ['[c][OX2][C;X4][OX2]'],  # Rule 12: Aromatic ring with methoxy or ethoxy groups
+        ['[c][CX3H]=O'],  # Rule 13: Formyl group on an aromatic ring
+    ]
+    results = []
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            results.append([0] * len(rules))
+            continue
+        row = []
+        for i, rule in enumerate(rules):
+            try:
+                if all(mol.HasSubstructMatch(Chem.MolFromSmarts(r)) for r in rule):
+                    if i in [0, 1, 2, 4, 5, 6, 7, 12]:  # Rules with high prediction
+                        row.append(1)
+                    else:  # Rules with low prediction
+                        row.append(-1)
+                else:
+                    row.append(0)
+            except:
+                row.append(0)
+        results.append(row)
+    df = pd.DataFrame(results, columns=[f'Rule {i+1}' for i in range(len(rules))])
+    return df
+--------------------------------------------------

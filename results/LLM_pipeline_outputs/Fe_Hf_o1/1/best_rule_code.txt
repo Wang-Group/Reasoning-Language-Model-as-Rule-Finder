@@ -1,0 +1,292 @@
+def rule2matrix(smiles_list):
+    # Define SMARTS patterns for functional groups and substructures
+    # Carboxylic acid group (-COOH)
+    carboxylic_acid = '[CX3](=O)[OX2H1]'
+    carboxylate_anion = '[CX3](=O)[O-]'
+    # Primary amine (-NH2)
+    primary_amine = '[NX3;H2][#6]'
+    # Amide group (-CONH2)
+    amide_group = '[CX3](=O)[NX3;H2]'
+    # Aliphatic chain with terminal amino group
+    terminal_primary_amino = '[NX3;H2][CH2][CH2][CH2][CH2][CH2][CX3](=O)[OX2H1]'
+    # Aliphatic chain with terminal amide group
+    terminal_amide = '[CX3](=O)[NX3;H2][CH2][CH2][CH2][CH2][CX3](=O)[OX2H1]'
+    # Aromatic carboxylic acid
+    aromatic_carboxylic_acid = '[c][CX3](=O)[OX2H1]'
+    # Substituents capable of coordinating with Fe ions
+    pyridyl_group = 'c1ccncc1'
+    nitro_group = '[NX3](=O)=O'
+    bromomethyl_group = '[CH2Br]'
+    # Electron-donating groups
+    methyl_group = '[CH3]'
+    amino_group = '[NX3;H2,H1][#6]'
+    hydroxyl_group = '[OX2H]'
+    # Sulfur functional groups
+    thiol_group = '[SX2H]'
+    thioether_group = '[#16X2][#6]'
+    # Ether linkage
+    ether_linkage = '[OD2]([#6])[#6]'
+    # Polyol
+    polyol = '[#6][OX2H][#6][OX2H][#6]'
+    # Phenolic hydroxyl group
+    phenolic_hydroxyl = '[c][OX2H]'
+    # Bulky aromatic side chains
+    bulky_aromatic = '[c]1cccc2ccccc12'
+    # Fluorinated alkyl chains
+    fluorinated_alkyl = '[#6][CF3]'
+    # Pyridine ring directly attached to carboxylic acid
+    pyridine_carboxylic_acid = 'n1cccc1C(=O)[O;H1]' 
+    # Aldehyde group adjacent to aromatic ring
+    aromatic_aldehyde = '[c][CX3H1](=O)'
+    # Ketone group adjacent to aromatic ring
+    aromatic_ketone = '[c][CX3](=O)[#6]'
+    # Simple aliphatic carboxylic acid
+    simple_aliphatic_acid = '[#6][CX3](=O)[OX2H1]'
+    # Terminal hydroxyl group on aliphatic chain
+    terminal_hydroxyl = '[CX4][CH2][CH2][CH2][CH2][OX2H]'
+    # Heteroaromatic carboxylic acid
+    heteroaromatic_acid = '[n,o,s][c][CX3](=O)[OX2H1]'
+    # Electron-rich methoxy-substituted aromatic ring
+    methoxy_substituted_aromatic = '[c][c][c]([OX2][CH3])[c][c]'
+    # Cyclic anhydride or lactone adjacent to carboxylic acid
+    cyclic_anhydride = '[C](=O)O[C](=O)'  # General pattern for cyclic anhydride
+    # Amide functional group adjacent to aromatic ring
+    aromatic_amide = '[c][CX3](=O)[NX3]'    
+    # Compile SMARTS patterns
+    patterns = {
+        'Rule 1': [
+            Chem.MolFromSmarts(primary_amine),
+            Chem.MolFromSmarts(carboxylic_acid),
+        ],
+        'Rule 2 High': [
+            Chem.MolFromSmarts(aromatic_carboxylic_acid),
+            [
+                Chem.MolFromSmarts(pyridyl_group),
+                Chem.MolFromSmarts(nitro_group),
+                Chem.MolFromSmarts(bromomethyl_group),
+            ]
+        ],
+        'Rule 2 Low': [
+            Chem.MolFromSmarts(aromatic_carboxylic_acid),
+            [
+                Chem.MolFromSmarts(methyl_group),
+                Chem.MolFromSmarts(amino_group),
+                Chem.MolFromSmarts(hydroxyl_group),
+            ]
+        ],
+        'Rule 3': [
+            Chem.MolFromSmarts(carboxylic_acid),
+            [
+                Chem.MolFromSmarts(thiol_group),
+                Chem.MolFromSmarts(thioether_group),
+            ]
+        ],
+        'Rule 4': [
+            Chem.MolFromSmarts(carboxylic_acid),
+            Chem.MolFromSmarts(ether_linkage),
+        ],
+        'Rule 5': [
+            Chem.MolFromSmarts(polyol),
+            Chem.MolFromSmarts(phenolic_hydroxyl),
+        ],
+        'Rule 6 High': [
+            Chem.MolFromSmarts(carboxylic_acid),
+            Chem.MolFromSmarts('[c][c][c]'),  # Less bulky aromatic chain
+        ],
+        'Rule 6 Low': [
+            Chem.MolFromSmarts(carboxylic_acid),
+            Chem.MolFromSmarts(bulky_aromatic),
+        ],
+        'Rule 7': [
+            Chem.MolFromSmarts(fluorinated_alkyl),
+        ],
+        'Rule 8 High': [
+            Chem.MolFromSmarts(carboxylic_acid),
+            Chem.MolFromSmarts('[#6]-[#6]-[#6]-[#6]-[#6]-n1ccccc1'),  # Pyridine ring via aliphatic linker
+        ],
+        'Rule 8 Low': [
+            Chem.MolFromSmarts(pyridine_carboxylic_acid),
+        ],
+        'Rule 9': [
+            [
+                Chem.MolFromSmarts(aromatic_aldehyde),
+                Chem.MolFromSmarts(aromatic_ketone),
+            ],
+        ],
+        'Rule 10 High': [
+            Chem.MolFromSmarts(carboxylic_acid),
+            Chem.MolFromSmarts(terminal_hydroxyl),
+        ],
+        'Rule 10 Low': [
+            Chem.MolFromSmarts(simple_aliphatic_acid),
+        ],
+        'Rule 11': [
+            Chem.MolFromSmarts(heteroaromatic_acid),
+        ],
+        'Rule 12 Low': [
+            Chem.MolFromSmarts(polyol),
+        ],
+        'Rule 12 High': [
+            Chem.MolFromSmarts(terminal_hydroxyl),
+        ],
+        'Rule 13': [
+            Chem.MolFromSmarts(methoxy_substituted_aromatic),
+            Chem.MolFromSmarts(aromatic_ketone),
+        ],
+        'Rule 14': [
+            Chem.MolFromSmarts(cyclic_anhydride),
+            Chem.MolFromSmarts(carboxylic_acid),
+        ],
+        'Rule 15': [
+            Chem.MolFromSmarts(aromatic_amide),
+            Chem.MolFromSmarts(carboxylic_acid),
+        ],
+    }
+    # Initialize the results list
+    results = []
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*15)
+            continue
+        row = []
+        # Rule 1
+        try:
+            match = mol.HasSubstructMatch(Chem.MolFromSmarts(primary_amine)) and mol.HasSubstructMatch(Chem.MolFromSmarts(carboxylic_acid))
+            row.append(1 if match else 0)
+        except:
+            row.append(0)
+        # Rule 2
+        try:
+            match_high = mol.HasSubstructMatch(Chem.MolFromSmarts(aromatic_carboxylic_acid)) and (
+                mol.HasSubstructMatch(Chem.MolFromSmarts(pyridyl_group)) or
+                mol.HasSubstructMatch(Chem.MolFromSmarts(nitro_group)) or
+                mol.HasSubstructMatch(Chem.MolFromSmarts(bromomethyl_group))
+            )
+            match_low = mol.HasSubstructMatch(Chem.MolFromSmarts(aromatic_carboxylic_acid)) and (
+                mol.HasSubstructMatch(Chem.MolFromSmarts(methyl_group)) or
+                mol.HasSubstructMatch(Chem.MolFromSmarts(amino_group)) or
+                mol.HasSubstructMatch(Chem.MolFromSmarts(hydroxyl_group))
+            )
+            if match_high:
+                row.append(1)
+            elif match_low:
+                row.append(-1)
+            else:
+                row.append(0)
+        except:
+            row.append(0)
+        # Rule 3
+        try:
+            match = mol.HasSubstructMatch(Chem.MolFromSmarts(carboxylic_acid)) and (
+                mol.HasSubstructMatch(Chem.MolFromSmarts(thiol_group)) or
+                mol.HasSubstructMatch(Chem.MolFromSmarts(thioether_group))
+            )
+            row.append(1 if match else 0)
+        except:
+            row.append(0)
+        # Rule 4
+        try:
+            match = mol.HasSubstructMatch(Chem.MolFromSmarts(ether_linkage)) and mol.HasSubstructMatch(Chem.MolFromSmarts(carboxylic_acid)) and (
+                mol.HasSubstructMatch(Chem.MolFromSmarts(primary_amine)) or mol.HasSubstructMatch(Chem.MolFromSmarts(carboxylic_acid))
+            )
+            row.append(1 if match else 0)
+        except:
+            row.append(0)
+        # Rule 5
+        try:
+            match = mol.HasSubstructMatch(Chem.MolFromSmarts(polyol)) or mol.HasSubstructMatch(Chem.MolFromSmarts(phenolic_hydroxyl))
+            row.append(-1 if match else 0)
+        except:
+            row.append(0)
+        # Rule 6
+        try:
+            match_high = mol.HasSubstructMatch(Chem.MolFromSmarts(carboxylic_acid)) and mol.HasSubstructMatch(Chem.MolFromSmarts('[c][c][c]'))
+            match_low = mol.HasSubstructMatch(Chem.MolFromSmarts(carboxylic_acid)) and mol.HasSubstructMatch(Chem.MolFromSmarts(bulky_aromatic))
+            if match_high:
+                row.append(1)
+            elif match_low:
+                row.append(-1)
+            else:
+                row.append(0)
+        except:
+            row.append(0)
+        # Rule 7
+        try:
+            match = mol.HasSubstructMatch(Chem.MolFromSmarts(fluorinated_alkyl))
+            row.append(-1 if match else 0)
+        except:
+            row.append(0)
+        # Rule 8
+        try:
+            match_high = mol.HasSubstructMatch(Chem.MolFromSmarts('[#6]-[#6]-[#6]-[#6]-[#6]-n1ccccc1'))
+            match_low = mol.HasSubstructMatch(Chem.MolFromSmarts(pyridine_carboxylic_acid))
+            if match_high:
+                row.append(1)
+            elif match_low:
+                row.append(-1)
+            else:
+                row.append(0)
+        except:
+            row.append(0)
+        # Rule 9
+        try:
+            match = mol.HasSubstructMatch(Chem.MolFromSmarts(aromatic_aldehyde)) or mol.HasSubstructMatch(Chem.MolFromSmarts(aromatic_ketone))
+            row.append(-1 if match else 0)
+        except:
+            row.append(0)
+        # Rule 10
+        try:
+            match_high = mol.HasSubstructMatch(Chem.MolFromSmarts(terminal_hydroxyl)) and mol.HasSubstructMatch(Chem.MolFromSmarts(carboxylic_acid))
+            match_low = mol.HasSubstructMatch(Chem.MolFromSmarts(simple_aliphatic_acid))
+            if match_high:
+                row.append(1)
+            elif match_low:
+                row.append(-1)
+            else:
+                row.append(0)
+        except:
+            row.append(0)
+        # Rule 11
+        try:
+            match = mol.HasSubstructMatch(Chem.MolFromSmarts(heteroaromatic_acid))
+            row.append(-1 if match else 0)
+        except:
+            row.append(0)
+        # Rule 12
+        try:
+            match_low = mol.HasSubstructMatch(Chem.MolFromSmarts(polyol))
+            match_high = mol.HasSubstructMatch(Chem.MolFromSmarts(terminal_hydroxyl))
+            if match_low:
+                row.append(-1)
+            elif match_high:
+                row.append(1)
+            else:
+                row.append(0)
+        except:
+            row.append(0)
+        # Rule 13
+        try:
+            match = mol.HasSubstructMatch(Chem.MolFromSmarts(methoxy_substituted_aromatic)) and mol.HasSubstructMatch(Chem.MolFromSmarts(aromatic_ketone))
+            row.append(1 if match else 0)
+        except:
+            row.append(0)
+        # Rule 14
+        try:
+            match = mol.HasSubstructMatch(Chem.MolFromSmarts(cyclic_anhydride)) and mol.HasSubstructMatch(Chem.MolFromSmarts(carboxylic_acid))
+            row.append(1 if match else 0)
+        except:
+            row.append(0)
+        # Rule 15
+        try:
+            match = mol.HasSubstructMatch(Chem.MolFromSmarts(aromatic_amide)) and mol.HasSubstructMatch(Chem.MolFromSmarts(carboxylic_acid))
+            row.append(-1 if match else 0)
+        except:
+            row.append(0)
+        # Append the row to results
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {i}' for i in range(1, 16)])
+    return df

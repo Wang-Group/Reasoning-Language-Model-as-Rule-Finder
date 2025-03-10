@@ -1,0 +1,39 @@
+def rule2matrix(smiles_list):
+    rules = [
+        ['[NX3][CX3](=O)[OX2H1]', '[CX3](=O)[OX2H1]', '[NX3][CX3](=O)[OX2H1]'],  # Rule 1: Amino acid with carboxylic acid
+        ['c1cc([OH])ccc1C(=O)O'],  # Rule 2: Benzene with hydroxyl and carboxylic acid
+        ['n1ccccc1C(=O)O'],  # Rule 3: Pyridine with carboxylic acid
+        ['[SX2H][CX3](=O)[OX2H1]'],  # Rule 4: Sulfanyl group
+        ['c1cc([NX3+](=O)[O-])ccc1C(=O)O'],  # Rule 5: Benzoic acid with nitro
+        ['[CX3](=O)[OX2H1]', '[C;X4][C;X4]'],  # Rule 6: Linear aliphatic with carboxylic acid
+        ['[CX3](=O)[OX2H1]', '[C;X4][F][F][F]'],  # Rule 7: High fluorination
+        ['c1ccccc1C=O'],  # Rule 8: Benzene with formyl
+        ['n1ccccc1C(=O)O', '[c][NX3+](=O)'],  # Rule 9: Pyridine with electron-withdrawing
+        ['[CX3](=O)[OX2H1]', '[C;X4][OH][OH]'],  # Rule 10: Multiple hydroxyls on aliphatic
+        ['n1ccccc1[OH]'],  # Rule 11: Pyridine with hydroxyl
+        ['c1ccccc1[SX2H]'],  # Rule 12: Benzene with sulfanyl
+        ['[NX3][C;X4][CX3](=O)[OX2H1]', '[C;X4][C;X4]'],  # Rule 13: Branched aliphatic with amino and carboxylic acid
+        ['[NX3][c1ccccc1]'],  # Rule 14: Amino with phenyl
+        ['c1ccccc1[OX2H1]'],  # Rule 15: Benzene with methoxy
+    ]
+    results = []
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            results.append([0] * len(rules))
+            continue
+        row = []
+        for i, rule in enumerate(rules):
+            try:
+                if all(mol.HasSubstructMatch(Chem.MolFromSmarts(r)) for r in rule):
+                    if i in [0, 1, 2, 3, 4, 10, 11]:  # Rules predicting high yield
+                        row.append(1)
+                    else:  # Rules predicting low yield
+                        row.append(-1)
+                else:
+                    row.append(0)
+            except:
+                row.append(0)
+        results.append(row)
+    df = pd.DataFrame(results, columns=[f'Rule {i+1}' for i in range(len(rules))])
+    return df

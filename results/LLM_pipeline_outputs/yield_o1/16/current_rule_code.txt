@@ -1,0 +1,218 @@
+def rule2matrix(smiles_list):
+    # Define the rules with their associated SMARTS patterns and predictions
+    rules = [
+        {
+            'number': 1,
+            'description': 'High Yield: Modifiers that are dicarboxylic amino acids (α-amino acids with two carboxylate groups).',
+            'patterns': [
+                # α-amino acid with two carboxylic acid groups
+                '[NX3;H2][CH1][CH](C(=O)[O-])[C](=O)[O-]',  # Simplified pattern for aspartic and glutamic acid anions
+                '[NX3;H2][CH1][CH](C(=O)O)[C](=O)O'  # Protonated carboxylic acids
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 2,
+            'description': 'High Yield: Modifiers that are aromatic carboxylic acids with a para-substituted amino or nitro group.',
+            'patterns': [
+                # Para-amino-benzoic acid
+                'c1cc(N)ccc1C(=O)O',
+                # Para-nitro-benzoic acid
+                'c1cc([N+](=O)[O-])ccc1C(=O)O'
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 3,
+            'description': 'High Yield: Modifiers that are linear aliphatic carboxylic acids with chain lengths of six to eight carbons and no additional polar substituents.',
+            'patterns': [
+                # Aliphatic chain of 6-8 carbons ending with carboxylic acid
+                'CCCCCC(=O)O',  # Hexanoic acid
+                'CCCCCCC(=O)O',  # Heptanoic acid
+                'CCCCCCCC(=O)O'  # Octanoic acid
+            ],
+            'exclude_patterns': [
+                # Exclude molecules with polar substituents (e.g., hydroxyl, amino)
+                '[#6][OX2H]',  # Hydroxyl group
+                '[#6][NX3;H2,H1]',  # Amino group
+                '[#6][SX2H]'  # Thiol group
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 4,
+            'description': 'High Yield: Modifiers that are hydroxylated aliphatic carboxylic acids with multiple hydroxyl groups near the carboxyl group.',
+            'patterns': [
+                # Molecules with carboxylic acid and multiple hydroxyls nearby
+                '[C](O)(O)[C](O)[C](O)C(=O)O'  # Simplified pattern for gluconic acid
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 5,
+            'description': 'High Yield: Modifiers that are aromatic carboxylic acids with a para-substituted bromomethyl group.',
+            'patterns': [
+                # 4-(Bromomethyl)benzoic acid
+                'c1cc(ccc1C(=O)O)CBr'
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 6,
+            'description': 'High Yield: Modifiers that are heterocyclic carboxylic acids where the heterocycle contains nitrogen atoms and the carboxyl group is directly attached.',
+            'patterns': [
+                # Pyridine-3-carboxylic acid (nicotinic acid)
+                'n1cc(ccc1)C(=O)O',
+                # 1H-Pyrazole-4-carboxylic acid
+                'c1c(C(=O)O)[nH]n1'
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 7,
+            'description': 'High Yield: Modifiers that are aliphatic carboxylic acids with a terminal thiol group.',
+            'patterns': [
+                # 3-Sulfanylpropanoic acid
+                'OC(=O)CCS'
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 8,
+            'description': 'Low Yield: Modifiers that are aromatic carboxylic acids with a para-formyl (aldehyde) group.',
+            'patterns': [
+                # 4-Formylbenzoic acid
+                'O=CC1=CC=C(C=C1)C(=O)O'
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 9,
+            'description': 'Low Yield: Modifiers that are fluorinated aliphatic carboxylic acids.',
+            'patterns': [
+                # Perfluorinated carboxylic acid
+                'C(F)(F)C(F)(F)C(F)(F)C(=O)O'
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 10,
+            'description': 'Low Yield: Modifiers containing ether linkages near the carboxyl group.',
+            'patterns': [
+                # Molecules with ether linkage and carboxylic acid
+                'COCCOC(=O)O'
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 11,
+            'description': 'Low Yield: Modifiers that are aromatic carboxylic acids with a para-methyl group.',
+            'patterns': [
+                # 4-Methylbenzoic acid
+                'CC1=CC=C(C=C1)C(=O)O'
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 12,
+            'description': 'Low Yield: Modifiers that are amino acids with bulky hydrophobic side chains.',
+            'patterns': [
+                # Phenylalanine
+                'N[C@@H](CC1=CC=CC=C1)C(=O)O'
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 13,
+            'description': 'Low Yield: Modifiers that are linear aliphatic carboxylic acids with terminal amino groups located six or more carbons away from the carboxyl group.',
+            'patterns': [
+                # 8-Aminooctanoic acid
+                'NCCCCCCCC(=O)O'
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 14,
+            'description': 'High Yield: Modifiers that are aromatic carboxylic acids connected via an aliphatic spacer (four carbons or more) to a heterocyclic ring.',
+            'patterns': [
+                # 4-Pyridin-4-ylbutanoic acid
+                'OC(=O)CCCC1=CC=NC=C1'
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 15,
+            'description': 'Modifiers that are aromatic carboxylic acids with a para-hydroxy group directly attached to the ring result in a low yield, whereas those with the hydroxy group attached via an aliphatic linker result in a high yield.',
+            'patterns': [
+                # Low Yield: Hydroxy directly attached
+                'OC1=CC=C(C=C1)C(=O)O',  # 4-Hydroxybenzoic acid
+                # High Yield: Hydroxy attached via linker
+                'OCCC1=CC=C(C=C1)C(=O)O'  # 3-(4-Hydroxyphenyl)propanoic acid
+            ],
+            'prediction': [
+                -1,  # For directly attached hydroxy
+                1    # For hydroxy via linker
+            ]
+        }
+    ]
+
+    # Compile SMARTS patterns
+    for rule in rules:
+        compiled_patterns = []
+        for pattern in rule['patterns']:
+            compiled_patterns.append(Chem.MolFromSmarts(pattern))
+        rule['compiled_patterns'] = compiled_patterns
+
+    # Initialize results list
+    results = []
+
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = False
+                # For Rule 15 which has different predictions
+                if rule['number'] == 15:
+                    matches = []
+                    for idx, pat in enumerate(rule['compiled_patterns']):
+                        if mol.HasSubstructMatch(pat):
+                            match = True
+                            row.append(rule['prediction'][idx])
+                            break
+                    if not match:
+                        row.append(0)
+                else:
+                    # Exclude patterns if any
+                    exclude = False
+                    if 'exclude_patterns' in rule:
+                        for ex_pat in rule['exclude_patterns']:
+                            ex_mol = Chem.MolFromSmarts(ex_pat)
+                            if mol.HasSubstructMatch(ex_mol):
+                                exclude = True
+                                break
+                    if exclude:
+                        row.append(0)
+                        continue
+                    # Check for matches
+                    for pat in rule['compiled_patterns']:
+                        if mol.HasSubstructMatch(pat):
+                            match = True
+                            break
+                    if match:
+                        row.append(rule['prediction'])
+                    else:
+                        row.append(0)
+            except Exception as e:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule['number']}' for rule in rules])
+    return df

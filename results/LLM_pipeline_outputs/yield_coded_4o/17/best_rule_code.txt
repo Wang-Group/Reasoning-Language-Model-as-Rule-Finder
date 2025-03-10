@@ -1,0 +1,36 @@
+def rule2matrix(smiles_list):
+    rules = [
+        ['[NX3H2][CX3](=O)[OX2H1]'],  # Rule 1: Amino and carboxylic acid group
+        ['c1ccc(cc1)[CX3](=O)[OX2H1]', '[Br,F,Cl,I,N+](=O)[O-]'],  # Rule 2: Phenyl with carboxylic acid and EWG
+        ['c1ncccc1[CX3](=O)[OX2H1]'],  # Rule 3: Pyridine with carboxylic acid
+        ['[SX2H][CX3](=O)[OX2H1]'],  # Rule 4: Sulfanyl with carboxylic acid
+        ['[c]1oc2c(c1)C(=O)O2'],  # Rule 5: Benzofuranone structure
+        ['c1ccccc1C(=O)'],  # Rule 6: Formyl group on benzoic acid
+        ['[O][CX3](C)C[OX2]'],  # Rule 7: Methoxy group on ether chain
+        ['[CX3](=O)[CX3](F)(F)F'],  # Rule 8: Trifluoroacetyl group
+        ['c1ccccc1[NX3H2]'],  # Rule 9: Phenyl on amino acid backbone
+        ['[CX4][CX4][OX2H]'],  # Rule 10: Long aliphatic chain with terminal hydroxyl
+        ['[c][NX3+](=O)[O-]'],  # Rule 11: Benzene with EWG
+        ['[CX4][CX4][CX4][CX4][CX4][CX4]'],  # Rule 12: Simple aliphatic chain
+    ]
+    results = []
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            results.append([0] * len(rules))
+            continue
+        row = []
+        for i, rule in enumerate(rules):
+            try:
+                if all(mol.HasSubstructMatch(Chem.MolFromSmarts(r)) for r in rule):
+                    if i in [0, 1, 2, 3, 4, 10, 11]:  # Rules predicting high yield
+                        row.append(1)
+                    else:  # Rules predicting low yield
+                        row.append(-1)
+                else:
+                    row.append(0)
+            except:
+                row.append(0)
+        results.append(row)
+    df = pd.DataFrame(results, columns=[f'Rule {i+1}' for i in range(len(rules))])
+    return df

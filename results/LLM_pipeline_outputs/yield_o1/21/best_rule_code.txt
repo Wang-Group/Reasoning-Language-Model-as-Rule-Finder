@@ -1,0 +1,317 @@
+def rule2matrix(smiles_list):
+    # Import necessary modules
+    from rdkit import Chem
+    from rdkit.Chem import AllChem
+    import pandas as pd
+
+    # Define SMARTS patterns and helper functions for rules
+
+    # Rule 1: High yield - Unbranched aliphatic carboxylic acids without polar substituents, chain length ≤ 8 carbons
+    def rule1(mol):
+        try:
+            # Check for carboxylic acid group
+            carboxylic_acid = Chem.MolFromSmarts('[CX3](=O)[OX2H1]')
+            if not mol.HasSubstructMatch(carboxylic_acid):
+                return 0
+            # Ensure molecule is aliphatic (no aromatic atoms)
+            if mol.GetNumAromaticAtoms() > 0:
+                return 0
+            # Check for unbranched chain
+            for atom in mol.GetAtoms():
+                if atom.GetAtomicNum() == 6:
+                    if atom.GetDegree() > 2:
+                        return 0  # Branching detected
+            # Check for polar substituents (-OH, -NH2, ethers)
+            polar_groups = Chem.MolFromSmarts('[#8,#7]')  # O or N atoms
+            matches = mol.GetSubstructMatches(polar_groups)
+            polar_atoms = [mol.GetAtomWithIdx(match[0]) for match in matches]
+            # Exclude O in carboxylic acid
+            carboxylic_oxygens = [atom.GetIdx() for atom in mol.GetAtoms() if atom.GetAtomicNum() == 8 and atom.GetDegree() == 1 and atom.GetNeighbors()[0].GetAtomicNum() == 6 and atom.GetNeighbors()[0].GetTotalDegree() == 3]
+            polar_atoms = [atom for atom in polar_atoms if atom.GetIdx() not in carboxylic_oxygens]
+            if polar_atoms:
+                return 0  # Polar substituents detected
+            # Check chain length (number of carbons)
+            num_carbons = sum(1 for atom in mol.GetAtoms() if atom.GetAtomicNum() == 6)
+            if num_carbons > 8:
+                return 0
+            return 1
+        except:
+            return 0
+
+    # Rule 2: High yield - Aromatic carboxylic acids with EWG at para position
+    def rule2(mol):
+        try:
+            # Check for aromatic carboxylic acid
+            aromatic_carboxylic_acid = Chem.MolFromSmarts('c[C](=O)[O,H]')
+            if not mol.HasSubstructMatch(aromatic_carboxylic_acid):
+                return 0
+            # Check for specific EWG at para position (e.g., nitro, bromomethyl)
+            para_substituents = ['[c][c]([NX3](=O)=O)',  # Nitro group
+                                 '[c][c][CX4][Br]']       # Bromomethyl group
+            for pattern in para_substituents:
+                smarts = Chem.MolFromSmarts(pattern)
+                if mol.HasSubstructMatch(smarts):
+                    return 1
+            # Exclude EDG at para position (will be handled in Rule 2 negative case)
+            return 0
+        except:
+            return 0
+
+    # Rule 2 Negative: Low yield - Aromatic carboxylic acids with EDG at para position (excluding para-amino)
+    def rule2_negative(mol):
+        try:
+            # Check for aromatic carboxylic acid
+            aromatic_carboxylic_acid = Chem.MolFromSmarts('c[C](=O)[O,H]')
+            if not mol.HasSubstructMatch(aromatic_carboxylic_acid):
+                return 0
+            # Check for specific EDG at para position
+            para_edgs = ['[c][c]([CH3])',    # Methyl group
+                         '[c][c][OH]',      # Hydroxyl group
+                         '[c][c][NX3H2]']   # Amino group (except para-amino which results in high yield)
+            for pattern in para_edgs:
+                smarts = Chem.MolFromSmarts(pattern)
+                matches = mol.GetSubstructMatches(smarts)
+                for match in matches:
+                    # Exclude para-amino
+                    atom = mol.GetAtomWithIdx(match[2])
+                    if atom.GetSymbol() == 'N' and atom.GetTotalNumHs() == 2:
+                        return 1  # Para-amino results in high yield
+                    else:
+                        return -1
+            return 0
+        except:
+            return 0
+
+    # Rule 3: High yield - Amino acids with acidic side chains (additional -COOH beyond alpha-carboxyl)
+    def rule3(mol):
+        try:
+            # Check for amino acid backbone
+            amino_acid = Chem.MolFromSmarts('[NX3][CX4H]([*])[CX3](=O)[O-]')
+            if not mol.HasSubstructMatch(amino_acid):
+                return 0
+            # Check for additional carboxylic acid group in side chain
+            side_chain_acid = Chem.MolFromSmarts('[CX3](=O)[OX2H1]')
+            matches = mol.GetSubstructMatches(side_chain_acid)
+            if len(matches) > 1:
+                return 1
+            return 0
+        except:
+            return 0
+
+    # Rule 4: High yield - Omega-amino acids with chain lengths ≤ 5 carbons
+    def rule4(mol):
+        try:
+            # Check for omega-amino acid (amino group at opposite end of carboxylic acid)
+            carboxylic_acid = Chem.MolFromSmarts('[CX3](=O)[OX2H1]')
+            amino_group = Chem.MolFromSmarts('[NX3H2]')
+            if mol.HasSubstructMatch(carboxylic_acid) and mol.HasSubstructMatch(amino_group):
+                # Calculate the shortest path between amino nitrogen and carboxyl carbon
+                carboxyl_carbons = mol.GetSubstructMatches(Chem.MolFromSmarts('[CX3](=O)[OX2H1]'))
+                amino_nitrogens = mol.GetSubstructMatches(Chem.MolFromSmarts('[NX3H2]'))
+                for c_idx in [match[0] for match in carboxyl_carbons]:
+                    for n_idx in [match[0] for match in amino_nitrogens]:
+                        path_length = len(Chem.rdmolops.GetShortestPath(mol, c_idx, n_idx)) - 1
+                        if path_length <= 5:
+                            return 1
+                        elif path_length > 5:
+                            return -1
+            return 0
+        except:
+            return 0
+
+    # Rule 5: High yield - Aromatic rings separated from hydrophilic groups by aliphatic chains
+    def rule5(mol):
+        try:
+            # Check for aromatic ring
+            aromatic_ring = Chem.MolFromSmarts('a1aaaaa1')
+            if not mol.HasSubstructMatch(aromatic_ring):
+                return 0
+            # Check for hydrophilic group attached via aliphatic chain
+            hydrophilic_groups = ['[OX2H]', '[NX3H2]']  # Hydroxyl or amino groups
+            for pattern in hydrophilic_groups:
+                smarts = Chem.MolFromSmarts('aaa[CH2][CH2][CH2]' + pattern)
+                if mol.HasSubstructMatch(smarts):
+                    return 1
+            # Check for hydrophilic groups directly attached to aromatic ring (negative case)
+            direct_attachment = ['[c][OX2H]', '[c][NX3H2]']
+            for pattern in direct_attachment:
+                smarts = Chem.MolFromSmarts(pattern)
+                if mol.HasSubstructMatch(smarts):
+                    return -1
+            return 0
+        except:
+            return 0
+
+    # Rule 6: High yield - Heteroaromatic carboxylic acids with N in ring directly attached to carboxyl group
+    def rule6(mol):
+        try:
+            # Check for heteroaromatic ring with N attached to carboxyl
+            pattern = Chem.MolFromSmarts('[n][c](=O)[O,H]')
+            if mol.HasSubstructMatch(pattern):
+                return 1
+            # Exclude cases where N-heterocycle is connected via additional aromatic ring
+            extended_ring = Chem.MolFromSmarts('[c][c][n][c](=O)[O,H]')
+            if mol.HasSubstructMatch(extended_ring):
+                return -1
+            return 0
+        except:
+            return 0
+
+    # Rule 7: High yield - Thiol (-SH) groups attached to short aliphatic chains
+    def rule7(mol):
+        try:
+            # Check for thiol group attached to short chain
+            thiol = Chem.MolFromSmarts('[SX2H]')
+            if mol.HasSubstructMatch(thiol):
+                # Check chain length from thiol to carboxyl
+                thiol_atoms = mol.GetSubstructMatches(thiol)
+                carboxylic_acid = Chem.MolFromSmarts('[CX3](=O)[OX2H1]')
+                carboxyl_atoms = mol.GetSubstructMatches(carboxylic_acid)
+                for s_idx in [match[0] for match in thiol_atoms]:
+                    for c_idx in [match[0] for match in carboxyl_atoms]:
+                        path_length = len(Chem.rdmolops.GetShortestPath(mol, s_idx, c_idx)) - 1
+                        if path_length <= 5:
+                            return 1
+                return 0
+            # Check for thiol directly attached to aromatic ring (negative case)
+            aromatic_thiol = Chem.MolFromSmarts('[c][SX2H]')
+            if mol.HasSubstructMatch(aromatic_thiol):
+                return -1
+            return 0
+        except:
+            return 0
+
+    # Rule 8: High yield - Modifiers containing multiple hydroxyl (-OH) groups on an aliphatic chain
+    def rule8(mol):
+        try:
+            # Check for multiple hydroxyl groups
+            hydroxyl = Chem.MolFromSmarts('[OX2H]')
+            matches = mol.GetSubstructMatches(hydroxyl)
+            if len(matches) >= 2:
+                return 1
+            return 0
+        except:
+            return 0
+
+    # Rule 9: Low yield - Modifiers containing amide bonds
+    def rule9(mol):
+        try:
+            amide = Chem.MolFromSmarts('[NX3][CX3](=O)[#6]')
+            if mol.HasSubstructMatch(amide):
+                return -1
+            return 0
+        except:
+            return 0
+
+    # Rule 10: Low yield - Modifiers with ether linkages extending from the carboxylic acid
+    def rule10(mol):
+        try:
+            # Check for ether linkage extending from carboxylic acid
+            ether = Chem.MolFromSmarts('[CX3](=O)[OX2][CX4][OX2][CX4]')
+            if mol.HasSubstructMatch(ether):
+                return -1
+            return 0
+        except:
+            return 0
+
+    # Rule 11: Low yield - Modifiers with highly electron-withdrawing fluorinated alkyl chains
+    def rule11(mol):
+        try:
+            # Check for fluorinated alkyl chain
+            fluorinated_chain = Chem.MolFromSmarts('[CX4]([F])[F]')
+            if mol.HasSubstructMatch(fluorinated_chain):
+                return -1
+            return 0
+        except:
+            return 0
+
+    # Rule 12: High yield - Amino acids with bulky hydrophobic aromatic side chains (e.g., tryptophan)
+    def rule12(mol):
+        try:
+            # Check for tryptophan-like side chain
+            indole = Chem.MolFromSmarts('c1ccc2c(c1)cc[nH]2')
+            if mol.HasSubstructMatch(indole):
+                amino_acid = Chem.MolFromSmarts('[NX3][CX4H]([*])[CX3](=O)[O-]')
+                if mol.HasSubstructMatch(amino_acid):
+                    return 1
+            # Check for less bulky aromatic side chains (phenylalanine)
+            phenyl = Chem.MolFromSmarts('c1ccccc1')
+            if mol.HasSubstructMatch(phenyl):
+                amino_acid = Chem.MolFromSmarts('[NX3][CX4H]([*])[CX3](=O)[O-]')
+                if mol.HasSubstructMatch(amino_acid):
+                    return -1
+            return 0
+        except:
+            return 0
+
+    # Rule 13: High yield - Modifiers with carbonyl groups adjacent to an aromatic ring within a fused lactone or ketone structure
+    def rule13(mol):
+        try:
+            pattern = Chem.MolFromSmarts('c1ccc2c(c1)C(=O)O2')  # Benzofuranone
+            if mol.HasSubstructMatch(pattern):
+                return 1
+            return 0
+        except:
+            return 0
+
+    # Rule 14: Low yield - Modifiers with aliphatic chains terminated with aldehyde (-CHO) or ketone (C=O) groups
+    def rule14(mol):
+        try:
+            aldehyde = Chem.MolFromSmarts('[CX3H1](=O)[#6]')
+            ketone = Chem.MolFromSmarts('[#6][CX3](=O)[#6]')
+            if mol.HasSubstructMatch(aldehyde) or mol.HasSubstructMatch(ketone):
+                return -1
+            return 0
+        except:
+            return 0
+
+    # Rule 15: High yield - Modifiers with bulky substituents on the aliphatic chain (e.g., methoxy groups)
+    def rule15(mol):
+        try:
+            # Check for bulky substituents on aliphatic chain
+            methoxy = Chem.MolFromSmarts('[CX4][OX2][CH3]')
+            if mol.HasSubstructMatch(methoxy):
+                return 1
+            return 0
+        except:
+            return 0
+
+    # List of rule functions and their predictions
+    rules = [
+        {'number': 1, 'function': rule1, 'description': 'Unbranched aliphatic carboxylic acids without polar substituents (high yield)'},
+        {'number': 2, 'function': rule2, 'description': 'Aromatic carboxylic acids with EWG at para position (high yield)'},
+        {'number': 2.1, 'function': rule2_negative, 'description': 'Aromatic carboxylic acids with EDG at para position (low yield)'},
+        {'number': 3, 'function': rule3, 'description': 'Amino acids with acidic side chains (high yield)'},
+        {'number': 4, 'function': rule4, 'description': 'Omega-amino acids with chain lengths ≤ 5 carbons (high yield)'},
+        {'number': 5, 'function': rule5, 'description': 'Aromatic rings separated from hydrophilic groups by aliphatic chains (high yield)'},
+        {'number': 6, 'function': rule6, 'description': 'Heteroaromatic carboxylic acids with N directly attached to carboxyl group (high yield)'},
+        {'number': 7, 'function': rule7, 'description': 'Thiol groups attached to short aliphatic chains (high yield)'},
+        {'number': 8, 'function': rule8, 'description': 'Modifiers with multiple hydroxyl groups on aliphatic chain (high yield)'},
+        {'number': 9, 'function': rule9, 'description': 'Modifiers containing amide bonds (low yield)'},
+        {'number': 10, 'function': rule10, 'description': 'Modifiers with ether linkages extending from carboxylic acid (low yield)'},
+        {'number': 11, 'function': rule11, 'description': 'Modifiers with fluorinated alkyl chains (low yield)'},
+        {'number': 12, 'function': rule12, 'description': 'Amino acids with bulky hydrophobic aromatic side chains (high yield)'},
+        {'number': 13, 'function': rule13, 'description': 'Carbonyl groups adjacent to aromatic ring in fused lactone/ketone (high yield)'},
+        {'number': 14, 'function': rule14, 'description': 'Modifiers with aliphatic chains terminated with aldehyde or ketone groups (low yield)'},
+        {'number': 15, 'function': rule15, 'description': 'Modifiers with bulky substituents on aliphatic chain (high yield)'}
+    ]
+
+    # Initialize results list
+    results = []
+
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            prediction = rule['function'](mol)
+            row.append(prediction)
+        results.append(row)
+
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule['number']}' for rule in rules])
+    return df

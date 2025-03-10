@@ -1,0 +1,192 @@
+def rule2matrix(smiles_list):
+    # Define the SMARTS patterns for various functional groups and substructures
+    # Aromatic carboxylic acid
+    aromatic_carboxylic_acid = '[c][CX3](=O)[O;H1,-]'  # Aromatic ring attached to a carboxylic acid
+    
+    # Electron-withdrawing groups (EWGs)
+    ewg_patterns = ['[CX3](=O)[OX1H0-,OX2H1]',  # Carboxylic acid or carboxylate
+                    '[CX3]=[OX1]',  # Carbonyl group
+                    '[NX3+](=O)[O-]',  # Nitro group
+                    '[F,Cl,Br,I]',  # Halogens
+                    '[CX4]([F])([F])[F]']  # Trifluoromethyl group
+    
+    # Electron-donating groups (EDGs)
+    edg_patterns = ['[OX2H]',  # Hydroxyl group
+                    '[OX2][#6]',  # Alkoxy group
+                    '[NX3;H2,H1][#6]']  # Amino group
+    
+    # Aromatic amino group at para position
+    para_amino_group = 'c1ccc([NX3;H2,H1][#6])cc1'  # Para-amino substituted benzene ring
+    
+    # Nitrogen-containing heterocycles directly attached to carboxylic acid
+    nitrogen_heterocycle_carboxylic_acid = '[nH0;r5,r6][CX3](=O)[OX1H0-,OX2H1]'  # Heterocycle with nitrogen attached to carboxylic acid
+    
+    # Nitrogen-containing heterocycles connected via aromatic linker
+    nitrogen_heterocycle_via_aromatic = '[nH0;r5,r6]-c-[c][CX3](=O)[OX1H0-,OX2H1]'  # Heterocycle connected via aromatic ring to carboxylic acid
+    
+    # Alpha-amino acids with acidic side chains
+    alpha_amino_acid_acidic = '[NX3;H2][CX4H]([#6])[CX3](=O)[OX1H0-,OX2H1]'  # Alpha-amino acid
+    acidic_side_chain = '[CX3](=O)[OX1H0-,OX2H1]'  # Additional carboxyl group
+    
+    # Alpha-amino acids with hydrophobic or basic side chains
+    hydrophobic_side_chains = ['[CX4][CH2][CH2][CH2][CH3]',  # Long aliphatic chain
+                               '[c]']  # Aromatic ring
+    basic_side_chains = '[NX3;H2,H1]'  # Amino group
+    
+    # Multiple hydroxyl groups on short aliphatic chain (≤6 carbons)
+    multiple_hydroxyls_short_chain = '[#6][OX2H]'  # Hydroxyl groups on carbon chain
+    
+    # Single hydroxyl group on long chain (>6 carbons)
+    single_hydroxyl_long_chain = '[CH2]'*7 + '[OX2H]'  # 7-carbon chain with hydroxyl
+    
+    # Short aliphatic chains (≤5 carbons) bearing an amino group
+    short_chain_amino_group = '[NX3;H2,H1][CH2][CH2][CH2][CH3]'  # Amino group on short chain
+    
+    # Long aliphatic chains (>5 carbons) bearing an amino group
+    long_chain_amino_group = '[NX3;H2,H1][CH2]'*6 + '[CH3]'  # Amino group on long chain
+    
+    # Aliphatic thiol group
+    aliphatic_thiol = '[SX2H][CH2]'  # Thiol group on aliphatic chain
+    
+    # Thiol group on aromatic ring
+    aromatic_thiol = '[SX2H][c]'  # Thiol group attached to aromatic ring
+    
+    # Fluorinated aliphatic chains
+    fluorinated_chain = '[CX4H0][F]'  # Carbon atom with fluorine attached
+    
+    # Ether linkages in aliphatic chains
+    ether_linkage = '[CX4][OX2][CX4]'  # Ether linkage in aliphatic chain
+    
+    # Aldehyde groups attached to aromatic rings
+    aldehyde_on_aromatic = '[c][CX3H]=O'  # Aldehyde group on aromatic ring
+    
+    # Aromatic ketone groups conjugated with electron-donating substituents
+    aromatic_ketone_edg = '[c][CX3](=O)[c][OX2H]'  # Ketone adjacent to aromatic ring with EDG
+    
+    # Aromatic rings fused to lactone or cyclic anhydride structures
+    aromatic_fused_lactone = '[c]1ccc2c1OC(=O)[c]2'  # Aromatic ring fused to lactone
+    
+    # Aromatic heterocycles connected via short aliphatic linker to carboxyl group
+    heterocycle_short_linker = '[nH0;r5,r6][CH2][CX3](=O)[OX1H0-,OX2H1]'  # Heterocycle connected via short linker to carboxylic acid
+    
+    # Thioether groups in side chain
+    thioether_side_chain = '[CX4][SX2][CX4]'  # Thioether linkage
+    
+    # Define the rules with their associated patterns and predictions
+    rules = [
+        {
+            'number': 2,
+            'description': 'Modifiers that are aromatic carboxylic acids with a para-amino group yield high yield.',
+            'patterns': [aromatic_carboxylic_acid, para_amino_group],
+            'prediction': 1
+        },
+        {
+            'number': 3,
+            'description': 'Modifiers containing nitrogen-containing heterocycles directly attached to the carboxylic acid yield high yield.',
+            'patterns': [nitrogen_heterocycle_carboxylic_acid],
+            'prediction': 1
+        },
+        {
+            'number': 4,
+            'description': 'Modifiers that are α-amino acids with acidic side chains (additional carboxyl groups) yield high yield.',
+            'patterns': [alpha_amino_acid_acidic, acidic_side_chain],
+            'prediction': 1
+        },
+        {
+            'number': 5,
+            'description': 'Modifiers with multiple hydroxyl groups on a short aliphatic chain (≤6 carbons) yield high yield.',
+            'patterns': [multiple_hydroxyls_short_chain],
+            'count_threshold': {'[OX2H]': 2},  # At least 2 hydroxyl groups
+            'prediction': 1
+        },
+        {
+            'number': 6,
+            'description': 'Modifiers with short aliphatic chains (≤5 carbons) bearing an amino group yield high yield.',
+            'patterns': [short_chain_amino_group],
+            'prediction': 1
+        },
+        {
+            'number': 7,
+            'description': 'Modifiers containing an aliphatic thiol group yield high yield.',
+            'patterns': [aliphatic_thiol],
+            'prediction': 1
+        },
+        {
+            'number': 9,
+            'description': 'Modifiers containing ether linkages in aliphatic chains yield low yield.',
+            'patterns': [ether_linkage],
+            'prediction': -1
+        },
+        {
+            'number': 8,
+            'description': 'Modifiers with fluorinated aliphatic chains yield low yield due to strong electron-withdrawing effects disrupting coordination.',
+            'patterns': [fluorinated_chain],
+            'prediction': -1
+        },
+        {
+            'number': 10,
+            'description': 'Modifiers with aldehyde groups attached to aromatic rings yield low yield.',
+            'patterns': [aldehyde_on_aromatic],
+            'prediction': -1
+        },
+        {
+            'number': 15,
+            'description': 'Modifiers with thioether groups in the side chain yield low yield due to possible interference with catalyst sites.',
+            'patterns': [thioether_side_chain],
+            'prediction': -1
+        }
+    ]
+    
+    # Compile SMARTS patterns
+    for rule in rules:
+        compiled_patterns = []
+        for smarts in rule.get('patterns', []):
+            pat = Chem.MolFromSmarts(smarts)
+            if pat:
+                compiled_patterns.append(pat)
+            else:
+                compiled_patterns.append(None)  # Handle invalid SMARTS patterns
+        rule['compiled_patterns'] = compiled_patterns
+    
+    # Initialize results list
+    results = []
+    
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = True
+                # Check required patterns
+                for pat in rule['compiled_patterns']:
+                    if pat is None:
+                        match = False
+                        break
+                    matches = mol.GetSubstructMatches(pat)
+                    if not matches:
+                        match = False
+                        break
+                    else:
+                        # If a count threshold is specified for this pattern
+                        if 'count_threshold' in rule:
+                            smarts = Chem.MolToSmarts(pat)
+                            threshold = rule['count_threshold'].get(smarts, 1)
+                            if len(matches) < threshold:
+                                match = False
+                                break
+                if match:
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception as e:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule['number']}' for rule in rules])
+    return df

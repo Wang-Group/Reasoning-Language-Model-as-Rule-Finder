@@ -1,0 +1,205 @@
+def rule2matrix(smiles_list):
+    import pandas as pd
+    from rdkit import Chem
+
+    # Define SMARTS patterns for the rules
+    rules = [
+        {
+            'number': 1,
+            'description': 'Modifiers that are α-amino dicarboxylic acids with the amino group adjacent to one carboxylate and an additional carboxylate side chain give high yield.',
+            'patterns': [
+                '[NX3;H2][CX4H]([#6])[CX3](=O)[OX2H1]',  # α-amino acid backbone
+                '[CX3](=O)[OX2H1]',  # Additional carboxylic acid group
+            ],
+            'min_counts': { '[CX3](=O)[OX2H1]': 2 },  # At least two carboxylic acid groups
+            'prediction': 1
+        },
+        {
+            'number': 2,
+            'description': 'Modifiers that are aromatic carboxylic acids containing nitrogen heterocycles or nitrogenous aromatic systems give high yield.',
+            'patterns': [
+                '[n][a]',  # Nitrogen in an aromatic system
+                '[c][CX3](=O)[OX2H1]',  # Aromatic carboxylic acid group
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 3,
+            'description': 'Modifiers that are aromatic carboxylic acids with strong electron-withdrawing groups at the para position (e.g., nitro, bromomethyl) give high yield.',
+            'patterns': [
+                '[c][CX3](=O)[OX2H1]',  # Aromatic carboxylic acid group
+                '[c][c][c]([NX3+](=O)[O-])[c][c]',  # Nitro group at para position
+                '[c][c][c]([CX4][Br])[c][c]',  # Bromomethyl group at para position
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 4,
+            'description': 'Modifiers that are aliphatic carboxylic acids with amino or thiol groups within three carbons of the carboxyl group give high yield.',
+            'patterns': [
+                '[CX3](=O)[OX2H1][CX4][CX4][NX3;H2,H1]',  # Amino group within three carbons
+                '[CX3](=O)[OX2H1][CX4][CX4][SX2H]',  # Thiol group within three carbons
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 5,
+            'description': 'Modifiers that are aliphatic carboxylic acids with long hydrophobic chains (e.g., eight carbons or more) give high yield.',
+            'patterns': [
+                '[CX3](=O)[OX2H1][CX4][CX4][CX4][CX4][CX4][CX4][CX4]',  # Chain of at least 8 carbons including carboxyl carbon
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 6,
+            'description': 'Modifiers with multiple hydroxyl groups (polyhydroxy carboxylic acids) give high yield.',
+            'patterns': [
+                '[OX2H]',  # Hydroxyl group
+                '[CX3](=O)[OX2H1]',  # Carboxylic acid group
+            ],
+            'min_counts': { '[OX2H]': 2 },  # At least two hydroxyl groups
+            'prediction': 1
+        },
+        {
+            'number': 7,
+            'description': 'Modifiers that are aromatic carboxylic acids with electron-donating groups at the para position and short aliphatic chains give low yield.',
+            'patterns': [
+                '[c][CX3](=O)[OX2H1]',  # Aromatic carboxylic acid group
+                '[c][c][c]([c])[c][c]',  # Para position available for substituent
+                '[c][c][c]([CX4H3])[c][c]',  # Electron-donating group (e.g., methyl) at para position
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 8,
+            'description': 'Modifiers with functional groups (e.g., amino, hydroxyl) more than four carbons away from the carboxyl group give low yield.',
+            'patterns': [
+                '[CX3](=O)[OX2H1]******[NX3;H2,H1]',  # Amino group more than four bonds away
+                '[CX3](=O)[OX2H1]******[OX2H]',  # Hydroxyl group more than four bonds away
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 9,
+            'description': 'Modifiers containing fluorinated alkyl chains give low yield.',
+            'patterns': [
+                '[CX4]([F])[F]',  # CF2 groups in chain
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 10,
+            'description': 'Modifiers with aldehyde or ketone groups adjacent to the carboxylic acid give low yield.',
+            'patterns': [
+                '[CX3](=O)[CX3](=O)[OX2H1]',  # Ketone adjacent to carboxylic acid
+                '[CX3H1](=O)[CX3](=O)[OX2H1]',  # Aldehyde adjacent to carboxylic acid
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 11,
+            'description': 'Modifiers with ether linkages or polyether chains give low yield.',
+            'patterns': [
+                '[OX2][CX4][OX2]',  # Ether linkage in chain
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 12,
+            'description': 'Modifiers with thiol groups attached directly to aromatic rings give low yield due to potential catalyst poisoning.',
+            'patterns': [
+                '[c][SX2H]',  # Thiol group attached to aromatic ring
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 13,
+            'description': 'Modifiers that are amino acids with hydrophobic aromatic side chains lacking additional coordinating groups give low yield.',
+            'patterns': [
+                '[NX3;H2][CX4][CX3](=O)[OX2H1]',  # Amino acid backbone
+                '[c]',  # Aromatic ring in side chain
+            ],
+            'exclude_patterns': [
+                '[OX2H]',  # Exclude additional hydroxyl groups
+                '[NX3;H2,H1]',  # Exclude additional amino groups
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 14,
+            'description': 'Modifiers containing aromatic oxygen heterocycles attached to carboxylic acids give high yield.',
+            'patterns': [
+                '[o][c]',  # Oxygen heterocycle
+                '[c][CX3](=O)[OX2H1]',  # Carboxylic acid group
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 15,
+            'description': 'Modifiers with extended aliphatic chains bearing electron-donating groups on aromatic rings give high yield due to combined hydrophobic and coordination effects.',
+            'patterns': [
+                '[CX4][CX4][CX4][CX4][c][OX2H]',  # Extended chain to aromatic ring with hydroxyl group
+            ],
+            'prediction': 1
+        },
+    ]
+
+    # Precompile SMARTS patterns
+    for rule in rules:
+        compiled_patterns = []
+        for smarts in rule.get('patterns', []):
+            compiled_patterns.append(Chem.MolFromSmarts(smarts))
+        rule['compiled_patterns'] = compiled_patterns
+        # Compile exclude patterns if any
+        if 'exclude_patterns' in rule:
+            compiled_excludes = []
+            for smarts in rule['exclude_patterns']:
+                compiled_excludes.append(Chem.MolFromSmarts(smarts))
+            rule['compiled_exclude_patterns'] = compiled_excludes
+
+    # Initialize results list
+    results = []
+
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = True
+                # Check exclude patterns if any
+                if 'exclude_patterns' in rule:
+                    for pat in rule['compiled_exclude_patterns']:
+                        if mol.HasSubstructMatch(pat):
+                            match = False
+                            break
+                    if not match:
+                        row.append(0)
+                        continue
+                # Check required patterns
+                for pat in rule['compiled_patterns']:
+                    matches = mol.GetSubstructMatches(pat)
+                    if not matches:
+                        match = False
+                        break
+                    # If a count threshold is specified for this pattern
+                    if 'min_counts' in rule and pat.GetSmarts() in rule['min_counts']:
+                        threshold = rule['min_counts'][pat.GetSmarts()]
+                        if len(matches) < threshold:
+                            match = False
+                            break
+                if match:
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception as e:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule['number']}' for rule in rules])
+    return df

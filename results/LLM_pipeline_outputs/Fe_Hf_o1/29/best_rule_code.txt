@@ -1,0 +1,169 @@
+def rule2matrix(smiles_list):
+    # Define SMARTS patterns for functional groups and features based on the rules
+    
+    # Rule 1: Terminal amino groups (-NH2) on aliphatic chains longer than three carbons
+    primary_amine = '[NX3H2]'
+    aliphatic_chain = '[CX4H2][CX4H2][CX4H2][CX4]'
+    
+    # Rule 2: Sulfur functional groups - thiols (-SH) or thioethers (-S-)
+    thiol = '[SX2H]'
+    thioether = '[#6][SX2][#6]'
+    
+    # Rule 3: Aromatic rings substituted with nitro (-NO2) or haloalkyl groups (-CH2Br)
+    nitro_aromatic = '[c][NX3+](=O)[O-]'
+    haloalkyl_aromatic = '[c][CX4][Br,Cl,F,I]'
+    
+    # Rule 4: Ether linkages (-O-) combined with terminal amino groups (-NH2) or methoxy groups (-OCH3)
+    ether_linkage = '[#6][OX2][#6]'
+    terminal_amine = '[NX3H2]'
+    methoxy = '[OX2][CH3]'
+    
+    # Rule 5: Aromatic rings substituted with hydroxyl (-OH), amino (-NH2), or methyl (-CH3) groups
+    hydroxyl_aromatic = '[c][OX2H]'
+    amino_aromatic = '[c][NX3H2]'
+    methyl_aromatic = '[c][CH3]'
+    
+    # Rule 6: Multiple hydroxyl groups (-OH) on aliphatic chains or cyclic structures
+    hydroxyl_group = '[OX2H]'
+    
+    # Rule 7: Pyridine rings directly linked to aromatic systems
+    pyridine_ring = 'n1ccccc1'
+    
+    # Rule 8: Straight-chain aliphatic carboxylic acids without additional functional groups
+    aliphatic_acid = '[CX3](=O)[OX2H1]'
+    exclude_groups = '[#7,#8,#9,#15,#16,#17,#35]'  # Exclude N, O (except in COOH), F, P, S, Cl, Br
+    
+    # Rule 9: Aromatic rings substituted with aldehyde groups (-CHO)
+    aldehyde_aromatic = '[c][CX3H](=O)'
+    
+    # Rule 10: Bulky aromatic heterocyclic rings (indole, pyridine ketones)
+    indole = 'c1ccc2ccccc2[nH]1'
+    pyrazole = 'c1cn[nH]c1'
+    
+    # Rule 11: Perfluorinated aliphatic chains
+    fluorinated_carbon = '[CX4](F)(F)(F)'
+    
+    # Rule 12: Aromatic rings substituted with hydroxyl groups (-OH) linked via amide bonds to aliphatic chains
+    amide_bond = '[NX3][CX3](=O)[#6]'
+    hydroxyl_aromatic = '[c][OX2H]'
+    
+    # Compile the SMARTS patterns
+    smarts_dict = {
+        'Rule 1': {
+            'patterns': [primary_amine, aliphatic_chain],
+            'prediction': 1
+        },
+        'Rule 2': {
+            'patterns': [thiol + '|' + thioether],
+            'prediction': 1
+        },
+        'Rule 3': {
+            'patterns': [nitro_aromatic + '|' + haloalkyl_aromatic],
+            'prediction': 1
+        },
+        'Rule 4': {
+            'patterns': [ether_linkage, terminal_amine + '|' + methoxy],
+            'prediction': 1
+        },
+        'Rule 5': {
+            'patterns': [hydroxyl_aromatic + '|' + amino_aromatic + '|' + methyl_aromatic],
+            'prediction': -1
+        },
+        'Rule 6': {
+            'patterns': [hydroxyl_group],
+            'count_threshold': 2,
+            'prediction': -1
+        },
+        'Rule 7': {
+            'patterns': [pyridine_ring],
+            'prediction': 1
+        },
+        'Rule 8': {
+            'patterns': [aliphatic_acid],
+            'exclude': [exclude_groups],
+            'prediction': -1
+        },
+        'Rule 9': {
+            'patterns': [aldehyde_aromatic],
+            'prediction': -1
+        },
+        'Rule 10': {
+            'patterns': [indole + '|' + pyrazole],
+            'prediction': -1
+        },
+        'Rule 11': {
+            'patterns': [fluorinated_carbon],
+            'count_threshold': 3,
+            'prediction': -1
+        },
+        'Rule 12': {
+            'patterns': [amide_bond, hydroxyl_aromatic],
+            'prediction': -1
+        },
+    }
+    
+    # Precompile SMARTS patterns
+    for rule in smarts_dict.values():
+        compiled_patterns = []
+        for smarts in rule['patterns']:
+            patterns = smarts.split('|')
+            compiled = [Chem.MolFromSmarts(pat) for pat in patterns]
+            compiled_patterns.append(compiled)
+        rule['compiled_patterns'] = compiled_patterns
+        # Compile exclude patterns if any
+        if 'exclude' in rule:
+            exclude_patterns = rule['exclude']
+            compiled_exclude = [Chem.MolFromSmarts(pat) for pat in exclude_patterns]
+            rule['compiled_exclude'] = compiled_exclude
+    
+    # Initialize results list
+    results = []
+    
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(smarts_dict))
+            continue
+        row = []
+        for rule_name, rule in smarts_dict.items():
+            try:
+                match = True
+                # Check exclude patterns if any
+                if 'compiled_exclude' in rule:
+                    for pat in rule['compiled_exclude']:
+                        if mol.HasSubstructMatch(pat):
+                            match = False
+                            break
+                    if not match:
+                        row.append(0)
+                        continue
+                # Check required patterns
+                for compiled_group in rule['compiled_patterns']:
+                    group_match = False
+                    for pat in compiled_group:
+                        matches = mol.GetSubstructMatches(pat)
+                        if matches:
+                            # Check count threshold if specified
+                            if 'count_threshold' in rule:
+                                if len(matches) >= rule['count_threshold']:
+                                    group_match = True
+                                    break
+                            else:
+                                group_match = True
+                                break
+                    if not group_match:
+                        match = False
+                        break
+                if match:
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception as e:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=smarts_dict.keys())
+    return df

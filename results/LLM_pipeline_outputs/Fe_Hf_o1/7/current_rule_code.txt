@@ -1,0 +1,219 @@
+def rule2matrix(smiles_list):
+    # Define SMARTS patterns for functional groups
+    # Carboxylic acid group (-COOH)
+    carboxylic_acid = '[CX3](=O)[OX2H1]'
+    
+    # Thiol group (-SH)
+    thiol = '[SX2H]'
+    
+    # Thioether group (-S-) excluding sulfoxides and sulfones
+    thioether = '[#16X2][#6]'  # Sulfur single-bonded to carbon
+    exclude_sulfoxide_sulfone = '[#16X3](=O)(=O)'  # Sulfoxide and sulfone
+    
+    # Pyridine nitrogen atom
+    pyridine_nitrogen = '[n]'
+    
+    # Amino group (-NH2 or -NH-)
+    amino_group = '[NX3;H2,H1;!$(N=*);!$(N#*)]'
+    
+    # Omega-amino acid pattern with chain length of 5 or more carbons
+    omega_amino_acid = '[NX3;H2][CH2]{4,}[CX3](=O)[OX2H1]'
+    
+    # Fused ring system with adjacent carbonyl groups
+    fused_ring_adjacent_carbonyl = '[R2][R1](=O)'
+    
+    # Electron-withdrawing groups (EWGs) on aromatic ring
+    ewg_on_aromatic = ['[c][NX3](=O)=O', '[c][CH2][Br,Cl,I]']  # Nitro and halomethyl groups
+    
+    # Electron-donating groups (EDGs) on aromatic ring
+    edg_on_aromatic = ['[c][OX2H]', '[c][OX2][CH3]', '[c][NX3;H2,H1][!$(N=*);!$(N#*)]', '[c][CH3]']
+    
+    # Ether linkages in aliphatic chains (-O-)
+    ether_linkage = '[#6][OX2][#6]'
+    
+    # Polyether chains with terminal amino or methoxy group
+    polyether_with_terminal_group = '[#6][OX2][#6][OX2][#6][OX2][NX3;H2,H1]'  # Simplified pattern
+    
+    # Multiple hydroxyl groups (polyhydroxy acids)
+    multiple_hydroxyl_groups = '[OX2H][#6][OX2H]'
+    
+    # Aromatic amino acids with aromatic side chains
+    aromatic_amino_acid = '[NX3;H2][CX4][CX3](=O)[OX2H1]'  # Simplified pattern for amino acids
+    
+    # Carbonyl-containing substituents at non-coordinating positions
+    non_coordinating_carbonyl = '[#6][CX3](=O)[#6]'  # Ketones and aldehydes
+    
+    # Compile SMARTS patterns
+    smarts_patterns = {
+        'carboxylic_acid': Chem.MolFromSmarts(carboxylic_acid),
+        'thiol': Chem.MolFromSmarts(thiol),
+        'thioether': Chem.MolFromSmarts(thioether),
+        'exclude_sulfoxide_sulfone': Chem.MolFromSmarts(exclude_sulfoxide_sulfone),
+        'pyridine_nitrogen': Chem.MolFromSmarts(pyridine_nitrogen),
+        'amino_group': Chem.MolFromSmarts(amino_group),
+        'omega_amino_acid': Chem.MolFromSmarts(omega_amino_acid),
+        'fused_ring_adjacent_carbonyl': Chem.MolFromSmarts(fused_ring_adjacent_carbonyl),
+        'ewg_on_aromatic': [Chem.MolFromSmarts(pat) for pat in ewg_on_aromatic],
+        'edg_on_aromatic': [Chem.MolFromSmarts(pat) for pat in edg_on_aromatic],
+        'ether_linkage': Chem.MolFromSmarts(ether_linkage),
+        'polyether_with_terminal_group': Chem.MolFromSmarts(polyether_with_terminal_group),
+        'multiple_hydroxyl_groups': Chem.MolFromSmarts(multiple_hydroxyl_groups),
+        'aromatic_amino_acid': Chem.MolFromSmarts(aromatic_amino_acid),
+        'non_coordinating_carbonyl': Chem.MolFromSmarts(non_coordinating_carbonyl)
+    }
+    
+    # Define the rules with their associated patterns and predictions
+    rules = [
+        {
+            'number': 1,
+            'description': 'High Fe/Hf Value (True): Modifiers containing functional groups capable of strong coordination with Fe ions, such as thiol (-SH), thioether (-S-), multiple amino groups, pyridine nitrogen atoms, and fused ring systems with adjacent carbonyl groups.',
+            'patterns': [
+                ('carboxylic_acid',),  # Must have carboxylic acid group
+                ('thiol', 'thioether', 'pyridine_nitrogen', 'omega_amino_acid', 'fused_ring_adjacent_carbonyl')  # Any of these
+            ],
+            'predictions': 1,
+            'count_thresholds': {'amino_group': 2}  # At least 2 amino groups
+        },
+        {
+            'number': 2,
+            'description': 'High Fe/Hf Value (True): Modifiers that are aromatic carboxylic acids with electron-withdrawing substituents at positions that enhance Fe coordination (e.g., nitro, bromomethyl groups).',
+            'patterns': [
+                ('carboxylic_acid',),  # Aromatic carboxylic acid
+                ('ewg_on_aromatic',)  # At least one EWG on aromatic ring
+            ],
+            'predictions': 1
+        },
+        {
+            'number': 3,
+            'description': 'Low Fe/Hf Value (False): Modifiers that are aromatic carboxylic acids with electron-donating substituents at the para position, or those with electron-rich aromatic rings.',
+            'patterns': [
+                ('carboxylic_acid',),  # Aromatic carboxylic acid
+                ('edg_on_aromatic',)  # At least one EDG on aromatic ring
+            ],
+            'predictions': -1
+        },
+        {
+            'number': 4,
+            'description': 'High Fe/Hf Value (True): Modifiers containing polyether chains with multiple ether linkages and a terminal coordinating group (e.g., amino or methoxy).',
+            'patterns': [
+                ('polyether_with_terminal_group',),
+                ('carboxylic_acid',)
+            ],
+            'predictions': 1
+        },
+        {
+            'number': 5,
+            'description': 'Low Fe/Hf Value (False): Simple aliphatic carboxylic acids without additional coordinating functional groups, or those with electron-withdrawing groups that do not enhance coordination.',
+            'patterns': [
+                ('carboxylic_acid',),
+            ],
+            'exclude_patterns': [
+                ('amino_group', 'thiol', 'thioether', 'pyridine_nitrogen', 'ether_linkage', 'ewg_on_aromatic', 'edg_on_aromatic')
+            ],
+            'predictions': -1
+        },
+        {
+            'number': 6,
+            'description': 'Low Fe/Hf Value (False): Modifiers containing multiple hydroxyl groups (polyhydroxy acids) or hydroxy-functionalized aliphatic chains.',
+            'patterns': [
+                ('multiple_hydroxyl_groups',),
+                ('carboxylic_acid',)
+            ],
+            'predictions': -1
+        },
+        {
+            'number': 7,
+            'description': 'High Fe/Hf Value (True): Modifiers that are amino acids with aromatic side chains capable of π-π interactions or coordination.',
+            'patterns': [
+                ('aromatic_amino_acid',)
+            ],
+            'predictions': 1
+        },
+        {
+            'number': 8,
+            'description': 'Low Fe/Hf Value (False): Modifiers with carbonyl-containing substituents at positions that do not enhance coordination ability.',
+            'patterns': [
+                ('non_coordinating_carbonyl',),
+                ('carboxylic_acid',)
+            ],
+            'predictions': -1
+        }
+    ]
+    
+    # Initialize results list
+    results = []
+    
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = True
+                # Check exclude patterns if any
+                if 'exclude_patterns' in rule:
+                    for pattern_names in rule['exclude_patterns']:
+                        for name in pattern_names:
+                            pat = smarts_patterns.get(name)
+                            if pat is None:
+                                continue
+                            if isinstance(pat, list):
+                                # For lists of patterns (like ewg_on_aromatic)
+                                for p in pat:
+                                    if mol.HasSubstructMatch(p):
+                                        match = False
+                                        break
+                            else:
+                                if mol.HasSubstructMatch(pat):
+                                    match = False
+                                    break
+                        if not match:
+                            break
+                    if not match:
+                        row.append(0)
+                        continue
+                # Check required patterns
+                for pattern_names in rule.get('patterns', []):
+                    group_match = False
+                    for name in pattern_names:
+                        pat = smarts_patterns.get(name)
+                        if pat is None:
+                            continue
+                        if isinstance(pat, list):
+                            # For lists of patterns (like ewg_on_aromatic)
+                            for p in pat:
+                                if mol.HasSubstructMatch(p):
+                                    group_match = True
+                                    break
+                        else:
+                            if mol.HasSubstructMatch(pat):
+                                group_match = True
+                                break
+                    if not group_match:
+                        match = False
+                        break
+                # Check count thresholds if any
+                if match and 'count_thresholds' in rule:
+                    for name, threshold in rule['count_thresholds'].items():
+                        pat = smarts_patterns.get(name)
+                        if pat is None:
+                            continue
+                        matches = mol.GetSubstructMatches(pat)
+                        if len(matches) < threshold:
+                            match = False
+                            break
+                if match:
+                    row.append(rule['predictions'])
+                else:
+                    row.append(0)
+            except Exception as e:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule['number']}' for rule in rules])
+    return df

@@ -1,0 +1,231 @@
+**Start of Rules**
+
+---
+
+**Rule 1**: **Aliphatic Carboxylic Acids with Terminal Primary Amino Groups Lead to High Fe/Hf Values (`True`)**
+
+*Modifiers that are straight-chain aliphatic carboxylic acids with a terminal primary amino group (-NH₂) result in high Fe/Hf values.*
+
+**Explanation**: The presence of both carboxylate and amino groups allows the modifier to act as a bidentate ligand, coordinating effectively with Fe ions. The flexible aliphatic chain facilitates the formation of stable chelate structures, enhancing Fe incorporation into the catalyst.
+
+**Applicable Modifiers**:
+
+- **High Fe/Hf (`True`)**:
+  - 5-aminopentanoic acid
+  - 7-aminoheptanoic acid
+  - 8-aminooctanoic acid
+
+---
+
+**Rule 2**: **Aromatic Carboxylic Acids with Electron-Withdrawing Para Substituents Lead to High Fe/Hf Values (`True`); Those with Electron-Donating Para Substituents Lead to Low Fe/Hf Values (`False`)**
+
+*Modifiers that are aromatic carboxylic acids with strong electron-withdrawing groups at the para position enhance Fe coordination (high Fe/Hf), while those with electron-donating groups reduce it (low Fe/Hf).*
+
+**Explanation**: Electron-withdrawing groups (e.g., nitro, bromomethyl) increase the acidity of the carboxylic acid, enhancing the carboxylate's ability to coordinate with Fe ions. Electron-donating groups (e.g., amino, methyl, hydroxy) decrease acidity, reducing coordination effectiveness.
+
+**Applicable Modifiers**:
+
+- **High Fe/Hf (`True`)**:
+  - 4-nitrobenzoic acid
+  - 4-(bromomethyl)benzoic acid
+- **Low Fe/Hf (`False`)**:
+  - 4-aminobenzoic acid
+  - 4-methylbenzoic acid
+  - 5-(4-hydroxyphenyl)pentanoic acid
+  - 3-(4-hydroxyphenyl)propanoic acid
+
+---
+
+**Rule 3**: **Modifiers Containing Thiol Groups (-SH) Along with Carboxylic Acid Groups Lead to High Fe/Hf Values (`True`)**
+
+*Modifiers that include thiol (sulfhydryl) groups in addition to carboxylate groups enhance Fe incorporation.*
+
+**Explanation**: Sulfur atoms are soft Lewis bases with lone pairs that can form strong coordination bonds with Fe ions. The combination of thiol and carboxylate groups allows the modifier to act as a multidentate ligand, significantly improving Fe coordination.
+
+**Applicable Modifiers**:
+
+- **High Fe/Hf (`True`)**:
+  - 4-sulfanylbenzoic acid
+  - 3-sulfanylpropanoic acid
+
+---
+
+**Rule 4**: **Simple Aliphatic Carboxylic Acids Without Additional Coordinating Functional Groups Lead to Low Fe/Hf Values (`False`)**
+
+*Modifiers that are straight-chain aliphatic carboxylic acids lacking additional coordinating groups result in low Fe/Hf values.*
+
+**Explanation**: Without extra functional groups capable of coordinating with Fe ions, these modifiers have limited interaction with Fe, resulting in lower Fe incorporation into the catalyst.
+
+**Applicable Modifiers**:
+
+- **Low Fe/Hf (`False`)**:
+  - Octanoic acid
+  - 4-oxoheptanedioic acid
+
+---
+
+**Rule 5**: **Modifiers with Multiple Hydroxyl Groups on an Aliphatic Chain Lead to Low Fe/Hf Values (`False`); Modifiers with a Single Terminal Hydroxyl Group May Lead to High Fe/Hf Values (`True`)**
+
+*The number and position of hydroxyl groups on the modifier affect Fe coordination.*
+
+**Explanation**: Multiple hydroxyl groups increase hydrophilicity and can form intramolecular hydrogen bonds, reducing the availability of coordinating sites for Fe ions. A single terminal hydroxyl group remains available for coordination without significant steric hindrance.
+
+**Applicable Modifiers**:
+
+- **Low Fe/Hf (`False`)**:
+  - (2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid
+  - 2-[[1,3-dihydroxy-2-(hydroxymethyl)propan-2-yl]oxy]acetic acid
+- **High Fe/Hf (`True`)**:
+  - 7-hydroxyheptanoic acid
+
+---
+
+**Rule 6**: **Modifiers with Ether Linkages and Terminal Amino Groups Lead to High Fe/Hf Values (`True`)**
+
+*Modifiers featuring ether linkages with terminal amino groups enhance Fe incorporation.*
+
+**Explanation**: Ether oxygen atoms provide flexibility, allowing the molecule to adopt conformations favorable for coordination. Terminal amino groups offer strong coordination sites for Fe ions, enhancing the overall binding affinity.
+
+**Applicable Modifiers**:
+
+- **High Fe/Hf (`True`)**:
+  - 3-[2-(2-aminoethoxy)ethoxy]propanoic acid
+
+---
+
+**Rule 7**: **Amino Acids with Aromatic Side Chains Lead to High Fe/Hf Values (`True`); Those with Highly Electron-Rich Aromatic Side Chains Lead to Low Fe/Hf Values (`False`)**
+
+*The electronic nature of the aromatic side chain in amino acids affects Fe coordination.*
+
+**Explanation**: Amino acids with less electron-rich aromatic side chains (e.g., phenylalanine) can coordinate effectively with Fe ions. Highly electron-rich side chains (e.g., indole ring of tryptophan) may result in steric hindrance or unfavorable electronic interactions, reducing Fe coordination.
+
+**Applicable Modifiers**:
+
+- **High Fe/Hf (`True`)**:
+  - (2S)-2-amino-3-phenylpropanoic acid (Phenylalanine)
+- **Low Fe/Hf (`False`)**:
+  - (2R)-2-amino-3-(1H-indol-3-yl)propanoic acid (Tryptophan)
+
+---
+
+**Rule 8**: **Modifiers with Heterocyclic Nitrogen Atoms Connected via Flexible Linkers Lead to High Fe/Hf Values (`True`); Those Directly Attached Without Flexibility Lead to Low Fe/Hf Values (`False`)**
+
+*The presence and positioning of heterocyclic nitrogen atoms influence Fe coordination.*
+
+**Explanation**: When a heterocyclic nitrogen is connected via a flexible linker, it allows optimal spatial orientation for coordination with Fe ions. Direct attachment without flexibility may hinder effective coordination due to steric constraints or electronic factors.
+
+**Applicable Modifiers**:
+
+- **High Fe/Hf (`True`)**:
+  - 4-pyridin-4-ylbutanoic acid
+  - 4-pyridin-4-ylbenzoic acid
+- **Low Fe/Hf (`False`)**:
+  - Pyridine-3-carboxylic acid
+  - 2-oxo-1H-pyridine-4-carboxylic acid
+  - 1H-pyrazole-4-carboxylic acid
+
+---
+
+**Rule 9**: **Modifiers with Fluorinated Alkyl Chains or Trifluoromethyl Groups Lead to Low Fe/Hf Values (`False`)**
+
+*The presence of fluorine atoms in the alkyl chain or functional groups reduces Fe coordination.*
+
+**Explanation**: Fluorine's high electronegativity withdraws electron density from potential coordinating atoms, diminishing their ability to coordinate effectively with Fe ions. This electron-withdrawing effect reduces the nucleophilicity of donor atoms in the modifier.
+
+**Applicable Modifiers**:
+
+- **Low Fe/Hf (`False`)**:
+  - 2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid
+  - 4-[(2,2,2-trifluoroacetyl)amino]butanoic acid
+
+---
+
+**Rule 10**: **Modifiers with Aldehyde Groups Adjacent to Aromatic Rings Lead to Low Fe/Hf Values (`False`)**
+
+*Modifiers that have aldehyde groups directly attached to aromatic rings tend to result in low Fe/Hf values.*
+
+**Explanation**: Aldehyde groups can be susceptible to side reactions under the reaction conditions and may not coordinate effectively with Fe ions. Additionally, the aldehyde can decrease the electron density of the aromatic ring, hindering coordination.
+
+**Applicable Modifiers**:
+
+- **Low Fe/Hf (`False`)**:
+  - 5-formyl-2-hydroxybenzoic acid
+  - 4-formylbenzoic acid
+
+---
+
+**Rule 11**: **Modifiers with Conjugated Ketone Groups Linked to Aromatic Rings via Flexible Linkers Lead to High Fe/Hf Values (`True`)**
+
+*The nature of the ketone and its position relative to aromatic systems influence Fe coordination.*
+
+**Explanation**: Ketones conjugated with aromatic rings can participate in resonance structures, enhancing their ability to coordinate with Fe ions. Flexible linkers allow optimal positioning for coordination.
+
+**Applicable Modifiers**:
+
+- **High Fe/Hf (`True`)**:
+  - 4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid
+- **Low Fe/Hf (`False`)**:
+  - 4-oxoheptanedioic acid (Non-conjugated ketone)
+
+---
+
+**Rule 12**: **Modifiers with Multiple Electron-Donating Groups on Aromatic Rings Lead to Low Fe/Hf Values (`False`)**
+
+*The cumulative effect of electron-donating groups reduces Fe coordination.*
+
+**Explanation**: Electron-donating groups like hydroxyl (-OH) and methoxy (-OCH₃) increase the electron density of the aromatic ring and decrease the acidity of the carboxylic acid group. This reduction in acidity weakens the carboxylate's ability to coordinate with Fe ions.
+
+**Applicable Modifiers**:
+
+- **Low Fe/Hf (`False`)**:
+  - 5-(4-hydroxyphenyl)pentanoic acid
+  - 3-(4-hydroxyphenyl)propanoic acid
+  - 2-[(4-hydroxybenzoyl)amino]acetic acid
+
+---
+
+**Rule 13**: **Modifiers with Ether Linkages and Terminal Hydroxyl Groups Lead to High Fe/Hf Values (`True`)**
+
+*Modifiers featuring ether linkages with terminal hydroxyl groups can enhance Fe incorporation.*
+
+**Explanation**: The ether linkages provide flexibility, and the terminal hydroxyl groups offer coordination sites for Fe ions. This combination can facilitate effective binding to Fe.
+
+**Applicable Modifiers**:
+
+- **High Fe/Hf (`True`)**:
+  - 2-[2-(2-methoxyethoxy)ethoxy]acetic acid
+
+---
+
+**Rule 14**: **Modifiers with Aliphatic Chains Containing Acetamido Groups and Additional Amino Groups Lead to High Fe/Hf Values (`True`)**
+
+*Modifiers with an acetamido group and an additional amino group enhance Fe coordination.*
+
+**Explanation**: The combination of multiple nitrogen-containing functional groups increases the number of potential coordination sites for Fe ions, enhancing Fe incorporation into the catalyst.
+
+**Applicable Modifiers**:
+
+- **High Fe/Hf (`True`)**:
+  - (2S)-6-acetamido-2-aminohexanoic acid
+  - 2-[[(2S)-2-amino-4-methylsulfanylbutanoyl]amino]acetic acid
+
+---
+
+**Rule 15**: **Modifiers with Indole Functional Groups Lead to Low Fe/Hf Values (`False`)**
+
+*The presence of bulky, electron-rich indole rings can hinder Fe coordination.*
+
+**Explanation**: Indole rings are highly electron-rich and can cause steric hindrance, reducing the ability of coordinating groups to interact effectively with Fe ions.
+
+**Applicable Modifiers**:
+
+- **Low Fe/Hf (`False`)**:
+  - (2R)-2-amino-3-(1H-indol-3-yl)propanoic acid
+
+---
+
+**End of Rules**
+
+---
+
+These rules have been generated by analyzing the dataset and considering underlying physicochemical principles such as coordination chemistry, electronic effects, and steric factors. Each rule combines functional group features to predict whether a modifier will lead to high or low Fe/Hf values. The rules balance simplicity and complexity, covering a broad range of the dataset while providing specific insights into how different substructures influence the Fe/Hf ratio in the catalyst.---------------------------------------------------------------

@@ -1,0 +1,169 @@
+def rule2matrix(smiles_list):
+    # Define SMARTS patterns for common functional groups
+    carboxylic_acid = '[CX3](=O)[OX2H1]'
+    amino_group = '[NX3H2]'
+    n_acylated_amino = '[NX3][CX3](=O)'
+    aromatic_ring = 'a'
+    thiol_group = '[SX2H]'
+    ether_linkage = '[#6][OX2][#6]'
+    aldehyde_group = '[CX3H1](=O)'
+    fluorine_atom = '[F]'
+    # Compile SMARTS patterns
+    carboxylic_acid_pat = Chem.MolFromSmarts(carboxylic_acid)
+    amino_group_pat = Chem.MolFromSmarts(amino_group)
+    n_acylated_amino_pat = Chem.MolFromSmarts(n_acylated_amino)
+    aromatic_ring_pat = Chem.MolFromSmarts(aromatic_ring)
+    thiol_group_pat = Chem.MolFromSmarts(thiol_group)
+    ether_linkage_pat = Chem.MolFromSmarts(ether_linkage)
+    aldehyde_group_pat = Chem.MolFromSmarts(aldehyde_group)
+    fluorine_atom_pat = Chem.MolFromSmarts(fluorine_atom)
+    
+    # Define the rules with their associated patterns and predictions
+    rules = [
+        {
+            'number': 1,
+            'description': 'High yield: α-amino acids without bulky hydrophobic side chains or acyl modifications',
+            'patterns': [
+                carboxylic_acid_pat,
+                amino_group_pat
+            ],
+            'exclude_patterns': [
+                n_acylated_amino_pat,
+                Chem.MolFromSmarts('[CX4H]([NX3H2])([CX3](=O)[OX2H1])[a]')  # α-carbon attached to aromatic ring
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 2,
+            'description': 'High yield: Aromatic carboxylic acids with metal-coordinating groups at para position',
+            'patterns': [
+                Chem.MolFromSmarts('[c]1ccc([NX3H2,NX3+0](=O)[O-,OX1-,OX2])cc1[CX3](=O)[OX1H0-,OX2H1]'),  # Aromatic ring with para amino or nitro group and carboxylic acid
+                Chem.MolFromSmarts('[c]1ccc([OX2H])cc1[CX3](=O)[OX1H0-,OX2H1]')  # Aromatic ring with para hydroxyl group and carboxylic acid
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 3,
+            'description': 'High yield: Heterocyclic carboxylic acids with ring nitrogen directly attached to carboxyl group',
+            'patterns': [
+                Chem.MolFromSmarts('[n][c][c][c][c][CX3](=O)[OX1H0-,OX2H1]'),  # Heterocycle with nitrogen and carboxylic acid directly attached
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 4,
+            'description': 'High yield: Unsubstituted medium-chain aliphatic carboxylic acids (6 to 8 carbons) without additional polar groups',
+            'patterns': [
+                Chem.MolFromSmarts('[CH3][CH2]{4,6}[CX3](=O)[OX1H0-,OX2H1]')  # Aliphatic chain of 5-7 carbons ending with carboxylic acid
+            ],
+            'exclude_patterns': [
+                amino_group_pat,
+                thiol_group_pat,
+                ether_linkage_pat
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 5,
+            'description': 'High yield: Aliphatic carboxylic acids with thiol groups on the aliphatic chain',
+            'patterns': [
+                carboxylic_acid_pat,
+                thiol_group_pat
+            ],
+            'exclude_patterns': [
+                aromatic_ring_pat  # Exclude aromatic rings
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 6,
+            'description': 'Low yield: Compounds with multiple ether linkages in aliphatic chains terminating with a carboxylic acid group',
+            'patterns': [
+                carboxylic_acid_pat,
+                Chem.MolFromSmarts('([#6][OX2]){2,}[#6]')  # At least two ether linkages in a chain
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 7,
+            'description': 'Low yield: Amino acids or peptides with acylated amino groups or additional amide linkages',
+            'patterns': [
+                carboxylic_acid_pat,
+                Chem.MolFromSmarts('[NX3][CX3](=O)')  # Acylated amino group
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 8,
+            'description': 'Low yield: Heavily fluorinated aliphatic carboxylic acids',
+            'patterns': [
+                carboxylic_acid_pat,
+                fluorine_atom_pat
+            ],
+            'count_threshold': {fluorine_atom: 3},  # At least 3 fluorine atoms
+            'prediction': -1
+        },
+        {
+            'number': 9,
+            'description': 'Low yield: Aromatic carboxylic acids with formyl groups adjacent to the carboxyl group',
+            'patterns': [
+                Chem.MolFromSmarts('c1cc([CX3H](=O))ccc1[CX3](=O)[OX1H0-,OX2H1]')  # Aromatic ring with aldehyde and carboxylic acid adjacent
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 10,
+            'description': 'High yield: Aromatic carboxylic acids connected through aliphatic chains of four or more carbons to additional functional groups',
+            'patterns': [
+                Chem.MolFromSmarts('[c][C][CH2][CH2][CH2][CX3](=O)[OX1H0-,OX2H1]')  # Aromatic ring connected via 4-carbon chain to carboxylic acid
+            ],
+            'prediction': 1
+        }
+    ]
+    
+    # Initialize results list
+    results = []
+    
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = True
+                # Check exclude patterns if any
+                if 'exclude_patterns' in rule:
+                    for pat in rule['exclude_patterns']:
+                        if mol.HasSubstructMatch(pat):
+                            match = False
+                            break
+                    if not match:
+                        row.append(0)
+                        continue
+                # Check required patterns
+                for pat in rule['patterns']:
+                    matches = mol.GetSubstructMatches(pat)
+                    if not matches:
+                        match = False
+                        break
+                    # If a count threshold is specified for this pattern
+                    if 'count_threshold' in rule and pat in rule['count_threshold']:
+                        threshold = rule['count_threshold'][pat]
+                        if len(matches) < threshold:
+                            match = False
+                            break
+                if match:
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception as e:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule['number']}' for rule in rules])
+    return df

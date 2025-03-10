@@ -1,0 +1,322 @@
+def rule2matrix(smiles_list):
+    import pandas as pd
+    from rdkit import Chem
+    
+    # Define SMARTS patterns for functional groups and substructures
+    # General patterns
+    carboxylic_acid = '[CX3](=O)[OX2H1]'
+    carboxylate_anion = '[CX3](=O)[O-]'
+    amino_group = '[NX3;H2]'
+    aromatic_ring = '[$([a])]'
+    nitro_group = '[NX3](=O)=O'
+    halogens = '[F,Cl,Br,I]'
+    nitro_aromatic = '[c][NX3](=O)=O'
+    amino_aromatic = '[c][NX3;H2]'
+    electron_withdrawing_groups = '[N+](=O)[O-],[CX3](=O)[OX1H0-,OX2H0-],[CX3](=O)[F,Cl,Br,I],[C#N],[S](=O)(=O)[O-],[S](=O)(=O)[OH],[P](=O)([OH])[OH]'
+    electron_donating_groups = '[OX2H],[OX2][#6],[NX3;H2,H1][#6],[SX2H]'
+    thiol_group = '[SX2H]'
+    hydroxyl_group = '[OX2H]'
+    aldehyde_group = '[CX3H1](=O)'
+    ketone_group = '[CX3](=O)[#6]'
+    ether_linkage = '[#6][OX2][#6]'
+    pyridine_ring = '[n]1cccc1'
+    aromatic_carboxylic_acid = '[c][CX3](=O)[OX1H0-,OX2H1]'
+    aromatic_carboxylic_acid_para_sub = 'c1cc([#8]-[H])cc([CX3](=O)[OX1H0-,OX2H1])c1'
+
+    # Compile SMARTS patterns
+    smarts_patterns = {
+        'carboxylic_acid': Chem.MolFromSmarts(carboxylic_acid),
+        'carboxylate_anion': Chem.MolFromSmarts(carboxylate_anion),
+        'amino_group': Chem.MolFromSmarts(amino_group),
+        'aromatic_ring': Chem.MolFromSmarts(aromatic_ring),
+        'nitro_group': Chem.MolFromSmarts(nitro_group),
+        'halogens': Chem.MolFromSmarts(halogens),
+        'nitro_aromatic': Chem.MolFromSmarts(nitro_aromatic),
+        'amino_aromatic': Chem.MolFromSmarts(amino_aromatic),
+        'thiol_group': Chem.MolFromSmarts(thiol_group),
+        'hydroxyl_group': Chem.MolFromSmarts(hydroxyl_group),
+        'aldehyde_group': Chem.MolFromSmarts(aldehyde_group),
+        'ketone_group': Chem.MolFromSmarts(ketone_group),
+        'ether_linkage': Chem.MolFromSmarts(ether_linkage),
+        'pyridine_ring': Chem.MolFromSmarts(pyridine_ring),
+        'aromatic_carboxylic_acid': Chem.MolFromSmarts(aromatic_carboxylic_acid),
+        'aromatic_carboxylic_acid_para_sub': Chem.MolFromSmarts(aromatic_carboxylic_acid_para_sub),
+    }
+    
+    # Define the rules with their associated patterns and predictions
+    rules = [
+        {
+            'number': 1,
+            'description': 'High yield: Amino acids with carboxylic acid side chains (e.g., aspartic acid, glutamic acid).',
+            'patterns': [
+                smarts_patterns['amino_group'],
+                smarts_patterns['carboxylic_acid'],
+            ],
+            'count': {'carboxylic_acid': 2},  # At least two carboxylic acid groups
+            'prediction': 1
+        },
+        {
+            'number': 2,
+            'description': 'High yield: Aromatic carboxylic acids with electron-withdrawing groups at the para position.',
+            'patterns': [
+                smarts_patterns['aromatic_carboxylic_acid'],
+                smarts_patterns['nitro_aromatic'],
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 3,
+            'description': 'High yield: Aromatic carboxylic acids with amino groups at the para position.',
+            'patterns': [
+                smarts_patterns['aromatic_carboxylic_acid'],
+                smarts_patterns['amino_aromatic'],
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 4,
+            'description': 'High yield: Heterocyclic carboxylic acids containing nitrogen atoms within the ring.',
+            'patterns': [
+                smarts_patterns['pyridine_ring'],
+                smarts_patterns['carboxylic_acid'],
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 5,
+            'description': 'High yield: Aliphatic carboxylic acids with proximal functional groups (amino, hydroxyl, or thiol) within three carbons of the carboxylate.',
+            'patterns': [
+                smarts_patterns['carboxylic_acid'],
+                smarts_patterns['amino_group']
+            ],
+            'max_distance': 3,
+            'prediction': 1
+        },
+        {
+            'number': 6,
+            'description': 'High yield: Carboxylic acids with adjacent hydroxyl or carbonyl groups capable of chelation.',
+            'patterns': [
+                smarts_patterns['carboxylic_acid'],
+                smarts_patterns['hydroxyl_group'],
+                smarts_patterns['ketone_group'],
+            ],
+            'adjacent': True,
+            'prediction': 1
+        },
+        {
+            'number': 7,
+            'description': 'Low yield: Aromatic carboxylic acids with aldehyde (formyl) groups at the ortho or para position.',
+            'patterns': [
+                smarts_patterns['aromatic_carboxylic_acid'],
+                smarts_patterns['aldehyde_group'],
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 8,
+            'description': 'Low yield: Aliphatic carboxylic acids with distal functional groups (more than three carbons away from the carboxylate).',
+            'patterns': [
+                smarts_patterns['carboxylic_acid'],
+                smarts_patterns['amino_group'],
+            ],
+            'min_distance': 4,
+            'prediction': -1
+        },
+        {
+            'number': 9,
+            'description': 'Low yield: Aromatic carboxylic acids with electron-donating groups at the para position (excluding amino groups).',
+            'patterns': [
+                smarts_patterns['aromatic_carboxylic_acid'],
+                smarts_patterns['hydroxyl_group'],
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 10,
+            'description': 'Low yield: Carboxylic acids with bulky, sterically hindering groups adjacent to the carboxylate.',
+            'patterns': [
+                smarts_patterns['carboxylic_acid'],
+                ],
+            'bulky_groups': True,
+            'prediction': -1
+        },
+        {
+            'number': 11,
+            'description': 'Low yield: Carboxylic acids with perfluorinated alkyl chains.',
+            'patterns': [
+                smarts_patterns['carboxylic_acid'],
+            ],
+            'perfluorinated_chain': True,
+            'prediction': -1
+        },
+        {
+            'number': 12,
+            'description': 'Low yield: Modifiers with long polyether chains attached to the carboxylate group.',
+            'patterns': [
+                smarts_patterns['carboxylic_acid'],
+                smarts_patterns['ether_linkage'],
+            ],
+            'long_chain': True,
+            'prediction': -1
+        },
+        {
+            'number': 13,
+            'description': 'High yield: Aliphatic carboxylic acids with medium-length (6-8 carbons) unbranched hydrocarbon chains without interfering functional groups.',
+            'patterns': [
+                smarts_patterns['carboxylic_acid'],
+            ],
+            'chain_length': (6, 8),
+            'prediction': 1
+        },
+        {
+            'number': 14,
+            'description': 'Low yield: Amino acids with bulky side chains lacking additional coordinating groups.',
+            'patterns': [
+                smarts_patterns['amino_group'],
+                smarts_patterns['carboxylic_acid'],
+            ],
+            'bulky_side_chain': True,
+            'prediction': -1
+        },
+        {
+            'number': 15,
+            'description': 'High yield: Thiol-containing aromatic carboxylic acids.',
+            'patterns': [
+                smarts_patterns['aromatic_carboxylic_acid'],
+                smarts_patterns['thiol_group'],
+            ],
+            'prediction': 1
+        },
+    ]
+    
+    # Initialize results list
+    results = []
+    
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = True
+                # Check for patterns
+                for pattern in rule.get('patterns', []):
+                    if not mol.HasSubstructMatch(pattern):
+                        match = False
+                        break
+                if not match:
+                    row.append(0)
+                    continue
+                # Additional checks
+                if 'count' in rule:
+                    for substruct_name, count in rule['count'].items():
+                        substruct = smarts_patterns[substruct_name]
+                        matches = mol.GetSubstructMatches(substruct)
+                        if len(matches) < count:
+                            match = False
+                            break
+                    if not match:
+                        row.append(0)
+                        continue
+                if 'max_distance' in rule:
+                    # Find shortest distance between carboxylic acid and functional group
+                    ca_matches = mol.GetSubstructMatches(smarts_patterns['carboxylic_acid'])
+                    fg_matches = mol.GetSubstructMatches(smarts_patterns['amino_group'])
+                    distances = []
+                    for ca in ca_matches:
+                        for fg in fg_matches:
+                            path_length = Chem.rdmolops.GetShortestPath(mol, ca[0], fg[0])
+                            distances.append(len(path_length)-1)
+                    if not distances or min(distances) > rule['max_distance']:
+                        match = False
+                if 'min_distance' in rule:
+                    ca_matches = mol.GetSubstructMatches(smarts_patterns['carboxylic_acid'])
+                    fg_matches = mol.GetSubstructMatches(smarts_patterns['amino_group'])
+                    distances = []
+                    for ca in ca_matches:
+                        for fg in fg_matches:
+                            path_length = Chem.rdmolops.GetShortestPath(mol, ca[0], fg[0])
+                            distances.append(len(path_length)-1)
+                    if not distances or min(distances) < rule['min_distance']:
+                        match = False
+                if 'adjacent' in rule and rule['adjacent']:
+                    # Check if carboxylic acid is adjacent to hydroxyl or ketone group
+                    ca_matches = mol.GetSubstructMatches(smarts_patterns['carboxylic_acid'])
+                    adj_patterns = [smarts_patterns['hydroxyl_group'], smarts_patterns['ketone_group']]
+                    adjacent = False
+                    for ca in ca_matches:
+                        for adj in adj_patterns:
+                            adj_matches = mol.GetSubstructMatches(adj)
+                            for am in adj_matches:
+                                path_length = Chem.rdmolops.GetShortestPath(mol, ca[0], am[0])
+                                if len(path_length)-1 == 1:
+                                    adjacent = True
+                                    break
+                            if adjacent:
+                                break
+                        if adjacent:
+                            break
+                    if not adjacent:
+                        match = False
+                if 'bulky_groups' in rule and rule['bulky_groups']:
+                    # Check for bulky groups adjacent to carboxylic acid
+                    bulky_groups = ['[CX3](C)(C)C']  # Tertiary butyl group as example
+                    bulky_match = False
+                    for bg in bulky_groups:
+                        bg_pat = Chem.MolFromSmarts(bg)
+                        if mol.HasSubstructMatch(bg_pat):
+                            bg_matches = mol.GetSubstructMatches(bg_pat)
+                            ca_matches = mol.GetSubstructMatches(smarts_patterns['carboxylic_acid'])
+                            for ca in ca_matches:
+                                for bgm in bg_matches:
+                                    path_length = Chem.rdmolops.GetShortestPath(mol, ca[0], bgm[0])
+                                    if len(path_length)-1 == 1:
+                                        bulky_match = True
+                                        break
+                                if bulky_match:
+                                    break
+                            if bulky_match:
+                                break
+                    if not bulky_match:
+                        match = False
+                if 'perfluorinated_chain' in rule and rule['perfluorinated_chain']:
+                    # Check for perfluorinated alkyl chains
+                    perfluoro_pat = Chem.MolFromSmarts('[CX4]([F])([F])[F]')
+                    if not mol.HasSubstructMatch(perfluoro_pat):
+                        match = False
+                if 'long_chain' in rule and rule['long_chain']:
+                    # Check for long polyether chains
+                    polyether_pat = Chem.MolFromSmarts('OCCOCCO')
+                    if not mol.HasSubstructMatch(polyether_pat):
+                        match = False
+                if 'chain_length' in rule:
+                    # Check for unbranched hydrocarbon chains of specific length
+                    chain_length_pat = Chem.MolFromSmarts('[C]' + ('[C]'*(rule['chain_length'][0]-1)))
+                    if not mol.HasSubstructMatch(chain_length_pat):
+                        match = False
+                if 'bulky_side_chain' in rule and rule['bulky_side_chain']:
+                    # Check for bulky side chains lacking additional coordinating groups
+                    bulky_side_chains = ['c1ccccc1', 'c1ccncc1']  # Phenyl and pyridine rings
+                    bulky_match = False
+                    for bsc in bulky_side_chains:
+                        bsc_pat = Chem.MolFromSmarts(bsc)
+                        if mol.HasSubstructMatch(bsc_pat):
+                            bulky_match = True
+                            break
+                    if not bulky_match:
+                        match = False
+                if match:
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception as e:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule["number"]}' for rule in rules])
+    return df

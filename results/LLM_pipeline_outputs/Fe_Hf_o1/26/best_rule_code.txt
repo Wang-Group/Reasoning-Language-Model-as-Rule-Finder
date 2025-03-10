@@ -1,0 +1,219 @@
+def rule2matrix(smiles_list):
+    # Define the rules with their associated patterns and predictions
+    from rdkit import Chem
+
+    # Define patterns
+    patterns = {}
+
+    # Carboxylic acid group (-COOH)
+    patterns['carboxylic_acid'] = Chem.MolFromSmarts('[CX3](=O)[OX2H1]')
+
+    # Primary amine group (-NH2), terminal on aliphatic chain of at least three carbons
+    # For simplicity, we will define a pattern that matches a chain of at least three aliphatic carbons ending with a primary amine
+    patterns['primary_amine_chain'] = Chem.MolFromSmarts('[CH2][CH2][CH2][NX3H2]')
+
+    # Thiol group (-SH)
+    patterns['thiol'] = Chem.MolFromSmarts('[SX2H]')
+
+    # Aromatic carboxylic acid
+    patterns['aromatic_carboxylic_acid'] = Chem.MolFromSmarts('[c][CX3](=O)[OX2H1]')
+
+    # Electron-withdrawing groups (EWG) attached to aromatic ring
+    # Nitro group attached to aromatic ring
+    patterns['nitro_on_aromatic'] = Chem.MolFromSmarts('[c][NX3](=O)[OX1]')
+
+    # Bromo attached to aromatic ring
+    patterns['bromo_on_aromatic'] = Chem.MolFromSmarts('[c][Br]')
+
+    # Pyridine ring
+    patterns['pyridine_ring'] = Chem.MolFromSmarts('n1ccccc1')
+
+    # Electron-donating groups (EDG) attached to aromatic ring
+    # Amino group attached to aromatic ring
+    patterns['amino_on_aromatic'] = Chem.MolFromSmarts('[c][NX3H2]')
+
+    # Hydroxy group attached to aromatic ring
+    patterns['hydroxy_on_aromatic'] = Chem.MolFromSmarts('[c][OX2H]')
+
+    # Methoxy group attached to aromatic ring
+    patterns['methoxy_on_aromatic'] = Chem.MolFromSmarts('[c][OX2][CH3]')
+
+    # Methyl group attached to aromatic ring
+    patterns['methyl_on_aromatic'] = Chem.MolFromSmarts('[c][CH3]')
+
+    # Multiple hydroxyl groups on aliphatic chain
+    patterns['aliphatic_hydroxyl'] = Chem.MolFromSmarts('[CX4][OX2H]')
+
+    # Aldehyde group attached to aromatic ring
+    patterns['aldehyde_on_aromatic'] = Chem.MolFromSmarts('[c][CX3H](=O)')
+
+    # Indole ring
+    patterns['indole'] = Chem.MolFromSmarts('c1ccc2c(c1)[nH]c3c2cccc3')
+
+    # Polyether chain (three or more ether linkages)
+    patterns['ether_linkage'] = Chem.MolFromSmarts('[#6][OX2][#6]')
+    # Note: counting is required for polyether chain with at least three ether linkages
+
+    # Terminal functional groups (amine or carboxylic acid)
+    patterns['terminal_amine'] = Chem.MolFromSmarts('[NX3H2]')
+    patterns['terminal_carboxylic_acid'] = patterns['carboxylic_acid']
+
+    # Heteroaromatic ring with carboxylic acid attached directly
+    patterns['heteroaromatic_carboxylic_acid'] = Chem.MolFromSmarts('[n,o,s][c][CX3](=O)[OX2H1]')
+
+    # Perfluorinated alkyl chain
+    patterns['perfluoro_alkyl'] = Chem.MolFromSmarts('[CX4](F)(F)(F)')
+
+    # Long aliphatic chain (saturated chain of at least five carbons)
+    patterns['long_aliphatic_chain'] = Chem.MolFromSmarts('[CH2][CH2][CH2][CH2][CH2]')
+
+    # Phenolic hydroxyl group
+    patterns['phenolic_oh'] = patterns['hydroxy_on_aromatic']
+
+    # Create list of rules
+    rules = [
+        {
+            'number': 1,
+            'description': 'Modifiers containing a terminal primary amine group on an aliphatic chain (with a chain length of at least three carbons) and a carboxylic acid group result in a high Fe/Hf value.',
+            'patterns': [patterns['primary_amine_chain'], patterns['carboxylic_acid']],
+            'prediction': 1
+        },
+        {
+            'number': 2,
+            'description': 'Modifiers containing a thiol group (–SH) and a carboxylic acid group result in a high Fe/Hf value.',
+            'patterns': [patterns['thiol'], patterns['carboxylic_acid']],
+            'prediction': 1
+        },
+        {
+            'number': 3,
+            'description': 'Aromatic carboxylic acids substituted with strong electron-withdrawing groups (e.g., nitro, bromo, pyridinyl) result in a high Fe/Hf value.',
+            'patterns': [patterns['aromatic_carboxylic_acid'], [patterns['nitro_on_aromatic'], patterns['bromo_on_aromatic'], patterns['pyridine_ring']]],
+            'prediction': 1
+        },
+        {
+            'number': 4,
+            'description': 'Modifiers containing polyether chains with at least three ether linkages and a terminal functional group (e.g., amine or carboxylic acid) result in a high Fe/Hf value.',
+            'patterns': [patterns['terminal_amine'], patterns['terminal_carboxylic_acid']],
+            'count_threshold': {'ether_linkage': 3},
+            'prediction': 1
+        },
+        {
+            'number': 5,
+            'description': 'Modifiers containing electron-donating groups (e.g., amino, hydroxy, methoxy, methyl) on an aromatic carboxylic acid result in a low Fe/Hf value.',
+            'patterns': [patterns['aromatic_carboxylic_acid'], [patterns['amino_on_aromatic'], patterns['hydroxy_on_aromatic'], patterns['methoxy_on_aromatic'], patterns['methyl_on_aromatic']]],
+            'prediction': -1
+        },
+        {
+            'number': 6,
+            'description': 'Modifiers containing multiple hydroxyl groups (polyhydroxylated) on an aliphatic chain result in a low Fe/Hf value.',
+            'patterns': [patterns['aliphatic_hydroxyl']],
+            'count_threshold': {'aliphatic_hydroxyl': 2},
+            'prediction': -1
+        },
+        {
+            'number': 7,
+            'description': 'Modifiers that are long-chain saturated carboxylic acids without additional functional groups result in a low Fe/Hf value.',
+            'patterns': [patterns['carboxylic_acid'], patterns['long_aliphatic_chain']],
+            'exclude_patterns': [patterns['aliphatic_hydroxyl'], patterns['primary_amine_chain'], patterns['thiol']],
+            'prediction': -1
+        },
+        {
+            'number': 8,
+            'description': 'Modifiers containing perfluorinated alkyl chains result in a low Fe/Hf value.',
+            'patterns': [patterns['perfluoro_alkyl']],
+            'prediction': -1
+        },
+        {
+            'number': 9,
+            'description': 'Modifiers containing heteroaromatic rings with a carboxylic acid group directly attached to the ring result in a low Fe/Hf value.',
+            'patterns': [patterns['heteroaromatic_carboxylic_acid']],
+            'prediction': -1
+        },
+        {
+            'number': 10,
+            'description': 'Modifiers containing an aldehyde group attached to an aromatic ring along with a carboxylic acid group result in a low Fe/Hf value.',
+            'patterns': [patterns['aldehyde_on_aromatic'], patterns['aromatic_carboxylic_acid']],
+            'prediction': -1
+        },
+        {
+            'number': 11,
+            'description': 'Modifiers containing an indole ring result in a low Fe/Hf value.',
+            'patterns': [patterns['indole']],
+            'prediction': -1
+        },
+        {
+            'number': 12,
+            'description': 'Modifiers containing a phenolic hydroxyl group (–OH attached to an aromatic ring) result in a low Fe/Hf value.',
+            'patterns': [patterns['phenolic_oh']],
+            'prediction': -1
+        }
+    ]
+
+    # Initialize results list
+    results = []
+
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = True
+                # Check exclude patterns if any
+                if 'exclude_patterns' in rule:
+                    for excl_pat in rule['exclude_patterns']:
+                        if mol.HasSubstructMatch(excl_pat):
+                            match = False
+                            break
+                    if not match:
+                        row.append(0)
+                        continue
+                # Check required patterns
+                for pat in rule['patterns']:
+                    if isinstance(pat, list):
+                        # Logical OR: at least one pattern in the list should match
+                        group_match = False
+                        for sub_pat in pat:
+                            if mol.HasSubstructMatch(sub_pat):
+                                group_match = True
+                                break
+                        if not group_match:
+                            match = False
+                            break
+                    else:
+                        # Single pattern
+                        if pat == patterns['ether_linkage']:
+                            # For patterns requiring counts
+                            if 'count_threshold' in rule and 'ether_linkage' in rule['count_threshold']:
+                                threshold = rule['count_threshold']['ether_linkage']
+                                matches = mol.GetSubstructMatches(pat)
+                                if len(matches) < threshold:
+                                    match = False
+                                    break
+                        elif pat == patterns['aliphatic_hydroxyl']:
+                            if 'count_threshold' in rule and 'aliphatic_hydroxyl' in rule['count_threshold']:
+                                threshold = rule['count_threshold']['aliphatic_hydroxyl']
+                                matches = mol.GetSubstructMatches(pat)
+                                if len(matches) < threshold:
+                                    match = False
+                                    break
+                        else:
+                            if not mol.HasSubstructMatch(pat):
+                                match = False
+                                break
+                if match:
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception as e:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    import pandas as pd
+    df = pd.DataFrame(results, columns=[f'Rule {rule['number']}' for rule in rules])
+    return df

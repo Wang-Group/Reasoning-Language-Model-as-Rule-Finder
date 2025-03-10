@@ -1,0 +1,163 @@
+**Start of Rules**
+
+---
+
+- **Rule 1**: **Modifiers containing thiol groups (–SH) result in a high Fe/Hf value.**
+
+  - **Explanation**: Thiol groups have a high affinity for metal ions due to the lone pair electrons on sulfur, enhancing Fe coordination to the catalyst.
+  - **Supports**:
+    - **Compound 9**: *4-sulfanylbenzoic acid* (True)
+    - **Compound 17**: *3-sulfanylpropanoic acid* (True)
+  - **Counters**: None observed in the dataset.
+
+---
+
+- **Rule 2**: **Aliphatic amino acids or aliphatic carboxylic acids with a primary amino group located at least four carbons away from the carboxyl group result in a high Fe/Hf value.**
+
+  - **Explanation**: The spatial separation between the amino and carboxyl groups allows the molecule to act as a bidentate ligand, forming chelate rings with Fe ions and enhancing metal incorporation.
+  - **Supports**:
+    - **Compound 2**: *5-aminopentanoic acid* (True)
+    - **Compound 31**: *7-aminoheptanoic acid* (True)
+    - **Compound 34**: *8-aminooctanoic acid* (True)
+    - **Compound 33**: *(2S)-6-acetamido-2-aminohexanoic acid* (True)
+  - **Counters**:
+    - **Compound 0**: *(2S)-2-aminopentanedioic acid* (False) *(Extra carboxyl group may interfere with Fe coordination)*
+    - **Compound 14**: *(2R)-2-amino-3-(1H-indol-3-yl)propanoic acid* (False) *(Amino group too close to the carboxyl group and bulky side chain may hinder coordination)*
+
+---
+
+- **Rule 3**: **Modifiers with aromatic rings substituted at the para position with strong electron-withdrawing groups (e.g., nitro, bromomethyl) result in a high Fe/Hf value.**
+
+  - **Explanation**: Electron-withdrawing groups increase the acidity of the aromatic ring's hydrogens, facilitating interactions with metal ions and enhancing Fe incorporation.
+  - **Supports**:
+    - **Compound 1**: *4-(bromomethyl)benzoic acid* (True)
+    - **Compound 20**: *4-nitrobenzoic acid* (True)
+    - **Compound 16**: *1,3-dioxo-2-benzofuran-5-carboxylic acid* (True)
+  - **Counters**:
+    - **Compound 19**: *4-formylbenzoic acid* (False) *(Formyl group is less electron-withdrawing compared to nitro or bromomethyl)*
+    - **Compound 22**: *4-methylbenzoic acid* (False) *(Methyl group is electron-donating, not withdrawing)*
+
+---
+
+- **Rule 4**: **Modifiers containing pyridine rings connected directly or via a short linker to a carboxylic acid result in a high Fe/Hf value.**
+
+  - **Explanation**: The lone pair on the pyridine nitrogen can coordinate with Fe ions, enhancing metal incorporation into the catalyst.
+  - **Supports**:
+    - **Compound 11**: *4-pyridin-4-ylbenzoic acid* (True)
+    - **Compound 24**: *4-pyridin-4-ylbutanoic acid* (True)
+  - **Counters**:
+    - **Compound 21**: *pyridine-3-carboxylic acid* (False) *(The carboxylic acid directly attached to the pyridine ring may hinder effective coordination due to steric factors or electronic distribution)*
+
+---
+
+- **Rule 5**: **Modifiers with long aliphatic chains (six or more carbons) bearing a hydroxyl group result in a high Fe/Hf value.**
+
+  - **Explanation**: The hydroxyl group combined with a flexible aliphatic chain can enhance interactions with Fe ions through hydrogen bonding and coordination, promoting metal incorporation.
+  - **Supports**:
+    - **Compound 29**: *7-hydroxyheptanoic acid* (True)
+  - **Counters**:
+    - **Compound 5**: *2-[[1,3-dihydroxy-2-(hydroxymethyl)propan-2-yl]oxy]acetic acid* (False) *(Multiple hydroxyl groups close together may form internal hydrogen bonds, reducing Fe coordination)*
+    - **Compound 8**: *(2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid* (False) *(Excessive hydroxylation can hinder metal interaction due to steric hindrance and strong intramolecular hydrogen bonding)*
+
+---
+
+- **Rule 6**: **Modifiers containing ether linkages or polyethylene glycol (PEG)-like segments (–O–(CH₂)ₙ–O–) result in a high Fe/Hf value.**
+
+  - **Explanation**: Ether oxygen atoms can act as coordinating sites for metal ions, and the flexible chains allow for effective interaction with Fe ions, enhancing metal incorporation.
+  - **Supports**:
+    - **Compound 10**: *2-[2-(2-methoxyethoxy)ethoxy]acetic acid* (True)
+    - **Compound 32**: *3-[2-(2-aminoethoxy)ethoxy]propanoic acid* (True)
+  - **Counters**: None observed in the dataset.
+
+---
+
+- **Rule 7**: **Modifiers with aromatic rings substituted with methoxy groups and adjacent carbonyl groups result in a high Fe/Hf value.**
+
+  - **Explanation**: Methoxy and carbonyl groups can coordinate with Fe ions through lone pairs on oxygen, and their placement on the aromatic ring can facilitate effective interaction with the metal.
+  - **Supports**:
+    - **Compound 25**: *4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid* (True)
+  - **Counters**:
+    - **Compound 6**: *5-(4-hydroxyphenyl)pentanoic acid* (False) *(Hydroxy groups may not favor Fe coordination as effectively as methoxy groups due to stronger hydrogen bonding)*
+    - **Compound 30**: *3-(4-hydroxyphenyl)propanoic acid* (False)
+
+---
+
+- **Rule 8**: **Modifiers containing multiple hydroxyl groups on aliphatic chains result in a low Fe/Hf value.**
+
+  - **Explanation**: Excessive hydroxylation leads to strong intramolecular and intermolecular hydrogen bonding, which can hinder the ability of the ligand to coordinate with Fe ions.
+  - **Supports**:
+    - **Compound 5**: *2-[[1,3-dihydroxy-2-(hydroxymethyl)propan-2-yl]oxy]acetic acid* (False)
+    - **Compound 8**: *(2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid* (False)
+
+---
+
+- **Rule 9**: **Modifiers that are simple aliphatic carboxylic acids without additional functional groups result in a low Fe/Hf value.**
+
+  - **Explanation**: The lack of functional groups capable of coordinating with Fe ions reduces the likelihood of metal incorporation into the catalyst.
+  - **Supports**:
+    - **Compound 4**: *octanoic acid* (False)
+    - **Compound 27**: *4-oxoheptanedioic acid* (False)
+
+---
+
+- **Rule 10**: **Modifiers containing fluorinated aliphatic chains result in a low Fe/Hf value.**
+
+  - **Explanation**: Fluorination increases hydrophobicity and decreases the electron density available for coordination, hindering interaction with Fe ions.
+  - **Supports**:
+    - **Compound 13**: *2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid* (False)
+    - **Compound 28**: *4-[(2,2,2-trifluoroacetyl)amino]butanoic acid* (False)
+
+---
+
+- **Rule 11**: **Modifiers with an amino group directly attached to an aromatic ring result in a low Fe/Hf value.**
+
+  - **Explanation**: Amino groups increase electron density on the aromatic ring, potentially leading to unfavorable interactions with Fe ions or competing interactions that hinder metal coordination.
+  - **Supports**:
+    - **Compound 3**: *4-aminobenzoic acid* (False)
+  - **Counters**:
+    - **Compound 12**: *(2S)-2-amino-3-phenylpropanoic acid* (True) *(Amino group is on an aliphatic chain, not directly attached to the aromatic ring, allowing for better Fe coordination)*
+
+---
+
+- **Rule 12**: **Modifiers containing phenolic hydroxyl groups on aromatic rings result in a low Fe/Hf value.**
+
+  - **Explanation**: Phenolic –OH groups can engage in strong intramolecular hydrogen bonding, reducing their availability to coordinate with Fe ions and thus decreasing metal incorporation.
+  - **Supports**:
+    - **Compound 6**: *5-(4-hydroxyphenyl)pentanoic acid* (False)
+    - **Compound 18**: *5-formyl-2-hydroxybenzoic acid* (False)
+    - **Compound 26**: *2-[(4-hydroxybenzoyl)amino]acetic acid* (False)
+    - **Compound 30**: *3-(4-hydroxyphenyl)propanoic acid* (False)
+
+---
+
+- **Rule 13**: **Modifiers containing heterocyclic rings such as indole or pyrazole result in a low Fe/Hf value.**
+
+  - **Explanation**: These heterocycles may not coordinate effectively with Fe ions due to electronic factors or steric hindrance, reducing metal incorporation.
+  - **Supports**:
+    - **Compound 14**: *(2R)-2-amino-3-(1H-indol-3-yl)propanoic acid* (False)
+    - **Compound 15**: *1H-pyrazole-4-carboxylic acid* (False)
+
+---
+
+- **Rule 14**: **Modifiers with formyl groups attached to aromatic rings result in a low Fe/Hf value.**
+
+  - **Explanation**: Formyl groups may not provide sufficient electron-withdrawing effect or may interfere with coordination sites, reducing interaction with Fe ions.
+  - **Supports**:
+    - **Compound 19**: *4-formylbenzoic acid* (False)
+    - **Compound 18**: *5-formyl-2-hydroxybenzoic acid* (False)
+
+---
+
+- **Rule 15**: **Modifiers with methyl groups substituted on the aromatic ring result in a low Fe/Hf value.**
+
+  - **Explanation**: Methyl groups are electron-donating, which can reduce the ability of the aromatic ring to interact with Fe ions, thus decreasing metal incorporation.
+  - **Supports**:
+    - **Compound 22**: *4-methylbenzoic acid* (False)
+
+---
+
+**End of Rules**
+
+---
+
+These rules collectively describe the relationship between specific functional groups or substructures in molecular modifiers and their effect on the Fe/Hf ratio in the catalyst. By considering combinations of functional groups and their chemical properties, these rules can predict whether a given modifier is likely to result in a high or low Fe/Hf value.---------------------------------------------------------------

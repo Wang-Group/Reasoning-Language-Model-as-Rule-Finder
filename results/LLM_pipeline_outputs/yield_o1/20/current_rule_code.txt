@@ -1,0 +1,239 @@
+def rule2matrix(smiles_list):
+    # Define SMARTS patterns for the rules, applying corrections from suggestions
+    
+    # Rule 1: α-amino dicarboxylic acids (aspartic acid, glutamic acid) lead to a high yield
+    # Suggestion 1: Remove stereochemistry constraints and generalize the pattern
+    # Define pattern for α-amino acids with a side-chain carboxyl group
+    alpha_amino_dicarboxylic_acid = Chem.MolFromSmarts('[NX3;H2,H1][CX4;H]([CX4])[CX3](=O)[O;H1,-]')
+    
+    # Rule 2: Aromatic carboxylic acids with EWGs or EDGs at the para position
+    # Suggestion 2: Use general patterns to represent EWGs and EDGs, ensure positional specificity
+    # General aromatic carboxylic acid
+    aromatic_carboxylic_acid = Chem.MolFromSmarts('c1ccccc1C(=O)[O;H1,-]')
+    # EWGs at para position
+    ewg_para = Chem.MolFromSmarts('c1cc([C](=O)[O;H1,-])ccc1[!#6;!H0]')  # Non-carbon heavy atom at para position
+    # EDGs at para position
+    edg_para = Chem.MolFromSmarts('c1cc([C](=O)[O;H1,-])ccc1[C,N,O]')  # Carbon, nitrogen, or oxygen atom at para position
+    
+    # Rule 3: Aliphatic carboxylic acids with amino or hydroxyl groups within two carbons lead to high yield
+    # Those with these groups more than four carbons away lead to low yield
+    # Suggestion 3: Update patterns to reflect exact carbon counts
+    amino_within_two_carbons = Chem.MolFromSmarts('[NX3;H2,H1][CX4][CX3](=O)[O;H1,-]')
+    hydroxyl_within_two_carbons = Chem.MolFromSmarts('[OX2H][CX4][CX3](=O)[O;H1,-]')
+    amino_beyond_four_carbons = Chem.MolFromSmarts('[CX4][CX4][CX4][CX4][NX3;H2,H1]')
+    hydroxyl_beyond_four_carbons = Chem.MolFromSmarts('[CX4][CX4][CX4][CX4][OX2H]')
+    
+    # Rule 4: Aromatic heterocyclic carboxylic acids with nitrogen atoms in the ring directly attached
+    # Suggestion 4: Modify pattern to ensure nitrogen is part of the ring and directly bonded to carboxyl group
+    aromatic_heterocycle_carboxylic_acid = Chem.MolFromSmarts('[nH0,r5,r6][c,r5,r6](=O)[O;H1,-]')
+    heterocycle_via_linker = Chem.MolFromSmarts('[nH0,r5,r6][CX4][c,r5,r6](=O)[O;H1,-]')
+    
+    # Rule 5: Perfluorinated alkyl chains or highly fluorinated groups lead to low yield
+    # Suggestion 5: Update pattern to detect perfluoroalkyl chains of any length
+    perfluorinated_alkyl_chain = Chem.MolFromSmarts('[CX4](F)(F)(F)[CX4](F)(F)F')  # Matches longer perfluoroalkyl chains
+    
+    # Rule 6: Aliphatic carboxylic acids without additional functional groups lead to high yield
+    # Suggestion 6: Refine exclusion pattern
+    aliphatic_carboxylic_acid_simple = Chem.MolFromSmarts('[CX4][CX3](=O)[O;H1,-]')
+    exclude_functional_groups = Chem.MolFromSmarts('[CX4;!$(C(=O)[O;H1,-])][!#6;!H0]')  # Exclude atoms other than carbon and hydrogen attached to the chain
+    
+    # Rule 7: Modifiers containing multiple ether linkages or polyether chains lead to low yield
+    # Suggestion 7: Use recursive pattern to match multiple ether linkages
+    polyether_chain = Chem.MolFromSmarts('[CX4;!$(C=O)]([OX2][CX4;!$(C=O)]){2,}')  # Two or more consecutive ether bonds
+    
+    # Rule 8: Bulky substituents near the carboxyl group lead to low yield; if bulky groups are distant, they have less impact
+    # Suggestion 8: Adjust patterns for bulky groups near and distant from carboxylate
+    bulky_near_carboxyl = Chem.MolFromSmarts('[CX3](=O)[O;H1,-][CX4][C](c1ccccc1)')
+    bulky_distant = Chem.MolFromSmarts('[CX3](=O)[O;H1,-][CX4][CX4][CX4][CX4][C](c1ccccc1)')
+    
+    # Rule 9: N-acylated amino acids or peptides lead to low yield
+    # Suggestion 9: Refine pattern to match N-acylated amino acids or peptides
+    n_acylated_amino_acid = Chem.MolFromSmarts('C(=O)N[CX4][CX3](=O)[O;H1,-]')
+    
+    # Rule 10: Aromatic carboxylic acids fused with oxygen-containing heterocycles lead to high yield
+    # Suggestion 10: Generalize pattern for oxygen heterocycles fused to aromatic systems
+    fused_oxygen_heterocycle = Chem.MolFromSmarts('[cH]1[cH][cH][cH][o][c]1C(=O)[O;H1,-]')
+    
+    # Rule 11: Electron-rich aromatic systems connected via flexible aliphatic linkers
+    # Suggestion 11: Differentiate between short and long aliphatic linkers
+    electron_rich_aromatic = Chem.MolFromSmarts('c[O,N,S]')  # Aromatic ring with O, N, or S attached
+    flexible_linker_short = Chem.MolFromSmarts('c[CX4][CX4][CX3](=O)[O;H1,-]')  # Short linker (less than 4 carbons)
+    flexible_linker_long = Chem.MolFromSmarts('c[CX4][CX4][CX4][CX4][CX3](=O)[O;H1,-]')  # Long linker (4 or more carbons)
+    
+    # Rule 12: Thiol groups proximal to carboxyl group lead to high yield; aromatic thiols lead to low yield
+    # Suggestion 12: Distinguish between aliphatic and aromatic thiols
+    thiol_proximal = Chem.MolFromSmarts('[SX2H][CX4][CX3](=O)[O;H1,-]')
+    aromatic_thiol = Chem.MolFromSmarts('c[SX2H]')
+    
+    # Rule 13: Modifiers containing aldehyde groups lead to low yield
+    # Suggestion 13: Modify pattern to match aldehydes attached to aromatic rings
+    aldehyde_group = Chem.MolFromSmarts('c[CX3H1](=O)')
+    
+    # Rule 14: Modifiers with multiple hydroxyl groups proximal to the carboxyl group lead to high yield
+    # Suggestion 14: Adjust pattern to detect multiple proximal hydroxyl groups
+    multiple_hydroxyls_proximal = Chem.MolFromSmarts('[OX2H][CX4][OX2H][CX4][CX3](=O)[O;H1,-]')
+    
+    # Initialize the feature matrix
+    feature_matrix = []
+    
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            feature_matrix.append([0]*14)
+            continue
+        row = []
+        
+        # Rule 1
+        try:
+            if mol.HasSubstructMatch(alpha_amino_dicarboxylic_acid):
+                row.append(1)
+            else:
+                row.append(0)
+        except:
+            row.append(0)
+        
+        # Rule 2
+        try:
+            if mol.HasSubstructMatch(ewg_para):
+                row.append(1)
+            elif mol.HasSubstructMatch(edg_para):
+                row.append(-1)
+            else:
+                row.append(0)
+        except:
+            row.append(0)
+        
+        # Rule 3
+        try:
+            if mol.HasSubstructMatch(amino_within_two_carbons) or mol.HasSubstructMatch(hydroxyl_within_two_carbons):
+                row.append(1)
+            elif mol.HasSubstructMatch(amino_beyond_four_carbons) or mol.HasSubstructMatch(hydroxyl_beyond_four_carbons):
+                row.append(-1)
+            else:
+                row.append(0)
+        except:
+            row.append(0)
+        
+        # Rule 4
+        try:
+            if mol.HasSubstructMatch(aromatic_heterocycle_carboxylic_acid):
+                row.append(1)
+            elif mol.HasSubstructMatch(heterocycle_via_linker):
+                row.append(-1)
+            else:
+                row.append(0)
+        except:
+            row.append(0)
+        
+        # Rule 5
+        try:
+            if mol.HasSubstructMatch(perfluorinated_alkyl_chain):
+                row.append(-1)
+            else:
+                row.append(0)
+        except:
+            row.append(0)
+        
+        # Rule 6
+        try:
+            if mol.HasSubstructMatch(aliphatic_carboxylic_acid_simple):
+                if not mol.HasSubstructMatch(exclude_functional_groups):
+                    row.append(1)
+                else:
+                    row.append(0)
+            else:
+                row.append(0)
+        except:
+            row.append(0)
+        
+        # Rule 7
+        try:
+            if mol.HasSubstructMatch(polyether_chain):
+                row.append(-1)
+            else:
+                row.append(0)
+        except:
+            row.append(0)
+        
+        # Rule 8
+        try:
+            if mol.HasSubstructMatch(bulky_near_carboxyl):
+                row.append(-1)
+            elif mol.HasSubstructMatch(bulky_distant):
+                row.append(1)
+            else:
+                row.append(0)
+        except:
+            row.append(0)
+        
+        # Rule 9
+        try:
+            if mol.HasSubstructMatch(n_acylated_amino_acid):
+                row.append(-1)
+            else:
+                row.append(0)
+        except:
+            row.append(0)
+        
+        # Rule 10
+        try:
+            if mol.HasSubstructMatch(fused_oxygen_heterocycle):
+                row.append(1)
+            else:
+                row.append(0)
+        except:
+            row.append(0)
+        
+        # Rule 11
+        try:
+            if mol.HasSubstructMatch(electron_rich_aromatic):
+                if mol.HasSubstructMatch(flexible_linker_long):
+                    row.append(1)
+                elif mol.HasSubstructMatch(flexible_linker_short):
+                    row.append(-1)
+                else:
+                    row.append(0)
+            else:
+                row.append(0)
+        except:
+            row.append(0)
+        
+        # Rule 12
+        try:
+            if mol.HasSubstructMatch(thiol_proximal):
+                row.append(1)
+            elif mol.HasSubstructMatch(aromatic_thiol):
+                row.append(-1)
+            else:
+                row.append(0)
+        except:
+            row.append(0)
+        
+        # Rule 13
+        try:
+            if mol.HasSubstructMatch(aldehyde_group):
+                row.append(-1)
+            else:
+                row.append(0)
+        except:
+            row.append(0)
+        
+        # Rule 14
+        try:
+            # For multiple hydroxyl groups proximal to carboxyl group, we need to check for matches
+            hydroxyl_matches = mol.GetSubstructMatches(multiple_hydroxyls_proximal)
+            if hydroxyl_matches:
+                row.append(1)
+            else:
+                row.append(0)
+        except:
+            row.append(0)
+        
+        # Append the row to the feature matrix
+        feature_matrix.append(row)
+    
+    # Create DataFrame with results
+    df = pd.DataFrame(feature_matrix, columns=[f'Rule {i}' for i in range(1, 15)])
+    return df

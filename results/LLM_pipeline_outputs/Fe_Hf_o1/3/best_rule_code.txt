@@ -1,0 +1,163 @@
+def rule2matrix(smiles_list):
+    # Define SMARTS patterns according to suggestions
+    
+    # For Rule 3, generate patterns programmatically
+    ewg_smarts_list = ['[N+](=O)[O-]', '[CH2][Br]']
+    rule3_patterns_smarts = []
+    for ewg in ewg_smarts_list:
+        smarts = f'c1ccc({ewg})cc1'
+        rule3_patterns_smarts.append(smarts)
+    
+    # For Rule 4, define patterns for pyridine connected to carboxylic acid directly or via short linker
+    rule4_patterns_smarts = ['n1ccccc1C(=O)O', 'n1ccccc1CC(=O)O', 'n1ccccc1CCC(=O)O']
+    
+    rules = [
+        {
+            'number': 1,
+            'description': 'Modifiers containing thiol groups (–SH) result in a high Fe/Hf value.',
+            'patterns': ['[S;H1]'],  # Suggestion 1
+            'prediction': 1
+        },
+        {
+            'number': 2,
+            'description': 'Aliphatic amino acids or aliphatic carboxylic acids with a primary amino group located at least four carbons away from the carboxyl group result in a high Fe/Hf value.',
+            'patterns': ['[C;X3](=O)[O;X2H][C;X4][C;X4][C;X4][C;X4][N;X3;H2]'],  # Suggestion 2
+            'prediction': 1
+        },
+        {
+            'number': 3,
+            'description': 'Modifiers with aromatic rings substituted at the para position with strong electron-withdrawing groups (e.g., nitro, bromomethyl) result in a high Fe/Hf value.',
+            'patterns': rule3_patterns_smarts,  # Generated from suggestion 3
+            'prediction': 1
+        },
+        {
+            'number': 4,
+            'description': 'Modifiers containing pyridine rings connected directly or via a short linker to a carboxylic acid result in a high Fe/Hf value.',
+            'patterns': rule4_patterns_smarts,
+            'prediction': 1
+        },
+        {
+            'number': 5,
+            'description': 'Modifiers with long aliphatic chains (six or more carbons) bearing a hydroxyl group result in a high Fe/Hf value.',
+            'patterns': ['[C][C][C][C][C][C][O;H1]'],  # Suggestion 4
+            'prediction':1
+        },
+        {
+            'number':6,
+            'description': 'Modifiers containing ether linkages or polyethylene glycol (PEG)-like segments (–O–(CH₂)ₙ–O–) result in a high Fe/Hf value.',
+            'patterns': ['[C][O][C]', '[C][O][C][O][C]'],
+            'prediction':1
+        },
+        {
+            'number':7,
+            'description':'Modifiers with aromatic rings substituted with methoxy groups and adjacent carbonyl groups result in a high Fe/Hf value.',
+            'patterns':['[c][OCH3]', '[c][CX3](=O)[#6]'],
+            'prediction':1
+        },
+        {
+            'number':8,
+            'description':'Modifiers containing multiple hydroxyl groups on aliphatic chains result in a low Fe/Hf value.',
+            'patterns':[],
+            'count_function': lambda mol: len(mol.GetSubstructMatches(Chem.MolFromSmarts('[OX2H][CX4H]'))),
+            'count_threshold':2,
+            'prediction':-1
+        },
+        {
+            'number':9,
+            'description':'Modifiers that are simple aliphatic carboxylic acids without additional functional groups result in a low Fe/Hf value.',
+            'patterns':['[CX3](=O)[OX2H1][CX4][CX4]'],
+            'exclude_patterns':['[!#6;!#1]'],
+            'prediction':-1
+        },
+        {
+            'number':10,
+            'description':'Modifiers containing fluorinated aliphatic chains result in a low Fe/Hf value.',
+            'patterns':['[CX4][CX4]([F])[CX4]([F])[CX4]([F])[CX4]'],
+            'prediction':-1
+        },
+        {
+            'number':11,
+            'description':'Modifiers with an amino group directly attached to an aromatic ring result in a low Fe/Hf value.',
+            'patterns':['[N;X3;H2][c]'],  # Suggestion 6
+            'prediction':-1
+        },
+        {
+            'number':12,
+            'description':'Modifiers containing phenolic hydroxyl groups on aromatic rings result in a low Fe/Hf value.',
+            'patterns':['[c][OX2H]'],
+            'prediction':-1
+        },
+        {
+            'number':13,
+            'description':'Modifiers containing heterocyclic rings such as indole or pyrazole result in a low Fe/Hf value.',
+            'patterns':['c1cc2ccccc2[nH]1', 'c1cn[nH]c1'],  # Suggestion 7
+            'prediction':-1
+        },
+        {
+            'number':14,
+            'description':'Modifiers with formyl groups attached to aromatic rings result in a low Fe/Hf value.',
+            'patterns':['[c][CX3H]=O'],
+            'prediction':-1
+        },
+        {
+            'number':15,
+            'description':'Modifiers with methyl groups substituted on the aromatic ring result in a low Fe/Hf value.',
+            'patterns':['[c][CH3]'],
+            'prediction':-1
+        }
+    ]
+
+    # Compile the SMARTS patterns
+    for rule in rules:
+        compiled_patterns = []
+        for smarts in rule.get('patterns', []):
+            pat = Chem.MolFromSmarts(smarts)
+            if pat is not None:
+                compiled_patterns.append(pat)
+            else:
+                # Handle invalid SMARTS pattern
+                pass
+        rule['compiled_patterns'] = compiled_patterns
+        if 'exclude_patterns' in rule:
+            compiled_exclude_patterns = []
+            for smarts in rule['exclude_patterns']:
+                pat = Chem.MolFromSmarts(smarts)
+                if pat is not None:
+                    compiled_exclude_patterns.append(pat)
+            rule['compiled_exclude_patterns'] = compiled_exclude_patterns
+    
+    results = []
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = False
+                if 'count_function' in rule:
+                    count = rule['count_function'](mol)
+                    if count >= rule['count_threshold']:
+                        match = True
+                else:
+                    # Check for matches based on the compiled patterns
+                    for pat in rule['compiled_patterns']:
+                        if mol.HasSubstructMatch(pat):
+                            match = True
+                            break
+                # For rules with exclude patterns
+                if 'compiled_exclude_patterns' in rule and match:
+                    for pat in rule['compiled_exclude_patterns']:
+                        if mol.HasSubstructMatch(pat):
+                            match = False
+                            break
+                row.append(rule['prediction'] if match else 0)
+            except Exception as e:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule['number']}' for rule in rules])
+    return df

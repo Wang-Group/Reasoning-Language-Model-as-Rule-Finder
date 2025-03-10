@@ -1,0 +1,167 @@
+def rule2matrix(smiles_list):
+    # Define the rules with their associated SMARTS patterns and predictions
+    rules = [
+        {
+            'number': 1,
+            'description': 'High Fe/Hf value: Linear aliphatic amino acids with amino (-NH2) and carboxylic acid (-COOH) groups at opposite ends of the chain, chain length of five or more carbons.',
+            'patterns': [
+                # Linear chain of five or more carbons with amino and carboxylic acid groups at the ends
+                'NCCCCCC(=O)O',  # Simplified pattern for six-carbon chain
+                'NCCCCC(=O)O',   # Five-carbon chain
+                # General pattern using recursive SMARTS for chains of five or more carbons
+                '[NX3;H2][CH2]{5,}[CX3](=O)[OX2H1]',
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 2,
+            'description': 'High Fe/Hf value: Modifiers containing sulfur-based functional groups, such as thiol (-SH) or thioether (-S-).',
+            'patterns': [
+                '[#16X2H]',  # Thiol group
+                '[#16X2][#6]',  # Thioether group
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 3,
+            'description': 'High Fe/Hf value: Aromatic carboxylic acids with strong electron-withdrawing groups at the para position.',
+            'patterns': [
+                # Para-substituted aromatic carboxylic acids with electron-withdrawing groups
+                'c1ccc(cc1)[CX3](=O)[OX2H1]',  # General aromatic carboxylic acid
+                # Electron-withdrawing groups at para position
+                'c1cc([NX3](=O)=O)ccc1[CX3](=O)[OX2H1]',  # Nitro group
+                'c1cc(Br)ccc1[CX3](=O)[OX2H1]',           # Bromo group
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 4,
+            'description': 'High Fe/Hf value: Modifiers containing pyridine rings with nitrogen atoms available for coordination.',
+            'patterns': [
+                'c1ccncc1',  # Pyridine ring
+                '[n]1ccccc1[CX3](=O)[OX2H1]',  # Pyridine connected to carboxylic acid
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 5,
+            'description': 'Low Fe/Hf value: Aromatic carboxylic acids with strong electron-donating groups at ortho or para positions.',
+            'patterns': [
+                # Aromatic carboxylic acids with electron-donating groups
+                '[OX2H][c]',  # Phenol group
+                '[NX3;H2][c]',  # Aromatic amine
+                'c1cc([OX2H])ccc1[CX3](=O)[OX2H1]',  # Hydroxyl at para position
+                'c1cc([NX3;H2])ccc1[CX3](=O)[OX2H1]',  # Amino at para position
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 6,
+            'description': 'Low Fe/Hf value: Modifiers with multiple hydroxyl groups adjacent to the carboxylic acid group.',
+            'patterns': [
+                '[CX4H](O)[CX4H](O)[CX3](=O)[OX2H1]',  # Adjacent hydroxyl groups
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 7,
+            'description': 'Low Fe/Hf value: Simple aliphatic carboxylic acids without additional coordinating functional groups.',
+            'patterns': [
+                '[CX3](=O)[OX2H1]',  # Carboxylic acid group
+                '[C][C][C][C][C][C](=O)[O]',  # Aliphatic chain
+            ],
+            'exclude_patterns': [
+                '[N,S,O]',  # Exclude presence of other heteroatoms
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 8,
+            'description': 'Low Fe/Hf value: Modifiers with highly fluorinated aliphatic chains.',
+            'patterns': [
+                '[C](F)(F)(F)',  # Trifluoromethyl group
+                '[C](F)(F)F',
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 9,
+            'description': 'High Fe/Hf value: Modifiers containing long flexible chains with multiple ether linkages (-O-) and a terminal carboxylic acid.',
+            'patterns': [
+                '[OX2][CX4][OX2][CX4][OX2][CX4][OX2][CX3](=O)[OX2H1]',  # Multiple ether linkages ending with carboxylic acid
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 10,
+            'description': 'Low Fe/Hf value: Modifiers with aldehyde (-CHO) or ketone (C=O) groups adjacent to the carboxylic acid.',
+            'patterns': [
+                '[CX3](=O)[CX3](=O)[OX2H1]',  # Ketone adjacent to carboxylic acid
+                '[CX3H1](=O)[CX3](=O)[OX2H1]',  # Aldehyde adjacent to carboxylic acid
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 11,
+            'description': 'Low Fe/Hf value: Modifiers containing amino acids with bulky aromatic side chains.',
+            'patterns': [
+                '[NX3;H2][CX4][CX3](=O)[OX2H1]',  # Amino acid backbone
+                'c1ccccc1',  # Aromatic ring (phenyl group)
+            ],
+            'prediction': -1
+        },
+    ]
+
+    # Compile SMARTS patterns
+    for rule in rules:
+        try:
+            rule['compiled_patterns'] = [Chem.MolFromSmarts(pat) for pat in rule['patterns']]
+            if 'exclude_patterns' in rule:
+                rule['compiled_exclude_patterns'] = [Chem.MolFromSmarts(pat) for pat in rule['exclude_patterns']]
+        except Exception as e:
+            # Handle compilation errors
+            rule['compiled_patterns'] = []
+            rule['compiled_exclude_patterns'] = []
+
+    # Initialize results list
+    results = []
+
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = False
+                # Check exclude patterns first
+                if 'compiled_exclude_patterns' in rule:
+                    for pat in rule['compiled_exclude_patterns']:
+                        if mol.HasSubstructMatch(pat):
+                            match = False
+                            break
+                    else:
+                        match = True
+                else:
+                    match = True
+                # Check if all patterns are matched
+                if match:
+                    for pat in rule['compiled_patterns']:
+                        if not mol.HasSubstructMatch(pat):
+                            match = False
+                            break
+                # Assign prediction based on match
+                if match:
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule["number"]}' for rule in rules])
+    return df

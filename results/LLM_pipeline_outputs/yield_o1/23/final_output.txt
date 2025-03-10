@@ -1,0 +1,3127 @@
+
+    Target Name: yield
+    GPT Model: o1-preview-2024-09-12
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+- **Rule 1**: Modifiers containing an **aldehyde group (–CHO) directly attached to an aromatic ring** are associated with **low yield**.
+  - *Examples*: _4-formylbenzoic acid_, _5-formyl-2-hydroxybenzoic acid_
+
+- **Rule 2**: Modifiers containing an **amino group (–NH₂) directly attached to an aromatic ring** are associated with **high yield**.
+  - *Example*: _4-aminobenzoic acid_
+
+- **Rule 3**: Modifiers with a **sulfanyl (–SH) group attached to an aliphatic chain** are associated with **high yield**; whereas those with the **sulfanyl group attached directly to an aromatic ring** are associated with **low yield**.
+  - *High yield example*: _3-sulfanylpropanoic acid_
+  - *Low yield example*: _4-sulfanylbenzoic acid_
+
+- **Rule 4**: Modifiers that are **amino acids with aliphatic side chains** produce **high yield** if the side chain has **five or fewer carbons**, and **low yield** if it has **six or more carbons**.
+  - *High yield examples*: _(2S)-2-aminobutanedioic acid_, _(2S)-2-aminopentanedioic acid_, _5-aminopentanoic acid_
+  - *Low yield examples*: _(2S)-6-acetamido-2-aminohexanoic acid_, _7-aminoheptanoic acid_, _8-aminooctanoic acid_
+
+- **Rule 5**: Modifiers containing **multiple hydroxyl (–OH) groups (three or more) on an aliphatic chain** are associated with **high yield**.
+  - *Example*: _(2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid_
+
+- **Rule 6**: Modifiers containing **bulky ether chains with few or no hydroxyl groups** are associated with **low yield**.
+  - *Examples*: _2-[2-(2-methoxyethoxy)ethoxy]acetic acid_, _3-[2-(2-aminoethoxy)ethoxy]propanoic acid_
+
+- **Rule 7**: Modifiers containing an **indole ring** are associated with **high yield**.
+  - *Example*: _(2R)-2-amino-3-(1H-indol-3-yl)propanoic acid_
+
+- **Rule 8**: Modifiers containing a **pyrazole ring** are associated with **high yield**.
+  - *Example*: _1H-pyrazole-4-carboxylic acid_
+
+- **Rule 9**: Modifiers where a **pyridine ring is connected via an alkyl chain to a carboxylic acid group** are associated with **high yield**; whereas modifiers where the **pyridine ring is directly attached to a benzene ring** are associated with **low yield**.
+  - *High yield example*: _4-pyridin-4-ylbutanoic acid_
+  - *Low yield example*: _4-pyridin-4-ylbenzoic acid_
+
+- **Rule 10**: Modifiers with a **phenolic hydroxyl group attached via an aliphatic chain longer than three carbons** are associated with **high yield**; those with a **shorter chain (three carbons or fewer)** are associated with **low yield**.
+  - *High yield example*: _5-(4-hydroxyphenyl)pentanoic acid_
+  - *Low yield example*: _3-(4-hydroxyphenyl)propanoic acid_
+
+- **Rule 11**: Modifiers containing a **perfluoroalkyl chain or fluorinated chain** linked to a **carboxylic acid group** are associated with **low yield**.
+  - *Examples*: _2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid_, _4-[(2,2,2-trifluoroacetyl)amino]butanoic acid_
+
+- **Rule 12**: Modifiers containing a **bromomethyl group attached to an aromatic ring** are associated with **high yield**.
+  - *Example*: _4-(bromomethyl)benzoic acid_
+
+- **Rule 13**: Modifiers that are **medium-chain aliphatic carboxylic acids (chain length of eight carbons)** are associated with **high yield**.
+  - *Example*: _octanoic acid_
+
+- **Rule 14**: Modifiers containing an **electron-withdrawing nitro group (–NO₂) attached to an aromatic ring** are associated with **high yield**.
+  - *Example*: _4-nitrobenzoic acid_
+
+**End of Rules**---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+Rule 1,Rule 2,Rule 3,Rule 4,Rule 5,Rule 6,Rule 7,Rule 8,Rule 9,Rule 10,Rule 11,Rule 12,Rule 13,Rule 14
+0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,1,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,1,0,0,0,0,0,0,0,0,0
+0,0,-1,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,-1,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,1,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0,0,0,0,0
+-1,0,0,0,0,0,0,0,0,0,0,0,0,0
+-1,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,1
+0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,-1,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0
+
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.6571428571428571; Test Accuracy: 0.0
+    Train Support: 0.047619047619047616; Test Support: 0.0
+    Train Confidence: 1.0; Test Confidence: 0.5
+    Train Lift: 2.011165577342048; Test Lift: NONE
+    Train Leverage: 0.02380952380952381; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    Current Rule Code:
+def rule2matrix(smiles_list):
+    # Define the rules with their associated patterns and predictions
+    rules = [
+        {
+            'number': 1,
+            'description': 'Modifiers containing an aldehyde group (-CHO) directly attached to an aromatic ring are associated with low yield.',
+            'patterns': ['[c][CX3H1](=O)'],  # Aldehyde attached to aromatic ring
+            'prediction': -1
+        },
+        {
+            'number': 2,
+            'description': 'Modifiers containing an amino group (-NH2) directly attached to an aromatic ring are associated with high yield.',
+            'patterns': ['[c][NX3H2]'],  # Amino group attached to aromatic ring
+            'prediction': 1
+        },
+        {
+            'number': 3,
+            'description': 'Modifiers with a sulfanyl (-SH) group attached to an aliphatic chain are associated with high yield; whereas those with the sulfanyl group attached directly to an aromatic ring are associated with low yield.',
+            'patterns': {
+                'high_yield': ['[!r][CX4;!R][SX2H]'],  # Aliphatic SH group
+                'low_yield': ['[c][SX2H]']  # Aromatic SH group
+            },
+            'prediction': None  # Prediction will be set in the code
+        },
+        {
+            'number': 4,
+            'description': 'Modifiers that are amino acids with aliphatic side chains produce high yield if the side chain has five or fewer carbons, and low yield if it has six or more carbons.',
+            'patterns': [],  # Custom function needed
+            'function': 'amino_acid_side_chain_length',
+            'prediction': None  # Determined by function
+        },
+        {
+            'number': 5,
+            'description': 'Modifiers containing multiple hydroxyl (-OH) groups (three or more) on an aliphatic chain are associated with high yield.',
+            'patterns': ['[OX2H][CX4;!R]'],  # Hydroxyl group on aliphatic carbon
+            'count_threshold': {'[OX2H][CX4;!R]': 3},  # At least 3 hydroxyl groups
+            'prediction': 1
+        },
+        {
+            'number': 6,
+            'description': 'Modifiers containing bulky ether chains with few or no hydroxyl groups are associated with low yield.',
+            'patterns': ['[#6][OX2][#6]'],  # Ether linkage
+            'exclude_patterns': ['[OX2H]'],  # Exclude if hydroxyl groups are present
+            'count_threshold': {'[#6][OX2][#6]': 3},  # Bulky ether chain (3 or more ether linkages)
+            'prediction': -1
+        },
+        {
+            'number': 7,
+            'description': 'Modifiers containing an indole ring are associated with high yield.',
+            'patterns': ['c1cc2c(cc1)[nH]c2'],  # Indole ring
+            'prediction': 1
+        },
+        {
+            'number': 8,
+            'description': 'Modifiers containing a pyrazole ring are associated with high yield.',
+            'patterns': ['[nH]1cccn1'],  # Pyrazole ring
+            'prediction': 1
+        },
+        {
+            'number': 9,
+            'description': 'Modifiers where a pyridine ring is connected via an alkyl chain to a carboxylic acid group are associated with high yield; whereas modifiers where the pyridine ring is directly attached to a benzene ring are associated with low yield.',
+            'patterns': {
+                'high_yield': ['[n]1cccc1CC[CX3](=O)[OX1H]'],  # Pyridine connected via alkyl chain to COOH
+                'low_yield': ['[n]1cccc1[c]1ccccc1']  # Pyridine directly attached to benzene ring
+            },
+            'prediction': None  # Prediction will be set in the code
+        },
+        {
+            'number': 10,
+            'description': 'Modifiers with a phenolic hydroxyl group attached via an aliphatic chain longer than three carbons are associated with high yield; those with a shorter chain (three carbons or fewer) are associated with low yield.',
+            'patterns': [],  # Custom function needed
+            'function': 'phenolic_hydroxyl_chain_length',
+            'prediction': None  # Determined by function
+        },
+        {
+            'number': 11,
+            'description': 'Modifiers containing a perfluoroalkyl chain or fluorinated chain linked to a carboxylic acid group are associated with low yield.',
+            'patterns': ['[CX4]([F])[F]', '[CX4]([F])([F])[F]'],  # Fluorinated groups
+            'prediction': -1
+        },
+        {
+            'number': 12,
+            'description': 'Modifiers containing a bromomethyl group attached to an aromatic ring are associated with high yield.',
+            'patterns': ['[c][CH2Br]'],  # Bromomethyl attached to aromatic ring
+            'prediction': 1
+        },
+        {
+            'number': 13,
+            'description': 'Modifiers that are medium-chain aliphatic carboxylic acids (chain length of eight carbons) are associated with high yield.',
+            'patterns': ['CCCCCCCC[CX3](=O)[OX1H]'],  # Aliphatic chain with 8 carbons ending with COOH
+            'prediction': 1
+        },
+        {
+            'number': 14,
+            'description': 'Modifiers containing an electron-withdrawing nitro group (-NO2) attached to an aromatic ring are associated with high yield.',
+            'patterns': ['[c][NX3](=O)[OX1]'],  # Nitro group on aromatic ring
+            'prediction': 1
+        },
+    ]
+    
+    # Compile patterns
+    for rule in rules:
+        if 'patterns' in rule and isinstance(rule['patterns'], dict):
+            compiled_high_patterns = [Chem.MolFromSmarts(pat) for pat in rule['patterns'].get('high_yield', [])]
+            compiled_low_patterns = [Chem.MolFromSmarts(pat) for pat in rule['patterns'].get('low_yield', [])]
+            rule['compiled_high_patterns'] = compiled_high_patterns
+            rule['compiled_low_patterns'] = compiled_low_patterns
+        elif 'patterns' in rule:
+            compiled_patterns = [Chem.MolFromSmarts(pat) for pat in rule['patterns']]
+            rule['compiled_patterns'] = compiled_patterns
+        if 'exclude_patterns' in rule:
+            compiled_exclude_patterns = [Chem.MolFromSmarts(pat) for pat in rule['exclude_patterns']]
+            rule['compiled_exclude_patterns'] = compiled_exclude_patterns
+    # Process each SMILES string
+    results = []
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = False
+                # If the rule uses a custom function to determine the prediction
+                if 'function' in rule:
+                    if rule['function'] == 'amino_acid_side_chain_length':
+                        # Custom function to determine the side chain length of amino acids
+                        # This requires identifying the amino acid backbone and side chain
+                        # Placeholder implementation
+                        prediction = 0  # Not implemented due to complexity
+                    elif rule['function'] == 'phenolic_hydroxyl_chain_length':
+                        # Custom function to determine the chain length between phenolic OH and COOH
+                        # Placeholder implementation
+                        prediction = 0  # Not implemented due to complexity
+                    else:
+                        prediction = 0
+                    row.append(prediction)
+                    continue
+                if 'compiled_high_patterns' in rule:
+                    # For rules with high_yield and low_yield patterns
+                    high_match = any(mol.HasSubstructMatch(pat) for pat in rule['compiled_high_patterns'])
+                    low_match = any(mol.HasSubstructMatch(pat) for pat in rule['compiled_low_patterns'])
+                    if high_match:
+                        row.append(1)
+                    elif low_match:
+                        row.append(-1)
+                    else:
+                        row.append(0)
+                    continue
+                matches = []
+                for pat in rule['compiled_patterns']:
+                    if mol.HasSubstructMatch(pat):
+                        matches.append(pat)
+                if matches:
+                    # Check exclude patterns if any
+                    exclude = False
+                    if 'compiled_exclude_patterns' in rule:
+                        for epat in rule['compiled_exclude_patterns']:
+                            if mol.HasSubstructMatch(epat):
+                                exclude = True
+                                break
+                    if exclude:
+                        row.append(0)
+                        continue
+                    # If a count threshold is specified
+                    if 'count_threshold' in rule:
+                        counts = sum(len(mol.GetSubstructMatches(pat)) for pat in matches)
+                        threshold = list(rule['count_threshold'].values())[0]
+                        if counts >= threshold:
+                            match = True
+                        else:
+                            match = False
+                    else:
+                        match = True
+                    if match:
+                        row.append(rule['prediction'])
+                    else:
+                        row.append(0)
+                else:
+                    row.append(0)
+            except:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule["number"]}' for rule in rules])
+    return df
+
+--------------------------------------------------
+    Target Name: yield
+    GPT Model: o1-preview-2024-09-12
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+- **Rule 1**: Modifiers containing an **aldehyde group (–CHO) directly attached to an aromatic ring** are associated with **low yield**.
+  - *Examples*: _4-formylbenzoic acid_, _5-formyl-2-hydroxybenzoic acid_
+
+- **Rule 2**: Modifiers containing an **amino group (–NH₂) directly attached to an aromatic ring** are associated with **high yield**.
+  - *Example*: _4-aminobenzoic acid_
+
+- **Rule 3**: Modifiers with a **sulfanyl (–SH) group attached to an aliphatic chain** are associated with **high yield**; whereas those with the **sulfanyl group attached directly to an aromatic ring** are associated with **low yield**.
+  - *High yield example*: _3-sulfanylpropanoic acid_
+  - *Low yield example*: _4-sulfanylbenzoic acid_
+
+- **Rule 4**: Modifiers that are **amino acids with aliphatic side chains containing five or fewer carbons** produce **high yield**; those with **longer chains (six or more carbons)** or **aromatic, bulky, or branched side chains** produce **low yield**.
+  - *High yield examples*: _(2S)-2-aminobutanedioic acid_, _(2S)-2-aminopentanedioic acid_, _5-aminopentanoic acid_
+  - *Low yield examples*: _(2S)-6-acetamido-2-aminohexanoic acid_, _7-aminoheptanoic acid_, _8-aminooctanoic acid_, _(2S)-2-amino-3-phenylpropanoic acid_
+
+- **Rule 5**: Modifiers containing **multiple hydroxyl (–OH) groups (three or more) on an aliphatic chain** are associated with **high yield**.
+  - *Example*: _(2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid_
+
+- **Rule 6**: Modifiers containing **bulky ether chains with few or no hydroxyl groups** are associated with **low yield**.
+  - *Examples*: _2-[2-(2-methoxyethoxy)ethoxy]acetic acid_, _3-[2-(2-aminoethoxy)ethoxy]propanoic acid_
+
+- **Rule 7**: Modifiers containing **aromatic heterocycles (e.g., indole, pyrazole) attached to a carboxylic acid group** are associated with **high yield**.
+  - *Examples*: _(2R)-2-amino-3-(1H-indol-3-yl)propanoic acid_, _1H-pyrazole-4-carboxylic acid_
+
+- **Rule 8**: Modifiers where a **pyridine ring is connected via an alkyl chain to a carboxylic acid group** are associated with **high yield**; whereas modifiers where the **pyridine ring is directly attached to an aromatic ring** are associated with **low yield**.
+  - *High yield example*: _4-pyridin-4-ylbutanoic acid_
+  - *Low yield example*: _4-pyridin-4-ylbenzoic acid_
+
+- **Rule 9**: Modifiers containing **phenolic hydroxyl groups attached via an aliphatic chain longer than three carbons** are associated with **high yield**; those with a **shorter chain (three carbons or fewer)** are associated with **low yield**.
+  - *High yield example*: _5-(4-hydroxyphenyl)pentanoic acid_
+  - *Low yield example*: _3-(4-hydroxyphenyl)propanoic acid_
+
+- **Rule 10**: Modifiers containing **strong electron-withdrawing groups (e.g., nitro, bromo) attached to an aromatic ring** are associated with **high yield**; those with **electron-donating groups (e.g., methyl, methoxy)** attached to an aromatic ring are associated with **low yield**.
+  - *High yield examples*: _4-nitrobenzoic acid_, _4-(bromomethyl)benzoic acid_
+  - *Low yield examples*: _4-methylbenzoic acid_, _2-[(4-hydroxybenzoyl)amino]acetic acid_
+
+- **Rule 11**: Modifiers containing a **perfluoroalkyl chain or fluorinated group** linked to a **carboxylic acid group** are associated with **low yield**.
+  - *Examples*: _2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid_, _4-[(2,2,2-trifluoroacetyl)amino]butanoic acid_
+
+- **Rule 12**: Modifiers that are **unsubstituted medium-chain aliphatic carboxylic acids with a chain length of eight carbons** are associated with **high yield**.
+  - *Example*: _octanoic acid_
+
+**End of Rules**---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+Rule 1,Rule 2,Rule 3.1,Rule 3.2,Rule 4.1,Rule 4.2,Rule 5,Rule 6,Rule 7,Rule 8.1,Rule 8.2,Rule 9.1,Rule 9.2,Rule 10.1,Rule 10.2,Rule 11,Rule 12
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+0,0,0,-1,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,-1,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,-1,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.6285714285714286; Test Accuracy: 0.0
+    Train Support: 0.045714285714285714; Test Support: 0.0
+    Train Confidence: 1.0; Test Confidence: 0.5
+    Train Lift: 2.0130718954248366; Test Lift: NONE
+    Train Leverage: 0.02285714285714286; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    Current Rule Code:
+def rule2matrix(smiles_list):
+    # Define required functions for rules
+
+    def check_amino_acid_side_chain_length(mol, max_length=None, min_length=None):
+        # Function to check amino acid side chain length
+        # Find the alpha carbon (connected to both amino and carboxylic acid group)
+        amino_acid_pattern = Chem.MolFromSmarts('[NX3H2][CX4H]([*])[CX3](=O)[OX1H]')
+        matches = mol.GetSubstructMatches(amino_acid_pattern)
+        if matches:
+            alpha_c_atom_idx = matches[0][1]
+            # Now find side chain attached to alpha carbon (excluding backbone atoms)
+            backbone_atom_indices = set(matches[0])
+            side_chain_atoms = []
+            for neighbor in mol.GetAtomWithIdx(alpha_c_atom_idx).GetNeighbors():
+                neighbor_idx = neighbor.GetIdx()
+                if neighbor_idx not in backbone_atom_indices:
+                    side_chain_atoms.append(neighbor_idx)
+            # Now, perform BFS from side chain atom(s) to count carbons
+            from rdkit.Chem import rdmolops
+            total_carbons = 0
+            visited_atoms = set(backbone_atom_indices)
+            queue = []
+            for atom_idx in side_chain_atoms:
+                queue.append(atom_idx)
+            while queue:
+                atom_idx = queue.pop(0)
+                if atom_idx in visited_atoms:
+                    continue
+                visited_atoms.add(atom_idx)
+                atom = mol.GetAtomWithIdx(atom_idx)
+                if atom.GetAtomicNum() == 6:
+                    total_carbons += 1
+                for neighbor in atom.GetNeighbors():
+                    nbr_idx = neighbor.GetIdx()
+                    if nbr_idx not in visited_atoms:
+                        queue.append(nbr_idx)
+            if max_length is not None and total_carbons <= max_length:
+                return True
+            elif min_length is not None and total_carbons >= min_length:
+                return True
+            else:
+                return False
+        else:
+            return False
+
+    def check_phenolic_hydroxyl_chain_length(mol, min_chain_length=None, max_chain_length=None):
+        # Find phenolic hydroxyl groups
+        phenol_pattern = Chem.MolFromSmarts('[c][OX2H]')
+        matches = mol.GetSubstructMatches(phenol_pattern)
+        if matches:
+            # For each phenolic hydroxyl, find the chain length to carboxylic acid
+            carboxylic_acid_pattern = Chem.MolFromSmarts('[CX3](=O)[OX1H]')
+            carbox_matches = mol.GetSubstructMatches(carboxylic_acid_pattern)
+            if not carbox_matches:
+                return False
+            min_found_chain_length = None
+            for phenol_match in matches:
+                phenol_idx = phenol_match[0]
+                for carbox_match in carbox_matches:
+                    carbox_idx = carbox_match[0]
+                    path = Chem.rdmolops.GetShortestPath(mol, phenol_idx, carbox_idx)
+                    chain_length = len(path) - 1
+                    if min_found_chain_length is None or chain_length < min_found_chain_length:
+                        min_found_chain_length = chain_length
+            if min_chain_length is not None and min_found_chain_length >= min_chain_length:
+                return True
+            elif max_chain_length is not None and min_found_chain_length <= max_chain_length:
+                return True
+            else:
+                return False
+        else:
+            return False
+
+    def check_aliphatic_chain_length(mol, chain_length):
+        # Find the longest straight aliphatic chain ending with carboxylic acid
+        # Start from carboxylic acid carbon
+        carboxylic_acid_pattern = Chem.MolFromSmarts('[CX3](=O)[OX1H]')
+        matches = mol.GetSubstructMatches(carboxylic_acid_pattern)
+        if matches:
+            carbox_c_idx = matches[0][0]
+            # Now perform BFS to find the chain length
+            from rdkit.Chem import rdmolops
+            visited = set()
+            queue = [(carbox_c_idx, 0)]
+            max_chain_length = 0
+            while queue:
+                atom_idx, length = queue.pop(0)
+                if atom_idx in visited:
+                    continue
+                visited.add(atom_idx)
+                atom = mol.GetAtomWithIdx(atom_idx)
+                if atom.GetAtomicNum() != 6 or atom.IsAromatic():
+                    continue
+                if length > max_chain_length:
+                    max_chain_length = length
+                for neighbor in atom.GetNeighbors():
+                    nbr_idx = neighbor.GetIdx()
+                    bond = mol.GetBondBetweenAtoms(atom_idx, nbr_idx)
+                    if nbr_idx not in visited and bond.GetBondType() == Chem.rdchem.BondType.SINGLE and not neighbor.IsInRing():
+                        queue.append((nbr_idx, length+1))
+            if max_chain_length == chain_length:
+                return True
+            else:
+                return False
+        else:
+            return False
+
+    # Define SMARTS patterns for each rule
+    rules = []
+
+    # Rule 1: Modifiers containing an aldehyde group (-CHO) directly attached to an aromatic ring (low yield)
+    rule1 = {
+        'number': 1,
+        'patterns': ['[c][CX3H](=O)'],
+        'prediction': -1
+    }
+
+    # Rule 2: Modifiers containing an amino group (-NH2) directly attached to an aromatic ring (high yield)
+    rule2 = {
+        'number': 2,
+        'patterns': ['[c][NX3H2]'],
+        'prediction': 1
+    }
+
+    # Rule 3:
+    # High yield: -SH attached to aliphatic chain
+    rule3_high = {
+        'number': 3.1,
+        'patterns': ['[CX4][SX2H]'],
+        'prediction': 1
+    }
+
+    # Low yield: -SH attached directly to aromatic ring
+    rule3_low = {
+        'number': 3.2,
+        'patterns': ['[c][SX2H]'],
+        'prediction': -1
+    }
+
+    # Rule 4
+    # High yield: Amino acids with aliphatic side chains containing five or fewer carbons
+    rule4_high = {
+        'number': 4.1,
+        'function': check_amino_acid_side_chain_length,
+        'max_length': 5,
+        'prediction': 1
+    }
+
+    # Low yield: Amino acids with longer chains or aromatic, bulky, or branched side chains
+    rule4_low = {
+        'number': 4.2,
+        'function': check_amino_acid_side_chain_length,
+        'min_length': 6,
+        'prediction': -1
+    }
+
+    # Rule 5: Modifiers containing multiple hydroxyl groups (three or more) on an aliphatic chain (high yield)
+    rule5 = {
+        'number': 5,
+        'pattern': '[CX4][OX2H]',
+        'min_count': 3,
+        'prediction': 1
+    }
+
+    # Rule 6: Modifiers containing bulky ether chains with few or no hydroxyl groups (low yield)
+    rule6 = {
+        'number': 6,
+        'pattern': '[CX4][OX2][CX4]',
+        'min_count': 2,
+        'max_oh': 1,
+        'prediction': -1
+    }
+
+    # Rule 7: Modifiers containing aromatic heterocycles attached to a carboxylic acid group (high yield)
+    rule7 = {
+        'number': 7,
+        'patterns': ['[a;!c][a][a]', '[CX3](=O)[OX1H]'],
+        'prediction': 1
+    }
+
+    # Rule 8: High yield: Pyridine ring connected via an alkyl chain to a carboxylic acid group
+    rule8_high = {
+        'number': 8.1,
+        'patterns': ['n1ccccc1', '[CX3](=O)[OX1H]'],
+        'alkyl_chain': True,
+        'prediction': 1
+    }
+
+    # Low yield: Pyridine ring directly attached to an aromatic ring
+    rule8_low = {
+        'number': 8.2,
+        'patterns': ['n1ccccc1~c'],
+        'prediction': -1
+    }
+
+    # Rule 9
+    # High yield: Phenolic hydroxyl groups attached via an aliphatic chain longer than three carbons
+    rule9_high = {
+        'number': 9.1,
+        'function': check_phenolic_hydroxyl_chain_length,
+        'min_chain_length': 4,
+        'prediction': 1
+    }
+
+    # Low yield: Shorter chain (three carbons or fewer)
+    rule9_low = {
+        'number': 9.2,
+        'function': check_phenolic_hydroxyl_chain_length,
+        'max_chain_length': 3,
+        'prediction': -1
+    }
+
+    # Rule 10
+    # High yield: Strong EWGs (e.g., nitro, bromo) attached to an aromatic ring
+    rule10_high = {
+        'number': 10.1,
+        'patterns': ['[c][N+](=O)[O-]', '[c]Br'],
+        'prediction': 1
+    }
+
+    # Low yield: EDGs (e.g., methyl, methoxy) attached to an aromatic ring
+    rule10_low = {
+        'number': 10.2,
+        'patterns': ['[c][CH3]', '[c][OX2][CH3]'],
+        'prediction': -1
+    }
+
+    # Rule 11: Modifiers containing perfluoroalkyl chain linked to a carboxylic acid group (low yield)
+    rule11 = {
+        'number': 11,
+        'patterns': ['[CX4](F)(F)(F)', '[CX3](=O)[OX1H]'],
+        'prediction': -1
+    }
+
+    # Rule 12: Unsubstituted medium-chain aliphatic carboxylic acids with a chain length of eight carbons (high yield)
+    rule12 = {
+        'number': 12,
+        'function': check_aliphatic_chain_length,
+        'chain_length': 8,
+        'prediction': 1
+    }
+
+    # Organize the rules
+    rules = [
+        rule1, rule2, rule3_high, rule3_low, rule4_high, rule4_low,
+        rule5, rule6, rule7, rule8_high, rule8_low,
+        rule9_high, rule9_low, rule10_high, rule10_low,
+        rule11, rule12
+    ]
+
+    # Compile patterns
+    for rule in rules:
+        if 'patterns' in rule:
+            rule['compiled_patterns'] = [Chem.MolFromSmarts(pat) for pat in rule['patterns']]
+        elif 'pattern' in rule:
+            rule['compiled_pattern'] = Chem.MolFromSmarts(rule['pattern'])
+        else:
+            # Rule uses a function
+            pass
+
+    # Now process each SMILES string
+    result_rows = []
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # Append zeros if molecule cannot be parsed
+            result_row = [0]*len(rules)
+            result_rows.append(result_row)
+            continue
+
+        row = []
+        for rule in rules:
+            try:
+                if 'compiled_patterns' in rule:
+                    # Check if all patterns are matched
+                    matches = all(mol.HasSubstructMatch(pat) for pat in rule['compiled_patterns'])
+                    if matches:
+                        # Additional checks for certain rules
+                        if rule.get('alkyl_chain'):
+                            # Ensure pyridine ring is connected via alkyl chain to carboxylic acid group
+                            # For simplicity, check if path between pyridine N and carboxylic acid C includes only aliphatic carbons
+                            pyridine_matches = mol.GetSubstructMatches(rule['compiled_patterns'][0])
+                            carboxy_matches = mol.GetSubstructMatches(rule['compiled_patterns'][1])
+                            connection_found = False
+                            for pyr_match in pyridine_matches:
+                                pyr_atom_idx = pyr_match[0]
+                                for carbox_match in carboxy_matches:
+                                    carbox_atom_idx = carbox_match[0]
+                                    path = Chem.rdmolops.GetShortestPath(mol, pyr_atom_idx, carbox_atom_idx)
+                                    if path:
+                                        # Check if path atoms are all aliphatic carbons (excluding start and end atoms)
+                                        is_aliphatic = True
+                                        for idx in path[1:-1]:
+                                            atom = mol.GetAtomWithIdx(idx)
+                                            if atom.GetAtomicNum() != 6 or atom.GetIsAromatic():
+                                                is_aliphatic = False
+                                                break
+                                        if is_aliphatic:
+                                            connection_found = True
+                                            break
+                                if connection_found:
+                                    break
+                            if connection_found:
+                                row.append(rule['prediction'])
+                            else:
+                                row.append(0)
+                        else:
+                            row.append(rule['prediction'])
+                    else:
+                        row.append(0)
+                elif 'compiled_pattern' in rule:
+                    if 'min_count' in rule:
+                        # Count number of matches
+                        matches = mol.GetSubstructMatches(rule['compiled_pattern'])
+                        if len(matches) >= rule['min_count']:
+                            # Check if there's a max_oh
+                            if 'max_oh' in rule:
+                                oh_pattern = Chem.MolFromSmarts('[OX2H]')
+                                oh_matches = mol.GetSubstructMatches(oh_pattern)
+                                if len(oh_matches) <= rule['max_oh']:
+                                    row.append(rule['prediction'])
+                                else:
+                                    row.append(0)
+                            else:
+                                row.append(rule['prediction'])
+                        else:
+                            row.append(0)
+                    else:
+                        if mol.HasSubstructMatch(rule['compiled_pattern']):
+                            row.append(rule['prediction'])
+                        else:
+                            row.append(0)
+                elif 'function' in rule:
+                    # Use specified function to evaluate rule
+                    if rule['function'] == check_amino_acid_side_chain_length:
+                        result = check_amino_acid_side_chain_length(mol, max_length=rule.get('max_length'), min_length=rule.get('min_length'))
+                        if result:
+                            row.append(rule['prediction'])
+                        else:
+                            row.append(0)
+                    elif rule['function'] == check_phenolic_hydroxyl_chain_length:
+                        result = check_phenolic_hydroxyl_chain_length(mol, min_chain_length=rule.get('min_chain_length'), max_chain_length=rule.get('max_chain_length'))
+                        if result:
+                            row.append(rule['prediction'])
+                        else:
+                            row.append(0)
+                    elif rule['function'] == check_aliphatic_chain_length:
+                        result = check_aliphatic_chain_length(mol, chain_length=rule['chain_length'])
+                        if result:
+                            row.append(rule['prediction'])
+                        else:
+                            row.append(0)
+                    else:
+                        row.append(0)
+                else:
+                    # Unknown rule type
+                    row.append(0)
+            except Exception as e:
+                # In case of error, append 0
+                row.append(0)
+        result_rows.append(row)
+
+    # Create DataFrame
+    df = pd.DataFrame(result_rows, columns=[f"Rule {rule['number']}" for rule in rules])
+    return df
+
+
+--------------------------------------------------
+    Target Name: yield
+    GPT Model: o1-preview-2024-09-12
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+- **Rule 1**: Modifiers that are **carboxylic acids containing an amino group (–NH₂) on an aromatic ring or on a short aliphatic chain (five or fewer carbons)** are associated with **high yield**. If the amino group is on a **longer aliphatic chain (six or more carbons)**, the yield is typically **low**.
+  - *High yield examples*: _4-aminobenzoic acid_, _5-aminopentanoic acid_, _(2S)-2-aminobutanedioic acid_, _(2S)-2-aminopentanedioic acid_
+  - *Low yield examples*: _7-aminoheptanoic acid_, _8-aminooctanoic acid_, _(2S)-6-acetamido-2-aminohexanoic acid_
+
+- **Rule 2**: Modifiers containing an **aldehyde group (–CHO) attached directly to an aromatic ring** are associated with **low yield**.
+  - *Examples*: _4-formylbenzoic acid_, _5-formyl-2-hydroxybenzoic acid_
+
+- **Rule 3**: Modifiers with **aromatic rings substituted with strong electron-withdrawing groups (EWGs)** such as **nitro (–NO₂)** or **halogens (e.g., bromo (–Br))** are associated with **high yield**. Modifiers substituted with **electron-donating groups (EDGs)** like **methyl (–CH₃)** or **methoxy (–OCH₃)** are generally associated with **low yield**, unless offset by additional activating functional groups.
+  - *High yield examples*: _4-nitrobenzoic acid_, _4-(bromomethyl)benzoic acid_
+  - *Low yield examples*: _4-methylbenzoic acid_, _4-pyridin-4-ylbenzoic acid_
+
+- **Rule 4**: Modifiers containing a **phenolic hydroxyl group (–OH) connected to an aromatic ring via an aliphatic chain of four or more carbons** are associated with **high yield**; if the chain is **three carbons or fewer**, they are associated with **low yield**.
+  - *High yield example*: _5-(4-hydroxyphenyl)pentanoic acid_
+  - *Low yield examples*: _3-(4-hydroxyphenyl)propanoic acid_, _2-[(4-hydroxybenzoyl)amino]acetic acid_
+
+- **Rule 5**: Modifiers containing a **sulfanyl group (–SH) attached to a short aliphatic chain** are associated with **high yield**; if the sulfanyl group is **attached directly to an aromatic ring**, they are associated with **low yield**.
+  - *High yield example*: _3-sulfanylpropanoic acid_
+  - *Low yield example*: _4-sulfanylbenzoic acid_
+
+- **Rule 6**: Modifiers that are **unsubstituted medium-chain aliphatic carboxylic acids with a chain length of eight carbons** are associated with **high yield**.
+  - *Example*: _octanoic acid_
+
+- **Rule 7**: Modifiers containing **multiple hydroxyl groups (three or more) on an aliphatic chain** are associated with **high yield** due to increased hydrogen bonding capability and solubility.
+  - *Example*: _(2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid_
+
+- **Rule 8**: Modifiers with **bulky ether chains containing few or no hydroxyl groups** are associated with **low yield**, possibly due to steric hindrance and reduced interaction with the catalyst.
+  - *Examples*: _2-[2-(2-methoxyethoxy)ethoxy]acetic acid_, _3-[2-(2-aminoethoxy)ethoxy]propanoic acid_
+
+- **Rule 9**: Modifiers containing **aromatic heterocycles connected via an aliphatic chain to a carboxylic acid group** are associated with **high yield**; if the heterocycle is **directly attached to an aromatic ring or carboxylic acid group**, they are associated with **low yield**.
+  - *High yield examples*: _4-pyridin-4-ylbutanoic acid_, _(2R)-2-amino-3-(1H-indol-3-yl)propanoic acid_
+  - *Low yield example*: _4-pyridin-4-ylbenzoic acid_
+
+- **Rule 10**: Modifiers containing **fluorinated alkyl chains or perfluoroalkyl groups** linked to a carboxylic acid are associated with **low yield**, potentially due to their strong electron-withdrawing nature and hydrophobicity.
+  - *Examples*: _2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid_, _4-[(2,2,2-trifluoroacetyl)amino]butanoic acid_
+
+- **Rule 11**: Modifiers that are **aromatic carboxylic acids fused with additional carbonyl or heterocyclic structures** are associated with **high yield**, possibly due to enhanced coordination with the catalyst.
+  - *Examples*: _1,3-dioxo-2-benzofuran-5-carboxylic acid_, _2-oxo-1H-pyridine-4-carboxylic acid_, _1H-pyrazole-4-carboxylic acid_
+
+- **Rule 12**: Modifiers containing **methoxy groups on aromatic rings attached to an aliphatic chain with a ketone functionality** can be associated with **high yield**, suggesting that the combined effect of these groups may enhance reactivity.
+  - *Example*: _4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid_
+
+- **Rule 13**: Modifiers with **aldehyde or ketone groups on aliphatic chains longer than five carbons** are associated with **low yield**, possibly due to competing side reactions or deactivation of the catalyst.
+  - *Examples*: _4-oxoheptanedioic acid_, _7-hydroxyheptanoic acid_
+
+**End of Rules**
+
+These rules synthesize the relationship between molecular modifiers' structural features and the observed reaction yields. They consider functional groups, chain lengths, and substituent effects, reflecting underlying physical and chemical properties such as electronic effects, steric hindrance, and coordination ability with the catalyst. The rules balance coverage and specificity to provide predictive guidance for the reaction's optimization.---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+Rule 1,Rule 2,Rule 3,Rule 4,Rule 5,Rule 6,Rule 7,Rule 8,Rule 9,Rule 10,Rule 11,Rule 12,Rule 13
+0,0,0,0,0,0,0,0,-1,0,1,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,-1,0,1,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,-1,0,1,0,0
+0,0,0,0,0,1,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,-1,0,1,0,0
+0,0,0,0,0,0,1,0,0,0,0,0,0
+0,0,0,0,-1,0,0,0,-1,0,1,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,-1,0,1,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,-1,0,0,0,0
+0,0,0,0,0,0,0,0,-1,0,1,0,0
+0,0,0,0,1,0,0,0,0,0,0,0,0
+0,-1,0,0,0,0,0,0,-1,0,1,0,0
+0,-1,0,0,0,0,0,0,-1,0,1,0,0
+0,0,1,0,0,0,0,0,-1,0,1,0,0
+0,0,0,0,0,0,0,0,-1,0,1,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,1,0,0,0,0
+0,0,-1,0,0,0,0,0,1,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0
+-1,0,0,0,0,0,0,0,0,0,0,0,0
+-1,0,0,0,0,0,0,0,0,0,0,0,0
+1,0,0,0,0,0,0,0,0,0,0,0,0
+-1,0,0,0,0,0,0,0,0,0,0,0,0
+
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.8; Test Accuracy: 1.0
+    Train Support: 0.08979591836734693; Test Support: 0.0
+    Train Confidence: 0.8236763236763237; Test Confidence: 0.42857142857142855
+    Train Lift: 1.6605534987887929; Test Lift: NONE
+    Train Leverage: 0.024256559766763854; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    Current Rule Code:
+def rule2matrix(smiles_list):
+    # Define SMARTS patterns for functional groups
+    # Carboxylic acid group (-COOH)
+    carboxylic_acid = '[CX3](=O)[OX2H1]'
+    
+    # Amino group (-NH2)
+    amino_group = '[NX3H2]'
+    
+    # Aromatic amino group (-NH2 connected to aromatic ring)
+    aromatic_amino = '[NX3H2][a]'
+    
+    # Aliphatic amino group (-NH2 connected to aliphatic carbon chain)
+    aliphatic_amino = '[NX3H2][C;!$(C=a)]'
+    
+    # Aldehyde group attached to aromatic ring
+    aldehyde_on_aromatic = '[#6H1](=O)[c]'
+    
+    # Nitro group on aromatic ring
+    nitro_on_aromatic = '[c][NX3](=O)=O'
+    
+    # Halogen substituted aromatic ring
+    halogen_on_aromatic = '[c][F,Cl,Br,I]'
+    
+    # Electron-donating groups on aromatic ring
+    edg_on_aromatic = '[c][OX2H,OX2][CH3]'
+    
+    # Phenolic hydroxyl group connected via aliphatic chain
+    phenolic_hydroxyl = '[C][C][C][C][c][OX2H]'
+    
+    # Phenolic hydroxyl group connected via short aliphatic chain
+    short_chain_phenolic_hydroxyl = '[C][C][C][c][OX2H]'
+    
+    # Sulfanyl group (-SH) attached to short aliphatic chain
+    sulfanyl_aliphatic = '[C][C,SX2][SX2H]'
+    
+    # Sulfanyl group attached directly to aromatic ring
+    sulfanyl_on_aromatic = '[c][SX2H]'
+    
+    # Unsubstituted medium-chain aliphatic carboxylic acids with chain length of eight carbons
+    medium_chain_carboxylic_acid = '[CH3][CH2][CH2][CH2][CH2][CH2][CH2][CX3](=O)[OX2H1]'
+    
+    # Multiple hydroxyl groups on aliphatic chain
+    multiple_hydroxyls_aliphatic = '[C](O)[C](O)[C](O)[C](O)'
+    
+    # Bulky ether chains with few or no hydroxyl groups
+    bulky_ether_chain = '[C]([OX2][C])[OX2][C]'
+    
+    # Aromatic heterocycles connected via aliphatic chain to carboxylic acid
+    heterocycle_aliphatic_chain_carboxylic_acid = '[c,n,o,s][C][C][C][CX3](=O)[OX2H1]'
+    
+    # Aromatic heterocycles directly attached to carboxylic acid
+    heterocycle_direct_carboxylic_acid = '[c,n,o,s][CX3](=O)[OX2H1]'
+    
+    # Fluorinated alkyl chains or perfluoroalkyl groups linked to carboxylic acid
+    fluorinated_alkyl_chain = '[CX4]([F,Cl,Br,I])[CX4]([F,Cl,Br,I])[CX4](=O)[OX2H1]'
+    
+    # Aromatic carboxylic acids fused with additional carbonyl or heterocyclic structures
+    fused_aromatic_carboxylic_acid = '[c]1[c,c,n,o,s][c,c,n,o,s][c,c,n,o,s][c,c,n,o,s][c,c,n,o,s]1[CX3](=O)[OX2H1]'
+    
+    # Methoxy groups on aromatic rings attached to aliphatic chain with ketone functionality
+    methoxy_aromatic_ketone_aliphatic = '[c][OX2][CH3][C](=O)[C][CX3](=O)[OX2H1]'
+    
+    # Aldehyde or ketone groups on aliphatic chains longer than five carbons
+    aldehyde_or_ketone_long_chain = '[C][C][C][C][C][C](=O)[CX3]'
+    
+    # Define the rules with their associated patterns and predictions
+    rules = [
+        {
+            'number': 1,
+            'description': 'High yield: Carboxylic acids containing an amino group (-NH2) on an aromatic ring or on a short aliphatic chain (five or fewer carbons). Low yield if amino group is on a longer aliphatic chain (six or more carbons).',
+            'patterns_high': [carboxylic_acid, aromatic_amino],
+            'patterns_high_aliphatic': [carboxylic_acid, amino_group],
+            'patterns_low': [carboxylic_acid, amino_group],
+            'prediction_high': 1,
+            'prediction_low': -1,
+            'chain_length_high': 5,
+            'chain_length_low': 6
+        },
+        {
+            'number': 2,
+            'description': 'Low yield: Modifiers containing an aldehyde group (-CHO) attached directly to an aromatic ring.',
+            'patterns': [aldehyde_on_aromatic],
+            'prediction': -1
+        },
+        {
+            'number': 3,
+            'description': 'High yield: Modifiers with aromatic rings substituted with strong electron-withdrawing groups (EWGs) such as nitro (-NO2) or halogens. Low yield if substituted with electron-donating groups (EDGs) like methyl (-CH3) or methoxy (-OCH3).',
+            'patterns_high': [carboxylic_acid, '[c]([F,Cl,Br,I,N+](=O)[O-])[c]'],
+            'patterns_low': [carboxylic_acid, edg_on_aromatic],
+            'prediction_high': 1,
+            'prediction_low': -1
+        },
+        {
+            'number': 4,
+            'description': 'High yield: Phenolic hydroxyl group connected via an aliphatic chain of four or more carbons. Low yield if the chain is three carbons or fewer.',
+            'patterns_high': [phenolic_hydroxyl],
+            'patterns_low': [short_chain_phenolic_hydroxyl],
+            'prediction_high': 1,
+            'prediction_low': -1
+        },
+        {
+            'number': 5,
+            'description': 'High yield: Sulfanyl group (-SH) attached to a short aliphatic chain. Low yield if the sulfanyl group is attached directly to an aromatic ring.',
+            'patterns_high': [sulfanyl_aliphatic],
+            'patterns_low': [sulfanyl_on_aromatic],
+            'prediction_high': 1,
+            'prediction_low': -1
+        },
+        {
+            'number': 6,
+            'description': 'High yield: Unsubstituted medium-chain aliphatic carboxylic acids with a chain length of eight carbons.',
+            'patterns': [medium_chain_carboxylic_acid],
+            'prediction': 1
+        },
+        {
+            'number': 7,
+            'description': 'High yield: Modifiers containing multiple hydroxyl groups (three or more) on an aliphatic chain.',
+            'patterns': [multiple_hydroxyls_aliphatic],
+            'prediction': 1
+        },
+        {
+            'number': 8,
+            'description': 'Low yield: Modifiers with bulky ether chains containing few or no hydroxyl groups.',
+            'patterns': [bulky_ether_chain],
+            'prediction': -1
+        },
+        {
+            'number': 9,
+            'description': 'High yield: Aromatic heterocycles connected via an aliphatic chain to a carboxylic acid group. Low yield if the heterocycle is directly attached to an aromatic ring or carboxylic acid group.',
+            'patterns_high': [heterocycle_aliphatic_chain_carboxylic_acid],
+            'patterns_low': [heterocycle_direct_carboxylic_acid],
+            'prediction_high': 1,
+            'prediction_low': -1
+        },
+        {
+            'number': 10,
+            'description': 'Low yield: Modifiers containing fluorinated alkyl chains or perfluoroalkyl groups linked to a carboxylic acid.',
+            'patterns': [fluorinated_alkyl_chain],
+            'prediction': -1
+        },
+        {
+            'number': 11,
+            'description': 'High yield: Aromatic carboxylic acids fused with additional carbonyl or heterocyclic structures.',
+            'patterns': [fused_aromatic_carboxylic_acid],
+            'prediction': 1
+        },
+        {
+            'number': 12,
+            'description': 'High yield: Modifiers containing methoxy groups on aromatic rings attached to an aliphatic chain with a ketone functionality.',
+            'patterns': [methoxy_aromatic_ketone_aliphatic],
+            'prediction': 1
+        },
+        {
+            'number': 13,
+            'description': 'Low yield: Modifiers with aldehyde or ketone groups on aliphatic chains longer than five carbons.',
+            'patterns': [aldehyde_or_ketone_long_chain],
+            'prediction': -1
+        }
+    ]
+    
+    # Compile SMARTS patterns
+    for rule in rules:
+        compiled_patterns = []
+        if 'patterns' in rule:
+            for pat in rule['patterns']:
+                compiled_patterns.append(Chem.MolFromSmarts(pat))
+        rule['compiled_patterns'] = compiled_patterns
+        if 'patterns_high' in rule:
+            compiled_patterns_high = []
+            for pat in rule['patterns_high']:
+                compiled_patterns_high.append(Chem.MolFromSmarts(pat))
+            rule['compiled_patterns_high'] = compiled_patterns_high
+        if 'patterns_low' in rule:
+            compiled_patterns_low = []
+            for pat in rule['patterns_low']:
+                compiled_patterns_low.append(Chem.MolFromSmarts(pat))
+            rule['compiled_patterns_low'] = compiled_patterns_low
+        if 'patterns_high_aliphatic' in rule:
+            compiled_patterns_high_aliphatic = []
+            for pat in rule['patterns_high_aliphatic']:
+                compiled_patterns_high_aliphatic.append(Chem.MolFromSmarts(pat))
+            rule['compiled_patterns_high_aliphatic'] = compiled_patterns_high_aliphatic
+    
+    # Initialize results list
+    results = []
+    
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = False
+                # Check for high prediction
+                if 'compiled_patterns_high' in rule:
+                    high_match = all(mol.HasSubstructMatch(pat) for pat in rule['compiled_patterns_high'])
+                    if high_match:
+                        match = True
+                        row.append(rule['prediction_high'])
+                        continue
+                # Special handling for Rule 1
+                if 'number' in rule and rule['number'] == 1:
+                    high_match = all(mol.HasSubstructMatch(pat) for pat in rule['compiled_patterns_high'])
+                    if high_match:
+                        match = True
+                        row.append(rule['prediction_high'])
+                        continue
+                    # Check for amino group on aliphatic chain
+                    high_aliphatic_match = all(mol.HasSubstructMatch(pat) for pat in rule['compiled_patterns_high_aliphatic'])
+                    if high_aliphatic_match:
+                        # Determine chain length between amino group and carboxylic acid
+                        amino_atoms = mol.GetSubstructMatches(Chem.MolFromSmarts(amino_group))
+                        acid_atoms = mol.GetSubstructMatches(Chem.MolFromSmarts(carboxylic_acid))
+                        min_chain_length = None
+                        for amino in amino_atoms:
+                            for acid in acid_atoms:
+                                path_length = Chem.GetShortestPath(mol, amino[0], acid[0])
+                                chain_length = len(path_length) - 2  # Exclude amino and acid atoms
+                                if min_chain_length is None or chain_length < min_chain_length:
+                                    min_chain_length = chain_length
+                        if min_chain_length is not None:
+                            if min_chain_length <= rule['chain_length_high']:
+                                match = True
+                                row.append(rule['prediction_high'])
+                                continue
+                            elif min_chain_length >= rule['chain_length_low']:
+                                match = True
+                                row.append(rule['prediction_low'])
+                                continue
+                # Check for low prediction
+                if 'compiled_patterns_low' in rule:
+                    low_match = all(mol.HasSubstructMatch(pat) for pat in rule['compiled_patterns_low'])
+                    if low_match:
+                        match = True
+                        row.append(rule['prediction_low'])
+                        continue
+                # General patterns
+                if 'compiled_patterns' in rule:
+                    general_match = all(mol.HasSubstructMatch(pat) for pat in rule['compiled_patterns'])
+                    if general_match:
+                        match = True
+                        row.append(rule['prediction'])
+                        continue
+                if not match:
+                    row.append(0)
+            except Exception as e:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule['number']}' for rule in rules])
+    return df
+
+--------------------------------------------------
+    Target Name: yield
+    GPT Model: o1-preview-2024-09-12
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+- **Rule 1**: Modifiers that are **carboxylic acids containing an amino group (–NH₂) on an aromatic ring or on a short aliphatic chain (five or fewer carbons)** are associated with **high yield**. This is likely due to the amino group enhancing coordination with the metal center and the optimal chain length facilitating effective interaction.
+  - *High yield examples*: _4-aminobenzoic acid_, _5-aminopentanoic acid_, _(2S)-2-aminobutanedioic acid_, _(2S)-2-aminopentanedioic acid_
+
+- **Rule 2**: Modifiers that are **carboxylic acids containing an amino group (–NH₂) on an aliphatic chain longer than five carbons** are associated with **low yield**. The extended chain length may introduce steric hindrance or reduce the modifier’s ability to coordinate effectively.
+  - *Low yield examples*: _7-aminoheptanoic acid_, _8-aminooctanoic acid_, _(2S)-6-acetamido-2-aminohexanoic acid_
+
+- **Rule 3**: Modifiers with **aromatic rings substituted with strong electron-withdrawing groups (EWGs)** such as **nitro (–NO₂)** or **bromoalkyl groups** are associated with **high yield**. EWGs can enhance the acidity of the carboxylic acid and improve coordination with metal sites.
+  - *High yield examples*: _4-nitrobenzoic acid_, _4-(bromomethyl)benzoic acid_
+
+- **Rule 4**: Modifiers with **aromatic rings substituted with electron-donating groups (EDGs)** like **methyl (–CH₃)**, **methoxy (–OCH₃)**, or **phenolic hydroxyl groups (–OH)** are associated with **low yield**. EDGs can reduce the acidity of the carboxylic acid, hindering effective coordination.
+  - *Low yield examples*: _4-methylbenzoic acid_, _3-(4-hydroxyphenyl)propanoic acid_, _2-[(4-hydroxybenzoyl)amino]acetic acid_
+
+- **Rule 5**: Modifiers containing an **aldehyde group (–CHO) attached directly to an aromatic ring** are associated with **low yield**. The aldehyde may engage in side reactions or interfere with catalyst coordination.
+  - *Low yield examples*: _4-formylbenzoic acid_, _5-formyl-2-hydroxybenzoic acid_
+
+- **Rule 6**: Modifiers containing a **sulfhydryl group (–SH) on a short aliphatic chain (three carbons or fewer)** are associated with **high yield**, possibly due to the thiol group enhancing metal coordination. However, when the sulfhydryl group is **attached directly to an aromatic ring**, they are associated with **low yield**, potentially due to steric hindrance or electronic effects.
+  - *High yield example*: _3-sulfanylpropanoic acid_
+  - *Low yield example*: _4-sulfanylbenzoic acid_
+
+- **Rule 7**: Modifiers with **multiple hydroxyl groups (three or more) on an aliphatic chain** are associated with **high yield**. The multiple hydroxyl groups can facilitate better interaction and stabilization with the catalyst.
+  - *High yield example*: _(2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid_
+
+- **Rule 8**: Modifiers containing **bulky ether chains with few or no hydroxyl groups** are associated with **low yield**. The bulky ethers may impede effective interaction with the catalyst due to steric hindrance.
+  - *Low yield examples*: _2-[2-(2-methoxyethoxy)ethoxy]acetic acid_, _3-[2-(2-aminoethoxy)ethoxy]propanoic acid_
+
+- **Rule 9**: Modifiers containing **heterocyclic aromatic rings connected to a carboxylic acid group via a short aliphatic linker** are associated with **high yield**. The linker allows for optimal positioning of the heterocycle for coordination. In contrast, those connected **directly to the carboxylic acid group** are associated with **low yield**, possibly due to rigidity hindering effective interaction.
+  - *High yield examples*: _4-pyridin-4-ylbutanoic acid_, _(2R)-2-amino-3-(1H-indol-3-yl)propanoic acid_
+  - *Low yield example*: _4-pyridin-4-ylbenzoic acid_
+
+- **Rule 10**: Modifiers with **fluorinated alkyl chains attached to a carboxylic acid group** are associated with **low yield**. The strong electron-withdrawing nature of fluorine may destabilize interactions with the catalyst.
+  - *Low yield examples*: _2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid_, _4-[(2,2,2-trifluoroacetyl)amino]butanoic acid_
+
+- **Rule 11**: Modifiers containing a **phenolic hydroxyl group (–OH) connected to an aromatic ring via an aliphatic chain longer than four carbons** are associated with **high yield**. The longer chain may reduce steric hindrance and enhance coordination. Those with **shorter chains (three carbons or fewer)** are associated with **low yield** due to potential steric or electronic interference.
+  - *High yield example*: _5-(4-hydroxyphenyl)pentanoic acid_
+  - *Low yield examples*: _3-(4-hydroxyphenyl)propanoic acid_, _2-[(4-hydroxybenzoyl)amino]acetic acid_
+
+- **Rule 12**: Modifiers that are **aromatic carboxylic acids fused with additional carbonyl or heterocyclic structures** are associated with **high yield**. The additional functional groups may enhance binding affinity to the metal center.
+  - *High yield examples*: _1,3-dioxo-2-benzofuran-5-carboxylic acid_, _2-oxo-1H-pyridine-4-carboxylic acid_, _1H-pyrazole-4-carboxylic acid_
+
+- **Rule 13**: Modifiers that are **straight-chain saturated carboxylic acids with medium chain lengths (e.g., eight carbons)** are associated with **high yield**. The optimal chain length may facilitate appropriate hydrophobic interactions without causing steric hindrance.
+  - *High yield example*: _octanoic acid_
+
+- **Rule 14**: Modifiers containing **bulky acyl groups or acylated amino acids** are associated with **low yield**. The bulky groups can introduce steric hindrance, preventing effective coordination.
+  - *Low yield examples*: _4-[(2,2,2-trifluoroacetyl)amino]butanoic acid_, _(2S)-6-acetamido-2-aminohexanoic acid_
+
+- **Rule 15**: Modifiers containing **ketone groups within aliphatic chains** or at **terminal positions** are associated with **low yield**. The presence of ketone groups may interfere with the catalyst or lead to side reactions.
+  - *Low yield example*: _4-oxoheptanedioic acid_
+
+**End of Rules**---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+Rule 1,Rule 2,Rule 3,Rule 4,Rule 5,Rule 6,Rule 7,Rule 8,Rule 9,Rule 10,Rule 11,Rule 12,Rule 13,Rule 14,Rule 15
+0,0,0,0,0,0,0,0,1,0,0,1,0,0,-1
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,-1
+0,0,1,0,0,0,0,0,0,0,0,0,0,0,-1
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,-1
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,-1
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,-1
+0,0,0,0,0,0,0,0,0,0,0,0,1,0,-1
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,-1
+0,0,0,-1,0,0,0,0,0,0,-1,0,0,0,-1
+0,0,0,0,0,0,0,0,1,0,0,1,0,0,-1
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,-1
+0,0,0,0,0,-1,0,0,0,0,0,0,0,0,-1
+0,0,0,0,0,0,0,-1,0,0,0,0,0,0,-1
+0,0,0,0,0,0,0,0,0,0,0,1,0,0,-1
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,-1
+0,0,0,0,0,0,0,0,0,-1,0,0,0,0,-1
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,-1
+0,0,0,0,0,0,0,0,1,0,0,0,0,0,-1
+0,0,0,0,0,0,0,-1,0,0,0,0,0,0,-1
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1
+0,0,0,-1,-1,0,0,0,0,0,-1,0,0,0,-1
+0,0,0,0,-1,0,0,0,0,0,0,0,0,0,-1
+0,0,1,0,0,0,0,0,0,0,0,0,0,0,-1
+0,0,0,-1,0,0,0,0,0,0,0,0,0,0,-1
+1,0,0,0,0,0,0,0,0,0,0,0,0,-1,-1
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1
+0,0,0,-1,0,0,0,-1,0,0,0,0,0,0,-1
+0,0,0,-1,0,0,0,0,0,0,-1,0,0,-1,-1
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1
+0,0,0,0,0,0,0,0,0,0,0,0,0,-1,-1
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1
+0,0,0,-1,0,0,0,0,0,0,-1,0,0,0,-1
+0,-1,0,0,0,0,0,0,0,0,0,0,0,0,-1
+0,-1,0,0,0,0,0,-1,0,0,0,0,0,0,-1
+1,0,0,0,0,0,0,0,0,0,0,0,0,-1,-1
+0,-1,0,0,0,0,0,0,0,0,0,0,0,0,-1
+
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.8285714285714286; Test Accuracy: 1.0
+    Train Support: 0.075; Test Support: 0.125
+    Train Confidence: 0.953125; Test Confidence: 0.5625
+    Train Lift: 1.9194240196078434; Test Lift: NONE
+    Train Leverage: 0.032448979591836735; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    Current Rule Code:
+def rule2matrix(smiles_list):
+    # Define SMARTS patterns for functional groups using corrected patterns from suggestions
+    
+    # Carboxylic acid group (-COOH)
+    carboxylic_acid = '[CX3](=O)[OX2H1]'
+    carboxylic_acid_pat = Chem.MolFromSmarts(carboxylic_acid)
+
+    # Amino group (-NH2)
+    amino_group = '[NX3H2]'
+    amino_pat = Chem.MolFromSmarts(amino_group)
+
+    # Aromatic nitro group
+    nitro_group_aromatic = '[c][N+](=O)[O-]'
+    nitro_pat = Chem.MolFromSmarts(nitro_group_aromatic)
+
+    # Bromoalkyl group attached to aromatic ring
+    bromoalkyl_aromatic = '[c][CX4][Br]'
+    bromo_pat = Chem.MolFromSmarts(bromoalkyl_aromatic)
+
+    # Methyl group on aromatic ring
+    methyl_aromatic = '[c][CH3]'
+    methyl_pat = Chem.MolFromSmarts(methyl_aromatic)
+
+    # Methoxy group on aromatic ring
+    methoxy_aromatic = '[c][OX2][CH3]'
+    methoxy_pat = Chem.MolFromSmarts(methoxy_aromatic)
+
+    # Phenolic hydroxyl group
+    phenol_group = '[c][OX2H]'
+    phenol_pat = Chem.MolFromSmarts(phenol_group)
+
+    # Aromatic aldehyde
+    aldehyde_aromatic = '[c][CX3H](=O)'
+    aldehyde_pat = Chem.MolFromSmarts(aldehyde_aromatic)
+
+    # Thiol group attached directly to aromatic ring
+    thiol_on_aromatic_ring = '[c][SX2H]'
+    thiol_aromatic_pat = Chem.MolFromSmarts(thiol_on_aromatic_ring)
+
+    # Thiol group on short aliphatic chain (three carbons or fewer)
+    thiol_on_short_chain = '[SX2H][C;!R][C;!R]?[C;!R]?'
+    thiol_short_chain_pat = Chem.MolFromSmarts(thiol_on_short_chain)
+
+    # Multiple hydroxyl groups on aliphatic chain
+    hydroxyl_group = '[OX2H]'
+    hydroxyl_pat = Chem.MolFromSmarts(hydroxyl_group)
+
+    # Bulky ether chains
+    ether_linkage = '[#6][OX2][#6]'
+    ether_pat = Chem.MolFromSmarts(ether_linkage)
+
+    # Heterocyclic aromatic ring
+    heteroaromatic_pat = Chem.MolFromSmarts('[a;!c]')  # Any aromatic atom that is not carbon
+
+    # Fluorinated alkyl chains
+    fluorinated_alkyl_chain = '[CX4][CX4][F]'
+    fluorinated_alkyl_chain_pat = Chem.MolFromSmarts(fluorinated_alkyl_chain)
+
+    # Aromatic ring
+    aromatic_pat = Chem.MolFromSmarts('[c]')
+
+    # Ketone group within aliphatic chain or terminal positions
+    ketone_group = '[CX3](=O)[#6]'
+    ketone_pat = Chem.MolFromSmarts(ketone_group)
+
+    # Acyl amine group
+    acyl_amine_group = '[CX3](=O)[NX3][#6]'
+    acyl_amine_pat = Chem.MolFromSmarts(acyl_amine_group)
+
+    # Define the rules
+    rules = []
+
+    # Rule 1
+    def rule1(mol):
+        try:
+            has_carboxy = mol.HasSubstructMatch(carboxylic_acid_pat)
+            has_amino = mol.HasSubstructMatch(amino_pat)
+            if not (has_carboxy and has_amino):
+                return 0
+            amino_matches = mol.GetSubstructMatches(amino_pat)
+            carboxy_matches = mol.GetSubstructMatches(carboxylic_acid_pat)
+            for amino_match in amino_matches:
+                amino_idx = amino_match[0]
+                amino_atom = mol.GetAtomWithIdx(amino_idx)
+                # Check if amino N is attached to aromatic ring
+                for neighbor in amino_atom.GetNeighbors():
+                    if neighbor.GetIsAromatic():
+                        return 1
+                # Check path length to carboxylic acid
+                for carboxy_match in carboxy_matches:
+                    carboxy_idx = carboxy_match[0]
+                    path = Chem.rdmolops.GetShortestPath(mol, amino_idx, carboxy_idx)
+                    if len(path) < 3:
+                        continue  # less than 3 atoms between amino N and carboxy C, skip
+                    middle_indices = path[1:-1]
+                    num_carbons = sum(1 for idx in middle_indices if mol.GetAtomWithIdx(idx).GetAtomicNum() == 6)
+                    if num_carbons <= 5:
+                        return 1
+            return 0
+        except Exception as e:
+            # print(f"Rule 1 Error: {e}")
+            return 0
+
+    rules.append({'number': 1, 'function': rule1})
+
+    # Rule 2
+    def rule2(mol):
+        try:
+            has_carboxy = mol.HasSubstructMatch(carboxylic_acid_pat)
+            has_amino = mol.HasSubstructMatch(amino_pat)
+            if not (has_carboxy and has_amino):
+                return 0
+            amino_matches = mol.GetSubstructMatches(amino_pat)
+            carboxy_matches = mol.GetSubstructMatches(carboxylic_acid_pat)
+            for amino_match in amino_matches:
+                amino_idx = amino_match[0]
+                amino_atom = mol.GetAtomWithIdx(amino_idx)
+                # Check if amino is attached to aromatic ring
+                attached_to_aromatic = any(neighbor.GetIsAromatic() for neighbor in amino_atom.GetNeighbors())
+                if attached_to_aromatic:
+                    continue
+                # Check path length to carboxylic acid
+                for carboxy_match in carboxy_matches:
+                    carboxy_idx = carboxy_match[0]
+                    path = Chem.rdmolops.GetShortestPath(mol, amino_idx, carboxy_idx)
+                    if len(path) < 3:
+                        continue  # less than 3 atoms between amino N and carboxy C, skip
+                    middle_indices = path[1:-1]
+                    num_carbons = sum(1 for idx in middle_indices if mol.GetAtomWithIdx(idx).GetAtomicNum() == 6)
+                    if num_carbons > 5:
+                        return -1
+            return 0
+        except Exception as e:
+            # print(f"Rule 2 Error: {e}")
+            return 0
+
+    rules.append({'number': 2, 'function': rule2})
+
+    # Rule 3
+    def rule3(mol):
+        try:
+            if mol.HasSubstructMatch(nitro_pat) or mol.HasSubstructMatch(bromo_pat):
+                return 1
+            else:
+                return 0
+        except Exception as e:
+            # print(f"Rule 3 Error: {e}")
+            return 0
+
+    rules.append({'number': 3, 'function': rule3})
+
+    # Rule 4
+    def rule4(mol):
+        try:
+            if mol.HasSubstructMatch(methyl_pat) or mol.HasSubstructMatch(methoxy_pat) or mol.HasSubstructMatch(phenol_pat):
+                return -1
+            else:
+                return 0
+        except Exception as e:
+            # print(f"Rule 4 Error: {e}")
+            return 0
+
+    rules.append({'number': 4, 'function': rule4})
+
+    # Rule 5
+    def rule5(mol):
+        try:
+            if mol.HasSubstructMatch(aldehyde_pat):
+                return -1
+            else:
+                return 0
+        except Exception as e:
+            # print(f"Rule 5 Error: {e}")
+            return 0
+
+    rules.append({'number': 5, 'function': rule5})
+
+    # Rule 6
+    def rule6(mol):
+        try:
+            if mol.HasSubstructMatch(thiol_aromatic_pat):
+                return -1
+            elif mol.HasSubstructMatch(thiol_short_chain_pat):
+                return 1
+            else:
+                return 0
+        except Exception as e:
+            # print(f"Rule 6 Error: {e}")
+            return 0
+
+    rules.append({'number': 6, 'function': rule6})
+
+    # Rule 7
+    def rule7(mol):
+        try:
+            matches = mol.GetSubstructMatches(hydroxyl_pat)
+            if len(matches) >=3:
+                # Check if hydroxyl groups are on an aliphatic chain
+                for match in matches:
+                    oxy_idx = match[0]
+                    oxy_atom = mol.GetAtomWithIdx(oxy_idx)
+                    if not any([neighbor.GetIsAromatic() for neighbor in oxy_atom.GetNeighbors()]):
+                        return 1
+                return 0
+            else:
+                return 0
+        except Exception as e:
+            # print(f"Rule 7 Error: {e}")
+            return 0
+
+    rules.append({'number': 7, 'function': rule7})
+
+    # Rule 8
+    def rule8(mol):
+        try:
+            num_ether = len(mol.GetSubstructMatches(ether_pat))
+            if num_ether >=1:
+                num_hydroxyl = len(mol.GetSubstructMatches(hydroxyl_pat))
+                if num_hydroxyl < 3:
+                    return -1
+            return 0
+        except Exception as e:
+            # print(f"Rule 8 Error: {e}")
+            return 0
+
+    rules.append({'number': 8, 'function': rule8})
+
+    # Rule 9
+    def rule9(mol):
+        try:
+            has_carboxy = mol.HasSubstructMatch(carboxylic_acid_pat)
+            heteroaromatic_matches = mol.GetSubstructMatches(heteroaromatic_pat)
+            if not (has_carboxy and heteroaromatic_matches):
+                return 0
+            carboxy_matches = mol.GetSubstructMatches(carboxylic_acid_pat)
+            for carboxy_match in carboxy_matches:
+                carboxy_idx = carboxy_match[0]
+                for hetero_match in heteroaromatic_matches:
+                    hetero_idx = hetero_match[0]
+                    path = Chem.rdmolops.GetShortestPath(mol, carboxy_idx, hetero_idx)
+                    path_length = len(path) -1  # number of bonds between carboxy and heteroaromatic atom
+                    if path_length ==1:
+                        return -1
+                    elif 1 < path_length <=4:
+                        return 1
+            return 0
+        except Exception as e:
+            # print(f"Rule 9 Error: {e}")
+            return 0
+
+    rules.append({'number': 9, 'function': rule9})
+
+    # Rule 10
+    def rule10(mol):
+        try:
+            if mol.HasSubstructMatch(carboxylic_acid_pat) and mol.HasSubstructMatch(fluorinated_alkyl_chain_pat):
+                return -1
+            else:
+                return 0
+        except Exception as e:
+            # print(f"Rule 10 Error: {e}")
+            return 0
+
+    rules.append({'number': 10, 'function': rule10})
+
+    # Rule 11
+    def rule11(mol):
+        try:
+            hydroxyl_matches = mol.GetSubstructMatches(phenol_pat)
+            aromatic_matches = mol.GetSubstructMatches(aromatic_pat)
+            if not (hydroxyl_matches and aromatic_matches):
+                return 0
+            for hydroxyl_match in hydroxyl_matches:
+                hydroxyl_idx = hydroxyl_match[0]
+                for aromatic_match in aromatic_matches:
+                    aromatic_idx = aromatic_match[0]
+                    path = Chem.rdmolops.GetShortestPath(mol, hydroxyl_idx, aromatic_idx)
+                    if len(path)<2:
+                        continue
+                    # Exclude hydroxyl oxygen and aromatic atom
+                    middle_indices = path[1:-1]
+                    num_carbons = sum(1 for idx in middle_indices if mol.GetAtomWithIdx(idx).GetAtomicNum()==6 and not mol.GetAtomWithIdx(idx).GetIsAromatic())
+                    if num_carbons >4:
+                        return 1
+                    elif num_carbons<=3:
+                        return -1
+            return 0
+        except Exception as e:
+            # print(f"Rule 11 Error: {e}")
+            return 0
+
+    rules.append({'number': 11, 'function': rule11})
+
+    # Rule 12
+    def rule12(mol):
+        try:
+            aromatic_carboxy_matches = mol.GetSubstructMatches(Chem.MolFromSmarts('[c][C](=O)[O;H1,-]'))
+            if not aromatic_carboxy_matches:
+                return 0
+            # Check for fused rings with carbonyl or heteroatoms
+            fused_ring_info = mol.GetRingInfo()
+            # Get fused rings
+            fused_rings = [ring for ring in fused_ring_info.AtomRings() if len(ring)>=6]
+            for ring in fused_rings:
+                ring_atoms = [mol.GetAtomWithIdx(idx) for idx in ring]
+                has_carbonyl = any(atom.GetAtomicNum()==6 and any(bond.GetBondType()==Chem.rdchem.BondType.DOUBLE and bond.GetEndAtomIdx()!=atom.GetIdx() for bond in atom.GetBonds()) for atom in ring_atoms)
+                has_heteroatom = any(atom.GetAtomicNum() in [7,8,15,16] for atom in ring_atoms)
+                if has_carbonyl or has_heteroatom:
+                    return 1
+            return 0
+        except Exception as e:
+            # print(f"Rule 12 Error: {e}")
+            return 0
+
+    rules.append({'number':12,'function':rule12})
+
+    # Rule 13
+    def rule13(mol):
+        try:
+            pattern = '[CH3][CH2][CH2][CH2][CH2][CH2][CH2][C](=O)[O;H1,-]'
+            chain_pat = Chem.MolFromSmarts(pattern)
+            if mol.HasSubstructMatch(chain_pat):
+                return 1
+            else:
+                return 0
+        except Exception as e:
+            # print(f"Rule 13 Error: {e}")
+            return 0
+
+    rules.append({'number':13,'function':rule13})
+
+    # Rule 14
+    def rule14(mol):
+        try:
+            if mol.HasSubstructMatch(acyl_amine_pat):
+                return -1
+            else:
+                return 0
+        except Exception as e:
+            # print(f"Rule 14 Error: {e}")
+            return 0
+
+    rules.append({'number':14,'function':rule14})
+
+    # Rule 15
+    def rule15(mol):
+        try:
+            if mol.HasSubstructMatch(ketone_pat):
+                return -1
+            else:
+                return 0
+        except Exception as e:
+            # print(f"Rule 15 Error: {e}")
+            return 0
+
+    rules.append({'number':15,'function':rule15})
+
+    # Initialize results
+    results = []
+
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                res = rule['function'](mol)
+                row.append(res)
+            except:
+                row.append(0)
+        results.append(row)
+    # Create DataFrame
+    df = pd.DataFrame(results, columns=[f'Rule {rule["number"]}' for rule in rules])
+    return df
+--------------------------------------------------
+    Target Name: yield
+    GPT Model: o1-preview-2024-09-12
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+- **Rule 1**: Modifiers that are **α-amino acids with aliphatic chains of five carbons or fewer** and **one or two carboxylic acid groups** are associated with **high yield**. These amino acids coordinate effectively with the metal center due to their amino and carboxylate groups.
+  - *High yield examples*: _(2S)-2-aminopentanedioic acid (L-glutamic acid)_, _(2S)-2-aminobutanedioic acid (L-aspartic acid)_, _5-aminopentanoic acid_
+
+- **Rule 2**: Modifiers that are **long-chain amino acids (more than six carbons)** or **amino acids with bulky side chains** are associated with **low yield**. Their size may hinder effective coordination with the catalyst.
+  - *Low yield examples*: _7-aminoheptanoic acid_, _8-aminooctanoic acid_, _(2S)-6-acetamido-2-aminohexanoic acid (N-acetyl-L-lysine)_, _(2S)-2-amino-3-phenylpropanoic acid (L-phenylalanine)_
+
+- **Rule 3**: Modifiers with **aromatic carboxylic acids substituted with strong electron-withdrawing groups (EWGs)**, such as **nitro (–NO₂)** or **bromoalkyl groups**, are associated with **high yield**. The increased acidity facilitates coordination with metal sites.
+  - *High yield examples*: _4-nitrobenzoic acid_, _4-(bromomethyl)benzoic acid_
+
+- **Rule 4**: Modifiers with **aromatic carboxylic acids substituted with electron-donating groups (EDGs)**, like **methyl (–CH₃)**, **methoxy (–OCH₃)**, or **hydroxyl (–OH)** groups, are associated with **low yield**. These groups reduce the acidity of the carboxylic acid, hindering coordination.
+  - *Low yield examples*: _4-methylbenzoic acid_, _3-(4-hydroxyphenyl)propanoic acid_, _2-[(4-hydroxybenzoyl)amino]acetic acid_
+
+- **Rule 5**: Modifiers containing a **formyl group (–CHO) attached to the aromatic ring** are associated with **low yield**. The aldehyde group may interfere with coordination or undergo side reactions.
+  - *Low yield examples*: _4-formylbenzoic acid_, _5-formyl-2-hydroxybenzoic acid_
+
+- **Rule 6**: Modifiers with **thiol groups (–SH) on short aliphatic chains (three carbons or fewer)** are associated with **high yield**, while those with thiol groups attached directly to an aromatic ring are associated with **low yield**. The aliphatic thiols enhance metal binding, while aromatic thiols may hinder it.
+  - *High yield example*: _3-sulfanylpropanoic acid_
+  - *Low yield example*: _4-sulfanylbenzoic acid_
+
+- **Rule 7**: Modifiers with **multiple hydroxyl groups on an aliphatic chain** are associated with **high yield**. These hydroxyls can enhance coordination through hydrogen bonding and chelation.
+  - *High yield examples*: _(2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid (D-gluconic acid)_, _2-[[1,3-dihydroxy-2-(hydroxymethyl)propan-2-yl]oxy]-2-oxoacetic acid_
+
+- **Rule 8**: Modifiers with **bulky ether chains or long polyether segments** are associated with **low yield**. Steric hindrance and increased flexibility may reduce effective binding.
+  - *Low yield examples*: _2-[2-(2-methoxyethoxy)ethoxy]acetic acid_, _3-[2-(2-aminoethoxy)ethoxy]propanoic acid_
+
+- **Rule 9**: Modifiers with **heterocyclic rings connected via a flexible aliphatic linker (one to four carbons)** are associated with **high yield**. The linker allows for optimal orientation and coordination.
+  - *High yield example*: _4-pyridin-4-ylbutanoic acid_
+
+- **Rule 10**: Modifiers with **heterocyclic rings connected directly to a carboxylic acid without a linker** can be associated with **high yield** if the heterocycle facilitates coordination. Aromatic heterocycles may enhance interaction with the metal center.
+  - *High yield examples*: _1H-pyrazole-4-carboxylic acid_, _2-oxo-1H-pyridine-4-carboxylic acid_, _1,3-dioxo-2-benzofuran-5-carboxylic acid_
+  - *Low yield example*: _4-pyridin-4-ylbenzoic acid_ (due to steric hindrance from additional aromatic rings)
+
+- **Rule 11**: Modifiers containing **amide bonds linking functional groups to the carboxylic acid** are associated with **low yield**. The amide bond may reduce the availability of coordination sites.
+  - *Low yield examples*: _2-[[(2S)-2-amino-4-methylsulfanylbutanoyl]amino]acetic acid_, _2-[(4-hydroxybenzoyl)amino]acetic acid_
+
+- **Rule 12**: Modifiers with **medium-length saturated aliphatic chains (six to eight carbons)** without additional functional groups are associated with **high yield**. The hydrophobic chain may enhance interactions by promoting favorable orientation near the metal center.
+  - *High yield example*: _octanoic acid_
+  - *Low yield examples*: _7-aminoheptanoic acid_, _7-hydroxyheptanoic acid_ (addition of polar groups decreases yield)
+
+- **Rule 13**: Modifiers with **perfluorinated alkyl chains** are associated with **low yield**. The fluorine atoms reduce electron density and hinder coordination with the metal center.
+  - *Low yield examples*: _2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid_, _4-[(2,2,2-trifluoroacetyl)amino]butanoic acid_
+
+- **Rule 14**: Modifiers with **ketone groups within the aliphatic chain connected to aromatic rings** are associated with **high yield** if the overall structure allows effective interaction. The ketone can provide additional coordination sites.
+  - *High yield example*: _4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid_
+  - *Low yield example*: _4-oxoheptanedioic acid_ (might be less effective due to chain length and lack of aromatic interactions)
+
+**End of Rules**---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+Rule 1,Rule 2,Rule 3,Rule 4,Rule 5
+0,0,0,0,0
+0,0,0,0,0
+0,0,1,0,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,0,-1,-1
+0,0,0,0,-1
+0,0,0,0,0
+0,0,0,-1,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,0,0,0
+
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.5714285714285714; Test Accuracy: 1.0
+    Train Support: 0.05714285714285714; Test Support: 0.0
+    Train Confidence: 1.0; Test Confidence: 0.5
+    Train Lift: 1.9444444444444446; Test Lift: NONE
+    Train Leverage: 0.02775510204081633; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    Current Rule Code:
+def rule2matrix(smiles_list):
+    # Define SMARTS patterns for functional groups
+    
+    # Carboxylic acid group (-COOH)
+    carboxylic_acid = '[CX3](=O)[OX1H0-,OX2H1]'
+
+    # Primary amine group (-NH2)
+    primary_amine = '[NX3H2]'
+
+    # Aromatic ring with carboxylic acid attached
+    aro_carboxylic_acid = '[c][CX3](=O)[OX1H0-,OX2H1]'
+
+    # Nitro group attached to aromatic ring
+    nitro_on_aromatic = '[c][NX3](=O)=O'
+
+    # Bromoalkyl group attached to aromatic ring
+    bromoalkyl_on_aromatic = '[c][CX4][Br]'
+
+    # Electron-donating groups (EDGs) on aromatic ring
+    methyl_on_aromatic = '[c][CH3]'
+    methoxy_on_aromatic = '[c][OX2][CH3]'
+    hydroxyl_on_aromatic = '[c][OX2H]'
+
+    # Formyl group (-CHO) attached to aromatic ring
+    formyl_on_aromatic = '[c][CX3H]=O'
+
+    # Now, define the rules with their associated patterns and predictions
+
+    rules = [
+        {
+            'number': 1,
+            'description': 'Modifiers that are α-amino acids with aliphatic chains of five carbons or fewer and one or two carboxylic acid groups are associated with high yield.',
+            'patterns': [
+                primary_amine,
+                carboxylic_acid,
+            ],
+            'conditions': {
+                'max_aliphatic_chain_length': 5,
+                'carboxylic_acid_count': [1, 2]
+            },
+            'prediction': 1
+        },
+        {
+            'number': 2,
+            'description': 'Modifiers that are long-chain amino acids (more than six carbons) or amino acids with bulky side chains are associated with low yield.',
+            'patterns': [
+                primary_amine,
+                carboxylic_acid,
+            ],
+            'conditions': {
+                'min_aliphatic_chain_length': 6
+            },
+            'prediction': -1
+        },
+        {
+            'number': 3,
+            'description': 'Modifiers with aromatic carboxylic acids substituted with strong electron-withdrawing groups (EWGs), such as nitro or bromoalkyl groups, are associated with high yield.',
+            'patterns': [
+                aro_carboxylic_acid,
+                [nitro_on_aromatic, bromoalkyl_on_aromatic]
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 4,
+            'description': 'Modifiers with aromatic carboxylic acids substituted with electron-donating groups (EDGs), like methyl, methoxy, or hydroxyl groups, are associated with low yield.',
+            'patterns': [
+                aro_carboxylic_acid,
+                [methyl_on_aromatic, methoxy_on_aromatic, hydroxyl_on_aromatic]
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 5,
+            'description': 'Modifiers containing a formyl group (-CHO) attached to the aromatic ring are associated with low yield.',
+            'patterns': [
+                aro_carboxylic_acid,
+                formyl_on_aromatic
+            ],
+            'prediction': -1
+        }
+    ]
+
+    # Compile SMARTS patterns
+    for rule in rules:
+        compiled_patterns = []
+        for pat in rule.get('patterns', []):
+            if isinstance(pat, list):
+                compiled_group = [Chem.MolFromSmarts(p) for p in pat]
+                compiled_patterns.append(compiled_group)
+            else:
+                compiled_patterns.append([Chem.MolFromSmarts(pat)])
+        rule['compiled_patterns'] = compiled_patterns
+
+    # Initialize results list
+    results = []
+
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = True
+                # Check required patterns
+                for compiled_group in rule['compiled_patterns']:
+                    group_match = False
+                    for pat in compiled_group:
+                        if mol.HasSubstructMatch(pat):
+                            group_match = True
+                            break
+                    if not group_match:
+                        match = False
+                        break
+                # Additional conditions
+                if match and 'conditions' in rule:
+                    conditions_met = True
+                    # Check aliphatic chain length conditions
+                    if 'max_aliphatic_chain_length' in rule['conditions']:
+                        # Simplified carbon count (excluding aromatic carbons)
+                        carbon_count = sum(1 for atom in mol.GetAtoms() if atom.GetAtomicNum() == 6 and not atom.IsAromatic())
+                        if carbon_count > rule['conditions']['max_aliphatic_chain_length']:
+                            conditions_met = False
+                    if 'min_aliphatic_chain_length' in rule['conditions']:
+                        carbon_count = sum(1 for atom in mol.GetAtoms() if atom.GetAtomicNum() == 6 and not atom.IsAromatic())
+                        if carbon_count < rule['conditions']['min_aliphatic_chain_length']:
+                            conditions_met = False
+                    # Check carboxylic acid count
+                    if 'carboxylic_acid_count' in rule['conditions']:
+                        carboxylic_acid_pat = Chem.MolFromSmarts(carboxylic_acid)
+                        carboxylic_acid_matches = mol.GetSubstructMatches(carboxylic_acid_pat)
+                        count = len(carboxylic_acid_matches)
+                        if count < rule['conditions']['carboxylic_acid_count'][0] or count > rule['conditions']['carboxylic_acid_count'][1]:
+                            conditions_met = False
+                    if not conditions_met:
+                        match = False
+                if match:
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception as e:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule["number"]}' for rule in rules])
+    return df
+
+--------------------------------------------------
+    Target Name: yield
+    GPT Model: o1-preview-2024-09-12
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+1. **Short-Chain Aliphatic Amino Acids with Carboxylic Groups**: Modifiers that are **α-amino acids with aliphatic side chains of five carbons or fewer**, possessing **one or two carboxylic acid groups**, are associated with **high yield**. The presence of amino and carboxyl groups enhances coordination with the metal center, facilitating the catalytic process.
+   - *High yield examples*: _(2S)-2-aminopentanedioic acid (L-glutamic acid)_, _(2S)-2-aminobutanedioic acid (L-aspartic acid)_, _5-aminopentanoic acid_, _4-aminobenzoic acid_
+
+2. **Aromatic Carboxylic Acids with Electron-Withdrawing Groups (EWGs)**: Modifiers that are **aromatic carboxylic acids substituted with strong EWGs** such as **nitro (–NO₂)** or **bromoalkyl groups** are associated with **high yield**. EWGs increase the acidity of the carboxylic acid, enhancing its ability to coordinate with metal sites.
+   - *High yield examples*: _4-nitrobenzoic acid_, _4-(bromomethyl)benzoic acid_
+
+3. **Aromatic Carboxylic Acids with Electron-Donating Groups (EDGs)**: Modifiers that are **aromatic carboxylic acids substituted with EDGs** like **methyl (–CH₃)**, **methoxy (–OCH₃)**, or **hydroxyl (–OH)** groups are associated with **low yield**. EDGs decrease the acidity of the carboxylic acid, hindering effective coordination.
+   - *Low yield examples*: _4-methylbenzoic acid_, _3-(4-hydroxyphenyl)propanoic acid_, _2-[(4-hydroxybenzoyl)amino]acetic acid_
+
+4. **Modifiers with Formyl Groups Attached to Aromatic Rings**: Modifiers containing a **formyl group (–CHO) attached to an aromatic ring** are associated with **low yield**. The aldehyde group may interfere with coordination or participate in side reactions, reducing catalytic efficiency.
+   - *Low yield examples*: _4-formylbenzoic acid_, _5-formyl-2-hydroxybenzoic acid_
+
+5. **Modifiers with Thiol Groups on Short Aliphatic Chains**: Modifiers containing **thiol groups (–SH) on short aliphatic chains (three carbons or fewer)** are associated with **high yield**. Thiol groups can strongly coordinate with metal centers, enhancing catalytic activity.
+   - *High yield example*: _3-sulfanylpropanoic acid_
+
+6. **Modifiers with Thiol Groups Attached to Aromatic Rings**: Modifiers with **thiol groups attached directly to an aromatic ring** are associated with **low yield**. The aromatic system may delocalize the electron density of the thiol, reducing its coordinating ability.
+   - *Low yield example*: _4-sulfanylbenzoic acid_
+
+7. **Modifiers with Multiple Hydroxyl Groups on Aliphatic Chains**: Modifiers with **multiple hydroxyl groups on an aliphatic chain** are associated with **high yield**. These hydroxyl groups enhance coordination through hydrogen bonding and chelation with the metal center.
+   - *High yield examples*: _(2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid (D-gluconic acid)_, _2-[[1,3-dihydroxy-2-(hydroxymethyl)propan-2-yl]oxy]-2-oxoacetic acid_
+
+8. **Modifiers with Bulky Ether Chains or Polyether Segments**: Modifiers containing **bulky ether chains or long polyether segments** are associated with **low yield**. Steric hindrance and increased flexibility may reduce effective binding to the metal sites.
+   - *Low yield examples*: _2-[2-(2-methoxyethoxy)ethoxy]acetic acid_, _3-[2-(2-aminoethoxy)ethoxy]propanoic acid_
+
+9. **Heterocyclic Carboxylic Acids with Coordinating Heteroatoms**: Modifiers that are **heterocyclic carboxylic acids containing heteroatoms** (such as **nitrogen or oxygen**) capable of metal coordination are associated with **high yield**. These heteroatoms enhance binding affinity to the metal center.
+   - *High yield examples*: _1H-pyrazole-4-carboxylic acid_, _2-oxo-1H-pyridine-4-carboxylic acid_, _1,3-dioxo-2-benzofuran-5-carboxylic acid_
+
+10. **Modifiers with Flexible Linkers Connecting Heterocyclic Rings to Carboxylic Acids**: Modifiers with **heterocyclic rings connected to carboxylic acids via flexible aliphatic linkers (e.g., butanoic acid linkers)** are associated with **high yield**. The linker allows optimal orientation and effective coordination with the metal center.
+    - *High yield example*: _4-pyridin-4-ylbutanoic acid_
+    - *Low yield example*: _4-pyridin-4-ylbenzoic acid_
+
+11. **Modifiers with Amide Bonds Linking Functional Groups**: Modifiers containing **amide bonds connecting functional groups to the carboxylic acid** are associated with **low yield**. The amide linkage may decrease the availability of lone pairs for coordination due to resonance stabilization.
+    - *Low yield examples*: _2-[[(2S)-2-amino-4-methylsulfanylbutanoyl]amino]acetic acid_, _2-[(4-hydroxybenzoyl)amino]acetic acid_
+
+12. **Modifiers with Long Aliphatic Chains Containing Polar Groups**: Modifiers with **long aliphatic chains (six carbons or more) containing polar functional groups** such as **hydroxyl (–OH)** or **amino (–NH₂)** are associated with **low yield**. The introduction of polar groups may disrupt hydrophobic interactions and hinder effective coordination.
+    - *Low yield examples*: _7-hydroxyheptanoic acid_, _7-aminoheptanoic acid_, _8-aminooctanoic acid_
+
+13. **Medium-Length Saturated Aliphatic Carboxylic Acids**: Modifiers with **saturated aliphatic chains of medium length (six to eight carbons)** without additional functional groups are associated with **high yield**. The hydrophobic chain may promote favorable interactions and accessibility to the metal sites.
+    - *High yield example*: _octanoic acid_
+
+14. **Modifiers with Perfluorinated Alkyl Chains**: Modifiers that have **perfluorinated alkyl chains** are associated with **low yield**. The strong electron-withdrawing effect of fluorine atoms reduces electron density on the carboxylate, diminishing its coordinating ability.
+    - *Low yield examples*: _2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid_, _4-[(2,2,2-trifluoroacetyl)amino]butanoic acid_
+
+15. **Aromatic Carboxylic Acids with Ketone Substituents Adjacent to the Ring**: Modifiers containing a **ketone group adjacent to an aromatic ring** are associated with **high yield**. The ketone may participate in coordination or influence electronic properties favorably.
+    - *High yield example*: _4-(3,4-dimethoxyphenyl)-4-oxobutanoic acid_
+
+**End of Rules**---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+Rule 1,Rule 2,Rule 3,Rule 4,Rule 5,Rule 6,Rule 7,Rule 8,Rule 9,Rule 10,Rule 11,Rule 12,Rule 13,Rule 14,Rule 15
+0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,1,0,0
+0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,-1,0,0,0
+0,0,0,0,0,-1,0,0,1,0,0,0,0,0,0
+0,0,0,0,0,0,0,-1,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,-1,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,-1,0,0,0,0,1,0,0,0,0,0,0
+0,0,0,-1,0,0,0,0,1,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.6285714285714286; Test Accuracy: 1.0
+    Train Support: 0.08571428571428572; Test Support: 0.3333333333333333
+    Train Confidence: 0.8484848484848485; Test Confidence: 0.6666666666666666
+    Train Lift: 1.6706278470984355; Test Lift: NONE
+    Train Leverage: 0.02013605442176871; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    Current Rule Code:
+def rule2matrix(smiles_list):
+    # Define SMARTS patterns for functional groups and structural features
+    patterns = {
+        # Rule 1: Short-Chain Aliphatic Amino Acids with Carboxylic Groups
+        'Rule 1': {
+            'smarts': '[NX3][CX4][CX3](=O)[OX1H1]',  # Alpha amino acid backbone
+            'conditions': {
+                'max_side_chain_length': 5,
+                'carboxylic_acid_count': [1, 2]
+            },
+            'prediction': 1
+        },
+        # Rule 2: Aromatic Carboxylic Acids with EWGs
+        'Rule 2': {
+            'smarts': '[c][CX3](=O)[OX1H0-,OX2H1][a][$(n),$(o),$(s),F,Cl,Br,I,N+](=O)',  # Aromatic carboxylic acid with EWG
+            'prediction': 1
+        },
+        # Rule 3: Aromatic Carboxylic Acids with EDGs
+        'Rule 3': {
+            'smarts': '[c][CX3](=O)[OX1H0-,OX2H1][c][$(O),$(OC),$(N)]',  # Aromatic carboxylic acid with EDG
+            'prediction': -1
+        },
+        # Rule 4: Modifiers with Formyl Groups Attached to Aromatic Rings
+        'Rule 4': {
+            'smarts': '[c][CX3H](=O)',  # Formyl group attached to aromatic ring
+            'prediction': -1
+        },
+        # Rule 5: Modifiers with Thiol Groups on Short Aliphatic Chains
+        'Rule 5': {
+            'smarts': '[SX2H][CX4][CX4][CX4][CX3](=O)[OX1H0-,OX2H1]',  # Thiol on short aliphatic chain with carboxylic acid
+            'prediction': 1
+        },
+        # Rule 6: Modifiers with Thiol Groups Attached to Aromatic Rings
+        'Rule 6': {
+            'smarts': '[c][SX2H]',  # Thiol group attached to aromatic ring
+            'prediction': -1
+        },
+        # Rule 7: Modifiers with Multiple Hydroxyl Groups on Aliphatic Chains
+        'Rule 7': {
+            'smarts': '[OX2H][CX4][CX4][CX4](C[OX2H])[CX3](=O)[OX1H0-,OX2H1]',  # Multiple hydroxyls on aliphatic chain with carboxylic acid
+            'prediction': 1
+        },
+        # Rule 8: Modifiers with Bulky Ether Chains or Polyether Segments
+        'Rule 8': {
+            'smarts': '[OX2][CX4][CX4][OX2][CX4][CX4][OX2][CX4]',  # Bulky ether chains
+            'prediction': -1
+        },
+        # Rule 9: Heterocyclic Carboxylic Acids with Coordinating Heteroatoms
+        'Rule 9': {
+            'smarts': '[c,n,o,s][c,n,o,s][c,n,o,s][CX3](=O)[OX1H0-,OX2H1]',  # Heterocyclic ring with carboxylic acid
+            'prediction': 1
+        },
+        # Rule 10: Heterocyclic Rings Connected via Flexible Linkers
+        'Rule 10': {
+            'smarts': '[c,n,o,s][CX4][CX4][CX4][CX3](=O)[OX1H0-,OX2H1]',  # Heterocycle connected by aliphatic linker to carboxylic acid
+            'prediction': 1
+        },
+        # Rule 11: Modifiers with Amide Bonds Linking Functional Groups
+        'Rule 11': {
+            'smarts': '[NX3][CX3](=O)[OX2H1]',  # Amide bond adjacent to carboxylic acid
+            'prediction': -1
+        },
+        # Rule 12: Modifiers with Long Aliphatic Chains Containing Polar Groups
+        'Rule 12': {
+            'smarts': '[OX2H1,NX3H2][CX4][CX4][CX4][CX4][CX4][CX3](=O)[OX1H0-,OX2H1]',  # Polar groups on long aliphatic chain
+            'prediction': -1
+        },
+        # Rule 13: Medium-Length Saturated Aliphatic Carboxylic Acids
+        'Rule 13': {
+            'smarts': '[CX4][CX4][CX4][CX4][CX3](=O)[OX1H0-,OX2H1]',  # Saturated aliphatic chain with carboxylic acid
+            'conditions': {
+                'chain_length': [6, 8]
+            },
+            'prediction': 1
+        },
+        # Rule 14: Modifiers with Perfluorinated Alkyl Chains
+        'Rule 14': {
+            'smarts': '[CX4]([F,Cl,Br,I])[CX4]([F,Cl,Br,I])[CX4]([F,Cl,Br,I])[CX3](=O)[OX1H0-,OX2H1]',  # Perfluorinated chains with carboxylic acid
+            'prediction': -1
+        },
+        # Rule 15: Aromatic Carboxylic Acids with Ketone Substituents Adjacent to the Ring
+        'Rule 15': {
+            'smarts': '[c][CX3](=O)[CX4][CX3](=O)[OX1H0-,OX2H1]',  # Ketone adjacent to aromatic ring with carboxylic acid
+            'prediction': 1
+        }
+    }
+
+    # Compile SMARTS patterns
+    for rule in patterns.values():
+        rule['pattern'] = Chem.MolFromSmarts(rule['smarts'])
+
+    # Initialize results list
+    results = []
+    
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(patterns))
+            continue
+        row = []
+        for rule_name, rule in patterns.items():
+            try:
+                match = mol.HasSubstructMatch(rule['pattern'])
+                # Additional conditions
+                if match and 'conditions' in rule:
+                    # Check for side chain length
+                    if 'max_side_chain_length' in rule['conditions']:
+                        side_chains = rdMolDescriptors.GetMorganFingerprint(mol, 2)
+                        if side_chains.GetNumOnBits() > rule['conditions']['max_side_chain_length']:
+                            match = False
+                    # Check for chain length
+                    if 'chain_length' in rule['conditions']:
+                        length_range = rule['conditions']['chain_length']
+                        chain_lengths = [len(chain) for chain in Chem.GetMolFrags(mol)]
+                        if not any(length_range[0] <= l <= length_range[1] for l in chain_lengths):
+                            match = False
+                    # Check for carboxylic acid count
+                    if 'carboxylic_acid_count' in rule['conditions']:
+                        carboxyl_pattern = Chem.MolFromSmarts('[CX3](=O)[OX1H0-,OX2H1]')
+                        carboxyl_matches = len(mol.GetSubstructMatches(carboxyl_pattern))
+                        if carboxyl_matches not in rule['conditions']['carboxylic_acid_count']:
+                            match = False
+                row.append(rule['prediction'] if match else 0)
+            except Exception as e:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=patterns.keys())
+    return df
+
+--------------------------------------------------
+    Target Name: yield
+    GPT Model: o1-preview-2024-09-12
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+1. **Short-Chain Aliphatic Amino Dicarboxylic Acids (≤5 Carbons)**:
+   - Modifiers that are **short-chain aliphatic amino dicarboxylic acids** with chain lengths of five carbons or fewer, containing both an **amino group (–NH₂)** and **two carboxyl groups (–COOH)**, are associated with **high yield**. The presence of multiple coordinating groups enables strong chelation with the metal center, enhancing catalytic activity.
+   - *High yield examples*: _(2S)-2-aminobutanedioic acid (L-aspartic acid)_, _(2S)-2-aminopentanedioic acid (L-glutamic acid)_
+
+2. **Long-Chain Aliphatic Amino Carboxylic Acids (>5 Carbons)**:
+   - Modifiers that are **long-chain aliphatic amino carboxylic acids** with more than five carbons, containing an **amino group (–NH₂)** and a **carboxyl group (–COOH)**, are associated with **low yield**. The extended chain length may introduce steric hindrance and reduce effective coordination with the metal center.
+   - *Low yield examples*: _7-aminoheptanoic acid_, _8-aminooctanoic acid_
+
+3. **Aromatic Carboxylic Acids with Electron-Withdrawing Para Substituents**:
+   - Modifiers that are **aromatic carboxylic acids substituted at the para position with strong electron-withdrawing groups (EWGs)** such as **nitro (–NO₂)** or **bromomethyl (–CH₂Br)** are associated with **high yield**. EWGs increase the acidity of the carboxyl group, enhancing its ability to coordinate with the metal center.
+   - *High yield examples*: _4-nitrobenzoic acid_, _4-(bromomethyl)benzoic acid_
+
+4. **Aromatic Carboxylic Acids with Electron-Donating Para Substituents**:
+   - Modifiers that are **aromatic carboxylic acids substituted at the para position with electron-donating groups (EDGs)** such as **methyl (–CH₃)** or **methoxy (–OCH₃)** are associated with **low yield**. EDGs decrease the acidity of the carboxyl group, hindering effective coordination with the metal center.
+   - *Low yield examples*: _4-methylbenzoic acid_, _3-(4-hydroxyphenyl)propanoic acid_
+
+5. **Modifiers with Thiol Groups on Short Aliphatic Chains**:
+   - Modifiers containing a **thiol group (–SH) on a short aliphatic chain (three carbons or fewer)**, along with a **carboxyl group (–COOH)**, are associated with **high yield**. Thiol groups act as strong ligands due to the lone pair on sulfur, facilitating robust coordination with the metal center.
+   - *High yield example*: _3-sulfanylpropanoic acid_
+
+6. **Modifiers with Thiol Groups Attached to Aromatic Rings**:
+   - Modifiers with a **thiol group attached directly to an aromatic ring** are associated with **low yield**. The delocalization of electrons in the aromatic system reduces the nucleophilicity of the thiol sulfur, diminishing its ability to coordinate effectively.
+   - *Low yield example*: _4-sulfanylbenzoic acid_
+
+7. **Polyhydroxylated Aliphatic Carboxylic Acids**:
+   - Modifiers that are **aliphatic carboxylic acids with multiple hydroxyl groups (–OH)** are associated with **high yield**. The hydroxyl groups enhance chelation through additional coordination sites and hydrogen bonding with the metal center.
+   - *High yield example*: _(2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid (D-gluconic acid)_
+
+8. **Modifiers with Long Polyether Chains**:
+   - Modifiers containing **long polyether chains** (–O–CH₂–CH₂–)ₙ are associated with **low yield**. The flexible ether chains may introduce steric hindrance and reduce effective coordination due to their conformational freedom and potential to mask coordinating groups.
+   - *Low yield examples*: _2-[2-(2-methoxyethoxy)ethoxy]acetic acid_, _3-[2-(2-aminoethoxy)ethoxy]propanoic acid_
+
+9. **Modifiers with Perfluoroalkyl Chains**:
+   - Modifiers that have **perfluorinated alkyl chains** attached to the **carboxyl group (–COOH)** are associated with **low yield**. The strong electron-withdrawing effect of fluorine atoms reduces electron density on the carboxylate oxygen, weakening its coordinating ability, and the bulky fluorinated chain may cause steric hindrance.
+   - *Low yield example*: _2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid_
+
+10. **Modifiers with Terminal Aldehyde Groups on Aromatic Rings**:
+    - Modifiers containing an **aldehyde group (–CHO) attached to an aromatic ring** along with a **carboxyl group (–COOH)** are associated with **low yield**. Aldehyde groups can engage in undesirable side reactions or interfere with metal coordination due to their reactivity.
+    - *Low yield examples*: _4-formylbenzoic acid_, _5-formyl-2-hydroxybenzoic acid_
+
+11. **Long-Chain Saturated Aliphatic Carboxylic Acids without Additional Functional Groups**:
+    - Modifiers that are **long-chain saturated aliphatic carboxylic acids (6–8 carbons)** without additional functional groups are associated with **high yield**. The hydrophobic chain may promote favorable interactions with the catalyst surface, while the carboxyl group remains available for coordination.
+    - *High yield example*: _octanoic acid_
+
+12. **Long-Chain Aliphatic Carboxylic Acids with Terminal Polar Groups**:
+    - Modifiers with **long aliphatic chains (6–8 carbons)** containing terminal polar functional groups such as **hydroxyl (–OH)** or **amino (–NH₂)**, in addition to a **carboxyl group (–COOH)**, are associated with **low yield**. The terminal polar groups may introduce steric hindrance or participate in competing interactions, reducing effective coordination with the metal center.
+    - *Low yield examples*: _7-hydroxyheptanoic acid_, _7-aminoheptanoic acid_, _8-aminooctanoic acid_
+
+13. **Modifiers with Flexible Aliphatic Linkers Connecting Aromatic Rings to Carboxyl Groups**:
+    - Modifiers with **flexible aliphatic linkers** (e.g., –(CH₂)ₙ–, where n ≥ 3) connecting an **aromatic ring** to a **carboxyl group (–COOH)** are associated with **high yield**. The flexible linker allows optimal orientation for the carboxyl group to coordinate effectively with the metal center, and the aromatic ring may enhance π–π interactions with the catalyst.
+    - *High yield examples*: _5-(4-hydroxyphenyl)pentanoic acid_, _4-pyridin-4-ylbutanoic acid_
+
+14. **Modifiers with Rigid Aromatic Linkers Connecting Two Aromatic Rings**:
+    - Modifiers with **rigid aromatic linkers** connecting two aromatic rings, one bearing a **carboxyl group (–COOH)**, are associated with **low yield**. The rigidity may prevent the carboxyl group from adopting an optimal position for coordination, reducing interaction with the metal center.
+    - *Low yield examples*: _4-pyridin-4-ylbenzoic acid_, _(2S)-2-amino-3-phenylpropanoic acid (L-phenylalanine)_
+
+15. **Modifiers with Amide Linkages Adjacent to Carboxyl Groups**:
+    - Modifiers containing **amide bonds** adjacent to the **carboxyl group (–COOH)** are associated with **low yield**. The resonance stabilization in amide linkages reduces the availability of lone pair electrons for coordination, and the additional functional group may introduce steric hindrance.
+    - *Low yield examples*: _2-[[(2S)-2-amino-4-methylsulfanylbutanoyl]amino]acetic acid_, _2-[(4-hydroxybenzoyl)amino]acetic acid_
+
+**End of Rules**---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+Rule 1,Rule 2,Rule 3,Rule 4,Rule 5,Rule 6,Rule 7,Rule 8,Rule 9,Rule 10,Rule 11,Rule 12,Rule 13,Rule 14,Rule 15
+0,0,1,-1,0,0,0,0,0,0,0,-1,0,0,0
+1,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+0,0,1,-1,0,0,0,0,0,0,0,-1,0,0,0
+1,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,1,-1,0,0,0,0,0,0,0,-1,0,0,0
+0,0,0,0,0,0,0,0,0,0,1,-1,0,0,0
+0,0,0,0,0,0,1,0,0,0,0,-1,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,1,0,0
+0,0,1,-1,0,0,0,0,0,0,0,-1,0,0,0
+0,0,0,0,0,0,1,0,0,0,1,-1,0,0,0
+0,0,1,-1,1,-1,0,0,0,0,0,-1,0,0,0
+0,0,0,0,0,0,0,0,0,0,1,-1,0,0,0
+0,0,1,-1,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,-1,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,1,-1,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+0,0,1,-1,0,0,0,0,0,0,0,-1,0,0,0
+0,0,1,-1,0,0,0,0,0,0,0,-1,0,0,0
+0,0,1,-1,0,0,0,0,0,0,0,-1,0,0,0
+0,0,1,-1,0,0,0,0,0,0,0,-1,0,0,0
+0,-1,0,0,0,0,0,0,0,0,0,-1,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,1,0,0,0,1,-1,0,0,0
+0,0,0,0,0,0,0,0,-1,0,0,-1,0,0,0
+0,0,0,0,0,0,1,0,0,0,1,-1,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,-1,0,0,0,0,0,0,0,0,0,-1,0,0,0
+0,-1,0,0,0,0,0,0,0,0,0,-1,0,0,0
+0,-1,0,0,0,0,0,0,0,0,0,-1,0,0,0
+0,-1,0,0,0,0,0,0,0,0,0,-1,0,0,0
+
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.6285714285714286; Test Accuracy: 1.0
+    Train Support: 0.14285714285714285; Test Support: 0.0
+    Train Confidence: 1.0; Test Confidence: 0.5
+    Train Lift: 1.9444444444444446; Test Lift: NONE
+    Train Leverage: 0.06938775510204082; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    Current Rule Code:
+def rule2matrix(smiles_list):
+    import pandas as pd
+    from rdkit import Chem
+    from rdkit.Chem import rdMolDescriptors
+    
+    # Define SMARTS patterns for functional groups
+    # Carboxylic acid group (-COOH)
+    carboxylic_acid = '[CX3](=O)[OX2H1]'
+    
+    # Primary amine group (-NH2)
+    primary_amine = '[NX3H2]'
+    
+    # Thiol group (-SH)
+    thiol = '[SX2H]'
+    
+    # Aromatic ring
+    aromatic_ring = '[a]'
+    
+    # Electron-withdrawing groups (EWGs) at para position
+    # Nitro group at para position
+    para_nitro = '[$(a1aa([NX3](=O)=O)a[!#1]a[!#1]1)]'
+    # Bromomethyl group at para position
+    para_bromomethyl = '[$(a1aa([CH2Br])a[!#1]a[!#1]1)]'
+    
+    # Electron-donating groups (EDGs) at para position
+    # Methyl group at para position
+    para_methyl = '[$(a1aa([CH3])a[!#1]a[!#1]1)]'
+    # Methoxy group at para position
+    para_methoxy = '[$(a1aa([OCH3])a[!#1]a[!#1]1)]'
+    
+    # Aliphatic chain of specified length
+    def aliphatic_chain(n):
+        return '[C]' + ('[C]' * (n - 1))
+    
+    # Define rules with their associated patterns and predictions
+    rules = [
+        {
+            'number': 1,
+            'description': 'High yield: Short-chain aliphatic amino dicarboxylic acids (≤5 carbons) with an amino group (-NH2) and two carboxyl groups (-COOH).',
+            'patterns': [
+                primary_amine,
+                carboxylic_acid
+            ],
+            'count_threshold': {
+                carboxylic_acid: 2
+            },
+            'max_chain_length': 5,
+            'is_aliphatic': True,
+            'prediction': 1
+        },
+        {
+            'number': 2,
+            'description': 'Low yield: Long-chain aliphatic amino carboxylic acids (>5 carbons) with an amino group (-NH2) and a carboxyl group (-COOH).',
+            'patterns': [
+                primary_amine,
+                carboxylic_acid
+            ],
+            'count_threshold': {
+                carboxylic_acid: 1
+            },
+            'min_chain_length': 6,
+            'is_aliphatic': True,
+            'prediction': -1
+        },
+        {
+            'number': 3,
+            'description': 'High yield: Aromatic carboxylic acids with electron-withdrawing para substituents (e.g., nitro or bromomethyl).',
+            'patterns': [
+                carboxylic_acid,
+                '[c][c]([C](=O)[O])[c][c]'  # Aromatic carboxylic acid
+            ],
+            'substituents': [
+                para_nitro,
+                para_bromomethyl
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 4,
+            'description': 'Low yield: Aromatic carboxylic acids with electron-donating para substituents (e.g., methyl or methoxy).',
+            'patterns': [
+                carboxylic_acid,
+                '[c][c]([C](=O)[O])[c][c]'  # Aromatic carboxylic acid
+            ],
+            'substituents': [
+                para_methyl,
+                para_methoxy
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 5,
+            'description': 'High yield: Modifiers with thiol groups (-SH) on short aliphatic chains (≤3 carbons) and a carboxyl group (-COOH).',
+            'patterns': [
+                thiol,
+                carboxylic_acid
+            ],
+            'max_thiol_chain_length': 3,
+            'prediction': 1
+        },
+        {
+            'number': 6,
+            'description': 'Low yield: Modifiers with thiol groups attached directly to aromatic rings and a carboxyl group (-COOH).',
+            'patterns': [
+                thiol,
+                carboxylic_acid,
+                aromatic_ring
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 7,
+            'description': 'High yield: Polyhydroxylated aliphatic carboxylic acids (multiple hydroxyl groups and a carboxyl group).',
+            'patterns': [
+                carboxylic_acid,
+                '[OX2H]'  # Hydroxyl group
+            ],
+            'count_threshold': {
+                '[OX2H]': 2
+            },
+            'is_aliphatic': True,
+            'prediction': 1
+        },
+        {
+            'number': 8,
+            'description': 'Low yield: Modifiers with long polyether chains and a carboxyl group (-COOH).',
+            'patterns': [
+                carboxylic_acid,
+                '[$([OX2][CX4][CX4][OX2][CX4][CX4][OX2][CX4][CX4])]'  # Long polyether chain
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 9,
+            'description': 'Low yield: Modifiers with perfluoroalkyl chains attached to the carboxyl group (-COOH).',
+            'patterns': [
+                carboxylic_acid,
+                '[CX4]([F])(F)F'  # Trifluoromethyl group
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 10,
+            'description': 'Low yield: Modifiers with terminal aldehyde groups on aromatic rings and a carboxyl group (-COOH).',
+            'patterns': [
+                carboxylic_acid,
+                '[#6][CX3H][OX1]'  # Aldehyde group
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 11,
+            'description': 'High yield: Long-chain saturated aliphatic carboxylic acids (6–8 carbons) without additional functional groups.',
+            'patterns': [
+                carboxylic_acid
+            ],
+            'chain_length_range': (6, 8),
+            'no_additional_groups': True,
+            'is_aliphatic': True,
+            'prediction': 1
+        },
+        {
+            'number': 12,
+            'description': 'Low yield: Long-chain aliphatic carboxylic acids (6–8 carbons) with terminal polar groups (e.g., hydroxyl or amino).',
+            'patterns': [
+                carboxylic_acid,
+                '[$([NX3H2]),$([OX2H])]'  # Amino or hydroxyl group
+            ],
+            'chain_length_range': (6, 8),
+            'prediction': -1
+        },
+        {
+            'number': 13,
+            'description': 'High yield: Modifiers with flexible aliphatic linkers connecting aromatic rings to carboxyl groups.',
+            'patterns': [
+                carboxylic_acid,
+                '[c][C][C][C][C][C](=O)[O]'  # Flexible linker (n ≥ 3)
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 14,
+            'description': 'Low yield: Modifiers with rigid aromatic linkers connecting two aromatic rings, one bearing a carboxyl group (-COOH).',
+            'patterns': [
+                carboxylic_acid,
+                'c1ccc(-c2ccccc2)cc1'  # Biphenyl structure
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 15,
+            'description': 'Low yield: Modifiers with amide linkages adjacent to carboxyl groups.',
+            'patterns': [
+                carboxylic_acid,
+                '[NX3][CX3](=O)[CX3](=O)[OX2H1]'  # Amide linkage adjacent to carboxyl
+            ],
+            'prediction': -1
+        }
+    ]
+    
+    # Compile SMARTS patterns
+    for rule in rules:
+        compiled_patterns = []
+        for smarts in rule.get('patterns', []):
+            compiled_patterns.append(Chem.MolFromSmarts(smarts))
+        rule['compiled_patterns'] = compiled_patterns
+    
+    # Initialize results list
+    results = []
+    
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = True
+                # Check for aliphaticity if required
+                if rule.get('is_aliphatic'):
+                    if mol.GetRingInfo().NumRings() > 0:
+                        match = False
+                # Check chain length constraints if any
+                if 'max_chain_length' in rule or 'min_chain_length' in rule or 'chain_length_range' in rule:
+                    carbon_chains = rdMolDescriptors.GetMorganFingerprintAsBitVect(mol, 2, nBits=2048, useFeatures=True)
+                    num_carbons = len([atom for atom in mol.GetAtoms() if atom.GetAtomicNum() == 6])
+                    if 'max_chain_length' in rule and num_carbons > rule['max_chain_length']:
+                        match = False
+                    if 'min_chain_length' in rule and num_carbons < rule['min_chain_length']:
+                        match = False
+                    if 'chain_length_range' in rule:
+                        min_len, max_len = rule['chain_length_range']
+                        if not (min_len <= num_carbons <= max_len):
+                            match = False
+                # Check for absence of additional functional groups if specified
+                if rule.get('no_additional_groups'):
+                    # Exclude molecules with atoms other than C, H, and O
+                    for atom in mol.GetAtoms():
+                        if atom.GetAtomicNum() not in [1, 6, 8]:
+                            match = False
+                            break
+                # Check patterns
+                for pat in rule['compiled_patterns']:
+                    if not mol.HasSubstructMatch(pat):
+                        match = False
+                        break
+                # Check count thresholds if any
+                if 'count_threshold' in rule:
+                    for smarts, threshold in rule['count_threshold'].items():
+                        pat = Chem.MolFromSmarts(smarts)
+                        matches = mol.GetSubstructMatches(pat)
+                        if len(matches) < threshold:
+                            match = False
+                            break
+                if match:
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception:
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule['number']}' for rule in rules])
+    return df
+
+--------------------------------------------------
+    Target Name: yield
+    GPT Model: o1-preview-2024-09-12
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+1. **Short-Chain Aliphatic Amino Acids (≤5 Carbons) with Amino and Carboxyl Groups**
+   - **Description**: Modifiers that are **short-chain (≤5 carbons) aliphatic acids** containing both an **amino group (–NH₂)** and **carboxyl groups (–COOH)**, without bulky side chains.
+   - **Prediction**: Associated with **high yield**.
+   - **Rationale**: Amino and carboxyl groups can coordinate with the metal center, and short chains minimize steric hindrance, enhancing catalytic activity.
+   - **Examples**: _(2S)-2-aminobutanedioic acid (L-aspartic acid)_, _(2S)-2-aminopentanedioic acid (L-glutamic acid)_, _5-aminopentanoic acid_.
+
+2. **Aromatic Carboxylic Acids with Para Substituents Capable of Coordination (Amino or Nitro Groups)**
+   - **Description**: Modifiers that are **aromatic carboxylic acids** with a **para substituent capable of coordination**, such as **amino (–NH₂)** or **nitro (–NO₂)** groups.
+   - **Prediction**: Associated with **high yield**.
+   - **Rationale**: Electron-donating or coordinating groups at the para position enhance the ability to coordinate with the metal center, improving catalytic performance.
+   - **Examples**: _4-aminobenzoic acid_, _4-nitrobenzoic acid_.
+
+3. **Heterocyclic Aromatic Carboxylic Acids Containing Nitrogen Atoms**
+   - **Description**: Modifiers that are **heterocyclic aromatic carboxylic acids** containing **nitrogen atoms within the ring structure**.
+   - **Prediction**: Associated with **high yield**.
+   - **Rationale**: Nitrogen atoms in heterocycles can act as additional coordination sites, enhancing interaction with the metal center and catalytic activity.
+   - **Examples**: _1H-pyrazole-4-carboxylic acid_, _2-oxo-1H-pyridine-4-carboxylic acid_.
+
+4. **Modifiers with Multiple Hydroxyl Groups (Polyhydroxylated Acids)**
+   - **Description**: Modifiers that contain **multiple hydroxyl (–OH) groups** in addition to **carboxyl groups**.
+   - **Prediction**: Associated with **high yield**.
+   - **Rationale**: Multiple hydroxyl groups provide additional coordination sites and can enhance interaction with the metal center, improving catalytic efficiency.
+   - **Examples**: _(2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid (D-gluconic acid)_, _2-[[1,3-dihydroxy-2-(hydroxymethyl)propan-2-yl]oxy]propanoic acid_.
+
+5. **Short-Chain Aliphatic Acids Containing Thiol Groups (–SH)**
+   - **Description**: Modifiers that are **short-chain (≤5 carbons) aliphatic acids** containing a **thiol group (–SH)**.
+   - **Prediction**: Associated with **high yield**.
+   - **Rationale**: Thiol groups are strong ligands due to the lone pair on sulfur, facilitating robust coordination with the metal center and enhancing catalytic activity.
+   - **Example**: _3-sulfanylpropanoic acid (3-mercaptopropionic acid)_.
+
+6. **Long-Chain Aliphatic Acids Without Additional Polar Groups**
+   - **Description**: Modifiers that are **long-chain (≥6 carbons) aliphatic carboxylic acids** without additional **polar groups** beyond the carboxyl group.
+   - **Prediction**: Associated with **high yield**.
+   - **Rationale**: Hydrophobic long chains without additional polar groups may favor interactions within the catalyst system and avoid steric hindrance, maintaining catalytic activity.
+   - **Example**: _Octanoic acid_.
+
+7. **Amino Acids with Aromatic Side Chains Lacking Additional Coordinating Groups**
+   - **Description**: Modifiers that are **amino acids** with **aromatic side chains** that do not contain additional coordinating groups, such as **phenyl rings** without substituents.
+   - **Prediction**: Associated with **low yield**.
+   - **Rationale**: Bulky aromatic side chains without coordinating functionalities may hinder effective coordination due to steric effects, reducing catalytic performance.
+   - **Example**: _(2S)-2-amino-3-phenylpropanoic acid (L-phenylalanine)_.
+
+8. **Modifiers with Aldehyde Groups Attached to Aromatic Rings**
+   - **Description**: Modifiers that are **aromatic carboxylic acids** with **aldehyde groups (–CHO)** attached to the ring.
+   - **Prediction**: Associated with **low yield**.
+   - **Rationale**: Aldehyde groups are reactive and can interfere with metal coordination or participate in side reactions, reducing catalytic efficiency.
+   - **Examples**: _4-formylbenzoic acid_, _5-formyl-2-hydroxybenzoic acid_.
+
+9. **Modifiers with Non-Coordinating Substituents on Aromatic Rings (e.g., Methyl, Methoxy)**
+   - **Description**: Modifiers that are **aromatic carboxylic acids** with **non-coordinating substituents** such as **methyl (–CH₃)** or **methoxy (–OCH₃)** groups on the ring.
+   - **Prediction**: Associated with **low yield**.
+   - **Rationale**: Non-coordinating substituents do not enhance coordination ability and may introduce steric hindrance, diminishing interaction with the metal center.
+   - **Examples**: _4-methylbenzoic acid_, _3-(4-hydroxyphenyl)propanoic acid_.
+
+10. **Modifiers with Long Aliphatic Chains Containing Terminal Polar Groups**
+    - **Description**: Modifiers that are **long-chain (≥6 carbons) aliphatic acids** containing **terminal polar groups**, such as **hydroxyl (–OH)** or **amino (–NH₂)** groups.
+    - **Prediction**: Associated with **low yield**.
+    - **Rationale**: Long chains with terminal polar groups may introduce steric hindrance or participate in competing interactions, reducing effective coordination with the metal center.
+    - **Examples**: _7-aminoheptanoic acid_, _8-aminooctanoic acid_, _7-hydroxyheptanoic acid_.
+
+11. **Modifiers with Ether Linkages (Polyethers)**
+    - **Description**: Modifiers containing **ether linkages** within the chain, such as repeated **–O–** units.
+    - **Prediction**: Associated with **low yield**.
+    - **Rationale**: Flexible ether chains may introduce steric hindrance and reduce effective coordination due to their conformational freedom, decreasing catalytic activity.
+    - **Examples**: _2-[2-(2-methoxyethoxy)ethoxy]acetic acid_, _3-[2-(2-aminoethoxy)ethoxy]propanoic acid_.
+
+12. **Modifiers with Perfluorinated Chains**
+    - **Description**: Modifiers that contain **perfluoroalkyl chains** attached to **carboxyl groups (–COOH)**.
+    - **Prediction**: Associated with **low yield**.
+    - **Rationale**: The strong electron-withdrawing effect of fluorine atoms reduces electron density on the carboxylate oxygen, weakening its coordinating ability, and the bulky perfluorinated chain may cause steric hindrance.
+    - **Example**: _2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid_.
+
+13. **Modifiers with Amide Bonds Nearby Carboxyl Groups**
+    - **Description**: Modifiers containing **amide bonds** adjacent to **carboxyl groups (–COOH)**.
+    - **Prediction**: Associated with **low yield**.
+    - **Rationale**: Amide groups may reduce the availability of lone pair electrons on nitrogen for coordination due to resonance stabilization and may introduce steric hindrance, decreasing catalytic efficiency.
+    - **Examples**: _2-[[(2S)-2-amino-4-methylsulfanylbutanoyl]amino]acetic acid_, _2-[(4-hydroxybenzoyl)amino]acetic acid_.
+
+14. **Modifiers with Aromatic Rings Connected via Longer Aliphatic Chains (≥5 Carbons)**
+    - **Description**: Modifiers where an **aromatic ring**, possibly substituted with coordinating groups (e.g., **hydroxyl (–OH)**), is connected to a **carboxyl group** via an **aliphatic chain of five or more carbons**.
+    - **Prediction**: Associated with **high yield**.
+    - **Rationale**: Longer aliphatic chains may reduce steric hindrance and allow better access for coordination with the metal center, enhancing catalytic performance.
+    - **Example**: _5-(4-hydroxyphenyl)pentanoic acid_.
+
+15. **Modifiers with Heteroaromatic Rings Attached via Aliphatic Linkers**
+    - **Description**: Modifiers where a **heteroaromatic ring** (e.g., **pyridine**) is attached to a **carboxyl group** via an **aliphatic linker (≥4 carbons)**.
+    - **Prediction**: Associated with **high yield**.
+    - **Rationale**: Aliphatic linkers may reduce steric hindrance and allow the heteroaromatic ring to coordinate effectively with the metal center, improving catalytic activity.
+    - **Example**: _4-pyridin-4-ylbutanoic acid_.
+
+**End of Rules**---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+Rule 1,Rule 2,Rule 3,Rule 4,Rule 5
+0,0,1,0,0
+1,0,0,1,0
+0,0,0,0,0
+1,0,0,1,0
+1,0,0,0,0
+0,1,0,0,0
+0,0,0,0,0
+0,0,0,1,0
+0,0,0,1,0
+0,0,1,0,0
+0,0,0,1,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,1,0,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,1,0,0
+0,0,0,0,0
+0,0,0,0,1
+0,0,0,1,0
+0,0,0,0,0
+0,1,0,0,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,0,1,0
+0,0,0,1,0
+0,0,0,0,0
+0,0,0,1,0
+0,0,0,1,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,0,0,0
+0,0,0,0,0
+
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.6857142857142857; Test Accuracy: 0.0
+    Train Support: 0.05714285714285714; Test Support: 0.0
+    Train Confidence: 1.0; Test Confidence: 0.5
+    Train Lift: 2.058823529411765; Test Lift: NONE
+    Train Leverage: 0.02938775510204081; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    Current Rule Code:
+def rule2matrix(smiles_list):
+    import pandas as pd
+    from rdkit import Chem
+    
+    # Define the rules with their associated patterns, exclude patterns, counts, and predictions
+    rules = [
+        # Rule 1
+        {
+            'number': 1,
+            'description': 'Short-chain aliphatic amino acids (≤5 carbons) with amino and carboxyl groups',
+            'patterns': [
+                '[CX3](=O)[OX2H1]',  # Carboxylic acid group
+                '[NX3;H2][CX4]',      # Aliphatic primary amine
+            ],
+            'exclude_patterns': ['[a]'],  # Exclude aromatic atoms
+            'count_constraints': [
+                {'pattern': '[#6]', 'max_count': 5},  # Total carbons ≤5
+            ],
+            'prediction': 1
+        },
+        # Rule 2
+        {
+            'number': 2,
+            'description': 'Aromatic carboxylic acids with para substituents capable of coordination (amino or nitro groups)',
+            'patterns': [
+                '[c][CX3](=O)[OX2H1]',  # Aromatic carboxylic acid group
+                ['[c][NX3;H2]', '[c][NX3+](=O)[O-]', '[c][NX3](=O)=O']  # Aromatic amino or nitro group
+            ],
+            'prediction': 1
+        },
+        # Rule 3
+        {
+            'number': 3,
+            'description': 'Heterocyclic aromatic carboxylic acids containing nitrogen atoms',
+            'patterns': [
+                '[n]',  # Aromatic nitrogen atom
+                '[c,n][CX3](=O)[OX2H1]',  # Carboxylic acid attached to heteroaromatic ring
+            ],
+            'prediction': 1
+        },
+        # Rule 4
+        {
+            'number': 4,
+            'description': 'Modifiers with multiple hydroxyl groups (polyhydroxylated acids)',
+            'patterns': [
+                '[CX3](=O)[OX2H1]',  # Carboxylic acid group
+            ],
+            'count_constraints': [
+                {'pattern': '[OX2H]', 'min_count': 2},  # At least 2 hydroxyl groups
+            ],
+            'prediction': 1
+        },
+        # Rule 5
+        {
+            'number': 5,
+            'description': 'Short-chain aliphatic acids containing thiol groups (-SH)',
+            'patterns': [
+                '[CX3](=O)[OX2H1]',  # Carboxylic acid group
+                '[SX2H]',             # Thiol group
+            ],
+            'exclude_patterns': ['[a]'],  # Exclude aromatic atoms
+            'count_constraints': [
+                {'pattern': '[#6]', 'max_count': 5},  # Total carbons ≤5
+            ],
+            'prediction': 1
+        },
+        # Additional rules can be added here in the same format
+    ]
+    
+    # Compile the patterns
+    for rule in rules:
+        compiled_patterns = []
+        for pat in rule['patterns']:
+            if isinstance(pat, list):
+                # This is an 'or' group
+                compiled_or_patterns = [Chem.MolFromSmarts(p) for p in pat]
+                compiled_patterns.append(compiled_or_patterns)
+            else:
+                compiled_patterns.append(Chem.MolFromSmarts(pat))
+        rule['compiled_patterns'] = compiled_patterns
+        # Compile exclude patterns if any
+        if 'exclude_patterns' in rule:
+            rule['compiled_exclude_patterns'] = [Chem.MolFromSmarts(p) for p in rule['exclude_patterns']]
+        # Compile count constraint patterns if any
+        if 'count_constraints' in rule:
+            for constraint in rule['count_constraints']:
+                constraint['compiled_pattern'] = Chem.MolFromSmarts(constraint['pattern'])
+    
+    # Initialize results list
+    results = []
+    
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = True
+                # Check exclude patterns if any
+                if 'compiled_exclude_patterns' in rule:
+                    for pat in rule['compiled_exclude_patterns']:
+                        if mol.HasSubstructMatch(pat):
+                            match = False
+                            break
+                    if not match:
+                        row.append(0)
+                        continue
+                # Check required patterns
+                for pat in rule['compiled_patterns']:
+                    if isinstance(pat, list):
+                        # This is an 'or' group; at least one must match
+                        group_match = False
+                        for sub_pat in pat:
+                            if mol.HasSubstructMatch(sub_pat):
+                                group_match = True
+                                break
+                        if not group_match:
+                            match = False
+                            break
+                    else:
+                        if not mol.HasSubstructMatch(pat):
+                            match = False
+                            break
+                if not match:
+                    row.append(0)
+                    continue
+                # Check count constraints if any
+                if 'count_constraints' in rule:
+                    for constraint in rule['count_constraints']:
+                        matches = mol.GetSubstructMatches(constraint['compiled_pattern'])
+                        count = len(matches)
+                        if 'max_count' in constraint and count > constraint['max_count']:
+                            match = False
+                            break
+                        if 'min_count' in constraint and count < constraint['min_count']:
+                            match = False
+                            break
+                    if not match:
+                        row.append(0)
+                        continue
+                # If all checks passed
+                row.append(rule['prediction'])
+            except Exception as e:
+                # In case of any error, append 0
+                # print(f"Error processing rule {rule['number']} for SMILES {smi}: {e}")
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule['number']}' for rule in rules])
+    return df
+
+--------------------------------------------------
+    Target Name: yield
+    GPT Model: o1-preview-2024-09-12
+    ML Model: ETC
+    Current_Rules:
+    **Start of Rules**
+
+1. **Modifiers that are α-Amino Acids with Carboxyl and Amino Groups on Adjacent Carbons**
+   - **Description**: Modifiers that are **α-amino acids**, having both **amino (–NH₂)** and **carboxyl (–COOH)** groups bonded to the **same carbon atom**.
+   - **Prediction**: Associated with **high yield**.
+   - **Rationale**: The proximity of amino and carboxyl groups allows for **bidentate coordination** to metal centers, enhancing catalytic activity by stabilizing the metal ion through chelation.
+   - **Examples**: _(2S)-2-aminobutanedioic acid (L-aspartic acid)_, _(2S)-2-aminopentanedioic acid (L-glutamic acid)_, _(2R)-2-amino-3-(1H-indol-3-yl)propanoic acid (L-tryptophan)_.
+
+2. **Aromatic Carboxylic Acids with Para-Amino or Para-Nitro Substituents**
+   - **Description**: Modifiers that are **aromatic carboxylic acids** with an **amino (–NH₂)** or **nitro (–NO₂)** group at the **para position** relative to the carboxyl group.
+   - **Prediction**: Associated with **high yield**.
+   - **Rationale**: Para-substituted amino or nitro groups enhance the ligand's ability to **coordinate with metal centers** through resonance and electron delocalization, improving catalytic performance.
+   - **Examples**: _4-aminobenzoic acid_, _4-nitrobenzoic acid_.
+
+3. **Heterocyclic Carboxylic Acids with Nitrogen Atoms in the Ring**
+   - **Description**: Modifiers that contain **heterocyclic aromatic rings** with **nitrogen atoms**, directly attached to a **carboxyl group**.
+   - **Prediction**: Associated with **high yield**.
+   - **Rationale**: Nitrogen atoms in heterocycles act as **strong coordinating sites**, forming stable complexes with metal ions and enhancing catalytic efficiency.
+   - **Examples**: _1H-pyrazole-4-carboxylic acid_, _2-oxo-1H-pyridine-4-carboxylic acid_.
+
+4. **Modifiers with Multiple Hydroxyl Groups Near Carboxyl Group**
+   - **Description**: Modifiers that possess **multiple hydroxyl groups (–OH)** in proximity to the **carboxyl group**, forming **polyol structures**.
+   - **Prediction**: Associated with **high yield**.
+   - **Rationale**: Multiple hydroxyl groups increase the number of **potential coordination sites**, strengthening metal-ligand interactions.
+   - **Example**: _(2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoic acid (D-gluconic acid)_.
+
+5. **Long-Chain Aliphatic Carboxylic Acids Without Additional Functional Groups**
+   - **Description**: Modifiers that are **straight-chain aliphatic carboxylic acids** with **six or more carbons** and **no other functional groups**.
+   - **Prediction**: Associated with **high yield**.
+   - **Rationale**: Their hydrophobic nature and lack of steric hindrance allow them to integrate into the catalyst's hydrophobic regions without blocking active sites.
+   - **Example**: _Octanoic acid_.
+
+6. **Modifiers with Aldehyde Groups Attached to Aromatic Rings**
+   - **Description**: Modifiers that are **aromatic carboxylic acids** with an **aldehyde group (–CHO)** attached to the aromatic ring.
+   - **Prediction**: Associated with **low yield**.
+   - **Rationale**: Aldehyde groups can participate in **side reactions** or inhibit catalyst function by forming **Schiff bases** with amines, reducing the availability of active metal sites.
+   - **Examples**: _4-formylbenzoic acid_, _5-formyl-2-hydroxybenzoic acid_.
+
+7. **Modifiers Containing Polyether Chains**
+   - **Description**: Modifiers with multiple **ether linkages (–O–)** within their molecular structure.
+   - **Prediction**: Associated with **low yield**.
+   - **Rationale**: Polyether chains may not coordinate effectively with metal centers and could introduce flexibility that disrupts the catalyst's structure.
+   - **Examples**: _2-[2-(2-methoxyethoxy)ethoxy]acetic acid_, _3-[2-(2-aminoethoxy)ethoxy]propanoic acid_.
+
+8. **Long-Chain Aliphatic Acids with Terminal Polar Groups**
+   - **Description**: Modifiers that are **long-chain aliphatic acids** (≥6 carbons) with **terminal amino (–NH₂)** or **hydroxyl (–OH)** groups.
+   - **Prediction**: Associated with **low yield**.
+   - **Rationale**: Terminal polar groups may introduce **steric hindrance** or create unfavorable interactions, hindering effective coordination with the metal center.
+   - **Examples**: _7-aminoheptanoic acid_, _7-hydroxyheptanoic acid_, _8-aminooctanoic acid_.
+
+9. **Modifiers with Amide Bonds Adjacent to Carboxyl Group**
+   - **Description**: Modifiers containing **amide bonds (–CONH–)** near the **carboxyl group**.
+   - **Prediction**: Associated with **low yield**.
+   - **Rationale**: Amide groups are less likely to donate electrons due to **resonance stabilization**, reducing their effectiveness as ligands and possibly introducing steric hindrance.
+   - **Examples**: _2-[(4-hydroxybenzoyl)amino]acetic acid_, _2-[[(2S)-2-amino-4-methylsulfanylbutanoyl]amino]acetic acid_.
+
+10. **Amino Acids with Non-Coordinating Aromatic Side Chains**
+    - **Description**: **Amino acids** with **aromatic side chains** lacking coordinating heteroatoms or substituents capable of metal coordination.
+    - **Prediction**: Associated with **low yield**.
+    - **Rationale**: The absence of additional coordination sites and potential steric bulk from the aromatic ring may hinder effective interaction with the metal center.
+    - **Example**: _(2S)-2-amino-3-phenylpropanoic acid (L-phenylalanine)_.
+
+11. **Modifiers with Electron-Withdrawing Perfluorinated Alkyl Chains**
+    - **Description**: Modifiers containing **perfluoroalkyl groups** attached to the **carboxyl group**.
+    - **Prediction**: Associated with **low yield**.
+    - **Rationale**: Strong electron-withdrawing fluorine atoms reduce electron density on coordinating oxygen atoms, weakening metal-ligand interactions.
+    - **Example**: _2,2,3,3,4,4,5,5,5-nonafluoropentanoic acid_.
+
+12. **Aromatic Carboxylic Acids with Para-Hydroxy Substituents**
+    - **Description**: Modifiers that are **aromatic carboxylic acids** with a **hydroxy group (–OH)** at the **para position** relative to the carboxyl group.
+    - **Prediction**: Associated with **low yield**.
+    - **Rationale**: Despite being a potential coordinating group, the **para-hydroxy substituent** may result in less effective coordination or deactivation of the catalyst, possibly due to strong hydrogen bonding or competing reactions.
+    - **Examples**: _4-hydroxybenzoic acid_, _3-(4-hydroxyphenyl)propanoic acid_.
+
+13. **Modifiers with Sulfur-Containing Thiol Groups Near Carboxyl Group**
+    - **Description**: Modifiers that have **thiol groups (–SH)** in proximity to the **carboxyl group** (within two carbons).
+    - **Prediction**: Associated with **high yield**.
+    - **Rationale**: **Thiol groups** can form strong metal-sulfur bonds, enhancing catalyst stability through effective coordination with the metal center.
+    - **Example**: _3-sulfanylpropanoic acid_.
+
+14. **Modifiers Where Heterocyclic Rings are Directly Attached to Carboxyl Group**
+    - **Description**: Modifiers in which **nitrogen-containing heterocyclic rings** are directly connected to the **carboxyl group**.
+    - **Prediction**: Yield depends on the ability of the heterocycle to coordinate; may be associated with **high yield** if the heterocycle can coordinate effectively.
+    - **Rationale**: Direct attachment of heterocyclic rings with coordinating nitrogen atoms can facilitate strong metal-ligand interactions, but the position and electron density of the nitrogen atoms are crucial.
+    - **Examples**: Positive example: _1H-pyrazole-4-carboxylic acid_ (**high yield**); negative example: _4-pyridin-4-ylbenzoic acid_ (**low yield**).
+
+15. **Modifiers with Extended Conjugation Between Carboxyl Group and Distal Heterocycle**
+    - **Description**: Modifiers with a **conjugated system** separating the **carboxyl group** from a **heterocyclic ring** containing coordinating heteroatoms.
+    - **Prediction**: Often associated with **low yield**.
+    - **Rationale**: The extended conjugation may **delocalize electron density** away from coordinating sites, reducing the effectiveness of coordination with the metal center.
+    - **Example**: _4-pyridin-4-ylbenzoic acid_ (**low yield**) vs. _4-pyridin-4-ylbutanoic acid_ (**high yield**).
+
+**End of Rules**
+
+---
+
+These refined rules have been carefully crafted to reflect the relationships observed in the dataset between the structural features of the molecular modifiers and the yield outcomes of the reaction. The focus has been on combining multiple sub-structures and considering the underlying physicochemical properties that influence metal coordination and catalytic activity. The rules prioritize broader coverage while balancing complexity, aiming to provide clear predictions for new modifiers based on their functional groups and structural characteristics.---------------------------------------------------------------
+
+
+    Current_Matrix:
+    Matrix Generator Message:
+Rule 1,Rule 2,Rule 3,Rule 4,Rule 5,Rule 6,Rule 7,Rule 8,Rule 9,Rule 10,Rule 11,Rule 12,Rule 13
+0,0,1,0,0,0,0,0,0,0,0,0,0
+0,0,0,1,0,0,0,-1,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,1,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,-1,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,1,0,0,-1,0,0,0,0,0
+0,0,0,1,0,0,0,0,0,0,0,0,0
+0,0,0,1,0,0,0,-1,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0,0,0,0
+0,0,0,1,0,0,0,-1,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,-1,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,-1,0,0,-1,0,0
+0,0,1,0,0,0,0,0,0,0,0,0,0
+0,0,1,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,1,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,-1,0,0,0,0
+0,0,1,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,1,0,0,0,0,-1,0,0,0,0
+0,0,0,1,1,0,0,-1,0,0,0,0,0
+0,0,0,0,0,0,0,0,-1,0,-1,0,0
+0,0,0,1,1,0,0,-1,0,0,0,0,0
+0,0,0,1,0,0,0,0,0,0,0,0,0
+0,0,0,0,1,0,0,-1,0,0,0,0,0
+0,0,0,0,0,0,-1,0,0,0,0,0,0
+0,0,0,0,0,0,0,-1,-1,0,0,0,0
+0,0,0,0,1,0,0,-1,0,0,0,0,0
+
+---------------------------------------------------------------
+
+
+    Train Accuracy: 0.7714285714285715; Test Accuracy: 1.0
+    Train Support: 0.06428571428571428; Test Support: 0.0
+    Train Confidence: 0.8; Test Confidence: 0.5
+    Train Lift: 1.5612745098039218; Test Lift: NONE
+    Train Leverage: 0.017551020408163268; Test Leverage: NONE
+    ----------------------------------------------------------------------------------
+
+    Current Rule Code:
+def rule2matrix(smiles_list):
+    # Define SMARTS patterns for functional groups
+    carboxylic_acid = Chem.MolFromSmarts('C(=O)[O;H]')
+    amine_primary = Chem.MolFromSmarts('[NX3;H2]')
+    amine_secondary = Chem.MolFromSmarts('[NX3;H1][#6]')
+    amino_acid_alpha = Chem.MolFromSmarts('[NX3;H2][CX4;H1][CX3](=O)[OX1H]')
+    aromatic_ring = Chem.MolFromSmarts('c1ccccc1')
+    para_amino = Chem.MolFromSmarts('c1cc(N)ccc1C(=O)[O;H]')
+    para_nitro = Chem.MolFromSmarts('c1cc([N+](=O)[O-])ccc1C(=O)[O;H]')
+    heterocycle_nitrogen = Chem.MolFromSmarts('[n]')
+    hydroxyl_group = Chem.MolFromSmarts('[OX2H]')
+    aldehyde_aromatic = Chem.MolFromSmarts('c[C](=O)[H]')
+    ether_linkage = Chem.MolFromSmarts('[C][OX2][C]')
+    long_aliphatic_chain = Chem.MolFromSmarts('[C]-[C]-[C]-[C]-[C]-[C]-[C](=O)[O;H]')
+    terminal_hydroxyl = Chem.MolFromSmarts('[C][C][C][C][C][OX2H]')
+    terminal_amino = Chem.MolFromSmarts('[C][C][C][C][C][NX3;H2]')
+    amide_adjacent = Chem.MolFromSmarts('C(=O)N')
+    aromatic_sidechain = Chem.MolFromSmarts('[NX3;H2][CX4][CX3](=O)[OX1H][CX4][c]')
+    perfluoro_alkyl = Chem.MolFromSmarts('[C]([F])([F])[F]')
+    para_hydroxy = Chem.MolFromSmarts('c1cc(O)ccc1C(=O)[O;H]')
+    thiol_adjacent = Chem.MolFromSmarts('[#16X2H][CX4][CX3](=O)[OX1H]')
+    extended_conjugation = Chem.MolFromSmarts('C=CC=CC(=O)[O;H]')
+    
+    # Define the rules
+    rules = [
+        {
+            'number': 1,
+            'description': 'Modifiers that are α-amino acids with carboxyl and amino groups on the same carbon',
+            'patterns': [amino_acid_alpha],
+            'prediction': 1
+        },
+        {
+            'number': 2,
+            'description': 'Aromatic carboxylic acids with para-amino or para-nitro substituents',
+            'patterns': [para_amino, para_nitro],
+            'prediction': 1
+        },
+        {
+            'number': 3,
+            'description': 'Heterocyclic carboxylic acids with nitrogen atoms in the ring',
+            'patterns': [heterocycle_nitrogen, carboxylic_acid],
+            'prediction': 1
+        },
+        {
+            'number': 4,
+            'description': 'Modifiers with multiple hydroxyl groups near carboxyl group',
+            'patterns': [hydroxyl_group, carboxylic_acid],
+            'count_threshold': {'[OX2H]': 2},
+            'prediction': 1
+        },
+        {
+            'number': 5,
+            'description': 'Long-chain aliphatic carboxylic acids without additional functional groups',
+            'patterns': [long_aliphatic_chain],
+            'prediction': 1
+        },
+        {
+            'number': 6,
+            'description': 'Modifiers with aldehyde groups attached to aromatic rings',
+            'patterns': [aldehyde_aromatic],
+            'prediction': -1
+        },
+        {
+            'number': 7,
+            'description': 'Modifiers containing polyether chains',
+            'patterns': [ether_linkage],
+            'count_threshold': {'[C][OX2][C]': 2},
+            'prediction': -1
+        },
+        {
+            'number': 8,
+            'description': 'Long-chain aliphatic acids with terminal polar groups',
+            'patterns': [carboxylic_acid],
+            'additional_patterns': [terminal_hydroxyl, terminal_amino],
+            'prediction': -1
+        },
+        {
+            'number': 9,
+            'description': 'Modifiers with amide bonds adjacent to carboxyl group',
+            'patterns': [amide_adjacent],
+            'prediction': -1
+        },
+        {
+            'number': 10,
+            'description': 'Amino acids with non-coordinating aromatic side chains',
+            'patterns': [aromatic_sidechain],
+            'prediction': -1
+        },
+        {
+            'number': 11,
+            'description': 'Modifiers with electron-withdrawing perfluorinated alkyl chains',
+            'patterns': [perfluoro_alkyl],
+            'prediction': -1
+        },
+        {
+            'number': 12,
+            'description': 'Aromatic carboxylic acids with para-hydroxy substituents',
+            'patterns': [para_hydroxy],
+            'prediction': -1
+        },
+        {
+            'number': 13,
+            'description': 'Modifiers with sulfur-containing thiol groups near carboxyl group',
+            'patterns': [thiol_adjacent],
+            'prediction': 1
+        },
+        # Rules 14 and 15 are complex and depend on specific contexts
+        # For simplicity, they are not included in this code
+    ]
+    
+    # Initialize results list
+    results = []
+    
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = True
+                # Check for required patterns
+                for pat in rule.get('patterns', []):
+                    if not mol.HasSubstructMatch(pat):
+                        match = False
+                        break
+                if not match:
+                    row.append(0)
+                    continue
+                # Check for additional patterns if any
+                if 'additional_patterns' in rule:
+                    additional_match = False
+                    for pat in rule['additional_patterns']:
+                        if mol.HasSubstructMatch(pat):
+                            additional_match = True
+                            break
+                    if not additional_match:
+                        match = False
+                        row.append(0)
+                        continue
+                # Check count thresholds if any
+                if 'count_threshold' in rule:
+                    for smarts, threshold in rule['count_threshold'].items():
+                        count = len(mol.GetSubstructMatches(Chem.MolFromSmarts(smarts)))
+                        if count < threshold:
+                            match = False
+                            break
+                    if not match:
+                        row.append(0)
+                        continue
+                if match:
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception as e:
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule['number']}' for rule in rules])
+    return df
+--------------------------------------------------

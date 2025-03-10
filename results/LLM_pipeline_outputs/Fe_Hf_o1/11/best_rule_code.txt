@@ -1,0 +1,240 @@
+def rule2matrix(smiles_list):
+    # Define SMARTS patterns for functional groups and features
+    # Common patterns
+    carboxylic_acid = '[CX3](=O)[OX1H0-,OX2H1]'
+    aromatic_ring = '[a]'
+    
+    # Electron-Withdrawing Groups (EWGs)
+    ewg_patterns = ['[F,Cl,Br,I]', '[NX3](=O)=O', '[CX3](=O)[OX1-,OX2H0]']
+    
+    # Electron-Donating Groups (EDGs)
+    edg_patterns = ['[OX2H]', '[OX2][CH3]', '[NX3;H2,H1][#6]']
+    
+    # Sulfur-containing groups
+    thiol = '[#16X2H]'
+    thioether = '[#16X2][#6]'
+    
+    # Primary amine
+    primary_amine = '[NX3;H2][#6]'
+    
+    # Multiple hydroxyl groups
+    hydroxyl_group = '[OX2H]'
+    
+    # Ether linkage
+    ether_linkage = '[#6][OX2][#6]'
+    
+    # Fluorinated aliphatic chains
+    fluorinated_chain = '[#6][#6][#6][#6][#6][F]'
+    
+    # Aromatic hydroxyl group (phenol)
+    phenol_group = '[c][OX2H]'
+    
+    # Keto group adjacent to carboxylic acid
+    keto_adjacent_carboxy = '[#6][CX3](=O)[CX3](=O)[OX1H0-,OX2H1]'
+    
+    # Pyridine rings
+    pyridine_2 = 'n1ccccc1'
+    pyridine_3 = 'c1ccncc1'
+    pyridine_4 = 'c1cccnc1'
+    
+    # Fused aromatic rings with carbonyl groups
+    fused_aromatic_carbonyl = '[#6]1[#6][#6][#6]=O[#6][#6]1'
+    
+    # Terminal hydroxyl group on long aliphatic chain
+    terminal_hydroxyl_chain = '[#6][#6][#6][#6][#6][#6][OX2H]'
+    
+    # Initialize rules
+    rules = [
+        {
+            'number': 1,
+            'description': 'Modifiers that are aromatic carboxylic acids with EWGs at the para position have a high Fe/Hf value (True).',
+            'patterns': [
+                aromatic_ring,
+                carboxylic_acid,
+                ewg_patterns
+            ],
+            'position': 'para',
+            'prediction': 1
+        },
+        {
+            'number': 2,
+            'description': 'Modifiers that are aromatic carboxylic acids with EDGs at the para position have a low Fe/Hf value (False).',
+            'patterns': [
+                aromatic_ring,
+                carboxylic_acid,
+                edg_patterns
+            ],
+            'position': 'para',
+            'prediction': -1
+        },
+        {
+            'number': 3,
+            'description': 'Modifiers containing sulfur-functional groups like thiol (-SH) or thioether (-S-) have a high Fe/Hf value (True).',
+            'patterns': [
+                [thiol, thioether]
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 4,
+            'description': 'Modifiers that are aliphatic amino acids with primary amino groups and carboxylic acid groups have a high Fe/Hf value (True).',
+            'patterns': [
+                primary_amine,
+                carboxylic_acid
+            ],
+            'aliphatic': True,
+            'prediction': 1
+        },
+        {
+            'number': 5,
+            'description': 'Modifiers with multiple hydroxyl groups (polyhydroxy acids) have a low Fe/Hf value (False).',
+            'patterns': [
+                hydroxyl_group,
+                hydroxyl_group,
+                carboxylic_acid
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 6,
+            'description': 'Modifiers containing ether linkages in their side chains have a high Fe/Hf value (True).',
+            'patterns': [
+                ether_linkage,
+                carboxylic_acid
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 7,
+            'description': 'Modifiers containing fluorinated aliphatic chains have a low Fe/Hf value (False).',
+            'patterns': [
+                fluorinated_chain
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 8,
+            'description': 'Modifiers that are simple aliphatic carboxylic acids without additional coordinating functional groups have a low Fe/Hf value (False).',
+            'patterns': [
+                carboxylic_acid
+            ],
+            'exclude_patterns': [
+                primary_amine,
+                thiol,
+                thioether,
+                ether_linkage,
+                aromatic_ring
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 9,
+            'description': 'Modifiers with aromatic hydroxy groups (phenolic OH) have a low Fe/Hf value (False).',
+            'patterns': [
+                phenol_group
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 10,
+            'description': 'Modifiers containing pyridine rings directly attached to a carboxylic acid group exhibit variable Fe/Hf values based on nitrogen position.',
+            'patterns': [
+                [pyridine_4],
+                carboxylic_acid
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 11,
+            'description': 'Modifiers with terminal hydroxyl groups on long aliphatic chains have a high Fe/Hf value (True).',
+            'patterns': [
+                terminal_hydroxyl_chain,
+                carboxylic_acid
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 12,
+            'description': 'Modifiers with keto groups adjacent to carboxylic acids on aliphatic chains have a low Fe/Hf value (False).',
+            'patterns': [
+                keto_adjacent_carboxy
+            ],
+            'prediction': -1
+        },
+        {
+            'number': 13,
+            'description': 'Modifiers with fused aromatic ring systems containing carbonyl groups can have a high Fe/Hf value (True).',
+            'patterns': [
+                fused_aromatic_carbonyl
+            ],
+            'prediction': 1
+        }
+    ]
+    
+    # Compile patterns
+    for rule in rules:
+        compiled_patterns = []
+        for pat in rule.get('patterns', []):
+            if isinstance(pat, list):
+                compiled_group = [Chem.MolFromSmarts(p) for p in pat]
+                compiled_patterns.append(compiled_group)
+            else:
+                compiled_patterns.append(Chem.MolFromSmarts(pat))
+        rule['compiled_patterns'] = compiled_patterns
+        
+        # Compile exclude patterns if any
+        if 'exclude_patterns' in rule:
+            compiled_excludes = []
+            for pat in rule['exclude_patterns']:
+                compiled_excludes.append(Chem.MolFromSmarts(pat))
+            rule['compiled_exclude_patterns'] = compiled_excludes
+    
+    # Initialize results list
+    results = []
+    
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = True
+                # Check exclude patterns if any
+                if 'exclude_patterns' in rule:
+                    for pat in rule['compiled_exclude_patterns']:
+                        if mol.HasSubstructMatch(pat):
+                            match = False
+                            break
+                    if not match:
+                        row.append(0)
+                        continue
+                # Check required patterns
+                for pat in rule['compiled_patterns']:
+                    if isinstance(pat, list):
+                        group_match = False
+                        for p in pat:
+                            if mol.HasSubstructMatch(p):
+                                group_match = True
+                                break
+                        if not group_match:
+                            match = False
+                            break
+                    else:
+                        if not mol.HasSubstructMatch(pat):
+                            match = False
+                            break
+                if match:
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception as e:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule['number']}' for rule in rules])
+    return df

@@ -1,0 +1,119 @@
+def rule2matrix(smiles_list):
+    # Define SMARTS patterns for functional groups
+    carboxylic_acid = Chem.MolFromSmarts('[CX3](=O)[OX2H1]')  # Carboxylic acid group (-COOH)
+    primary_amine = Chem.MolFromSmarts('[NX3;H2]')  # Primary amine group (-NH2)
+    amide_bond = Chem.MolFromSmarts('[NX3][CX3](=O)[#6]')  # Amide bond
+    ether_linkage = Chem.MolFromSmarts('[C][O][C]')  # Ether linkage within carbon chain
+    fluorinated_group = Chem.MolFromSmarts('[CX4]([F,Cl,Br,I])([F,Cl,Br,I])[F,Cl,Br,I]')  # Trifluoromethyl group
+    aldehyde_group = Chem.MolFromSmarts('[CX3H1](=O)')  # Aldehyde group
+    hydroxyl_group = Chem.MolFromSmarts('[OX2H]')  # Hydroxyl group (-OH)
+    peptide_bond = Chem.MolFromSmarts('[NX3][CX3](=O)[NX3]')  # Peptide bond
+    aromatic_ring = Chem.MolFromSmarts('a')  # Aromatic ring
+    nitrogen_aromatic_ring = Chem.MolFromSmarts('[n]')  # Nitrogen-containing aromatic ring
+
+    # Initialize results list
+    results = []
+
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*11)  # Number of rules is 11
+            continue
+        row = []
+        try:
+            # Rule 1: Carboxylic acid with free amino group within three carbons
+            match_rule1 = 0
+            carboxy_matches = mol.GetSubstructMatches(carboxylic_acid)
+            amine_matches = mol.GetSubstructMatches(primary_amine)
+            for c_match in carboxy_matches:
+                for a_match in amine_matches:
+                    path = Chem.GetShortestPath(mol, c_match[0], a_match[0])
+                    if len(path) - 1 <= 3:
+                        match_rule1 = 1
+                        break
+                if match_rule1 == 1:
+                    break
+            row.append(match_rule1)
+        except:
+            row.append(0)
+        try:
+            # Rule 2: Aromatic carboxylic acid with short linker (less than four carbons) predicts low yield
+            pattern_rule2 = Chem.MolFromSmarts('[c][CX3](=O)[OX2H1]')
+            match_rule2 = -1 if mol.HasSubstructMatch(pattern_rule2) else 0
+            row.append(match_rule2)
+        except:
+            row.append(0)
+        try:
+            # Rule 3: Aromatic carboxylic acids with aliphatic chain of four or more carbons separating carboxyl group from ring predicts high yield
+            pattern_rule3 = Chem.MolFromSmarts('[c][C][C][C][C][CX3](=O)[OX2H1]')
+            match_rule3 = 1 if mol.HasSubstructMatch(pattern_rule3) else 0
+            row.append(match_rule3)
+        except:
+            row.append(0)
+        try:
+            # Rule 4: Aliphatic carboxylic acids with long, unbranched carbon chains (six or more carbons) predict high yield
+            pattern_rule4 = Chem.MolFromSmarts('[CX3](=O)[OX2H1][C][C][C][C][C][C]')
+            match_rule4 = 1 if mol.HasSubstructMatch(pattern_rule4) else 0
+            row.append(match_rule4)
+        except:
+            row.append(0)
+        try:
+            # Rule 5: Modifiers containing amide bonds involving amino group or near carboxyl group predict low yield
+            match_rule5 = -1 if mol.HasSubstructMatch(amide_bond) else 0
+            row.append(match_rule5)
+        except:
+            row.append(0)
+        try:
+            # Rule 6: Heteroaromatic carboxylic acids with carboxyl group directly attached to nitrogen-containing aromatic ring predict high yield
+            pattern_rule6 = Chem.MolFromSmarts('[n][CX3](=O)[OX2H1]')
+            match_rule6 = 1 if mol.HasSubstructMatch(pattern_rule6) else 0
+            row.append(match_rule6)
+        except:
+            row.append(0)
+        try:
+            # Rule 7: Modifiers containing strongly electron-withdrawing fluorinated groups predict low yield
+            match_rule7 = -1 if mol.HasSubstructMatch(fluorinated_group) else 0
+            row.append(match_rule7)
+        except:
+            row.append(0)
+        try:
+            # Rule 8: Aliphatic carboxylic acids containing ether linkages within carbon chain predict low yield
+            match_rule8 = -1 if mol.HasSubstructMatch(ether_linkage) else 0
+            row.append(match_rule8)
+        except:
+            row.append(0)
+        try:
+            # Rule 9: Aromatic carboxylic acids with aldehyde groups attached to ring predict low yield
+            match_rule9 = -1 if mol.HasSubstructMatch(aromatic_ring) and mol.HasSubstructMatch(aldehyde_group) else 0
+            row.append(match_rule9)
+        except:
+            row.append(0)
+        try:
+            # Rule 10: Polyhydroxy carboxylic acids (sugar acids) or multiple hydroxyl groups near carboxyl group predict high yield
+            hydroxyl_matches = mol.GetSubstructMatches(hydroxyl_group)
+            carboxy_matches = mol.GetSubstructMatches(carboxylic_acid)
+            match_rule10 = 0
+            for c_match in carboxy_matches:
+                hydroxyl_count = 0
+                for h_match in hydroxyl_matches:
+                    path = Chem.GetShortestPath(mol, c_match[0], h_match[0])
+                    if len(path) - 1 <= 3:
+                        hydroxyl_count += 1
+                if hydroxyl_count >= 2:
+                    match_rule10 = 1
+                    break
+            row.append(match_rule10)
+        except:
+            row.append(0)
+        try:
+            # Rule 11: Modifiers containing peptide bonds or are peptides predict low yield
+            match_rule11 = -1 if mol.HasSubstructMatch(peptide_bond) else 0
+            row.append(match_rule11)
+        except:
+            row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {i}' for i in range(1, 12)])
+    return df

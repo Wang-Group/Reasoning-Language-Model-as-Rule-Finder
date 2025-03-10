@@ -1,0 +1,202 @@
+def rule2matrix(smiles_list):
+    import pandas as pd
+    from rdkit import Chem
+    from rdkit.Chem import AllChem
+
+    # Define SMARTS patterns for functional groups
+    patterns = {
+        'carboxylic_acid': Chem.MolFromSmarts('[CX3](=O)[OX2H1]'),
+        'carboxylate_anion': Chem.MolFromSmarts('[CX3](=O)[O-]'),
+        'primary_amine': Chem.MolFromSmarts('[NX3;H2]'),
+        'secondary_amine': Chem.MolFromSmarts('[NX3;H1][#6]'),
+        'thiol': Chem.MolFromSmarts('[SX2H]'),
+        'thioether': Chem.MolFromSmarts('[#16X2][#6]'),
+        'pyridine_ring': Chem.MolFromSmarts('n1ccccc1'),
+        'aromatic_ring': Chem.MolFromSmarts('a1aaaaa1'),
+        'aromatic_carboxylic_acid': Chem.MolFromSmarts('[a][CX3](=O)[OX1H0-,OX2H1]'),
+        'electron_withdrawing_groups': [
+            Chem.MolFromSmarts('[c][NX3+](=O)[O-]'),  # Nitro group on aromatic ring
+            Chem.MolFromSmarts('[c][CH2Br]'),          # Bromomethyl on aromatic ring
+            Chem.MolFromSmarts('[c][SX2H]'),           # Thiol on aromatic ring
+        ],
+        'electron_donating_groups': [
+            Chem.MolFromSmarts('[c][CH3]'),            # Methyl group on aromatic ring
+            Chem.MolFromSmarts('[c][NX3H2]'),          # Amino group on aromatic ring
+            Chem.MolFromSmarts('[c][OX2H]'),           # Hydroxyl group on aromatic ring
+        ],
+        'hydroxyl_group': Chem.MolFromSmarts('[OX2H]'),
+        'multiple_hydroxyls': Chem.MolFromSmarts('[OX2H]'),
+        'perfluoroalkyl_chain': Chem.MolFromSmarts('[CX4](F)(F)(F)'),  # Trifluoromethyl
+        'ether_linkage': Chem.MolFromSmarts('[#6][OX2][#6]'),
+        'amide_adjacent_to_aromatic': Chem.MolFromSmarts('[a][CX3](=O)[NX3]'),
+        'alpha_amino_acid': Chem.MolFromSmarts('[NX3H2][CX4][CX3](=O)[OX1H0-,OX2H1]'),
+        'aromatic_amino_acid': Chem.MolFromSmarts('[NX3H2][CX4][#6][a]'),
+    }
+
+    # Define custom check functions for complex rules
+
+    def check_rule1(mol):
+        # Rule 1: ω-amino carboxylic acids with aliphatic chains of five or more carbons
+        amine_matches = mol.GetSubstructMatches(patterns['primary_amine'])
+        acid_matches = mol.GetSubstructMatches(patterns['carboxylic_acid'])
+        if not amine_matches or not acid_matches:
+            return False
+        for amine in amine_matches:
+            for acid in acid_matches:
+                n_idx = amine[0]
+                c_idx = acid[0]
+                # Get shortest path
+                path = Chem.rdmolops.GetShortestPath(mol, n_idx, c_idx)
+                # Check if path length is at least 7 (N + 5 carbons + C)
+                if len(path) >= 7:
+                    # Check that intermediate atoms are carbons
+                    intermediate_atoms = path[1:-1]
+                    if all(mol.GetAtomWithIdx(idx).GetSymbol() == 'C' for idx in intermediate_atoms):
+                        return True
+        return False
+
+    def check_rule2(mol):
+        # Rule 2: Aromatic carboxylic acids with strong electron-withdrawing groups at the para position
+        acid_matches = mol.GetSubstructMatches(patterns['aromatic_carboxylic_acid'])
+        if not acid_matches:
+            return False
+        for acid_match in acid_matches:
+            c_idx = acid_match[0]  # Carbon of carboxylic acid attached to aromatic ring
+            c_atom = mol.GetAtomWithIdx(c_idx)
+            # Find the aromatic ring containing this atom
+            ri = mol.GetRingInfo()
+            atom_rings = ri.AtomRings()
+            for ring in atom_rings:
+                if c_idx in ring and len(ring) == 6:
+                    # Identify para position (opposite atom in the ring)
+                    idx_in_ring = ring.index(c_idx)
+                    para_idx = ring[(idx_in_ring + 3) % 6]
+                    para_atom = mol.GetAtomWithIdx(para_idx)
+                    # Check for EWG at para position
+                    for ewg_pattern in patterns['electron_withdrawing_groups']:
+                        if mol.HasSubstructMatch(ewg_pattern, useChirality=False):
+                            ewg_matches = mol.GetSubstructMatches(ewg_pattern)
+                            for match in ewg_matches:
+                                if para_idx in match:
+                                    return True
+        return False
+
+    def check_rule3(mol):
+        # Rule 3: Modifiers containing both sulfur-containing groups and carboxylic acid groups
+        has_acid = mol.HasSubstructMatch(patterns['carboxylic_acid']) or mol.HasSubstructMatch(patterns['carboxylate_anion'])
+        has_sulfur = mol.HasSubstructMatch(patterns['thiol']) or mol.HasSubstructMatch(patterns['thioether'])
+        return has_acid and has_sulfur
+
+    def check_rule4(mol):
+        # Rule 4: Modifiers with pyridine rings adjacent to carboxylic acid groups
+        pyridine_matches = mol.GetSubstructMatches(patterns['pyridine_ring'])
+        acid_matches = mol.GetSubstructMatches(patterns['carboxylic_acid'])
+        if not pyridine_matches or not acid_matches:
+            return False
+        for pyridine in pyridine_matches:
+            for idx in pyridine:
+                atom = mol.GetAtomWithIdx(idx)
+                for neighbor in atom.GetNeighbors():
+                    if neighbor.HasSubstructMatch(patterns['carboxylic_acid']) or neighbor.HasSubstructMatch(patterns['carboxylate_anion']):
+                        return True
+        return False
+
+    def check_rule5(mol):
+        # Rule 5: Amino acids with aromatic side chains without steric hindrance
+        matches = mol.GetSubstructMatches(patterns['aromatic_amino_acid'])
+        return bool(matches)
+
+    def check_rule6(mol):
+        # Rule 6: Simple aliphatic carboxylic acids without additional coordinating groups
+        has_acid = mol.HasSubstructMatch(patterns['carboxylic_acid']) or mol.HasSubstructMatch(patterns['carboxylate_anion'])
+        has_other_groups = mol.HasSubstructMatch(patterns['primary_amine']) or mol.HasSubstructMatch(patterns['secondary_amine']) or mol.HasSubstructMatch(patterns['thiol']) or mol.HasSubstructMatch(patterns['thioether']) or mol.HasSubstructMatch(patterns['ether_linkage'])
+        return has_acid and not has_other_groups
+
+    def check_rule7(mol):
+        # Rule 7: Aromatic carboxylic acids with electron-donating groups at the para position
+        acid_matches = mol.GetSubstructMatches(patterns['aromatic_carboxylic_acid'])
+        if not acid_matches:
+            return False
+        for acid_match in acid_matches:
+            c_idx = acid_match[0]
+            c_atom = mol.GetAtomWithIdx(c_idx)
+            ri = mol.GetRingInfo()
+            atom_rings = ri.AtomRings()
+            for ring in atom_rings:
+                if c_idx in ring and len(ring) == 6:
+                    idx_in_ring = ring.index(c_idx)
+                    para_idx = ring[(idx_in_ring + 3) % 6]
+                    for edg_pattern in patterns['electron_donating_groups']:
+                        if mol.GetAtomWithIdx(para_idx).HasSubstructMatch(edg_pattern):
+                            return True
+        return False
+
+    def check_rule8(mol):
+        # Rule 8: Modifiers with multiple hydroxyl groups on aliphatic chains without other strong coordinating groups
+        hydroxyl_matches = mol.GetSubstructMatches(patterns['hydroxyl_group'])
+        has_acid = mol.HasSubstructMatch(patterns['carboxylic_acid']) or mol.HasSubstructMatch(patterns['carboxylate_anion'])
+        if len(hydroxyl_matches) >= 2 and has_acid:
+            return True
+        return False
+
+    def check_rule9(mol):
+        # Rule 9: Carboxylic acids attached to perfluorinated alkyl chains
+        has_acid = mol.HasSubstructMatch(patterns['carboxylic_acid']) or mol.HasSubstructMatch(patterns['carboxylate_anion'])
+        has_perfluoro = mol.HasSubstructMatch(patterns['perfluoroalkyl_chain'])
+        return has_acid and has_perfluoro
+
+    def check_rule10(mol):
+        # Rule 10: Aliphatic carboxylic acids with terminal hydroxyl groups and sufficient chain length (6 or more carbons)
+        acid_matches = mol.GetSubstructMatches(patterns['carboxylic_acid'])
+        hydroxyl_matches = mol.GetSubstructMatches(patterns['hydroxyl_group'])
+        if not acid_matches or not hydroxyl_matches:
+            return False
+        # Check for chain length between acid and hydroxyl group
+        for acid in acid_matches:
+            for hydroxyl in hydroxyl_matches:
+                c_idx = acid[0]
+                o_idx = hydroxyl[0]
+                path = Chem.rdmolops.GetShortestPath(mol, c_idx, o_idx)
+                if len(path) >= 7:
+                    return True
+        return False
+
+    # Define the rules with their check functions
+    rules = [
+        {'number': 1, 'description': 'Rule 1', 'prediction': 1, 'check_function': check_rule1},
+        {'number': 2, 'description': 'Rule 2', 'prediction': 1, 'check_function': check_rule2},
+        {'number': 3, 'description': 'Rule 3', 'prediction': 1, 'check_function': check_rule3},
+        {'number': 4, 'description': 'Rule 4', 'prediction': 1, 'check_function': check_rule4},
+        {'number': 5, 'description': 'Rule 5', 'prediction': 1, 'check_function': check_rule5},
+        {'number': 6, 'description': 'Rule 6', 'prediction': -1, 'check_function': check_rule6},
+        {'number': 7, 'description': 'Rule 7', 'prediction': -1, 'check_function': check_rule7},
+        {'number': 8, 'description': 'Rule 8', 'prediction': -1, 'check_function': check_rule8},
+        {'number': 9, 'description': 'Rule 9', 'prediction': -1, 'check_function': check_rule9},
+        {'number': 10, 'description': 'Rule 10', 'prediction': 1, 'check_function': check_rule10},
+        # Add more rules as needed
+    ]
+
+    # Initialize results list
+    results = []
+
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                if rule['check_function'](mol):
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception as e:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f"Rule {rule['number']}" for rule in rules])
+    return df

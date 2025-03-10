@@ -1,0 +1,171 @@
+def rule2matrix(smiles_list):
+    # Define SMARTS patterns
+    carboxylic_acid = '[CX3](=O)[OX1H0-,OX2H1]'
+    amino_group = '[NX3;H2]'
+    hydroxyl_group = '[OX2H]'
+    aromatic_atom = '[a]'
+    nitro_group = '[NX3](=O)=O'
+    aromatic_amino = '[NX3;H2][c]'
+    thiol_group = '[SX2H]'
+    halogen = '[F,Cl,Br,I]'
+    methoxy_group = '[OX2][CH3]'
+    ether_linkage = '[#6][OX2][#6]'
+    pyridine_ring = 'n1ccccc1'
+    aldehyde_group = '[CX3H1](=O)'  # Aldehyde group
+    bromomethyl_group = '[CH2][Br]'
+    fluorinated_alkyl_chain = '[CX4][F]'
+    
+    # Initialize list of rules
+    rules = [
+        {
+            'number': 1,
+            'description': 'Modifiers that are aliphatic dicarboxylic amino acids predict a high yield.',
+            'patterns': [
+                [carboxylic_acid],
+                [amino_group]
+            ],
+            'exclude_patterns': [
+                [aromatic_atom]
+            ],
+            'count_threshold': {carboxylic_acid: 2},
+            'prediction': 1
+        },
+        {
+            'number': 2,
+            'description': 'Modifiers that are short-chain aliphatic amino acids with terminal amino groups within five carbons of the carboxyl group predict a high yield.',
+            'patterns': [
+                [carboxylic_acid],
+                [amino_group]
+            ],
+            'distance': 5,
+            'exclude_patterns': [
+                [aromatic_atom]
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 3,
+            'description': 'Modifiers that are polyhydroxy carboxylic acids predict a high yield.',
+            'patterns': [
+                [carboxylic_acid],
+                [hydroxyl_group]
+            ],
+            'count_threshold': {hydroxyl_group: 2},
+            'prediction': 1
+        },
+        {
+            'number': 4,
+            'description': 'Modifiers that are aromatic carboxylic acids with para-substituted amino or nitro groups predict a high yield.',
+            'patterns': [
+                ['c1cc(ccc1[NX3;H2])C(=O)O', 'c1cc(ccc1[NX3;H1])C(=O)O', 'c1cc(ccc1[NX3](=O)=O)C(=O)O']
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 5,
+            'description': 'Modifiers that are heteroaromatic carboxylic acids with nitrogen atoms capable of coordination predict a high yield.',
+            'patterns': [
+                [pyridine_ring],
+                [carboxylic_acid]
+            ],
+            'prediction': 1
+        },
+        {
+            'number': 6,
+            'description': 'Modifiers with fluorinated alkyl chains predict a low yield.',
+            'patterns': [
+                [fluorinated_alkyl_chain]
+            ],
+            'prediction': -1
+        },
+        # ... Additional rules would be defined similarly ...
+    ]
+    
+    # Compile SMARTS patterns
+    for rule in rules:
+        compiled_patterns = []
+        for group in rule.get('patterns', []):
+            compiled_group = [Chem.MolFromSmarts(p) for p in group]
+            compiled_patterns.append(compiled_group)
+        rule['compiled_patterns'] = compiled_patterns
+        # Compile exclude patterns if any
+        if 'exclude_patterns' in rule:
+            compiled_excludes = []
+            for group in rule['exclude_patterns']:
+                compiled_group = [Chem.MolFromSmarts(p) for p in group]
+                compiled_excludes.append(compiled_group)
+            rule['compiled_exclude_patterns'] = compiled_excludes
+    
+    # Initialize results list
+    results = []
+    
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If the molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = True
+                # Check exclude patterns if any
+                if 'exclude_patterns' in rule:
+                    for group in rule['compiled_exclude_patterns']:
+                        for pat in group:
+                            if mol.HasSubstructMatch(pat):
+                                match = False
+                                break
+                        if not match:
+                            break
+                    if not match:
+                        row.append(0)
+                        continue
+                # Check required patterns
+                for idx, compiled_group in enumerate(rule['compiled_patterns']):
+                    group_match = False
+                    for pat in compiled_group:
+                        matches = mol.GetSubstructMatches(pat)
+                        if matches:
+                            # If a count threshold is specified for this pattern
+                            if 'count_threshold' in rule and pat.GetSmarts() in rule['count_threshold']:
+                                threshold = rule['count_threshold'][pat.GetSmarts()]
+                                if len(matches) >= threshold:
+                                    group_match = True
+                                    break
+                            else:
+                                group_match = True
+                                break
+                    if not group_match:
+                        match = False
+                        break
+                # Check distance if specified
+                if match and 'distance' in rule:
+                    # Get indices of amino groups and carboxylic acids
+                    amino_pat = Chem.MolFromSmarts(amino_group)
+                    carboxy_pat = Chem.MolFromSmarts(carboxylic_acid)
+                    amino_atoms = mol.GetSubstructMatches(amino_pat)
+                    carboxy_atoms = mol.GetSubstructMatches(carboxy_pat)
+                    distance_match = False
+                    for a in amino_atoms:
+                        for c in carboxy_atoms:
+                            path = Chem.GetShortestPath(mol, a[0], c[0])
+                            if len(path) - 1 <= rule['distance']:
+                                distance_match = True
+                                break
+                        if distance_match:
+                            break
+                    if not distance_match:
+                        match = False
+                if match:
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except Exception as e:
+                # In case of any error, append 0
+                row.append(0)
+        results.append(row)
+    # Create DataFrame with results
+    df = pd.DataFrame(results, columns=[f'Rule {rule['number']}' for rule in rules])
+    return df

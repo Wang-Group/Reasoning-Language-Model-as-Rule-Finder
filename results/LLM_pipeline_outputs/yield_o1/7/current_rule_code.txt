@@ -1,0 +1,241 @@
+def rule2matrix(smiles_list):
+    # Define SMARTS patterns for functional groups
+    # General patterns
+    carboxylic_acid = '[CX3](=O)[OX1H0-,OX2H1]'
+    amino_group = '[NX3;H2,H1]'
+    alpha_amino_acid = '[NX3;H2,H1][CX4H][CX3](=O)[OX1H0-,OX2H1]'
+    aliphatic_chain = '[C;X4H2][C;X4H2][C;X4H2][C;X4H2]'
+    hydroxyl_group = '[OX2H]'
+    thiol_group = '[SX2H]'
+    ether_linkage = '[CX4][OX2][CX4]'
+    aromatic_ring = '[a]'
+    nitro_group = '[NX3](=O)[O-]'
+    halogen = '[F,Cl,Br,I]'
+    keto_group = '[CX3](=O)[#6]'
+    aldehyde_group = '[CX3H](=O)'
+    nitrogen_heterocycle = '[n]'
+    aromatic_nitrogen = '[n]'
+    perfluorinated_chain = '[CX4]([F])([F])[F]'
+    acylated_amino_group = '[NX3][CX3](=O)'
+    
+    # Rules list
+    rules = [
+        {
+            'number': 1,
+            'description': 'High yield: α-amino acids with side-chain carboxyl groups (-COOH).',
+            'patterns': [alpha_amino_acid, carboxylic_acid],
+            'count_threshold': {carboxylic_acid: 2},  # At least two carboxylic acid groups
+            'prediction': 1
+        },
+        {
+            'number': 2,
+            'description': 'High yield: Long-chain aliphatic carboxylic acids without additional functional groups.',
+            'patterns': [aliphatic_chain, carboxylic_acid],
+            'exclude_patterns': [hydroxyl_group, amino_group, thiol_group, ether_linkage],
+            'prediction': 1
+        },
+        {
+            'number': 2.1,
+            'description': 'Low yield: Aliphatic acids with additional polar groups along the chain.',
+            'patterns': [aliphatic_chain, carboxylic_acid],
+            'include_patterns': [hydroxyl_group, amino_group, thiol_group, ether_linkage],
+            'prediction': -1
+        },
+        {
+            'number': 3,
+            'description': 'High yield: Aromatic carboxylic acids with electron-withdrawing groups (EWGs) at the para position.',
+            'patterns': [carboxylic_acid],
+            'include_patterns': [nitro_group, halogen],
+            'prediction': 1
+        },
+        {
+            'number': 3.1,
+            'description': 'Low yield: Aromatic carboxylic acids with electron-donating groups (EDGs) at the para position.',
+            'patterns': [carboxylic_acid],
+            'include_patterns': [hydroxyl_group, '[OX2][CX4]', amino_group],
+            'prediction': -1
+        },
+        {
+            'number': 4,
+            'description': 'High yield: Nitrogen-containing heterocyclic carboxylic acids without bulky substituents.',
+            'patterns': [carboxylic_acid, nitrogen_heterocycle],
+            'prediction': 1
+        },
+        {
+            'number': 5,
+            'description': 'High yield: α-amino acids with nitrogen-containing aromatic side chains.',
+            'patterns': [alpha_amino_acid, aromatic_nitrogen],
+            'prediction': 1
+        },
+        {
+            'number': 5.1,
+            'description': 'Low yield: α-amino acids with non-nitrogenous aromatic side chains.',
+            'patterns': [alpha_amino_acid, '[c]'],
+            'exclude_patterns': [aromatic_nitrogen],
+            'prediction': -1
+        },
+        {
+            'number': 6,
+            'description': 'High yield: Aliphatic carboxylic acids with thiol groups (-SH) on the chain.',
+            'patterns': [aliphatic_chain, carboxylic_acid, thiol_group],
+            'exclude_patterns': [aromatic_ring],
+            'prediction': 1
+        },
+        {
+            'number': 6.1,
+            'description': 'Low yield: Thiol groups directly attached to an aromatic ring.',
+            'patterns': [thiol_group, aromatic_ring],
+            'prediction': -1
+        },
+        {
+            'number': 7,
+            'description': 'Low yield: Perfluorinated aliphatic carboxylic acids.',
+            'patterns': [perfluorinated_chain, carboxylic_acid],
+            'prediction': -1
+        },
+        {
+            'number': 8,
+            'description': 'Low yield: Aromatic carboxylic acids with aldehyde groups (-CHO) adjacent to the carboxyl group.',
+            'patterns': [carboxylic_acid, aldehyde_group],
+            'prediction': -1
+        },
+        {
+            'number': 9,
+            'description': 'Low yield: Aliphatic carboxylic acids with ether linkages (-O-) within the chain.',
+            'patterns': [aliphatic_chain, carboxylic_acid, ether_linkage],
+            'exclude_patterns': [aromatic_ring],
+            'prediction': -1
+        },
+        {
+            'number': 10,
+            'description': 'High yield: Polyhydroxy aliphatic acids (sugar acids).',
+            'patterns': [carboxylic_acid],
+            'count_threshold': {hydroxyl_group: 2},
+            'prediction': 1
+        },
+        {
+            'number': 11,
+            'description': 'Low yield: Acylated amino acids (amide derivatives).',
+            'patterns': [alpha_amino_acid, acylated_amino_group],
+            'prediction': -1
+        },
+        {
+            'number': 12,
+            'description': 'Low yield: Aromatic carboxylic acids with bulky substituents or extended conjugation.',
+            'patterns': [carboxylic_acid],
+            'include_patterns': ['[c][c][c][c][c][c]'],
+            'prediction': -1
+        },
+        {
+            'number': 13,
+            'description': 'High yield: Aromatic compounds with adjacent keto (=O) and carboxyl (-COOH) groups.',
+            'patterns': [carboxylic_acid, keto_group],
+            'prediction': 1
+        },
+        {
+            'number': 14,
+            'description': 'High yield: Aromatic carboxylic acids with methoxy groups (-OCH₃) and additional carbonyl groups within the side chain.',
+            'patterns': [carboxylic_acid, '[OX2][CX4][H3C]', keto_group],
+            'prediction': 1
+        },
+        {
+            'number': 15,
+            'description': 'Low yield: Aliphatic dicarboxylic acids with keto groups.',
+            'patterns': [carboxylic_acid, keto_group],
+            'count_threshold': {carboxylic_acid: 2},
+            'exclude_patterns': [aromatic_ring],
+            'prediction': -1
+        }
+    ]
+    
+    # Compile patterns
+    for rule in rules:
+        compiled_patterns = []
+        for p in rule['patterns']:
+            if isinstance(p, list):
+                compiled_group = [Chem.MolFromSmarts(sub_p) for sub_p in p]
+                compiled_patterns.append(compiled_group)
+            else:
+                compiled_patterns.append(Chem.MolFromSmarts(p))
+        rule['compiled_patterns'] = compiled_patterns
+        # Compile include patterns if any
+        if 'include_patterns' in rule:
+            compiled_include_patterns = [Chem.MolFromSmarts(p) for p in rule['include_patterns']]
+            rule['compiled_include_patterns'] = compiled_include_patterns
+        # Compile exclude patterns if any
+        if 'exclude_patterns' in rule:
+            compiled_exclude_patterns = [Chem.MolFromSmarts(p) for p in rule['exclude_patterns']]
+            rule['compiled_exclude_patterns'] = compiled_exclude_patterns
+    
+    # Initialize results
+    results = []
+    
+    # Process each SMILES string
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            # If molecule cannot be parsed, append a row of zeros
+            results.append([0]*len(rules))
+            continue
+        row = []
+        for rule in rules:
+            try:
+                match = True
+                # Check exclude patterns
+                if 'compiled_exclude_patterns' in rule:
+                    for pat in rule['compiled_exclude_patterns']:
+                        if mol.HasSubstructMatch(pat):
+                            match = False
+                            break
+                    if not match:
+                        row.append(0)
+                        continue
+                # Check required patterns
+                for pat in rule['compiled_patterns']:
+                    if isinstance(pat, list):
+                        # At least one pattern in the group should match
+                        group_match = False
+                        for sub_pat in pat:
+                            if mol.HasSubstructMatch(sub_pat):
+                                group_match = True
+                                break
+                        if not group_match:
+                            match = False
+                            break
+                    else:
+                        if not mol.HasSubstructMatch(pat):
+                            match = False
+                            break
+                if not match:
+                    row.append(0)
+                    continue
+                # Check include patterns (at least one must match)
+                if 'compiled_include_patterns' in rule:
+                    include_match = False
+                    for pat in rule['compiled_include_patterns']:
+                        if mol.HasSubstructMatch(pat):
+                            include_match = True
+                            break
+                    if not include_match:
+                        match = False
+                if not match:
+                    row.append(0)
+                    continue
+                # Check count thresholds if any
+                if 'count_threshold' in rule:
+                    for smarts, threshold in rule['count_threshold'].items():
+                        sub_pat = Chem.MolFromSmarts(smarts)
+                        matches = mol.GetSubstructMatches(sub_pat)
+                        if len(matches) < threshold:
+                            match = False
+                            break
+                if match:
+                    row.append(rule['prediction'])
+                else:
+                    row.append(0)
+            except:
+                row.append(0)
+        results.append(row)
+    # Create DataFrame
+    df = pd.DataFrame(results, columns=[f'Rule {rule['number']}' for rule in rules])
+    return df

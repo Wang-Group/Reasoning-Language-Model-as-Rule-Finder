@@ -32,7 +32,7 @@ else:
     raise ValueError(f"Invalid target_name: {target_name}. Must be 'Fe/Hf', 'modifier/SBU' or 'yield'.")
 
 # Initialize the output folder
-date_index = 'yield_o1_test'
+date_index = 'yield_o1'
 output_folder = append_name + '_' + date_index
 os.makedirs(output_folder, exist_ok=True)
 
