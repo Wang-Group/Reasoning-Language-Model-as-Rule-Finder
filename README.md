@@ -18,3 +18,5 @@ python test/dataset_splitting.py # generating the dictionary with the leave-one-
 python test/main.py
 ```
 Please set your OPENAI key and LANGCHAIN key in the GPT_agent.env.
+## Components of results
+[results](results) are the collection of the results and original machine learning data of the paper, containing metrics of different methods and log files of iterative pipeline of large language model (LLM).
