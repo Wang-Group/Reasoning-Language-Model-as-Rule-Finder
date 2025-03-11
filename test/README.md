@@ -1,0 +1,2 @@
+- [dataset_splitting.py](dataset_splitting.py): split the dataset using leave-one-out (LOO) and save the initial files in a designated directory.
+- [main.py](main.py): running the pipeilne under the designated directory.

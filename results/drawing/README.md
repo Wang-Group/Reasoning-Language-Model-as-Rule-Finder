@@ -1,2 +1,3 @@
-- Accuracies_figure.ipynb: Accuracy plot shown in Figure 5.
-- SHAP_analysis.ipynb: SHAP plot shown in Figure 5.
+- [Accuracies_figure.ipynb](Accuracies_figure.ipynb): Accuracy plot shown in Figure 5.
+- [SHAP_analysis.ipynb](SHAP_analysis.ipynb): SHAP plot shown in Figure 5.
+- [Figures](Figures): Save the figures drawing in the above two notebooks.

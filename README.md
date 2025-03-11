@@ -12,8 +12,9 @@
 conda install rdkit scikit-learn shap openai langgraph dotenv pydantic -c conda-forge
 ```
 ## Running the code
+Codes to run the pipeline are saved in [test](test) directory
 ```
-python dataset_splitting.py # generating the dictionary with the leave-one-out (LOO) datasets.
-python main.py
+python test/dataset_splitting.py # generating the dictionary with the leave-one-out (LOO) datasets.
+python test/main.py
 ```
 Please set your OPENAI key and LANGCHAIN key in the GPT_agent.env.
