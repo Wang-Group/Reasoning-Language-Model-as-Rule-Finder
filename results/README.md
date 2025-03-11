@@ -10,4 +10,3 @@
 - Accuracis_of_iterative_LLMs.ipynb: Calculate the accuracies for iterative LLMs
 - ARIAL.TTF: the font file for plotting.
 - langgraph_visulization.ipynb: the visualizaiton of the langgraph pipeline.
-- 
