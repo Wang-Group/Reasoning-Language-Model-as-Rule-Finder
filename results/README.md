@@ -8,5 +8,5 @@
 - [selected_rule_log_o1](selected_rule_log_o1): the original log for the selected rule: **para-substituted benzoic acids with electron-withdrawing, metal-coordinating groups give high yields; while electron-donating or non-coordinating substitution groups give low yields.**
 - [traditional_feature_selection](traditional_feature_selection): feature selection on the traditional descriptors.
 - [Accuracis_of_iterative_LLMs.ipynb](Accuracis_of_iterative_LLMs.ipynb): Calculate the accuracies for iterative LLMs
-- ARIAL.TTF: the font file for plotting.
+- [ARIAL.TTF](ARIAL.TTF): the font file for plotting.
 - [langgraph_visulization.ipynb](langgraph_visulization.ipynb): the visualizaiton of the langgraph pipeline.
