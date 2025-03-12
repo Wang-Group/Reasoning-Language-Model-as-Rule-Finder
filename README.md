@@ -51,3 +51,6 @@ The implementation includes a predefined pipeline with sample test cases:
 - **Location:** The results, including original machine learning data, metrics of various approaches, and logs of the LLM iterative process, are saved in the *[results](results)* directory.
 
 This setup not only supports QSAR studies but can be adapted for any experimental scenario involving rule extraction with machine learning models. If you have additional questions or need further assistance, feel free to ask!
+
+### License
+This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details
