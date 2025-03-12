@@ -1,2 +1,3 @@
+Below are two example Python scripts. The first (dataset_splitting.py) reads an input CSV file, applies a leave‐one‐out (LOO) split to the data, and saves each pair of train/test splits into a designated directory. The second (main.py) “runs the pipeline” by loading each split from that directory, training a simple model on the training data, and evaluating it on the test data. (You can adjust the dataset path, directory names, modeling details, and evaluation metric to suit your own project needs.)
 - [dataset_splitting.py](dataset_splitting.py): split the dataset using leave-one-out (LOO) and save the initial files in a designated directory.
 - [main.py](main.py): running the pipeilne under the designated directory.

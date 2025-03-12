@@ -66,13 +66,13 @@ if Fe_loading_flag:
     Fe_loading_data = pd.read_csv(pkg_resources.resource_filename('agent.data', 'data.csv'))[['Fe_loading']]
     Fe_loading_df = pd.concat([Fe_loading_df, Fe_loading_data],axis=1)
     
-# Read the reference values for rule metrics (support, confidence, lift and leverage) and traditional metrics (accuracies and SHAP values).
+# Read the reference values for rule metrics (support, confidence, lift and leverage) and ML metrics (accuracies and SHAP values).
 rule_hist_path = pkg_resources.resource_filename('agent.data', f"pre_rule_metric_{append_name}.txt")
 with open(rule_hist_path,'r') as f:
     content = f.read()
 content = '< Previous Rule Metrics for Reference: >\n'+ content + '\n< Rule Metrics During the Iteration of This Program: >\n'
-trad_hist_path = pkg_resources.resource_filename('agent.data', f"pre_trad_metric_{append_name}.txt")
-with open(trad_hist_path,'r') as f:
+ml_hist_path = pkg_resources.resource_filename('agent.data', f"pre_ML_metric_{append_name}.txt")
+with open(ml_hist_path,'r') as f:
     content1 = f.read()
 content1 = '< Previous Accuracy for Reference: >\n'+ content1 + '\n< Accuracy and SHAP During the Iteration of This Program: >\n'
 # Leave-One-Out cross-validation
@@ -110,7 +110,7 @@ for train_index, test_index in loo.split(dataset):
         with open(os.path.join(split_folder,'rule_metric_log.txt'),'w') as f1:
             f1.write(content)
         
-        with open(os.path.join(split_folder,'trad_metric_log.txt'),'w') as f1:
+        with open(os.path.join(split_folder,'ML_metric_log.txt'),'w') as f1:
             f1.write(content1)
         
     index += 1
