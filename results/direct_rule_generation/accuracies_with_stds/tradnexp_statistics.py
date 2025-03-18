@@ -17,7 +17,7 @@ random.seed(42)
 
 # Load the target column
 target = 'yield'
-df = pd.read_csv("../../agent/data/data.csv")[[target]]
+df = pd.read_csv("../../../agent/data/data.csv")[[target]]
 
 # Calculate the median of the target column
 median_value = df[target].median()
@@ -32,14 +32,14 @@ print(df.head())
 
 
 # Load the dataset
-dataset = pd.read_csv("../../agent/data/data.csv")
+dataset = pd.read_csv("../../../agent/data/data.csv")
 
 
 # Convert the labels to numpy array
 label = df[target].values
 
-feature_file = "../../agent/data/del_and_exp_features.csv"
-selected_features = ['Fe_loading','Solvent_area','Fun_LogP_Max']
+feature_file = "../../../agent/data/del_and_exp_features.csv"
+selected_features = ['Fe_loading','Fe/Hf','NumAliphaticRings','Solvent_area']
 
 feature = pd.read_csv(feature_file)[selected_features]
 feature = feature.values
@@ -55,7 +55,7 @@ loo_accuracies_all_seeds = []
 for seed in random_seeds:
     # Initialize the RandomForestClassifier with a specific random seed
     # model_cla = RandomForestClassifier(n_estimators=500, max_depth=4, random_state=seed, n_jobs=64)
-    model_cla = RandomForestClassifier(n_estimators=500, max_depth=3, max_features=None,random_state=seed, n_jobs=64)
+    model_cla = RandomForestClassifier(n_estimators=500, max_depth=4, max_features=None,random_state=seed, n_jobs=64)
     
     # List to store accuracies for this seed
     loo_accuracies = []

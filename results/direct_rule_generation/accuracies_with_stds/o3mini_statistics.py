@@ -181,7 +181,7 @@ def rule2matrix(smiles_list):
 
 # Load the target column
 target = 'yield'
-df = pd.read_csv("../../agent/data/data.csv")[[target]]
+df = pd.read_csv("../../../agent/data/data.csv")[[target]]
 
 # Calculate the median of the target column
 median_value = df[target].median()
@@ -196,7 +196,7 @@ print(df.head())
 
 
 # Load the dataset
-dataset = pd.read_csv("../../agent/data/data.csv")
+dataset = pd.read_csv("../../../agent/data/data.csv")
 
 feature_df = rule2matrix(list(dataset['SMILES']))
 

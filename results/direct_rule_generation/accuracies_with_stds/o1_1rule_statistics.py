@@ -11,11 +11,11 @@ import os
 import random
 random.seed(42)
 
-all_smiles = list(pd.read_csv("../../agent/data/data.csv")['SMILES'])
+all_smiles = list(pd.read_csv("../../../agent/data/data.csv")['SMILES'])
 
 
 seed = 42
-DIR = '../../yield_o1'
+DIR = '../../LLM_pipeline_outputs/yield_o1'
 target_name = 'yield'
 
 all_best_features = pd.DataFrame({
@@ -92,7 +92,7 @@ def find_duplicate_columns(df):
 duplicate_columns = find_duplicate_columns(all_best_features)
 
 # Load the SHAP data
-shap_data = pd.read_csv("../../o1_rules_SHAP_value/mean_shap_values.csv")
+shap_data = pd.read_csv("../../rule_selection_o1/o1_rules_SHAP_value/mean_shap_values.csv")
 
 # Calculate absolute mean SHAP values
 shap_data['Abs_Mean_SHAP_Value'] = shap_data['Mean_SHAP_Value'].abs()
@@ -123,7 +123,7 @@ else:
 
 # Load the target column
 target = 'yield'
-df = pd.read_csv("../../agent/data/data.csv")[[target]]
+df = pd.read_csv("../../../agent/data/data.csv")[[target]]
 
 # Calculate the median of the target column
 median_value = df[target].median()
@@ -138,14 +138,14 @@ print(df.head())
 
 
 # Load the dataset
-dataset = pd.read_csv("../../agent/data/data.csv")
+dataset = pd.read_csv("../../../agent/data/data.csv")
 
 
 # Convert the labels to numpy array
 label = df[target].values
 
 # Read the feature names back into a list
-with open('../../o1_rules_SHAP_value/top_20_shap_features.txt', 'r') as f:
+with open('../../rule_selection_o1/o1_rules_SHAP_value/top_20_shap_features.txt', 'r') as f:
     top_20_features_from_file = [line.strip() for line in f]
 # Remove specific items from the list
 # top_20_features_from_file = [feature for feature in top_20_features_from_file if feature not in ['LOO_11_Rule 7', 'LOO_27_Rule 8']]
@@ -168,7 +168,7 @@ loo_accuracies_all_seeds = []
 for seed in random_seeds:
     # Initialize the RandomForestClassifier with a specific random seed
     # model_cla = RandomForestClassifier(n_estimators=500, max_depth=4, random_state=seed, n_jobs=64)
-    model_cla = RandomForestClassifier(n_estimators=500, max_depth=3, max_features=None,random_state=seed, n_jobs=64)
+    model_cla = RandomForestClassifier(n_estimators=500, max_depth=3, max_features=None,random_state=seed, n_jobs=16)
     
     # List to store accuracies for this seed
     loo_accuracies = []
